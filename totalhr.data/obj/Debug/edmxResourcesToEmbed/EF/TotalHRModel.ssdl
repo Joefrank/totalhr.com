@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TotalHRModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TotalHRModelStoreContainer">
+    <EntitySet Name="Company" EntityType="TotalHRModel.Store.Company" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Glossary" EntityType="TotalHRModel.Store.Glossary" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Language" EntityType="TotalHRModel.Store.Language" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="User" EntityType="TotalHRModel.Store.User" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+    <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Address1" Type="varchar" Nullable="false" MaxLength="255" />
+    <Property Name="Address2" Type="varchar" MaxLength="255" />
+    <Property Name="Address3" Type="varchar" MaxLength="255" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="StateorCounty" Type="nvarchar" MaxLength="50" />
+    <Property Name="CountryId" Type="int" />
+    <Property Name="Phone" Type="varchar" MaxLength="30" />
+    <Property Name="PostCode" Type="varchar" MaxLength="30" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdateBy" Type="int" />
+    <Property Name="LastUpdatedOn" Type="datetime" />
+    <Property Name="TaxId" Type="nvarchar" MaxLength="50" />
+    <Property Name="VATId" Type="nvarchar" MaxLength="50" />
+    <Property Name="DNUSNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="NumberOfEmployees" Type="int" Nullable="false" />
+    <Property Name="CompanyType" Type="nvarchar" MaxLength="50" />
+    <Property Name="AnnualRevenue" Type="decimal" Precision="20" Scale="2" />
+    <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+    <Property Name="Website" Type="nvarchar" MaxLength="500" />
+    <Property Name="PreferredLanguageId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Glossary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Term" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="RootId" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdatedOn" Type="datetime" />
+    <Property Name="LastUpdatedBy" Type="int" />
+    <Property Name="Obsolete" Type="bit" Nullable="false" />
+    <Property Name="GlossaryGroup" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdatedBy" Type="int" />
+    <Property Name="LastUpdatedOn" Type="datetime" />
+    <Property Name="RelatedGlossaryId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="GenderId" Type="int" Nullable="false" />
+    <Property Name="firstname" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="othernames" Type="nvarchar" MaxLength="50" />
+    <Property Name="surname" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="title" Type="int" Nullable="false" />
+    <Property Name="othertitle" Type="nvarchar" MaxLength="30" />
+    <Property Name="username" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+    <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+    <Property Name="Address3" Type="nvarchar" MaxLength="255" />
+    <Property Name="Town" Type="nvarchar" MaxLength="50" />
+    <Property Name="stateorcounty" Type="nvarchar" MaxLength="50" />
+    <Property Name="PostCode" Type="nvarchar" MaxLength="30" />
+    <Property Name="countryId" Type="int" />
+    <Property Name="Phone" Type="nvarchar" MaxLength="30" />
+    <Property Name="Mobile" Type="nvarchar" MaxLength="30" />
+    <Property Name="CompanyId" Type="int" />
+    <Property Name="created" Type="datetime" Nullable="false" />
+    <Property Name="createdby" Type="int" Nullable="false" />
+    <Property Name="lastvisit" Type="datetime" />
+    <Property Name="novisits" Type="int" Nullable="false" />
+    <Property Name="active" Type="bit" Nullable="false" />
+    <Property Name="email" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="password" Type="nvarchar" Nullable="false" MaxLength="150" />
+    <Property Name="lastupdatedby" Type="int" />
+    <Property Name="lastupdated" Type="datetime" />
+    <Property Name="typeid" Type="int" Nullable="false" />
+    <Property Name="userguid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="preferedlanguageid" Type="int" Nullable="false" />
+    <Property Name="tersmaccepted" Type="bit" Nullable="false" />
+  </EntityType>
+</Schema>

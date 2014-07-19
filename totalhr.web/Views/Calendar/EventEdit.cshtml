@@ -1,0 +1,33 @@
+﻿@model totalhr.Shared.Models.CalendarEventInfo
+@using totalhr.Resources
+@{
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+    ViewBag.Title = "EventEdit";
+}
+
+@section extrastyles{
+    @Styles.Render("~/Content/css/BeatPicker.min.css")
+}
+
+@{
+    Html.RenderPartial("_FormScripts"); 
+}
+
+
+<div id="main">
+    <div class="content">
+       <h2>Calendar Event Edit</h2>
+
+        <p>Calendar Name: @Model.CalendarName</p>
+
+        @{
+            Html.RenderPartial("_CalendarEventEdit");
+        }
+        
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript" src="/Scripts/Site/BeatPicker.min.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-1.11.0.min.js"></script>
+}

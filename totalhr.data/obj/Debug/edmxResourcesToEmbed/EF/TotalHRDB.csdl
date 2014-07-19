@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TotalHRModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TotalHRDBContext" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Glossaries" EntityType="TotalHRModel.Glossary" />
+    <EntitySet Name="Languages" EntityType="TotalHRModel.Language" />
+  </EntityContainer>
+  <EntityType Name="Glossary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Term" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="RootId" Nullable="false" />
+    <Property Type="Int32" Name="LanguageId" Nullable="false" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="3" />
+    <Property Type="DateTime" Name="LastUpdatedOn" Precision="3" />
+    <Property Type="Int32" Name="LastUpdatedBy" />
+    <Property Type="Boolean" Name="Obsolete" Nullable="false" />
+    <Property Type="String" Name="GlossaryGroup" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="3" />
+    <Property Type="Int32" Name="LastUpdatedBy" />
+    <Property Type="DateTime" Name="LastUpdatedOn" Precision="3" />
+    <Property Type="Int32" Name="RelatedGlossaryId" Nullable="false" />
+  </EntityType>
+</Schema>

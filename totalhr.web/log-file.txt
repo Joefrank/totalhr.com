@@ -1,0 +1,792 @@
+2014-05-31 22:53:34,502 [105] DEBUG totalhr.web.Controllers.AccountController [(null)] - this is the first log message
+2014-05-31 22:58:07,616 DEBUG totalhr.web.Controllers.AccountController - this is the first log message
+2014-05-31 22:59:51,542 DEBUG totalhr.web.Controllers.AccountController - [this is the first log message]newline2014-05-31 23:01:07,156 DEBUG totalhr.web.Controllers.AccountController - [this is the first log message
+]2014-05-31 23:22:07,460 DEBUG totalhr.web.Controllers.AccountController - [New User Registration Started
+]2014-05-31 23:22:08,408 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - company created
+]2014-05-31 23:22:08,598 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - user created
+]2014-05-31 23:22:08,603 DEBUG totalhr.web.Controllers.AccountController - [Notification/Messaging started
+]2014-05-31 23:23:11,557 DEBUG totalhr.services.messaging.Implementation.EmailService - [EmailService (SendEmailHTML)- email send failed: The SMTP host was not specified.
+]2014-05-31 23:23:11,557 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - user notified 
+]2014-05-31 23:23:13,361 DEBUG totalhr.services.messaging.Implementation.EmailService - [EmailService (SendEmailHTML)- email send failed: The SMTP host was not specified.
+]2014-05-31 23:23:13,362 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - Admin notified 
+]2014-05-31 23:26:06,239 DEBUG totalhr.web.Controllers.AccountController - [New User Registration Started
+]2014-05-31 23:26:30,550 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - user email exists
+]2014-05-31 23:26:40,296 DEBUG totalhr.web.Controllers.AccountController - [New User Registration failed The email you entered, already exists.
+]2014-05-31 23:28:22,527 DEBUG totalhr.web.Controllers.AccountController - [New User Registration Started
+]2014-05-31 23:29:05,129 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - company created
+]2014-05-31 23:29:21,873 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - user created
+]2014-05-31 23:29:52,902 DEBUG totalhr.web.Controllers.AccountController - [Notification/Messaging started
+]2014-05-31 23:33:07,060 DEBUG totalhr.services.messaging.Implementation.EmailService - [EmailService (SendEmailHTML)- email send failed: The SMTP host was not specified.
+]2014-05-31 23:33:07,061 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - user notified 
+]2014-05-31 23:33:07,061 DEBUG totalhr.services.messaging.Implementation.EmailService - [EmailService (SendEmailHTML)- email send failed: The SMTP host was not specified.
+]2014-05-31 23:33:07,061 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - Admin notified 
+]2014-05-31 23:36:39,248 DEBUG totalhr.web.Controllers.AccountController - [New User Registration Started
+]2014-05-31 23:36:39,958 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - company created
+]2014-05-31 23:36:43,544 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - user created
+]2014-05-31 23:36:43,548 DEBUG totalhr.web.Controllers.AccountController - [Notification/Messaging started
+]2014-05-31 23:38:02,334 DEBUG totalhr.services.messaging.Implementation.EmailService - [EmailService (SendEmailHTML)- email send failed: Error: SMTP Not initialized
+]2014-05-31 23:38:02,334 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - user notified 
+]2014-05-31 23:38:02,335 DEBUG totalhr.services.messaging.Implementation.EmailService - [EmailService (SendEmailHTML)- email send failed: Error: SMTP Not initialized
+]2014-05-31 23:38:02,335 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - Admin notified 
+]2014-05-31 23:41:29,035 DEBUG totalhr.web.Controllers.AccountController - [New User Registration Started
+]2014-05-31 23:41:32,705 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - company created
+]2014-05-31 23:41:36,477 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - user created
+]2014-05-31 23:41:36,480 DEBUG totalhr.web.Controllers.AccountController - [Notification/Messaging started
+]2014-05-31 23:42:11,295 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - user notified 
+]2014-05-31 23:42:22,753 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - Admin notified 
+]2014-06-03 00:39:29,309 DEBUG totalhr.web.Controllers.AccountController - [Login failed for user  tester.dummy@totalhr.com
+]2014-06-08 11:23:26,741 DEBUG totalhr.web.Controllers.AccountController - [New User Registration Started
+]2014-06-08 11:23:27,436 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - The email you entered is already registered.
+]2014-06-08 11:23:27,438 DEBUG totalhr.web.Controllers.AccountController - [New User Registration failed The email you entered, already exists.
+]2014-06-08 11:24:26,468 DEBUG totalhr.web.Controllers.AccountController - [New User Registration Started
+]2014-06-08 11:24:26,619 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - The username you entered is already taken.
+]2014-06-08 11:24:26,619 DEBUG totalhr.web.Controllers.AccountController - [New User Registration failed The email you entered, already exists.
+]2014-06-08 11:26:00,785 DEBUG totalhr.web.Controllers.AccountController - [New User Registration Started
+]2014-06-08 11:26:19,955 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - The username you entered is already taken.
+]2014-06-08 11:26:51,721 DEBUG totalhr.web.Controllers.AccountController - [New User Registration failed The email you entered, already exists.
+]2014-06-08 11:28:36,590 DEBUG totalhr.web.Controllers.AccountController - [New User Registration Started
+]2014-06-08 11:28:37,097 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - company created
+]2014-06-08 11:28:37,276 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - user created
+]2014-06-08 11:28:37,278 DEBUG totalhr.web.Controllers.AccountController - [Notification/Messaging started
+]2014-06-08 11:28:37,973 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - user notified 
+]2014-06-08 11:28:38,136 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - Admin notified 
+]2014-06-08 11:54:58,111 DEBUG totalhr.web.Controllers.AccountController - [Account Activation Token: 
+]2014-06-08 11:54:58,123 DEBUG totalhr.web.Controllers.AccountController - [Account Activation Decrypted Token: 
+]2014-06-08 18:13:46,125 DEBUG totalhr.web.Controllers.AccountController - [New User Registration Started
+]2014-06-08 18:13:55,468 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - company created
+]2014-06-08 18:13:58,504 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - user created
+]2014-06-08 18:13:58,506 DEBUG totalhr.web.Controllers.AccountController - [Notification/Messaging started
+]2014-06-08 18:13:59,295 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - user notified 
+]2014-06-08 18:13:59,416 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - Admin notified 
+]2014-06-08 18:17:02,964 DEBUG totalhr.web.Controllers.AccountController - [New User Registration Started
+]2014-06-08 18:17:04,139 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - company created
+]2014-06-08 18:17:04,292 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - user created
+]2014-06-08 18:17:04,293 DEBUG totalhr.web.Controllers.AccountController - [Notification/Messaging started
+]2014-06-08 18:17:05,188 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - user notified 
+]2014-06-08 18:17:05,326 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - Admin notified 
+]2014-06-08 18:18:29,909 DEBUG totalhr.web.Controllers.AccountController - [Account Activation Token: 
+]2014-06-08 18:19:32,978 DEBUG totalhr.web.Controllers.AccountController - [Account Activation Token: 
+]2014-06-08 18:20:05,072 DEBUG totalhr.web.Controllers.AccountController - [Account Activation Token: 9adf4220-73de-4338-b643-3ee9dcf8f1e9
+]2014-06-08 18:39:51,952 DEBUG totalhr.web.Controllers.AccountController - [Account Activation Token: 9adf4220-73de-4338-b643-3ee9dcf8f1e9
+]2014-06-08 18:44:23,376 DEBUG totalhr.web.Controllers.AccountController - [Account Activation Token: 9adf4220-73de-4338-b643-3ee9dcf8f1e9
+]2014-06-08 18:44:25,095 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeAccountActivation - user notified 
+]2014-06-08 18:44:25,266 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeAccountActivation - Admin notified 
+]2014-06-08 18:46:36,657 DEBUG totalhr.web.Controllers.AccountController - [Account Activation Token: 9adf4220-73de-4338-b643-3ee9dcf
+]2014-06-08 18:58:05,451 DEBUG totalhr.web.Controllers.AccountController - [Account Activation Token: 9adf4220-73de-4338-b643-
+]2014-06-15 13:49:38,271 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-15 13:49:41,062 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-15 13:49:43,643 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-15 13:54:35,992 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-15 14:19:12,072 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-22 15:16:42,177 DEBUG totalhr.web.Controllers.AccountController - [Calendar week view params Year: 2014 - Month 7 - Day 3 
+]2014-06-22 15:17:25,843 DEBUG totalhr.web.Controllers.AccountController - [Calendar week view params Year: 2014 - Month 8 - Day 3 
+]2014-06-22 15:17:35,745 DEBUG totalhr.web.Controllers.AccountController - [Calendar week view params Year: 2014 - Month 7 - Day 3 
+]2014-06-22 15:18:04,655 DEBUG totalhr.web.Controllers.AccountController - [Calendar week view params Year: 2014 - Month 7 - Day 3 
+]2014-06-22 15:18:19,805 DEBUG totalhr.web.Controllers.AccountController - [Calendar week view params Year: 2014 - Month 7 - Day 3 
+]2014-06-22 15:22:36,526 DEBUG totalhr.web.Controllers.AccountController - [Calendar week view params Year: 2014 - Month 7 - Day 3 
+]2014-06-22 15:33:06,106 DEBUG totalhr.web.Controllers.AccountController - [Calendar week view params Year: 2014 - Month 7 - Day 3 
+]2014-06-22 15:45:17,251 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 4 
+]2014-06-22 15:45:37,830 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 3 
+]2014-06-22 15:45:46,897 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 3 
+]2014-06-22 15:52:21,341 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 3 
+]2014-06-22 15:57:07,694 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 3 
+]2014-06-22 15:59:13,189 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 3 
+]2014-06-23 21:56:24,655 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 3 
+]2014-06-23 21:58:00,490 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 3 
+]2014-06-23 21:59:24,420 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 3 
+]2014-06-23 21:59:33,161 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 3 
+]2014-06-23 22:01:10,447 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 3 
+]2014-06-23 22:26:07,278 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 3 
+]2014-06-23 22:26:33,908 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 3 
+]2014-06-25 16:42:44,900 DEBUG totalhr.web.Controllers.AccountController - [Calendar week view params Year: 2014 - Month 6 - Day 3 
+Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
+]2014-06-25 16:45:00,712 DEBUG totalhr.web.Controllers.AccountController - [Calendar week view params Year: 2014 - Month 6 - Day 3 
+Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
+]2014-06-25 21:56:58,983 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-25 22:34:13,215 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-25 22:35:04,843 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-25 22:35:18,703 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-25 22:36:15,818 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 21:37:25,080 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 21:37:30,604 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:02:19,297 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Object reference not set to an instance of an object.
+]2014-06-26 22:07:57,049 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:09:01,203 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:11:56,565 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:13:16,251 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:14:36,583 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:16:23,421 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:20:16,362 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:20:16,400 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-26 22:20:17,058 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:20:25,442 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:20:25,475 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-26 22:20:26,302 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:24:27,260 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:24:34,772 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:24:34,793 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-26 22:24:35,631 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:24:55,302 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:26:19,551 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:26:19,551 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-26 22:26:19,612 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:26:35,264 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:26:45,139 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:30:00,046 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 22:30:00,052 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-26 22:30:00,192 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 23:50:17,326 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 23:52:18,772 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 23:54:07,519 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-26 23:56:14,080 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-27 07:44:24,131 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-27 07:44:24,629 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-27 07:46:52,850 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-27 07:46:52,856 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-27 07:46:52,909 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-27 07:47:54,692 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-27 07:47:54,692 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-27 07:48:22,744 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-27 07:48:22,744 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-27 07:49:12,412 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-27 07:49:41,070 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 15:29:07,489 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 15:34:50,389 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 15:35:07,112 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 15:35:12,511 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 15:39:56,504 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 15:39:56,504 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 15:39:56,514 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:33:09,075 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:33:09,082 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 16:33:09,157 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:33:18,845 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:33:18,845 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 16:33:30,283 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:33:30,283 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 16:33:45,948 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:33:45,948 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 16:34:20,290 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:34:20,304 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 16:34:44,195 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:34:44,218 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 16:36:10,148 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:36:29,648 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 16:36:38,571 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:37:56,127 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:41:22,000 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:41:22,021 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 16:41:22,298 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:42:32,261 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:42:32,277 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 16:43:30,818 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:43:56,536 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 16:43:56,540 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:46:01,753 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:46:13,748 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:46:13,748 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 16:46:13,833 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:46:21,236 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 16:46:21,236 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 16:46:21,278 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 17:40:42,300 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 17:40:42,360 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 17:41:02,975 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 17:41:03,019 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 17:41:41,111 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 17:41:41,173 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 17:41:47,397 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 17:41:47,397 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-06-29 17:41:47,404 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-06-29 17:41:55,816 DEBUG totalhr.web.Controllers.AccountController - [Login failed for user  joe_bolla
+]2014-07-01 07:31:03,164 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 07:31:03,176 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 07:31:03,221 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 07:33:10,458 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 07:33:10,465 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 07:33:10,485 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 07:33:43,849 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 07:33:43,849 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 07:34:07,877 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 07:34:07,878 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 08:04:20,539 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 08:04:23,078 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 08:04:29,533 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 08:04:42,233 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 08:04:58,150 DEBUG totalhr.web.Controllers.AccountController - [Login failed for user  joe_bolla@yahoo.com
+]2014-07-01 08:05:07,175 DEBUG totalhr.web.Controllers.AccountController - [Login failed for user  joe_bolla@yahoo.com
+]2014-07-01 10:22:18,716 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 10:22:18,737 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 10:22:18,847 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 10:22:37,787 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 10:22:37,798 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 10:22:44,716 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 10:22:44,727 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 11:46:13,526 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 11:46:13,546 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 11:46:13,606 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 11:46:48,319 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 11:46:48,330 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 11:47:44,583 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 11:47:44,593 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 12:00:54,725 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 12:01:53,278 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 12:02:01,737 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 12:04:12,057 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 12:06:21,057 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 12:06:23,157 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 12:10:46,276 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 12:10:46,276 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 12:14:12,203 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 12:14:13,908 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 12:19:31,540 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 12:19:34,423 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 12:22:51,170 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 12:22:51,170 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 12:29:55,055 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Object reference not set to an instance of an object.
+]2014-07-01 13:35:26,966 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 13:50:16,166 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 13:50:42,197 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 13:50:48,008 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 13:50:48,008 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 13:50:48,031 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 13:51:03,989 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 13:51:03,995 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 13:51:13,956 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 13:51:13,956 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 14:09:42,212 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:10:12,696 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:13:45,073 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:13:45,080 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 14:13:45,139 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:14:07,940 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:14:07,940 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 14:14:07,947 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:14:55,168 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:14:55,175 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 14:14:55,216 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:15:25,688 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:15:25,688 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 14:15:25,694 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:15:40,055 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:15:40,055 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 14:21:21,278 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:21:21,288 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 14:25:42,975 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:25:45,317 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 14:28:17,399 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:28:17,400 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Value cannot be null.
+Parameter name: second
+]2014-07-01 14:40:40,149 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:40:42,453 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:52:15,733 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:52:15,740 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Object reference not set to an instance of an object.
+]2014-07-01 14:52:15,769 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:52:25,455 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:52:25,455 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Object reference not set to an instance of an object.
+]2014-07-01 14:52:25,460 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:52:31,914 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:52:31,914 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Object reference not set to an instance of an object.
+]2014-07-01 14:52:31,921 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:52:41,055 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:52:41,055 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Object reference not set to an instance of an object.
+]2014-07-01 14:52:41,060 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:52:57,200 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:52:57,200 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Object reference not set to an instance of an object.
+]2014-07-01 14:53:43,481 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 14:53:43,489 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Object reference not set to an instance of an object.
+]2014-07-01 16:35:42,173 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 16:35:42,173 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Object reference not set to an instance of an object.
+]2014-07-01 16:35:42,182 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 16:35:51,197 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 16:35:51,197 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Object reference not set to an instance of an object.
+]2014-07-01 16:35:51,203 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 16:36:23,159 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 16:36:23,159 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Object reference not set to an instance of an object.
+]2014-07-01 16:36:23,168 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 16:36:31,610 DEBUG totalhr.web.Controllers.AccountController - [Login failed for user  joe_bolla
+]2014-07-01 16:36:38,822 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 16:36:38,822 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Object reference not set to an instance of an object.
+]2014-07-01 16:36:42,816 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 16:36:42,816 DEBUG Authentication.Models.CustomAuthorizeAttribute - [Authentication failed: Object reference not set to an instance of an object.
+]2014-07-01 16:53:50,290 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 16:56:18,098 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 17:18:00,199 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 17:18:04,153 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 17:19:30,913 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 17:19:30,934 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 17:19:39,328 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 17:19:39,347 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 17:19:51,406 DEBUG Authentication.Implementation.AuthService - [PersistUser - Failed to persist user dataObject reference not set to an instance of an object.
+]2014-07-01 17:20:01,781 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 17:20:01,804 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 17:20:31,948 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 17:22:07,647 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 22:31:16,320 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 22:31:16,364 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 22:31:24,399 DEBUG Authentication.Implementation.AuthService - [PersistUser - Failed to persist user dataObject reference not set to an instance of an object.
+]2014-07-01 22:31:43,729 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 22:31:43,828 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 22:32:03,967 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 22:32:13,298 DEBUG Authentication.Implementation.AuthService - [PersistUser - Failed to persist user dataObject reference not set to an instance of an object.
+]2014-07-01 22:32:22,462 DEBUG Authentication.Implementation.AuthService - [PersistUser - Failed to persist user dataObject reference not set to an instance of an object.
+]2014-07-01 22:32:25,187 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 22:32:25,221 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 22:34:59,776 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 22:34:59,814 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 22:35:11,539 DEBUG Authentication.Implementation.AuthService - [PersistUser - Failed to persist user dataObject reference not set to an instance of an object.
+]2014-07-01 22:43:18,870 DEBUG Authentication.Implementation.AuthService - [LogUserOut failed.Object reference not set to an instance of an object.
+]2014-07-01 22:47:19,131 DEBUG Authentication.Implementation.AuthService - [PersistUser - Failed to persist user dataObject reference not set to an instance of an object.
+]2014-07-01 22:49:47,567 DEBUG Authentication.Implementation.AuthService - [PersistUser - Failed to persist user dataObject reference not set to an instance of an object.
+]2014-07-01 23:24:27,022 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 23:24:30,516 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 23:27:30,525 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-01 23:27:30,588 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-02 10:18:25,066 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-02 10:18:31,346 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-02 10:20:23,554 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-02 10:22:06,440 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-02 10:22:27,655 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-02 10:22:41,874 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-02 10:22:47,524 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-02 10:23:40,842 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-02 10:23:53,863 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataValue cannot be null.
+Parameter name: source
+]2014-07-02 12:17:26,654 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 12:17:38,681 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 12:24:14,552 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 12:24:14,611 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 12:25:23,200 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 12:25:23,220 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 12:25:30,296 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 12:25:30,373 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 12:46:00,735 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 12:46:02,732 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 14:37:38,735 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 14:37:38,789 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 14:50:25,484 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 14:50:25,562 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 16:26:31,024 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 16:26:31,108 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-02 16:26:44,915 DEBUG totalhr.web.Controllers.AccountController - [Login failed for user  joe_bolla
+]2014-07-03 08:23:53,055 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 08:23:53,152 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 09:05:43,328 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 10:01:29,276 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 10:01:29,352 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 10:22:05,515 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 10:22:05,588 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 10:55:03,372 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 10:55:03,420 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 11:28:09,183 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 11:28:09,213 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 11:28:20,128 DEBUG totalhr.web.Controllers.AccountController - [Login failed for user  joe_bolla
+]2014-07-03 12:15:29,030 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 12:15:29,060 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 12:33:29,450 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 12:33:29,488 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 12:33:51,276 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 12:34:17,203 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 12:35:47,707 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 12:36:06,286 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 12:36:06,293 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:15:17,745 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:15:17,772 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:46:15,269 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:46:19,086 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:46:41,594 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:46:44,405 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:47:03,633 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:51:11,592 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:52:08,095 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:57:03,080 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:57:03,148 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:57:03,156 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:57:03,159 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:57:07,919 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:57:08,001 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:57:08,004 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:57:08,005 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:57:10,812 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 13:59:49,371 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 14:37:36,314 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 14:37:36,713 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 14:37:36,721 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 14:37:36,722 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 14:37:48,130 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 14:37:48,132 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 14:37:48,143 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 14:37:48,144 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 14:37:59,809 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 14:52:20,478 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 14:52:20,495 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 14:52:20,515 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 14:52:20,517 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 14:52:28,310 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 15:25:57,099 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 15:25:57,118 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 15:25:57,154 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 15:25:57,155 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-03 15:26:08,226 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-08 23:42:34,105 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-08 23:42:34,408 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-08 23:42:34,443 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-08 23:42:34,455 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-08 23:42:47,558 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:00,696 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:00,948 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:00,965 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:10,730 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:11,015 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:11,031 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:20,037 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:27,806 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:28,111 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:28,124 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:36,209 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:36,224 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:36,242 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:42,860 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:42,868 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:42,881 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:50,095 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:50,128 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:00:50,139 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:03:38,893 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:03:38,912 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:03:38,937 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:03:48,809 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:03:52,981 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:03:53,003 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:03:53,021 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:04:42,336 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:04:42,608 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:04:42,644 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:04:50,512 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:05:08,959 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:05:09,290 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:05:09,304 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:05:15,783 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:05:15,809 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 00:05:15,825 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 07:36:24,724 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 07:36:38,714 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 11:27:06,946 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 11:27:07,046 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 11:27:07,117 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 11:27:23,164 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 12:26:53,028 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 12:26:53,271 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 12:26:53,321 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 12:27:05,410 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 14:19:00,541 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 14:19:00,777 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 14:19:00,825 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 14:19:12,515 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 14:51:26,550 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 14:51:32,665 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 14:51:34,755 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 14:51:41,099 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 14:51:41,922 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 14:51:42,761 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 14:51:52,592 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 15:26:47,000 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 15:26:47,119 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 15:26:47,160 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 15:27:05,898 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 16:11:51,344 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 16:11:51,344 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 16:11:51,671 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 16:12:02,437 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 16:42:13,975 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 16:42:13,975 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 16:42:13,996 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 16:42:25,671 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 22:39:33,650 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 22:39:40,806 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 22:39:41,075 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 22:40:00,440 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 23:12:06,257 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 23:12:06,299 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 23:12:06,530 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 23:12:17,740 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 23:43:34,166 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 23:43:35,186 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 23:43:35,545 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-09 23:43:49,353 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 13:39:57,234 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 13:39:57,647 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 13:39:57,861 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 13:40:11,123 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 14:31:52,639 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 14:31:52,828 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 14:31:52,913 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 14:32:15,185 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 15:03:17,474 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 15:03:17,492 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 15:03:17,593 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 15:03:27,887 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 15:50:11,378 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 15:50:11,394 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 15:50:11,503 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 15:50:25,578 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 16:25:53,586 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 16:25:53,598 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 16:25:53,694 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 16:26:10,608 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 16:59:10,264 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 16:59:10,265 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 16:59:10,320 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 16:59:20,913 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 17:29:53,187 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 17:29:53,188 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 17:29:53,251 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 17:30:04,763 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 18:01:46,948 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 18:01:47,152 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 18:01:47,228 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-13 18:01:59,080 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 12:42:04,654 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 12:42:04,662 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 12:42:04,668 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 12:42:10,995 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 12:42:19,627 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 14:56:57,983 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 14:56:57,991 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 14:56:58,012 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 14:57:06,481 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 15:29:30,876 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 15:29:30,981 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 15:29:31,007 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 15:31:27,333 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 16:06:53,988 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 16:06:53,995 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 16:06:54,014 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-18 16:07:02,850 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]

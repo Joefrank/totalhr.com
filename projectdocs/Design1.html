@@ -1,0 +1,56 @@
+ <!DOCTYPE html>
+    <!--<!--[if IE 8]><html class="ie8"><![endif]-->
+<!--[if IE 9]><html class="ie9"><![endif]-->
+<!--[if !IE]><!--><html><!--<![endif]-->
+
+
+<head>
+	<title>
+		
+	</title>
+	
+	<link href="styles.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript">
+	
+		
+		var w = window.innerWidth;
+		var h = window.innerHeight;
+		
+		var screenW = 640, screenH = 480;
+		if (parseInt(navigator.appVersion)>3) {
+		 screenW = screen.width;
+		 screenH = screen.height;
+		}
+		else if (navigator.appName == "Netscape" 
+			&& parseInt(navigator.appVersion)==3
+			&& navigator.javaEnabled()
+		   ) 
+		{
+		 var jToolkit = java.awt.Toolkit.getDefaultToolkit();
+		 var jScreenSize = jToolkit.getScreenSize();
+		 screenW = jScreenSize.width;
+		 screenH = jScreenSize.height;
+		}
+
+		alert("Screen width = " + screenW + " - " + "Screen height = " + screenH + " | win width = " + w + " - win height= " +h );
+		
+	</script>
+</head>
+<body>
+
+<div id="tophead" class="tophead">
+	<div id="logo">
+	</div>
+	<div id="menu">
+		<ul>
+			<li><a href="#" title="" onclick="">Home</a></li>			
+			<li><a href="#" title="" onclick="">About</a></li>			
+			<li><a href="#" title="" onclick="">Pricing</a></li>
+			<li><a href="#" title="" onclick="">Features</a></li>
+		    <li><a href="#" title="" onclick="">Features</a></li>
+		</ul>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+Total HR meeting 1 Sun 18-05-2014
+
+
+Action
+
+- Email Francis about sketcher.
+- Github repos to be created.
+
+
+- Create the project (Joe)
+- Create Admin area (Joe)
+- Put in Generic Repositories (Joe)
+- Dependency package (Ninject)
+- Form Authentication 
+- User registration (company)
+- Login process
+- Create employees into the system (Employee profile - after profile management functionality is created)
+
+
+- Package/features selection (features and packages and product cost) custom or pre-generated.(francis)
+- Profile/permissions Management  (site admin to create basic profile) other company admin can create other profiles.(francis)
+- Employee profile 
+- Calendar of Events Design and implementation
++ Invistigate jquery calendar (francis)
++ Create, edit list and calendar profiles (joe)

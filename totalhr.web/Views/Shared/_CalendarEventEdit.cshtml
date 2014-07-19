@@ -1,0 +1,307 @@
+﻿@model totalhr.Shared.Models.CalendarEventInfo
+@using System.Text
+@using totalhr.Resources
+@using System.Collections
+@using totalhr.Shared
+@using totalhr.web.Helpers
+
+@{
+    ViewBag.Title = "CalendarEventEdit";
+
+    var lstDayHours = new List<string> { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
+    var lstDayMinutes = new List<string> { "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55" };
+       
+    
+    var eventTargets = ViewBag.EventTargets as List<totalhr.data.EF.Glossary>;
+
+    StringBuilder sbJS = new StringBuilder();
+ }
+
+@* http://stackoverflow.com/questions/17095443/how-to-use-simple-ajax-beginform-in-asp-net-mvc-4 *@
+
+@using (Ajax.BeginForm("CreateEvent", "Calendar", new AjaxOptions
+{//GetPacients is name of method in PacientController
+    InsertionMode = InsertionMode.Replace,//target element(#pacientList) will be replaced
+    UpdateTargetId = "dvEvent"
+}))
+{
+     @Html.ValidationSummary()
+
+    <div class="formwrapper">
+
+            <div class="line">
+                <div class="block">
+			        <label class="fix200W">@FormMessages.Label_Title: <span class="req">*</span></label>
+                    @Html.TextBoxFor(x => x.Title)                    
+                </div>
+            </div>
+
+             <div class="line">
+                 <div class="block">
+                    <label class="fix200W">@FormMessages.Label_Location:</label>
+                    @Html.TextBoxFor(x => x.Location) 
+               </div>
+            </div>
+
+            <div class="longline">
+                <div class="block">
+                    <label class="fix200W">@FormMessages.Label_Description:</label>
+                    @Html.TextAreaFor(x => x.Description, new { @rows ="6", @cols = "40" })
+                </div>               
+            </div>
+        
+            <div class="line">
+                <div class="block">
+                <label class="fix200W">@FormMessages.Label_Start_Date:<span class="req">*</span></label>
+                @Html.TextBoxFor(x => x.StartDate, "{0:d/MM/yyyy}", 
+                new Dictionary<string, object>
+                    { 
+                        { "class", "datetype"},
+                        {"Value",""},
+                        {"type", "text"},
+                        {"data-beatpicker","true"},				                  
+                        {"data-beatpicker-position","['*','*']"},
+                        { "data-beatpicker-format","['DD','MM','YYYY'],separator:'/'"},
+                        {"data-beatpicker-module","gotoDate,clear"}
+                    }
+                  ) 
+                
+                </div>
+
+                <div class="halfblock">
+
+                     @Html.HiddenFor(x => x.StartTime) 
+
+			        <label>Hour</label>
+			        @Html.DropDownList("starthour", new SelectList(lstDayHours)) 
+			
+			        <label>: Min</label>			
+			        @Html.DropDownList("startminute", new SelectList(lstDayMinutes))
+		        </div>
+            </div>          
+    
+            <div class="line"> 
+                <div class="block">
+                    <label class="fix200W">@FormMessages.Label_End_Date:<span class="req">*</span></label>
+                    @Html.TextBoxFor(x => x.EndDate, "{0:d/MM/yyyy}", new Dictionary<string, object>
+                        { 
+                            { "class", "datetype"},
+                            {"Value",""},
+                            {"type", "text"},
+                            {"data-beatpicker","true"},				                  
+                            {"data-beatpicker-position","['*','*']"},
+                            { "data-beatpicker-format","['DD','MM','YYYY'],separator:'/'"},
+                            {"data-beatpicker-module","gotoDate,clear"}
+                        })
+                    
+                </div>
+                 <div class="halfblock">
+
+                    @Html.HiddenFor(x => x.EndTime) 
+
+			        <label>Hour</label>
+			        @Html.DropDownList("endhour", new SelectList(lstDayHours)) 
+			
+			        <label>: Min</label>			
+			        @Html.DropDownList("endminute", new SelectList(lstDayMinutes))
+		        </div>
+            </div>           
+            
+        <div class="line">
+            <div class="block">
+                <label class="fix200W"> @FormMessages.Label_Reminders</label>
+                <div class="childblock">
+                    
+                    <div class="head" onclick="ToggleExpand('dvReminders')">
+                        None added 
+                        
+                        <span class="spedit" title="@FormMessages.Toolt_Edit_Reminder" onclick="Expand('spReminders');">
+                            &nbsp;
+                        </span>
+
+                        <span class="spadd" title="@FormMessages.Toolt_Add_Reminder" onclick="DialogAddReminder('dvReminders');">
+                            &nbsp;
+                        </span>
+
+                        <span id="spReminders" class="spview" style="display:none;">
+                            &nbsp;
+                        </span>
+                    </div>
+                       
+				    
+                    <div id="dvReminders" class="reminderpopup" style="display:none;"> 
+                            <table>
+                                <tr>
+                                    <td>
+                                        <input type="radio" name="remindertype" value="1" /> 
+                                    </td>
+                                    <td>
+                                        <input type="text" id="txtReminderFrequencyBefore" name="txtReminderFrequencyBefore" size="5" />
+                                    </td>
+                                    <td>
+                                        <select id="ddlFrequencyBeforeType" name="ddlFrequencyBeforeType">
+                                            <option>Duration</option>
+                                            <option value="1">Minutes</option>
+                                            <option value="2">Hour</option>
+                                            <option value="3">Day</option>
+                                            <option value="4">Week</option>
+                                            <option value="5">Month</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        Before
+                                    </td>
+                                    <td colspan="2">
+                                        &nbsp;
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <input type="radio" name="remindertype" value="2" />
+                                    </td>
+                                    <td>
+                                        Every 
+                                    </td>
+                                    <td>
+                                        <input type="text" id="txtReminderFrequency" name="txtReminderFrequency" size="5" />
+                                    </td>
+                                    <td>
+                                        <select id="ddlFrequencyType" name="ddlFrequencyType">
+                                            <option>Frequency</option>
+                                            <option value="1">Minutes</option>
+                                            <option value="2">Hour</option>
+                                            <option value="3">Day</option>
+                                            <option value="4">Week</option>
+                                            <option value="5">Month</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        From
+                                        <input type="text" id="txtReminderFrom" name="txtReminderFrom" size="15" />
+                                    </td>
+                                </tr>                        
+                         
+                                <tr>
+                                    <td colspan="4">
+                                        <input type="button" value="Cancel" onclick="Hide('dvReminders');" /> 
+                                        <input type="button" value="Save" onclick="SaveReminder();" /> 
+                                    </td>
+                                </tr>
+                        
+                            </table>
+                        </div>
+
+                    
+                    
+                </div>
+
+              </div>
+		    <div class="block">
+			   
+		    </div>
+	    </div>
+
+
+             <div class="line">
+                  <div class="block">
+			<label class="fix200W">@FormMessages.Label_TargetGroup</label>
+                 <div class="childblock">
+                    
+                     <div class="head" onclick="ToggleExpand('dvAttendeesContent')">
+                           None added
+                     </div>
+                     <div id="dvAttendeesContent" class="content" style="display:none">
+                         @foreach (totalhr.data.EF.Glossary glossary in eventTargets)
+                         {
+                             var spId = "sp_" + glossary.RootId;
+                         
+                             <input type="radio" id="ck_@glossary.RootId" name="attendeegroup" onclick="@(Html.Raw("PickEventTargetSelection(this,'" +  spId +"')"));" value="@glossary.RootId" />
+                             <span>@glossary.Term</span>
+                        
+                             <span id="@spId" style="display:none;">@Html.Raw(GlossaryHelper.EventTargetHTML(glossary.RootId))</span>
+                             <br />
+                         }
+                     </div>
+
+                </div>
+                
+              </div>
+            </div>
+            
+          <div class="line">
+                <div class="block">
+			        <label class="fix200W">@FormMessages.Label_Repeat: <span class="req">*</span></label>
+                    
+                    <div  id="dvRepeat" class="childblock">
+                    
+                        <div class="head" onclick="ToggleExpand('dvRepeatContent')">
+                               None added
+                        </div>
+
+                    <div id="dvRepeatContent" class="content" style="display:none">
+                        @foreach (var num in (Variables.RepeatType[])Enum.GetValues(typeof(Variables.RepeatType)))
+                        {
+                            sbJS.Append(string.Format("{0} = {1};" + Environment.NewLine, num.ToString(), (int) num));
+                            @Html.Raw(CalendarHelper.GenerateRepeatByType(num));
+                        }
+                    
+                        <div id="repeatOptions" class="optionbox" style="display:none;">
+                        
+                            <span id="spRepeatBattery" style="display:none;float:left;position:relative;z-index:1004;">
+                                <input type="text" id="txtRepeatDate"  />
+                                <input type="button" value="Add" onclick="KeepDateIn('txtRepeatDate')" />
+                            </span>
+                        
+                            <span id="spUntilDate" style="display:none;float:left;position:relative;z-index:1004;">
+                                Until: <input type="text" id="txtRepeatUntil" />
+                                <input type="button" value="Set" onclick="SetUntilDateIn('txtRepeatUntil')" />
+                            </span>
+                        
+                            <span id="spRepeatValue" style="display:none;float:left;position:relative;z-index:1004;">
+                                Enter year:  <input type="text" id="txtRepeatValue"  />
+                                <input type="button" value="Add" onclick="KeepDateIn('txtRepeatValue')" />
+                            </span>
+                            
+                            <span id="sprepeatinfo"></span>
+                        </div>
+                        
+                      </div>
+                    </div>
+
+                    @Html.HiddenFor(x => x.RepeatType)
+                    @Html.HiddenFor(x => x.RepeatDate) 
+                    @Html.HiddenFor(x => x.RepeatValue)  
+                    
+                    <span id="spmonthlydate"></span>              
+                </div>
+            </div>    
+
+        <div class="line">
+            <div class="block">
+                <label class="fix200W">&nbsp;</label>
+
+                <input type="button" value="Cancel" onclick="DisposePopup();" />
+                <input type="submit" value="Save" onclick="return GrabValues()" />
+             </div>
+        </div>
+                
+            @Html.HiddenFor(x => x.EventId)
+            @Html.HiddenFor(x => x.CalendarId)
+
+
+      </div>
+      
+
+}
+        
+
+<script type="text/javascript">
+
+    var previousSelectedId = null;
+    var repeatTypeSelectedid = null;
+    var prevSelDisplayObj = null;
+    var RepeatsToSave = new Array();
+
+    @sbJS.ToString()
+    
+</script>

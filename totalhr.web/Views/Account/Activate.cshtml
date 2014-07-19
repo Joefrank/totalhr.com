@@ -1,0 +1,26 @@
+﻿@model totalhr.data.EF.User
+@using totalhr.Resources;
+
+@{
+    ViewBag.Title = @Common.Page_TT_Account_Activation_Header;
+    bool userActive = (Model != null && Model.active); 
+}
+
+<div id="main">
+    <div class="content">
+
+<h1>@Common.Page_TT_Account_Activation</h1>
+
+        @if(userActive){
+<p>
+    @Html.Raw(string.Format(Common.MSG_Account_Activation_Welcome, Model.firstname))
+
+</p>
+        }
+        else{
+         <p class="error">
+            @Common.Error_Account_Activation_Failed
+         </p>   
+        }
+        </div>
+</div>

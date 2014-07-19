@@ -1,0 +1,24 @@
+﻿@model Calendar.Models.CalendarHTML
+
+@{
+    ViewBag.Title = "Generate";
+}
+
+<h2>Generate</h2>
+
+
+
+@{
+    Html.RenderPartial("_Calendar");
+}
+
+@section scripts{
+
+     @Scripts.Render("~/Scripts/Site/calendar.js")
+
+      <script type="text/javascript">
+          @Html.Raw(Model.Javascript)
+      </script>
+
+     
+}

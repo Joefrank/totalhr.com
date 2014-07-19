@@ -1,0 +1,271 @@
+﻿@model totalhr.Shared.Models.NewUserInfo
+@using totalhr.Resources;
+@using totalhr.data.EF;
+
+@{
+    ViewBag.Title = Common.Page_TT_Header_Registration;
+
+
+    List<Glossary> languages = ViewBag.LanguageList as List<Glossary>;
+    List<Glossary> genders = ViewBag.GenderList as List<Glossary>;
+    List<Glossary> countries = ViewBag.CountryList as List<Glossary>;
+    List<Glossary> titles = ViewBag.TitleList as List<Glossary>;    
+ 
+}
+
+@{Html.RenderPartial("_FormScripts");}
+
+
+<div id="main">
+    <div class="content">
+
+<h1>@Common.Page_TT_Registration</h1>
+
+    @using (Html.BeginRouteForm("Default", new { Controller = "Account", action = "RegisterUser" }))
+    {
+
+         @Html.ValidationSummary()
+
+        <div class="formdiv midform">
+            <div class="wrapper">
+
+                 <fieldset>
+               <legend>@FormMessages.Title_Personal_Details</legend>
+                
+                <div class="line">
+                    <label>@FormMessages.Label_Gender</label>
+                     <span>@Html.DropDownListFor(x => x.GenderId,  new SelectList(genders, "RootId", "Term"))</span>
+                    <span class="req">*</span>
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_Title</label>
+                     <span>@Html.DropDownListFor(x => x.Title, new SelectList(titles, "RootId", "Term"), 
+                        new { onchange = string.Format("CheckOther(this, 'spOther', {0})", (int)totalhr.Shared.Variables.NamedGlossaryIds.OtherTitle) })
+                         &nbsp;
+                        <span id="spOther" style="display:none">@Html.TextBoxFor(x => x.OtherTitle , new { size = "20", maxlength = "30" })</span>
+                     </span>
+                    <span class="req">*</span>
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_First_Name</label>
+                    <span>@Html.TextBoxFor(x => x.FirstName , new { size = "45", maxlength = "50" })</span>
+                    <span class="req">*</span>
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_MiddleName</label>
+                     <span>@Html.TextBoxFor(x => x.MiddleNames, new {size="45", maxlength="50"})</span>
+                    <span class="req"></span>
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_Last_Name</label>
+                    <span>@Html.TextBoxFor(x => x.Surname , new { size = "45", maxlength = "50" })</span>
+                    <span class="req">*</span>
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_Email</label>
+                    <span>@Html.TextBoxFor(x => x.Email , new { size = "45", maxlength = "150" })</span>
+                    <span class="req">*</span>
+                </div>                
+                
+                <div class="line">
+                    <label>@FormMessages.Label_Address</label>
+                    <span>@Html.TextBoxFor(x => x.Address1 , new { size = "45", maxlength = "250" })</span>
+                    <span class="req">*</span>
+                </div>
+                 <div class="line">
+                    <label>&nbsp;</label>
+                    <span>@Html.TextBoxFor(x => x.Address2 , new { size = "45", maxlength = "250" })</span>
+                    <span class="req"></span>
+                </div>
+                 <div class="line">
+                    <label>&nbsp;</label>
+                    <span>@Html.TextBoxFor(x => x.Address3 , new { size = "45", maxlength = "250" })</span>
+                    <span class="req"></span>
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_City</label>
+                    <span>@Html.TextBoxFor(x => x.City , new { size = "20", maxlength = "50" })</span>
+                    <span class="req">*</span>
+                </div>
+                <div class="line" >
+                    <label>@FormMessages.Label_State</label>
+                    <span>@Html.TextBoxFor(x => x.State , new { size = "20", maxlength = "50" })</span>
+                    <span class="req"></span>
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_PostCode</label>
+                    <span>@Html.TextBoxFor(x => x.PostCode , new { size = "10", maxlength = "20" })</span>
+                    <span class="req"></span>
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_Country</label>
+                    <span>@Html.DropDownListFor(x => x.CountryId,  new SelectList(countries, "RootId", "Term"))</span>
+                    <span class="req">*</span>
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_Phone</label>
+                    <span>@Html.TextBoxFor(x => x.PersonalPhone, new { size = "20", maxlength = "20" })</span>
+                    <span class="req">*</span>
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_Mobile</label>
+                    <span>@Html.TextBoxFor(x => x.MobilePhone, new { size = "20", maxlength = "20" })</span>
+                    <span class="req"></span>
+                </div>
+                
+                </fieldset>
+                
+                <fieldset>
+
+                <legend>@FormMessages.Title_Logon_Details</legend>
+
+                 <div class="line">
+                    <label>@FormMessages.Label_Username</label>
+                    <span>@Html.TextBoxFor(x => x.UserName , new { size = "20", maxlength = "20", autocomplete ="off" })
+
+                        @Html.CheckBoxFor(x => x.UseEmailAsUserName, new { onclick = "PullTextFrom(this, 'UserName', 'Email', 'hdnMSGEmailNotProvided')" }) &nbsp;
+                        (@FormMessages.V_User_Email_As_UserName)
+
+                        <input type="hidden" id="hdnMSGEmailNotProvided" value="@FormMessages.Error_Email_Needs_To_Be_Provided" />
+                    </span>
+                    <span class="req">*</span>
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_Password</label>
+                    <span>@Html.PasswordFor(x => x.Password , new { size = "20", maxlength = "15", autocomplete ="off" })</span>
+                    <span class="req">*</span>
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_Password_Confirm</label>
+                    <span>@Html.PasswordFor(x => x.PasswordConfirm , new { size = "20", maxlength = "15", autocomplete ="off" })</span>
+                    <span class="req">*</span>
+                </div>                
+                 <div class="line">
+                    <label>@FormMessages.Label_Pref_Language</label>
+                    <span>@Html.DropDownListFor(x => x.PreferedLanguageId,  new SelectList(languages, "RootId", "Term"))</span>
+                    <span class="req"></span>
+                </div>
+                
+                </fieldset>
+
+                <fieldset>
+
+                <legend>
+                    @FormMessages.Title_Company_Details
+                </legend>
+
+                <div class="line">
+                    <label>@FormMessages.Label_Company_Name</label>
+                    <span>@Html.TextBoxFor(x => x.CompanyName , new { size = "30", maxlength = "100" })</span>
+                    <span class="req">*</span>
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_CompanyEmail</label>
+                    <span>@Html.TextBoxFor(x => x.CompanyEmail , new { size = "45", maxlength = "150" })</span>
+                    <span class="req">*</span>
+                </div>                
+                
+                <div class="line">
+                    <label>@FormMessages.Label_CompanyAddress</label>
+                    <span>@Html.TextBoxFor(x => x.CompanyAddress1 , new { size = "45", maxlength = "250" })</span>
+                    <span class="req">*</span>
+                </div>
+                 <div class="line">
+                    <label>&nbsp;</label>
+                    <span>@Html.TextBoxFor(x => x.CompanyAddress2 , new { size = "45", maxlength = "250" })</span>
+                    <span class="req"></span>
+                </div>
+                 <div class="line">
+                    <label>&nbsp;</label>
+                    <span>@Html.TextBoxFor(x => x.CompanyAddress3 , new { size = "45", maxlength = "250" })</span>
+                    <span class="req"></span>
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_City</label>
+                    <span>@Html.TextBoxFor(x => x.CompanyCity , new { size = "20", maxlength = "50" })</span>
+                    <span class="req">*</span>
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_State</label>
+                    <span>@Html.TextBoxFor(x => x.CompanyState , new { size = "20", maxlength = "50" })</span>
+                    <span class="req"></span>
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_PostCode</label>
+                    <span>@Html.TextBoxFor(x => x.CompanyPostCode , new { size = "10", maxlength = "20" })</span>
+                    <span class="req"></span>
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_Country</label>
+                    <span>@Html.DropDownListFor(x => x.CompanyCountryId,  new SelectList(countries, "RootId", "Term"))</span>
+                    <span class="req">*</span>
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_Phone1</label>
+                    <span>@Html.TextBoxFor(x => x.CompanyPhone1, new { size = "20", maxlength = "20" })</span>
+                    <span class="req">*</span>
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_Phone2</label>
+                    <span>@Html.TextBoxFor(x => x.CompanyPhone2, new { size = "20", maxlength = "20" })</span>
+                    <span class="req"></span>
+                </div>
+
+
+                <div class="line">
+                    <label>@FormMessages.Label_Tax_Id</label>
+                    <span>@Html.TextBoxFor(x => x.TaxID , new { size = "20", maxlength = "50" })</span>
+                    <span class="req"></span>
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_VAT_Id</label>
+                    <span>@Html.TextBoxFor(x => x.VATID , new { size = "20", maxlength = "50" })</span>
+                    <span class="req"></span>
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_CompanyNumber</label>
+                    <span>@Html.TextBoxFor(x => x.CompanyNumber , new { size = "20", maxlength = "50" })</span>
+                    <span class="req"></span>
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_CompanyNoOfEmployees</label>
+                    <span>@Html.TextBoxFor(x => x.CompanyNoEmployees , new { size = "20", maxlength = "50" })</span>
+                    <span class="req">*</span>
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_CompanyType</label>
+                    <span>@Html.TextBoxFor(x => x.CompanyType , new { size = "20", maxlength = "50" })</span>
+                    <span class="req"></span>
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_Annual_Revenue</label>
+                    <span>@Html.TextBoxFor(x => x.AnnualRevenue , new { size = "20", maxlength = "50" }) (USD)</span>
+                    <span class="req">*</span>
+                </div>
+                
+
+              </fieldset>
+
+                <div class="line">
+                    <label>@Html.CheckBoxFor(x => x.TermsAccepted)</label>
+                    <span class="terms">@FormMessages.MSG_Terms_Of_Service</span>
+                    <span class="req"></span>
+                </div>
+                <div class="line">
+                    <label>&nbsp;</label>
+                    <span>
+                        <input type="button" value="@FormMessages.btn_Cancel" onclick="" /> &nbsp;
+                        <input type="submit" value="@FormMessages.btn_Register" /></span>
+                    <span class="req"></span>
+                </div>
+                <div class="line">&nbsp;</div>
+            </div>
+            <br /><br />
+            
+          
+           
+        </div>        
+    }
+</div>
+
+</div>

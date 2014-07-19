@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TotalHRModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TotalHRModelStoreContainer">
+    <EntitySet Name="Glossary" EntityType="TotalHRModel.Store.Glossary" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Language" EntityType="TotalHRModel.Store.Language" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Glossary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Term" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="RootId" Type="int" Nullable="false" />
+    <Property Name="LanguageId" Type="int" Nullable="false" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdatedOn" Type="datetime" />
+    <Property Name="LastUpdatedBy" Type="int" />
+    <Property Name="Obsolete" Type="bit" Nullable="false" />
+    <Property Name="GlossaryGroup" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="CreatedBy" Type="int" Nullable="false" />
+    <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+    <Property Name="LastUpdatedBy" Type="int" />
+    <Property Name="LastUpdatedOn" Type="datetime" />
+    <Property Name="RelatedGlossaryId" Type="int" Nullable="false" />
+  </EntityType>
+</Schema>

@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TotalHRModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TotalHREntities1" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Companies" EntityType="TotalHRModel.Company" />
+    <EntitySet Name="Glossaries" EntityType="TotalHRModel.Glossary" />
+    <EntitySet Name="Languages" EntityType="TotalHRModel.Language" />
+    <EntitySet Name="Users" EntityType="TotalHRModel.User" />
+  </EntityContainer>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Address1" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="Address2" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="Address3" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="City" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="StateorCounty" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="Phone" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="PostCode" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdateBy" Type="Int32" />
+    <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="TaxId" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="VATId" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="DNUSNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="NumberOfEmployees" Type="Int32" Nullable="false" />
+    <Property Name="CompanyType" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="AnnualRevenue" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="Description" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+    <Property Name="Website" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="PreferredLanguageId" Type="Int32" Nullable="false" />
+    <Property Type="String" Name="Phone1" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="Phone2" MaxLength="30" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="Glossary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Term" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="RootId" Type="Int32" Nullable="false" />
+    <Property Name="LanguageId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="LastUpdatedBy" Type="Int32" />
+    <Property Name="Obsolete" Type="Boolean" Nullable="false" />
+    <Property Name="GlossaryGroup" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdatedBy" Type="Int32" />
+    <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="RelatedGlossaryId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="GenderId" Type="Int32" Nullable="false" />
+    <Property Name="firstname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="othernames" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="surname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="title" Type="Int32" Nullable="false" />
+    <Property Name="othertitle" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Address1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Address2" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Address3" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Town" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="stateorcounty" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="PostCode" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="countryId" Type="Int32" />
+    <Property Name="Phone" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="Mobile" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="CompanyId" Type="Int32" />
+    <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="createdby" Type="Int32" Nullable="false" />
+    <Property Name="lastvisit" Type="DateTime" Precision="3" />
+    <Property Name="novisits" Type="Int32" Nullable="false" />
+    <Property Name="active" Type="Boolean" Nullable="false" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="lastupdatedby" Type="Int32" />
+    <Property Name="lastupdated" Type="DateTime" Precision="3" />
+    <Property Name="typeid" Type="Int32" Nullable="false" />
+    <Property Name="userguid" Type="Guid" Nullable="false" />
+    <Property Name="preferedlanguageid" Type="Int32" Nullable="false" />
+    <Property Name="tersmaccepted" Type="Boolean" Nullable="false" />
+  </EntityType>
+</Schema>

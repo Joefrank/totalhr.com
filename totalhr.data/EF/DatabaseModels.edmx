@@ -1,0 +1,1064 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TotalHREntities.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="TotalHREntitiesStoreContainer">
+          <EntitySet Name="Calendar" EntityType="TotalHREntities.Store.Calendar" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CalendarEvent" EntityType="TotalHREntities.Store.CalendarEvent" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CalendarEventDepartment" EntityType="TotalHREntities.Store.CalendarEventDepartment" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CalendarEventInvite" EntityType="TotalHREntities.Store.CalendarEventInvite" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CalendarEventReminder" EntityType="TotalHREntities.Store.CalendarEventReminder" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Company" EntityType="TotalHREntities.Store.Company" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CompanyFeature" EntityType="TotalHREntities.Store.CompanyFeature" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Department" EntityType="TotalHREntities.Store.Department" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmailTemplate" EntityType="TotalHREntities.Store.EmailTemplate" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Feature" EntityType="TotalHREntities.Store.Feature" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Glossary" EntityType="TotalHREntities.Store.Glossary" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Language" EntityType="TotalHREntities.Store.Language" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Profile" EntityType="TotalHREntities.Store.Profile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Roles" EntityType="TotalHREntities.Store.Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="TotalHREntities.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProfile" EntityType="TotalHREntities.Store.UserProfile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserRole" EntityType="TotalHREntities.Store.UserRole" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Calendar_Company" Association="TotalHREntities.Store.FK_Calendar_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Calendar" EntitySet="Calendar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CalendarEvent_Calendar" Association="TotalHREntities.Store.FK_CalendarEvent_Calendar">
+            <End Role="Calendar" EntitySet="Calendar" />
+            <End Role="CalendarEvent" EntitySet="CalendarEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Company" Association="TotalHREntities.Store.FK_Department_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Calendar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastModified" Type="datetime" />
+          <Property Name="LastModifiedBy" Type="int" />
+          <Property Name="TemplateId" Type="int" />
+          <Property Name="OpenToAll" Type="bit" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CalendarEvent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="LastModifed" Type="datetime" />
+          <Property Name="LastModifiedBy" Type="int" />
+          <Property Name="StartOfEvent" Type="datetime" Nullable="false" />
+          <Property Name="EndOfEvent" Type="datetime" Nullable="false" />
+          <Property Name="Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="TargetInviteType" Type="varchar" MaxLength="150" />
+          <Property Name="CalendarId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CalendarEventDepartment">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CalendarEventInvite">
+          <Key>
+            <PropertyRef Name="EventId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ProfileId" />
+          </Key>
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ProfileId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CalendarEventReminder">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="Frequency" Type="int" Nullable="false" />
+          <Property Name="FrequencyType" Type="varchar" Nullable="false" MaxLength="10" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="int" />
+          <Property Name="LastModified" Type="datetime" />
+          <Property Name="TextTemplateId" Type="int" Nullable="false" />
+          <Property Name="ReminderTypeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Address1" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="Address2" Type="varchar" MaxLength="255" />
+          <Property Name="Address3" Type="varchar" MaxLength="255" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="StateorCounty" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="Phone1" Type="varchar" MaxLength="30" />
+          <Property Name="Phone2" Type="varchar" MaxLength="30" />
+          <Property Name="PostCode" Type="varchar" MaxLength="30" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateBy" Type="int" />
+          <Property Name="LastUpdatedOn" Type="datetime" />
+          <Property Name="TaxId" Type="nvarchar" MaxLength="50" />
+          <Property Name="VATId" Type="nvarchar" MaxLength="50" />
+          <Property Name="DNUSNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="NumberOfEmployees" Type="int" Nullable="false" />
+          <Property Name="CompanyType" Type="nvarchar" MaxLength="50" />
+          <Property Name="AnnualRevenue" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Website" Type="nvarchar" MaxLength="500" />
+          <Property Name="PreferredLanguageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyFeature">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="FeatureId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="int" />
+          <Property Name="LastModified" Type="datetime" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EmailTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="250" />
+          <Property Name="Template" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="RootId" Type="int" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="Obsolete" Type="bit" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="Identifier" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Feature">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="1000" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastModified" Type="datetime" />
+          <Property Name="LastModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="Glossary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Term" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="RootId" Type="int" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedOn" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="Obsolete" Type="bit" Nullable="false" />
+          <Property Name="GlossaryGroup" Type="varchar" MaxLength="50" />
+          <Property Name="GroupOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="LastUpdatedOn" Type="datetime" />
+          <Property Name="RelatedGlossaryId" Type="int" Nullable="false" />
+          <Property Name="Culture" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastModified" Type="datetime" />
+          <Property Name="LastModifiedBy" Type="int" />
+          <Property Name="Identifier" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastModified" Type="datetime" />
+          <Property Name="LastModifiedBy" Type="int" />
+          <Property Name="Identifier" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GenderId" Type="int" Nullable="false" />
+          <Property Name="firstname" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="othernames" Type="nvarchar" MaxLength="50" />
+          <Property Name="surname" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="title" Type="int" Nullable="false" />
+          <Property Name="othertitle" Type="nvarchar" MaxLength="30" />
+          <Property Name="username" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address3" Type="nvarchar" MaxLength="255" />
+          <Property Name="Town" Type="nvarchar" MaxLength="50" />
+          <Property Name="stateorcounty" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="countryId" Type="int" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="30" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="30" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="createdby" Type="int" Nullable="false" />
+          <Property Name="lastvisit" Type="datetime" />
+          <Property Name="novisits" Type="int" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="email" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="password" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="lastupdatedby" Type="int" />
+          <Property Name="lastupdated" Type="datetime" />
+          <Property Name="typeid" Type="int" Nullable="false" />
+          <Property Name="userguid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="preferedlanguageid" Type="int" Nullable="false" />
+          <Property Name="tersmaccepted" Type="bit" Nullable="false" />
+          <Property Name="activationcode" Type="nvarchar" MaxLength="150" />
+          <Property Name="chosenculture" Type="varchar" MaxLength="10" />
+          <Property Name="departmentid" Type="int" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ProfileId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ProfileId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Calendar_Company">
+          <End Role="Company" Type="TotalHREntities.Store.Company" Multiplicity="1" />
+          <End Role="Calendar" Type="TotalHREntities.Store.Calendar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Calendar">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CalendarEvent_Calendar">
+          <End Role="Calendar" Type="TotalHREntities.Store.Calendar" Multiplicity="1" />
+          <End Role="CalendarEvent" Type="TotalHREntities.Store.CalendarEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calendar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CalendarEvent">
+              <PropertyRef Name="CalendarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Company">
+          <End Role="Company" Type="TotalHREntities.Store.Company" Multiplicity="1" />
+          <End Role="Department" Type="TotalHREntities.Store.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetUserProfileIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserProfiles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserRoleIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+        </Function>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TotalHREntities" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TotalHREntities1" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Calendars" EntityType="TotalHREntities.Calendar" />
+          <EntitySet Name="CalendarEvents" EntityType="TotalHREntities.CalendarEvent" />
+          <EntitySet Name="CalendarEventDepartments" EntityType="TotalHREntities.CalendarEventDepartment" />
+          <EntitySet Name="CalendarEventInvites" EntityType="TotalHREntities.CalendarEventInvite" />
+          <EntitySet Name="CalendarEventReminders" EntityType="TotalHREntities.CalendarEventReminder" />
+          <EntitySet Name="Companies" EntityType="TotalHREntities.Company" />
+          <EntitySet Name="CompanyFeatures" EntityType="TotalHREntities.CompanyFeature" />
+          <EntitySet Name="Departments" EntityType="TotalHREntities.Department" />
+          <EntitySet Name="EmailTemplates" EntityType="TotalHREntities.EmailTemplate" />
+          <EntitySet Name="Features" EntityType="TotalHREntities.Feature" />
+          <EntitySet Name="Glossaries" EntityType="TotalHREntities.Glossary" />
+          <EntitySet Name="Languages" EntityType="TotalHREntities.Language" />
+          <EntitySet Name="Profiles" EntityType="TotalHREntities.Profile" />
+          <EntitySet Name="Roles" EntityType="TotalHREntities.Role" />
+          <EntitySet Name="Users" EntityType="TotalHREntities.User" />
+          <EntitySet Name="UserProfiles" EntityType="TotalHREntities.UserProfile" />
+          <EntitySet Name="UserRoles" EntityType="TotalHREntities.UserRole" />
+          <AssociationSet Name="FK_Calendar_Company" Association="TotalHREntities.FK_Calendar_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Calendar" EntitySet="Calendars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CalendarEvent_Calendar" Association="TotalHREntities.FK_CalendarEvent_Calendar">
+            <End Role="Calendar" EntitySet="Calendars" />
+            <End Role="CalendarEvent" EntitySet="CalendarEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Company" Association="TotalHREntities.FK_Department_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <FunctionImport Name="GetUserProfileIds" ReturnType="Collection(Int32)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserProfiles" ReturnType="Collection(TotalHREntities.GetUserProfiles_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserRoleIds" ReturnType="Collection(Int32)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserRoles" ReturnType="Collection(TotalHREntities.GetUserRoles_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <EntityType Name="Calendar">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModified" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" />
+          <Property Name="TemplateId" Type="Int32" />
+          <Property Name="OpenToAll" Type="Boolean" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="TotalHREntities.FK_Calendar_Company" FromRole="Calendar" ToRole="Company" />
+          <NavigationProperty Name="CalendarEvents" Relationship="TotalHREntities.FK_CalendarEvent_Calendar" FromRole="Calendar" ToRole="CalendarEvent" />
+        </EntityType>
+        <EntityType Name="CalendarEvent">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifed" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" />
+          <Property Name="StartOfEvent" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndOfEvent" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Location" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="TargetInviteType" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="CalendarId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Calendar" Relationship="TotalHREntities.FK_CalendarEvent_Calendar" FromRole="CalendarEvent" ToRole="Calendar" />
+        </EntityType>
+        <EntityType Name="CalendarEventDepartment">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+            <PropertyRef Name="EventId" />
+          </Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CalendarEventInvite">
+          <Key>
+            <PropertyRef Name="EventId" />
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ProfileId" />
+          </Key>
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ProfileId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CalendarEventReminder">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Frequency" Type="Int32" Nullable="false" />
+          <Property Name="FrequencyType" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="Int32" />
+          <Property Name="LastModified" Type="DateTime" Precision="3" />
+          <Property Name="TextTemplateId" Type="Int32" Nullable="false" />
+          <Property Name="ReminderTypeId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Address1" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Address2" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Address3" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="City" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="StateorCounty" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="Phone1" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Phone2" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="PostCode" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateBy" Type="Int32" />
+          <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="TaxId" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="VATId" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="DNUSNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="NumberOfEmployees" Type="Int32" Nullable="false" />
+          <Property Name="CompanyType" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="AnnualRevenue" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="Description" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <Property Name="Website" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="PreferredLanguageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Calendars" Relationship="TotalHREntities.FK_Calendar_Company" FromRole="Company" ToRole="Calendar" />
+          <NavigationProperty Name="Departments" Relationship="TotalHREntities.FK_Department_Company" FromRole="Company" ToRole="Department" />
+        </EntityType>
+        <EntityType Name="CompanyFeature">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+            <PropertyRef Name="FeatureId" />
+          </Key>
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="FeatureId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" />
+          <Property Name="LastModified" Type="DateTime" Precision="3" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="TotalHREntities.FK_Department_Company" FromRole="Department" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="EmailTemplate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="Subject" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+          <Property Name="Template" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="RootId" Type="Int32" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="Obsolete" Type="Boolean" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="Identifier" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Feature">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModified" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Glossary">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Term" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="RootId" Type="Int32" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="Obsolete" Type="Boolean" Nullable="false" />
+          <Property Name="GlossaryGroup" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="GroupOrder" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="RelatedGlossaryId" Type="Int32" Nullable="false" />
+          <Property Name="Culture" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModified" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" />
+          <Property Name="Identifier" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModified" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" />
+          <Property Name="Identifier" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="GenderId" Type="Int32" Nullable="false" />
+          <Property Name="firstname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="othernames" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="surname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="title" Type="Int32" Nullable="false" />
+          <Property Name="othertitle" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Address1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Address2" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Address3" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+          <Property Name="Town" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="stateorcounty" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="PostCode" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="countryId" Type="Int32" />
+          <Property Name="Phone" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="Mobile" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdby" Type="Int32" Nullable="false" />
+          <Property Name="lastvisit" Type="DateTime" Precision="3" />
+          <Property Name="novisits" Type="Int32" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="email" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="lastupdatedby" Type="Int32" />
+          <Property Name="lastupdated" Type="DateTime" Precision="3" />
+          <Property Name="typeid" Type="Int32" Nullable="false" />
+          <Property Name="userguid" Type="Guid" Nullable="false" />
+          <Property Name="preferedlanguageid" Type="Int32" Nullable="false" />
+          <Property Name="tersmaccepted" Type="Boolean" Nullable="false" />
+          <Property Name="activationcode" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="chosenculture" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="departmentid" Type="Int32" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ProfileId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ProfileId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Calendar_Company">
+          <End Role="Company" Type="TotalHREntities.Company" Multiplicity="1" />
+          <End Role="Calendar" Type="TotalHREntities.Calendar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Calendar">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CalendarEvent_Calendar">
+          <End Role="Calendar" Type="TotalHREntities.Calendar" Multiplicity="1" />
+          <End Role="CalendarEvent" Type="TotalHREntities.CalendarEvent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Calendar">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CalendarEvent">
+              <PropertyRef Name="CalendarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Company">
+          <End Role="Company" Type="TotalHREntities.Company" Multiplicity="1" />
+          <End Role="Department" Type="TotalHREntities.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetUserProfiles_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="LastModified" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="LastModifiedBy" Nullable="true" />
+          <Property Type="String" Name="Identifier" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="GetUserRoles_Result">
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
+          <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="LastModified" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="LastModifiedBy" Nullable="true" />
+          <Property Type="String" Name="Identifier" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TotalHREntitiesStoreContainer" CdmEntityContainer="TotalHREntities1">
+          <EntitySetMapping Name="Calendars">
+            <EntityTypeMapping TypeName="TotalHREntities.Calendar">
+              <MappingFragment StoreEntitySet="Calendar">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+                <ScalarProperty Name="OpenToAll" ColumnName="OpenToAll" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CalendarEvents">
+            <EntityTypeMapping TypeName="TotalHREntities.CalendarEvent">
+              <MappingFragment StoreEntitySet="CalendarEvent">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="LastModifed" ColumnName="LastModifed" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="StartOfEvent" ColumnName="StartOfEvent" />
+                <ScalarProperty Name="EndOfEvent" ColumnName="EndOfEvent" />
+                <ScalarProperty Name="Location" ColumnName="Location" />
+                <ScalarProperty Name="TargetInviteType" ColumnName="TargetInviteType" />
+                <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CalendarEventDepartments">
+            <EntityTypeMapping TypeName="TotalHREntities.CalendarEventDepartment">
+              <MappingFragment StoreEntitySet="CalendarEventDepartment">
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CalendarEventInvites">
+            <EntityTypeMapping TypeName="TotalHREntities.CalendarEventInvite">
+              <MappingFragment StoreEntitySet="CalendarEventInvite">
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CalendarEventReminders">
+            <EntityTypeMapping TypeName="TotalHREntities.CalendarEventReminder">
+              <MappingFragment StoreEntitySet="CalendarEventReminder">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+                <ScalarProperty Name="FrequencyType" ColumnName="FrequencyType" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="TextTemplateId" ColumnName="TextTemplateId" />
+                <ScalarProperty Name="ReminderTypeId" ColumnName="ReminderTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="TotalHREntities.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateorCounty" ColumnName="StateorCounty" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+                <ScalarProperty Name="VATId" ColumnName="VATId" />
+                <ScalarProperty Name="DNUSNumber" ColumnName="DNUSNumber" />
+                <ScalarProperty Name="NumberOfEmployees" ColumnName="NumberOfEmployees" />
+                <ScalarProperty Name="CompanyType" ColumnName="CompanyType" />
+                <ScalarProperty Name="AnnualRevenue" ColumnName="AnnualRevenue" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="PreferredLanguageId" ColumnName="PreferredLanguageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyFeatures">
+            <EntityTypeMapping TypeName="TotalHREntities.CompanyFeature">
+              <MappingFragment StoreEntitySet="CompanyFeature">
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="TotalHREntities.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmailTemplates">
+            <EntityTypeMapping TypeName="TotalHREntities.EmailTemplate">
+              <MappingFragment StoreEntitySet="EmailTemplate">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Template" ColumnName="Template" />
+                <ScalarProperty Name="RootId" ColumnName="RootId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="Obsolete" ColumnName="Obsolete" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Features">
+            <EntityTypeMapping TypeName="TotalHREntities.Feature">
+              <MappingFragment StoreEntitySet="Feature">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Glossaries">
+            <EntityTypeMapping TypeName="TotalHREntities.Glossary">
+              <MappingFragment StoreEntitySet="Glossary">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Term" ColumnName="Term" />
+                <ScalarProperty Name="RootId" ColumnName="RootId" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="Obsolete" ColumnName="Obsolete" />
+                <ScalarProperty Name="GlossaryGroup" ColumnName="GlossaryGroup" />
+                <ScalarProperty Name="GroupOrder" ColumnName="GroupOrder" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="TotalHREntities.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+                <ScalarProperty Name="RelatedGlossaryId" ColumnName="RelatedGlossaryId" />
+                <ScalarProperty Name="Culture" ColumnName="Culture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profiles">
+            <EntityTypeMapping TypeName="TotalHREntities.Profile">
+              <MappingFragment StoreEntitySet="Profile">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="TotalHREntities.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TotalHREntities.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="othernames" ColumnName="othernames" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="othertitle" ColumnName="othertitle" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
+                <ScalarProperty Name="stateorcounty" ColumnName="stateorcounty" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="countryId" ColumnName="countryId" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="lastvisit" ColumnName="lastvisit" />
+                <ScalarProperty Name="novisits" ColumnName="novisits" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="lastupdatedby" ColumnName="lastupdatedby" />
+                <ScalarProperty Name="lastupdated" ColumnName="lastupdated" />
+                <ScalarProperty Name="typeid" ColumnName="typeid" />
+                <ScalarProperty Name="userguid" ColumnName="userguid" />
+                <ScalarProperty Name="preferedlanguageid" ColumnName="preferedlanguageid" />
+                <ScalarProperty Name="tersmaccepted" ColumnName="tersmaccepted" />
+                <ScalarProperty Name="activationcode" ColumnName="activationcode" />
+                <ScalarProperty Name="chosenculture" ColumnName="chosenculture" />
+                <ScalarProperty Name="departmentid" ColumnName="departmentid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="TotalHREntities.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="TotalHREntities.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetUserProfileIds" FunctionName="TotalHREntities.Store.GetUserProfileIds" />
+          <FunctionImportMapping FunctionImportName="GetUserProfiles" FunctionName="TotalHREntities.Store.GetUserProfiles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalHREntities.GetUserProfiles_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="GetUserRoleIds" FunctionName="TotalHREntities.Store.GetUserRoleIds" />
+          <FunctionImportMapping FunctionImportName="GetUserRoles" FunctionName="TotalHREntities.Store.GetUserRoles">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalHREntities.GetUserRoles_Result">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

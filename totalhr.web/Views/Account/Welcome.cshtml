@@ -1,0 +1,18 @@
+﻿@model totalhr.Shared.Models.UserRegStruct
+@using totalhr.Resources;
+@{
+    ViewBag.Title = Common.Page_TT_Header_Welcome;
+}
+
+
+<div id="main">
+    <div class="content">
+
+<h1>@Common.Page_TT_Welcome</h1>
+
+        <p>
+            @Html.Raw(string.Format(Common.MSG_Welcome_NewUser, Model.Name, Model.Email, Common.Signature))
+        </p>
+
+        </div>
+    </div>

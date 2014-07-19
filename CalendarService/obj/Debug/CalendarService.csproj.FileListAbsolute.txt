@@ -1,0 +1,5 @@
+C:\Projects\websites\Totalhr.com\TotalHR\CalendarService\bin\Debug\CalendarService.dll
+C:\Projects\websites\Totalhr.com\TotalHR\CalendarService\bin\Debug\CalendarService.pdb
+C:\Projects\websites\Totalhr.com\TotalHR\CalendarService\obj\Debug\CalendarService.csprojResolveAssemblyReference.cache
+C:\Projects\websites\Totalhr.com\TotalHR\CalendarService\obj\Debug\CalendarService.dll
+C:\Projects\websites\Totalhr.com\TotalHR\CalendarService\obj\Debug\CalendarService.pdb

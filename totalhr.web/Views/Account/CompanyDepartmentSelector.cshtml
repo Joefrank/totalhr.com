@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "CompanyDepartmentSelector";
+}
+
+<h2>CompanyDepartmentSelector</h2>
+
+@foreach (totalhr.data.EF.Department department in Model)
+{
+    <input type="checkbox" onclick="PickDepartment(this)" value="@department.id" />@department.Name
+    <input type="hidden" id="hdnDept_@department.id" value="@department.Name" />
+}
+
+<input type="button" value="Done" onclick="PickDepartmentSelection()" />

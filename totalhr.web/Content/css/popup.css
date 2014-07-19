@@ -1,0 +1,134 @@
+﻿
+body {
+    background-color: #F9F9F9;
+    overflow-x: hidden;
+}
+
+.req {
+    color:red;
+    position:relative;
+    padding-top:13px;
+}
+
+.formwrapper {
+    float:left;
+    width:700px;
+}
+
+body, html {
+    min-height: 100%;
+}
+
+.line input[type="text"], .line .datetxt, .longline textarea, .line input[type="radio"]{
+	background-color: #FFFBFB;
+    border: 1px solid #BBBB11;
+    margin: 2px;
+    padding: 2px;
+    width: 167px;
+}
+
+.line button:hover, .line input[type="button"]:hover,  .line input[type="submit"]:hover {
+    background-color: #B53636;
+}
+
+.line button, .line input[type="button"],  .line input[type="submit"] {
+    background-color: #D36161;
+    border: medium none;
+    color: #FFFFFF;
+    cursor: pointer;
+    font: bold 14px arial,serif;
+    margin: 3px;
+    padding: 4px;
+    width: 72px;
+}
+
+
+.line, .longline {
+    z-index: 1;
+    position: relative;
+	float:left;	
+	width:100%;
+	/*height:40px;*/
+	padding:4px 0;
+    font-size: 10pt;
+}
+
+.longline {
+	min-height:100px;
+}
+
+.line  .block{
+	float:left;
+	width:50%;
+	height:100%;
+}
+
+.line .halfblock{
+	float:left;
+	width:50%;
+	height:50%;
+    text-align:left;
+}
+
+    /*.line .halfblock label {
+        float: left;background-color:red;
+    }*/
+
+
+
+.line label , .line select, .longline label{
+    color: #7B7B7B;
+    font: bold 8pt arial,serif;
+	float:left;
+	text-align:right;
+}
+
+.fix200W{width:100px;}
+
+.line label, .longline label {position:relative;top:5px;padding:0 5px;}
+.line .reminders span{float:left;display:block;width:16px;height:16px;cursor:pointer;}
+.line .reminders .spcount{color:blue;width:100px;font-weight:bold;padding:5px 0 0 5px;}
+
+.line .reminders .spview{padding:2px 3px;float:right;margin:5px 10px 0 0px;width:200px;}
+
+.line .reminders .spadd{padding:10px 0 0 2px;margin-left:10px;background:transparent url('../images/plus-icon.png') left center no-repeat;}
+
+.line .reminders .spedit{padding:10px 0 0 2px;background:transparent url('../images/edit-icon.png') center center no-repeat;}
+
+.line .reminders .spdelete{background:transparent url('../images/delete-icon.png') center center no-repeat;}
+
+.reminderpopup {
+    background-color:#59a8dc;
+    color:white;
+    width:400px;
+    position:relative;
+    text-align:left;
+    float:left;
+    padding:10px;
+}
+
+   .reminderpopup  input[type="text"], .reminderpopup textarea, .reminderpopup input[type="radio"] , .line input[type="radio"]{
+      padding:0;
+        margin:0;
+        width:50px;
+    }
+    
+
+.line .childblock {
+    float: left;text-align: left;width: 200px;margin: 5px 0;
+}
+
+.line .childblock input[type="radio"], .line .attendees  input[type="radio"]{ width: 10px;margin: 2px 5px 0 0;}
+
+.line .optionbox{width:400px;min-height:100px;background-color:powderblue;color:white;float:left;position:relative;z-index:1002;}
+
+ .childblock span.row{ display: block;width: 100%;cursor: pointer;}
+
+  .childblock .head{ float: left;width: 100%;height: 20px;padding: 2px 0;text-align: left;cursor: pointer;color: blue;font-weight: bold;}
+
+   .childblock .content{ float: left;width: 100%;background-color: beige;}
+
+   .childblock .info{ cursor: pointer;color: blue;font-weight: bold;float: right;}
+
+   #sprepeatinfo{ display: block;float: left;width: 100%;margin: 10px 0;color:#7b7b7b;}
+

@@ -1,0 +1,17 @@
+﻿@model List<totalhr.data.EF.User>
+
+@{
+    ViewBag.Title = "CompanyUsersSelector";
+}
+
+<h2>CompanyUsersSelector</h2>
+
+
+@foreach (totalhr.data.EF.User user in Model)
+{
+    var username = user.firstname + " " + user.surname;
+    <input type="checkbox" onclick="Pick(this)" value="@user.id" />@username
+    <input type="hidden" id="hdnUser_@user.id" value="@username" />
+}
+
+<input type="button" value="Done" onclick="PickUserSelection()" />

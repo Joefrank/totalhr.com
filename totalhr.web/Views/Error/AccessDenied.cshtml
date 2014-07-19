@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "AccessDenied";
+    string ErrorMessage = Request.QueryString["ModelError"];
+}
+
+<h2>AccessDenied</h2>
+
+<p>
+    You do not have the correct profile for this feature.<br />
+    Please contact your administrator for more details.
+</p>
+<p>
+    @ErrorMessage
+</p>

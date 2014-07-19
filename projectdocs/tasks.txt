@@ -1,0 +1,33 @@
+
+
+
+- SMTP settings need to be in ioc container.
+- Check sizes of fields with db sizes
+- Update auto field with Js -> (title -other, use my email as username)
+- put stars next to their labels.
+- Messaging service needs to inject Admin settings
+- Adminstruct should be renamed to something like Kernel.
+
+
+- Remove caching from registration logon details fields (done)
+- Unit testing for registration (done)
+- load glossaries in one go to avoid db hit -> create helper methods (done)
+- Countries not alphabetical (done)
+- Create table for user and company (Done -29/05/2014)
+- Check fields from specifications (Done)
+- do field validation in structure (size) (Done)
+- Create related repositories (Done)
+- Create services (done)
+- Do Business rules validation for registration (existing email, password length, existing username)(done)
+- Logging needs to be done.(done)-ongoing
+- Validation summary on error (testing) - (done)
+- avoid duplicate registration.(done)
+- Check email service not working.(done)
+
+
+
+------- Later -----------------------
+
+Front-end forms (registration) Field suggestions.
+Field highlights on errors.
+

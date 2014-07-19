@@ -1,0 +1,15 @@
+﻿@model Calendar.Models.CalendarHTML
+
+<link href="~/Content/calendar.css" rel="stylesheet" />
+
+@{
+
+  
+} 
+<p>
+    <a href="@Model.PreviousRequest">Prev</a>&nbsp;
+    <a href="@Model.NextRequest">Next</a>
+</p>
+@Html.Raw(Model.GridHTML)
+
+ 

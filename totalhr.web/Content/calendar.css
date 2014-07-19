@@ -1,0 +1,90 @@
+﻿
+table.calendar {
+    border-collapse:collapse;
+}
+
+    table.calendar tr td, table.calendar tr th {
+        padding:5px;text-align:center;
+    }
+
+    table.calendar tr td {
+        height:120px;width:120px;cursor:pointer;
+    }
+
+        table.calendar tr td.prev, table.calendar tr td.next {
+            
+        }
+ 
+
+
+table.day {
+    min-width: 600px;
+}
+
+table.calendarweek, table.calendar {
+    border-collapse: collapse;border-color: white;
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.calendarweek td, .calendarweek th {
+    padding: 10px;border-color:#cfcfcf;
+}
+
+.calendarweek td, table.calendar td {
+    font-weight: bold;
+    color: #4f4f4f;
+    background-color: #ebebeb;  
+}
+
+.calendarweek th, table.calendar th {
+    background-color: #3883a3;
+    color: white;
+    font-weight: bold;
+    font-size: 100%;
+}
+
+.calendarweek td .event {
+    background-color: #3883a3;
+    color: white;
+    font-weight: normal;
+    font-size: 8pt;
+    padding: 2px 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px; /* future proofing */
+    -khtml-border-radius: 10px; /* for old Konqueror browsers */
+}
+
+table.calendar tr td.next, table.calendar tr td.prev {
+    color:#808080;font-weight:normal;
+}
+
+table.calendar tr td span.day {
+    display:block;
+    float:right;
+    position:relative;
+    top:-45%;
+    right:5px;
+}
+
+table.calendar tr td span.event {
+    display:block;    
+    font-size:8pt;
+    font-weight:normal;
+    background-color:blue;
+    color:white;
+}
+
+#dvReminders {
+    border:1px solid grey;
+    background-color:beige;
+    width:480px;
+    padding:5px 0;
+    margin:10px;
+}
+
+    #dvReminders input[type='text'] {
+        height:10px;
+    }

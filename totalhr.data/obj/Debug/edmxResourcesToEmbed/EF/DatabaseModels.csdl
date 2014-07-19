@@ -1,0 +1,374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TotalHREntities" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TotalHREntities1" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Calendars" EntityType="TotalHREntities.Calendar" />
+    <EntitySet Name="CalendarEvents" EntityType="TotalHREntities.CalendarEvent" />
+    <EntitySet Name="CalendarEventDepartments" EntityType="TotalHREntities.CalendarEventDepartment" />
+    <EntitySet Name="CalendarEventInvites" EntityType="TotalHREntities.CalendarEventInvite" />
+    <EntitySet Name="CalendarEventReminders" EntityType="TotalHREntities.CalendarEventReminder" />
+    <EntitySet Name="Companies" EntityType="TotalHREntities.Company" />
+    <EntitySet Name="CompanyFeatures" EntityType="TotalHREntities.CompanyFeature" />
+    <EntitySet Name="Departments" EntityType="TotalHREntities.Department" />
+    <EntitySet Name="EmailTemplates" EntityType="TotalHREntities.EmailTemplate" />
+    <EntitySet Name="Features" EntityType="TotalHREntities.Feature" />
+    <EntitySet Name="Glossaries" EntityType="TotalHREntities.Glossary" />
+    <EntitySet Name="Languages" EntityType="TotalHREntities.Language" />
+    <EntitySet Name="Profiles" EntityType="TotalHREntities.Profile" />
+    <EntitySet Name="Roles" EntityType="TotalHREntities.Role" />
+    <EntitySet Name="Users" EntityType="TotalHREntities.User" />
+    <EntitySet Name="UserProfiles" EntityType="TotalHREntities.UserProfile" />
+    <EntitySet Name="UserRoles" EntityType="TotalHREntities.UserRole" />
+    <AssociationSet Name="FK_Calendar_Company" Association="TotalHREntities.FK_Calendar_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Calendar" EntitySet="Calendars" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CalendarEvent_Calendar" Association="TotalHREntities.FK_CalendarEvent_Calendar">
+      <End Role="Calendar" EntitySet="Calendars" />
+      <End Role="CalendarEvent" EntitySet="CalendarEvents" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Department_Company" Association="TotalHREntities.FK_Department_Company">
+      <End Role="Company" EntitySet="Companies" />
+      <End Role="Department" EntitySet="Departments" />
+    </AssociationSet>
+    <FunctionImport Name="GetUserProfileIds" ReturnType="Collection(Int32)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserProfiles" ReturnType="Collection(TotalHREntities.GetUserProfiles_Result)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserRoleIds" ReturnType="Collection(Int32)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetUserRoles" ReturnType="Collection(TotalHREntities.GetUserRoles_Result)">
+      <Parameter Name="userid" Mode="In" Type="Int32" />
+    </FunctionImport>
+  </EntityContainer>
+  <EntityType Name="Calendar">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="LastModified" Type="DateTime" Precision="3" />
+    <Property Name="LastModifiedBy" Type="Int32" />
+    <Property Name="TemplateId" Type="Int32" />
+    <Property Name="OpenToAll" Type="Boolean" Nullable="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="TotalHREntities.FK_Calendar_Company" FromRole="Calendar" ToRole="Company" />
+    <NavigationProperty Name="CalendarEvents" Relationship="TotalHREntities.FK_CalendarEvent_Calendar" FromRole="Calendar" ToRole="CalendarEvent" />
+  </EntityType>
+  <EntityType Name="CalendarEvent">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Title" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastModifed" Type="DateTime" Precision="3" />
+    <Property Name="LastModifiedBy" Type="Int32" />
+    <Property Name="StartOfEvent" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EndOfEvent" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Location" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="TargetInviteType" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="CalendarId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Calendar" Relationship="TotalHREntities.FK_CalendarEvent_Calendar" FromRole="CalendarEvent" ToRole="Calendar" />
+  </EntityType>
+  <EntityType Name="CalendarEventDepartment">
+    <Key>
+      <PropertyRef Name="DepartmentId" />
+      <PropertyRef Name="EventId" />
+    </Key>
+    <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+    <Property Name="EventId" Type="Int32" Nullable="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CalendarEventInvite">
+    <Key>
+      <PropertyRef Name="EventId" />
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="ProfileId" />
+    </Key>
+    <Property Name="EventId" Type="Int32" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="ProfileId" Type="Int32" Nullable="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CalendarEventReminder">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Frequency" Type="Int32" Nullable="false" />
+    <Property Name="FrequencyType" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="LastModifiedBy" Type="Int32" />
+    <Property Name="LastModified" Type="DateTime" Precision="3" />
+    <Property Name="TextTemplateId" Type="Int32" Nullable="false" />
+    <Property Name="ReminderTypeId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Company">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="Email" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Address1" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="Address2" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="Address3" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="City" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="StateorCounty" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="CountryId" Type="Int32" />
+    <Property Name="Phone1" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="Phone2" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="PostCode" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdateBy" Type="Int32" />
+    <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="TaxId" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="VATId" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="DNUSNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="NumberOfEmployees" Type="Int32" Nullable="false" />
+    <Property Name="CompanyType" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="AnnualRevenue" Type="Decimal" Precision="20" Scale="2" />
+    <Property Name="Description" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
+    <Property Name="Website" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="PreferredLanguageId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Calendars" Relationship="TotalHREntities.FK_Calendar_Company" FromRole="Company" ToRole="Calendar" />
+    <NavigationProperty Name="Departments" Relationship="TotalHREntities.FK_Department_Company" FromRole="Company" ToRole="Department" />
+  </EntityType>
+  <EntityType Name="CompanyFeature">
+    <Key>
+      <PropertyRef Name="CompanyId" />
+      <PropertyRef Name="FeatureId" />
+    </Key>
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="FeatureId" Type="Int32" Nullable="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastModifiedBy" Type="Int32" />
+    <Property Name="LastModified" Type="DateTime" Precision="3" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Company" Relationship="TotalHREntities.FK_Department_Company" FromRole="Department" ToRole="Company" />
+  </EntityType>
+  <EntityType Name="EmailTemplate">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
+    <Property Name="Subject" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
+    <Property Name="Template" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+    <Property Name="RootId" Type="Int32" Nullable="false" />
+    <Property Name="LanguageId" Type="Int32" Nullable="false" />
+    <Property Name="Obsolete" Type="Boolean" Nullable="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="LastUpdatedBy" Type="Int32" />
+    <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+    <Property Name="Identifier" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Feature">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="1000" Unicode="true" FixedLength="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="LastModified" Type="DateTime" Precision="3" />
+    <Property Name="LastModifiedBy" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Glossary">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Term" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="RootId" Type="Int32" Nullable="false" />
+    <Property Name="LanguageId" Type="Int32" Nullable="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="LastUpdatedBy" Type="Int32" />
+    <Property Name="Obsolete" Type="Boolean" Nullable="false" />
+    <Property Name="GlossaryGroup" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="GroupOrder" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Language">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdatedBy" Type="Int32" />
+    <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+    <Property Name="RelatedGlossaryId" Type="Int32" Nullable="false" />
+    <Property Name="Culture" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Profile">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="LastModified" Type="DateTime" Precision="3" />
+    <Property Name="LastModifiedBy" Type="Int32" />
+    <Property Name="Identifier" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="Description" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+    <Property Name="LastModified" Type="DateTime" Precision="3" />
+    <Property Name="LastModifiedBy" Type="Int32" />
+    <Property Name="Identifier" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="GenderId" Type="Int32" Nullable="false" />
+    <Property Name="firstname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="othernames" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="surname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="title" Type="Int32" Nullable="false" />
+    <Property Name="othertitle" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="username" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="Address1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Address2" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Address3" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
+    <Property Name="Town" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="stateorcounty" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+    <Property Name="PostCode" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="countryId" Type="Int32" />
+    <Property Name="Phone" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="Mobile" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="CompanyId" Type="Int32" Nullable="false" />
+    <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="createdby" Type="Int32" Nullable="false" />
+    <Property Name="lastvisit" Type="DateTime" Precision="3" />
+    <Property Name="novisits" Type="Int32" Nullable="false" />
+    <Property Name="active" Type="Boolean" Nullable="false" />
+    <Property Name="email" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="lastupdatedby" Type="Int32" />
+    <Property Name="lastupdated" Type="DateTime" Precision="3" />
+    <Property Name="typeid" Type="Int32" Nullable="false" />
+    <Property Name="userguid" Type="Guid" Nullable="false" />
+    <Property Name="preferedlanguageid" Type="Int32" Nullable="false" />
+    <Property Name="tersmaccepted" Type="Boolean" Nullable="false" />
+    <Property Name="activationcode" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+    <Property Name="chosenculture" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+    <Property Name="departmentid" Type="Int32" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="ProfileId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="ProfileId" Type="Int32" Nullable="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserRole">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="RoleId" Type="Int32" Nullable="false" />
+    <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Calendar_Company">
+    <End Role="Company" Type="TotalHREntities.Company" Multiplicity="1" />
+    <End Role="Calendar" Type="TotalHREntities.Calendar" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Calendar">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CalendarEvent_Calendar">
+    <End Role="Calendar" Type="TotalHREntities.Calendar" Multiplicity="1" />
+    <End Role="CalendarEvent" Type="TotalHREntities.CalendarEvent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Calendar">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CalendarEvent">
+        <PropertyRef Name="CalendarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Department_Company">
+    <End Role="Company" Type="TotalHREntities.Company" Multiplicity="1" />
+    <End Role="Department" Type="TotalHREntities.Department" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Company">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Department">
+        <PropertyRef Name="CompanyId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <ComplexType Name="GetUserProfiles_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="LastModified" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="LastModifiedBy" Nullable="true" />
+    <Property Type="String" Name="Identifier" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <ComplexType Name="GetUserRoles_Result">
+    <Property Type="Int32" Name="id" Nullable="false" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="Description" Nullable="true" MaxLength="255" />
+    <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+    <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+    <Property Type="DateTime" Name="LastModified" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="LastModifiedBy" Nullable="true" />
+    <Property Type="String" Name="Identifier" Nullable="false" MaxLength="50" />
+  </ComplexType>
+</Schema>
