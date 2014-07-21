@@ -600,4 +600,22 @@
   <data name="Toolt_Edit_Reminder" xml:space="preserve">
     <value>Edit reminder</value>
   </data>
+  <data name="Error_Invalid_Date" xml:space="preserve">
+    <value>Invalid date.</value>
+  </data>
+  <data name="Error_StartDate_Before_Repeat" xml:space="preserve">
+    <value>You must specify a start date for event before you add a repeat.</value>
+  </data>
+  <data name="btn_Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="V_Added" xml:space="preserve">
+    <value>Added</value>
+  </data>
+  <data name="Error_Event_Target_Required" xml:space="preserve">
+    <value>You need to select attendee(s) for your event</value>
+  </data>
+  <data name="V_None_Added" xml:space="preserve">
+    <value>None added</value>
+  </data>
 </root>

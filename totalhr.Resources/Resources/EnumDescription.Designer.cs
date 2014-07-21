@@ -61,11 +61,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Whole company.
+        /// </summary>
+        public static string Company {
+            get {
+                return ResourceManager.GetString("Company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Daily (Mon - Fri).
         /// </summary>
         public static string DailyMonToFri {
             get {
                 return ResourceManager.GetString("DailyMonToFri", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chosen department(s).
+        /// </summary>
+        public static string Department {
+            get {
+                return ResourceManager.GetString("Department", resourceCulture);
             }
         }
         
@@ -79,6 +97,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Myself Only (private).
+        /// </summary>
+        public static string MyselfOnly {
+            get {
+                return ResourceManager.GetString("MyselfOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to On specific date(s).
         /// </summary>
         public static string OnDates {
@@ -88,11 +115,20 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to On {0} every week.
+        ///   Looks up a localized string similar to On &lt;span id=&quot;repDay&quot;&gt;{0}&lt;/span&gt; every week.
         /// </summary>
         public static string OnDayOfTheWeek {
             get {
                 return ResourceManager.GetString("OnDayOfTheWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected user(s).
+        /// </summary>
+        public static string User {
+            get {
+                return ResourceManager.GetString("User", resourceCulture);
             }
         }
         

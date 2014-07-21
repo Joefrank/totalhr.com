@@ -9,13 +9,42 @@ namespace totalhr.web.Helpers
     public class CalendarHelper
     {
 
-        public static string GenerateRepeatByType(Variables.RepeatType myenum)
+        public static string GenerateRepeatByType(Variables.RepeatType myenum, string groupname)
         {
             return string.Format(@"<span class=""row"" id=""spRepeatType_{0}"" title=""{1}"" onmouseover=""ShowDetails(this);"" 
-                onmouseout=""HideDetails(this);"" onclick=""ApplyRepeatSelection(this)""><i class=""info"" title=""{1}"">(i)</i>
-                <input type=""radio"" name=""repeattype"" value=""{0}"" />{2}</span>
-                <span id=""spRepeatTypeCount_{0}"" onclick=""ShowRepeats('spRepeatTypeAdded_{0}')""></span>
-                <span id=""spRepeatTypeAdded_{0}""></span> ", (int)myenum, EnumExtensions.FurtherInfo(myenum), EnumExtensions.Description(myenum));
+                onmouseout=""HideDetails(this);"" onclick=""ApplyRepeatSelection(this)""><i class=""info"" title=""{1}"">&nbsp;</i>
+                <input type=""radio"" name=""{3}"" value=""{0}"" /><span id=""spRepeatDesc_{0}"">{2}</span></span>
+                <span class=""repeatcount"" id=""spRepeatTypeCount_{0}"" onclick=""ShowRepeats('spRepeatTypeAdded_{0}')""></span>
+                <span id=""spRepeatTypeAdded_{0}"" style=""display:none""></span> ", (int)myenum, EnumExtensions.FurtherInfo(myenum), 
+                           EnumExtensions.Description(myenum), groupname);
+        }
+
+        public static string GenerateAttendee(Variables.CalendarEventTarget myenum, string groupname)
+        {
+
+            var temp = string.Empty;
+            var targetId = (int)myenum;
+
+            if (targetId == (int)Variables.CalendarEventTarget.User)
+            {
+                temp = @" onclick=""OpenSelector('USERS');"" ";
+            }
+            else if (targetId == (int)Variables.CalendarEventTarget.Department)
+            {
+                temp = @" onclick=""OpenSelector('DEPARTMENT');"" ";
+            }
+            else
+            {
+                temp = "";
+            }
+
+            return string.Format(@"<span class=""row"" id=""spAttendeeTarget_{0}"" title=""{1}"" onmouseover=""ShowDetails(this);"" 
+                onmouseout=""HideDetails(this);"" onclick=""ApplyAttendeeTargetSelection(this, {0})""><i class=""info"" title=""{1}"">&nbsp;</i>
+                <input type=""radio"" name=""{4}"" value=""{0}"" {3} />
+                <span id=""spAttendeeDesc_{0}"">{2}</span></span>", (int)myenum, EnumExtensions.FurtherInfo(myenum),
+                                              EnumExtensions.Description(myenum), temp, groupname);
         }
     }
+
+
 }

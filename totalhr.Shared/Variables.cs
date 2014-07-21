@@ -56,6 +56,7 @@ namespace totalhr.Shared
 
         public enum CalendarEventTarget
         {
+            MyselfOnly = 254,
             Company= 251,
             Department =252,
             User =253
@@ -70,7 +71,7 @@ namespace totalhr.Shared
             MonthlyOnDates = 4,
             YearlyOnSameDate = 5
         }
-
+        
         public static string AdminEmailSignature
         {
             get

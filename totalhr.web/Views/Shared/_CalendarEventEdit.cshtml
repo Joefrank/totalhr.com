@@ -10,7 +10,8 @@
 
     var lstDayHours = new List<string> { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
     var lstDayMinutes = new List<string> { "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55" };
-       
+
+    var WeekDaysJS = ViewBag.WeekDaysJS;
     
     var eventTargets = ViewBag.EventTargets as List<totalhr.data.EF.Glossary>;
 
@@ -56,13 +57,14 @@
                 @Html.TextBoxFor(x => x.StartDate, "{0:d/MM/yyyy}", 
                 new Dictionary<string, object>
                     { 
-                        { "class", "datetype"},
+                        {"class", "datetype"},
                         {"Value",""},
                         {"type", "text"},
                         {"data-beatpicker","true"},				                  
                         {"data-beatpicker-position","['*','*']"},
-                        { "data-beatpicker-format","['DD','MM','YYYY'],separator:'/'"},
-                        {"data-beatpicker-module","gotoDate,clear"}
+                        {"data-beatpicker-format","['DD','MM','YYYY'],separator:'/'"},
+                        {"data-beatpicker-module","gotoDate,clear"},
+                        {"data-beatpicker-id", "StartDate"}
                     }
                   ) 
                 
@@ -208,19 +210,20 @@
                  <div class="childblock">
                     
                      <div class="head" onclick="ToggleExpand('dvAttendeesContent')">
-                           None added
+                           @FormMessages.V_None_Added
                      </div>
                      <div id="dvAttendeesContent" class="content" style="display:none">
-                         @foreach (totalhr.data.EF.Glossary glossary in eventTargets)
-                         {
-                             var spId = "sp_" + glossary.RootId;
+                        @foreach (var num in (Variables.CalendarEventTarget[])Enum.GetValues(typeof(Variables.CalendarEventTarget)))
+                        {
+                            @Html.Raw(CalendarHelper.GenerateAttendee(num, "TargetAttendeeGroupId"));
+                        }                         
+                       
+                        @Html.HiddenFor(x => x.InvitedUserIds)
+                        @Html.HiddenFor(x => x.InvitedDepartmentIds)
                          
-                             <input type="radio" id="ck_@glossary.RootId" name="attendeegroup" onclick="@(Html.Raw("PickEventTargetSelection(this,'" +  spId +"')"));" value="@glossary.RootId" />
-                             <span>@glossary.Term</span>
-                        
-                             <span id="@spId" style="display:none;">@Html.Raw(GlossaryHelper.EventTargetHTML(glossary.RootId))</span>
-                             <br />
-                         }
+                        <div id="dvAttendeesOptions" class="optionbox" style="display:none;">
+
+                        </div>
                      </div>
 
                 </div>
@@ -234,31 +237,40 @@
                     
                     <div  id="dvRepeat" class="childblock">
                     
-                        <div class="head" onclick="ToggleExpand('dvRepeatContent')">
-                               None added
+                        <div id="dvRepeatHead" class="head" onclick="ToggleExpand('dvRepeatContent',$.trim($('#StartDate').val()) != '' ,'hdnMissingStartDate')">
+                               @FormMessages.V_None_Added
                         </div>
 
                     <div id="dvRepeatContent" class="content" style="display:none">
                         @foreach (var num in (Variables.RepeatType[])Enum.GetValues(typeof(Variables.RepeatType)))
                         {
                             sbJS.Append(string.Format("{0} = {1};" + Environment.NewLine, num.ToString(), (int) num));
-                            @Html.Raw(CalendarHelper.GenerateRepeatByType(num));
+                            @Html.Raw(CalendarHelper.GenerateRepeatByType(num, "RepeatType"));
                         }
                     
                         <div id="repeatOptions" class="optionbox" style="display:none;">
                         
                             <span id="spRepeatBattery" style="display:none;float:left;position:relative;z-index:1004;">
-                                <input type="text" id="txtRepeatDate"  />
+                                <input type="text" id="txtRepeatDate" name="txtRepeatDate" class="datetype"
+                                    data-beatpicker="true" 
+                                    data-beatpicker-format="[&#39;DD&#39;,&#39;MM&#39;,&#39;YYYY&#39;],separator:&#39;/&#39;" 
+                                    data-beatpicker-module="gotoDate,clear" 
+                                    data-beatpicker-position="[&#39;*&#39;,&#39;*&#39;]"  />
+
                                 <input type="button" value="Add" onclick="KeepDateIn('txtRepeatDate')" />
                             </span>
                         
                             <span id="spUntilDate" style="display:none;float:left;position:relative;z-index:1004;">
-                                Until: <input type="text" id="txtRepeatUntil" />
+                                Until: <input type="text" id="txtRepeatUntil" name="txtRepeatUntil" class="datetype"
+                                    data-beatpicker="true" 
+                                    data-beatpicker-format="[&#39;DD&#39;,&#39;MM&#39;,&#39;YYYY&#39;],separator:&#39;/&#39;" 
+                                    data-beatpicker-module="gotoDate,clear" 
+                                    data-beatpicker-position="[&#39;*&#39;,&#39;*&#39;]"  />
                                 <input type="button" value="Set" onclick="SetUntilDateIn('txtRepeatUntil')" />
                             </span>
                         
                             <span id="spRepeatValue" style="display:none;float:left;position:relative;z-index:1004;">
-                                Enter year:  <input type="text" id="txtRepeatValue"  />
+                                Enter year:  <input type="text" id="txtRepeatValue" class="datetype"  />
                                 <input type="button" value="Add" onclick="KeepDateIn('txtRepeatValue')" />
                             </span>
                             
@@ -274,14 +286,18 @@
                     
                     <span id="spmonthlydate"></span>              
                 </div>
+
+                <div class="block">
+                    <span class="preview" id="sppreview"></span>
+                </div>
             </div>    
 
         <div class="line">
             <div class="block">
                 <label class="fix200W">&nbsp;</label>
 
-                <input type="button" value="Cancel" onclick="DisposePopup();" />
-                <input type="submit" value="Save" onclick="return GrabValues()" />
+                <input type="button" value="@FormMessages.btn_Reset" onclick='@( @"document.location.href=""/Calendar/CreateEvent/" + Model.CalendarId + @""" ")' />
+                <input type="submit" value="@FormMessages.btn_Value_Save" onclick="return GrabValues()" />
              </div>
         </div>
                 
@@ -293,7 +309,9 @@
       
 
 }
-        
+    <script type="text/javascript" src="/Scripts/Site/BeatPicker.min.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery-1.11.0.min.js"></script>     
+<div class="status-box" id="status"></div>
 
 <script type="text/javascript">
 
@@ -302,6 +320,39 @@
     var prevSelDisplayObj = null;
     var RepeatsToSave = new Array();
 
+    var ERROR_INVALID_DATE = '@FormMessages.Error_Invalid_Date';
+
     @sbJS.ToString()
     
+    @Html.Raw(WeekDaysJS)
+
+    MSG_ADDED = "@FormMessages.V_Added";
+
+    $(document).ready(function () {
+
+        var statusGenerator = function (text) {
+           
+            var statusElem = $("#status");
+            var child = $("<span></span>").text(text);
+            statusElem.append(child);
+        };
+
+        StartDate.on("select", function (data) {
+            var selectedDate = data.string;           
+            var objDate = parseDate(selectedDate);
+            var dayIndex = objDate.getDay();            
+           
+            var obj = $('#spRepeatDesc_' + OnDayOfTheWeek + ' #repDay');
+
+            obj.html(weekday[dayIndex]);
+        });
+      
+
+       // $("#StartDate").bind("change", AdjustEvents);
+
+    })
+
+    
 </script>
+
+<input type="hidden" id="hdnMissingStartDate" value="@totalhr.Resources.FormMessages.Error_StartDate_Before_Repeat" />

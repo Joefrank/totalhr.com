@@ -72,6 +72,20 @@ namespace Calendar.Implementation
             return weekBoundaries;
         }
 
+        public string[] GetWeekDaysByName(CultureInfo info)
+        {
+            var firstDay = info.DateTimeFormat.FirstDayOfWeek;
+            string[] arrOfDays = new string[NoWeekDays];
+
+            for (int dayIndex = 0; dayIndex < NoWeekDays; dayIndex++)
+            {
+                var currentDay = (DayOfWeek)(((int)firstDay + dayIndex) % NoWeekDays);
+                // Output the day               
+                arrOfDays[dayIndex] = currentDay.ToString();
+            }
+            return arrOfDays;
+        }
+
         public CalendarHTML GenerateCalendarHTML(CalendarRequestStruct rqStruct)
         {   
             var sbAllHtml = new StringBuilder();

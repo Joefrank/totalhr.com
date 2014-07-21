@@ -33,3 +33,16 @@ C:\Projects\totalhr.com\TotalHR\CalendarService\bin\Debug\Resources.pdb
 C:\Projects\totalhr.com\TotalHR\CalendarService\obj\Debug\Calendar.csprojResolveAssemblyReference.cache
 C:\Projects\totalhr.com\TotalHR\CalendarService\obj\Debug\CalendarService.dll
 C:\Projects\totalhr.com\TotalHR\CalendarService\obj\Debug\CalendarService.pdb
+C:\Projects\websites\totalhr.com\CalendarService\bin\Debug\CalendarService.dll
+C:\Projects\websites\totalhr.com\CalendarService\bin\Debug\CalendarService.pdb
+C:\Projects\websites\totalhr.com\CalendarService\bin\Debug\totalhr.data.dll
+C:\Projects\websites\totalhr.com\CalendarService\bin\Debug\totalhr.Shared.dll
+C:\Projects\websites\totalhr.com\CalendarService\bin\Debug\EntityFramework.dll
+C:\Projects\websites\totalhr.com\CalendarService\bin\Debug\Resources.dll
+C:\Projects\websites\totalhr.com\CalendarService\bin\Debug\totalhr.data.pdb
+C:\Projects\websites\totalhr.com\CalendarService\bin\Debug\totalhr.Shared.pdb
+C:\Projects\websites\totalhr.com\CalendarService\bin\Debug\EntityFramework.xml
+C:\Projects\websites\totalhr.com\CalendarService\bin\Debug\Resources.pdb
+C:\Projects\websites\totalhr.com\CalendarService\obj\Debug\Calendar.csprojResolveAssemblyReference.cache
+C:\Projects\websites\totalhr.com\CalendarService\obj\Debug\CalendarService.dll
+C:\Projects\websites\totalhr.com\CalendarService\obj\Debug\CalendarService.pdb

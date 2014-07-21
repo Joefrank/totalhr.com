@@ -61,6 +61,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The whole of your company will be invited and could see this event..
+        /// </summary>
+        public static string Company {
+            get {
+                return ResourceManager.GetString("Company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The event will be repeated every day at the same time from Monday to Friday up to the End Date you select.
         /// </summary>
         public static string DailyMonToFri {
@@ -70,11 +79,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Users from department(s) chosen will be notified and could see this event..
+        /// </summary>
+        public static string Department {
+            get {
+                return ResourceManager.GetString("Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The event will be repeated on the days you select for each month. The start and end time will stay the same..
         /// </summary>
         public static string MonthlyOnDates {
             get {
                 return ResourceManager.GetString("MonthlyOnDates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This event will be private and only you as creator could see it..
+        /// </summary>
+        public static string MyselfOnly {
+            get {
+                return ResourceManager.GetString("MyselfOnly", resourceCulture);
             }
         }
         
@@ -93,6 +120,15 @@ namespace totalhr.Resources {
         public static string OnDayOfTheWeek {
             get {
                 return ResourceManager.GetString("OnDayOfTheWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User(s) selected will be notified and could see this event.
+        /// </summary>
+        public static string User {
+            get {
+                return ResourceManager.GetString("User", resourceCulture);
             }
         }
         

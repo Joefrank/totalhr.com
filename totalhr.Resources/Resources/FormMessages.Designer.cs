@@ -97,6 +97,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string btn_Reset {
+            get {
+                return ResourceManager.GetString("btn_Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string btn_Search {
@@ -331,6 +340,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You need to select attendee(s) for your event.
+        /// </summary>
+        public static string Error_Event_Target_Required {
+            get {
+                return ResourceManager.GetString("Error_Event_Target_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must be a valid logged in user in order to create and event.
         /// </summary>
         public static string Error_Event_UserNotLogged {
@@ -390,6 +408,15 @@ namespace totalhr.Resources {
         public static string Error_Gender_Rq {
             get {
                 return ResourceManager.GetString("Error_Gender_Rq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid date..
+        /// </summary>
+        public static string Error_Invalid_Date {
+            get {
+                return ResourceManager.GetString("Error_Invalid_Date", resourceCulture);
             }
         }
         
@@ -624,6 +651,15 @@ namespace totalhr.Resources {
         public static string Error_Select_Location {
             get {
                 return ResourceManager.GetString("Error_Select_Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must specify a start date for event before you add a repeat..
+        /// </summary>
+        public static string Error_StartDate_Before_Repeat {
+            get {
+                return ResourceManager.GetString("Error_StartDate_Before_Repeat", resourceCulture);
             }
         }
         
@@ -1438,6 +1474,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added.
+        /// </summary>
+        public static string V_Added {
+            get {
+                return ResourceManager.GetString("V_Added", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use my email as username.
         /// </summary>
         public static string V_Email_As_Username {
@@ -1461,6 +1506,15 @@ namespace totalhr.Resources {
         public static string V_No {
             get {
                 return ResourceManager.GetString("V_No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None added.
+        /// </summary>
+        public static string V_None_Added {
+            get {
+                return ResourceManager.GetString("V_None_Added", resourceCulture);
             }
         }
         

@@ -35,10 +35,12 @@ namespace totalhr.Shared.Models
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_Event_UserNotLogged")]
         public int CreatedBy { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_Event_UserNotLogged")]
-        public string TargetInviteeGroup { get; set; }
+        [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_Event_Target_Required")]
+        public int TargetAttendeeGroupId { get; set; }
 
         public string InvitedUserIds { get; set; }
+
+        public string InvitedDepartmentIds { get; set; }
 
         public bool NewlyCreated { get; set; }
 

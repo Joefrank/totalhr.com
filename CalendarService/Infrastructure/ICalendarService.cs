@@ -1,6 +1,7 @@
 ﻿using Calendar.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,5 +15,7 @@ namespace Calendar.Infrastructure
         CalendarHTML GenerateWeekHTML(CalendarWeekRequestStruct rqStruct);
 
         CalendarHTML GenerateDayHTML(CalendarWeekRequestStruct rqStruct);
+
+        string[] GetWeekDaysByName(CultureInfo info);
     }
 }

@@ -221,5 +221,22 @@ namespace totalhr.web.Controllers
 
             return View("CompanyDepartmentSelector", lstDepartments);
         }
+
+        public JsonResult GetCompanyUsersJson()
+        {
+            List<User> lstUsers = _accountService.GetCompanyUsers(CurrentUser.CompanyId);
+            return Json(lstUsers, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult GetCompanyDepartmentsJson()
+        {
+            List<Department> lstDepartments = _accountService.GetCompanyDepartments(CurrentUser.CompanyId);
+
+            var qry = from dept in lstDepartments
+                      orderby dept.Name ascending
+                      select new { dept.id, dept.Name };
+
+            return Json(qry, JsonRequestBehavior.AllowGet);
+        }
     }
 }

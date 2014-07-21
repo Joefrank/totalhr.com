@@ -117,17 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Company" xml:space="preserve">
+    <value>Whole company</value>
+  </data>
   <data name="DailyMonToFri" xml:space="preserve">
     <value>Daily (Mon - Fri)</value>
   </data>
+  <data name="Department" xml:space="preserve">
+    <value>Chosen department(s)</value>
+  </data>
   <data name="MonthlyOnDates" xml:space="preserve">
     <value>Monthly (on chosen dates)</value>
+  </data>
+  <data name="MyselfOnly" xml:space="preserve">
+    <value>Myself Only (private)</value>
   </data>
   <data name="OnDates" xml:space="preserve">
     <value>On specific date(s)</value>
   </data>
   <data name="OnDayOfTheWeek" xml:space="preserve">
-    <value>On {0} every week</value>
+    <value>On &lt;span id="repDay"&gt;{0}&lt;/span&gt; every week</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Selected user(s)</value>
   </data>
   <data name="YearlyOnSameDate" xml:space="preserve">
     <value>Yearly (on chosen years)</value>

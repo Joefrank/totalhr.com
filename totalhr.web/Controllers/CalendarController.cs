@@ -16,6 +16,7 @@ using totalhr.Shared.Models;
 using totalhr.Shared;
 using totalhr.Resources;
 using totalhr.services.Infrastructure;
+using System.Text;
 
 namespace totalhr.web.Controllers
 {
@@ -37,11 +38,6 @@ namespace totalhr.web.Controllers
         private readonly IGlossaryService _glossaryService;
 
         private static readonly ILog Log = LogManager.GetLogger(typeof(AccountController));
-
-        string[] _daysOfWeek = {Resources.Calendar.Day_Sunday, Resources.Calendar.Day_Monday,Resources.Calendar.Day_Tuesday, 
-                        Resources.Calendar.Day_Wednesday,Resources.Calendar.Day_Thursday,
-                        Resources.Calendar.Day_Friday,Resources.Calendar.Day_Saturday};
-
         
         public CalendarController(ICalendarService cservice, ICalendarManagementService calmservice, 
             IOAuthService authservice, ICalendarRepository calrepos, ICalendarEventRepository caleventRepos, IGlossaryService glossaryService) :  base(authservice)
@@ -52,6 +48,22 @@ namespace totalhr.web.Controllers
             _calEventRepos = caleventRepos;
             _authService = authservice;
             _glossaryService = glossaryService;
+        }
+
+        private string MakeClientJSForWeekDays()
+        {
+            StringBuilder sbtemp = new StringBuilder();            
+            string[] weekdays = _calService.GetWeekDaysByName(CultureInfo.CreateSpecificCulture(CurrentUser.Culture));
+            int len = weekdays.Length;
+
+            sbtemp.Append(" var d = new Date();" + Environment.NewLine + " var weekday = new Array(7);" + Environment.NewLine);
+
+            for (int i = 0; i < len; i++)
+            {
+                sbtemp.Append(string.Format(@"weekday[{0}]=  ""{1}"";" + Environment.NewLine,
+                    i, HttpUtility.JavaScriptStringEncode(weekdays[i])));
+            }
+            return sbtemp.ToString();
         }
 
         [CustomAuthorize(Roles = "3")]
@@ -104,7 +116,7 @@ namespace totalhr.web.Controllers
             }
             else
             {
-
+                ViewBag.WeekDaysJS = MakeClientJSForWeekDays();
                 ViewBag.EventTargets = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.CalendarEventTarget);
                 return View("EventEdit", "~/Views/Shared/_PopupLayout.cshtml", new CalendarEventInfo {CalendarId = calendar.id, CalendarName = calendar.Name });
             }

@@ -117,17 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Company" xml:space="preserve">
+    <value>The whole of your company will be invited and could see this event.</value>
+  </data>
   <data name="DailyMonToFri" xml:space="preserve">
     <value>The event will be repeated every day at the same time from Monday to Friday up to the End Date you select</value>
   </data>
+  <data name="Department" xml:space="preserve">
+    <value>Users from department(s) chosen will be notified and could see this event.</value>
+  </data>
   <data name="MonthlyOnDates" xml:space="preserve">
     <value>The event will be repeated on the days you select for each month. The start and end time will stay the same.</value>
+  </data>
+  <data name="MyselfOnly" xml:space="preserve">
+    <value>This event will be private and only you as creator could see it.</value>
   </data>
   <data name="OnDates" xml:space="preserve">
     <value>The event will be repeated on the dates you enter at the same time. You will need to enter each date in turn.</value>
   </data>
   <data name="OnDayOfTheWeek" xml:space="preserve">
     <value>The event will be repeated this specific day each week until the End Date you have selected.</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User(s) selected will be notified and could see this event</value>
   </data>
   <data name="YearlyOnSameDate" xml:space="preserve">
     <value>You will need to enter each year you want the event to be repeated. For each year entered, the event will be repeated on the same day and time as the original event.</value>
