@@ -97,6 +97,51 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Day.
+        /// </summary>
+        public static string EvtDay {
+            get {
+                return ResourceManager.GetString("EvtDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hour.
+        /// </summary>
+        public static string EvtHour {
+            get {
+                return ResourceManager.GetString("EvtHour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minute.
+        /// </summary>
+        public static string EvtMinute {
+            get {
+                return ResourceManager.GetString("EvtMinute", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        public static string EvtMonth {
+            get {
+                return ResourceManager.GetString("EvtMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Week.
+        /// </summary>
+        public static string EvtWeek {
+            get {
+                return ResourceManager.GetString("EvtWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Monthly (on chosen dates).
         /// </summary>
         public static string MonthlyOnDates {

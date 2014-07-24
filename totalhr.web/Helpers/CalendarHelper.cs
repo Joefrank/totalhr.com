@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using totalhr.Shared;
 
@@ -43,6 +44,21 @@ namespace totalhr.web.Helpers
                 <span id=""spAttendeeDesc_{0}"">{2}</span></span>", (int)myenum, EnumExtensions.FurtherInfo(myenum),
                                               EnumExtensions.Description(myenum), temp, groupname, selector);
         }
+
+        public static string GenerateFrequencyDDl(string id, string name, string callback)
+        {
+            StringBuilder sbTemp = new StringBuilder();
+
+            foreach(var num in (Variables.EventFrequency[])Enum.GetValues(typeof(Variables.EventFrequency)))
+            {
+                sbTemp.Append(string.Format(@"<option value=""{0}"">{1}</option>",(int)num, EnumExtensions.Description(num)));
+            }
+
+            return string.Format(@"<select id=""{0}"" name=""{1}"" {2}>
+                                        {3}
+                                    </select>",id, name, callback, sbTemp.ToString());
+        }
+
     }
 
 

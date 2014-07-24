@@ -259,6 +259,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry couldn&apos;t submit form..
+        /// </summary>
+        public static string Error_Could_Not_Submit_Form {
+            get {
+                return ResourceManager.GetString("Error_Could_Not_Submit_Form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select a country.
         /// </summary>
         public static string Error_Country_Required {
@@ -669,6 +678,15 @@ namespace totalhr.Resources {
         public static string Error_Select_Location {
             get {
                 return ResourceManager.GetString("Error_Select_Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start date cannot be after the end date. Please select correct dates..
+        /// </summary>
+        public static string Error_StartDate_After_EndDate {
+            get {
+                return ResourceManager.GetString("Error_StartDate_After_EndDate", resourceCulture);
             }
         }
         

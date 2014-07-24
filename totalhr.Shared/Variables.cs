@@ -77,6 +77,15 @@ namespace totalhr.Shared
             TimeBefore,
             EveryXTime
         }
+
+        public enum EventFrequency
+        {
+            EvtHour=2,
+            EvtMinute = 1,
+            EvtDay = 3,
+            EvtWeek = 4,
+            EvtMonth = 5
+        }
         
         public static string AdminEmailSignature
         {

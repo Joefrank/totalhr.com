@@ -624,4 +624,10 @@
   <data name="Error_Missing_Reminder_Type" xml:space="preserve">
     <value>Please select a reminder type before continuing."</value>
   </data>
+  <data name="Error_Could_Not_Submit_Form" xml:space="preserve">
+    <value>Sorry couldn't submit form.</value>
+  </data>
+  <data name="Error_StartDate_After_EndDate" xml:space="preserve">
+    <value>Start date cannot be after the end date. Please select correct dates.</value>
+  </data>
 </root>

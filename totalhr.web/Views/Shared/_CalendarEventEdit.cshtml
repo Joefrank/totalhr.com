@@ -19,13 +19,8 @@
     var sbAttendees = new StringBuilder();
  }
 
-@* http://stackoverflow.com/questions/17095443/how-to-use-simple-ajax-beginform-in-asp-net-mvc-4 *@
 
-@using (Ajax.BeginForm("CreateEvent", "Calendar", new AjaxOptions
-{//GetPacients is name of method in PacientController
-    InsertionMode = InsertionMode.Replace,//target element(#pacientList) will be replaced
-    UpdateTargetId = "dvEvent"
-}))
+@using (Html.BeginForm("CreateEvent", "Calendar"))
 {
      @Html.ValidationSummary()
 
@@ -133,24 +128,19 @@
 
                      </div>
 
-                     <div id="dvReminderContent" class="content" style="">
+                     <div id="dvReminderContent" class="content" style="display:none;">
                            
                          <span class="row" id="spReminderRow_1">
                              <i class="info" title="@EnumExtensions.FurtherInfo(Variables.ReminderType.TimeBefore)">&nbsp;</i> 
                                 &nbsp;
-                             <input type="radio" id="rdReminder1" name="ReminderType" value="1" onchange="ApplyReminderSelection('rdReminder1');" /> 
+                             <input type="radio" id="rdReminder1" name="ReminderType" value="@((int)Variables.ReminderType.TimeBefore)" onchange="ApplyReminderSelection('rdReminder1');" /> 
                              &nbsp;
                                     
                              <input type="text" id="txtReminderFrequencyBefore" onchange="ApplyReminderSelection('rdReminder1');" class="shortnum" name="txtReminderFrequencyBefore" value="10" />
                              &nbsp;
-                                    
-                             <select id="ddlFrequencyBeforeType" name="ddlFrequencyBeforeType" onchange="ApplyReminderSelection('rdReminder1');">
-                                 <option value="1">Minutes</option>
-                                 <option value="2">Hour</option>
-                                 <option value="3">Day</option>
-                                 <option value="4">Week</option>
-                                 <option value="5">Month</option>
-                             </select>
+                             @Html.Raw(CalendarHelper.GenerateFrequencyDDl("ddlFrequencyBeforeType", "ddlFrequencyBeforeType", @" onchange=""ApplyReminderSelection('rdReminder1')"" ")) 
+                                 
+                            
                              &nbsp;
                                     
                              <span id="spTimeBefore" class="tdtop">@EnumExtensions.Description(Variables.ReminderType.TimeBefore)</span>
@@ -163,7 +153,7 @@
                                 <i class="info" title="@EnumExtensions.FurtherInfo(Variables.ReminderType.EveryXTime)">&nbsp;</i>
                                 &nbsp;
 
-                                <input type="radio" id="rdReminder2" name="ReminderType" value="2" onchange="ApplyReminderSelection('rdReminder2');" />
+                                <input type="radio" id="rdReminder2" name="ReminderType" value="@((int)Variables.ReminderType.EveryXTime)" onchange="ApplyReminderSelection('rdReminder2');" />
                                 &nbsp;
                                     
                                 <span id="spEveryTime" class="td"> @EnumExtensions.Description(Variables.ReminderType.EveryXTime) </span>
@@ -171,15 +161,9 @@
                                         
                                 <input type="text" id="txtReminderFrequency" onchange="ApplyReminderSelection('rdReminder2')"  class="shortnum" name="txtReminderFrequency" value="2" />
                                 &nbsp;
-                                    
-                                <select id="ddlFrequencyType" name="ddlFrequencyType" onchange="ApplyReminderSelection('rdReminder2')">
-                                    <option value="2">Hour</option>
-                                    <option value="1">Minutes</option>
-                                    <option value="3">Day</option>
-                                    <option value="4">Week</option>
-                                    <option value="5">Month</option>
-                                </select>
-                              
+                                
+                                @Html.Raw(CalendarHelper.GenerateFrequencyDDl("ddlFrequencyType", "ddlFrequencyType", @" onchange=""ApplyReminderSelection('rdReminder2')"" "))
+                                                              
                         </span>   
                            
                          
@@ -251,7 +235,7 @@
                         @foreach (var num in (Variables.RepeatType[])Enum.GetValues(typeof(Variables.RepeatType)))
                         {
                             sbJS.Append(string.Format("{0} = {1};" + Environment.NewLine, num.ToString(), (int)num));
-                            @Html.Raw(CalendarHelper.GenerateRepeatByType(num, "RepeatType"));
+                            @Html.Raw(CalendarHelper.GenerateRepeatByType(num, "RepeatTypeGroup"));
                         }
                     
                         <div id="repeatOptions" class="optionbox" style="display:none;">
@@ -287,7 +271,7 @@
                     </div>
 
                     @Html.HiddenFor(x => x.RepeatType)
-                    @Html.HiddenFor(x => x.RepeatDate) 
+                    @Html.HiddenFor(x => x.RepeatXML) 
                     @Html.HiddenFor(x => x.RepeatValue)  
                     
                     <span id="spmonthlydate"></span>              
@@ -317,7 +301,7 @@
 }
     <script type="text/javascript" src="/Scripts/Site/BeatPicker.min.js"></script>
 <script type="text/javascript" src="/Scripts/jquery-1.11.0.min.js"></script> 
-
+<script type="text/javascript" src="/Scripts/date.js"></script>
     
 <div class="status-box" id="status"></div>
 
@@ -340,6 +324,8 @@
     MSG_ADDED = "@FormMessages.V_Added";
     MSG_MISSING_REMINDER_TYPE = "@FormMessages.Error_Missing_Reminder_Type";
     MSG_MISSING_REMINDER_VALUES = "@FormMessages.Error_Missing_Reminder_Frequency_AndValues";
+    MSG_ERROR_SUBMIT_FAILED = "@FormMessages.Error_Could_Not_Submit_Form";
+    MSG_ERROR_STARTDATE_AFTER_ENDDATE = "@FormMessages.Error_StartDate_After_EndDate";
 
     $(document).ready(function() {
 

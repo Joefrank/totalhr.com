@@ -881,4 +881,5 @@ Parameter name: source
 ]2014-07-24 00:04:49,032 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
 ]2014-07-24 00:04:49,297 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
 ]2014-07-24 00:05:05,036 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-24 21:53:55,028 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
 ]
