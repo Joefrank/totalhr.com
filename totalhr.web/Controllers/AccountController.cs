@@ -238,5 +238,29 @@ namespace totalhr.web.Controllers
 
             return Json(qry, JsonRequestBehavior.AllowGet);
         }
+
+        /// <summary>
+        /// this is for testing only do not go live with it.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult ExpressLogAdmin()
+        {
+            var user = new ClientUser
+                {
+                    FullName = "Joe Tester Temp",
+                    CompanyId = 30,
+                    CookieDuration = new TimeSpan(0, 5, 0,0),
+                    Culture = "en-GB",
+                    UserName = "jbolla@cyberminds.co.uk",
+                    LanguageId = 1,
+                    Profiles = new List<string>{"1","4"},
+                    Roles = new List<string>{"1","2","3"},
+                    UserId = 59
+                };
+
+            AuthService.PersistClientUser(user);
+
+            return View("Index", user);
+        }
     }
 }

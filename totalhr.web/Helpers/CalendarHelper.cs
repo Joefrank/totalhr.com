@@ -24,25 +24,24 @@ namespace totalhr.web.Helpers
 
             var temp = string.Empty;
             var targetId = (int)myenum;
+            var selector = string.Empty;
 
             if (targetId == (int)Variables.CalendarEventTarget.User)
             {
                 temp = @" onclick=""OpenSelector('USERS');"" ";
+                selector = "USERS";
             }
             else if (targetId == (int)Variables.CalendarEventTarget.Department)
             {
                 temp = @" onclick=""OpenSelector('DEPARTMENT');"" ";
+                selector = "DEPARTMENT";
             }
-            else
-            {
-                temp = "";
-            }
-
+            
             return string.Format(@"<span class=""row"" id=""spAttendeeTarget_{0}"" title=""{1}"" onmouseover=""ShowDetails(this);"" 
-                onmouseout=""HideDetails(this);"" onclick=""ApplyAttendeeTargetSelection(this, {0})""><i class=""info"" title=""{1}"">&nbsp;</i>
+                onmouseout=""HideDetails(this);"" onclick=""ApplyAttendeeTargetSelection(this, {0}, '{5}')""><i class=""info"" title=""{1}"">&nbsp;</i>
                 <input type=""radio"" name=""{4}"" value=""{0}"" {3} />
                 <span id=""spAttendeeDesc_{0}"">{2}</span></span>", (int)myenum, EnumExtensions.FurtherInfo(myenum),
-                                              EnumExtensions.Description(myenum), temp, groupname);
+                                              EnumExtensions.Description(myenum), temp, groupname, selector);
         }
     }
 

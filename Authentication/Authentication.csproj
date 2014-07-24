@@ -59,10 +59,17 @@
     <Compile Include="Infrastructure\IOAuthService.cs" />
     <Compile Include="Models\ClientUser.cs" />
     <Compile Include="Models\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Models\ProfileCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\totalhr.Shared\totalhr.Shared.csproj">
+      <Project>{1af1abb5-66b8-4e3f-a5aa-12025159514f}</Project>
+      <Name>totalhr.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

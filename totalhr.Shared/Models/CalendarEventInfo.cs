@@ -46,6 +46,14 @@ namespace totalhr.Shared.Models
 
         public List<CalendarEventReminder> Reminders { get; set; }
 
+        public int ReminderType { get; set; }
+
+        public int ReminderFrequencyType { get; set; }
+
+        public int ReminderFrequency { get; set; }
+
+        public string ReminderXML { get; set; }
+
         public int CalendarId { get; set; }
 
         public string CalendarName { get; set; }

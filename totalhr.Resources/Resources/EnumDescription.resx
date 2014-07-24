@@ -126,6 +126,9 @@
   <data name="Department" xml:space="preserve">
     <value>Chosen department(s)</value>
   </data>
+  <data name="EveryXTime" xml:space="preserve">
+    <value>Every</value>
+  </data>
   <data name="MonthlyOnDates" xml:space="preserve">
     <value>Monthly (on chosen dates)</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="OnDayOfTheWeek" xml:space="preserve">
     <value>On &lt;span id="repDay"&gt;{0}&lt;/span&gt; every week</value>
+  </data>
+  <data name="TimeBefore" xml:space="preserve">
+    <value>Before</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>Selected user(s)</value>

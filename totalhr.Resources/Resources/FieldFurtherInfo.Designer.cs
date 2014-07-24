@@ -88,6 +88,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This reminder will come based on frequency specified (e.g. every 1 day before event).
+        /// </summary>
+        public static string EveryXTime {
+            get {
+                return ResourceManager.GetString("EveryXTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The event will be repeated on the days you select for each month. The start and end time will stay the same..
         /// </summary>
         public static string MonthlyOnDates {
@@ -120,6 +129,15 @@ namespace totalhr.Resources {
         public static string OnDayOfTheWeek {
             get {
                 return ResourceManager.GetString("OnDayOfTheWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is reminder time before event. (e.g. 2 hours before).
+        /// </summary>
+        public static string TimeBefore {
+            get {
+                return ResourceManager.GetString("TimeBefore", resourceCulture);
             }
         }
         

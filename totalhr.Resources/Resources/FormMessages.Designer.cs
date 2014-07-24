@@ -448,6 +448,24 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter and select reminder values and frequency as necessary..
+        /// </summary>
+        public static string Error_Missing_Reminder_Frequency_AndValues {
+            get {
+                return ResourceManager.GetString("Error_Missing_Reminder_Frequency_AndValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select a reminder type before continuing.&quot;.
+        /// </summary>
+        public static string Error_Missing_Reminder_Type {
+            get {
+                return ResourceManager.GetString("Error_Missing_Reminder_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mobile Phone too long (max 30 characters).
         /// </summary>
         public static string Error_MobilePhone_Too_Long {

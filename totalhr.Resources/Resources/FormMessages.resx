@@ -618,4 +618,10 @@
   <data name="V_None_Added" xml:space="preserve">
     <value>None added</value>
   </data>
+  <data name="Error_Missing_Reminder_Frequency_AndValues" xml:space="preserve">
+    <value>Please enter and select reminder values and frequency as necessary.</value>
+  </data>
+  <data name="Error_Missing_Reminder_Type" xml:space="preserve">
+    <value>Please select a reminder type before continuing."</value>
+  </data>
 </root>

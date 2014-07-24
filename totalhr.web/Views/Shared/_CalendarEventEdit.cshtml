@@ -15,7 +15,8 @@
     
     var eventTargets = ViewBag.EventTargets as List<totalhr.data.EF.Glossary>;
 
-    StringBuilder sbJS = new StringBuilder();
+    var sbJS = new StringBuilder();
+    var sbAttendees = new StringBuilder();
  }
 
 @* http://stackoverflow.com/questions/17095443/how-to-use-simple-ajax-beginform-in-asp-net-mvc-4 *@
@@ -112,11 +113,12 @@
         <div class="line">
             <div class="block">
                 <label class="fix200W"> @FormMessages.Label_Reminders</label>
-                <div class="childblock">
+                
+                 <div class="childblock">
                     
-                    <div class="head" onclick="ToggleExpand('dvReminders')">
-                        None added 
-                        
+                     <div class="head" onclick="ToggleExpand('dvReminderContent')">
+                           @FormMessages.V_None_Added
+                         
                         <span class="spedit" title="@FormMessages.Toolt_Edit_Reminder" onclick="Expand('spReminders');">
                             &nbsp;
                         </span>
@@ -128,74 +130,77 @@
                         <span id="spReminders" class="spview" style="display:none;">
                             &nbsp;
                         </span>
-                    </div>
-                       
-				    
-                    <div id="dvReminders" class="reminderpopup" style="display:none;"> 
-                            <table>
-                                <tr>
-                                    <td>
-                                        <input type="radio" name="remindertype" value="1" /> 
-                                    </td>
-                                    <td>
-                                        <input type="text" id="txtReminderFrequencyBefore" name="txtReminderFrequencyBefore" size="5" />
-                                    </td>
-                                    <td>
-                                        <select id="ddlFrequencyBeforeType" name="ddlFrequencyBeforeType">
-                                            <option>Duration</option>
-                                            <option value="1">Minutes</option>
-                                            <option value="2">Hour</option>
-                                            <option value="3">Day</option>
-                                            <option value="4">Week</option>
-                                            <option value="5">Month</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        Before
-                                    </td>
-                                    <td colspan="2">
-                                        &nbsp;
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="radio" name="remindertype" value="2" />
-                                    </td>
-                                    <td>
-                                        Every 
-                                    </td>
-                                    <td>
-                                        <input type="text" id="txtReminderFrequency" name="txtReminderFrequency" size="5" />
-                                    </td>
-                                    <td>
-                                        <select id="ddlFrequencyType" name="ddlFrequencyType">
-                                            <option>Frequency</option>
-                                            <option value="1">Minutes</option>
-                                            <option value="2">Hour</option>
-                                            <option value="3">Day</option>
-                                            <option value="4">Week</option>
-                                            <option value="5">Month</option>
-                                        </select>
-                                    </td>
-                                    <td>
-                                        From
-                                        <input type="text" id="txtReminderFrom" name="txtReminderFrom" size="15" />
-                                    </td>
-                                </tr>                        
-                         
-                                <tr>
-                                    <td colspan="4">
-                                        <input type="button" value="Cancel" onclick="Hide('dvReminders');" /> 
-                                        <input type="button" value="Save" onclick="SaveReminder();" /> 
-                                    </td>
-                                </tr>
-                        
-                            </table>
-                        </div>
 
-                    
-                    
-                </div>
+                     </div>
+
+                     <div id="dvReminderContent" class="content" style="">
+                           
+                         <span class="row" id="spReminderRow_1">
+                             <i class="info" title="@EnumExtensions.FurtherInfo(Variables.ReminderType.TimeBefore)">&nbsp;</i> 
+                                &nbsp;
+                             <input type="radio" id="rdReminder1" name="ReminderType" value="1" onchange="ApplyReminderSelection('rdReminder1');" /> 
+                             &nbsp;
+                                    
+                             <input type="text" id="txtReminderFrequencyBefore" onchange="ApplyReminderSelection('rdReminder1');" class="shortnum" name="txtReminderFrequencyBefore" value="10" />
+                             &nbsp;
+                                    
+                             <select id="ddlFrequencyBeforeType" name="ddlFrequencyBeforeType" onchange="ApplyReminderSelection('rdReminder1');">
+                                 <option value="1">Minutes</option>
+                                 <option value="2">Hour</option>
+                                 <option value="3">Day</option>
+                                 <option value="4">Week</option>
+                                 <option value="5">Month</option>
+                             </select>
+                             &nbsp;
+                                    
+                             <span id="spTimeBefore" class="tdtop">@EnumExtensions.Description(Variables.ReminderType.TimeBefore)</span>
+                             
+                                  
+                         </span>
+
+                        <span class="row" id="spReminderRow_2">
+                                   
+                                <i class="info" title="@EnumExtensions.FurtherInfo(Variables.ReminderType.EveryXTime)">&nbsp;</i>
+                                &nbsp;
+
+                                <input type="radio" id="rdReminder2" name="ReminderType" value="2" onchange="ApplyReminderSelection('rdReminder2');" />
+                                &nbsp;
+                                    
+                                <span id="spEveryTime" class="td"> @EnumExtensions.Description(Variables.ReminderType.EveryXTime) </span>
+                                    &nbsp;
+                                        
+                                <input type="text" id="txtReminderFrequency" onchange="ApplyReminderSelection('rdReminder2')"  class="shortnum" name="txtReminderFrequency" value="2" />
+                                &nbsp;
+                                    
+                                <select id="ddlFrequencyType" name="ddlFrequencyType" onchange="ApplyReminderSelection('rdReminder2')">
+                                    <option value="2">Hour</option>
+                                    <option value="1">Minutes</option>
+                                    <option value="3">Day</option>
+                                    <option value="4">Week</option>
+                                    <option value="5">Month</option>
+                                </select>
+                              
+                        </span>   
+                           
+                         
+                         <div id="dvReminderOptions" class="optionbox" style="display:none;">
+                             <div id="dvReminderProgress">
+                             </div>
+                             <div>
+                                 <input type="button" value="Save" onclick="SaveReminder();"/>
+                                 <input type="button" value="Add new" onclick="SaveAndResetReminder();"/>
+                             </div>
+                             <div id="dvAddedReminders">
+                                 
+                             </div>
+                         </div>
+
+                         </div>
+                        
+                       
+
+                       @Html.HiddenFor(x => x.ReminderXML)
+                 </div>
 
               </div>
 		    <div class="block">
@@ -215,6 +220,7 @@
                      <div id="dvAttendeesContent" class="content" style="display:none">
                         @foreach (var num in (Variables.CalendarEventTarget[])Enum.GetValues(typeof(Variables.CalendarEventTarget)))
                         {
+                            sbAttendees.Append(string.Format("{0} = {1};" + Environment.NewLine, num.ToString(), (int) num));
                             @Html.Raw(CalendarHelper.GenerateAttendee(num, "TargetAttendeeGroupId"));
                         }                         
                        
@@ -244,7 +250,7 @@
                     <div id="dvRepeatContent" class="content" style="display:none">
                         @foreach (var num in (Variables.RepeatType[])Enum.GetValues(typeof(Variables.RepeatType)))
                         {
-                            sbJS.Append(string.Format("{0} = {1};" + Environment.NewLine, num.ToString(), (int) num));
+                            sbJS.Append(string.Format("{0} = {1};" + Environment.NewLine, num.ToString(), (int)num));
                             @Html.Raw(CalendarHelper.GenerateRepeatByType(num, "RepeatType"));
                         }
                     
@@ -297,7 +303,7 @@
                 <label class="fix200W">&nbsp;</label>
 
                 <input type="button" value="@FormMessages.btn_Reset" onclick='@( @"document.location.href=""/Calendar/CreateEvent/" + Model.CalendarId + @""" ")' />
-                <input type="submit" value="@FormMessages.btn_Value_Save" onclick="return GrabValues()" />
+                <input type="submit" value="@FormMessages.btn_Value_Save" onclick="return PrepareToSaveValues()" />
              </div>
         </div>
                 
@@ -310,7 +316,9 @@
 
 }
     <script type="text/javascript" src="/Scripts/Site/BeatPicker.min.js"></script>
-    <script type="text/javascript" src="/Scripts/jquery-1.11.0.min.js"></script>     
+<script type="text/javascript" src="/Scripts/jquery-1.11.0.min.js"></script> 
+
+    
 <div class="status-box" id="status"></div>
 
 <script type="text/javascript">
@@ -323,34 +331,39 @@
     var ERROR_INVALID_DATE = '@FormMessages.Error_Invalid_Date';
 
     @sbJS.ToString()
-    
+   
     @Html.Raw(WeekDaysJS)
 
+    @Html.Raw(sbAttendees)
+    
+
     MSG_ADDED = "@FormMessages.V_Added";
+    MSG_MISSING_REMINDER_TYPE = "@FormMessages.Error_Missing_Reminder_Type";
+    MSG_MISSING_REMINDER_VALUES = "@FormMessages.Error_Missing_Reminder_Frequency_AndValues";
 
-    $(document).ready(function () {
+    $(document).ready(function() {
 
-        var statusGenerator = function (text) {
-           
+        var statusGenerator = function(text) {
+
             var statusElem = $("#status");
             var child = $("<span></span>").text(text);
             statusElem.append(child);
         };
 
-        StartDate.on("select", function (data) {
-            var selectedDate = data.string;           
+        StartDate.on("select", function(data) {
+            var selectedDate = data.string;
             var objDate = parseDate(selectedDate);
-            var dayIndex = objDate.getDay();            
-           
+            var dayIndex = objDate.getDay();
+
             var obj = $('#spRepeatDesc_' + OnDayOfTheWeek + ' #repDay');
 
             obj.html(weekday[dayIndex]);
         });
-      
 
-       // $("#StartDate").bind("change", AdjustEvents);
 
-    })
+        // $("#StartDate").bind("change", AdjustEvents);
+
+    });
 
     
 </script>

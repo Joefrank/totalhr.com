@@ -38,10 +38,10 @@ C:\Projects\totalhr.com\TotalHR\totalhr.Shared\bin\Debug\Resources.pdb
 C:\Projects\totalhr.com\TotalHR\totalhr.Shared\obj\Debug\totalhr.Shared.csprojResolveAssemblyReference.cache
 C:\Projects\totalhr.com\TotalHR\totalhr.Shared\obj\Debug\totalhr.Shared.dll
 C:\Projects\totalhr.com\TotalHR\totalhr.Shared\obj\Debug\totalhr.Shared.pdb
-C:\Projects\websites\totalhr.com\totalhr.Shared\bin\Debug\totalhr.Shared.dll
-C:\Projects\websites\totalhr.com\totalhr.Shared\bin\Debug\totalhr.Shared.pdb
-C:\Projects\websites\totalhr.com\totalhr.Shared\bin\Debug\Resources.dll
-C:\Projects\websites\totalhr.com\totalhr.Shared\bin\Debug\Resources.pdb
-C:\Projects\websites\totalhr.com\totalhr.Shared\obj\Debug\totalhr.Shared.csprojResolveAssemblyReference.cache
-C:\Projects\websites\totalhr.com\totalhr.Shared\obj\Debug\totalhr.Shared.dll
-C:\Projects\websites\totalhr.com\totalhr.Shared\obj\Debug\totalhr.Shared.pdb
+C:\Projects\totalhr.com\totalhr.Shared\bin\Debug\totalhr.Shared.dll
+C:\Projects\totalhr.com\totalhr.Shared\bin\Debug\totalhr.Shared.pdb
+C:\Projects\totalhr.com\totalhr.Shared\bin\Debug\Resources.dll
+C:\Projects\totalhr.com\totalhr.Shared\bin\Debug\Resources.pdb
+C:\Projects\totalhr.com\totalhr.Shared\obj\Debug\totalhr.Shared.csprojResolveAssemblyReference.cache
+C:\Projects\totalhr.com\totalhr.Shared\obj\Debug\totalhr.Shared.dll
+C:\Projects\totalhr.com\totalhr.Shared\obj\Debug\totalhr.Shared.pdb

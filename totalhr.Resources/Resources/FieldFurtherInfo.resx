@@ -126,6 +126,9 @@
   <data name="Department" xml:space="preserve">
     <value>Users from department(s) chosen will be notified and could see this event.</value>
   </data>
+  <data name="EveryXTime" xml:space="preserve">
+    <value>This reminder will come based on frequency specified (e.g. every 1 day before event)</value>
+  </data>
   <data name="MonthlyOnDates" xml:space="preserve">
     <value>The event will be repeated on the days you select for each month. The start and end time will stay the same.</value>
   </data>
@@ -137,6 +140,9 @@
   </data>
   <data name="OnDayOfTheWeek" xml:space="preserve">
     <value>The event will be repeated this specific day each week until the End Date you have selected.</value>
+  </data>
+  <data name="TimeBefore" xml:space="preserve">
+    <value>This is reminder time before event. (e.g. 2 hours before)</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>User(s) selected will be notified and could see this event</value>

@@ -1,11 +1,16 @@
 ﻿//document.onclick = AdjustEvents;
 
+
+var MSG_ADDED;
+var MSG_MISSING_REMINDER_TYPE;
+
 var eventid = 0;
 var CalendarId = null;
-var MSG_ADDED;
 var prevTargetSelected = null;
-var ckSelectedTargetUsers = '';
-var ckSelectedDepartment = '';
+var ckSelectedTargetUsers = new Array();
+var ckSelectedDepartment = new Array();
+var SelectedReminderType = null;
+var Reminders = new Array();
 
 function ManageActiveDay(objTd) {
     var objTdId = objTd.id;
@@ -48,20 +53,7 @@ function PickEventTargetSelection(obj, objid) {
     $('#spAttendeeDesc_' + objid).css("color", "green");
 }
 
-function DialogAddReminder(objid) {
-    $('#' + objid).fadeIn("slow");
-}
 
-function SaveReminder() {
-   var vFrom = $('#txtReminderFrom').val();
-   var vFrequency =   $('#txtReminderFrequency').val();
-   var vFrequencyType = $('#ddlFrequencyType').val();
-       
-   if (!isNaN(vFrequency) || !$('#txtReminderFrom').val() || !isNaN(vFrequencyType)) {
-       alert('Invalid reminder please correct values entered.');
-       return;
-   }
-}
 
 function OpenSelector(mode) {
     var url;
@@ -81,14 +73,10 @@ function OpenSelector(mode) {
         div.html("<br/> " + "Users received from server: " + "<br/>");
         
         $.each(data, function (i, item) {
-            
-
             if (func == 1)
                 PrintUser(div, item);
             else if (func == 2)
                 PrintDepartment(div, item);
-
-            
         });
         div.slideDown("slow");
     });
@@ -106,13 +94,19 @@ function PrintDepartment(div, item) {
 }
 
 function PickUser(objck) {
-    ckSelectedTargetUsers += (ckSelectedTargetUsers == '') ? objck.value : ',' + objck.value;
-    $('#InvitedUserIds').val(ckSelectedTargetUsers);
+    if (objck.checked) {
+        ckSelectedTargetUsers['ckuser_' + objck.value] = objck.value;
+    } else {
+        ckSelectedTargetUsers['ckuser_' + objck.value] = null;
+    }
 }
 
 function PickDepartment(objck) {
-    ckSelectedDepartment += (ckSelectedDepartment == '') ? objck.value : ',' + objck.value;
-    $('#InvitedDepartmentIds').val(ckSelectedDepartment);
+    if (objck.checked) {
+        ckSelectedDepartment['ckdepartment_' + objck.value] = objck.value;
+    } else {
+        ckSelectedDepartment['ckdepartment_' + objck.value] = null;
+    }
 }
 
 function Expand(objid) {
@@ -156,7 +150,7 @@ function ApplyRepeatSelection(obj) {
 }
 
 
-function ApplyAttendeeTargetSelection(obj, id) {
+function ApplyAttendeeTargetSelection(obj, id, selector) {
     var objInput = $('#' + obj.id).children("input[type=radio]");
     var objInfo = $('#' + obj.id).children("i");
 
@@ -166,12 +160,14 @@ function ApplyAttendeeTargetSelection(obj, id) {
         var desc = $('#' + prevTargetSelected.id).children("#spAttendeeDesc_" + id);
         desc.css("color", "black");
     }
-   // alert(objInput.attr('checked'));
+   
     objInput.attr('checked', true);    
    
     //doesn't update twice BUG
-
     prevTargetSelected = obj;
+
+    if (selector != null)
+        OpenSelector(selector);
 }
 
 function ShowDetails(obj) {
@@ -251,4 +247,130 @@ function parseDate(input) {
     var parts = input.match(/(\d+)/g);
     // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
     return new Date(parts[2], parts[1] - 1, parts[0]); // months are 0-based
+}
+
+function ApplyReminderSelection(objid) {
+    var obj = document.getElementById(objid);
+    var val = obj.value;
+    var message = '';
+    
+    if (obj.checked) {
+        if (val == 1) {
+            message = $('#txtReminderFrequencyBefore').val() + " " + $('#ddlFrequencyBeforeType option:selected').text() + " " + $('#spTimeBefore').html();
+        }else if (val == 2) {
+            message = $('#spEveryTime').html() + " " + $('#txtReminderFrequency').val() + " " + $('#ddlFrequencyType option:selected').text();
+        }
+        
+        $('#dvReminderProgress').html(message);
+        $('#dvReminderOptions').slideDown("slow");
+        
+        SelectedReminderType = val;
+    }
+
+}
+
+function SaveReminder() {
+    if (SelectedReminderType == null) {
+        alert(MSG_MISSING_REMINDER_TYPE);
+    }
+    //Reminders
+    var frequency = 0;
+    var frequencytype = 0;
+    var message = '';
+    
+    if (SelectedReminderType == 1) {
+        frequency = $('#txtReminderFrequencyBefore').val();
+        frequencytype = $('#ddlFrequencyBeforeType option:selected').val();
+        message = $('#txtReminderFrequencyBefore').val() + " " + $('#ddlFrequencyBeforeType option:selected').text() + " " + $('#spTimeBefore').html();
+    } else if(SelectedReminderType == 2) {
+        frequency = $('#txtReminderFrequency').val();
+        frequencytype = $('#ddlFrequencyType option:selected').val();
+        message = $('#spEveryTime').html() + " " + $('#txtReminderFrequency').val() + " " + $('#ddlFrequencyType option:selected').text();
+    }
+    
+    if (frequency == 0 || frequency == '' || isNaN(frequency)) {
+        alert(MSG_MISSING_REMINDER_VALUES);
+        return;
+    }
+
+    Reminders[Reminders.length] = [SelectedReminderType, frequency, frequencytype, message];
+
+    DisplayAddedReminders();
+    
+    
+}
+
+function DisplayAddedReminders() {
+    var tempHtml = '';
+    var len = Reminders.length;
+    for (var i = 0; i < len; i++) {
+        tempHtml += '<span class="row">#' + (i + 1) + ': ' + Reminders[i][3] + '</span>';
+    }
+    
+    $('#dvAddedReminders').html(tempHtml);
+}
+
+function PrepareToSaveValues() {
+    
+    //prepare reminders
+    var reminderlen = Reminders.length;
+    var remindersXML = '';
+    
+    for (var i = 0; i < reminderlen; i++) {
+        if (Reminders[i] != null) {
+            remindersXML += '<reminder><type>' + Reminders[i][0] + '</type><frequencytype>' + Reminders[i][1] + '</frequencytype><frequency>' + Reminders[i][0] + '</frequency></reminder>';
+        }
+    }
+    
+    if (remindersXML != '') {
+        remindersXML = '<reminders>' + remindersXML + '</reminders>';
+    }
+
+    $('#ReminderXML').val(remindersXML);
+        
+    // prepare target groups
+    var selTargetVal = $("input:radio[name='TargetAttendeeGroupId']:checked").val();
+    
+     if (selTargetVal == Department) {
+        var temp = '';
+
+        for (var key in ckSelectedDepartment) {
+            temp += (temp != '') ? ',' + ckSelectedDepartment[key] : ckSelectedDepartment[key];
+        }
+
+        $('#InvitedDepartmentIds').val(temp);
+
+    } else if (selTargetVal == User) {
+        var temp = '';
+
+        for (var key in ckSelectedTargetUsers) {
+            if (ckSelectedTargetUsers[key] != null) {
+                temp += (temp != '') ? ',' + ckSelectedTargetUsers[key] : ckSelectedTargetUsers[key];
+            }
+        }
+
+        $('#InvitedUserIds').val(temp);
+    } 
+
+    //prepare repeats
+     var repeatType = $('#RepeatType').val();
+     var repeatDateXML = '';
+
+    
+
+     if (repeatType == DailyMonToFri || repeatType == OnDayOfTheWeek) {
+         repeatDateXML = '<dates><date>' + $('#txtRepeatUntil').val() + '</date></dates>';
+     }else if(repeatType == OnDates || repeatType == MonthlyOnDates){
+
+     }else if(repeatType == YearlyOnSameDate){
+
+     }
+
+     $('#RepeatDate').val(repeatDateXML);
+
+     
+     
+
+  
+    return false;
 }

@@ -106,6 +106,7 @@ namespace totalhr.web.Controllers
         }
         
         [CustomAuthorize(Roles = "3", Profiles = "4", AccessDeniedMessage = "Work this out - FormMessages.Error_NoProfile_CreateCalendarEvent")]
+       // [ProfileCheck(Variables.Profiles.CalendarCreateEvent)]
         [HttpGet] 
         public ActionResult CreateEvent(int id)
          {

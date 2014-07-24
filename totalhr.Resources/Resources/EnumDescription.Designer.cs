@@ -88,6 +88,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Every.
+        /// </summary>
+        public static string EveryXTime {
+            get {
+                return ResourceManager.GetString("EveryXTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Monthly (on chosen dates).
         /// </summary>
         public static string MonthlyOnDates {
@@ -120,6 +129,15 @@ namespace totalhr.Resources {
         public static string OnDayOfTheWeek {
             get {
                 return ResourceManager.GetString("OnDayOfTheWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Before.
+        /// </summary>
+        public static string TimeBefore {
+            get {
+                return ResourceManager.GetString("TimeBefore", resourceCulture);
             }
         }
         

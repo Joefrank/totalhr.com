@@ -1,34 +1,47 @@
-﻿using System.Web;
-using System.Web.Mvc;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web;
+using System.Web.Mvc;
+using System.Web.Routing;
+using Authentication.Implementation;
 using Authentication.Infrastructure;
 using Ninject;
-using Authentication.Implementation;
-using System;
 using log4net;
-using System.Web.Routing;
+using totalhr.Shared;
 
 namespace Authentication.Models
 {
-    public class CustomAuthorizeAttribute : AuthorizeAttribute
+    public class ProfileCheck : AuthorizeAttribute
     {
         public IOAuthService AuthService;
         private readonly IKernel _ninjectKernel;
         private static readonly ILog Log = LogManager.GetLogger(typeof(CustomAuthorizeAttribute));
         private ClientUser _user;
 
-        public string Profiles { get; set; }
+        public Variables.Profiles[] Profiles { get; set; }
         public string AccessDeniedMessage { get; set; }
 
-        public CustomAuthorizeAttribute()
+        public ProfileCheck(Variables.Profiles profile)
+            : base()
         {
             _ninjectKernel = new StandardKernel();
             _ninjectKernel.Bind<IOAuthService>().To<OckAuthService>();
-            AuthService =_ninjectKernel.Get<IOAuthService>();            
+            AuthService = _ninjectKernel.Get<IOAuthService>();
+            Profiles = new Variables.Profiles[] { profile };
         }
 
-      
+        public ProfileCheck(params Variables.Profiles[] profiles)
+            : base()
+        {
+            _ninjectKernel = new StandardKernel();
+            _ninjectKernel.Bind<IOAuthService>().To<OckAuthService>();
+            AuthService = _ninjectKernel.Get<IOAuthService>();
+            Profiles = profiles;
+        }
+
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             try
@@ -38,17 +51,11 @@ namespace Authentication.Models
                 if (_user == null || _user.UserId < 1 || _user.Profiles.Count < 1)//user must be authenticated
                     return false;
 
-                 var roles = string.IsNullOrEmpty(Roles)? null : Roles.Split(',').ToList();
-                 var profiles = string.IsNullOrEmpty(Profiles)? null : Profiles.Split(',').ToList();
+                var arrProfiles = Enum.GetValues(typeof(Variables.Profiles)).Cast<int>();
 
-
-                return (
-                    (roles == null || (_user.IsInRole(roles)))
-                    &&
-                    (profiles == null || _user.IsInProfile(profiles))
-                    );
+                return _user.IsInProfile(arrProfiles);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Log.Debug("Authentication failed: " + ex.Message);
                 return false;
@@ -64,10 +71,9 @@ namespace Authentication.Models
             }
             else
             {
-
                 if (filterContext.HttpContext.Request.IsAjaxRequest())
                 {
-                    UrlHelper urlHelper = new UrlHelper(filterContext.RequestContext);
+                    var urlHelper = new UrlHelper(filterContext.RequestContext);
                     filterContext.Result = new JsonResult
                     {
                         Data = new
@@ -77,13 +83,12 @@ namespace Authentication.Models
                         },
                         JsonRequestBehavior = JsonRequestBehavior.AllowGet
                     };
-                } 
-
+                }
 
                 filterContext.Result = new RedirectToRouteResult(new
                 RouteValueDictionary(new { controller = "Error", action = "AccessDenied", ModelError = AccessDeniedMessage }));
             }
         }
-
     }
+
 }

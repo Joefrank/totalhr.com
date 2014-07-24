@@ -71,6 +71,12 @@ namespace totalhr.Shared
             MonthlyOnDates = 4,
             YearlyOnSameDate = 5
         }
+
+        public enum ReminderType
+        {
+            TimeBefore,
+            EveryXTime
+        }
         
         public static string AdminEmailSignature
         {

@@ -37,5 +37,15 @@ namespace Authentication.Models
         {
             return !profiles.Except(this.Profiles).Any();
         }
+
+        public bool IsInProfile(IEnumerable<int> profiles)
+        {
+            return !profiles.Except(this.Profiles.Cast<int>()).Any();
+        }
+
+        public bool IsLogged()
+        {
+            return (UserId > 0 && LanguageId > 0 && CompanyId > 0 && Roles != null && Roles.Count > 0);
+        }
     }
 }
