@@ -26,6 +26,7 @@ namespace totalhr.data.EF
         public string Location { get; set; }
         public string TargetInviteType { get; set; }
         public int CalendarId { get; set; }
+        public Nullable<int> RepeatTypeId { get; set; }
     
         public virtual Calendar Calendar { get; set; }
     }

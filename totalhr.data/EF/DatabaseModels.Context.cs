@@ -27,23 +27,21 @@ namespace totalhr.data.EF
             throw new UnintentionalCodeFirstException();
         }
 
-        public virtual DbSet<Calendar> Calendars { get; set; }
-        public virtual DbSet<CalendarEvent> CalendarEvents { get; set; }
-        public virtual DbSet<CalendarEventDepartment> CalendarEventDepartments { get; set; }
-        public virtual DbSet<CalendarEventInvite> CalendarEventInvites { get; set; }
-        public virtual DbSet<CalendarEventReminder> CalendarEventReminders { get; set; }
-        public virtual DbSet<Company> Companies { get; set; }
-        public virtual DbSet<CompanyFeature> CompanyFeatures { get; set; }
-        public virtual DbSet<Department> Departments { get; set; }
-        public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
-        public virtual DbSet<Feature> Features { get; set; }
-        public virtual DbSet<Glossary> Glossaries { get; set; }
-        public virtual DbSet<Language> Languages { get; set; }
-        public virtual DbSet<Profile> Profiles { get; set; }
-        public virtual DbSet<Role> Roles { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<UserProfile> UserProfiles { get; set; }
-        public virtual DbSet<UserRole> UserRoles { get; set; }
+        public DbSet<Calendar> Calendars { get; set; }
+        public DbSet<CalendarAssociation> CalendarAssociations { get; set; }
+        public DbSet<CalendarEvent> CalendarEvents { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<CompanyFeature> CompanyFeatures { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<EmailTemplate> EmailTemplates { get; set; }
+        public DbSet<Feature> Features { get; set; }
+        public DbSet<Glossary> Glossaries { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
+        public DbSet<Role> Roles { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserProfile> UserProfiles { get; set; }
+        public DbSet<UserRole> UserRoles { get; set; }
 
         public virtual ObjectResult<Nullable<int>> GetUserProfileIds(Nullable<int> userid)
         {

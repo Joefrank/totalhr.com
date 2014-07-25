@@ -45,3 +45,10 @@ C:\Projects\totalhr.com\totalhr.Shared\bin\Debug\Resources.pdb
 C:\Projects\totalhr.com\totalhr.Shared\obj\Debug\totalhr.Shared.csprojResolveAssemblyReference.cache
 C:\Projects\totalhr.com\totalhr.Shared\obj\Debug\totalhr.Shared.dll
 C:\Projects\totalhr.com\totalhr.Shared\obj\Debug\totalhr.Shared.pdb
+D:\Projects\MyGithub\totalhr.com\totalhr.Shared\bin\Debug\totalhr.Shared.dll
+D:\Projects\MyGithub\totalhr.com\totalhr.Shared\bin\Debug\totalhr.Shared.pdb
+D:\Projects\MyGithub\totalhr.com\totalhr.Shared\bin\Debug\Resources.dll
+D:\Projects\MyGithub\totalhr.com\totalhr.Shared\bin\Debug\Resources.pdb
+D:\Projects\MyGithub\totalhr.com\totalhr.Shared\obj\Debug\totalhr.Shared.csprojResolveAssemblyReference.cache
+D:\Projects\MyGithub\totalhr.com\totalhr.Shared\obj\Debug\totalhr.Shared.dll
+D:\Projects\MyGithub\totalhr.com\totalhr.Shared\obj\Debug\totalhr.Shared.pdb

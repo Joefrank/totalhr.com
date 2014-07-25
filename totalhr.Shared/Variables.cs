@@ -74,8 +74,8 @@ namespace totalhr.Shared
 
         public enum ReminderType
         {
-            TimeBefore,
-            EveryXTime
+            TimeBefore= 1,
+            EveryXTime = 2
         }
 
         public enum EventFrequency
@@ -85,6 +85,14 @@ namespace totalhr.Shared
             EvtDay = 3,
             EvtWeek = 4,
             EvtMonth = 5
+        }
+
+        public enum CalendarEventAssociationType
+        {
+            UserInvite =1,
+            Department = 2,
+            Reminder = 3,
+            Repeat = 4
         }
         
         public static string AdminEmailSignature

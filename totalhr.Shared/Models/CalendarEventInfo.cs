@@ -27,6 +27,7 @@ namespace totalhr.Shared.Models
         public string StartTime { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_EventEndDate_Rq")]
+        [DataType(DataType.Date)]
         public DateTime EndDate { get; set; }
 
         
@@ -65,6 +66,7 @@ namespace totalhr.Shared.Models
         public string RepeatXML { get; set; }
 
         public string RepeatValue { get; set; }
+
         
     }
 }

@@ -12,11 +12,12 @@ namespace totalhr.data.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class CalendarEventInvite
+    public partial class CalendarAssociation
     {
+        public int EventAssociationId { get; set; }
         public int EventId { get; set; }
-        public int UserId { get; set; }
-        public int ProfileId { get; set; }
+        public int AssociationTypeid { get; set; }
+        public string AssociationValue { get; set; }
         public System.DateTime Created { get; set; }
         public int CreatedBy { get; set; }
     }

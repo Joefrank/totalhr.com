@@ -141,12 +141,12 @@ namespace totalhr.web.Controllers
             }
             else
             {
-                CalendarEvent cevent = _calMservice.CreateEvent(eventinfo);
+                var cevent = _calMservice.CreateEvent(eventinfo);
                 
             }
 
-            //return view to confirm creation
-            return View("EventEdit", eventinfo);
+            return RedirectToAction("GenerateDefault", "Calendar");
+            //return View("EventEdit", eventinfo);
             
         }
 

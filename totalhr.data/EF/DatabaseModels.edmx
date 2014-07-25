@@ -4,34 +4,32 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TotalHREntities.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="TotalHREntitiesStoreContainer">
-          <EntitySet Name="Calendar" EntityType="TotalHREntities.Store.Calendar" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="CalendarEvent" EntityType="TotalHREntities.Store.CalendarEvent" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="CalendarEventDepartment" EntityType="TotalHREntities.Store.CalendarEventDepartment" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="CalendarEventInvite" EntityType="TotalHREntities.Store.CalendarEventInvite" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="CalendarEventReminder" EntityType="TotalHREntities.Store.CalendarEventReminder" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Company" EntityType="TotalHREntities.Store.Company" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="CompanyFeature" EntityType="TotalHREntities.Store.CompanyFeature" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Department" EntityType="TotalHREntities.Store.Department" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="EmailTemplate" EntityType="TotalHREntities.Store.EmailTemplate" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Feature" EntityType="TotalHREntities.Store.Feature" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Glossary" EntityType="TotalHREntities.Store.Glossary" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Language" EntityType="TotalHREntities.Store.Language" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Profile" EntityType="TotalHREntities.Store.Profile" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Roles" EntityType="TotalHREntities.Store.Roles" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="User" EntityType="TotalHREntities.Store.User" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserProfile" EntityType="TotalHREntities.Store.UserProfile" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserRole" EntityType="TotalHREntities.Store.UserRole" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_Calendar_Company" Association="TotalHREntities.Store.FK_Calendar_Company">
+      <Schema Namespace="TotalHRModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="TotalHRModelStoreContainer">
+          <EntitySet Name="Calendar" EntityType="TotalHRModel.Store.Calendar" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CalendarAssociation" EntityType="TotalHRModel.Store.CalendarAssociation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CalendarEvent" EntityType="TotalHRModel.Store.CalendarEvent" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Company" EntityType="TotalHRModel.Store.Company" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CompanyFeature" EntityType="TotalHRModel.Store.CompanyFeature" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Department" EntityType="TotalHRModel.Store.Department" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EmailTemplate" EntityType="TotalHRModel.Store.EmailTemplate" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Feature" EntityType="TotalHRModel.Store.Feature" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Glossary" EntityType="TotalHRModel.Store.Glossary" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Language" EntityType="TotalHRModel.Store.Language" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Profile" EntityType="TotalHRModel.Store.Profile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Roles" EntityType="TotalHRModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="User" EntityType="TotalHRModel.Store.User" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserProfile" EntityType="TotalHRModel.Store.UserProfile" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserRole" EntityType="TotalHRModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Calendar_Company" Association="TotalHRModel.Store.FK_Calendar_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="Calendar" EntitySet="Calendar" />
           </AssociationSet>
-          <AssociationSet Name="FK_CalendarEvent_Calendar" Association="TotalHREntities.Store.FK_CalendarEvent_Calendar">
+          <AssociationSet Name="FK_CalendarEvent_Calendar" Association="TotalHRModel.Store.FK_CalendarEvent_Calendar">
             <End Role="Calendar" EntitySet="Calendar" />
             <End Role="CalendarEvent" EntitySet="CalendarEvent" />
           </AssociationSet>
-          <AssociationSet Name="FK_Department_Company" Association="TotalHREntities.Store.FK_Department_Company">
+          <AssociationSet Name="FK_Department_Company" Association="TotalHRModel.Store.FK_Department_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="Department" EntitySet="Department" />
           </AssociationSet>
@@ -51,6 +49,17 @@
           <Property Name="OpenToAll" Type="bit" Nullable="false" />
           <Property Name="CompanyId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="CalendarAssociation">
+          <Key>
+            <PropertyRef Name="EventAssociationId" />
+          </Key>
+          <Property Name="EventAssociationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="AssociationTypeid" Type="int" Nullable="false" />
+          <Property Name="AssociationValue" Type="nvarchar" Nullable="false" MaxLength="2000" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="CalendarEvent">
           <Key>
             <PropertyRef Name="id" />
@@ -67,43 +76,7 @@
           <Property Name="Location" Type="nvarchar" MaxLength="50" />
           <Property Name="TargetInviteType" Type="varchar" MaxLength="150" />
           <Property Name="CalendarId" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CalendarEventDepartment">
-          <Key>
-            <PropertyRef Name="DepartmentId" />
-            <PropertyRef Name="EventId" />
-          </Key>
-          <Property Name="DepartmentId" Type="int" Nullable="false" />
-          <Property Name="EventId" Type="int" Nullable="false" />
-          <Property Name="Created" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CalendarEventInvite">
-          <Key>
-            <PropertyRef Name="EventId" />
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="ProfileId" />
-          </Key>
-          <Property Name="EventId" Type="int" Nullable="false" />
-          <Property Name="UserId" Type="int" Nullable="false" />
-          <Property Name="ProfileId" Type="int" Nullable="false" />
-          <Property Name="Created" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CalendarEventReminder">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="StartDate" Type="datetime" Nullable="false" />
-          <Property Name="Frequency" Type="int" Nullable="false" />
-          <Property Name="FrequencyType" Type="varchar" Nullable="false" MaxLength="10" />
-          <Property Name="Created" Type="datetime" Nullable="false" />
-          <Property Name="CreatedBy" Type="int" Nullable="false" />
-          <Property Name="LastModifiedBy" Type="int" />
-          <Property Name="LastModified" Type="datetime" />
-          <Property Name="TextTemplateId" Type="int" Nullable="false" />
-          <Property Name="ReminderTypeId" Type="int" Nullable="false" />
+          <Property Name="RepeatTypeId" Type="int" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -303,8 +276,8 @@
           <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Calendar_Company">
-          <End Role="Company" Type="TotalHREntities.Store.Company" Multiplicity="1" />
-          <End Role="Calendar" Type="TotalHREntities.Store.Calendar" Multiplicity="*" />
+          <End Role="Company" Type="TotalHRModel.Store.Company" Multiplicity="1" />
+          <End Role="Calendar" Type="TotalHRModel.Store.Calendar" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
               <PropertyRef Name="ID" />
@@ -315,8 +288,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CalendarEvent_Calendar">
-          <End Role="Calendar" Type="TotalHREntities.Store.Calendar" Multiplicity="1" />
-          <End Role="CalendarEvent" Type="TotalHREntities.Store.CalendarEvent" Multiplicity="*" />
+          <End Role="Calendar" Type="TotalHRModel.Store.Calendar" Multiplicity="1" />
+          <End Role="CalendarEvent" Type="TotalHRModel.Store.CalendarEvent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Calendar">
               <PropertyRef Name="id" />
@@ -327,8 +300,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Department_Company">
-          <End Role="Company" Type="TotalHREntities.Store.Company" Multiplicity="1" />
-          <End Role="Department" Type="TotalHREntities.Store.Department" Multiplicity="*" />
+          <End Role="Company" Type="TotalHRModel.Store.Company" Multiplicity="1" />
+          <End Role="Department" Type="TotalHRModel.Store.Department" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
               <PropertyRef Name="ID" />
@@ -354,47 +327,45 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="TotalHREntities" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="TotalHREntities1" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Calendars" EntityType="TotalHREntities.Calendar" />
-          <EntitySet Name="CalendarEvents" EntityType="TotalHREntities.CalendarEvent" />
-          <EntitySet Name="CalendarEventDepartments" EntityType="TotalHREntities.CalendarEventDepartment" />
-          <EntitySet Name="CalendarEventInvites" EntityType="TotalHREntities.CalendarEventInvite" />
-          <EntitySet Name="CalendarEventReminders" EntityType="TotalHREntities.CalendarEventReminder" />
-          <EntitySet Name="Companies" EntityType="TotalHREntities.Company" />
-          <EntitySet Name="CompanyFeatures" EntityType="TotalHREntities.CompanyFeature" />
-          <EntitySet Name="Departments" EntityType="TotalHREntities.Department" />
-          <EntitySet Name="EmailTemplates" EntityType="TotalHREntities.EmailTemplate" />
-          <EntitySet Name="Features" EntityType="TotalHREntities.Feature" />
-          <EntitySet Name="Glossaries" EntityType="TotalHREntities.Glossary" />
-          <EntitySet Name="Languages" EntityType="TotalHREntities.Language" />
-          <EntitySet Name="Profiles" EntityType="TotalHREntities.Profile" />
-          <EntitySet Name="Roles" EntityType="TotalHREntities.Role" />
-          <EntitySet Name="Users" EntityType="TotalHREntities.User" />
-          <EntitySet Name="UserProfiles" EntityType="TotalHREntities.UserProfile" />
-          <EntitySet Name="UserRoles" EntityType="TotalHREntities.UserRole" />
-          <AssociationSet Name="FK_Calendar_Company" Association="TotalHREntities.FK_Calendar_Company">
+      <Schema Namespace="TotalHRModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Calendars" EntityType="TotalHRModel.Calendar" />
+          <EntitySet Name="CalendarAssociations" EntityType="TotalHRModel.CalendarAssociation" />
+          <EntitySet Name="CalendarEvents" EntityType="TotalHRModel.CalendarEvent" />
+          <EntitySet Name="Companies" EntityType="TotalHRModel.Company" />
+          <EntitySet Name="CompanyFeatures" EntityType="TotalHRModel.CompanyFeature" />
+          <EntitySet Name="Departments" EntityType="TotalHRModel.Department" />
+          <EntitySet Name="EmailTemplates" EntityType="TotalHRModel.EmailTemplate" />
+          <EntitySet Name="Features" EntityType="TotalHRModel.Feature" />
+          <EntitySet Name="Glossaries" EntityType="TotalHRModel.Glossary" />
+          <EntitySet Name="Languages" EntityType="TotalHRModel.Language" />
+          <EntitySet Name="Profiles" EntityType="TotalHRModel.Profile" />
+          <EntitySet Name="Roles" EntityType="TotalHRModel.Role" />
+          <EntitySet Name="Users" EntityType="TotalHRModel.User" />
+          <EntitySet Name="UserProfiles" EntityType="TotalHRModel.UserProfile" />
+          <EntitySet Name="UserRoles" EntityType="TotalHRModel.UserRole" />
+          <AssociationSet Name="FK_Calendar_Company" Association="TotalHRModel.FK_Calendar_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="Calendar" EntitySet="Calendars" />
           </AssociationSet>
-          <AssociationSet Name="FK_CalendarEvent_Calendar" Association="TotalHREntities.FK_CalendarEvent_Calendar">
+          <AssociationSet Name="FK_CalendarEvent_Calendar" Association="TotalHRModel.FK_CalendarEvent_Calendar">
             <End Role="Calendar" EntitySet="Calendars" />
             <End Role="CalendarEvent" EntitySet="CalendarEvents" />
           </AssociationSet>
-          <AssociationSet Name="FK_Department_Company" Association="TotalHREntities.FK_Department_Company">
+          <AssociationSet Name="FK_Department_Company" Association="TotalHRModel.FK_Department_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="Department" EntitySet="Departments" />
           </AssociationSet>
           <FunctionImport Name="GetUserProfileIds" ReturnType="Collection(Int32)">
             <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetUserProfiles" ReturnType="Collection(TotalHREntities.GetUserProfiles_Result)">
+          <FunctionImport Name="GetUserProfiles" ReturnType="Collection(TotalHRModel.GetUserProfiles_Result)">
             <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserRoleIds" ReturnType="Collection(Int32)">
             <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="GetUserRoles" ReturnType="Collection(TotalHREntities.GetUserRoles_Result)">
+          <FunctionImport Name="GetUserRoles" ReturnType="Collection(TotalHRModel.GetUserRoles_Result)">
             <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -412,8 +383,19 @@
           <Property Name="TemplateId" Type="Int32" />
           <Property Name="OpenToAll" Type="Boolean" Nullable="false" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Company" Relationship="TotalHREntities.FK_Calendar_Company" FromRole="Calendar" ToRole="Company" />
-          <NavigationProperty Name="CalendarEvents" Relationship="TotalHREntities.FK_CalendarEvent_Calendar" FromRole="Calendar" ToRole="CalendarEvent" />
+          <NavigationProperty Name="Company" Relationship="TotalHRModel.FK_Calendar_Company" FromRole="Calendar" ToRole="Company" />
+          <NavigationProperty Name="CalendarEvents" Relationship="TotalHRModel.FK_CalendarEvent_Calendar" FromRole="Calendar" ToRole="CalendarEvent" />
+        </EntityType>
+        <EntityType Name="CalendarAssociation">
+          <Key>
+            <PropertyRef Name="EventAssociationId" />
+          </Key>
+          <Property Name="EventAssociationId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="AssociationTypeid" Type="Int32" Nullable="false" />
+          <Property Name="AssociationValue" Type="String" Nullable="false" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="CalendarEvent">
           <Key>
@@ -431,44 +413,8 @@
           <Property Name="Location" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
           <Property Name="TargetInviteType" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
           <Property Name="CalendarId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Calendar" Relationship="TotalHREntities.FK_CalendarEvent_Calendar" FromRole="CalendarEvent" ToRole="Calendar" />
-        </EntityType>
-        <EntityType Name="CalendarEventDepartment">
-          <Key>
-            <PropertyRef Name="DepartmentId" />
-            <PropertyRef Name="EventId" />
-          </Key>
-          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
-          <Property Name="EventId" Type="Int32" Nullable="false" />
-          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CalendarEventInvite">
-          <Key>
-            <PropertyRef Name="EventId" />
-            <PropertyRef Name="UserId" />
-            <PropertyRef Name="ProfileId" />
-          </Key>
-          <Property Name="EventId" Type="Int32" Nullable="false" />
-          <Property Name="UserId" Type="Int32" Nullable="false" />
-          <Property Name="ProfileId" Type="Int32" Nullable="false" />
-          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="CalendarEventReminder">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Frequency" Type="Int32" Nullable="false" />
-          <Property Name="FrequencyType" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="false" />
-          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <Property Name="LastModifiedBy" Type="Int32" />
-          <Property Name="LastModified" Type="DateTime" Precision="3" />
-          <Property Name="TextTemplateId" Type="Int32" Nullable="false" />
-          <Property Name="ReminderTypeId" Type="Int32" Nullable="false" />
+          <Property Name="RepeatTypeId" Type="Int32" />
+          <NavigationProperty Name="Calendar" Relationship="TotalHRModel.FK_CalendarEvent_Calendar" FromRole="CalendarEvent" ToRole="Calendar" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -499,8 +445,8 @@
           <Property Name="Description" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
           <Property Name="Website" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
           <Property Name="PreferredLanguageId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Calendars" Relationship="TotalHREntities.FK_Calendar_Company" FromRole="Company" ToRole="Calendar" />
-          <NavigationProperty Name="Departments" Relationship="TotalHREntities.FK_Department_Company" FromRole="Company" ToRole="Department" />
+          <NavigationProperty Name="Calendars" Relationship="TotalHRModel.FK_Calendar_Company" FromRole="Company" ToRole="Calendar" />
+          <NavigationProperty Name="Departments" Relationship="TotalHRModel.FK_Department_Company" FromRole="Company" ToRole="Department" />
         </EntityType>
         <EntityType Name="CompanyFeature">
           <Key>
@@ -524,7 +470,7 @@
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="LastModified" Type="DateTime" Precision="3" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Company" Relationship="TotalHREntities.FK_Department_Company" FromRole="Department" ToRole="Company" />
+          <NavigationProperty Name="Company" Relationship="TotalHRModel.FK_Department_Company" FromRole="Department" ToRole="Company" />
         </EntityType>
         <EntityType Name="EmailTemplate">
           <Key>
@@ -671,8 +617,8 @@
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Calendar_Company">
-          <End Role="Company" Type="TotalHREntities.Company" Multiplicity="1" />
-          <End Role="Calendar" Type="TotalHREntities.Calendar" Multiplicity="*" />
+          <End Role="Company" Type="TotalHRModel.Company" Multiplicity="1" />
+          <End Role="Calendar" Type="TotalHRModel.Calendar" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
               <PropertyRef Name="ID" />
@@ -683,8 +629,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CalendarEvent_Calendar">
-          <End Role="Calendar" Type="TotalHREntities.Calendar" Multiplicity="1" />
-          <End Role="CalendarEvent" Type="TotalHREntities.CalendarEvent" Multiplicity="*" />
+          <End Role="Calendar" Type="TotalHRModel.Calendar" Multiplicity="1" />
+          <End Role="CalendarEvent" Type="TotalHRModel.CalendarEvent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Calendar">
               <PropertyRef Name="id" />
@@ -695,8 +641,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Department_Company">
-          <End Role="Company" Type="TotalHREntities.Company" Multiplicity="1" />
-          <End Role="Department" Type="TotalHREntities.Department" Multiplicity="*" />
+          <End Role="Company" Type="TotalHRModel.Company" Multiplicity="1" />
+          <End Role="Department" Type="TotalHRModel.Department" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
               <PropertyRef Name="ID" />
@@ -731,9 +677,9 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TotalHREntitiesStoreContainer" CdmEntityContainer="TotalHREntities1">
+        <EntityContainerMapping StorageEntityContainer="TotalHRModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="Calendars">
-            <EntityTypeMapping TypeName="TotalHREntities.Calendar">
+            <EntityTypeMapping TypeName="TotalHRModel.Calendar">
               <MappingFragment StoreEntitySet="Calendar">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -748,8 +694,20 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="CalendarAssociations">
+            <EntityTypeMapping TypeName="TotalHRModel.CalendarAssociation">
+              <MappingFragment StoreEntitySet="CalendarAssociation">
+                <ScalarProperty Name="EventAssociationId" ColumnName="EventAssociationId" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="AssociationTypeid" ColumnName="AssociationTypeid" />
+                <ScalarProperty Name="AssociationValue" ColumnName="AssociationValue" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="CalendarEvents">
-            <EntityTypeMapping TypeName="TotalHREntities.CalendarEvent">
+            <EntityTypeMapping TypeName="TotalHRModel.CalendarEvent">
               <MappingFragment StoreEntitySet="CalendarEvent">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
@@ -763,48 +721,12 @@
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="TargetInviteType" ColumnName="TargetInviteType" />
                 <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CalendarEventDepartments">
-            <EntityTypeMapping TypeName="TotalHREntities.CalendarEventDepartment">
-              <MappingFragment StoreEntitySet="CalendarEventDepartment">
-                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
-                <ScalarProperty Name="EventId" ColumnName="EventId" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CalendarEventInvites">
-            <EntityTypeMapping TypeName="TotalHREntities.CalendarEventInvite">
-              <MappingFragment StoreEntitySet="CalendarEventInvite">
-                <ScalarProperty Name="EventId" ColumnName="EventId" />
-                <ScalarProperty Name="UserId" ColumnName="UserId" />
-                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="CalendarEventReminders">
-            <EntityTypeMapping TypeName="TotalHREntities.CalendarEventReminder">
-              <MappingFragment StoreEntitySet="CalendarEventReminder">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
-                <ScalarProperty Name="Frequency" ColumnName="Frequency" />
-                <ScalarProperty Name="FrequencyType" ColumnName="FrequencyType" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
-                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
-                <ScalarProperty Name="TextTemplateId" ColumnName="TextTemplateId" />
-                <ScalarProperty Name="ReminderTypeId" ColumnName="ReminderTypeId" />
+                <ScalarProperty Name="RepeatTypeId" ColumnName="RepeatTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Companies">
-            <EntityTypeMapping TypeName="TotalHREntities.Company">
+            <EntityTypeMapping TypeName="TotalHRModel.Company">
               <MappingFragment StoreEntitySet="Company">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -835,7 +757,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CompanyFeatures">
-            <EntityTypeMapping TypeName="TotalHREntities.CompanyFeature">
+            <EntityTypeMapping TypeName="TotalHRModel.CompanyFeature">
               <MappingFragment StoreEntitySet="CompanyFeature">
                 <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
                 <ScalarProperty Name="FeatureId" ColumnName="FeatureId" />
@@ -845,7 +767,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Departments">
-            <EntityTypeMapping TypeName="TotalHREntities.Department">
+            <EntityTypeMapping TypeName="TotalHRModel.Department">
               <MappingFragment StoreEntitySet="Department">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -859,7 +781,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="EmailTemplates">
-            <EntityTypeMapping TypeName="TotalHREntities.EmailTemplate">
+            <EntityTypeMapping TypeName="TotalHRModel.EmailTemplate">
               <MappingFragment StoreEntitySet="EmailTemplate">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -878,7 +800,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Features">
-            <EntityTypeMapping TypeName="TotalHREntities.Feature">
+            <EntityTypeMapping TypeName="TotalHRModel.Feature">
               <MappingFragment StoreEntitySet="Feature">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -891,7 +813,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Glossaries">
-            <EntityTypeMapping TypeName="TotalHREntities.Glossary">
+            <EntityTypeMapping TypeName="TotalHRModel.Glossary">
               <MappingFragment StoreEntitySet="Glossary">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Term" ColumnName="Term" />
@@ -908,7 +830,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Languages">
-            <EntityTypeMapping TypeName="TotalHREntities.Language">
+            <EntityTypeMapping TypeName="TotalHRModel.Language">
               <MappingFragment StoreEntitySet="Language">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -922,7 +844,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Profiles">
-            <EntityTypeMapping TypeName="TotalHREntities.Profile">
+            <EntityTypeMapping TypeName="TotalHRModel.Profile">
               <MappingFragment StoreEntitySet="Profile">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -936,7 +858,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Roles">
-            <EntityTypeMapping TypeName="TotalHREntities.Role">
+            <EntityTypeMapping TypeName="TotalHRModel.Role">
               <MappingFragment StoreEntitySet="Roles">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
@@ -950,7 +872,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
-            <EntityTypeMapping TypeName="TotalHREntities.User">
+            <EntityTypeMapping TypeName="TotalHRModel.User">
               <MappingFragment StoreEntitySet="User">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="GenderId" ColumnName="GenderId" />
@@ -990,7 +912,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserProfiles">
-            <EntityTypeMapping TypeName="TotalHREntities.UserProfile">
+            <EntityTypeMapping TypeName="TotalHRModel.UserProfile">
               <MappingFragment StoreEntitySet="UserProfile">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
@@ -1000,7 +922,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="UserRoles">
-            <EntityTypeMapping TypeName="TotalHREntities.UserRole">
+            <EntityTypeMapping TypeName="TotalHRModel.UserRole">
               <MappingFragment StoreEntitySet="UserRole">
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
@@ -1009,10 +931,10 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="GetUserProfileIds" FunctionName="TotalHREntities.Store.GetUserProfileIds" />
-          <FunctionImportMapping FunctionImportName="GetUserProfiles" FunctionName="TotalHREntities.Store.GetUserProfiles">
+          <FunctionImportMapping FunctionImportName="GetUserProfileIds" FunctionName="TotalHRModel.Store.GetUserProfileIds" />
+          <FunctionImportMapping FunctionImportName="GetUserProfiles" FunctionName="TotalHRModel.Store.GetUserProfiles">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="TotalHREntities.GetUserProfiles_Result">
+              <ComplexTypeMapping TypeName="TotalHRModel.GetUserProfiles_Result">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
@@ -1024,10 +946,10 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="GetUserRoleIds" FunctionName="TotalHREntities.Store.GetUserRoleIds" />
-          <FunctionImportMapping FunctionImportName="GetUserRoles" FunctionName="TotalHREntities.Store.GetUserRoles">
+          <FunctionImportMapping FunctionImportName="GetUserRoleIds" FunctionName="TotalHRModel.Store.GetUserRoleIds" />
+          <FunctionImportMapping FunctionImportName="GetUserRoles" FunctionName="TotalHRModel.Store.GetUserRoles">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="TotalHREntities.GetUserRoles_Result">
+              <ComplexTypeMapping TypeName="TotalHRModel.GetUserRoles_Result">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

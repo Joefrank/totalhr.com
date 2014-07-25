@@ -367,7 +367,7 @@ function PrepareToSaveValues() {
 
 
         if (repeatType == DailyMonToFri || repeatType == OnDayOfTheWeek) {
-            repeatDateXML = '<dates><date>' + $('#txtRepeatUntil').val() + '</date></dates>';
+            repeatDateXML = '<dates><date>' + RepeatsToSave['RepeatTypeId_' + previousSelectedId][1] + '</date></dates>';
         } else if (repeatType == OnDates || repeatType == MonthlyOnDates || repeatType == YearlyOnSameDate) {
             var arrTemp = RepeatsToSave['RepeatTypeId_' + repeatType];
 
@@ -376,8 +376,8 @@ function PrepareToSaveValues() {
             }
 
             repeatDateXML = '<dates>' + repeatDateXML + '</dates>';
-
         }
+       
 
         $('#RepeatType').val(repeatType);
      

@@ -32,5 +32,12 @@ namespace totalhr.data.Repositories.Implementation
                 ).ToList();
 
         }
+
+        public CalendarAssociation CreateEventAssociation(CalendarAssociation assoc)
+        {
+            this.Context.CalendarAssociations.Add(assoc);
+            this.Context.SaveChanges();
+            return assoc;
+        }
     }
 }

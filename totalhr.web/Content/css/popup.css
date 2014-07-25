@@ -135,7 +135,7 @@ body, html {
    .line .childblock b{ float: left;color: #7b7b7b;}
 
     #dvReminderContent span.row span.td, #dvReminderContent span.row span.tdtop{display: block;float: left;left:2px;}
-    #dvReminderContent span.row span.tdtop{ position: relative;top: -14px;}
+    #dvReminderContent span.row span.tdtop{ position: relative;top: 0px;}
 
    #sprepeatinfo{ display: block;float: left;width: 100%;margin: 10px 0;color:#7b7b7b;}
 

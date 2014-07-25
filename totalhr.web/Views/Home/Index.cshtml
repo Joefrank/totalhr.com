@@ -2,12 +2,13 @@
 
 @{
     ViewBag.Title = "Index";
-  
+
+    var config = System.Configuration.ConfigurationManager.ConnectionStrings["TotalHREntities"].ToString();
 }
 
-<h2>Index</h2>
+<h2>Index </h2>
 
-@*<h1>UserId: @userid</h1>*@
+@*<h1>UserId: @userid @config</h1>*@
 <p>
 
     Welcome to TotalHR
@@ -21,7 +22,9 @@
     <a href="/Account/Login">Click here to Login</a><br />
     
     <a href="/Account/ExpressLogAdmin">Log Admin</a>
-
+    
+    <br/>
+    <a href="/calendar/createevent/1">Event cal 1 create</a>
     @*    <br />
 
     <a href="/calendar/DayView/2014/06/03">Calendar Day View</a>

@@ -1,9 +1,11 @@
-﻿using Calendar.Infrastructure;
+﻿using System.Xml;
+using Calendar.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using totalhr.Shared;
 using TEF = totalhr.data.EF;
 using totalhr.data.Repositories.Implementation;
 using totalhr.data.Repositories.Infrastructure;
@@ -28,20 +30,118 @@ namespace Calendar.Implementation
             return _calrepos.FindBy(x => x.id == calendarid).FirstOrDefault();
         }
 
+        private DateTime AddTimeToDate(DateTime date, string formattedTime)
+        {
+            string[] arrTemp = formattedTime.Split(':');
+            int hour= 0, minute=0, second=0;
+
+            if(arrTemp.Length > 0)
+            {
+                hour = Int32.Parse(arrTemp[0]);
+                minute = Int32.Parse(arrTemp[1]);
+                second = (arrTemp.Length > 2) ? Int32.Parse(arrTemp[2]) : 00;
+            }
+            return new DateTime(date.Year, date.Month, date.Day, hour, minute, second);
+        }
+
         public CalendarEvent CreateEvent(totalhr.Shared.Models.CalendarEventInfo info)
         {
-            var cevent = new CalendarEvent();
-            cevent.Title = info.Title;
-            cevent.Description = info.Description;
-            cevent.StartOfEvent = info.StartDate;
-            cevent.EndOfEvent = info.EndDate;
-            cevent.CreatedBy = info.CreatedBy;
-            cevent.Location = info.Location;
-            cevent.Created = DateTime.Now;
-            cevent.CalendarId = info.CalendarId;
+            var cevent = new CalendarEvent
+                {
+                    Title = info.Title,
+                    Description = info.Description,
+                    StartOfEvent = AddTimeToDate(info.StartDate, info.StartTime),
+                    EndOfEvent = AddTimeToDate(info.EndDate, info.EndTime),
+                    CreatedBy = info.CreatedBy,
+                    Location = info.Location,
+                    Created = DateTime.Now,
+                    CalendarId = info.CalendarId
+                };
 
             _calEventRepos.Add(cevent);
             _calEventRepos.Save();
+
+            //event has been created let's create associations
+            if (cevent.id > 0)
+            {
+                //save reminders.
+                var doc = new XmlDocument();
+                doc.Load(info.ReminderXML);
+                var rootNode =  doc.DocumentElement;
+
+                if (rootNode != null)
+                {
+                    foreach (XmlNode node in rootNode.ChildNodes)
+                    {
+                        var eventAssociation = new CalendarAssociation
+                            {
+                                EventId = cevent.id,
+                                AssociationTypeid = (int) Variables.CalendarEventAssociationType.Reminder,
+                                AssociationValue = node.OuterXml.ToString(),
+                                Created = DateTime.Now,
+                                CreatedBy = info.CreatedBy
+                            };
+
+                        _calEventRepos.CreateEventAssociation(eventAssociation);
+                    }
+                }
+
+                //save attendees. *** include notification
+                if (info.TargetAttendeeGroupId > 0)
+                {
+                     var assocValue = string.Empty;
+                    var assocType = 0;
+
+                    if (info.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.User)
+                    {
+                        assocValue = info.InvitedUserIds;
+                        assocType = (int) Variables.CalendarEventAssociationType.UserInvite;
+                    }
+                    else if (info.TargetAttendeeGroupId == (int) Variables.CalendarEventAssociationType.Department)
+                    {
+                        assocValue = info.InvitedDepartmentIds;
+                        assocType = (int) Variables.CalendarEventAssociationType.Department;
+                    }
+
+                    if (assocType > 0)
+                    {
+                        var attendeeEvtAssociation = new CalendarAssociation
+                            {
+                                EventId = cevent.id,
+                                AssociationTypeid = assocType,
+                                AssociationValue = assocValue,
+                                Created = DateTime.Now,
+                                CreatedBy = info.CreatedBy
+                            };
+
+                        _calEventRepos.CreateEventAssociation(attendeeEvtAssociation);
+                    }
+
+                }
+
+                //save repeat for event
+                doc.Load(info.RepeatXML);
+                rootNode = doc.DocumentElement;
+
+                if (rootNode != null)
+                {
+                    foreach (XmlNode node in rootNode.ChildNodes)
+                    {
+                        var eventAssociation = new CalendarAssociation
+                        {
+                            EventId = cevent.id,
+                            AssociationTypeid = (int)Variables.CalendarEventAssociationType.Repeat,
+                            AssociationValue = node.OuterXml.ToString(),
+                            Created = DateTime.Now,
+                            CreatedBy = info.CreatedBy
+                        };
+
+                        _calEventRepos.CreateEventAssociation(eventAssociation);
+                    }
+                }
+               
+
+            }
 
             return cevent;
         }
@@ -77,12 +177,12 @@ namespace Calendar.Implementation
             return _calEventRepos.GetCalendarMonthlyEventsByUserAndCalendar(calendarid, userid, year, month);
         }
 
-        public List<TEF.CalendarEventInvite> GetCalendarEventInvitees(int calendareventid)
+        public List<TEF.CalendarAssociation> GetCalendarEventInvitees(int calendareventid)
         {
             return null;
         }
 
-        public List<TEF.CalendarEventReminder> GetCalendarEventReminders(int calendareventid)
+        public List<TEF.CalendarAssociation> GetCalendarEventReminders(int calendareventid)
         {
             return null;
         }
