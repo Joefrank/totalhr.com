@@ -17,7 +17,7 @@ function ManageActiveDay(objTd) {
     eventid = 0;
     
     var urltoload = "/Calendar/CreateEvent/" + CalendarId;
-    $("#dvPopup").load(urltoload);
+    $('#ipopup').attr("src", urltoload);
     $('#dvPopup').css("display", "");
     $('#dvPopup').css("min-height", "600px");
 }
@@ -26,7 +26,7 @@ function ManageEvent(evt) {
     var sEventClientId = evt.id;
     eventid = ArrEvents[sEventClientId][1];
     var urltoload = "/Calendar/EditEvent/" + eventid;
-    $("#dvPopup").load(urltoload);
+    $('#ipopup').attr("src", urltoload);
     $('#dvPopup').css("display", "");
     $('#dvPopup').css("min-height", "600px");
     event.stopPropagation();
@@ -309,7 +309,7 @@ function PrepareToSaveValues() {
         //validate dates (also check times)***
         var compare = Date.parse($('#StartDate').val()).compareTo(Date.parse($('#EndDate').val()));
         if (compare > 0) {
-            alert(MSG_ERROR_STARTDATE_AFTER_ENDDATE);
+            alert(decodeURIComponent(MSG_ERROR_STARTDATE_AFTER_ENDDATE));
             return false;
         }
 
@@ -333,8 +333,7 @@ function PrepareToSaveValues() {
 
         $('#ReminderXML').val(remindersXML);
         
-        alert("Reminders:" + remindersXML);
-
+      
         // prepare target groups
         var selTargetVal = $("input:radio[name='TargetAttendeeGroupId']:checked").val();
     
@@ -385,8 +384,13 @@ function PrepareToSaveValues() {
             repeatDateXML = '<repeat><type>' + repeatType + '</type>' + repeatDateXML + '</repeat>';
 
         $('#RepeatType').val(repeatType);
-        $('#RepeatXML').val(repeatDateXML);        alert("repeat  xml : " + $('#RepeatXML').val());        return true;    }catch(ex){
-        alert(MSG_ERROR_SUBMIT_FAILED);
+        $('#RepeatXML').val(repeatDateXML);
+
+       
+        return true;
+
+    }catch(ex){
+        alert(decodeURIComponent(MSG_ERROR_SUBMIT_FAILED));
         return false;
     }
 }

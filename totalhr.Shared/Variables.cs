@@ -89,10 +89,9 @@ namespace totalhr.Shared
 
         public enum CalendarEventAssociationType
         {
-            UserInvite =1,
-            Department = 2,
-            Reminder = 3,
-            Repeat = 4
+            Attendee =1,
+            Reminder = 2,
+            Repeat = 3
         }
         
         public static string AdminEmailSignature

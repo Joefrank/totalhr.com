@@ -39,5 +39,10 @@ namespace totalhr.data.Repositories.Implementation
             this.Context.SaveChanges();
             return assoc;
         }
+
+        public List<CalendarAssociation> GetCalendarEventAssociations(int eventid)
+        {
+            return this.Context.CalendarAssociations.Where(x => x.EventId == eventid).ToList();
+        }
     }
 }

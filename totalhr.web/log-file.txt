@@ -902,4 +902,16 @@ Parameter name: source
 ]2014-07-25 15:06:03,786 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
 ]2014-07-26 23:01:26,912 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
 ]2014-07-27 09:22:17,540 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-27 21:41:39,234 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-27 21:41:39,472 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-27 21:41:39,503 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-27 21:41:42,820 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-27 21:53:08,181 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-27 21:53:08,263 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-27 21:53:08,286 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-27 21:53:17,908 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-27 23:26:09,716 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-27 23:54:22,768 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-27 23:54:22,867 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-27 23:54:22,897 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
 ]

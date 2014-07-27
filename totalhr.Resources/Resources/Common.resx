@@ -174,4 +174,10 @@
   <data name="V_Password_Reminder" xml:space="preserve">
     <value>Forgot Password</value>
   </data>
+  <data name="Page_TT_Calendar_Event_Add" xml:space="preserve">
+    <value>Calendar Event Add</value>
+  </data>
+  <data name="Page_TT_Calendar_Event_Edit" xml:space="preserve">
+    <value>Calendar Event Edit</value>
+  </data>
 </root>

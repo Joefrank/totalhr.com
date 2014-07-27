@@ -10,6 +10,7 @@ using TEF = totalhr.data.EF;
 using totalhr.data.Repositories.Implementation;
 using totalhr.data.Repositories.Infrastructure;
 using totalhr.data.EF;
+using totalhr.Shared.Models;
 
 
 namespace Calendar.Implementation
@@ -96,7 +97,7 @@ namespace Calendar.Implementation
                         assocValue = string.Format("<target><type>{0}</type><value>{1}</value></target>",
                             info.TargetAttendeeGroupId,info.InvitedUserIds);                       
                     }
-                    else if (info.TargetAttendeeGroupId == (int)Variables.CalendarEventAssociationType.Department)
+                    else if (info.TargetAttendeeGroupId == (int)Variables.CalendarEventTarget.Department)
                     {
                         assocValue = string.Format("<target><type>{0}</type><value>{1}</value></target>", 
                             info.TargetAttendeeGroupId, info.InvitedDepartmentIds);
@@ -110,7 +111,7 @@ namespace Calendar.Implementation
                         var attendeeEvtAssociation = new CalendarAssociation
                             {
                                 EventId = cevent.id,
-                                AssociationTypeid = (int)Variables.CalendarEventAssociationType.UserInvite,
+                                AssociationTypeid = (int)Variables.CalendarEventAssociationType.Attendee,
                                 AssociationValue = assocValue,
                                 Created = DateTime.Now,
                                 CreatedBy = info.CreatedBy
@@ -149,6 +150,128 @@ namespace Calendar.Implementation
             }
 
             return cevent;
+        }
+
+        public CalendarEventInfo GetEventInfo(int eventid)
+        {
+            var evt = _calEventRepos.FindBy(x => x.id == eventid).FirstOrDefault();
+            var associations = _calEventRepos.GetCalendarEventAssociations(eventid);
+
+            if (evt != null)
+            {
+                var calEventInfo = new CalendarEventInfo
+                {
+                    EventId = evt.id,
+                    Title = evt.Title,
+                    Location = evt.Location,
+                    Description = evt.Description,
+                    StartDate = evt.StartOfEvent.Date,
+                    EndDate = evt.EndOfEvent.Date,
+                    StartTime = evt.StartOfEvent.ToString("HH:mm"),
+                    EndTime = evt.EndOfEvent.ToString("HH:mm"),
+                    CreatedBy = evt.CreatedBy                    
+                };
+
+                foreach (CalendarAssociation assoc in associations)
+                {
+                    //calEventInfo
+                    switch (assoc.AssociationTypeid)
+                    {
+                        case (int)Variables.CalendarEventAssociationType.Attendee :
+                            calEventInfo = MakeAttendees(assoc, calEventInfo); break;
+
+                        case (int)Variables.CalendarEventAssociationType.Reminder :
+                            calEventInfo = MakeReminders(assoc, calEventInfo); break;
+
+                        case (int)Variables.CalendarEventAssociationType.Repeat:
+                            calEventInfo = MakeRepeats(assoc, calEventInfo); break;
+                    }
+                }
+
+                return calEventInfo; 
+            }
+            else { return null; }
+        }
+
+        private CalendarEventInfo MakeAttendees(CalendarAssociation assoc, CalendarEventInfo info)
+        {
+            var doc = new XmlDocument();
+            doc.LoadXml(assoc.AssociationValue);
+            int attendeeTypeId = 0;
+            var root = doc.DocumentElement;
+            var attendeeTypeNode = root.SelectSingleNode("//type");
+
+            if (attendeeTypeNode != null)
+            {
+                Int32.TryParse(attendeeTypeNode.InnerText, out attendeeTypeId);
+                if (attendeeTypeId > 0)
+                {
+                    info.TargetAttendeeGroupId = attendeeTypeId;
+                    if (attendeeTypeId == (int)Variables.CalendarEventTarget.User)
+                    {
+                        info.InvitedUserIds = root.SelectSingleNode("//value").InnerText;
+                    }
+                    else if (attendeeTypeId == (int)Variables.CalendarEventTarget.Department)
+                    {
+                        info.InvitedDepartmentIds = root.SelectSingleNode("//value").InnerText;
+                    }                    
+                }
+            }
+            return info;
+
+        }
+
+        private CalendarEventInfo MakeReminders(CalendarAssociation assoc, CalendarEventInfo info)
+        {
+            var doc = new XmlDocument();
+            doc.LoadXml(assoc.AssociationValue);
+            int reminderTypeId = 0;
+            var root = doc.DocumentElement;
+            var reminderTypeNode = root.SelectSingleNode("//type");
+
+            if (reminderTypeNode != null)
+            {
+                Int32.TryParse(reminderTypeNode.InnerText, out reminderTypeId);
+                if (reminderTypeId > 0)
+                {
+                    var reminder = new CalendarEventReminder
+                    {
+                        ReminderType =reminderTypeId,
+                        Frequency = Convert.ToInt32(root.SelectSingleNode("//frequency").InnerText),
+                        FrequencyType = Convert.ToInt32(root.SelectSingleNode("//frequencytype").InnerText)
+                    };
+
+                    if (info.Reminders == null)
+                    {
+                        info.Reminders = new List<CalendarEventReminder>();
+                    }
+                    info.Reminders.Add(reminder);                    
+                }
+            }
+            return info;
+
+        }
+
+        private CalendarEventInfo MakeRepeats(CalendarAssociation assoc, CalendarEventInfo info)
+        {
+            var doc = new XmlDocument();
+            doc.LoadXml(assoc.AssociationValue);
+            int repeatTypeId = 0;
+            var root = doc.DocumentElement;
+            var repeatTypeNode = root.SelectSingleNode("//type");
+
+            if (repeatTypeNode != null)
+            {
+                Int32.TryParse(repeatTypeNode.InnerText, out repeatTypeId);
+
+                if (repeatTypeId > 0)
+                {
+                    info.RepeatType = repeatTypeId;
+                    info.RepeatXML = root.OuterXml;                   
+                }
+            }
+            return info;
+
         }
 
         public CalendarEvent GetEvent(int eventid)

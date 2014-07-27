@@ -11,12 +11,51 @@
     var lstDayHours = new List<string> { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" };
     var lstDayMinutes = new List<string> {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55" };
 
-    var WeekDaysJS = ViewBag.WeekDaysJS;
-    
-    var eventTargets = ViewBag.EventTargets as List<totalhr.data.EF.Glossary>;
-
+    var WeekDaysJS = ViewBag.WeekDaysJS;    
+   
     var sbJS = new StringBuilder();
     var sbAttendees = new StringBuilder();
+
+    string startTimeHour = string.Empty;
+    string startTimeMin = string.Empty;
+    string endTimeHour = string.Empty;
+    string endTimeMin = string.Empty;
+    
+    if(Model.EventId > 0)
+    {
+        var tempStart = Model.StartTime.Split(':');
+        var tempEnd = Model.EndTime.Split(':');
+
+        startTimeHour = tempStart[0];
+        startTimeMin = tempStart[1];
+        endTimeHour = tempEnd[0];
+        endTimeMin = tempEnd[1];    
+    }
+    
+     var dicoStartDate = new Dictionary<string, object>{ 
+                            { "class", "datetype"},
+                            {"data-beatpicker","true"},				                  
+                            {"data-beatpicker-position","['*','*']"},
+                            {"data-beatpicker-format","['DD','MM','YYYY'],separator:'/'"},
+                            {"data-beatpicker-module","gotoDate,clear"},
+                            {"data-beatpicker-id", "StartDate"}
+                        };
+                        
+    var dicoEndDate = new Dictionary<string, object>{ 
+                            { "class", "datetype"},
+                            {"data-beatpicker","true"},				                  
+                            {"data-beatpicker-position","['*','*']"},
+                            {"data-beatpicker-format","['DD','MM','YYYY'],separator:'/'"},
+                            {"data-beatpicker-module","gotoDate,clear"},
+                            {"data-beatpicker-id", "EndDate"}
+                        };
+        
+       if (Model.EventId < 1){
+           dicoStartDate.Add("value", "");
+            dicoEndDate.Add("value", "");
+       }
+   
+       
  }
 
 
@@ -50,58 +89,37 @@
             <div class="line">
                 <div class="block">
                 <label class="fix200W">@FormMessages.Label_Start_Date:<span class="req">*</span></label>
-                @Html.TextBoxFor(x => x.StartDate, "{0:d/MM/yyyy}", 
-                new Dictionary<string, object>
-                    { 
-                        {"class", "datetype"},
-                        {"Value",""},
-                        {"type", "text"},
-                        {"data-beatpicker","true"},				                  
-                        {"data-beatpicker-position","['*','*']"},
-                        {"data-beatpicker-format","['DD','MM','YYYY'],separator:'/'"},
-                        {"data-beatpicker-module","gotoDate,clear"},
-                        {"data-beatpicker-id", "StartDate"}
-                    }
-                  ) 
+                @Html.TextBoxFor(x => x.StartDate, "{0:d/MM/yyyy}",dicoStartDate) 
                 
                 </div>
 
-                <div class="halfblock">
+                <div class="halfblock shiftleft">
 
                      @Html.HiddenFor(x => x.StartTime) 
 
 			        <label>Hour</label>
-			        @Html.DropDownList("starthour", new SelectList(lstDayHours)) 
+			        @Html.DropDownList("starthour", new SelectList(lstDayHours), startTimeHour) 
 			
-			        <label>: Min</label>			
-			        @Html.DropDownList("startminute", new SelectList(lstDayMinutes))
+			        <label> Min</label>			
+			        @Html.DropDownList("startminute", new SelectList(lstDayMinutes), startTimeMin)
 		        </div>
             </div>          
     
             <div class="line"> 
                 <div class="block">
                     <label class="fix200W">@FormMessages.Label_End_Date:<span class="req">*</span></label>
-                    @Html.TextBoxFor(x => x.EndDate, "{0:d/MM/yyyy}", new Dictionary<string, object>
-                        { 
-                            { "class", "datetype"},
-                            {"Value",""},
-                            {"type", "text"},
-                            {"data-beatpicker","true"},				                  
-                            {"data-beatpicker-position","['*','*']"},
-                            { "data-beatpicker-format","['DD','MM','YYYY'],separator:'/'"},
-                            {"data-beatpicker-module","gotoDate,clear"}
-                        })
+                    @Html.TextBoxFor(x => x.EndDate, "{0:d/MM/yyyy}", dicoEndDate)
                     
                 </div>
-                 <div class="halfblock">
+                 <div class="halfblock shiftleft">
 
                     @Html.HiddenFor(x => x.EndTime) 
 
 			        <label>Hour</label>
-			        @Html.DropDownList("endhour", new SelectList(lstDayHours)) 
+			        @Html.DropDownList("endhour", new SelectList(lstDayHours), endTimeHour) 
 			
-			        <label>: Min</label>			
-			        @Html.DropDownList("endminute", new SelectList(lstDayMinutes))
+			        <label> Min</label>			
+			        @Html.DropDownList("endminute", new SelectList(lstDayMinutes), endTimeMin)
 		        </div>
             </div>           
             
@@ -112,8 +130,15 @@
                  <div class="childblock">
                     
                      <div class="head" onclick="ToggleExpand('dvReminderContent')">
-                           @FormMessages.V_None_Added
-                         
+                         <span id="spReminderCount">
+                             @if (Model.Reminders != null && Model.Reminders.Count > 0)
+                             {
+                                @(Model.Reminders.Count + " " + FormMessages.V_Added)
+                             }else{
+                                @FormMessages.V_None_Added
+                             }
+                         </span>
+
                         <span class="spedit" title="@FormMessages.Toolt_Edit_Reminder" onclick="Expand('spReminders');">
                             &nbsp;
                         </span>
@@ -169,6 +194,7 @@
                          
                          <div id="dvReminderOptions" class="optionbox" style="display:none;">
                              <div id="dvReminderProgress">
+
                              </div>
                              <div>
                                  <input type="button" value="Save" onclick="SaveReminder();"/>
@@ -320,11 +346,11 @@
     @Html.Raw(sbAttendees)
     
 
-    MSG_ADDED = "@FormMessages.V_Added";
-    MSG_MISSING_REMINDER_TYPE = "@FormMessages.Error_Missing_Reminder_Type";
-    MSG_MISSING_REMINDER_VALUES = "@FormMessages.Error_Missing_Reminder_Frequency_AndValues";
-    MSG_ERROR_SUBMIT_FAILED = "@FormMessages.Error_Could_Not_Submit_Form";
-    MSG_ERROR_STARTDATE_AFTER_ENDDATE = "@FormMessages.Error_StartDate_After_EndDate";
+    MSG_ADDED = "@Html.Raw(FormMessages.V_Added)";
+    MSG_MISSING_REMINDER_TYPE = "@Html.Raw(FormMessages.Error_Missing_Reminder_Type)";
+    MSG_MISSING_REMINDER_VALUES = "@Html.Raw(FormMessages.Error_Missing_Reminder_Frequency_AndValues)";
+    MSG_ERROR_SUBMIT_FAILED = "@Html.Raw(FormMessages.Error_Could_Not_Submit_Form)";
+    MSG_ERROR_STARTDATE_AFTER_ENDDATE = "@Html.Raw(FormMessages.Error_StartDate_After_EndDate)";
 
     $(document).ready(function() {
 

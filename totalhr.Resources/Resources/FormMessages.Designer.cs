@@ -466,7 +466,7 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please select a reminder type before continuing.&quot;.
+        ///   Looks up a localized string similar to Please select a reminder type before continuing..
         /// </summary>
         public static string Error_Missing_Reminder_Type {
             get {

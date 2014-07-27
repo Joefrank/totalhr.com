@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using totalhr.Shared;
+using totalhr.Shared.Models;
 
 namespace totalhr.web.Helpers
 {
@@ -59,6 +60,23 @@ namespace totalhr.web.Helpers
                                     </select>",id, name, callback, sbTemp.ToString());
         }
 
+        public static string GenerateReminderList(List<CalendarEventReminder> lstReminder)
+        {
+            StringBuilder sbTemp = new StringBuilder();
+
+            //(Variables.ReminderType[])Enum.GetValues(typeof(Variables.ReminderType))
+
+            foreach (var reminder in lstReminder)
+            {
+                if (reminder.ReminderType == (int)Variables.ReminderType.TimeBefore)
+                {
+                    sbTemp.Append(string.Format(@"<span>{0} {1} {2}</span>", reminder.Frequency,
+                        EnumExtensions.Description(Variables.ReminderType[reminder.FrequencyType])));
+                    //Convert.ChangeType(1, Variables.ReminderType.GetTypeCode())
+                }
+            }
+            return sbTemp.ToString();
+        }
     }
 
 

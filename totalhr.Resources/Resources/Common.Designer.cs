@@ -133,6 +133,24 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Calendar Event Add.
+        /// </summary>
+        public static string Page_TT_Calendar_Event_Add {
+            get {
+                return ResourceManager.GetString("Page_TT_Calendar_Event_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calendar Event Edit.
+        /// </summary>
+        public static string Page_TT_Calendar_Event_Edit {
+            get {
+                return ResourceManager.GetString("Page_TT_Calendar_Event_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password Reminder.
         /// </summary>
         public static string Page_TT_ForgotPassword {

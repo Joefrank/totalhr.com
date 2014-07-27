@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using TEF= totalhr.data.EF;
+using totalhr.Shared.Models;
+using TEF = totalhr.data.EF;
 
 namespace Calendar.Infrastructure
 {
@@ -16,6 +17,8 @@ namespace Calendar.Infrastructure
         List<TEF.CalendarEvent> GetCalendarEvents(int calendarid);
 
         TEF.CalendarEvent GetEvent(int eventid);
+
+        CalendarEventInfo GetEventInfo(int eventid);
 
         TEF.CalendarEvent CreateEvent(totalhr.Shared.Models.CalendarEventInfo info);
 

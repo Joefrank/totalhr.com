@@ -31,3 +31,14 @@
 Front-end forms (registration) Field suggestions.
 Field highlights on errors.
 
+
+
+
+- handle illegal characters when reading resources.
+- redirect to correct resource after creating event.
+- Apply business rules on event create 
+- update layout of event window popup
+
+- handle authorize at controller level + clean up repeats
+- Update kernel for features based on site also on user assignment.
+-Incorrect date format on empty text box.

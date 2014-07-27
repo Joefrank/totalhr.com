@@ -89,19 +89,8 @@ namespace totalhr.web.Controllers
             }
             else
             {
-                ViewBag.EventTargets = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.CalendarEventTarget);
-               CalendarEvent cevent = _calMservice.GetEvent(id);
-               var ceinfo = new CalendarEventInfo
-               {
-                   EventId = id,
-                   Title = cevent.Title,
-                   Description = cevent.Description,
-                   Location = cevent.Location,
-                   StartDate = cevent.StartOfEvent,
-                   EndDate = cevent.EndOfEvent
-               };
 
-               return View("EventEdit", ceinfo);
+                return View("EventEdit", _calMservice.GetEventInfo(id));
             }
         }
         

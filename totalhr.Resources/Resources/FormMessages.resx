@@ -622,7 +622,7 @@
     <value>Please enter and select reminder values and frequency as necessary.</value>
   </data>
   <data name="Error_Missing_Reminder_Type" xml:space="preserve">
-    <value>Please select a reminder type before continuing."</value>
+    <value>Please select a reminder type before continuing.</value>
   </data>
   <data name="Error_Could_Not_Submit_Form" xml:space="preserve">
     <value>Sorry couldn't submit form.</value>

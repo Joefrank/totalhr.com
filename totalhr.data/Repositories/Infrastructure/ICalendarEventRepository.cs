@@ -14,5 +14,7 @@ namespace totalhr.data.Repositories.Infrastructure
         List<CalendarEvent> GetCalendarMonthlyEventsByUserAndCalendar(int calendarId, int userid, int year, int month);
 
         CalendarAssociation CreateEventAssociation(CalendarAssociation assoc);
+
+        List<CalendarAssociation> GetCalendarEventAssociations(int eventid);
     }
 }

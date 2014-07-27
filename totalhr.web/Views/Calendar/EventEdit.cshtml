@@ -16,7 +16,7 @@
 
 <div id="main">
     <div class="content">
-       <h2>Calendar Event Edit</h2>
+       <h2>@((Model.EventId > 0)? Common.Page_TT_Calendar_Event_Edit : Common.Page_TT_Calendar_Event_Add)</h2>
 
         <p>Calendar Name: @Model.CalendarName</p>
 

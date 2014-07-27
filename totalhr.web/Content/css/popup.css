@@ -70,6 +70,9 @@ body, html {
     text-align:left;
 }
 
+.line .shiftleft {
+    position:relative;left:-120px;
+}
     /*.line .halfblock label {
         float: left;background-color:red;
     }*/
