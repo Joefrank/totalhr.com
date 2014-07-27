@@ -43,8 +43,6 @@ namespace totalhr.Shared.Models
 
         public string InvitedDepartmentIds { get; set; }
 
-        public bool NewlyCreated { get; set; }
-
         public List<CalendarEventReminder> Reminders { get; set; }
 
         public int ReminderType { get; set; }
@@ -64,8 +62,6 @@ namespace totalhr.Shared.Models
         public DateTime RepeatDate { get; set; }
 
         public string RepeatXML { get; set; }
-
-        public string RepeatValue { get; set; }
 
         
     }

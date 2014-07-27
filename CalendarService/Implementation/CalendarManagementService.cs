@@ -66,7 +66,7 @@ namespace Calendar.Implementation
             {
                 //save reminders.
                 var doc = new XmlDocument();
-                doc.Load(info.ReminderXML);
+                doc.LoadXml(info.ReminderXML);
                 var rootNode =  doc.DocumentElement;
 
                 if (rootNode != null)
@@ -77,7 +77,7 @@ namespace Calendar.Implementation
                             {
                                 EventId = cevent.id,
                                 AssociationTypeid = (int) Variables.CalendarEventAssociationType.Reminder,
-                                AssociationValue = node.OuterXml.ToString(),
+                                AssociationValue = node.OuterXml,
                                 Created = DateTime.Now,
                                 CreatedBy = info.CreatedBy
                             };
@@ -89,54 +89,59 @@ namespace Calendar.Implementation
                 //save attendees. *** include notification
                 if (info.TargetAttendeeGroupId > 0)
                 {
-                     var assocValue = string.Empty;
-                    var assocType = 0;
-
+                    var assocValue = string.Empty;
+                   
                     if (info.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.User)
                     {
-                        assocValue = info.InvitedUserIds;
-                        assocType = (int) Variables.CalendarEventAssociationType.UserInvite;
+                        assocValue = string.Format("<target><type>{0}</type><value>{1}</value></target>",
+                            info.TargetAttendeeGroupId,info.InvitedUserIds);                       
                     }
-                    else if (info.TargetAttendeeGroupId == (int) Variables.CalendarEventAssociationType.Department)
+                    else if (info.TargetAttendeeGroupId == (int)Variables.CalendarEventAssociationType.Department)
                     {
-                        assocValue = info.InvitedDepartmentIds;
-                        assocType = (int) Variables.CalendarEventAssociationType.Department;
+                        assocValue = string.Format("<target><type>{0}</type><value>{1}</value></target>", 
+                            info.TargetAttendeeGroupId, info.InvitedDepartmentIds);
+                    }
+                    else
+                    {
+                        assocValue = string.Format("<target><type>{0}</type></target>", info.TargetAttendeeGroupId);
                     }
 
-                    if (assocType > 0)
-                    {
+                   
                         var attendeeEvtAssociation = new CalendarAssociation
                             {
                                 EventId = cevent.id,
-                                AssociationTypeid = assocType,
+                                AssociationTypeid = (int)Variables.CalendarEventAssociationType.UserInvite,
                                 AssociationValue = assocValue,
                                 Created = DateTime.Now,
                                 CreatedBy = info.CreatedBy
                             };
 
                         _calEventRepos.CreateEventAssociation(attendeeEvtAssociation);
-                    }
+                   
 
                 }
 
-                //save repeat for event
-                doc.Load(info.RepeatXML);
-                rootNode = doc.DocumentElement;
-
-                if (rootNode != null)
+                //save repeat for event if they have been specified
+                if (info.RepeatType > 0)
                 {
-                    foreach (XmlNode node in rootNode.ChildNodes)
+                    doc = new XmlDocument();
+                    doc.LoadXml(info.RepeatXML);
+                    rootNode = doc.DocumentElement;
+                    
+                    if (rootNode != null)
                     {
-                        var eventAssociation = new CalendarAssociation
-                        {
-                            EventId = cevent.id,
-                            AssociationTypeid = (int)Variables.CalendarEventAssociationType.Repeat,
-                            AssociationValue = node.OuterXml.ToString(),
-                            Created = DateTime.Now,
-                            CreatedBy = info.CreatedBy
-                        };
+                        
+                            var eventAssociation = new CalendarAssociation
+                            {
+                                EventId = cevent.id,
+                                AssociationTypeid = (int)Variables.CalendarEventAssociationType.Repeat,
+                                AssociationValue = rootNode.OuterXml,
+                                Created = DateTime.Now,
+                                CreatedBy = info.CreatedBy
+                            };
 
-                        _calEventRepos.CreateEventAssociation(eventAssociation);
+                            _calEventRepos.CreateEventAssociation(eventAssociation);
+                        
                     }
                 }
                

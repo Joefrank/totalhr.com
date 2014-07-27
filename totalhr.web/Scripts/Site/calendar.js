@@ -333,6 +333,8 @@ function PrepareToSaveValues() {
 
         $('#ReminderXML').val(remindersXML);
         
+        alert("Reminders:" + remindersXML);
+
         // prepare target groups
         var selTargetVal = $("input:radio[name='TargetAttendeeGroupId']:checked").val();
     
@@ -357,6 +359,7 @@ function PrepareToSaveValues() {
             $('#InvitedUserIds').val(temp);
         } 
 
+
         //prepare repeats
         var repeatDateXML = '';
         var repeatType = "";
@@ -378,13 +381,11 @@ function PrepareToSaveValues() {
             repeatDateXML = '<dates>' + repeatDateXML + '</dates>';
         }
        
+        if(repeatDateXML != '')
+            repeatDateXML = '<repeat><type>' + repeatType + '</type>' + repeatDateXML + '</repeat>';
 
         $('#RepeatType').val(repeatType);
-     
-        if(repeatType == YearlyOnSameDate)
-            $('#RepeatValue').val(repeatDateXML);
-        else
-            $('#RepeatXML').val(repeatDateXML);        return true;    }catch(ex){
+        $('#RepeatXML').val(repeatDateXML);        alert("repeat  xml : " + $('#RepeatXML').val());        return true;    }catch(ex){
         alert(MSG_ERROR_SUBMIT_FAILED);
         return false;
     }

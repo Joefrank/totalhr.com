@@ -4,42 +4,13 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TotalHRModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="TotalHRModelStoreContainer">
-          <EntitySet Name="Calendar" EntityType="TotalHRModel.Store.Calendar" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="CalendarAssociation" EntityType="TotalHRModel.Store.CalendarAssociation" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="CalendarEvent" EntityType="TotalHRModel.Store.CalendarEvent" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Company" EntityType="TotalHRModel.Store.Company" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="CompanyFeature" EntityType="TotalHRModel.Store.CompanyFeature" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Department" EntityType="TotalHRModel.Store.Department" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="EmailTemplate" EntityType="TotalHRModel.Store.EmailTemplate" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Feature" EntityType="TotalHRModel.Store.Feature" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Glossary" EntityType="TotalHRModel.Store.Glossary" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Language" EntityType="TotalHRModel.Store.Language" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Profile" EntityType="TotalHRModel.Store.Profile" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Roles" EntityType="TotalHRModel.Store.Roles" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="User" EntityType="TotalHRModel.Store.User" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserProfile" EntityType="TotalHRModel.Store.UserProfile" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="UserRole" EntityType="TotalHRModel.Store.UserRole" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_Calendar_Company" Association="TotalHRModel.Store.FK_Calendar_Company">
-            <End Role="Company" EntitySet="Company" />
-            <End Role="Calendar" EntitySet="Calendar" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CalendarEvent_Calendar" Association="TotalHRModel.Store.FK_CalendarEvent_Calendar">
-            <End Role="Calendar" EntitySet="Calendar" />
-            <End Role="CalendarEvent" EntitySet="CalendarEvent" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Department_Company" Association="TotalHRModel.Store.FK_Department_Company">
-            <End Role="Company" EntitySet="Company" />
-            <End Role="Department" EntitySet="Department" />
-          </AssociationSet>
-        </EntityContainer>
+      <Schema Namespace="TotalHRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Calendar">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
@@ -53,10 +24,10 @@
           <Key>
             <PropertyRef Name="EventAssociationId" />
           </Key>
-          <Property Name="EventAssociationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="EventAssociationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="EventId" Type="int" Nullable="false" />
           <Property Name="AssociationTypeid" Type="int" Nullable="false" />
-          <Property Name="AssociationValue" Type="nvarchar" Nullable="false" MaxLength="2000" />
+          <Property Name="AssociationValue" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
@@ -64,9 +35,9 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="LastModifed" Type="datetime" />
@@ -74,18 +45,16 @@
           <Property Name="StartOfEvent" Type="datetime" Nullable="false" />
           <Property Name="EndOfEvent" Type="datetime" Nullable="false" />
           <Property Name="Location" Type="nvarchar" MaxLength="50" />
-          <Property Name="TargetInviteType" Type="varchar" MaxLength="150" />
           <Property Name="CalendarId" Type="int" Nullable="false" />
-          <Property Name="RepeatTypeId" Type="int" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
-          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="Address1" Type="varchar" Nullable="false" MaxLength="255" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address1" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="Address2" Type="varchar" MaxLength="255" />
           <Property Name="Address3" Type="varchar" MaxLength="255" />
           <Property Name="City" Type="varchar" MaxLength="50" />
@@ -122,8 +91,8 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="500" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
@@ -135,8 +104,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="nvarchar" MaxLength="1000" />
           <Property Name="Subject" Type="nvarchar" MaxLength="250" />
           <Property Name="Template" Type="nvarchar(max)" Nullable="false" />
@@ -153,9 +122,9 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
-          <Property Name="Description" Type="nvarchar" Nullable="false" MaxLength="1000" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="LastModified" Type="datetime" />
@@ -165,8 +134,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Term" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Term" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="RootId" Type="int" Nullable="false" />
           <Property Name="LanguageId" Type="int" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
@@ -181,8 +150,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="CreatedOn" Type="datetime" Nullable="false" />
           <Property Name="LastUpdatedBy" Type="int" />
@@ -194,8 +163,8 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="255" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
@@ -207,27 +176,27 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Description" Type="varchar" MaxLength="255" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="LastModified" Type="datetime" />
           <Property Name="LastModifiedBy" Type="int" />
-          <Property Name="Identifier" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Identifier" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GenderId" Type="int" Nullable="false" />
-          <Property Name="firstname" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="othernames" Type="nvarchar" MaxLength="50" />
-          <Property Name="surname" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="title" Type="int" Nullable="false" />
           <Property Name="othertitle" Type="nvarchar" MaxLength="30" />
-          <Property Name="username" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="username" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="Address1" Type="nvarchar" MaxLength="255" />
           <Property Name="Address2" Type="nvarchar" MaxLength="255" />
           <Property Name="Address3" Type="nvarchar" MaxLength="255" />
@@ -243,8 +212,8 @@
           <Property Name="lastvisit" Type="datetime" />
           <Property Name="novisits" Type="int" Nullable="false" />
           <Property Name="active" Type="bit" Nullable="false" />
-          <Property Name="email" Type="nvarchar" Nullable="false" MaxLength="100" />
-          <Property Name="password" Type="nvarchar" Nullable="false" MaxLength="150" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="150" Nullable="false" />
           <Property Name="lastupdatedby" Type="int" />
           <Property Name="lastupdated" Type="datetime" />
           <Property Name="typeid" Type="int" Nullable="false" />
@@ -276,8 +245,8 @@
           <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Calendar_Company">
-          <End Role="Company" Type="TotalHRModel.Store.Company" Multiplicity="1" />
-          <End Role="Calendar" Type="TotalHRModel.Store.Calendar" Multiplicity="*" />
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Calendar" Type="Self.Calendar" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
               <PropertyRef Name="ID" />
@@ -288,8 +257,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CalendarEvent_Calendar">
-          <End Role="Calendar" Type="TotalHRModel.Store.Calendar" Multiplicity="1" />
-          <End Role="CalendarEvent" Type="TotalHRModel.Store.CalendarEvent" Multiplicity="*" />
+          <End Role="Calendar" Type="Self.Calendar" Multiplicity="1" />
+          <End Role="CalendarEvent" Type="Self.CalendarEvent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Calendar">
               <PropertyRef Name="id" />
@@ -300,8 +269,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Department_Company">
-          <End Role="Company" Type="TotalHRModel.Store.Company" Multiplicity="1" />
-          <End Role="Department" Type="TotalHRModel.Store.Department" Multiplicity="*" />
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
               <PropertyRef Name="ID" />
@@ -323,59 +292,47 @@
         <Function Name="GetUserRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="int" Mode="In" />
         </Function>
+        <EntityContainer Name="TotalHRModelStoreContainer">
+          <EntitySet Name="Calendar" EntityType="Self.Calendar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CalendarAssociation" EntityType="Self.CalendarAssociation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CalendarEvent" EntityType="Self.CalendarEvent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyFeature" EntityType="Self.CompanyFeature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmailTemplate" EntityType="Self.EmailTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Glossary" EntityType="Self.Glossary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Calendar_Company" Association="Self.FK_Calendar_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Calendar" EntitySet="Calendar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CalendarEvent_Calendar" Association="Self.FK_CalendarEvent_Calendar">
+            <End Role="Calendar" EntitySet="Calendar" />
+            <End Role="CalendarEvent" EntitySet="CalendarEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Company" Association="Self.FK_Department_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+        </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="TotalHRModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Calendars" EntityType="TotalHRModel.Calendar" />
-          <EntitySet Name="CalendarAssociations" EntityType="TotalHRModel.CalendarAssociation" />
-          <EntitySet Name="CalendarEvents" EntityType="TotalHRModel.CalendarEvent" />
-          <EntitySet Name="Companies" EntityType="TotalHRModel.Company" />
-          <EntitySet Name="CompanyFeatures" EntityType="TotalHRModel.CompanyFeature" />
-          <EntitySet Name="Departments" EntityType="TotalHRModel.Department" />
-          <EntitySet Name="EmailTemplates" EntityType="TotalHRModel.EmailTemplate" />
-          <EntitySet Name="Features" EntityType="TotalHRModel.Feature" />
-          <EntitySet Name="Glossaries" EntityType="TotalHRModel.Glossary" />
-          <EntitySet Name="Languages" EntityType="TotalHRModel.Language" />
-          <EntitySet Name="Profiles" EntityType="TotalHRModel.Profile" />
-          <EntitySet Name="Roles" EntityType="TotalHRModel.Role" />
-          <EntitySet Name="Users" EntityType="TotalHRModel.User" />
-          <EntitySet Name="UserProfiles" EntityType="TotalHRModel.UserProfile" />
-          <EntitySet Name="UserRoles" EntityType="TotalHRModel.UserRole" />
-          <AssociationSet Name="FK_Calendar_Company" Association="TotalHRModel.FK_Calendar_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Calendar" EntitySet="Calendars" />
-          </AssociationSet>
-          <AssociationSet Name="FK_CalendarEvent_Calendar" Association="TotalHRModel.FK_CalendarEvent_Calendar">
-            <End Role="Calendar" EntitySet="Calendars" />
-            <End Role="CalendarEvent" EntitySet="CalendarEvents" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Department_Company" Association="TotalHRModel.FK_Department_Company">
-            <End Role="Company" EntitySet="Companies" />
-            <End Role="Department" EntitySet="Departments" />
-          </AssociationSet>
-          <FunctionImport Name="GetUserProfileIds" ReturnType="Collection(Int32)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="GetUserProfiles" ReturnType="Collection(TotalHRModel.GetUserProfiles_Result)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="GetUserRoleIds" ReturnType="Collection(Int32)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
-          </FunctionImport>
-          <FunctionImport Name="GetUserRoles" ReturnType="Collection(TotalHRModel.GetUserRoles_Result)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
-          </FunctionImport>
-        </EntityContainer>
+      <Schema Namespace="TotalHRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Calendar">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="LastModified" Type="DateTime" Precision="3" />
@@ -383,17 +340,17 @@
           <Property Name="TemplateId" Type="Int32" />
           <Property Name="OpenToAll" Type="Boolean" Nullable="false" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Company" Relationship="TotalHRModel.FK_Calendar_Company" FromRole="Calendar" ToRole="Company" />
-          <NavigationProperty Name="CalendarEvents" Relationship="TotalHRModel.FK_CalendarEvent_Calendar" FromRole="Calendar" ToRole="CalendarEvent" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Calendar_Company" FromRole="Calendar" ToRole="Company" />
+          <NavigationProperty Name="CalendarEvents" Relationship="Self.FK_CalendarEvent_Calendar" FromRole="Calendar" ToRole="CalendarEvent" />
         </EntityType>
         <EntityType Name="CalendarAssociation">
           <Key>
             <PropertyRef Name="EventAssociationId" />
           </Key>
-          <Property Name="EventAssociationId" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="EventAssociationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="EventId" Type="Int32" Nullable="false" />
           <Property Name="AssociationTypeid" Type="Int32" Nullable="false" />
-          <Property Name="AssociationValue" Type="String" Nullable="false" MaxLength="2000" Unicode="true" FixedLength="false" />
+          <Property Name="AssociationValue" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
         </EntityType>
@@ -401,52 +358,50 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Title" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifed" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="StartOfEvent" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="EndOfEvent" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Location" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="TargetInviteType" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+          <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CalendarId" Type="Int32" Nullable="false" />
-          <Property Name="RepeatTypeId" Type="Int32" />
-          <NavigationProperty Name="Calendar" Relationship="TotalHRModel.FK_CalendarEvent_Calendar" FromRole="CalendarEvent" ToRole="Calendar" />
+          <NavigationProperty Name="Calendar" Relationship="Self.FK_CalendarEvent_Calendar" FromRole="CalendarEvent" ToRole="Calendar" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="Address1" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
-          <Property Name="Address2" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
-          <Property Name="Address3" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
-          <Property Name="City" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="StateorCounty" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Address3" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StateorCounty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CountryId" Type="Int32" />
-          <Property Name="Phone1" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
-          <Property Name="Phone2" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
-          <Property Name="PostCode" Type="String" MaxLength="30" Unicode="false" FixedLength="false" />
+          <Property Name="Phone1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Phone2" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PostCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdateBy" Type="Int32" />
           <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
-          <Property Name="TaxId" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="VATId" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="DNUSNumber" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="TaxId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VATId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DNUSNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NumberOfEmployees" Type="Int32" Nullable="false" />
-          <Property Name="CompanyType" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="CompanyType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="AnnualRevenue" Type="Decimal" Precision="20" Scale="2" />
-          <Property Name="Description" Type="String" MaxLength="2000" Unicode="true" FixedLength="false" />
-          <Property Name="Website" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="PreferredLanguageId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Calendars" Relationship="TotalHRModel.FK_Calendar_Company" FromRole="Company" ToRole="Calendar" />
-          <NavigationProperty Name="Departments" Relationship="TotalHRModel.FK_Department_Company" FromRole="Company" ToRole="Department" />
+          <NavigationProperty Name="Calendars" Relationship="Self.FK_Calendar_Company" FromRole="Company" ToRole="Calendar" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK_Department_Company" FromRole="Company" ToRole="Department" />
         </EntityType>
         <EntityType Name="CompanyFeature">
           <Key>
@@ -462,25 +417,25 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Description" Type="String" MaxLength="500" Unicode="true" FixedLength="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="LastModified" Type="DateTime" Precision="3" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Company" Relationship="TotalHRModel.FK_Department_Company" FromRole="Department" ToRole="Company" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Department_Company" FromRole="Department" ToRole="Company" />
         </EntityType>
         <EntityType Name="EmailTemplate">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Description" Type="String" MaxLength="1000" Unicode="true" FixedLength="false" />
-          <Property Name="Subject" Type="String" MaxLength="250" Unicode="true" FixedLength="false" />
-          <Property Name="Template" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Template" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RootId" Type="Int32" Nullable="false" />
           <Property Name="LanguageId" Type="Int32" Nullable="false" />
           <Property Name="Obsolete" Type="Boolean" Nullable="false" />
@@ -488,15 +443,15 @@
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="LastUpdatedBy" Type="Int32" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
-          <Property Name="Identifier" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Feature">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="1000" Unicode="true" FixedLength="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="LastModified" Type="DateTime" Precision="3" />
@@ -506,8 +461,8 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Term" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Term" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="RootId" Type="Int32" Nullable="false" />
           <Property Name="LanguageId" Type="Int32" Nullable="false" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
@@ -515,85 +470,85 @@
           <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="Int32" />
           <Property Name="Obsolete" Type="Boolean" Nullable="false" />
-          <Property Name="GlossaryGroup" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="GlossaryGroup" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="GroupOrder" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="LastUpdatedBy" Type="Int32" />
           <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
           <Property Name="RelatedGlossaryId" Type="Int32" Nullable="false" />
-          <Property Name="Culture" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="Culture" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Description" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="LastModified" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" />
-          <Property Name="Identifier" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
-          <Property Name="Description" Type="String" MaxLength="255" Unicode="false" FixedLength="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="LastModified" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" />
-          <Property Name="Identifier" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="GenderId" Type="Int32" Nullable="false" />
-          <Property Name="firstname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="othernames" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="surname" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="othernames" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="title" Type="Int32" Nullable="false" />
-          <Property Name="othertitle" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
-          <Property Name="username" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="Address1" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
-          <Property Name="Address2" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
-          <Property Name="Address3" Type="String" MaxLength="255" Unicode="true" FixedLength="false" />
-          <Property Name="Town" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="stateorcounty" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="PostCode" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="othertitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Town" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stateorcounty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="countryId" Type="Int32" />
-          <Property Name="Phone" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
-          <Property Name="Mobile" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+          <Property Name="Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="createdby" Type="Int32" Nullable="false" />
           <Property Name="lastvisit" Type="DateTime" Precision="3" />
           <Property Name="novisits" Type="Int32" Nullable="false" />
           <Property Name="active" Type="Boolean" Nullable="false" />
-          <Property Name="email" Type="String" Nullable="false" MaxLength="100" Unicode="true" FixedLength="false" />
-          <Property Name="password" Type="String" Nullable="false" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="lastupdatedby" Type="Int32" />
           <Property Name="lastupdated" Type="DateTime" Precision="3" />
           <Property Name="typeid" Type="Int32" Nullable="false" />
           <Property Name="userguid" Type="Guid" Nullable="false" />
           <Property Name="preferedlanguageid" Type="Int32" Nullable="false" />
           <Property Name="tersmaccepted" Type="Boolean" Nullable="false" />
-          <Property Name="activationcode" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
-          <Property Name="chosenculture" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="activationcode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="chosenculture" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="departmentid" Type="Int32" />
         </EntityType>
         <EntityType Name="UserProfile">
@@ -617,8 +572,8 @@
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
         </EntityType>
         <Association Name="FK_Calendar_Company">
-          <End Role="Company" Type="TotalHRModel.Company" Multiplicity="1" />
-          <End Role="Calendar" Type="TotalHRModel.Calendar" Multiplicity="*" />
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Calendar" Type="Self.Calendar" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
               <PropertyRef Name="ID" />
@@ -629,8 +584,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_CalendarEvent_Calendar">
-          <End Role="Calendar" Type="TotalHRModel.Calendar" Multiplicity="1" />
-          <End Role="CalendarEvent" Type="TotalHRModel.CalendarEvent" Multiplicity="*" />
+          <End Role="Calendar" Type="Self.Calendar" Multiplicity="1" />
+          <End Role="CalendarEvent" Type="Self.CalendarEvent" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Calendar">
               <PropertyRef Name="id" />
@@ -641,8 +596,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Department_Company">
-          <End Role="Company" Type="TotalHRModel.Company" Multiplicity="1" />
-          <End Role="Department" Type="TotalHRModel.Department" Multiplicity="*" />
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Company">
               <PropertyRef Name="ID" />
@@ -652,6 +607,47 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityContainer Name="TotalHREntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Calendars" EntityType="Self.Calendar" />
+          <EntitySet Name="CalendarAssociations" EntityType="Self.CalendarAssociation" />
+          <EntitySet Name="CalendarEvents" EntityType="Self.CalendarEvent" />
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="CompanyFeatures" EntityType="Self.CompanyFeature" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="EmailTemplates" EntityType="Self.EmailTemplate" />
+          <EntitySet Name="Features" EntityType="Self.Feature" />
+          <EntitySet Name="Glossaries" EntityType="Self.Glossary" />
+          <EntitySet Name="Languages" EntityType="Self.Language" />
+          <EntitySet Name="Profiles" EntityType="Self.Profile" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <AssociationSet Name="FK_Calendar_Company" Association="Self.FK_Calendar_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Calendar" EntitySet="Calendars" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CalendarEvent_Calendar" Association="Self.FK_CalendarEvent_Calendar">
+            <End Role="Calendar" EntitySet="Calendars" />
+            <End Role="CalendarEvent" EntitySet="CalendarEvents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Company" Association="Self.FK_Department_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <FunctionImport Name="GetUserProfileIds" ReturnType="Collection(Int32)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserProfiles" ReturnType="Collection(TotalHRModel.GetUserProfiles_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserRoleIds" ReturnType="Collection(Int32)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="GetUserRoles" ReturnType="Collection(TotalHRModel.GetUserRoles_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
         <ComplexType Name="GetUserProfiles_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
           <Property Type="String" Name="Name" Nullable="false" MaxLength="50" />
@@ -677,7 +673,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TotalHRModelStoreContainer" CdmEntityContainer="Entities">
+        <EntityContainerMapping StorageEntityContainer="TotalHRModelStoreContainer" CdmEntityContainer="TotalHREntities2">
           <EntitySetMapping Name="Calendars">
             <EntityTypeMapping TypeName="TotalHRModel.Calendar">
               <MappingFragment StoreEntitySet="Calendar">
@@ -719,9 +715,7 @@
                 <ScalarProperty Name="StartOfEvent" ColumnName="StartOfEvent" />
                 <ScalarProperty Name="EndOfEvent" ColumnName="EndOfEvent" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
-                <ScalarProperty Name="TargetInviteType" ColumnName="TargetInviteType" />
                 <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
-                <ScalarProperty Name="RepeatTypeId" ColumnName="RepeatTypeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -975,8 +969,9 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
-        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
       </DesignerInfoPropertySet>
     </Options>

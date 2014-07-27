@@ -133,20 +133,17 @@ namespace totalhr.web.Controllers
                 return View("EventEdit", eventinfo);
             }
 
-            eventinfo.CreatedBy = CurrentUser.UserId;
+            eventinfo.CreatedBy = CurrentUser.UserId;           
+            var cevent = _calMservice.CreateEvent(eventinfo);
 
-            if (eventinfo.EventId > 0)
+            if (cevent.id > 0)
             {
-                //update event
+                return RedirectToAction("GenerateDefault", "Calendar", new { id = eventinfo.CalendarId });
             }
             else
             {
-                var cevent = _calMservice.CreateEvent(eventinfo);
-                
+                return RedirectToAction("CreateEvent", "Calendar", new {id = eventinfo.CalendarId });
             }
-
-            return RedirectToAction("GenerateDefault", "Calendar");
-            //return View("EventEdit", eventinfo);
             
         }
 
