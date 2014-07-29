@@ -15,11 +15,22 @@
    
     var sbJS = new StringBuilder();
     var sbAttendees = new StringBuilder();
-
+    var sJSChosenTargetUsers = string.Empty;
+    var sJSChosenTargeDepartments = string.Empty;
+    
     string startTimeHour = string.Empty;
     string startTimeMin = string.Empty;
     string endTimeHour = string.Empty;
     string endTimeMin = string.Empty;
+    
+    if (Model.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.User)
+    {
+        sJSChosenTargetUsers = Model.InvitedUserIds;
+    }
+    else if (Model.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.Department)
+    {
+        sJSChosenTargeDepartments = Model.InvitedDepartmentIds;
+    }  
     
     if(Model.EventId > 0)
     {
@@ -201,7 +212,10 @@
                                  <input type="button" value="Add new" onclick="SaveAndResetReminder();"/>
                              </div>
                              <div id="dvAddedReminders">
-                                 
+                                 @if (Model.Reminders != null && Model.Reminders.Count > 0)
+                                 {
+                                     @Html.Raw(CalendarHelper.GenerateReminderList(Model.Reminders))
+                                 }
                              </div>
                          </div>
 
@@ -225,13 +239,16 @@
                  <div class="childblock">
                     
                      <div class="head" onclick="ToggleExpand('dvAttendeesContent')">
-                           @FormMessages.V_None_Added
+                         @(Model.TargetAttendeeGroupId > 0 ? EnumExtensions.Description((Variables.CalendarEventTarget) Model.TargetAttendeeGroupId) : 
+                            FormMessages.V_None_Added)
+                         
                      </div>
                      <div id="dvAttendeesContent" class="content" style="display:none">
                         @foreach (var num in (Variables.CalendarEventTarget[])Enum.GetValues(typeof(Variables.CalendarEventTarget)))
                         {
+                            var schecked = (int) num == Model.TargetAttendeeGroupId ? " checked " : "";
                             sbAttendees.Append(string.Format("{0} = {1};" + Environment.NewLine, num.ToString(), (int) num));
-                            @Html.Raw(CalendarHelper.GenerateAttendee(num, "TargetAttendeeGroupId"));
+                            @Html.Raw(CalendarHelper.GenerateAttendee(num, "TargetAttendeeGroupId", schecked));
                         }                         
                        
                         @Html.HiddenFor(x => x.InvitedUserIds)
@@ -253,15 +270,20 @@
                     
                     <div  id="dvRepeat" class="childblock">
                     
-                        <div id="dvRepeatHead" class="head" onclick="ToggleExpand('dvRepeatContent',$.trim($('#StartDate').val()) != '' ,'hdnMissingStartDate')">
-                               @FormMessages.V_None_Added
+                        <div id="dvRepeatHead" class="head" onclick="ToggleExpand('dvRepeatContent',$.trim($('#StartDate').val()) != '' ,'hdnMissingStartDate', 'AdjustRepeatBasedOnStartDate')">
+                            @{
+                                var title = Model.RepeatType > 0 ? EnumExtensions.Description((Variables.RepeatType) Model.RepeatType) : FormMessages.V_None_Added;
+                                title = (title.Contains("{0}")) ? string.Format(title, Model.StartDate.DayOfWeek.ToString()) : title;
+                            }
+                            @Html.Raw(title)
                         </div>
 
                     <div id="dvRepeatContent" class="content" style="display:none">
                         @foreach (var num in (Variables.RepeatType[])Enum.GetValues(typeof(Variables.RepeatType)))
                         {
+                            var schecked = (int) num == Model.RepeatType ? " checked " : "";
                             sbJS.Append(string.Format("{0} = {1};" + Environment.NewLine, num.ToString(), (int)num));
-                            @Html.Raw(CalendarHelper.GenerateRepeatByType(num, "RepeatTypeGroup"));
+                            @Html.Raw(CalendarHelper.GenerateRepeatByType(num, "RepeatTypeGroup", schecked));
                         }
                     
                         <div id="repeatOptions" class="optionbox" style="display:none;">
@@ -336,9 +358,11 @@
     var repeatTypeSelectedid = null;
     var prevSelDisplayObj = null;
     var RepeatsToSave = new Array();
-
-    var ERROR_INVALID_DATE = '@FormMessages.Error_Invalid_Date';
-
+    var EventId = @Model.EventId;
+    var ERROR_INVALID_DATE = "@FormMessages.Error_Invalid_Date";
+    var InvitedUsers = @("[" + sJSChosenTargetUsers + "]");
+    var InvitedDepartments = @("[" + sJSChosenTargeDepartments + "]");
+    
     @sbJS.ToString()
    
     @Html.Raw(WeekDaysJS)
@@ -355,7 +379,6 @@
     $(document).ready(function() {
 
         var statusGenerator = function(text) {
-
             var statusElem = $("#status");
             var child = $("<span></span>").text(text);
             statusElem.append(child);
@@ -365,14 +388,13 @@
             var selectedDate = data.string;
             var objDate = parseDate(selectedDate);
             var dayIndex = objDate.getDay();
-
-            var obj = $('#spRepeatDesc_' + OnDayOfTheWeek + ' #repDay');
-
-            obj.html(weekday[dayIndex]);
+            var objList = $('#spRepeatDesc_' + OnDayOfTheWeek + ' .repDay');
+            
+            objList.each(function( i ) {
+                $(this).html(weekday[dayIndex]);
+            });
+            
         });
-
-
-        // $("#StartDate").bind("change", AdjustEvents);
 
     });
 

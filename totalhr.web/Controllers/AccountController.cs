@@ -24,7 +24,7 @@ namespace totalhr.web.Controllers
         private readonly IGlossaryService _glossaryService;
         private readonly IAccountService _accountService;
         private readonly IMessagingService _messagingService;
-        private const string UserDataFormat = "UserId:{0}|roles:{1}|profiles:{2}|fullname:{3}|culture:{4}|languageid:{5}";
+        //private const string UserDataFormat = "UserId:{0}|roles:{1}|profiles:{2}|fullname:{3}|culture:{4}|languageid:{5}";
 
         private static readonly ILog Log = LogManager.GetLogger(typeof(AccountController));
 
@@ -35,8 +35,7 @@ namespace totalhr.web.Controllers
             _messagingService = messageService;           
             _messagingService.ReadSMTPSettings(new SMTPSettings {SMTPServer = WebsiteKernel.SMTPServer, UserName = WebsiteKernel.SMTPUser, Password = WebsiteKernel.SMTPPassword });
         }
-
-        [CustomAuthorize(Roles = "3")]
+        
         public ActionResult Index()
         {
             var user = AuthService.GetClientUser();
@@ -47,8 +46,7 @@ namespace totalhr.web.Controllers
             }
             return View(user);
         }
-
-        [CustomAuthorize(Roles = "3")]
+        
         public ActionResult MyDetails()
         {
             UserPersonalInfo userinfo = _accountService.GetUserInfoByEmail(CurrentUser.UserName.Trim());
@@ -60,6 +58,7 @@ namespace totalhr.web.Controllers
             return View(userinfo);
         }
 
+        [AllowAnonymous]
         public ActionResult Login()
         {
             ViewBag.Currentuser = CurrentUser;
@@ -74,6 +73,7 @@ namespace totalhr.web.Controllers
             ViewBag.TitleList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Title);
         }
 
+        [AllowAnonymous]
         public ActionResult Register()
         {
             LoadGlossaries();
@@ -81,6 +81,7 @@ namespace totalhr.web.Controllers
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult RegisterUser(NewUserInfo userinfo)
         {
             if (ModelState.IsValid)
@@ -111,13 +112,15 @@ namespace totalhr.web.Controllers
             return View("Register", userinfo);           
         }
 
+        [AllowAnonymous]
         public ActionResult Welcome()
         {
-            UserRegStruct userstruct = TempData["UserReg"] as UserRegStruct;
+            var userstruct = TempData["UserReg"] as UserRegStruct;
             return View(userstruct);
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult LoginUser(LoginStruct userdetails)
         {
             if (!ModelState.IsValid)
@@ -158,12 +161,14 @@ namespace totalhr.web.Controllers
             return View("Login");
         }
 
+        [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
             return View();
         }
 
         [HttpPost]
+        [AllowAnonymous]
         public ActionResult PasswordRemind(string Email)
         {
             if (string.IsNullOrEmpty(Email))
@@ -188,6 +193,7 @@ namespace totalhr.web.Controllers
             }
         }
 
+        [AllowAnonymous]
         public ActionResult Activate(string id)
         {
             Log.Debug("Account Activation Token: " + id);//token is user guid 
@@ -196,7 +202,6 @@ namespace totalhr.web.Controllers
             {
 
                 totalhr.data.EF.User user = _accountService.ActivateUser(id);
-
                 //send user email 
                 _messagingService.AcknowledgeAccountActivation(WebsiteKernel, user);
 
@@ -244,6 +249,7 @@ namespace totalhr.web.Controllers
         /// this is for testing only do not go live with it.
         /// </summary>
         /// <returns></returns>
+        [AllowAnonymous]
         public ActionResult ExpressLogAdmin()
         {
             var user = new ClientUser

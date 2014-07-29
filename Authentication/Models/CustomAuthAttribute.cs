@@ -14,48 +14,46 @@ using totalhr.Shared;
 
 namespace Authentication.Models
 {
-    public class ProfileCheck : AuthorizeAttribute
+    public class CustomAuthAttribute : AuthorizeAttribute 
     {
-        public IOAuthService AuthService;
+         public IOAuthService AuthService;
         private readonly IKernel _ninjectKernel;
         private static readonly ILog Log = LogManager.GetLogger(typeof(CustomAuthorizeAttribute));
         private ClientUser _user;
-
-        public Variables.Profiles[] RequiredProfiles { get; set; }
+        
+        public Variables.Roles[] RequiredRoles { get; set; }
         public string AccessDeniedMessage { get; set; }
-
-        public ProfileCheck(Variables.Profiles profile)
+        
+        public CustomAuthAttribute(Variables.Roles role)
             : base()
         {
             _ninjectKernel = new StandardKernel();
             _ninjectKernel.Bind<IOAuthService>().To<OckAuthService>();
             AuthService = _ninjectKernel.Get<IOAuthService>();
-            RequiredProfiles = new Variables.Profiles[] { profile };
+            RequiredRoles = new Variables.Roles[] { role };
         }
 
-        public ProfileCheck(params Variables.Profiles[] profiles)
+        public CustomAuthAttribute(params Variables.Roles[] roles)
             : base()
         {
             _ninjectKernel = new StandardKernel();
             _ninjectKernel.Bind<IOAuthService>().To<OckAuthService>();
             AuthService = _ninjectKernel.Get<IOAuthService>();
-            RequiredProfiles = profiles;
+            RequiredRoles = roles;
         }
-
+      
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {
             try
             {
                 _user = AuthService.GetClientUser();
 
-                if (_user == null || _user.UserId < 1 || _user.Profiles.Count < 1)//user must be authenticated
+                if (_user == null || _user.UserId < 1 || _user.Roles.Count < 1)//user must be authenticated
                     return false;
 
-                //var arrProfiles = Enum.GetValues(typeof(Variables.Profiles)).Cast<int>();
-
-                return _user.IsInProfile(RequiredProfiles);
+                 return _user.IsInRole(RequiredRoles); 
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 Log.Debug("Authentication failed: " + ex.Message);
                 return false;
@@ -83,12 +81,11 @@ namespace Authentication.Models
                         },
                         JsonRequestBehavior = JsonRequestBehavior.AllowGet
                     };
-                }
+                } 
 
                 filterContext.Result = new RedirectToRouteResult(new
                 RouteValueDictionary(new { controller = "Error", action = "AccessDenied", ModelError = AccessDeniedMessage }));
             }
         }
     }
-
 }

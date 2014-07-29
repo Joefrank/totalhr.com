@@ -85,12 +85,29 @@ function OpenSelector(mode) {
 }
 
 function PrintUser(div, item) {
-    div.append("<input type='checkbox' id='ckuser_" + item.id + "' value='" + item.id + "' onclick='PickUser(this);' />" + item.firstname + " " + item.surname);    
+    var sChecked = '';
+    if (InvitedUsers != null) {
+        for (var sc in InvitedUsers) {
+            if (InvitedUsers[sc] == item.id) {
+                sChecked = " checked ";
+            }
+        }
+    }
+    
+    div.append("<input type='checkbox' " + sChecked + " id='ckuser_" + item.id + "' value='" + item.id + "' onclick='PickUser(this);' />" + item.firstname + " " + item.surname);
 }
 
 function PrintDepartment(div, item) {
+    var sChecked = '';
+    if (InvitedDepartments != null) {
+        for (var sc in InvitedDepartments) {
+            if (InvitedDepartments[sc] == item.id) {
+                sChecked = " checked ";
+            }
+        }
+    }
     
-    div.append("<input type='checkbox' id='ckdepartment_" + item.id + "' value='" + item.id + "' onclick='PickDepartment(this);' />" + item.Name);
+    div.append("<input type='checkbox' " + sChecked + " id='ckdepartment_" + item.id + "' value='" + item.id + "' onclick='PickDepartment(this);' />" + item.Name);
 }
 
 function PickUser(objck) {
@@ -220,13 +237,17 @@ function ShowRepeats(objid) {
     $('#sppreview').html($('#' + objid).html());
 }
 
-function ToggleExpand(objid, bCondition, hdnMessage) {
+function ToggleExpand(objid, bCondition, hdnMessage, callback) {
     if (bCondition != null && bCondition == true || bCondition == null) {
         $('#' + objid).slideToggle(500);
     } else if (hdnMessage != null) {
         alert($('#' + hdnMessage).val());
     } else {
         alert('Action invalidated.');
+    }
+    
+    if (callback != typeof("undefined") && callback != null) {
+        AdjustRepeatBasedOnStartDate();
     }
 }
 
@@ -301,6 +322,19 @@ function DisplayAddedReminders() {
     }
     
     $('#dvAddedReminders').html(tempHtml);
+}
+
+function AdjustRepeatBasedOnStartDate() {
+    alert('I was called');
+    var selectedDate =$('#StartDate').val();
+    var objDate = parseDate(selectedDate);
+    var dayIndex = objDate.getDay();
+    var objList = $('#spRepeatDesc_' + OnDayOfTheWeek + ' .repDay');
+
+    objList.each(function (i) {
+        $(this).html(weekday[dayIndex]);
+    });
+
 }
 
 function PrepareToSaveValues() {
