@@ -254,5 +254,35 @@ namespace totalhr.services.Implementation
         {
             return _companyRepos.GetCompanyDepartments(companyid);
         }
+
+        public UserPersonalInfo GetUserInfoByEmail(string email)
+        {
+            User user = GetUserByEmail(email);
+            UserPersonalInfo info = new UserPersonalInfo();
+
+            info.Address1 = user.Address1;
+            info.Address2 = user.Address2;
+            info.Address3 = user.Address3;
+            info.City = user.Town;
+            info.CompanyId = user.CompanyId;
+            info.CountryId = 1; //*** user.countryId;
+            info.Email = user.email;
+            info.FirstName = user.firstname;
+            info.GenderId = user.GenderId;
+            info.MiddleNames = user.othernames;
+            info.MobilePhone = user.Mobile;
+            info.OtherTitle = user.othertitle;
+            info.Password = CM.Security.Decrypt(user.password);
+            info.PersonalPhone = user.Phone;
+            info.PostCode = user.PostCode;
+            info.PreferedLanguageId = user.preferedlanguageid;
+            info.State = user.stateorcounty;
+            info.Surname = user.surname;
+            info.Title = user.title;
+            info.UserId = user.id;
+            info.UserName = user.username;
+
+            return info;
+        }
     }
 }

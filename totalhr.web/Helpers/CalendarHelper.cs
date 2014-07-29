@@ -70,8 +70,8 @@ namespace totalhr.web.Helpers
             {
                 if (reminder.ReminderType == (int)Variables.ReminderType.TimeBefore)
                 {
-                    sbTemp.Append(string.Format(@"<span>{0} {1} {2}</span>", reminder.Frequency,
-                        EnumExtensions.Description(Variables.ReminderType[reminder.FrequencyType])));
+                    //sbTemp.Append(string.Format(@"<span>{0} {1} {2}</span>", reminder.Frequency,
+                    //    EnumExtensions.Description(Variables.ReminderType[reminder.FrequencyType])));
                     //Convert.ChangeType(1, Variables.ReminderType.GetTypeCode())
                 }
             }

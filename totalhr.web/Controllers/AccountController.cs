@@ -51,12 +51,13 @@ namespace totalhr.web.Controllers
         [CustomAuthorize(Roles = "3")]
         public ActionResult MyDetails()
         {
-            totalhr.data.EF.User user = _accountService.GetUserByEmail(CurrentUser.UserName.Trim());
-            if (user == null)
+            UserPersonalInfo userinfo = _accountService.GetUserInfoByEmail(CurrentUser.UserName.Trim());
+            if (userinfo == null)
             {
                 return View("Login");
             }
-            return View(user);
+            LoadGlossaries();
+            return View(userinfo);
         }
 
         public ActionResult Login()
@@ -261,6 +262,12 @@ namespace totalhr.web.Controllers
             AuthService.PersistClientUser(user);
 
             return View("Index", user);
+        }
+
+        [HttpPost]
+        public ActionResult SaveUserDetails(UserPersonalInfo userinfo)
+        {
+            return null;
         }
     }
 }

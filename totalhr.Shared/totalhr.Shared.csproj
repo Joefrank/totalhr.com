@@ -88,6 +88,7 @@
     <Compile Include="Models\Attributes\AlwaysTrueAttribute.cs" />
     <Compile Include="Models\LoginStruct.cs" />
     <Compile Include="Models\NewUserInfo.cs" />
+    <Compile Include="Models\UserPersonalInfo.cs" />
     <Compile Include="Models\UserRegStruct.cs" />
     <Compile Include="Models\SMTPSettings.cs" />
     <Compile Include="Variables.cs" />

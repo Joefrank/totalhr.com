@@ -134,6 +134,11 @@ div.line
             width: 100px;
         }
 
+        div.line label .req
+        {
+            float:right;margin:3px;
+        }
+
  #main input[type='text'], #main input[type='password'], #main textarea {
     font-weight: bold !important;
     font-family: Century Gothic,Verdana,Arial,Helvetica,sans-serif !important;
