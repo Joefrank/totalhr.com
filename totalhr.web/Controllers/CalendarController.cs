@@ -65,22 +65,19 @@ namespace totalhr.web.Controllers
             }
             return sbtemp.ToString();
         }
-
-        [CustomAuthorize(Roles = "3")]
+       
         public ActionResult Index()
         {
             var allCalendars = _calMservice.GetCompanyCalendars(CurrentUser.CompanyId);
             return View(allCalendars);
         }
-
-        [CustomAuthorize(Roles = "3")]
+        
         public ActionResult GenerateDefault(int id)
         {
             //always put calendarid to get correct calendar.
             return MonthView(DateTime.Now.Year, DateTime.Now.Month, id);
         }
 
-        [CustomAuthorize(Roles = "3")]
         public ActionResult EditEvent(int id)
         {
             if (id == 0)
@@ -89,17 +86,16 @@ namespace totalhr.web.Controllers
             }
             else
             {
-
+                ViewBag.WeekDaysJS = MakeClientJSForWeekDays();
                 return View("EventEdit", _calMservice.GetEventInfo(id));
             }
         }
-        
-        [CustomAuthorize(Roles = "3", Profiles = "4", AccessDeniedMessage = "Work this out - FormMessages.Error_NoProfile_CreateCalendarEvent")]
-       // [ProfileCheck(Variables.Profiles.CalendarCreateEvent)]
+       
+        [ProfileCheck(Variables.Profiles.CalendarCreateEvent)]
         [HttpGet] 
         public ActionResult CreateEvent(int id)
          {
-            totalhr.data.EF.Calendar calendar = _calMservice.GetCalendar(id);
+            var calendar = _calMservice.GetCalendar(id);
             if (calendar == null)
             {
                 return RedirectToAction("AccessDenied", "Error", new { ModelError = "Calendar not registered." });
@@ -107,12 +103,12 @@ namespace totalhr.web.Controllers
             else
             {
                 ViewBag.WeekDaysJS = MakeClientJSForWeekDays();
-                ViewBag.EventTargets = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.CalendarEventTarget);
+                //ViewBag.EventTargets = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.CalendarEventTarget);
                 return View("EventEdit", "~/Views/Shared/_PopupLayout.cshtml", new CalendarEventInfo {CalendarId = calendar.id, CalendarName = calendar.Name });
             }
          }
 
-        [CustomAuthorize(Roles = "3", Profiles = "4", AccessDeniedMessage = "Work this out - FormMessages.Error_NoProfile_CreateCalendarEvent")]
+        [ProfileCheck(Variables.Profiles.CalendarCreateEvent)]
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult CreateEvent(CalendarEventInfo eventinfo)
@@ -135,8 +131,7 @@ namespace totalhr.web.Controllers
             }
             
         }
-
-        [CustomAuthorize(Roles = "3")]
+       
         public ActionResult Generate(int year, int month)
         {
             var rqStruct = new CalendarRequestStruct
@@ -150,7 +145,7 @@ namespace totalhr.web.Controllers
             return View("Generate", _calService.GenerateCalendarHTML(rqStruct));
         }
 
-        [CustomAuthorize(Roles = "3")]
+        
         private ActionResult MonthView(int year, int month, int calendarid =0)
         {
 
@@ -177,13 +172,13 @@ namespace totalhr.web.Controllers
             return View("Generate",_calService.GenerateCalendarHTML(rqStruct));
         }
 
-        [CustomAuthorize(Roles = "3")]
+       
         public ActionResult GetCalendarMonthViewByUser(int year, int month)
         {           
             return  MonthView(year, month);
         }
 
-        [CustomAuthorize(Roles = "3")]
+       
         public ActionResult WeekView(int year, int month, int day)
         {
             
@@ -211,7 +206,7 @@ namespace totalhr.web.Controllers
             
         }
 
-        [CustomAuthorize(Roles = "3")]
+        
         public ActionResult DayView(int year, int month, int day)
         {
             Log.Debug(string.Format("Calendar day view params Year: {0} - Month {1} - Day {2} ", year, month, day));
@@ -228,7 +223,7 @@ namespace totalhr.web.Controllers
             return View("Generate", _calService.GenerateDayHTML(weekRequest));
         }
 
-        [CustomAuthorize(Roles = "3")]
+        
         public ActionResult ListPersonal()
         {
             List<TEF.Calendar> lstCalendars = _calMservice.GetUserCalendars(CurrentUser.UserId);
@@ -239,4 +234,3 @@ namespace totalhr.web.Controllers
     }
 }
 
-/*http://mvc.daypilot.org/calendar/ */

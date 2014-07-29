@@ -10,6 +10,7 @@ using Authentication.Models;
 
 namespace totalhr.web.Controllers
 {
+    [CustomAuth(new[] { Variables.Roles.Employee, Variables.Roles.CompanyAdmin })]
     public class BaseController : Controller
     {
         public int ViewingLanguageId { get; set; }
