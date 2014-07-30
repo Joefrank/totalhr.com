@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,5 +46,14 @@ namespace totalhr.data.Repositories.Implementation
         {
             return this.Context.CalendarAssociations.Where(x => x.EventId == eventid).ToList();
         }
+
+        public List<CalendarEvent> GetCalendarDailyEventsByUser(int userid, DateTime date, int calendarid=0){
+            return FindBy(x =>
+                (DbFunctions.TruncateTime(x.StartOfEvent) == DbFunctions.TruncateTime(date) || 
+                    DbFunctions.TruncateTime(x.EndOfEvent) == DbFunctions.TruncateTime(date))
+                && (calendarid == 0 || x.CalendarId == calendarid)
+                ).ToList(); 
+        }
+
     }
 }

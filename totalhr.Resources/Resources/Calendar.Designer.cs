@@ -257,5 +257,50 @@ namespace totalhr.Resources {
                 return ResourceManager.GetString("V_Calendar_View_For", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Day View.
+        /// </summary>
+        public static string V_Day_View {
+            get {
+                return ResourceManager.GetString("V_Day_View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month View.
+        /// </summary>
+        public static string V_Month_View {
+            get {
+                return ResourceManager.GetString("V_Month_View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        public static string V_Next {
+            get {
+                return ResourceManager.GetString("V_Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prev.
+        /// </summary>
+        public static string V_Prev {
+            get {
+                return ResourceManager.GetString("V_Prev", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Week View.
+        /// </summary>
+        public static string V_Week_View {
+            get {
+                return ResourceManager.GetString("V_Week_View", resourceCulture);
+            }
+        }
     }
 }

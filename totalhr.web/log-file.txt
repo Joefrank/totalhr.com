@@ -26,4 +26,56 @@ Index (zero based) must be greater than or equal to zero and less than the size 
 Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
 ]2014-07-30 16:41:59,238 DEBUG totalhr.web.Controllers.AccountController - [Calendar week view params Year: 2014 - Month 6 - Day 3 
 Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
+]2014-07-30 21:14:50,346 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-30 22:05:30,926 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 7 
+]2014-07-30 22:24:09,699 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 7 
+]2014-07-30 22:29:20,004 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 7 
+]2014-07-30 22:31:07,409 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 7 
+]2014-07-30 22:31:19,794 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 8 
+]2014-07-30 22:31:20,916 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 9 
+]2014-07-30 22:31:22,298 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 10 
+]2014-07-30 22:31:22,783 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 11 
+]2014-07-30 22:31:22,991 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 12 
+]2014-07-30 22:31:23,231 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 13 
+]2014-07-30 22:31:23,440 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 14 
+]2014-07-30 22:31:23,979 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 15 
+]2014-07-30 22:31:24,229 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 16 
+]2014-07-30 22:31:24,403 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 17 
+]2014-07-30 22:31:24,725 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 18 
+]2014-07-30 22:31:24,932 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 19 
+]2014-07-30 22:31:25,100 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 20 
+]2014-07-30 22:31:25,268 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 21 
+]2014-07-30 22:31:25,423 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 22 
+]2014-07-30 22:31:25,605 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 23 
+]2014-07-30 22:31:25,973 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 24 
+]2014-07-30 22:31:26,439 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 25 
+]2014-07-30 22:31:26,784 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 26 
+]2014-07-30 22:31:27,132 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 27 
+]2014-07-30 22:31:27,286 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 28 
+]2014-07-30 22:31:27,860 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 29 
+]2014-07-30 22:31:28,240 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 30 
+]2014-07-30 22:31:28,881 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 1 
+]2014-07-30 22:43:16,145 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 1 
+]2014-07-30 22:43:27,653 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 6 - Day 7 
+]2014-07-30 22:55:06,552 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 30 
+]2014-07-30 22:55:12,163 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 31 
+]2014-07-30 22:55:13,105 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 8 - Day 1 
+]2014-07-30 22:55:13,971 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 31 
+]2014-07-30 22:55:14,298 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 30 
+]2014-07-30 22:55:14,562 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 29 
+]2014-07-30 22:55:14,770 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 28 
+]2014-07-30 22:55:14,951 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 27 
+]2014-07-30 22:55:15,110 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 26 
+]2014-07-30 22:55:15,312 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 25 
+]2014-07-30 22:55:15,495 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 24 
+]2014-07-30 22:55:15,731 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 23 
+]2014-07-30 22:55:15,998 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 22 
+]2014-07-30 22:55:16,206 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 21 
+]2014-07-30 22:55:16,414 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 20 
+]2014-07-30 22:55:16,577 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 19 
+]2014-07-30 23:00:26,119 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 30 
+]2014-07-30 23:02:01,482 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 30 
+]2014-07-30 23:02:07,582 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 30 
+]2014-07-30 23:02:13,598 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 30 
+]2014-07-30 23:03:30,580 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 7 - Day 30 
 ]

@@ -190,6 +190,14 @@ namespace totalhr.web.Controllers
         {
             try
             {
+                var calendar = _calMservice.GetCalendar(calendarid);
+
+                if (calendar != null)
+                {
+                    ViewBag.CalendarName = calendar.Name;
+                    ViewBag.CalendarId = calendar.id;
+                }
+
                 var calEvents = calendarid == 0 ? _calMservice.GetUserCalendarEvents(CurrentUser.UserId, year, month) :
                _calMservice.GetUserCalendarEvents(calendarid, CurrentUser.UserId, year, month);
 
@@ -226,18 +234,47 @@ namespace totalhr.web.Controllers
         }
 
 
-        public ActionResult DayView(int year, int month, int day, int calendarid = 0)
+        public ActionResult GetDayView(int year, int month, int day, int calendarid = 0)
         {
             Log.Debug(string.Format("Calendar day view params Year: {0} - Month {1} - Day {2} ", year, month, day));
+
+            var calendar = _calMservice.GetCalendar(calendarid);
+
+            if (calendar != null)
+            {
+                ViewBag.CalendarName = calendar.Name;
+                ViewBag.CalendarId = calendar.id;
+            }
+
+            var calEvents = calendarid == 0 ? _calMservice.GetUserDayCalendarEvents(CurrentUser.UserId, new DateTime(year, month, day)) :
+             _calMservice.GetUserDayCalendarEvents(CurrentUser.UserId, new DateTime( year, month,day), calendarid);
 
             var weekRequest = new CalendarWeekRequestStruct
             {
                 DateRequested = new DateTime(year, month, day),
-                Info = CultureInfo.CreateSpecificCulture("fr-FR"),//read current user culture
-                TableTemplate = @" border=""1"" class=""calendarweek day"" ",
-                DayHeaderFormat = "dddd, MMM d",
-                CrossEdgeContent = " "
+                Info = CultureInfo.CreateSpecificCulture(CurrentUser.Culture),//read user culture here
+                TableTemplate = @" border=""1"" class=""calendarweek"" ",
+                DayHeaderFormat = "ddd, MMM d",
+                CrossEdgeContent = " ",
+                RelatedEvents = calEvents,
+                CalendarId = calendarid,
+                ClientConfig = new ClientScriptConfig
+                {
+                    PageClientId = 1,
+                    ActiveTdClickCallBack = @" onclick=""ManageActiveDay(this);"" ",
+                    EventClickCallBack = @" onclick=""ManageEvent(this);"" ",
+                    JsArrayEventName = "ArrEvents",
+                    CurrentDayCssClass = ""
+                }
             };
+            //var weekRequest = new CalendarWeekRequestStruct
+            //{
+            //    DateRequested = new DateTime(year, month, day),
+            //    Info = CultureInfo.CreateSpecificCulture("fr-FR"),//read current user culture
+            //    TableTemplate = @" border=""1"" class=""calendarweek day"" ",
+            //    DayHeaderFormat = "dddd, MMM d",
+            //    CrossEdgeContent = " "
+            //};
 
             return View("Generate", _calService.GenerateDayHTML(weekRequest));
         }

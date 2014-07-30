@@ -305,6 +305,11 @@ namespace Calendar.Implementation
             return _calEventRepos.GetCalendarMonthlyEventsByUserAndCalendar(calendarid, userid, year, month);
         }
 
+        public List<TEF.CalendarEvent> GetUserDayCalendarEvents(int userid, DateTime date, int calendarid=0)
+        {
+            return _calEventRepos.GetCalendarDailyEventsByUser(userid, date, calendarid);
+        }
+
         public List<TEF.CalendarAssociation> GetCalendarEventInvitees(int calendareventid)
         {
             return null;

@@ -183,4 +183,19 @@
   <data name="V_Calendar_View_For" xml:space="preserve">
     <value>Calendar view for: &lt;span class="light"&gt;{0}&lt;/span&gt;</value>
   </data>
+  <data name="V_Day_View" xml:space="preserve">
+    <value>Day View</value>
+  </data>
+  <data name="V_Month_View" xml:space="preserve">
+    <value>Month View</value>
+  </data>
+  <data name="V_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="V_Prev" xml:space="preserve">
+    <value>Prev</value>
+  </data>
+  <data name="V_Week_View" xml:space="preserve">
+    <value>Week View</value>
+  </data>
 </root>

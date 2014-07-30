@@ -1,4 +1,5 @@
 ﻿@model Calendar.Models.CalendarHTML
+@using totalhr.web.Helpers
 
 @{
     int calendarId = 0;
@@ -11,13 +12,16 @@
 <link href="~/Content/calendar.css" rel="stylesheet" />
 
 <p>
-    <a href="@Model.PreviousRequest">Prev</a>
+    @*** pass current date as links will depend on dates being viewed*@
+    <a href="@Model.PreviousRequest">@totalhr.Resources.Calendar.V_Prev</a>
     &nbsp;
-    <a href="@Model.NextRequest">Next</a>
+    <a href="@Model.NextRequest">@totalhr.Resources.Calendar.V_Next</a>
     &nbsp;
-    <a href="/calendar/GetWeekView/2014/06/03/@calendarId">Calendar Week View</a>
+    @Html.Raw(DateHelper.CurrentWeekCalendarLink(totalhr.Resources.Calendar.V_Week_View, calendarId))
      &nbsp;
-    <a href="/calendar/DayView/2014/06/03/@calendarId">Calendar Day View</a>
+    @Html.Raw(DateHelper.CurrentDayCalendarLink(totalhr.Resources.Calendar.V_Day_View, calendarId))
+    &nbsp;
+    @Html.Raw(DateHelper.CurrentMonthCalendarLink(totalhr.Resources.Calendar.V_Month_View, calendarId))
 </p>
 @Html.Raw(Model.GridHTML)
 

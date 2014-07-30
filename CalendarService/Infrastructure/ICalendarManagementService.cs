@@ -31,5 +31,7 @@ namespace Calendar.Infrastructure
         List<TEF.CalendarAssociation> GetCalendarEventInvitees(int calendareventid);
 
         List<TEF.CalendarAssociation> GetCalendarEventReminders(int calendareventid);
+
+        List<TEF.CalendarEvent> GetUserDayCalendarEvents(int userid, DateTime date, int calendarid = 0);
     }
 }

@@ -91,3 +91,8 @@ table.calendar tr td span.event {
 .light {
     font-weight: normal;
 }
+
+.calendar td.today {
+    background-color:beige;
+    color:brown;
+}

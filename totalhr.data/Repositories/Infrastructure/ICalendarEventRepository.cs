@@ -16,5 +16,7 @@ namespace totalhr.data.Repositories.Infrastructure
         CalendarAssociation CreateEventAssociation(CalendarAssociation assoc);
 
         List<CalendarAssociation> GetCalendarEventAssociations(int eventid);
+
+        List<CalendarEvent> GetCalendarDailyEventsByUser(int userid, DateTime date, int calendarid = 0);
     }
 }
