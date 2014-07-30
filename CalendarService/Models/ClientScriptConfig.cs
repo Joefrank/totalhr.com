@@ -33,5 +33,10 @@ namespace Calendar.Models
         /// </summary>
         public string InActiveTdClickCallBack { get; set; }
 
+        /// <summary>
+        /// You can pass a class to style the current day
+        /// </summary>
+        public string CurrentDayCssClass { get; set; }
+
     }
 }

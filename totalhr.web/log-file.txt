@@ -6,4 +6,24 @@
 ]2014-07-30 00:13:55,211 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
 ]2014-07-30 00:13:55,243 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
 ]2014-07-30 00:14:02,516 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-30 14:26:56,296 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-30 14:26:56,670 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-30 14:26:56,740 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-30 14:27:07,637 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-30 15:46:19,475 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-30 15:46:19,670 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-30 15:46:19,704 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-30 15:46:30,939 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-30 16:31:45,724 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-30 16:31:45,834 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-30 16:31:45,865 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-30 16:32:22,202 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-07-30 16:32:29,591 DEBUG totalhr.web.Controllers.AccountController - [Calendar week view params Year: 2014 - Month 6 - Day 3 
+Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
+]2014-07-30 16:33:49,772 DEBUG totalhr.web.Controllers.AccountController - [Calendar week view params Year: 2014 - Month 6 - Day 3 
+Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
+]2014-07-30 16:40:11,567 DEBUG totalhr.web.Controllers.AccountController - [Calendar week view params Year: 2014 - Month 6 - Day 3 
+Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
+]2014-07-30 16:41:59,238 DEBUG totalhr.web.Controllers.AccountController - [Calendar week view params Year: 2014 - Month 6 - Day 3 
+Index (zero based) must be greater than or equal to zero and less than the size of the argument list.
 ]

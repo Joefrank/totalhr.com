@@ -1,14 +1,23 @@
 ﻿@model Calendar.Models.CalendarHTML
 
+@{
+    int calendarId = 0;
+    if (ViewBag.CalendarId != null)
+    {
+        Int32.TryParse(ViewBag.CalendarId.ToString(), out calendarId);
+    }
+}
+
 <link href="~/Content/calendar.css" rel="stylesheet" />
 
-@{
-
-  
-} 
 <p>
-    <a href="@Model.PreviousRequest">Prev</a>&nbsp;
+    <a href="@Model.PreviousRequest">Prev</a>
+    &nbsp;
     <a href="@Model.NextRequest">Next</a>
+    &nbsp;
+    <a href="/calendar/GetWeekView/2014/06/03/@calendarId">Calendar Week View</a>
+     &nbsp;
+    <a href="/calendar/DayView/2014/06/03/@calendarId">Calendar Day View</a>
 </p>
 @Html.Raw(Model.GridHTML)
 

@@ -158,6 +158,7 @@ namespace totalhr.web.Controllers
             if (calendar != null)
             {
                 ViewBag.CalendarName = calendar.Name;
+                ViewBag.CalendarId = calendar.id;
             }
 
             var rqStruct = new CalendarRequestStruct
@@ -173,39 +174,42 @@ namespace totalhr.web.Controllers
                         PageClientId = 1,
                         ActiveTdClickCallBack = @" onclick=""ManageActiveDay(this);"" ",
                         EventClickCallBack = @" onclick=""ManageEvent(this);"" ",
-                        JsArrayEventName = "ArrEvents"
+                        JsArrayEventName = "ArrEvents",
+                        CurrentDayCssClass = "today"
                     }
-                
             };
-
-           
-
             return View("Generate",_calService.GenerateCalendarHTML(rqStruct));
         }
-
-       
-        public ActionResult GetCalendarMonthViewByUser(int year, int month, int day)
-        {
-            return MonthView(year, month);
-        }
-
+        
         public ActionResult GetCalendarMonth(int year, int month, int calendarid)
         {
             return MonthView(year, month, calendarid);
         }
        
-        public ActionResult WeekView(int year, int month, int day)
+        public ActionResult GetWeekView(int year, int month, int day, int calendarid =0)
         {
-            
             try
             {
+                var calEvents = calendarid == 0 ? _calMservice.GetUserCalendarEvents(CurrentUser.UserId, year, month) :
+               _calMservice.GetUserCalendarEvents(calendarid, CurrentUser.UserId, year, month);
+
                 var weekRequest = new CalendarWeekRequestStruct
                 {
                     DateRequested = new DateTime(year, month, day),
-                    Info = CultureInfo.CreateSpecificCulture("fr-FR"),//read user culture here
+                    Info = CultureInfo.CreateSpecificCulture(CurrentUser.Culture),//read user culture here
                     TableTemplate = @" border=""1"" class=""calendarweek"" ",
                     DayHeaderFormat = "ddd, MMM d",
-                    CrossEdgeContent = " "
+                    CrossEdgeContent = " ",
+                    RelatedEvents = calEvents,
+                    CalendarId = calendarid,
+                     ClientConfig = new ClientScriptConfig
+                    {
+                        PageClientId = 1,
+                        ActiveTdClickCallBack = @" onclick=""ManageActiveDay(this);"" ",
+                        EventClickCallBack = @" onclick=""ManageEvent(this);"" ",
+                        JsArrayEventName = "ArrEvents",
+                        CurrentDayCssClass = "today"
+                    }
                 };
 
                 return View("Generate", _calService.GenerateWeekHTML(weekRequest));
@@ -221,8 +225,8 @@ namespace totalhr.web.Controllers
             
         }
 
-        
-        public ActionResult DayView(int year, int month, int day)
+
+        public ActionResult DayView(int year, int month, int day, int calendarid = 0)
         {
             Log.Debug(string.Format("Calendar day view params Year: {0} - Month {1} - Day {2} ", year, month, day));
 
