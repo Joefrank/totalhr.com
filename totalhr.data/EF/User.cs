@@ -28,7 +28,7 @@ namespace totalhr.data.EF
         public string Town { get; set; }
         public string stateorcounty { get; set; }
         public string PostCode { get; set; }
-        public Nullable<int> countryId { get; set; }
+        public int countryId { get; set; }
         public string Phone { get; set; }
         public string Mobile { get; set; }
         public int CompanyId { get; set; }

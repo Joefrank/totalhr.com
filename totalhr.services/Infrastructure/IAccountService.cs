@@ -43,5 +43,7 @@ namespace totalhr.services.Infrastructure
         List<Department> GetCompanyDepartments(int companyid);
 
         UserPersonalInfo GetUserInfoByEmail(string email);
+
+        int UpdateUserDetails(UserPersonalInfo info);
     }
 }

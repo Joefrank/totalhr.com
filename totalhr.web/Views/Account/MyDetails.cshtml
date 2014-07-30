@@ -17,7 +17,13 @@
         <h1>@Account.tt_Personal_Details</h1>
 
         @using (Html.BeginForm("SaveUserDetails", "Account"))
-{
+        {
+            
+        if(Model.DetailsSaveSuccess){
+            <div id="dvSaveSuccess" class="savesuccess">
+                @FormMessages.MSG_Details_Saved
+            </div>
+        }
             
         @Html.ValidationSummary()
 
@@ -34,7 +40,7 @@
                 </div>
                  <div class="line">
                     <label>@FormMessages.Label_Title <b class="req">*</b></label>
-                     <span>@Html.DropDownListFor(x => x.OtherTitle, new SelectList(titles, "RootId", "Term"), 
+                     <span>@Html.DropDownListFor(x => x.Title, new SelectList(titles, "RootId", "Term"), 
                         new { onchange = string.Format("CheckOther(this, 'spOther', {0})", (int)totalhr.Shared.Variables.NamedGlossaryIds.OtherTitle) })
                          &nbsp;
                         <span id="spOther" style="display:none">@Html.TextBoxFor(x => x.OtherTitle , new { size = "20", maxlength = "30" })</span>
@@ -116,19 +122,17 @@
 
                  <div class="line">
                     <label>@FormMessages.Label_Username <b class="req">*</b></label>
-                    <span>@Html.TextBoxFor(x => x.UserName , new { size = "20", maxlength = "20", autocomplete ="off" })
-
-                      @*  @Html.CheckBoxFor(x => x.UseEmailAsUserName, new { onclick = "PullTextFrom(this, 'UserName', 'Email', 'hdnMSGEmailNotProvided')" }) &nbsp;
-                        (@FormMessages.V_User_Email_As_UserName)
-
-                        <input type="hidden" id="hdnMSGEmailNotProvided" value="@FormMessages.Error_Email_Needs_To_Be_Provided" />*@
-                    </span>
+                    <span>
+                        @Html.TextBoxFor(x => x.UserName , new { size = "20", maxlength = "20", autocomplete ="off" })
+                     </span>
                     
                 </div>
                 <div class="line">
                     <label>@FormMessages.Label_Password <b class="req">*</b></label>
                     <span>@Html.PasswordFor(x => x.Password , new { size = "20", maxlength = "15", autocomplete ="off", value=Model.Password })</span>
-                    
+                    <span id="spAction" class="actionlink" onclick="RevealPassToSpan('Password', 'spupss', this, 'spAlternate');">@Common.V_Show</span>
+                    <span id="spupss" class="passdisplay" style="display:none"></span>    
+                    <span id="spAlternate" style="display:none">@Common.V_Hide</span>                
                 </div>
                                 
                  <div class="line">
@@ -153,9 +157,11 @@
             </div>
 
         </div>
-
+            @Html.HiddenFor(x => x.UserId)
+            @Html.HiddenFor(x => x.CompanyId)
         }
     </div>
 </div>
+
 
 

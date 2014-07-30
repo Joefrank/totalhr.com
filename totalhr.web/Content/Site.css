@@ -216,3 +216,56 @@ div.line
     min-height:100%;
     border:none;
 }
+
+.actionlink, .passdisplay {
+    color: blue;
+    cursor: pointer;
+    font-weight:bold;
+    margin-top:8px;
+}
+
+.passdisplay {
+    color:white;
+    background-color:brown;
+    padding:5px 10px;
+}
+
+.savesuccess {
+    box-sizing: border-box;    
+    line-height: 32px;
+    width:600px;
+    padding: 5px 15px;
+    background-color: #198fff;
+    color: #fff;
+    -webkit-box-shadow: 0 2px #063a93;
+    box-shadow: 0 2px #063a93;
+    border-radius: 3px;
+    font-weight: 400;
+    border: 2px solid transparent;
+    margin:10px 0 15px;
+}
+
+.btn {
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    -moz-user-select: -moz-none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.btn.default {
+    box-sizing: border-box;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 25px;
+    background-color: #198fff;
+    color: #fff;
+    -webkit-box-shadow: 0 2px #063a93;
+    box-shadow: 0 2px #063a93;
+    border-radius: 3px;
+    font-weight: 400;
+    border: 2px solid transparent;
+}

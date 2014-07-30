@@ -25,6 +25,19 @@ namespace totalhr.web
                    day = UrlParameter.Optional
                });
 
+
+            routes.MapRoute(
+               name: "CalendarMonth",
+               url: "Calendar/GetCalendarMonth/{year}/{month}/{calendarid}",
+               defaults: new
+               {
+                   controller = "Calendar",
+                   action = "GetCalendarMonth",
+                   year = DateTime.Now.Year,
+                   month = DateTime.Now.Month,
+                   calendarid = UrlParameter.Optional
+               });
+
             routes.MapRoute(
                name: "CalendarView",
                url: "Calendar/{action}/{year}/{month}/{day}",

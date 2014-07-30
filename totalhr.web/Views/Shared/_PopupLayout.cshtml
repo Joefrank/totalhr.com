@@ -9,8 +9,23 @@
      @RenderSection("extrastyles", required: false)
 </head>
 <body>
-    @RenderBody()
+   <div id="main">
+    <div class="content">
+         <div class="popuphead">  
+            
+              @RenderSection("head2", required: true)             
 
+              <div id="toolbox">
+                  <span class="spclose" onclick="parent.ClosePopup('dvPopup')">&nbsp;</span>  
+                  <!--<span class="spsave">&nbsp;</span>-->
+                                  
+              </div>
+        </div> 
+        
+        @RenderBody()
+            
+        </div>
+    </div>
 
 
     @RenderSection("scripts", required: false)

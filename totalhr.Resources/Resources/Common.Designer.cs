@@ -241,11 +241,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hide.
+        /// </summary>
+        public static string V_Hide {
+            get {
+                return ResourceManager.GetString("V_Hide", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forgot Password.
         /// </summary>
         public static string V_Password_Reminder {
             get {
                 return ResourceManager.GetString("V_Password_Reminder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show.
+        /// </summary>
+        public static string V_Show {
+            get {
+                return ResourceManager.GetString("V_Show", resourceCulture);
             }
         }
     }

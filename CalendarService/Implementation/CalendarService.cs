@@ -19,7 +19,7 @@ namespace Calendar.Implementation
         private const string TdHtmlNoAttrib = "<td>{0}</td>";
         private const string TrHtmlNoAttrib = "<tr>{0}</tr>";
         private const string TableHtml = "<table {0}>{1}</table>";
-        private const string CalendarMonthViewLink = @"/Calendar/GetCalendarMonthViewByUser/{0}/{1}";
+        private const string CalendarMonthViewLink = @"/Calendar/GetCalendarMonth/{0}/{1}/{2}";
         private const string CalendarWeekViewLink = @"/Calendar/WeekView/{0}/{1}/{2}";
         private const string CalendarDayViewLink = @"/Calendar/DayView/{0}/{1}/{2}";
 
@@ -198,8 +198,8 @@ namespace Calendar.Implementation
 
             return new CalendarHTML { 
                 GridHTML = sbAllHtml.ToString(),
-                NextRequest = string.Format(CalendarMonthViewLink, nextMonthDate.Year, nextMonthDate.Month),
-                PreviousRequest = string.Format(CalendarMonthViewLink, prevMonthDate.Year, prevMonthDate.Month),
+                NextRequest = string.Format(CalendarMonthViewLink, nextMonthDate.Year, nextMonthDate.Month, rqStruct.CalendarId ),
+                PreviousRequest = string.Format(CalendarMonthViewLink, prevMonthDate.Year, prevMonthDate.Month,rqStruct.CalendarId),
                 Javascript = sbJavascript.ToString()
 
             };

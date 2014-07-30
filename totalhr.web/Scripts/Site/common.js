@@ -20,6 +20,17 @@ function PullTextFrom(objsrc, objtxtId, fromObjTxtId, ErrorMSGId) {
     return true;
 }
 
+function RevealPassToSpan(originTxtid, destinationSpanid, obj, objAlternateId) {
+    $('#' + destinationSpanid).html($('#' + originTxtid).val());
+    $('#' + destinationSpanid).fadeToggle("slow");
+    var newval = $('#' + objAlternateId).html();
+    var oldval = obj.innerHTML;
+
+    obj.innerHTML = newval;
+    $('#' + objAlternateId).html(oldval)
+
+}
+
 function CheckOther(obj, objToShow, Id) {
     if (obj.value == Id) {
         GetO(objToShow).style.display = "";
@@ -59,4 +70,9 @@ function isDate(txtDate)
             return false;
     }
     return true;
+}
+
+
+function ClosePopup(objid) {   
+    document.getElementById(objid).style.display = "none";   
 }

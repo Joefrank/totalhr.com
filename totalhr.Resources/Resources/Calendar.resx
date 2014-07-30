@@ -174,4 +174,13 @@
   <data name="Month_September" xml:space="preserve">
     <value>September</value>
   </data>
+  <data name="V_Calendar_Name" xml:space="preserve">
+    <value>Calendar Name</value>
+  </data>
+  <data name="V_Calendar_View" xml:space="preserve">
+    <value>Calendar View</value>
+  </data>
+  <data name="V_Calendar_View_For" xml:space="preserve">
+    <value>Calendar view for: &lt;span class="light"&gt;{0}&lt;/span&gt;</value>
+  </data>
 </root>

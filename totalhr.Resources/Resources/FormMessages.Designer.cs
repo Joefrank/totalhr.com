@@ -682,6 +682,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry could not save your details..
+        /// </summary>
+        public static string Error_Sorry_CouldNot_Save_User {
+            get {
+                return ResourceManager.GetString("Error_Sorry_CouldNot_Save_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start date cannot be after the end date. Please select correct dates..
         /// </summary>
         public static string Error_StartDate_After_EndDate {
@@ -1416,6 +1425,15 @@ namespace totalhr.Resources {
         public static string MSG_Category_Search_Intro {
             get {
                 return ResourceManager.GetString("MSG_Category_Search_Intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your details have been saved successfully!.
+        /// </summary>
+        public static string MSG_Details_Saved {
+            get {
+                return ResourceManager.GetString("MSG_Details_Saved", resourceCulture);
             }
         }
         

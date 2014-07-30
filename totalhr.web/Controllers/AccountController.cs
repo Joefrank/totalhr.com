@@ -24,8 +24,7 @@ namespace totalhr.web.Controllers
         private readonly IGlossaryService _glossaryService;
         private readonly IAccountService _accountService;
         private readonly IMessagingService _messagingService;
-        //private const string UserDataFormat = "UserId:{0}|roles:{1}|profiles:{2}|fullname:{3}|culture:{4}|languageid:{5}";
-
+        
         private static readonly ILog Log = LogManager.GetLogger(typeof(AccountController));
 
         public AccountController(IGlossaryService glossaryService, IAccountService accountService, IMessagingService messageService, IOAuthService authService) : base(authService)
@@ -49,11 +48,8 @@ namespace totalhr.web.Controllers
         
         public ActionResult MyDetails()
         {
-            UserPersonalInfo userinfo = _accountService.GetUserInfoByEmail(CurrentUser.UserName.Trim());
-            if (userinfo == null)
-            {
-                return View("Login");
-            }
+            UserPersonalInfo userinfo = _accountService.GetUserInfoByEmail(CurrentUser.UserName.Trim());            
+            userinfo.DetailsSaveSuccess = false;
             LoadGlossaries();
             return View(userinfo);
         }
@@ -273,7 +269,29 @@ namespace totalhr.web.Controllers
         [HttpPost]
         public ActionResult SaveUserDetails(UserPersonalInfo userinfo)
         {
-            return null;
+
+            if (ModelState.IsValid)
+            {
+                int result = _accountService.UpdateUserDetails(userinfo);
+
+                if (result < 0)
+                {
+                    ModelState.AddModelError("Error_Saving_User", FormMessages.Error_Sorry_CouldNot_Save_User);
+                    userinfo.DetailsSaveSuccess = false;
+                }
+                else
+                {
+                    userinfo.DetailsSaveSuccess = true;
+                }
+            }
+            else
+            {
+                userinfo.DetailsSaveSuccess = false;
+            }
+
+            LoadGlossaries();
+            return View("MyDetails", userinfo);
+
         }
     }
 }

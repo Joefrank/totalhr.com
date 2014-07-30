@@ -66,10 +66,7 @@ namespace totalhr.Shared.Models
 
         [MaxLength(30, ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_MobilePhone_Too_Long")]
         public string MobilePhone { get; set; }
-
-        [AlwaysTrue(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_Terms_Not_Accepted_Rq")]
-        public bool TermsAccepted { get; set; }
-
+              
 
         #endregion
 
@@ -94,6 +91,8 @@ namespace totalhr.Shared.Models
         public int CompanyId { get; set; }
 
         public int UserId { get; set; }
+
+        public bool DetailsSaveSuccess { get; set; }
 
         #endregion
     }

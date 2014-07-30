@@ -152,6 +152,14 @@ namespace totalhr.web.Controllers
             var calEvents = calendarid == 0 ? _calMservice.GetUserCalendarEvents(CurrentUser.UserId,year,month) :
                 _calMservice.GetUserCalendarEvents(calendarid, CurrentUser.UserId, year, month);
 
+            //***verify that current user is not viewing calendars they are not authorized to view
+            var calendar = _calMservice.GetCalendar(calendarid);
+            
+            if (calendar != null)
+            {
+                ViewBag.CalendarName = calendar.Name;
+            }
+
             var rqStruct = new CalendarRequestStruct
             {
                 Info = CultureInfo.CreateSpecificCulture(CurrentUser.Culture),
@@ -169,15 +177,22 @@ namespace totalhr.web.Controllers
                     }
                 
             };
+
+           
+
             return View("Generate",_calService.GenerateCalendarHTML(rqStruct));
         }
 
        
-        public ActionResult GetCalendarMonthViewByUser(int year, int month)
-        {           
-            return  MonthView(year, month);
+        public ActionResult GetCalendarMonthViewByUser(int year, int month, int day)
+        {
+            return MonthView(year, month);
         }
 
+        public ActionResult GetCalendarMonth(int year, int month, int calendarid)
+        {
+            return MonthView(year, month, calendarid);
+        }
        
         public ActionResult WeekView(int year, int month, int day)
         {
