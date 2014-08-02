@@ -256,6 +256,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CalendarAssociation_CalendarEvent">
+          <End Role="CalendarEvent" Type="Self.CalendarEvent" Multiplicity="1" />
+          <End Role="CalendarAssociation" Type="Self.CalendarAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CalendarEvent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CalendarAssociation">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CalendarEvent_Calendar">
           <End Role="Calendar" Type="Self.Calendar" Multiplicity="1" />
           <End Role="CalendarEvent" Type="Self.CalendarEvent" Multiplicity="*" />
@@ -312,6 +324,10 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="Calendar" EntitySet="Calendar" />
           </AssociationSet>
+          <AssociationSet Name="FK_CalendarAssociation_CalendarEvent" Association="Self.FK_CalendarAssociation_CalendarEvent">
+            <End Role="CalendarEvent" EntitySet="CalendarEvent" />
+            <End Role="CalendarAssociation" EntitySet="CalendarAssociation" />
+          </AssociationSet>
           <AssociationSet Name="FK_CalendarEvent_Calendar" Association="Self.FK_CalendarEvent_Calendar">
             <End Role="Calendar" EntitySet="Calendar" />
             <End Role="CalendarEvent" EntitySet="CalendarEvent" />
@@ -352,6 +368,7 @@
           <Property Name="AssociationValue" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CalendarEvent" Relationship="TotalHRModel.FK_CalendarAssociation_CalendarEvent" FromRole="CalendarAssociation" ToRole="CalendarEvent" />
         </EntityType>
         <EntityType Name="CalendarEvent">
           <Key>
@@ -369,6 +386,7 @@
           <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CalendarId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Calendar" Relationship="Self.FK_CalendarEvent_Calendar" FromRole="CalendarEvent" ToRole="Calendar" />
+          <NavigationProperty Name="CalendarAssociations" Relationship="TotalHRModel.FK_CalendarAssociation_CalendarEvent" FromRole="CalendarEvent" ToRole="CalendarAssociation" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -646,6 +664,10 @@
           <FunctionImport Name="GetUserRoles" ReturnType="Collection(TotalHRModel.GetUserRoles_Result)">
           <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_CalendarAssociation_CalendarEvent" Association="TotalHRModel.FK_CalendarAssociation_CalendarEvent">
+            <End Role="CalendarEvent" EntitySet="CalendarEvents" />
+            <End Role="CalendarAssociation" EntitySet="CalendarAssociations" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetUserProfiles_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -667,6 +689,18 @@
           <Property Type="Int32" Name="LastModifiedBy" Nullable="true" />
           <Property Type="String" Name="Identifier" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <Association Name="FK_CalendarAssociation_CalendarEvent">
+          <End Type="TotalHRModel.CalendarEvent" Role="CalendarEvent" Multiplicity="1" />
+          <End Type="TotalHRModel.CalendarAssociation" Role="CalendarAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CalendarEvent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CalendarAssociation">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

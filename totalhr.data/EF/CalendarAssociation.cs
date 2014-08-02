@@ -20,5 +20,7 @@ namespace totalhr.data.EF
         public string AssociationValue { get; set; }
         public System.DateTime Created { get; set; }
         public int CreatedBy { get; set; }
+    
+        public virtual CalendarEvent CalendarEvent { get; set; }
     }
 }

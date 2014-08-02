@@ -47,6 +47,6 @@ namespace totalhr.data.EF
         public bool tersmaccepted { get; set; }
         public string activationcode { get; set; }
         public string chosenculture { get; set; }
-        public Nullable<int> departmentid { get; set; }
+        public int departmentid { get; set; }
     }
 }

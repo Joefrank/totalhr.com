@@ -295,17 +295,17 @@ namespace Calendar.Implementation
             return _calrepos.FindBy(x => x.CreatedBy == userid).ToList();
         }
 
-        public List<TEF.CalendarEvent> GetUserCalendarEvents(int userid, int year, int month)
+        public List<CalendarEventCache> GetUserCalendarEvents(int userid, int year, int month)
         {
-            return _calEventRepos.GetCalendarMonthlyEventsByUser(userid, year, month);
+            return _calEventRepos.GetMonthlyCalendarEvents(userid, year, month);
         }
 
-        public List<TEF.CalendarEvent> GetUserCalendarEvents(int calendarid, int userid, int year, int month)
+        public List<CalendarEventCache> GetUserCalendarEvents(int calendarid, int userid, int year, int month)
         {
-            return _calEventRepos.GetCalendarMonthlyEventsByUserAndCalendar(calendarid, userid, year, month);
+            return _calEventRepos.GetMonthlyCalendarEvents(calendarid, userid, year, month);
         }
 
-        public List<TEF.CalendarEvent> GetUserDayCalendarEvents(int userid, DateTime date, int calendarid=0)
+        public List<CalendarEventCache> GetUserDayCalendarEvents(int userid, DateTime date, int calendarid=0)
         {
             return _calEventRepos.GetCalendarDailyEventsByUser(userid, date, calendarid);
         }

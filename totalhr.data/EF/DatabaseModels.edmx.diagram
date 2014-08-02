@@ -23,6 +23,7 @@
         <AssociationConnector Association="TotalHRModel.FK_Calendar_Company" ManuallyRouted="false" />
         <AssociationConnector Association="TotalHRModel.FK_CalendarEvent_Calendar" ManuallyRouted="false" />
         <AssociationConnector Association="TotalHRModel.FK_Department_Company" ManuallyRouted="false" />
+        <AssociationConnector Association="TotalHRModel.FK_CalendarAssociation_CalendarEvent" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

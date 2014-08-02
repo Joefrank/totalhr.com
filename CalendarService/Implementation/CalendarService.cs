@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using totalhr.data.EF;
+using totalhr.Shared.Models;
 
 namespace Calendar.Implementation
 {
@@ -158,7 +159,7 @@ namespace Calendar.Implementation
                     var foundEvents = lstEvents.FindAll(x => x.StartOfEvent.Date == currentdate.Date
                         || x.EndOfEvent.Date == currentdate.Date).ToList();
 
-                    foreach (CalendarEvent ce in foundEvents)
+                    foreach (CalendarEventCache ce in foundEvents)
                     {
                         sbEvents.Append(string.Format(@"<span class=""event"" id=""evt_{0}_{1}"" {2}>", ClientPageId, ce.id, rqStruct.ClientConfig.EventClickCallBack)
                             + ce.Title + "</span>");
@@ -318,7 +319,7 @@ namespace Calendar.Implementation
 
             //clean the temp SB
             sbTemp.Clear();
-            var foundEvents = new List<CalendarEvent>();
+            var foundEvents = new List<CalendarEventCache>();
 
             if (lstEvents != null)
             {

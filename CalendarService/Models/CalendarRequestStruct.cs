@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using totalhr.data.EF;
+using totalhr.Shared.Models;
 
 namespace Calendar.Models
 {
@@ -20,7 +21,7 @@ namespace Calendar.Models
 
         public int CalendarId { get; set; }
 
-        public List<CalendarEvent> RelatedEvents { get; set; }
+        public List<CalendarEventCache> RelatedEvents { get; set; }
 
         public ClientScriptConfig ClientConfig { get; set; }
     }

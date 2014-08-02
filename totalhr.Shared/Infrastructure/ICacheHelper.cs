@@ -15,5 +15,7 @@ namespace totalhr.Shared.Infrastructure
         bool Exists(string key);
 
         bool Get<T>(string key, out T value);
+
+        T Get<T>(string key);
     }
 }
