@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using totalhr.Shared;
 
 namespace Authentication.Models
 {
@@ -33,14 +35,19 @@ namespace Authentication.Models
             return !roles.Except(this.Roles).Any();
         }
 
+        public bool IsInRole(Variables.Roles[] requiredroles)
+        {
+            return requiredroles.All(rrole => this.Roles.Contains(((int) rrole).ToString(CultureInfo.InvariantCulture)));
+        }
+
         public bool IsInProfile(List<string> profiles)
         {
             return !profiles.Except(this.Profiles).Any();
         }
 
-        public bool IsInProfile(IEnumerable<int> profiles)
+        public bool IsInProfile(Variables.Profiles[] requiredprofiles)
         {
-            return !profiles.Except(this.Profiles.Cast<int>()).Any();
+            return requiredprofiles.All(rprof => this.Profiles.Contains(((int)rprof).ToString(CultureInfo.InvariantCulture)));
         }
 
         public bool IsLogged()

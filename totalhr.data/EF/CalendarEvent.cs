@@ -14,6 +14,11 @@ namespace totalhr.data.EF
     
     public partial class CalendarEvent
     {
+        public CalendarEvent()
+        {
+            this.CalendarAssociations = new HashSet<CalendarAssociation>();
+        }
+    
         public int id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
@@ -27,5 +32,6 @@ namespace totalhr.data.EF
         public int CalendarId { get; set; }
     
         public virtual Calendar Calendar { get; set; }
+        public virtual ICollection<CalendarAssociation> CalendarAssociations { get; set; }
     }
 }

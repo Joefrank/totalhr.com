@@ -24,12 +24,14 @@ namespace Calendar.Infrastructure
 
         List<TEF.Calendar> GetUserCalendars(int userid);
 
-        List<TEF.CalendarEvent> GetUserCalendarEvents(int userid, int year, int month);
+        List<CalendarEventCache> GetUserCalendarEvents(int userid, int year, int month);
 
-        List<TEF.CalendarEvent> GetUserCalendarEvents(int calendarid, int userid, int year, int month);
+        List<CalendarEventCache> GetUserCalendarEvents(int calendarid, int userid, int year, int month);
 
         List<TEF.CalendarAssociation> GetCalendarEventInvitees(int calendareventid);
 
         List<TEF.CalendarAssociation> GetCalendarEventReminders(int calendareventid);
+
+        List<CalendarEventCache> GetUserDayCalendarEvents(int userid, DateTime date, int calendarid = 0);
     }
 }

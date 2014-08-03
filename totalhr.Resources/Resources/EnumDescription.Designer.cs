@@ -169,7 +169,7 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to On &lt;span id=&quot;repDay&quot;&gt;{0}&lt;/span&gt; every week.
+        ///   Looks up a localized string similar to On &lt;span class=&quot;repDay&quot;&gt;{0}&lt;/span&gt; every week.
         /// </summary>
         public static string OnDayOfTheWeek {
             get {

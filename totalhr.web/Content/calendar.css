@@ -88,3 +88,11 @@ table.calendar tr td span.event {
     #dvReminders input[type='text'] {
         height:10px;
     }
+.light {
+    font-weight: normal;
+}
+
+.calendar td.today {
+    background-color:beige;
+    color:brown;
+}

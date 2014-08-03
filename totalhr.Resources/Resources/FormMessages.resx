@@ -630,4 +630,10 @@
   <data name="Error_StartDate_After_EndDate" xml:space="preserve">
     <value>Start date cannot be after the end date. Please select correct dates.</value>
   </data>
+  <data name="Error_Sorry_CouldNot_Save_User" xml:space="preserve">
+    <value>Sorry could not save your details.</value>
+  </data>
+  <data name="MSG_Details_Saved" xml:space="preserve">
+    <value>Your details have been saved successfully!</value>
+  </data>
 </root>

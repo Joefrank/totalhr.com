@@ -254,5 +254,71 @@ namespace totalhr.services.Implementation
         {
             return _companyRepos.GetCompanyDepartments(companyid);
         }
+
+        public UserPersonalInfo GetUserInfoByEmail(string email)
+        {
+            User user = GetUserByEmail(email);
+            UserPersonalInfo info = new UserPersonalInfo();
+
+            info.Address1 = user.Address1;
+            info.Address2 = user.Address2;
+            info.Address3 = user.Address3;
+            info.City = user.Town;
+            info.CompanyId = user.CompanyId;
+            info.CountryId = user.countryId;
+            info.Email = user.email;
+            info.FirstName = user.firstname;
+            info.GenderId = user.GenderId;
+            info.MiddleNames = user.othernames;
+            info.MobilePhone = user.Mobile;
+            info.OtherTitle = user.othertitle;
+            info.Password = CM.Security.Decrypt(user.password);
+            info.PersonalPhone = user.Phone;
+            info.PostCode = user.PostCode;
+            info.PreferedLanguageId = user.preferedlanguageid;
+            info.State = user.stateorcounty;
+            info.Surname = user.surname;
+            info.Title = user.title;
+            info.UserId = user.id;
+            info.UserName = user.username;
+
+            return info;
+        }
+
+        public int UpdateUserDetails(UserPersonalInfo info)
+        {
+            User user = _userRepos.FindBy(x => x.id == info.UserId).FirstOrDefault();
+
+            if (user == null)
+            {
+                return -1;//user details not found
+            }
+
+            user.Address1 = info.Address1;
+            user.Address2= info.Address2 ;
+            user.Address3= info.Address3  ;
+            user.Town= info.City;
+            user.CompanyId= info.CompanyId  ;
+            user.countryId =info.CountryId  ;
+            user.email = info.Email ;
+            user.firstname = info.FirstName ;
+            user.GenderId= info.GenderId;
+            user.othernames= info.MiddleNames;
+            user.Mobile = info.MobilePhone;
+            user.othertitle =info.OtherTitle;
+            user.password= CM.Security.Encrypt(info.Password);
+            user.Phone= info.PersonalPhone;
+            user.PostCode= info.PostCode;
+            user.preferedlanguageid =info.PreferedLanguageId;
+            user.stateorcounty= info.State;
+            user.surname= info.Surname;
+            user.title = info.Title;
+            user.id =info.UserId;
+            user.username= info.UserName;
+
+            _userRepos.Save();
+
+            return 1;
+        }
     }
 }

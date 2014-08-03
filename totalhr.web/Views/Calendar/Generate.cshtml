@@ -1,12 +1,15 @@
 ﻿@model Calendar.Models.CalendarHTML
 
 @{
-    ViewBag.Title = "Generate";
+    ViewBag.Title = "";
+   
 }
 
-<h2>Generate</h2>
-
-
+@if (ViewBag.CalendarName != null){
+    <h2>@Html.Raw(string.Format(totalhr.Resources.Calendar.V_Calendar_View_For, ViewBag.CalendarName))</h2>
+}else{
+    <h2>@totalhr.Resources.Calendar.V_Calendar_View</h2>   
+}         
 
 @{
     Html.RenderPartial("_Calendar");

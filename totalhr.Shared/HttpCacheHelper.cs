@@ -80,6 +80,23 @@ namespace totalhr.Shared
 
             return true;
         }
+
+        public T Get<T>(string key)
+        {
+            try
+            {
+                if (!Exists(key))
+                {
+                    return default(T);
+                }
+
+                return (T)HttpContext.Current.Cache[key];
+            }
+            catch
+            {
+                return default(T);
+            }
+        }
     }
 
 }

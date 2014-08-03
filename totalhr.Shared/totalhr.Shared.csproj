@@ -79,6 +79,7 @@
   <ItemGroup>
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="Models\AdminStruct.cs" />
+    <Compile Include="Models\CalendarEventCache.cs" />
     <Compile Include="Models\CalendarEventInfo.cs" />
     <Compile Include="Models\CalendarEventReminder.cs" />
     <Compile Include="Models\EmailStruct.cs" />
@@ -88,6 +89,7 @@
     <Compile Include="Models\Attributes\AlwaysTrueAttribute.cs" />
     <Compile Include="Models\LoginStruct.cs" />
     <Compile Include="Models\NewUserInfo.cs" />
+    <Compile Include="Models\UserPersonalInfo.cs" />
     <Compile Include="Models\UserRegStruct.cs" />
     <Compile Include="Models\SMTPSettings.cs" />
     <Compile Include="Variables.cs" />
@@ -99,6 +101,7 @@
       <Name>totalhr.Resources</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

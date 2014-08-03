@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TotalHRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TotalHRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Calendar">
           <Key>
             <PropertyRef Name="id" />
@@ -203,7 +203,7 @@
           <Property Name="Town" Type="nvarchar" MaxLength="50" />
           <Property Name="stateorcounty" Type="nvarchar" MaxLength="50" />
           <Property Name="PostCode" Type="nvarchar" MaxLength="30" />
-          <Property Name="countryId" Type="int" />
+          <Property Name="countryId" Type="int" Nullable="false" />
           <Property Name="Phone" Type="nvarchar" MaxLength="30" />
           <Property Name="Mobile" Type="nvarchar" MaxLength="30" />
           <Property Name="CompanyId" Type="int" Nullable="false" />
@@ -253,6 +253,18 @@
             </Principal>
             <Dependent Role="Calendar">
               <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CalendarAssociation_CalendarEvent">
+          <End Role="CalendarEvent" Type="Self.CalendarEvent" Multiplicity="1" />
+          <End Role="CalendarAssociation" Type="Self.CalendarAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CalendarEvent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CalendarAssociation">
+              <PropertyRef Name="EventId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -312,6 +324,10 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="Calendar" EntitySet="Calendar" />
           </AssociationSet>
+          <AssociationSet Name="FK_CalendarAssociation_CalendarEvent" Association="Self.FK_CalendarAssociation_CalendarEvent">
+            <End Role="CalendarEvent" EntitySet="CalendarEvent" />
+            <End Role="CalendarAssociation" EntitySet="CalendarAssociation" />
+          </AssociationSet>
           <AssociationSet Name="FK_CalendarEvent_Calendar" Association="Self.FK_CalendarEvent_Calendar">
             <End Role="Calendar" EntitySet="Calendar" />
             <End Role="CalendarEvent" EntitySet="CalendarEvent" />
@@ -321,8 +337,7 @@
             <End Role="Department" EntitySet="Department" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TotalHRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -353,6 +368,7 @@
           <Property Name="AssociationValue" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CalendarEvent" Relationship="TotalHRModel.FK_CalendarAssociation_CalendarEvent" FromRole="CalendarAssociation" ToRole="CalendarEvent" />
         </EntityType>
         <EntityType Name="CalendarEvent">
           <Key>
@@ -370,6 +386,7 @@
           <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CalendarId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Calendar" Relationship="Self.FK_CalendarEvent_Calendar" FromRole="CalendarEvent" ToRole="Calendar" />
+          <NavigationProperty Name="CalendarAssociations" Relationship="TotalHRModel.FK_CalendarAssociation_CalendarEvent" FromRole="CalendarEvent" ToRole="CalendarAssociation" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -530,7 +547,7 @@
           <Property Name="Town" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="stateorcounty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="PostCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
-          <Property Name="countryId" Type="Int32" />
+          <Property Name="countryId" Type="Int32" Nullable="false" />
           <Property Name="Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Mobile" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
@@ -636,17 +653,21 @@
             <End Role="Department" EntitySet="Departments" />
           </AssociationSet>
           <FunctionImport Name="GetUserProfileIds" ReturnType="Collection(Int32)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserProfiles" ReturnType="Collection(TotalHRModel.GetUserProfiles_Result)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserRoleIds" ReturnType="Collection(Int32)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserRoles" ReturnType="Collection(TotalHRModel.GetUserRoles_Result)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_CalendarAssociation_CalendarEvent" Association="TotalHRModel.FK_CalendarAssociation_CalendarEvent">
+            <End Role="CalendarEvent" EntitySet="CalendarEvents" />
+            <End Role="CalendarAssociation" EntitySet="CalendarAssociations" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetUserProfiles_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -668,6 +689,18 @@
           <Property Type="Int32" Name="LastModifiedBy" Nullable="true" />
           <Property Type="String" Name="Identifier" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <Association Name="FK_CalendarAssociation_CalendarEvent">
+          <End Type="TotalHRModel.CalendarEvent" Role="CalendarEvent" Multiplicity="1" />
+          <End Type="TotalHRModel.CalendarAssociation" Role="CalendarAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CalendarEvent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CalendarAssociation">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

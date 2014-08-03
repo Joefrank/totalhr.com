@@ -21,7 +21,7 @@ namespace Authentication.Models
         private static readonly ILog Log = LogManager.GetLogger(typeof(CustomAuthorizeAttribute));
         private ClientUser _user;
 
-        public Variables.Profiles[] Profiles { get; set; }
+        public Variables.Profiles[] RequiredProfiles { get; set; }
         public string AccessDeniedMessage { get; set; }
 
         public ProfileCheck(Variables.Profiles profile)
@@ -30,7 +30,7 @@ namespace Authentication.Models
             _ninjectKernel = new StandardKernel();
             _ninjectKernel.Bind<IOAuthService>().To<OckAuthService>();
             AuthService = _ninjectKernel.Get<IOAuthService>();
-            Profiles = new Variables.Profiles[] { profile };
+            RequiredProfiles = new Variables.Profiles[] { profile };
         }
 
         public ProfileCheck(params Variables.Profiles[] profiles)
@@ -39,7 +39,7 @@ namespace Authentication.Models
             _ninjectKernel = new StandardKernel();
             _ninjectKernel.Bind<IOAuthService>().To<OckAuthService>();
             AuthService = _ninjectKernel.Get<IOAuthService>();
-            Profiles = profiles;
+            RequiredProfiles = profiles;
         }
 
         protected override bool AuthorizeCore(HttpContextBase httpContext)
@@ -51,9 +51,9 @@ namespace Authentication.Models
                 if (_user == null || _user.UserId < 1 || _user.Profiles.Count < 1)//user must be authenticated
                     return false;
 
-                var arrProfiles = Enum.GetValues(typeof(Variables.Profiles)).Cast<int>();
+                //var arrProfiles = Enum.GetValues(typeof(Variables.Profiles)).Cast<int>();
 
-                return _user.IsInProfile(arrProfiles);
+                return _user.IsInProfile(RequiredProfiles);
             }
             catch (Exception ex)
             {

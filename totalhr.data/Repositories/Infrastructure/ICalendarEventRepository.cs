@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using totalhr.data.EF;
+using totalhr.Shared.Models;
 
 namespace totalhr.data.Repositories.Infrastructure
 {
@@ -13,8 +14,14 @@ namespace totalhr.data.Repositories.Infrastructure
 
         List<CalendarEvent> GetCalendarMonthlyEventsByUserAndCalendar(int calendarId, int userid, int year, int month);
 
+        List<CalendarEventCache> GetMonthlyCalendarEvents(int userid, int year, int month);
+
+        List<CalendarEventCache> GetMonthlyCalendarEvents(int calendarId, int userid, int year, int month);
+
         CalendarAssociation CreateEventAssociation(CalendarAssociation assoc);
 
         List<CalendarAssociation> GetCalendarEventAssociations(int eventid);
+
+        List<CalendarEventCache> GetCalendarDailyEventsByUser(int userid, DateTime date, int calendarid = 0);
     }
 }

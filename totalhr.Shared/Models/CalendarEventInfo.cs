@@ -38,7 +38,7 @@ namespace totalhr.Shared.Models
 
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_Event_Target_Required")]
         public int TargetAttendeeGroupId { get; set; }
-
+                
         public string InvitedUserIds { get; set; }
 
         public string InvitedDepartmentIds { get; set; }

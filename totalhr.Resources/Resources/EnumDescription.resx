@@ -154,7 +154,7 @@
     <value>On specific date(s)</value>
   </data>
   <data name="OnDayOfTheWeek" xml:space="preserve">
-    <value>On &lt;span id="repDay"&gt;{0}&lt;/span&gt; every week</value>
+    <value>On &lt;span class="repDay"&gt;{0}&lt;/span&gt; every week</value>
   </data>
   <data name="TimeBefore" xml:space="preserve">
     <value>Before</value>

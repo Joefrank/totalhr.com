@@ -180,4 +180,10 @@
   <data name="Page_TT_Calendar_Event_Edit" xml:space="preserve">
     <value>Calendar Event Edit</value>
   </data>
+  <data name="V_Hide" xml:space="preserve">
+    <value>Hide</value>
+  </data>
+  <data name="V_Show" xml:space="preserve">
+    <value>Show</value>
+  </data>
 </root>

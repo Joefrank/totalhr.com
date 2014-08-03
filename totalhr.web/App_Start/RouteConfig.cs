@@ -25,6 +25,45 @@ namespace totalhr.web
                    day = UrlParameter.Optional
                });
 
+
+            routes.MapRoute(
+               name: "CalendarMonth",
+               url: "Calendar/GetCalendarMonth/{year}/{month}/{calendarid}",
+               defaults: new
+               {
+                   controller = "Calendar",
+                   action = "GetCalendarMonth",
+                   year = DateTime.Now.Year,
+                   month = DateTime.Now.Month,
+                   calendarid = UrlParameter.Optional
+               });
+
+            routes.MapRoute(
+               name: "CalendarWeek",
+               url: "Calendar/GetWeekView/{year}/{month}/{day}/{calendarid}",
+               defaults: new
+               {
+                   controller = "Calendar",
+                   action = "GetWeekView",
+                   year = DateTime.Now.Year,
+                   month = DateTime.Now.Month,
+                   day = DateTime.Now.Day,
+                   calendarid = UrlParameter.Optional
+               });
+            
+            routes.MapRoute(
+               name: "CalendarDay",
+               url: "Calendar/GetDayView/{year}/{month}/{day}/{calendarid}",
+               defaults: new
+               {
+                   controller = "Calendar",
+                   action = "GetDayView",
+                   year = DateTime.Now.Year,
+                   month = DateTime.Now.Month,
+                   day = DateTime.Now.Day,
+                   calendarid = UrlParameter.Optional
+               });
+
             routes.MapRoute(
                name: "CalendarView",
                url: "Calendar/{action}/{year}/{month}/{day}",

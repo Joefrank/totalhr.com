@@ -69,5 +69,22 @@ namespace totalhr.tests.libs
 
             return true;
         }
+
+        public T Get<T>(string key)
+        {
+            try
+            {
+                if (!Exists(key))
+                {
+                    return default(T);
+                }
+
+                return (T)hash[key];
+            }
+            catch
+            {
+                return default(T);
+            }
+        }
     }
 }

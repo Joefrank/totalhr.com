@@ -65,22 +65,19 @@ namespace totalhr.web.Controllers
             }
             return sbtemp.ToString();
         }
-
-        [CustomAuthorize(Roles = "3")]
+       
         public ActionResult Index()
         {
             var allCalendars = _calMservice.GetCompanyCalendars(CurrentUser.CompanyId);
             return View(allCalendars);
         }
-
-        [CustomAuthorize(Roles = "3")]
+        
         public ActionResult GenerateDefault(int id)
         {
             //always put calendarid to get correct calendar.
             return MonthView(DateTime.Now.Year, DateTime.Now.Month, id);
         }
 
-        [CustomAuthorize(Roles = "3")]
         public ActionResult EditEvent(int id)
         {
             if (id == 0)
@@ -89,17 +86,16 @@ namespace totalhr.web.Controllers
             }
             else
             {
-
+                ViewBag.WeekDaysJS = MakeClientJSForWeekDays();
                 return View("EventEdit", _calMservice.GetEventInfo(id));
             }
         }
-        
-        [CustomAuthorize(Roles = "3", Profiles = "4", AccessDeniedMessage = "Work this out - FormMessages.Error_NoProfile_CreateCalendarEvent")]
-       // [ProfileCheck(Variables.Profiles.CalendarCreateEvent)]
+       
+        [ProfileCheck(Variables.Profiles.CalendarCreateEvent)]
         [HttpGet] 
         public ActionResult CreateEvent(int id)
          {
-            totalhr.data.EF.Calendar calendar = _calMservice.GetCalendar(id);
+            var calendar = _calMservice.GetCalendar(id);
             if (calendar == null)
             {
                 return RedirectToAction("AccessDenied", "Error", new { ModelError = "Calendar not registered." });
@@ -107,12 +103,12 @@ namespace totalhr.web.Controllers
             else
             {
                 ViewBag.WeekDaysJS = MakeClientJSForWeekDays();
-                ViewBag.EventTargets = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.CalendarEventTarget);
+                //ViewBag.EventTargets = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.CalendarEventTarget);
                 return View("EventEdit", "~/Views/Shared/_PopupLayout.cshtml", new CalendarEventInfo {CalendarId = calendar.id, CalendarName = calendar.Name });
             }
          }
 
-        [CustomAuthorize(Roles = "3", Profiles = "4", AccessDeniedMessage = "Work this out - FormMessages.Error_NoProfile_CreateCalendarEvent")]
+        [ProfileCheck(Variables.Profiles.CalendarCreateEvent)]
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult CreateEvent(CalendarEventInfo eventinfo)
@@ -135,8 +131,7 @@ namespace totalhr.web.Controllers
             }
             
         }
-
-        [CustomAuthorize(Roles = "3")]
+       
         public ActionResult Generate(int year, int month)
         {
             var rqStruct = new CalendarRequestStruct
@@ -150,12 +145,21 @@ namespace totalhr.web.Controllers
             return View("Generate", _calService.GenerateCalendarHTML(rqStruct));
         }
 
-        [CustomAuthorize(Roles = "3")]
+        
         private ActionResult MonthView(int year, int month, int calendarid =0)
         {
 
             var calEvents = calendarid == 0 ? _calMservice.GetUserCalendarEvents(CurrentUser.UserId,year,month) :
                 _calMservice.GetUserCalendarEvents(calendarid, CurrentUser.UserId, year, month);
+
+            //***verify that current user is not viewing calendars they are not authorized to view
+            var calendar = _calMservice.GetCalendar(calendarid);
+            
+            if (calendar != null)
+            {
+                ViewBag.CalendarName = calendar.Name;
+                ViewBag.CalendarId = calendar.id;
+            }
 
             var rqStruct = new CalendarRequestStruct
             {
@@ -170,32 +174,50 @@ namespace totalhr.web.Controllers
                         PageClientId = 1,
                         ActiveTdClickCallBack = @" onclick=""ManageActiveDay(this);"" ",
                         EventClickCallBack = @" onclick=""ManageEvent(this);"" ",
-                        JsArrayEventName = "ArrEvents"
+                        JsArrayEventName = "ArrEvents",
+                        CurrentDayCssClass = "today"
                     }
-                
             };
             return View("Generate",_calService.GenerateCalendarHTML(rqStruct));
         }
-
-        [CustomAuthorize(Roles = "3")]
-        public ActionResult GetCalendarMonthViewByUser(int year, int month)
-        {           
-            return  MonthView(year, month);
-        }
-
-        [CustomAuthorize(Roles = "3")]
-        public ActionResult WeekView(int year, int month, int day)
+        
+        public ActionResult GetCalendarMonth(int year, int month, int calendarid)
         {
-            
+            return MonthView(year, month, calendarid);
+        }
+       
+        public ActionResult GetWeekView(int year, int month, int day, int calendarid =0)
+        {
             try
             {
+                var calendar = _calMservice.GetCalendar(calendarid);
+
+                if (calendar != null)
+                {
+                    ViewBag.CalendarName = calendar.Name;
+                    ViewBag.CalendarId = calendar.id;
+                }
+
+                var calEvents = calendarid == 0 ? _calMservice.GetUserCalendarEvents(CurrentUser.UserId, year, month) :
+               _calMservice.GetUserCalendarEvents(calendarid, CurrentUser.UserId, year, month);
+
                 var weekRequest = new CalendarWeekRequestStruct
                 {
                     DateRequested = new DateTime(year, month, day),
-                    Info = CultureInfo.CreateSpecificCulture("fr-FR"),//read user culture here
+                    Info = CultureInfo.CreateSpecificCulture(CurrentUser.Culture),//read user culture here
                     TableTemplate = @" border=""1"" class=""calendarweek"" ",
                     DayHeaderFormat = "ddd, MMM d",
-                    CrossEdgeContent = " "
+                    CrossEdgeContent = " ",
+                    RelatedEvents = calEvents,
+                    CalendarId = calendarid,
+                     ClientConfig = new ClientScriptConfig
+                    {
+                        PageClientId = 1,
+                        ActiveTdClickCallBack = @" onclick=""ManageActiveDay(this);"" ",
+                        EventClickCallBack = @" onclick=""ManageEvent(this);"" ",
+                        JsArrayEventName = "ArrEvents",
+                        CurrentDayCssClass = "today"
+                    }
                 };
 
                 return View("Generate", _calService.GenerateWeekHTML(weekRequest));
@@ -211,24 +233,53 @@ namespace totalhr.web.Controllers
             
         }
 
-        [CustomAuthorize(Roles = "3")]
-        public ActionResult DayView(int year, int month, int day)
+
+        public ActionResult GetDayView(int year, int month, int day, int calendarid = 0)
         {
             Log.Debug(string.Format("Calendar day view params Year: {0} - Month {1} - Day {2} ", year, month, day));
+
+            var calendar = _calMservice.GetCalendar(calendarid);
+
+            if (calendar != null)
+            {
+                ViewBag.CalendarName = calendar.Name;
+                ViewBag.CalendarId = calendar.id;
+            }
+
+            var calEvents = calendarid == 0 ? _calMservice.GetUserDayCalendarEvents(CurrentUser.UserId, new DateTime(year, month, day)) :
+             _calMservice.GetUserDayCalendarEvents(CurrentUser.UserId, new DateTime( year, month,day), calendarid);
 
             var weekRequest = new CalendarWeekRequestStruct
             {
                 DateRequested = new DateTime(year, month, day),
-                Info = CultureInfo.CreateSpecificCulture("fr-FR"),//read current user culture
-                TableTemplate = @" border=""1"" class=""calendarweek day"" ",
-                DayHeaderFormat = "dddd, MMM d",
-                CrossEdgeContent = " "
+                Info = CultureInfo.CreateSpecificCulture(CurrentUser.Culture),//read user culture here
+                TableTemplate = @" border=""1"" class=""calendarweek"" ",
+                DayHeaderFormat = "ddd, MMM d",
+                CrossEdgeContent = " ",
+                RelatedEvents = calEvents,
+                CalendarId = calendarid,
+                ClientConfig = new ClientScriptConfig
+                {
+                    PageClientId = 1,
+                    ActiveTdClickCallBack = @" onclick=""ManageActiveDay(this);"" ",
+                    EventClickCallBack = @" onclick=""ManageEvent(this);"" ",
+                    JsArrayEventName = "ArrEvents",
+                    CurrentDayCssClass = ""
+                }
             };
+            //var weekRequest = new CalendarWeekRequestStruct
+            //{
+            //    DateRequested = new DateTime(year, month, day),
+            //    Info = CultureInfo.CreateSpecificCulture("fr-FR"),//read current user culture
+            //    TableTemplate = @" border=""1"" class=""calendarweek day"" ",
+            //    DayHeaderFormat = "dddd, MMM d",
+            //    CrossEdgeContent = " "
+            //};
 
             return View("Generate", _calService.GenerateDayHTML(weekRequest));
         }
 
-        [CustomAuthorize(Roles = "3")]
+        
         public ActionResult ListPersonal()
         {
             List<TEF.Calendar> lstCalendars = _calMservice.GetUserCalendars(CurrentUser.UserId);
@@ -239,4 +290,3 @@ namespace totalhr.web.Controllers
     }
 }
 
-/*http://mvc.daypilot.org/calendar/ */
