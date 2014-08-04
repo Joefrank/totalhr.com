@@ -125,6 +125,47 @@ namespace totalhr.services.messaging.Implementation
             log.Debug("AcknowledgeAccountActivation - Admin notified ");
         }
 
+        public bool NotifyUserOfCalendarEvent(AdminStruct adminstruct, CalendarEventInfo eventinfo)
+        {
+            var userTemplate = _mailRepos.FindBy(x => x.Identifier.Equals(Variables.EmailTemplateIds.CalendarEventNotification.ToString())).FirstOrDefault();
+            var lstUsers = new List<User>();
+           
+            if (eventinfo.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.User)
+            {
+                
+            }
+            else if(eventinfo.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.Department)
+            {
+
+            }
+            else if (eventinfo.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.MyselfOnly)
+            {
+
+            }
+            else if (eventinfo.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.Company)
+            {
+                
+            }
+
+            foreach (var user in lstUsers)
+            {
+                NotifyUser(new EmailStruct
+                    {
+                        SenderName = adminstruct.AdminName,
+                        SenderEmail = adminstruct.AdminEmail,
+                        ReceiverName = user.firstname + " " + user.surname,
+                        ReceiverEmail = user.email,
+                        EmailTitle = string.Format(userTemplate.Subject, eventinfo.Title),
+                        EmailBody =
+                            string.Format(userTemplate.Template, user.firstname, eventinfo.Title,
+                                          adminstruct.SiteRootURL, Variables.AdminEmailSignature)
+                    });
+            }
+           
+
+            return true;
+        }
+
         public bool NotifyUser(EmailStruct estruct)
         {
             return _emailService.SendEmailHTML(estruct.ReceiverEmail, estruct.ReceiverName, estruct.SenderEmail, estruct.SenderName, estruct.EmailTitle, estruct.EmailBody);

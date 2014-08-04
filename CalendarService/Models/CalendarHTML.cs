@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using totalhr.Shared;
 
 namespace Calendar.Models
 {
@@ -14,7 +15,7 @@ namespace Calendar.Models
 
         public string PreviousRequest { get; set; }
 
-        public int ViewType { get; set; }
+        public Variables.CalendarViewType  ViewType { get; set; }
 
         public string Javascript { get; set; }
     }

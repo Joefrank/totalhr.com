@@ -7,6 +7,7 @@ using Calendar.Infrastructure;
 using Calendar.Models;
 using System.Globalization;
 using log4net;
+using totalhr.services.messaging.Infrastructure;
 using TEF = totalhr.data.EF;
 using Authentication.Infrastructure;
 using totalhr.data.Repositories.Infrastructure;
@@ -30,29 +31,25 @@ namespace totalhr.web.Controllers
    
     public class CalendarController : BaseController
     {
-        ICalendarService _calService;
-        ICalendarManagementService _calMservice;
-        ICalendarRepository _calRepos;
-        ICalendarEventRepository _calEventRepos;
+        readonly ICalendarService _calService;
+        readonly ICalendarManagementService _calMservice;
         private IOAuthService _authService;
-        private readonly IGlossaryService _glossaryService;
+        private readonly IMessagingService _messagingService;
 
         private static readonly ILog Log = LogManager.GetLogger(typeof(AccountController));
-        
-        public CalendarController(ICalendarService cservice, ICalendarManagementService calmservice, 
-            IOAuthService authservice, ICalendarRepository calrepos, ICalendarEventRepository caleventRepos, IGlossaryService glossaryService) :  base(authservice)
+
+        public CalendarController(ICalendarService cservice, ICalendarManagementService calmservice, IMessagingService messageService, IOAuthService authservice)
+            : base(authservice)
         {
             _calService = cservice;
             _calMservice = calmservice;
-            _calRepos = calrepos;
-            _calEventRepos = caleventRepos;
+            _messagingService = messageService;  
             _authService = authservice;
-            _glossaryService = glossaryService;
         }
 
         private string MakeClientJSForWeekDays()
         {
-            StringBuilder sbtemp = new StringBuilder();            
+            var sbtemp = new StringBuilder();            
             string[] weekdays = _calService.GetWeekDaysByName(CultureInfo.CreateSpecificCulture(CurrentUser.Culture));
             int len = weekdays.Length;
 
@@ -120,7 +117,8 @@ namespace totalhr.web.Controllers
 
             eventinfo.CreatedBy = CurrentUser.UserId;           
             var cevent = _calMservice.CreateEvent(eventinfo);
-
+            _messagingService.NotifyUserOfCalendarEvent(WebsiteKernel, eventinfo);
+           
             if (cevent.id > 0)
             {
                 return RedirectToAction("GenerateDefault", "Calendar", new { id = eventinfo.CalendarId });
@@ -131,20 +129,6 @@ namespace totalhr.web.Controllers
             }
             
         }
-       
-        public ActionResult Generate(int year, int month)
-        {
-            var rqStruct = new CalendarRequestStruct
-            {
-                Info = CultureInfo.CreateSpecificCulture("en-GB"),//read user culture here
-                TableTemplate = @" border=""1"" class=""calendar"" ",
-                Year = year,
-                Month = month
-            };
-
-            return View("Generate", _calService.GenerateCalendarHTML(rqStruct));
-        }
-
         
         private ActionResult MonthView(int year, int month, int calendarid =0)
         {
@@ -267,14 +251,6 @@ namespace totalhr.web.Controllers
                     CurrentDayCssClass = ""
                 }
             };
-            //var weekRequest = new CalendarWeekRequestStruct
-            //{
-            //    DateRequested = new DateTime(year, month, day),
-            //    Info = CultureInfo.CreateSpecificCulture("fr-FR"),//read current user culture
-            //    TableTemplate = @" border=""1"" class=""calendarweek day"" ",
-            //    DayHeaderFormat = "dddd, MMM d",
-            //    CrossEdgeContent = " "
-            //};
 
             return View("Generate", _calService.GenerateDayHTML(weekRequest));
         }

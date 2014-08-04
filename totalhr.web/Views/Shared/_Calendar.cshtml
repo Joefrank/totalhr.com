@@ -1,4 +1,5 @@
 ﻿@model Calendar.Models.CalendarHTML
+@using totalhr.Shared
 @using totalhr.web.Helpers
 
 @{
@@ -12,16 +13,31 @@
 <link href="~/Content/calendar.css" rel="stylesheet" />
 
 <p>
-    @*** pass current date as links will depend on dates being viewed*@
+   
     <a href="@Model.PreviousRequest">@totalhr.Resources.Calendar.V_Prev</a>
     &nbsp;
     <a href="@Model.NextRequest">@totalhr.Resources.Calendar.V_Next</a>
     &nbsp;
-    @Html.Raw(DateHelper.CurrentWeekCalendarLink(totalhr.Resources.Calendar.V_Week_View, calendarId))
-     &nbsp;
-    @Html.Raw(DateHelper.CurrentDayCalendarLink(totalhr.Resources.Calendar.V_Day_View, calendarId))
-    &nbsp;
-    @Html.Raw(DateHelper.CurrentMonthCalendarLink(totalhr.Resources.Calendar.V_Month_View, calendarId))
+    
+    @if (Model.ViewType != Variables.CalendarViewType.MonthView)
+    {
+         @Html.Raw(DateHelper.CurrentMonthCalendarLink(totalhr.Resources.Calendar.V_Month_View, calendarId))
+         @:&nbsp;
+    }
+    
+    @if (Model.ViewType != Variables.CalendarViewType.WeekView)
+    {
+        @Html.Raw(DateHelper.CurrentWeekCalendarLink(totalhr.Resources.Calendar.V_Week_View, calendarId))
+        @:&nbsp;
+    }
+   
+    @if (Model.ViewType != Variables.CalendarViewType.DayView)
+    {
+        @Html.Raw(DateHelper.CurrentDayCalendarLink(totalhr.Resources.Calendar.V_Day_View, calendarId))
+        @:&nbsp; 
+    }
+    
+   
 </p>
 @Html.Raw(Model.GridHTML)
 

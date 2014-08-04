@@ -35,7 +35,8 @@ namespace totalhr.Shared
             AdminNewUserNotify,
             PasswordReminder,
             AccountActivated,
-            AdminAccountActivated
+            AdminAccountActivated,
+            CalendarEventNotification
         }
 
         public enum Roles
@@ -94,6 +95,13 @@ namespace totalhr.Shared
             Repeat = 3
         }
         
+        public enum CalendarViewType
+        {
+            MonthView,
+            WeekView,
+            DayView
+        }
+
         public static string AdminEmailSignature
         {
             get

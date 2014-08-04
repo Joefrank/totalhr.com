@@ -100,4 +100,10 @@ Index (zero based) must be greater than or equal to zero and less than the size 
 ]2014-08-02 20:58:27,498 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
 ]2014-08-02 20:58:27,841 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
 ]2014-08-03 18:20:01,211 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 10:09:09,979 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 10:36:32,170 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 8 - Day 4 
+]2014-08-04 10:36:41,984 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 8 - Day 4 
+]2014-08-04 10:36:43,236 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 8 - Day 5 
+]2014-08-04 10:36:44,520 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 8 - Day 4 
+]2014-08-04 10:36:44,955 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 8 - Day 3 
 ]

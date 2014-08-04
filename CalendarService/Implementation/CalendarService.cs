@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using totalhr.Shared;
 using totalhr.data.EF;
 using totalhr.Shared.Models;
 
@@ -207,8 +208,8 @@ namespace Calendar.Implementation
                 GridHTML = sbAllHtml.ToString(),
                 NextRequest = string.Format(CalendarMonthViewLink, nextMonthDate.Year, nextMonthDate.Month, rqStruct.CalendarId ),
                 PreviousRequest = string.Format(CalendarMonthViewLink, prevMonthDate.Year, prevMonthDate.Month,rqStruct.CalendarId),
-                Javascript = sbJavascript.ToString()
-
+                Javascript = sbJavascript.ToString(),
+                ViewType = Variables.CalendarViewType.MonthView
             };
         }
 
@@ -287,7 +288,8 @@ namespace Calendar.Implementation
                     GridHTML = string.Format(TableHtml, rqStruct.TableTemplate, sbHtml.ToString()),
                     NextRequest = string.Format(CalendarWeekViewLink, nextweek.Year, nextweek.Month, nextweek.Day, rqStruct.CalendarId),
                     PreviousRequest = string.Format(CalendarWeekViewLink, prevweek.Year, prevweek.Month, prevweek.Day, rqStruct.CalendarId),
-                    Javascript = sbJavascript.ToString()
+                    Javascript = sbJavascript.ToString(),
+                    ViewType = Variables.CalendarViewType.WeekView
                 };
 
             return html;
@@ -359,7 +361,8 @@ namespace Calendar.Implementation
                 {
                     GridHTML = string.Format(TableHtml, rqStruct.TableTemplate, sbHtml.ToString()),
                     NextRequest = string.Format(CalendarDayViewLink, nextday.Year, nextday.Month, nextday.Day, rqStruct.CalendarId),
-                    PreviousRequest = string.Format(CalendarDayViewLink, prevday.Year, prevday.Month, prevday.Day, rqStruct.CalendarId)
+                    PreviousRequest = string.Format(CalendarDayViewLink, prevday.Year, prevday.Month, prevday.Day, rqStruct.CalendarId),
+                    ViewType = Variables.CalendarViewType.DayView
                 };
         }       
 

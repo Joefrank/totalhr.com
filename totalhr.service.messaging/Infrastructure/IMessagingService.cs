@@ -20,5 +20,7 @@ namespace totalhr.services.messaging.Infrastructure
         void SendPasswordReminderEmail(AdminStruct adminstruct, User user);
 
         void AcknowledgeAccountActivation(AdminStruct adminstruct, User user);
+
+        bool NotifyUserOfCalendarEvent(AdminStruct adminstruct, CalendarEventInfo eventinfo);
     }
 }
