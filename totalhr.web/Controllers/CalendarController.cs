@@ -150,7 +150,7 @@ namespace totalhr.web.Controllers
         {
 
             var calEvents = calendarid == 0 ? _calMservice.GetUserCalendarEvents(CurrentUser.UserId,year,month) :
-                _calMservice.GetUserCalendarEvents(calendarid, CurrentUser.UserId, year, month);
+                _calMservice.GetUserCalendarEvents( CurrentUser.UserId, year, month, calendarid);
 
             //***verify that current user is not viewing calendars they are not authorized to view
             var calendar = _calMservice.GetCalendar(calendarid);
@@ -199,7 +199,7 @@ namespace totalhr.web.Controllers
                 }
 
                 var calEvents = calendarid == 0 ? _calMservice.GetUserCalendarEvents(CurrentUser.UserId, year, month) :
-               _calMservice.GetUserCalendarEvents(calendarid, CurrentUser.UserId, year, month);
+               _calMservice.GetUserCalendarEvents(CurrentUser.UserId, year, month, calendarid);
 
                 var weekRequest = new CalendarWeekRequestStruct
                 {

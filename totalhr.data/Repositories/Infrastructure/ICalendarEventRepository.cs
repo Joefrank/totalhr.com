@@ -9,14 +9,8 @@ using totalhr.Shared.Models;
 namespace totalhr.data.Repositories.Infrastructure
 {
     public interface ICalendarEventRepository : IGenericRepository<CalendarEvent>
-    {
-        List<CalendarEvent> GetCalendarMonthlyEventsByUser(int userid, int year, int month);
-
-        List<CalendarEvent> GetCalendarMonthlyEventsByUserAndCalendar(int calendarId, int userid, int year, int month);
-
-        List<CalendarEventCache> GetMonthlyCalendarEvents(int userid, int year, int month);
-
-        List<CalendarEventCache> GetMonthlyCalendarEvents(int calendarId, int userid, int year, int month);
+    {        
+        List<CalendarEventCache> GetMonthlyCalendarEvents(int userid, int year, int month , int calendarId=0);
 
         CalendarAssociation CreateEventAssociation(CalendarAssociation assoc);
 

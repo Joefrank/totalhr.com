@@ -43,6 +43,7 @@ namespace totalhr.data.Repositories.Implementation
                 CacheHelper = new HttpCacheHelper();
         }
 
+        //we need to get details of user or companyid, we might bind cache object to companyid
         public List<CalendarEventCache> GetAllCalendarEvents(int calendarid = 0)
         {
             var result = CacheHelper.Get<List<CalendarEventCache>>(calendarEventCacheKey);
@@ -68,97 +69,60 @@ namespace totalhr.data.Repositories.Implementation
 
             return result;
         }
+        
 
-        private List<CalendarEvent> List<T1>(IQueryable<CalendarEvent> queryable)
-        {
-            throw new NotImplementedException();
-        }
-
-        //add filtering by user
-        public List<CalendarEvent> GetCalendarMonthlyEventsByUser(int userid, int year, int month)
-        {
-            return FindBy(x =>
-                (x.StartOfEvent.Month == month || x.EndOfEvent.Month == month)
-                &&
-                (x.StartOfEvent.Year == year || x.EndOfEvent.Year == year)
-                ).ToList();                
-
-        }
-
-        //add filtering by user
-        public List<CalendarEvent> GetCalendarMonthlyEventsByUserAndCalendar(int calendarId, int userid, int year, int month)
-        {
-            return FindBy(x => x.CalendarId == calendarId &&
-                (x.StartOfEvent.Month == month || x.EndOfEvent.Month == month)
-                &&
-                (x.StartOfEvent.Year == year || x.EndOfEvent.Year == year)
-                ).ToList();
-
-        }
-
-        public List<CalendarEventCache> GetMonthlyCalendarEvents(int userid, int year, int month)
+        public List<CalendarEventCache> GetMonthlyCalendarEvents(int userid, int year, int month, int calendarid=0)
         {
             var lstEvents = GetAllCalendarEvents();
+            var foundEvents = new List<CalendarEventCache>();
             var user = Context.Users.FirstOrDefault(x => x.id == userid);
 
-            return lstEvents.FindAll(x =>  
-                (x.StartOfEvent.Month == month || x.EndOfEvent.Month == month)
-                && (x.StartOfEvent.Year == year || x.EndOfEvent.Year == year)
-                && //check that event is for all company or user personal event or user department or in list of invited users
-                (
-                x.CreatedBy == userid //is it my own event
-                ||
-                    x.Associations.Count(a =>                     
-                        (a.AssociationTypeid == (int)Variables.CalendarEventAssociationType.Attendee)
-                            &&
-                        (
-                            a.SubTypeId == (int)Variables.CalendarEventTarget.Company ||
-                            (a.SubTypeId == (int)Variables.CalendarEventTarget.MyselfOnly && x.CreatedBy == userid) ||                         
-                            (a.SubTypeId == (int)Variables.CalendarEventTarget.User && a.AssociationValue.Split(',').Select(int.Parse).ToList().Contains(userid)) ||
-                            (a.SubTypeId == (int)Variables.CalendarEventTarget.Department && a.AssociationValue.Split(',').Select(int.Parse).ToList().Contains(user.departmentid))
-                         )
-                        ) > 0
-                    )
-                );
-        }
-
-        public List<CalendarEventCache> GetMonthlyCalendarEvents(int calendarId, int userid, int year, int month)
-        {
-            var lstEvents = GetAllCalendarEvents();           
-            var user = Context.Users.FirstOrDefault(x => x.id == userid);
-
-            return lstEvents.FindAll(x =>  x.CalendarId == calendarId &&
-                (x.StartOfEvent.Month == month || x.EndOfEvent.Month == month) &&
-                (x.StartOfEvent.Year == year || x.EndOfEvent.Year == year) &&
-                 
-                (
-                x.Associations == null ||
-                (
-                x.CreatedBy == userid //is it my own event
-                ||
-
-                    x.Associations.Select(a => 
-                        (a.AssociationTypeid == (int)Variables.CalendarEventAssociationType.Attendee)
-                            &&
-                        (
-                            a.SubTypeId == (int)Variables.CalendarEventTarget.Company ||
-                            (a.SubTypeId == (int)Variables.CalendarEventTarget.MyselfOnly && x.CreatedBy == userid) ||
-                            (a.SubTypeId == (int)Variables.CalendarEventTarget.User && a.AssociationValue.Split(',').Select(int.Parse).ToList().Contains(userid)) ||
-                            (a.SubTypeId == (int)Variables.CalendarEventTarget.Department && a.AssociationValue.Split(',').Select(int.Parse).ToList().Contains(user.departmentid))
-                         )
-                        ).Count() >0
+            foreach (CalendarEventCache assocevt in lstEvents)
+            {
+                if (
+                    (calendarid == 0 || assocevt.CalendarId == calendarid)
+                    &&
+                    (assocevt.StartOfEvent.Month == month || assocevt.EndOfEvent.Month == month)
+                    &&
+                    (assocevt.StartOfEvent.Year == year || assocevt.EndOfEvent.Year == year)
                   )
-                  )
-                );
+                {
+                    //check event associations
+                    if(assocevt.Associations != null && assocevt.Associations.Count > 0){
+                        
+                        var targetassoc = assocevt.Associations.FirstOrDefault
+                            (x => x.AssociationTypeid == (int)Variables.CalendarEventAssociationType.Attendee);
+                        
+                        //there must be some invite or don't show event
+                        if(targetassoc == null){
+                            continue;
+                        }
+
+                        if (CanUserViewEvent(targetassoc, userid, assocevt.CreatedBy, user.departmentid))
+                        {
+                            foundEvents.Add(assocevt);
+                        }
+                    }
+                }
+            }
+
+            return foundEvents;           
 
         }
 
-        public CalendarAssociation CreateEventAssociation(CalendarAssociation assoc)
+        private bool CanUserViewEvent(CalendarAssociationCache targetassoc, int userid, int creatorid, int departmentid)
         {
-            this.Context.CalendarAssociations.Add(assoc);
-            this.Context.SaveChanges();
-            return assoc;
+            var assocvalue = targetassoc.AssociationValue;
+
+            return (
+                      targetassoc.SubTypeId == (int)Variables.CalendarEventTarget.Company ||
+                      (targetassoc.SubTypeId == (int)Variables.CalendarEventTarget.MyselfOnly && creatorid == userid) ||
+                      (targetassoc.SubTypeId == (int)Variables.CalendarEventTarget.User && assocvalue.Split(',').Select(int.Parse).ToList().Contains(userid)) ||
+                      (targetassoc.SubTypeId == (int)Variables.CalendarEventTarget.Department && assocvalue.Split(',').Select(int.Parse).ToList().Contains(departmentid))
+                   );
         }
+
+       
 
         public List<CalendarAssociation> GetCalendarEventAssociations(int eventid)
         {
@@ -167,12 +131,47 @@ namespace totalhr.data.Repositories.Implementation
 
         public List<CalendarEventCache> GetCalendarDailyEventsByUser(int userid, DateTime date, int calendarid=0){
             var lstEvents = GetAllCalendarEvents();
+            var foundEvents = new List<CalendarEventCache>();
+            var user = Context.Users.FirstOrDefault(x => x.id == userid);
 
-            return lstEvents.FindAll(x =>
-                (x.StartOfEvent.Date == date.Date || 
-                    x.EndOfEvent.Date == date.Date)
-                && (calendarid == 0 || x.CalendarId == calendarid)
-                ); 
+            foreach (CalendarEventCache assocevt in lstEvents)
+            {
+                if (
+                    (calendarid == 0 || assocevt.CalendarId == calendarid)
+                    &&
+                    (assocevt.StartOfEvent.Date == date.Date || assocevt.EndOfEvent.Date == date.Date)
+                  )
+                {
+                    //check event associations
+                    if (assocevt.Associations != null && assocevt.Associations.Count > 0)
+                    {
+
+                        var targetassoc = assocevt.Associations.FirstOrDefault
+                            (x => x.AssociationTypeid == (int)Variables.CalendarEventAssociationType.Attendee);
+
+                        //there must be some invite or don't show event
+                        if (targetassoc == null)
+                        {
+                            continue;
+                        }
+
+                        if (CanUserViewEvent(targetassoc, userid, assocevt.CreatedBy, user.departmentid))
+                        {
+                            foundEvents.Add(assocevt);
+                        }
+                    }
+                }
+            }
+
+            return foundEvents;
+        }
+
+        
+        public CalendarAssociation CreateEventAssociation(CalendarAssociation assoc)
+        {
+            this.Context.CalendarAssociations.Add(assoc);
+            this.Context.SaveChanges();
+            return assoc;
         }
 
     }

@@ -294,15 +294,11 @@ namespace Calendar.Implementation
             
             return _calrepos.FindBy(x => x.CreatedBy == userid).ToList();
         }
+               
 
-        public List<CalendarEventCache> GetUserCalendarEvents(int userid, int year, int month)
+        public List<CalendarEventCache> GetUserCalendarEvents(int userid, int year, int month, int calendarid=0)
         {
-            return _calEventRepos.GetMonthlyCalendarEvents(userid, year, month);
-        }
-
-        public List<CalendarEventCache> GetUserCalendarEvents(int calendarid, int userid, int year, int month)
-        {
-            return _calEventRepos.GetMonthlyCalendarEvents(calendarid, userid, year, month);
+            return _calEventRepos.GetMonthlyCalendarEvents( userid, year,month, calendarid);
         }
 
         public List<CalendarEventCache> GetUserDayCalendarEvents(int userid, DateTime date, int calendarid=0)

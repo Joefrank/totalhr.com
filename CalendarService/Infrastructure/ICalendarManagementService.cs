@@ -23,10 +23,8 @@ namespace Calendar.Infrastructure
         TEF.CalendarEvent CreateEvent(totalhr.Shared.Models.CalendarEventInfo info);
 
         List<TEF.Calendar> GetUserCalendars(int userid);
-
-        List<CalendarEventCache> GetUserCalendarEvents(int userid, int year, int month);
-
-        List<CalendarEventCache> GetUserCalendarEvents(int calendarid, int userid, int year, int month);
+                
+        List<CalendarEventCache> GetUserCalendarEvents(int userid, int year, int month, int calendarid = 0);
 
         List<TEF.CalendarAssociation> GetCalendarEventInvitees(int calendareventid);
 
