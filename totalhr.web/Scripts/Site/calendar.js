@@ -325,7 +325,6 @@ function DisplayAddedReminders() {
 }
 
 function AdjustRepeatBasedOnStartDate() {
-    alert('I was called');
     var selectedDate =$('#StartDate').val();
     var objDate = parseDate(selectedDate);
     var dayIndex = objDate.getDay();
