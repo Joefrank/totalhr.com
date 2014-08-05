@@ -79,7 +79,9 @@ namespace totalhr.Shared.Models.Mappers
             {
                 int typeofattendee = Int32.Parse(rootnode.SelectSingleNode("//type").InnerText);
                 assoccache.SubTypeId = typeofattendee;
-                assoccache.AssociationValue = rootnode.SelectSingleNode("//value").InnerText;
+                if(typeofattendee == (int)Variables.CalendarEventTarget.Department || 
+                    typeofattendee == (int)Variables.CalendarEventTarget.User)
+                    assoccache.AssociationValue = rootnode.SelectSingleNode("//value").InnerText;
             }
             catch (Exception ex)
             {

@@ -63,6 +63,8 @@ namespace totalhr.Shared.Models
 
         public string RepeatXML { get; set; }
 
-        
+        public int CompanyId { get; set; }
+
+
     }
 }

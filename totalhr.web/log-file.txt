@@ -106,4 +106,34 @@ Index (zero based) must be greater than or equal to zero and less than the size 
 ]2014-08-04 10:36:43,236 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 8 - Day 5 
 ]2014-08-04 10:36:44,520 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 8 - Day 4 
 ]2014-08-04 10:36:44,955 DEBUG totalhr.web.Controllers.AccountController - [Calendar day view params Year: 2014 - Month 8 - Day 3 
+]2014-08-04 21:58:58,216 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 22:01:19,345 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 22:01:19,706 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 22:01:19,813 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 22:01:26,282 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 22:03:42,305 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 22:07:08,195 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 22:07:08,235 DEBUG totalhr.web.Controllers.AccountController - [New User Registration Started
+]2014-08-04 22:07:08,928 DEBUG totalhr.services.Implementation.AccountService - [CreateCompany - Company creating
+]2014-08-04 22:07:09,490 DEBUG totalhr.services.Implementation.AccountService - [CreateCompany - Company created
+]2014-08-04 22:07:09,490 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - company created
+]2014-08-04 22:07:09,491 DEBUG totalhr.services.Implementation.AccountService - [Create User - User creating
+]2014-08-04 22:07:09,563 DEBUG totalhr.services.Implementation.AccountService - [Create user - user created
+]2014-08-04 22:07:09,564 DEBUG totalhr.services.Implementation.AccountService - [RegisterUserCompany - user created
+]2014-08-04 22:07:09,564 DEBUG totalhr.web.Controllers.AccountController - [Notification/Messaging started
+]2014-08-04 22:07:14,701 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - user notified 
+]2014-08-04 22:07:16,904 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeNewUserRegistration - Admin notified 
+]2014-08-04 22:07:16,993 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 22:09:31,506 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 22:09:31,509 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 22:09:31,520 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 22:09:41,991 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 22:09:42,024 DEBUG totalhr.web.Controllers.AccountController - [Login failed for user  bealice2000
+]2014-08-04 22:14:53,356 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 22:14:53,817 DEBUG totalhr.web.Controllers.AccountController - [Account Activation Token: 45649867-9f4d-4546-ad4b-cd1bbbc70deb
+]2014-08-04 22:15:01,863 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeAccountActivation - user notified 
+]2014-08-04 22:15:03,962 DEBUG totalhr.services.messaging.Implementation.MessagingService - [AcknowledgeAccountActivation - Admin notified 
+]2014-08-04 22:16:09,475 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-04 22:29:50,233 DEBUG totalhr.services.messaging.Implementation.EmailService - [EmailService (SendEmailHTML)- email send failed: The SMTP host was not specified.
+]2014-08-04 22:29:50,266 DEBUG totalhr.services.messaging.Implementation.EmailService - [EmailService (SendEmailHTML)- email send failed: The SMTP host was not specified.
 ]

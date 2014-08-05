@@ -146,12 +146,16 @@ namespace totalhr.services.Implementation
                 return userstruct;
             }
 
+            //*** create the default department which is HR and set user to that also create default calendar.
+            //*** give user some default roles and profiles when they are activated.
+
             Company company = CreateCompany(info);
 
             if (company.ID > 0)
             {
                 log.Debug("RegisterUserCompany - company created");
 
+                info.CompanyId = company.ID;
                 User user = CreateUser(info);
 
                 if (user.id > 0)

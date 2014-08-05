@@ -26,6 +26,8 @@ namespace Authentication.Models
 
         public int CompanyId { get; set; }
 
+        public int DepartmentId { get; set; }
+
         public string Culture { get; set; }
 
         public TimeSpan CookieDuration { get; set; }

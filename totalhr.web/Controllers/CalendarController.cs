@@ -115,7 +115,9 @@ namespace totalhr.web.Controllers
                 return View("EventEdit", eventinfo);
             }
 
-            eventinfo.CreatedBy = CurrentUser.UserId;           
+            eventinfo.CreatedBy = CurrentUser.UserId;
+            eventinfo.CompanyId = CurrentUser.CompanyId;
+          
             var cevent = _calMservice.CreateEvent(eventinfo);
             _messagingService.NotifyUserOfCalendarEvent(WebsiteKernel, eventinfo);
            
