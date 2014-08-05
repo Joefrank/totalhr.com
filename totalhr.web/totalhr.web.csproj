@@ -337,6 +337,7 @@
     <Content Include="Views\Account\CompanyUsersSelector.cshtml" />
     <Content Include="Views\Account\CompanyDepartmentSelector.cshtml" />
     <Content Include="Views\Shared\_PopupLayout.cshtml" />
+    <Content Include="Views\Calendar\EventAdd.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

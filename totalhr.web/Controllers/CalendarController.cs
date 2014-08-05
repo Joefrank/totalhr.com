@@ -100,8 +100,7 @@ namespace totalhr.web.Controllers
             else
             {
                 ViewBag.WeekDaysJS = MakeClientJSForWeekDays();
-                //ViewBag.EventTargets = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.CalendarEventTarget);
-                return View("EventEdit", "~/Views/Shared/_PopupLayout.cshtml", new CalendarEventInfo {CalendarId = calendar.id, CalendarName = calendar.Name });
+                return View("EventAdd", "~/Views/Shared/_PopupLayout.cshtml", new CalendarEventInfo {CalendarId = calendar.id, CalendarName = calendar.Name });
             }
          }
 
