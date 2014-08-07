@@ -186,3 +186,20 @@ div#toolbox {
         background:transparent url('/content/images/close.png') center center no-repeat;float:right;display:block;width:22px;height:22px;
     cursor:pointer;
         }
+
+/*validation styles*/
+
+.validation-summary-errors {
+    border:1px solid red;
+    background-color:#fcacca;
+    color:red;
+    font-weight:bold;
+    float:left;
+    position:relative;    
+    margin:10px;  
+    width:95%;
+}
+
+    .validation-summary-errors ul li {
+        padding:5px;
+    }

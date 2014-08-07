@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @*@Scripts.Render("~/bundles/modernizr")*@
+    @Scripts.Render("~/Scripts/jquery-1.11.0.min.js")
     @Scripts.Render("~/Scripts/Site/common.js")
 </head>
 <body>
     @RenderBody()
-
-    @Scripts.Render("~/bundles/jquery")
+        
     @RenderSection("scripts", required: false)
 
     <div id="dvPopup" style="display: none;"> 

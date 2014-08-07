@@ -9,14 +9,14 @@
 @{
     Layout = "~/Views/Shared/_PopupLayout.cshtml";
     ViewBag.Title = Common.Page_TT_Calendar_Event_Add;
- 
-    
+
+
     var WeekDaysJS = ViewBag.WeekDaysJS;
     var sbJS = new StringBuilder();
     var sbAttendees = new StringBuilder();
     string defaultStartDate;
     string defaultEndDate;
-    
+
     const string startTimeHour = "09";
     const string startTimeMin = "00";
     const string endTimeHour = "10";
@@ -31,9 +31,12 @@
     @Styles.Render("~/Content/css/BeatPicker.min.css")
 }
 
-@{
-    Html.RenderPartial("_FormScripts"); 
+@section headerScripts{   
+    
+   
+
 }
+
 
 
 @section head2{
@@ -65,14 +68,16 @@
             <div class="longline">
                 <div class="block">
                     <label class="fix200W">@FormMessages.Label_Description:</label>
-                    @Html.TextAreaFor(x => x.Description, new { @rows ="6", @cols = "40" })
+                    @Html.TextAreaFor(x => x.Description, new { @rows = "6", @cols = "40" })
                 </div>               
             </div>
         
             <div class="line">
                 <div class="block">
                 <label class="fix200W">@FormMessages.Label_Start_Date:<span class="req">*</span></label>
-                @Html.TextBoxFor(x => x.StartDate, defaultStartDate, DateHelper.GetCalendarDictionary("StartDate", "datetype", "['DD','MM','YYYY'],separator:'/'"));
+                @Html.TextBoxFor(x => x.StartDate, defaultStartDate, DateHelper.GetCalendarDictionary("StartDate", "datetype", "['DD','MM','YYYY'],separator:'/'"))
+                <a href="javascript:NewCal('StartDate','ddmmyyyy',true,24)"><img src="/Content/Images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
+
                 </div>
 
                 <div class="halfblock shiftleft">
@@ -98,10 +103,10 @@
                     @Html.HiddenFor(x => x.EndTime) 
 
 			        <label>Hour</label>
-			        @Html.DropDownList("endhour",  DateHelper.GetHourDDL(), endTimeHour) 
+			        @Html.DropDownList("endhour", DateHelper.GetHourDDL(), endTimeHour) 
 			
 			        <label> Min</label>			
-			        @Html.DropDownList("endminute",  DateHelper.GetMinuteDDL(), endTimeMin)
+			        @Html.DropDownList("endminute", DateHelper.GetMinuteDDL(), endTimeMin)
 		        </div>
             </div>           
             
@@ -116,7 +121,9 @@
                              @if (Model.Reminders != null && Model.Reminders.Count > 0)
                              {
                                 @(Model.Reminders.Count + " " + FormMessages.V_Added)
-                             }else{
+                             }
+                             else
+                             {
                                 @FormMessages.V_None_Added
                              }
                          </span>
@@ -201,19 +208,19 @@
 
              <div class="line">
                   <div class="block">
-			<label class="fix200W">@FormMessages.Label_TargetGroup</label>
+			<label class="fix200W">@FormMessages.Label_TargetGroup <span class="req">*</span></label>
                  <div class="childblock">
                     
                      <div class="head" onclick="ToggleExpand('dvAttendeesContent')">
-                         @(Model.TargetAttendeeGroupId > 0 ? EnumExtensions.Description((Variables.CalendarEventTarget) Model.TargetAttendeeGroupId) : 
+                         @(Model.TargetAttendeeGroupId > 0 ? EnumExtensions.Description((Variables.CalendarEventTarget)Model.TargetAttendeeGroupId) :
                             FormMessages.V_None_Added)
                          
                      </div>
                      <div id="dvAttendeesContent" class="content" style="display:none">
                         @foreach (var num in (Variables.CalendarEventTarget[])Enum.GetValues(typeof(Variables.CalendarEventTarget)))
                         {
-                            var schecked = (int) num == Model.TargetAttendeeGroupId ? " checked " : "";
-                            sbAttendees.Append(string.Format("{0} = {1};" + Environment.NewLine, num.ToString(), (int) num));
+                            var schecked = (int)num == Model.TargetAttendeeGroupId ? " checked " : "";
+                            sbAttendees.Append(string.Format("{0} = {1};" + Environment.NewLine, num.ToString(), (int)num));
                             @Html.Raw(CalendarHelper.GenerateAttendee(num, "TargetAttendeeGroupId", schecked));
                         }                         
                        
@@ -232,14 +239,14 @@
             
           <div class="line">
                 <div class="block">
-			        <label class="fix200W">@FormMessages.Label_Repeat: <span class="req">*</span></label>
+			        <label class="fix200W">@FormMessages.Label_Repeat:</label>
                     
                     <div  id="dvRepeat" class="childblock">
                     
                         <div id="dvRepeatHead" class="head" onclick="ToggleExpand('dvRepeatContent',$.trim($('#StartDate').val()) != '' ,'hdnMissingStartDate', 'AdjustRepeatBasedOnStartDate')">
                             @{
-                                var title = Model.RepeatType > 0 ? EnumExtensions.Description((Variables.RepeatType) Model.RepeatType) : FormMessages.V_None_Added;
-                                title = (title.Contains("{0}")) ? string.Format(title, Model.StartDate.DayOfWeek.ToString()) : title;
+                        var title = Model.RepeatType > 0 ? EnumExtensions.Description((Variables.RepeatType)Model.RepeatType) : FormMessages.V_None_Added;
+                        title = (title.Contains("{0}")) ? string.Format(title, Model.StartDate.DayOfWeek.ToString()) : title;
                             }
                             @Html.Raw(title)
                         </div>
@@ -247,7 +254,7 @@
                     <div id="dvRepeatContent" class="content" style="display:none">
                         @foreach (var num in (Variables.RepeatType[])Enum.GetValues(typeof(Variables.RepeatType)))
                         {
-                            var schecked = (int) num == Model.RepeatType ? " checked " : "";
+                            var schecked = (int)num == Model.RepeatType ? " checked " : "";
                             sbJS.Append(string.Format("{0} = {1};" + Environment.NewLine, num.ToString(), (int)num));
                             @Html.Raw(CalendarHelper.GenerateRepeatByType(num, "RepeatTypeGroup", schecked));
                         }
@@ -312,11 +319,15 @@
       
 
 }
-    <script type="text/javascript" src="/Scripts/Site/BeatPicker.min.js"></script>
-<script type="text/javascript" src="/Scripts/jquery-1.11.0.min.js"></script> 
-<script type="text/javascript" src="/Scripts/date.js"></script>
+
     
 <div class="status-box" id="status"></div>
+
+@* <script type="text/javascript" src="/Scripts/Site/BeatPicker.min.js"></script>
+    <script type="text/javascript" src="/Scripts/date.js"></script>*@
+
+    <script type="text/javascript" src="/Scripts/Site/calendar_new.js"></script>
+    <script type="text/javascript" src="/Scripts/Site/calendar.js" ></script>
 
 <script type="text/javascript">
 
@@ -348,17 +359,17 @@
             statusElem.append(child);
         };
 
-        StartDate.on("select", function(data) {
-            var selectedDate = data.string;
-            var objDate = parseDate(selectedDate);
-            var dayIndex = objDate.getDay();
-            var objList = $('#spRepeatDesc_' + OnDayOfTheWeek + ' .repDay');
+        //StartDate.on("select", function(data) {
+        //    var selectedDate = data.string;
+        //    var objDate = parseDate(selectedDate);
+        //    var dayIndex = objDate.getDay();
+        //    var objList = $('#spRepeatDesc_' + OnDayOfTheWeek + ' .repDay');
             
-            objList.each(function( i ) {
-                $(this).html(weekday[dayIndex]);
-            });
+        //    objList.each(function( i ) {
+        //        $(this).html(weekday[dayIndex]);
+        //    });
             
-        });
+        //});
 
     });
 

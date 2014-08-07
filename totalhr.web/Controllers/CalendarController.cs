@@ -111,7 +111,7 @@ namespace totalhr.web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return View("EventEdit", eventinfo);
+                return View("EventAdd", eventinfo);
             }
 
             eventinfo.CreatedBy = CurrentUser.UserId;
