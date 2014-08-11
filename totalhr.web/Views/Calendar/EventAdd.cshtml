@@ -16,8 +16,9 @@
     var sbAttendees = new StringBuilder();
     string defaultStartDate;
     string defaultEndDate;
-    var sbRemindersJS = new StringBuilder();    
-    
+    var sbRemindersJS = new StringBuilder();
+    var reminderscount = (Model.Reminders == null) ? 0 : Model.Reminders.Count;
+        
     var culture = new System.Globalization.CultureInfo(Model.UserCulture);
 
     defaultStartDate = (Model.StartDate > DateTime.MinValue) ? Model.StartDate.ToString(culture) : DateTime.Now.ToString(culture);
@@ -125,9 +126,9 @@
                     
                      <div class="head" onclick="ToggleExpand('dvReminderContent')">
                          <span id="spReminderCount" class="actiontitle">(
-                             @if (Model.Reminders != null && Model.Reminders.Count > 0)
+                             @if (reminderscount > 0)
                              {
-                                @(Model.Reminders.Count + " " + FormMessages.V_Added)
+                                @(reminderscount + " " + FormMessages.V_Added)
                              }
                              else
                              {
@@ -135,15 +136,17 @@
                              }
                        ) </span>
 
-                      <span class="buttons">
-                        <span class="spedit" title="@FormMessages.Toolt_Edit_Reminder" onclick="Expand('spReminders');">
-                            &nbsp;
-                        </span>
+                         <span class="buttons">
+                             
+                             <span class="spadd" onclick="AddReminderRow();" />
 
-                        <span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick="Expand('spReminders');">
-                            &nbsp;
-                        </span>
-                      </span>
+                             @if (reminderscount > 0)
+                             {
+                                 <span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick=" Expand('spReminders'); ">
+                                     &nbsp;
+                                 </span>
+                             }
+                         </span>
 
                         <span id="spReminders" class="spview" style="display:none;">
                             &nbsp;
@@ -153,25 +156,37 @@
 
                      <div id="dvReminderContent" class="content" style="display:none;">
                            
-                          <div id="dvReminderOptions" class="optionbox">
+                        <div id="dvReminderOptions" >
                              <div id="dvAddedReminders" style="min-height:100px;">
                                 
                              </div>
-                              
-                              <div id="dvReminderProgress" style="border-top:1px solid brown;color:red;padding:3px 0;">
+                         </div>
 
-                             </div>
-                            
+                         <div id="dvReminderList" class="reminderedit" style="display:none">
+                             <table>
+                                 <tr>
+                                     <td>
+                                         <span id="ctremtype_1">
+                                             @Html.Raw(CalendarHelper.GenerateReminderTypeSelect("selReminder_1", "selReminder_1", @" onchange=""CheckReminderValue(this);"" "))
+                                         </span>
+                                     </td>
+                                     <td>
+                                         <span id="ctremnotification_1">
+                                             @Html.Raw(CalendarHelper.GenerateReminderNotificationSelect("selRemindernotif_1", "selRemindernotif_1", ""))
+                                         </span>
+                                     </td>
+                                     <td>
+                                         <span id="ctremaction_1">
+                                             <span id="spreminremove_1" class="delete" onclick="RemoveRow(this);" />
+                                         </span>
+                                     </td>
+                                 </tr>
+                             </table>
                              
-                              <span class="spadd" onclick="$('#dvReminderEdit').slideDown('slow');">Add new reminder</span>
-                           
+                             <input type="button" value="Add" class="btnsmall" onclick="SaveReminder();"/>
                          </div>
 
-                         <div id="dvReminderList" style="display:none">
-
-                         </div>
-
-                         <div id="dvReminderEdit" style="display:none;">
+                      @*   <div id="dvReminderEdit" style="display:none;">
                          <span class="row" id="spReminderRow_1">
                              <i class="info" title="@EnumExtensions.FurtherInfo(Variables.ReminderType.TimeBefore)">&nbsp;</i> 
                                 &nbsp;
@@ -208,10 +223,10 @@
                                                               
                         </span> 
                              <div>
-                                 <input type="button" value="Add" class="btnsmall" onclick="SaveReminder();"/>
+                                 
                                  
                              </div>
-                             </div>
+                             </div>*@
                            
                             
                          
@@ -384,6 +399,7 @@
     var RepeatsToSave = new Array();
     var EventId = @Model.EventId;
     var ERROR_INVALID_DATE = "@FormMessages.Error_Invalid_Date";
+    var REMINDER_TYPE_CUSTOMIZE = "@Variables.CalendarEventReminderValues.Customize";
     
     @sbJS.ToString()
    

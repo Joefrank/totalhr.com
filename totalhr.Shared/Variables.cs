@@ -79,6 +79,32 @@ namespace totalhr.Shared
             EveryXTime = 2
         }
 
+        public enum CalendarEventReminderValues
+        {
+            R5MinsBefore,
+            R10MinsBefore,
+            R15MinsBefore,
+            R20MinsBefore,
+            R25MinsBefore,
+            R30MinsBefore,
+            R45MinsBefore,
+            R1HourBefore,
+            R2HoursBefore,
+            R4HoursBefore,
+            R1DayBefore,
+            R2DaysBefore,
+            R1WeekBefore,
+            R2WeeksBefore,
+            R1MonthBefore,
+            Customize
+        }
+
+        public enum CalendarEventNotificationType
+        {
+            ByEmail,
+            ByTextPhone
+        }
+
         public enum EventFrequency
         {
             EvtHour=2,

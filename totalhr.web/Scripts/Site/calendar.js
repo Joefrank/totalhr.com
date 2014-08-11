@@ -11,6 +11,7 @@ var ckSelectedTargetUsers = new Array();
 var ckSelectedDepartment = new Array();
 var SelectedReminderType = null;
 var Reminders = new Array();
+var reminderTemplateHTML = '<tr><td></td><td></td></tr>';
 
 function ManageActiveDay(objTd) {
     var objTdId = objTd.id;
@@ -263,6 +264,21 @@ function parseDate(input) {
     return new Date(parts[2], parts[1] - 1, parts[0]); // months are 0-based
 }
 
+
+/* Reminders work */
+
+function CheckReminderValue(objsel) {
+    var selremindertype = objsel.value;
+    if (REMINDER_TYPE_CUSTOMIZE == selremindertype) {
+        alert('customizing');
+    }
+}
+
+function AddReminderRow() {
+    $('#dvReminderEdit').slideDown('slow');
+    $('#dvReminderList').fadeIn("slow");
+}
+    
 function ApplyReminderSelection(objid) {
     var obj = document.getElementById(objid);
     var val = obj.value;
@@ -307,43 +323,64 @@ function ApplyMessagesToReminders() {
 
 function SaveReminder() {
 
-    if (SelectedReminderType == null) {
+    /*if (SelectedReminderType == null) {
         alert(MSG_MISSING_REMINDER_TYPE);
-    }
-    //Reminders
-    var frequency = 0;
-    var frequencytype = 0;
-    var message = '';
-    
-    if (SelectedReminderType == 1) {
-        frequency = $('#txtReminderFrequencyBefore').val();
-        frequencytype = $('#ddlFrequencyBeforeType option:selected').val();
-        message = $('#txtReminderFrequencyBefore').val() + " " + $('#ddlFrequencyBeforeType option:selected').text() + " " + $('#spTimeBefore').html();
-    } else if(SelectedReminderType == 2) {
-        frequency = $('#txtReminderFrequency').val();
-        frequencytype = $('#ddlFrequencyType option:selected').val();
-        message = $('#spEveryTime').html() + " " + $('#txtReminderFrequency').val() + " " + $('#ddlFrequencyType option:selected').text();
-    }
-    
-    if (frequency == 0 || frequency == '' || isNaN(frequency)) {
-        alert(MSG_MISSING_REMINDER_VALUES);
-        return;
-    }
+    }*/
 
-    if (!ValidateIncomingReminder(frequency, frequencytype, SelectedReminderType))
-        return;
+    
 
-    Reminders[Reminders.length] = [SelectedReminderType, frequency, frequencytype, message];
+    var message = $('#selReminder_1 option:selected').text() + " (" + $('#selRemindernotif_1 option:selected').text() + ")";
+    var selremindertype = $('#selReminder_1').val();
+    var selnotificationtype = $('#selRemindernotif_1').val();
+    
+    if (!ValidateIncomingReminder(selremindertype))
+        return;
+    
+    Reminders[Reminders.length] = [selremindertype, selnotificationtype, 0, message];
+    
+    ////Reminders
+    //var frequency = 0;
+    //var frequencytype = 0;
+    
+    
+    //if (SelectedReminderType == 1) {
+    //    frequency = $('#txtReminderFrequencyBefore').val();
+    //    frequencytype = $('#ddlFrequencyBeforeType option:selected').val();
+    //    message = $('#txtReminderFrequencyBefore').val() + " " + $('#ddlFrequencyBeforeType option:selected').text() + " " + $('#spTimeBefore').html();
+    //} else if(SelectedReminderType == 2) {
+    //    frequency = $('#txtReminderFrequency').val();
+    //    frequencytype = $('#ddlFrequencyType option:selected').val();
+    //    message = $('#spEveryTime').html() + " " + $('#txtReminderFrequency').val() + " " + $('#ddlFrequencyType option:selected').text();
+    //}
+    
+    //if (frequency == 0 || frequency == '' || isNaN(frequency)) {
+    //    alert(MSG_MISSING_REMINDER_VALUES);
+    //    return;
+    //}
+
+    //if (!ValidateIncomingReminder(frequency, frequencytype, SelectedReminderType))
+    //    return;
+
+    //Reminders[Reminders.length] = [SelectedReminderType, frequency, frequencytype, message];
 
     DisplayAddedReminders();
     
     
 }
 
-function ValidateIncomingReminder(frequency, frenquencyType, remindertype) {
+function ValidateIncomingReminder(remindertype, frequency, frenquencyType) {
     var len = Reminders.length;
+    var bDuplicate = false;
+    
     for (var i = 0; i < len; i++) {
-        if (Reminders[i][0] == remindertype && Reminders[i][1] == frequency && Reminders[i][2] == frenquencyType) {
+        if (remindertype == REMINDER_TYPE_CUSTOMIZE && Reminders[i][1] == frequency && Reminders[i][2] == frenquencyType) {
+            bDuplicate = true;
+        }
+        else if (remindertype == Reminders[i][0]) {
+            bDuplicate = true;
+        }
+
+        if (bDuplicate) {
             alert(MSG_DUPLICATE_REMINDER);
             return false;
         }

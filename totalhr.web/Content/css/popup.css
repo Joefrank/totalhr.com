@@ -96,7 +96,10 @@ body, html {
 
 .line .head .spview{float:left;display:block;width:16px;height:16px;background:transparent url('/Content/images/view.gif') center center no-repeat;}
 
-.line .content .spadd{padding: 2px 0 0 17px;color:blue;cursor:pointer;margin-left:5px;background:transparent url('/Content/images/plus-icon.png') left center no-repeat;}
+.line .content .spadd, .line .head .spadd{float: left;display:block;width:16px;height:16px;padding: 2px 0 0 17px;color:blue;cursor:pointer;background:transparent url('/Content/images/plus-icon.png') left center no-repeat;}
+.line .head .spadd {
+    float: right;padding: 0;
+}
 
 .line .content .delete {padding: 2px 0 0 17px;color:blue;cursor:pointer;margin-left:5px;background:transparent url('/Content/images/minus-icon.png') left center no-repeat; }
 
@@ -228,4 +231,8 @@ div#toolbox {
     font-weight: 90;
     border: 2px solid transparent;
 
+}
+
+div.reminderedit {
+    width: 300px;position: relative;top: 0;z-index: 10000;background-color:#f9f9f9;border: 1px solid grey;
 }
