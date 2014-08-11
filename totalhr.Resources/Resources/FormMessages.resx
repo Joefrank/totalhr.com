@@ -636,4 +636,7 @@
   <data name="MSG_Details_Saved" xml:space="preserve">
     <value>Your details have been saved successfully!</value>
   </data>
+  <data name="MSG_Duplicate_Reminder" xml:space="preserve">
+    <value>Reminder already added.</value>
+  </data>
 </root>

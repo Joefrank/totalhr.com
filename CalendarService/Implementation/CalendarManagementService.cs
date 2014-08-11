@@ -51,8 +51,8 @@ namespace Calendar.Implementation
                 {
                     Title = info.Title,
                     Description = info.Description,
-                    StartOfEvent = AddTimeToDate(info.StartDate, info.StartTime),
-                    EndOfEvent = AddTimeToDate(info.EndDate, info.EndTime),
+                    StartOfEvent = info.StartDate,
+                    EndOfEvent = info.EndDate,
                     CreatedBy = info.CreatedBy,
                     Location = info.Location,
                     Created = DateTime.Now,

@@ -20,14 +20,13 @@ namespace totalhr.Shared.Models
         public string Location { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_EventStartDate_Rq")]       
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public DateTime StartDate { get; set; }
-
        
         public string StartTime { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_EventEndDate_Rq")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public DateTime EndDate { get; set; }
 
         
@@ -36,6 +35,10 @@ namespace totalhr.Shared.Models
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_Event_UserNotLogged")]
         public int CreatedBy { get; set; }
 
+        public string UserCulture { get; set; }
+
+        public List<CalendarEventReminder> Reminders { get; set; }
+
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_Event_Target_Required")]
         public int TargetAttendeeGroupId { get; set; }
                 
@@ -43,7 +46,8 @@ namespace totalhr.Shared.Models
 
         public string InvitedDepartmentIds { get; set; }
 
-        public List<CalendarEventReminder> Reminders { get; set; }
+       
+
 
         public int ReminderType { get; set; }
 

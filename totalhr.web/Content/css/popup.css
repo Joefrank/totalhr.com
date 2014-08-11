@@ -94,13 +94,21 @@ body, html {
 .line .reminders span{float:left;display:block;width:16px;height:16px;cursor:pointer;}
 .line .reminders .spcount{color:blue;width:100px;font-weight:bold;padding:5px 0 0 5px;}
 
-.line .reminders .spview{padding:2px 3px;float:right;margin:5px 10px 0 0px;width:200px;}
+.line .head .spview{float:left;display:block;width:16px;height:16px;background:transparent url('/Content/images/view.gif') center center no-repeat;}
 
-.line .reminders .spadd{padding:10px 0 0 2px;margin-left:10px;background:transparent url('../images/plus-icon.png') left center no-repeat;}
+.line .content .spadd{padding: 2px 0 0 17px;color:blue;cursor:pointer;margin-left:5px;background:transparent url('/Content/images/plus-icon.png') left center no-repeat;}
 
-.line .reminders .spedit{padding:10px 0 0 2px;background:transparent url('../images/edit-icon.png') center center no-repeat;}
+.line .content .delete {padding: 2px 0 0 17px;color:blue;cursor:pointer;margin-left:5px;background:transparent url('/Content/images/minus-icon.png') left center no-repeat; }
 
-.line .reminders .spdelete{background:transparent url('../images/delete-icon.png') center center no-repeat;}
+.line .head .spedit{float:left;margin-right:10px;display:block;width:16px;height:16px;background:transparent url('/Content/images/edit-icon.png') center center no-repeat;}
+
+.line .actiontitle {float:left;margin-right:10px;}
+
+.line .buttons {
+    float:right;display:block;margin-right:2px;
+}
+
+.line .reminders .spdelete{background:transparent url('/Content/images/delete-icon.png') center center no-repeat;}
 
 .reminderpopup {
     background-color:#59a8dc;
@@ -131,7 +139,10 @@ body, html {
 
  #dvReminderContent span.row{height: 30px;float: left;}
 
-  .childblock .head{ float: left;width: 100%;height: 20px;padding: 2px 0;text-align: left;cursor: pointer;color: blue;font-weight: bold;}
+  .childblock .head{ 
+      float: left;width: 100%;height: 20px;padding: 2px 0;text-align: left;cursor: pointer;color: blue;font-weight: bold;
+      -webkit-box-shadow: 0 2px #666633;box-shadow: 0 2px #666633;background-color:beige;border: 1px solid grey;
+  }
 
    .childblock .content{ float: left;width: 98%;background-color: beige;padding:1%;}
    
@@ -156,7 +167,7 @@ body, html {
 /*span.row i.info{ margin-top: -16px;}*/
 
 .line input[type="text"].datetype {
-    width:100px;
+    width:130px;background:transparent url('/content/images/cal.gif') right center no-repeat;padding-right:16px;
 }
 
 #dvPopupAjax {
@@ -203,3 +214,18 @@ div#toolbox {
     .validation-summary-errors ul li {
         padding:5px;
     }
+
+.line input[type="button"].btnsmall {
+    /*box-sizing: border-box;
+    height: 32px;
+    line-height: 32px;*/
+    padding: 0 5px;
+    background-color: #198fff;
+    color: #fff;
+    -webkit-box-shadow: 0 2px #063a93;
+    box-shadow: 0 2px #063a93;
+    border-radius: 3px;
+    font-weight: 90;
+    border: 2px solid transparent;
+
+}

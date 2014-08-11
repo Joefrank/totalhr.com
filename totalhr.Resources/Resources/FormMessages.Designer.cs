@@ -1438,6 +1438,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reminder already added..
+        /// </summary>
+        public static string MSG_Duplicate_Reminder {
+            get {
+                return ResourceManager.GetString("MSG_Duplicate_Reminder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter your email and we will send you a reminder for your password.
         /// </summary>
         public static string MSG_Email_Reminder {

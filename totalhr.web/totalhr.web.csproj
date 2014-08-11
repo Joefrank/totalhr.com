@@ -303,7 +303,7 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\Site\BeatPicker.min.js" />
     <Content Include="Scripts\Site\calendar.js" />
-    <Content Include="Scripts\Site\calendar_new.js" />
+    <Content Include="Scripts\Site\DatePicker.js" />
     <Content Include="Scripts\Site\common.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">

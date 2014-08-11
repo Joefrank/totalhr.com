@@ -283,7 +283,30 @@ function ApplyReminderSelection(objid) {
 
 }
 
+/** used when page is reloaded */
+function ApplyMessagesToReminders() {
+    var len = Reminders.length;
+    var message = '';
+    var messageHtml = '';
+    var remindertype;
+
+    for (var i = 0; i < len; i++) {
+        remindertype = Reminders[i][0];
+
+        if (remindertype == 1) {            
+            message = Reminders[i][1] + " " + $('#ddlFrequencyBeforeType option[value="' + Reminders[i][2] + '"]').text() + " " + $('#spTimeBefore').html();
+        } else if (remindertype == 2) {
+            message = $('#spEveryTime').html() + " " + Reminders[i][1] + " " + $('#ddlFrequencyBeforeType option[value="' + Reminders[i][2] + '"]').text();
+        }
+        Reminders[i][3] = message;
+        messageHtml += '<span class="row">#' + (i + 1) + ': ' +  message + '</span>';
+    }
+
+    $('#dvAddedReminders').html(messageHtml);
+}
+
 function SaveReminder() {
+
     if (SelectedReminderType == null) {
         alert(MSG_MISSING_REMINDER_TYPE);
     }
@@ -307,6 +330,9 @@ function SaveReminder() {
         return;
     }
 
+    if (!ValidateIncomingReminder(frequency, frequencytype, SelectedReminderType))
+        return;
+
     Reminders[Reminders.length] = [SelectedReminderType, frequency, frequencytype, message];
 
     DisplayAddedReminders();
@@ -314,14 +340,39 @@ function SaveReminder() {
     
 }
 
-function DisplayAddedReminders() {
-    var tempHtml = '';
+function ValidateIncomingReminder(frequency, frenquencyType, remindertype) {
     var len = Reminders.length;
     for (var i = 0; i < len; i++) {
-        tempHtml += '<span class="row">#' + (i + 1) + ': ' + Reminders[i][3] + '</span>';
+        if (Reminders[i][0] == remindertype && Reminders[i][1] == frequency && Reminders[i][2] == frenquencyType) {
+            alert(MSG_DUPLICATE_REMINDER);
+            return false;
+        }
+    }
+    return true;
+}
+
+function DisplayAddedReminders() {
+    var tempHtml = '';
+    var tempFormHtml = '';
+
+    var len = Reminders.length;
+    for (var i = 0; i < len; i++) {
+        tempHtml += '<span class="row">#' + (i + 1) + ': ' + Reminders[i][3] + '<span class="delete" onclick="DeleteReminder(' + i + ')">';
+        tempHtml += '&nbsp;</span></span>';
+        tempFormHtml += '<input type="hidden" name="Reminders[' + i + '].Frequency" value="' + Reminders[i][1] + '" />';
+        tempFormHtml += '<input type="hidden" name="Reminders[' + i + '].FrequencyType" value="' + Reminders[i][2] + '" />';
+        tempFormHtml += '<input type="hidden" name="Reminders[' + i + '].ReminderType" value="' + Reminders[i][0] + '" />';
     }
     
     $('#dvAddedReminders').html(tempHtml);
+    $('#spReminderCount').html('(' + len + ' ' + MSG_ADDED + ')');
+
+    $('#dvReminderList').html(tempFormHtml);
+}
+
+function DeleteReminder(index) {
+    Reminders.splice(index, 1);
+    DisplayAddedReminders();
 }
 
 function AdjustRepeatBasedOnStartDate() {
@@ -340,32 +391,37 @@ function PrepareToSaveValues() {
     
     try{
         //validate dates (also check times)***
-        var compare = Date.parse($('#StartDate').val()).compareTo(Date.parse($('#EndDate').val()));
-        if (compare > 0) {
-            alert(decodeURIComponent(MSG_ERROR_STARTDATE_AFTER_ENDDATE));
-            return false;
-        }
+        //var compare = Date.parse($('#StartDate').val()).compareTo(Date.parse($('#EndDate').val()));
+
+
+        //if (compare > 0) {
+        //    alert(decodeURIComponent(MSG_ERROR_STARTDATE_AFTER_ENDDATE));
+        //    return false;
+        //}
 
         // prepare timings
-        $('#StartTime').val($('#starthour').val() + ' : ' + $('#startminute').val() + ' : 00');
-        $('#EndTime').val($('#endhour').val() + ' : ' + $('#endminute').val() + ' : 00');
+        //$('#StartTime').val($('#starthour').val() + ' : ' + $('#startminute').val() + ' : 00');
+        //$('#EndTime').val($('#endhour').val() + ' : ' + $('#endminute').val() + ' : 00');
 
         //prepare reminders
         var reminderlen = Reminders.length;
         var remindersXML = '';
     
-        for (var i = 0; i < reminderlen; i++) {
-            if (Reminders[i] != null) {
-                remindersXML += '<reminder><type>' + Reminders[i][0] + '</type><frequencytype>' + Reminders[i][2] + '</frequencytype><frequency>' + Reminders[i][1] + '</frequency></reminder>';
+        if (reminderlen != null && reminderlen > 0) {
+            for (var i = 0; i < reminderlen; i++) {
+                if (Reminders[i] != null) {
+                    remindersXML += '<reminder><type>' + Reminders[i][0] + '</type><frequencytype>' + Reminders[i][2] + '</frequencytype><frequency>' + Reminders[i][1] + '</frequency></reminder>';
+                }
+            }
+
+            if (remindersXML != '') {
+                remindersXML = '<reminders>' + remindersXML + '</reminders>';
+                $('#ReminderXML').val(remindersXML);
             }
         }
-    
-        if (remindersXML != '') {
-            remindersXML = '<reminders>' + remindersXML + '</reminders>';
-        }
 
-        $('#ReminderXML').val(remindersXML);
         
+        return true;
       
         // prepare target groups
         var selTargetVal = $("input:radio[name='TargetAttendeeGroupId']:checked").val();

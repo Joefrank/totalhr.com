@@ -16,15 +16,24 @@
     var sbAttendees = new StringBuilder();
     string defaultStartDate;
     string defaultEndDate;
+    var sbRemindersJS = new StringBuilder();    
+    
+    var culture = new System.Globalization.CultureInfo(Model.UserCulture);
 
-    const string startTimeHour = "09";
-    const string startTimeMin = "00";
-    const string endTimeHour = "10";
-    const string endTimeMin = "00";
-
-
-    defaultStartDate = (Model.StartDate > DateTime.MinValue) ? Model.StartDate.ToShortDateString() : DateTime.Now.ToShortDateString();
-    defaultEndDate = (Model.EndDate > DateTime.MinValue) ? Model.EndDate.ToShortDateString() : DateTime.Now.ToShortDateString();
+    defaultStartDate = (Model.StartDate > DateTime.MinValue) ? Model.StartDate.ToString(culture) : DateTime.Now.ToString(culture);
+    defaultEndDate = (Model.EndDate > DateTime.MinValue) ? Model.EndDate.ToString(culture) : DateTime.Now.ToString(culture);
+    
+    if (Model.Reminders != null)
+    {
+        int i=0;
+        
+        foreach (totalhr.Shared.Models.CalendarEventReminder reminder in Model.Reminders)
+        {
+            sbRemindersJS.Append(string.Format(" Reminders[{0}]=[{1}, {2}, {3}, '{4}'];" + Environment.NewLine,i, reminder.ReminderType,
+                reminder.Frequency, reminder.FrequencyType, ""));
+            i++;
+        }
+    }
 }
 
 @section extrastyles{
@@ -75,12 +84,10 @@
             <div class="line">
                 <div class="block">
                 <label class="fix200W">@FormMessages.Label_Start_Date:<span class="req">*</span></label>
-                @Html.TextBoxFor(x => x.StartDate, defaultStartDate, DateHelper.GetCalendarDictionary("StartDate", "datetype", "['DD','MM','YYYY'],separator:'/'"))
-                <a href="javascript:NewCal('StartDate','ddmmyyyy',true,24)"><img src="/Content/Images/cal.gif" width="16" height="16" border="0" alt="Pick a date"></a>
-
+                    @Html.TextBoxFor(x => x.StartDate, defaultStartDate, new { @class = "datetype", onclick = "javascript:NewCal('StartDate','ddmmyyyy',true,24)" })
                 </div>
 
-                <div class="halfblock shiftleft">
+                @*<div class="halfblock">
 
                      @Html.HiddenFor(x => x.StartTime) 
 
@@ -89,16 +96,16 @@
 			
 			        <label> Min</label>			
 			        @Html.DropDownList("startminute", DateHelper.GetMinuteDDL(), startTimeMin)
-		        </div>
+		        </div>*@
             </div>          
     
             <div class="line"> 
                 <div class="block">
                     <label class="fix200W">@FormMessages.Label_End_Date:<span class="req">*</span></label>
-                    @Html.TextBoxFor(x => x.EndDate, defaultEndDate, DateHelper.GetCalendarDictionary("EndDate", "datetype", "['DD','MM','YYYY'],separator:'/'"))
+                    @Html.TextBoxFor(x => x.EndDate, defaultEndDate, new { @class = "datetype", onclick = "javascript:NewCal('EndDate','ddmmyyyy',true,24)" })
                     
                 </div>
-                 <div class="halfblock shiftleft">
+               @*  <div class="halfblock">
 
                     @Html.HiddenFor(x => x.EndTime) 
 
@@ -107,7 +114,7 @@
 			
 			        <label> Min</label>			
 			        @Html.DropDownList("endminute", DateHelper.GetMinuteDDL(), endTimeMin)
-		        </div>
+		        </div>*@
             </div>           
             
         <div class="line">
@@ -117,7 +124,7 @@
                  <div class="childblock">
                     
                      <div class="head" onclick="ToggleExpand('dvReminderContent')">
-                         <span id="spReminderCount">
+                         <span id="spReminderCount" class="actiontitle">(
                              @if (Model.Reminders != null && Model.Reminders.Count > 0)
                              {
                                 @(Model.Reminders.Count + " " + FormMessages.V_Added)
@@ -126,15 +133,17 @@
                              {
                                 @FormMessages.V_None_Added
                              }
-                         </span>
+                       ) </span>
 
+                      <span class="buttons">
                         <span class="spedit" title="@FormMessages.Toolt_Edit_Reminder" onclick="Expand('spReminders');">
                             &nbsp;
                         </span>
 
-                        <span class="spadd" title="@FormMessages.Toolt_Add_Reminder" onclick="DialogAddReminder('dvReminders');">
+                        <span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick="Expand('spReminders');">
                             &nbsp;
                         </span>
+                      </span>
 
                         <span id="spReminders" class="spview" style="display:none;">
                             &nbsp;
@@ -144,6 +153,25 @@
 
                      <div id="dvReminderContent" class="content" style="display:none;">
                            
+                          <div id="dvReminderOptions" class="optionbox">
+                             <div id="dvAddedReminders" style="min-height:100px;">
+                                
+                             </div>
+                              
+                              <div id="dvReminderProgress" style="border-top:1px solid brown;color:red;padding:3px 0;">
+
+                             </div>
+                            
+                             
+                              <span class="spadd" onclick="$('#dvReminderEdit').slideDown('slow');">Add new reminder</span>
+                           
+                         </div>
+
+                         <div id="dvReminderList" style="display:none">
+
+                         </div>
+
+                         <div id="dvReminderEdit" style="display:none;">
                          <span class="row" id="spReminderRow_1">
                              <i class="info" title="@EnumExtensions.FurtherInfo(Variables.ReminderType.TimeBefore)">&nbsp;</i> 
                                 &nbsp;
@@ -178,21 +206,16 @@
                                 
                                 @Html.Raw(CalendarHelper.GenerateFrequencyDDl("ddlFrequencyType", "ddlFrequencyType", @" onchange=""ApplyReminderSelection('rdReminder2')"" "))
                                                               
-                        </span>   
-                           
-                         
-                         <div id="dvReminderOptions" class="optionbox" style="display:none;">
-                             <div id="dvReminderProgress">
-
-                             </div>
+                        </span> 
                              <div>
-                                 <input type="button" value="Save" onclick="SaveReminder();"/>
-                                 <input type="button" value="Add new" onclick="SaveAndResetReminder();"/>
+                                 <input type="button" value="Add" class="btnsmall" onclick="SaveReminder();"/>
+                                 
                              </div>
-                             <div id="dvAddedReminders">
-                                
                              </div>
-                         </div>
+                           
+                            
+                         
+                        
 
                          </div>
 
@@ -212,9 +235,22 @@
                  <div class="childblock">
                     
                      <div class="head" onclick="ToggleExpand('dvAttendeesContent')">
-                         @(Model.TargetAttendeeGroupId > 0 ? EnumExtensions.Description((Variables.CalendarEventTarget)Model.TargetAttendeeGroupId) :
-                            FormMessages.V_None_Added)
+                         <span class="actiontitle">(
+                             @(Model.TargetAttendeeGroupId > 0 ? EnumExtensions.Description((Variables.CalendarEventTarget)Model.TargetAttendeeGroupId) :
+                                FormMessages.V_None_Added)
                          
+                             )
+                         </span>
+
+                         <span class="buttons">
+                          <span class="spedit" title="@FormMessages.Toolt_Edit_Reminder" onclick="Expand('spReminders');">
+                            &nbsp;
+                        </span>
+
+                        <span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick="DialogAddReminder('dvReminders');">
+                            &nbsp;
+                        </span>
+                             </span>
                      </div>
                      <div id="dvAttendeesContent" class="content" style="display:none">
                         @foreach (var num in (Variables.CalendarEventTarget[])Enum.GetValues(typeof(Variables.CalendarEventTarget)))
@@ -228,7 +264,6 @@
                         @Html.HiddenFor(x => x.InvitedDepartmentIds)
                          
                         <div id="dvAttendeesOptions" class="optionbox" style="display:none;">
-
                         </div>
                      </div>
 
@@ -244,11 +279,23 @@
                     <div  id="dvRepeat" class="childblock">
                     
                         <div id="dvRepeatHead" class="head" onclick="ToggleExpand('dvRepeatContent',$.trim($('#StartDate').val()) != '' ,'hdnMissingStartDate', 'AdjustRepeatBasedOnStartDate')">
-                            @{
+                           <span class="actiontitle">
+                            ( @{
                         var title = Model.RepeatType > 0 ? EnumExtensions.Description((Variables.RepeatType)Model.RepeatType) : FormMessages.V_None_Added;
                         title = (title.Contains("{0}")) ? string.Format(title, Model.StartDate.DayOfWeek.ToString()) : title;
                             }
                             @Html.Raw(title)
+                            )
+                            </span>
+                            <span class="buttons">
+                             <span class="spedit" title="@FormMessages.Toolt_Edit_Reminder" onclick="Expand('spReminders');">
+                                &nbsp;
+                            </span>
+
+                            <span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick="DialogAddReminder('dvReminders');">
+                                &nbsp;
+                            </span>
+                            </span>
                         </div>
 
                     <div id="dvRepeatContent" class="content" style="display:none">
@@ -311,7 +358,7 @@
              </div>
         </div>
                 
-            @Html.HiddenFor(x => x.EventId)
+            @Html.HiddenFor(x => x.UserCulture)
             @Html.HiddenFor(x => x.CalendarId)
 
 
@@ -326,7 +373,7 @@
 @* <script type="text/javascript" src="/Scripts/Site/BeatPicker.min.js"></script>
     <script type="text/javascript" src="/Scripts/date.js"></script>*@
 
-    <script type="text/javascript" src="/Scripts/Site/calendar_new.js"></script>
+    <script type="text/javascript" src="/Scripts/Site/DatePicker.js"></script>
     <script type="text/javascript" src="/Scripts/Site/calendar.js" ></script>
 
 <script type="text/javascript">
@@ -350,6 +397,7 @@
     MSG_MISSING_REMINDER_VALUES = "@Html.Raw(FormMessages.Error_Missing_Reminder_Frequency_AndValues)";
     MSG_ERROR_SUBMIT_FAILED = "@Html.Raw(FormMessages.Error_Could_Not_Submit_Form)";
     MSG_ERROR_STARTDATE_AFTER_ENDDATE = "@Html.Raw(FormMessages.Error_StartDate_After_EndDate)";
+    MSG_DUPLICATE_REMINDER = "@FormMessages.MSG_Duplicate_Reminder";
 
     $(document).ready(function() {
 
@@ -371,6 +419,9 @@
             
         //});
 
+        @Html.Raw(sbRemindersJS.ToString())
+
+        ApplyMessagesToReminders();
     });
 
     

@@ -25,7 +25,7 @@ var cnLeft="500";//left coordinate of calendar window
 var WindowTitle ="DateTime Picker";//Date Time Picker title.
 var WeekChar=2;//number of character for week day. if 2 then Mo,Tu,We. if 3 then Mon,Tue,Wed.
 var CellWidth=20;//Width of day cell.
-var DateSeparator="-";//Date Separator, you can change it to "/" if you want.
+var DateSeparator="/";//Date Separator, you can change it to "/" if you want.
 var TimeMode=24;//default TimeMode value. 12 or 24
 
 var ShowLongMonth=true;//Show long month name in Calendar header. example: "January".
@@ -142,23 +142,7 @@ function RenderCal()
 
     vCalHeader="<table cellpadding=1 cellspacing=1 width='100%' align=\"center\" valign=\"top\">\n";
 	//Month Selector
-	/*vCalHeader+="<tr>\n<td colspan='7'><table border=0 width='100%' cellpadding=0 cellspacing=0><tr><td align='left'>\n";
-	vCalHeader+="<select name=\"MonthSelector\" onChange=\"javascript:winMain.Cal.SwitchMth(this.selectedIndex);winMain.RenderCal();\">\n";
-	for (i=0;i<12;i++)
-	{
-		if (i==Cal.Month)
-			SelectStr="Selected";
-		else
-			SelectStr="";	
-		vCalHeader+="<option "+SelectStr+" value >"+MonthName[i]+"\n";
-	}
-	vCalHeader+="</select></td>";*/
-
-
-	//Year selector
-	//vCalHeader+="\n<td align='right'><font face=\"Verdana\" color=\""+YrSelColor+"\" size=2><b> "+Cal.Year+" </b></font></td></tr></table></td>\n";
-	//vCalHeader+="</tr>";
-
+	
 
 	//Calendar header shows Month and Year
 	if (ShowMonthYear)
