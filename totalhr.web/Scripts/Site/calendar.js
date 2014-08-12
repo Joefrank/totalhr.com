@@ -264,13 +264,20 @@ function parseDate(input) {
     return new Date(parts[2], parts[1] - 1, parts[0]); // months are 0-based
 }
 
+function CancelDivPopup(objid) {
+    $('#' + objid).fadeOut("slow");
+}
 
 /* Reminders work */
+
+
 
 function CheckReminderValue(objsel) {
     var selremindertype = objsel.value;
     if (REMINDER_TYPE_CUSTOMIZE == selremindertype) {
-        alert('customizing');
+        $('#trCustomReminder').slideDown("slow");
+    } else {
+        $('#trCustomReminder').css("display", "none");
     }
 }
 
@@ -305,67 +312,52 @@ function ApplyMessagesToReminders() {
     var message = '';
     var messageHtml = '';
     var remindertype;
-
+    var selremindertype = $('#selReminder_1').val();
+    
     for (var i = 0; i < len; i++) {
         remindertype = Reminders[i][0];
 
-        if (remindertype == 1) {            
-            message = Reminders[i][1] + " " + $('#ddlFrequencyBeforeType option[value="' + Reminders[i][2] + '"]').text() + " " + $('#spTimeBefore').html();
-        } else if (remindertype == 2) {
-            message = $('#spEveryTime').html() + " " + Reminders[i][1] + " " + $('#ddlFrequencyBeforeType option[value="' + Reminders[i][2] + '"]').text();
+        if (remindertype == REMINDER_TYPE_CUSTOMIZE) {
+            message = Reminders[i][1] + " " + $('#ddlFrequencyBeforeType option[value="' + Reminders[i][2] + '"]').text() + " " + MSG_BEFORE;
+            message += " (" + $('#selRemindernotif_1 option[value="' + Reminders[i][4] + '"]').text() + ")";
+        } else {
+            message = $('#selReminder_1 option[value="' + Reminders[i][0] + '"]').text() + " ( ";
+            message += $('#selRemindernotif_1 option[value="' + Reminders[i][4] + '"]').text() + " )";
         }
+       
         Reminders[i][3] = message;
-        messageHtml += '<span class="row">#' + (i + 1) + ': ' +  message + '</span>';
     }
 
-    $('#dvAddedReminders').html(messageHtml);
+    DisplayAddedReminders();
 }
 
 function SaveReminder() {
-
-    /*if (SelectedReminderType == null) {
-        alert(MSG_MISSING_REMINDER_TYPE);
-    }*/
-
-    
-
+ 
+    var frequency = 0;
+    var frequencytype = 0;
     var message = $('#selReminder_1 option:selected').text() + " (" + $('#selRemindernotif_1 option:selected').text() + ")";
     var selremindertype = $('#selReminder_1').val();
     var selnotificationtype = $('#selRemindernotif_1').val();
     
     if (!ValidateIncomingReminder(selremindertype))
         return;
-    
-    Reminders[Reminders.length] = [selremindertype, selnotificationtype, 0, message];
-    
-    ////Reminders
-    //var frequency = 0;
-    //var frequencytype = 0;
-    
-    
-    //if (SelectedReminderType == 1) {
-    //    frequency = $('#txtReminderFrequencyBefore').val();
-    //    frequencytype = $('#ddlFrequencyBeforeType option:selected').val();
-    //    message = $('#txtReminderFrequencyBefore').val() + " " + $('#ddlFrequencyBeforeType option:selected').text() + " " + $('#spTimeBefore').html();
-    //} else if(SelectedReminderType == 2) {
-    //    frequency = $('#txtReminderFrequency').val();
-    //    frequencytype = $('#ddlFrequencyType option:selected').val();
-    //    message = $('#spEveryTime').html() + " " + $('#txtReminderFrequency').val() + " " + $('#ddlFrequencyType option:selected').text();
-    //}
-    
-    //if (frequency == 0 || frequency == '' || isNaN(frequency)) {
-    //    alert(MSG_MISSING_REMINDER_VALUES);
-    //    return;
-    //}
 
-    //if (!ValidateIncomingReminder(frequency, frequencytype, SelectedReminderType))
-    //    return;
+    if (selremindertype == REMINDER_TYPE_CUSTOMIZE) {
+        
+        frequency = $('#txtFrequency').val();
+        if (isNaN(frequency)) {
+            alert(MSG_MISSING_REMINDER_VALUES);
+            return;
+        }
 
-    //Reminders[Reminders.length] = [SelectedReminderType, frequency, frequencytype, message];
-
+        frequencytype = $('#ddlFrequencyBeforeType option:selected').val();
+        message = frequency + " " + $('#ddlFrequencyBeforeType option:selected').text() + " " + MSG_BEFORE + " (" + $('#selRemindernotif_1 option:selected').text() + ")";
+        Reminders[Reminders.length] = [selremindertype, frequency, frequencytype, message, selnotificationtype];
+    } else {
+        Reminders[Reminders.length] = [selremindertype, 0, 0, message, selnotificationtype];
+    }
+    
     DisplayAddedReminders();
-    
-    
 }
 
 function ValidateIncomingReminder(remindertype, frequency, frenquencyType) {
@@ -391,20 +383,27 @@ function ValidateIncomingReminder(remindertype, frequency, frenquencyType) {
 function DisplayAddedReminders() {
     var tempHtml = '';
     var tempFormHtml = '';
+    var headMessage = '';
 
     var len = Reminders.length;
     for (var i = 0; i < len; i++) {
-        tempHtml += '<span class="row">#' + (i + 1) + ': ' + Reminders[i][3] + '<span class="delete" onclick="DeleteReminder(' + i + ')">';
+        var notificationid = (Reminders[i].length == 5) ? Reminders[i][4] : 0;
+
+        tempHtml += '<span class="row"> - ' + Reminders[i][3] + '<span class="delete" onclick="DeleteReminder(' + i + ')">';
         tempHtml += '&nbsp;</span></span>';
         tempFormHtml += '<input type="hidden" name="Reminders[' + i + '].Frequency" value="' + Reminders[i][1] + '" />';
         tempFormHtml += '<input type="hidden" name="Reminders[' + i + '].FrequencyType" value="' + Reminders[i][2] + '" />';
         tempFormHtml += '<input type="hidden" name="Reminders[' + i + '].ReminderType" value="' + Reminders[i][0] + '" />';
+        tempFormHtml += '<input type="hidden" name="Reminders[' + i + '].NotificationType" value="' + notificationid + '" />';
+
     }
     
-    $('#dvAddedReminders').html(tempHtml);
-    $('#spReminderCount').html('(' + len + ' ' + MSG_ADDED + ')');
+    headMessage = (len > 0) ? len + ' ' + MSG_ADDED : NONE_ADDED_MESSAGE;
 
-    $('#dvReminderList').html(tempFormHtml);
+    $('#dvAddedReminders').html(tempHtml);
+    $('#spReminderCount').html('( ' + headMessage + ' )');
+
+    $('#dvRemindersData').html(tempFormHtml);
 }
 
 function DeleteReminder(index) {
@@ -427,18 +426,6 @@ function AdjustRepeatBasedOnStartDate() {
 function PrepareToSaveValues() {
     
     try{
-        //validate dates (also check times)***
-        //var compare = Date.parse($('#StartDate').val()).compareTo(Date.parse($('#EndDate').val()));
-
-
-        //if (compare > 0) {
-        //    alert(decodeURIComponent(MSG_ERROR_STARTDATE_AFTER_ENDDATE));
-        //    return false;
-        //}
-
-        // prepare timings
-        //$('#StartTime').val($('#starthour').val() + ' : ' + $('#startminute').val() + ' : 00');
-        //$('#EndTime').val($('#endhour').val() + ' : ' + $('#endminute').val() + ' : 00');
 
         //prepare reminders
         var reminderlen = Reminders.length;

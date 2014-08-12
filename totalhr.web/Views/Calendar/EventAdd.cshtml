@@ -30,23 +30,12 @@
         
         foreach (totalhr.Shared.Models.CalendarEventReminder reminder in Model.Reminders)
         {
-            sbRemindersJS.Append(string.Format(" Reminders[{0}]=[{1}, {2}, {3}, '{4}'];" + Environment.NewLine,i, reminder.ReminderType,
-                reminder.Frequency, reminder.FrequencyType, ""));
+            sbRemindersJS.Append(string.Format(" Reminders[{0}]=[{1}, {2}, {3}, '{4}',{5}];" + Environment.NewLine,i, reminder.ReminderType,
+                reminder.Frequency, reminder.FrequencyType, "", reminder.NotificationType));
             i++;
         }
     }
 }
-
-@section extrastyles{
-    @Styles.Render("~/Content/css/BeatPicker.min.css")
-}
-
-@section headerScripts{   
-    
-   
-
-}
-
 
 
 @section head2{
@@ -87,17 +76,6 @@
                 <label class="fix200W">@FormMessages.Label_Start_Date:<span class="req">*</span></label>
                     @Html.TextBoxFor(x => x.StartDate, defaultStartDate, new { @class = "datetype", onclick = "javascript:NewCal('StartDate','ddmmyyyy',true,24)" })
                 </div>
-
-                @*<div class="halfblock">
-
-                     @Html.HiddenFor(x => x.StartTime) 
-
-			        <label>Hour</label>
-			        @Html.DropDownList("starthour", DateHelper.GetHourDDL(), startTimeHour) 
-			
-			        <label> Min</label>			
-			        @Html.DropDownList("startminute", DateHelper.GetMinuteDDL(), startTimeMin)
-		        </div>*@
             </div>          
     
             <div class="line"> 
@@ -106,16 +84,7 @@
                     @Html.TextBoxFor(x => x.EndDate, defaultEndDate, new { @class = "datetype", onclick = "javascript:NewCal('EndDate','ddmmyyyy',true,24)" })
                     
                 </div>
-               @*  <div class="halfblock">
-
-                    @Html.HiddenFor(x => x.EndTime) 
-
-			        <label>Hour</label>
-			        @Html.DropDownList("endhour", DateHelper.GetHourDDL(), endTimeHour) 
-			
-			        <label> Min</label>			
-			        @Html.DropDownList("endminute", DateHelper.GetMinuteDDL(), endTimeMin)
-		        </div>*@
+              
             </div>           
             
         <div class="line">
@@ -124,7 +93,7 @@
                 
                  <div class="childblock">
                     
-                     <div class="head" onclick="ToggleExpand('dvReminderContent')">
+                     <div class="head" onclick="ToggleExpand('dvReminderContent');">
                          <span id="spReminderCount" class="actiontitle">(
                              @if (reminderscount > 0)
                              {
@@ -138,7 +107,8 @@
 
                          <span class="buttons">
                              
-                             <span class="spadd" onclick="AddReminderRow();" />
+                             <span id="spaddrem" class="spadd" onclick="AddReminderRow();" />
+
 
                              @if (reminderscount > 0)
                              {
@@ -157,12 +127,13 @@
                      <div id="dvReminderContent" class="content" style="display:none;">
                            
                         <div id="dvReminderOptions" >
-                             <div id="dvAddedReminders" style="min-height:100px;">
-                                
+                             <div id="dvAddedReminders" style="min-height:100px;">                                
                              </div>
+                            <div id="dvRemindersData"></div>
                          </div>
 
                          <div id="dvReminderList" class="reminderedit" style="display:none">
+                             <span class="spclose" onclick="CancelDivPopup('dvReminderList');">&nbsp;</span>
                              <table>
                                  <tr>
                                      <td>
@@ -175,64 +146,32 @@
                                              @Html.Raw(CalendarHelper.GenerateReminderNotificationSelect("selRemindernotif_1", "selRemindernotif_1", ""))
                                          </span>
                                      </td>
+                                     
+                                 </tr>
+                                 <tr id="trCustomReminder" style="display:none;">
+
+                                     <td><input type="text" class="shortnum" style="float:right" id="txtFrequency" value="5" /></td>
                                      <td>
-                                         <span id="ctremaction_1">
-                                             <span id="spreminremove_1" class="delete" onclick="RemoveRow(this);" />
-                                         </span>
+                                         
+                                         @Html.Raw(CalendarHelper.GenerateFrequencyDDl("ddlFrequencyBeforeType", "ddlFrequencyBeforeType", "")) 
+
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td>
+                                         <input type="button" value="Add" class="btnsmall" onclick="SaveReminder();"/>
+                                     </td>
+                                     <td>
+                                         &nbsp;
                                      </td>
                                  </tr>
                              </table>
                              
-                             <input type="button" value="Add" class="btnsmall" onclick="SaveReminder();"/>
-                         </div>
-
-                      @*   <div id="dvReminderEdit" style="display:none;">
-                         <span class="row" id="spReminderRow_1">
-                             <i class="info" title="@EnumExtensions.FurtherInfo(Variables.ReminderType.TimeBefore)">&nbsp;</i> 
-                                &nbsp;
-                             <input type="radio" id="rdReminder1" name="ReminderType" value="@((int)Variables.ReminderType.TimeBefore)" onchange="ApplyReminderSelection('rdReminder1');" /> 
-                             &nbsp;
-                                    
-                             <input type="text" id="txtReminderFrequencyBefore" onchange="ApplyReminderSelection('rdReminder1');" class="shortnum" name="txtReminderFrequencyBefore" value="10" />
-                             &nbsp;
-                             @Html.Raw(CalendarHelper.GenerateFrequencyDDl("ddlFrequencyBeforeType", "ddlFrequencyBeforeType", @" onchange=""ApplyReminderSelection('rdReminder1')"" ")) 
-                                 
-                            
-                             &nbsp;
-                                    
-                             <span id="spTimeBefore" class="tdtop">@EnumExtensions.Description(Variables.ReminderType.TimeBefore)</span>
                              
-                                  
-                         </span>
-
-                        <span class="row" id="spReminderRow_2">
-                                   
-                                <i class="info" title="@EnumExtensions.FurtherInfo(Variables.ReminderType.EveryXTime)">&nbsp;</i>
-                                &nbsp;
-
-                                <input type="radio" id="rdReminder2" name="ReminderType" value="@((int)Variables.ReminderType.EveryXTime)" onchange="ApplyReminderSelection('rdReminder2');" />
-                                &nbsp;
-                                    
-                                <span id="spEveryTime" class="td"> @EnumExtensions.Description(Variables.ReminderType.EveryXTime) </span>
-                                    &nbsp;
-                                        
-                                <input type="text" id="txtReminderFrequency" onchange="ApplyReminderSelection('rdReminder2')"  class="shortnum" name="txtReminderFrequency" value="2" />
-                                &nbsp;
-                                
-                                @Html.Raw(CalendarHelper.GenerateFrequencyDDl("ddlFrequencyType", "ddlFrequencyType", @" onchange=""ApplyReminderSelection('rdReminder2')"" "))
-                                                              
-                        </span> 
-                             <div>
-                                 
-                                 
-                             </div>
-                             </div>*@
-                           
-                            
-                         
+                         </div>
                         
 
-                         </div>
+                     </div>
 
                        @Html.HiddenFor(x => x.ReminderXML)
                  </div>
@@ -399,8 +338,10 @@
     var RepeatsToSave = new Array();
     var EventId = @Model.EventId;
     var ERROR_INVALID_DATE = "@FormMessages.Error_Invalid_Date";
-    var REMINDER_TYPE_CUSTOMIZE = "@Variables.CalendarEventReminderValues.Customize";
-    
+    var REMINDER_TYPE_CUSTOMIZE = "@((int)Variables.CalendarEventReminderValues.Customize)";
+    var NONE_ADDED_MESSAGE = "@FormMessages.V_None_Added";
+    var MSG_BEFORE = "@Common.V_Before";
+
     @sbJS.ToString()
    
     @Html.Raw(WeekDaysJS)
@@ -417,11 +358,11 @@
 
     $(document).ready(function() {
 
-        var statusGenerator = function(text) {
-            var statusElem = $("#status");
-            var child = $("<span></span>").text(text);
-            statusElem.append(child);
-        };
+        //var statusGenerator = function(text) {
+        //    var statusElem = $("#status");
+        //    var child = $("<span></span>").text(text);
+        //    statusElem.append(child);
+        //};
 
         //StartDate.on("select", function(data) {
         //    var selectedDate = data.string;

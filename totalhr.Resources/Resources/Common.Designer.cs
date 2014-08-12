@@ -241,6 +241,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Before.
+        /// </summary>
+        public static string V_Before {
+            get {
+                return ResourceManager.GetString("V_Before", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hide.
         /// </summary>
         public static string V_Hide {

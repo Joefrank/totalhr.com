@@ -228,11 +228,20 @@ div#toolbox {
     -webkit-box-shadow: 0 2px #063a93;
     box-shadow: 0 2px #063a93;
     border-radius: 3px;
-    font-weight: 90;
+    font-weight: 100;
     border: 2px solid transparent;
 
 }
 
 div.reminderedit {
-    width: 300px;position: relative;top: 0;z-index: 10000;background-color:#f9f9f9;border: 1px solid grey;
+    width: 240px;position: relative;left:200px;z-index: 10000;background-color:#f9f9f9;border: 1px solid grey;padding:5px 0 0 5px;
+}
+
+div.reminderedit .spclose {
+    background:transparent url('/content/images/close-icon.png') center center no-repeat;float:right;display:block;width:16px;height:16px;
+    cursor:pointer;position:relative;top:-3px;right:2px;
+    }
+
+.collapse {
+    background-image:url('/content/images/minus.png');
 }

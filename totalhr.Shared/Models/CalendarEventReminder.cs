@@ -13,5 +13,7 @@ namespace totalhr.Shared.Models
         public int FrequencyType { get; set; }
 
         public int ReminderType { get; set; }
+
+        public int NotificationType { get; set; }
     }
 }
