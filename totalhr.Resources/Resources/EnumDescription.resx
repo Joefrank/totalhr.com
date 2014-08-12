@@ -142,7 +142,7 @@
     <value>Hour</value>
   </data>
   <data name="EvtMinute" xml:space="preserve">
-    <value>Minute</value>
+    <value>Min</value>
   </data>
   <data name="EvtMonth" xml:space="preserve">
     <value>Month</value>
@@ -166,7 +166,7 @@
     <value>10 mins before</value>
   </data>
   <data name="R15MinsBefore" xml:space="preserve">
-    <value>15 minutes before</value>
+    <value>15 mins before</value>
   </data>
   <data name="R1DayBefore" xml:space="preserve">
     <value>1 day before</value>

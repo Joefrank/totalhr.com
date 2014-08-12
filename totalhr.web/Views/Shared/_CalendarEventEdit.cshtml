@@ -25,11 +25,11 @@
     
     if (Model.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.User)
     {
-        sJSChosenTargetUsers = Model.InvitedUserIds;
+        sJSChosenTargetUsers = string.Join<int>(",", Model.TargetAttendeeIdList);
     }
     else if (Model.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.Department)
     {
-        sJSChosenTargeDepartments = Model.InvitedDepartmentIds;
+        sJSChosenTargeDepartments = string.Join<int>(",", Model.TargetAttendeeIdList);
     }  
     
     if(Model.EventId > 0)
@@ -223,7 +223,7 @@
                         
                        
 
-                       @Html.HiddenFor(x => x.ReminderXML)
+                     @*  @Html.HiddenFor(x => x.ReminderXML)*@
                  </div>
 
               </div>
@@ -251,8 +251,8 @@
                             @Html.Raw(CalendarHelper.GenerateAttendee(num, "TargetAttendeeGroupId", schecked));
                         }                         
                        
-                        @Html.HiddenFor(x => x.InvitedUserIds)
-                        @Html.HiddenFor(x => x.InvitedDepartmentIds)
+                        @*Html.HiddenFor(x => x.InvitedUserIds)
+                        @Html.HiddenFor(x => x.InvitedDepartmentIds)*@
                          
                         <div id="dvAttendeesOptions" class="optionbox" style="display:none;">
 

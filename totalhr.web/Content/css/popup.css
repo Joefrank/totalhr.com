@@ -233,11 +233,11 @@ div#toolbox {
 
 }
 
-div.reminderedit {
+div.popupedit {
     width: 240px;position: relative;left:200px;z-index: 10000;background-color:#f9f9f9;border: 1px solid grey;padding:5px 0 0 5px;
 }
 
-div.reminderedit .spclose {
+div.popupedit .spclose {
     background:transparent url('/content/images/close-icon.png') center center no-repeat;float:right;display:block;width:16px;height:16px;
     cursor:pointer;position:relative;top:-3px;right:2px;
     }

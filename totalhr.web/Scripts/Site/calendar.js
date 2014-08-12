@@ -12,6 +12,8 @@ var ckSelectedDepartment = new Array();
 var SelectedReminderType = null;
 var Reminders = new Array();
 var reminderTemplateHTML = '<tr><td></td><td></td></tr>';
+var dialogmode = '';
+
 
 function ManageActiveDay(objTd) {
     var objTdId = objTd.id;
@@ -59,6 +61,7 @@ function PickEventTargetSelection(obj, objid) {
 function OpenSelector(mode) {
     var url;
     var func;
+    dialogmode = mode;
 
     if (mode == 'USERS') {
         url = '/Account/GetCompanyUsersJson/';
@@ -70,8 +73,9 @@ function OpenSelector(mode) {
    
 
     $.getJSON(url, null, function (data) {
-        var div = $('#dvAttendeesOptions');
-        div.html("<br/> " + "Users received from server: " + "<br/>");
+        $('#dvAttendeesOptions').slideDown("slow");
+        var div = $('#dvAttendeesList');
+        div.html(MSG_USERS_FROM_SERVER + "<br/>");
         
         $.each(data, function (i, item) {
             if (func == 1)
@@ -80,9 +84,12 @@ function OpenSelector(mode) {
                 PrintDepartment(div, item);
         });
         div.slideDown("slow");
-    });
+    });    
     
-    
+}
+
+function CollapseSelector() {
+    $('#dvAttendeesOptions').slideUp();
 }
 
 function PrintUser(div, item) {
@@ -125,6 +132,64 @@ function PickDepartment(objck) {
     } else {
         ckSelectedDepartment['ckdepartment_' + objck.value] = null;
     }
+}
+
+function SaveInvitees() {
+    if (dialogmode == 'USERS') {
+        SaveUserInvitees();
+    } else if (dialogmode == 'DEPARTMENT') {
+        SaveDepartmentInvitees();
+    }
+}
+
+function SaveUserInvitees() {
+    var allinvitees = '';
+    var listAttendeesHTML = '';
+    var count = 0;
+    //*** use name in jquery to retrieve selected value of radios
+    var val = $('#TargetAttendeeGroupId').val();
+
+    for (var key in ckSelectedTargetUsers) {
+        if (ckSelectedTargetUsers[key] != null) {
+            allinvitees += (allinvitees == '') ? ckSelectedTargetUsers[key] : ',' + ckSelectedTargetUsers[key];
+            listAttendeesHTML += '<input type="hidden" name="TargetAttendeeIdList[' + count + ']" value="' + ckSelectedTargetUsers[key] + '" />';
+            count++;
+        }
+
+    }
+    if (allinvitees == '') {
+        alert("You cannot invite attendees without selecting any!");
+        return;
+    }
+    $('#dvHiddenAttendees').html(listAttendeesHTML);
+    $('#dvAttendeesOptions').fadeOut("slow");
+    $('#spattendeeCount').html('( ' + count + $('#spAttendeeDesc_' + val).text() + ' )');
+}
+
+function SaveDepartmentInvitees() {
+    var allinvitees = '';
+    var listAttendeesHTML = '';
+    var count = 0;
+    //*** use name in jquery to retrieve selected value of radios
+    var val = $('#TargetAttendeeGroupId').val();
+
+    for (var key in ckSelectedDepartment) {
+        if (ckSelectedDepartment[key] != null) {
+            allinvitees += (allinvitees == '') ? ckSelectedDepartment[key] : ',' + ckSelectedDepartment[key];
+            listAttendeesHTML += '<input type="hidden" name="TargetAttendeeIdList[' + count + ']" value="' + ckSelectedDepartment[key] + '" />';
+            count++;
+        }
+
+    }
+    if (allinvitees == '') {
+        alert("You cannot invite attendees without selecting any!");
+        return;
+    }
+    $('#dvHiddenAttendees').html(listAttendeesHTML); 
+    $('#dvAttendeesOptions').fadeOut("slow");
+    
+
+    $('#spattendeeCount').html('( ' + count + $('#spAttendeeDesc_' + val).text() + ' )');
 }
 
 function Expand(objid) {
@@ -428,24 +493,24 @@ function PrepareToSaveValues() {
     try{
 
         //prepare reminders
-        var reminderlen = Reminders.length;
-        var remindersXML = '';
+        //var reminderlen = Reminders.length;
+        //var remindersXML = '';
     
-        if (reminderlen != null && reminderlen > 0) {
-            for (var i = 0; i < reminderlen; i++) {
-                if (Reminders[i] != null) {
-                    remindersXML += '<reminder><type>' + Reminders[i][0] + '</type><frequencytype>' + Reminders[i][2] + '</frequencytype><frequency>' + Reminders[i][1] + '</frequency></reminder>';
-                }
-            }
+        //if (reminderlen != null && reminderlen > 0) {
+        //    for (var i = 0; i < reminderlen; i++) {
+        //        if (Reminders[i] != null) {
+        //            remindersXML += '<reminder><type>' + Reminders[i][0] + '</type><frequencytype>' + Reminders[i][2] + '</frequencytype><frequency>' + Reminders[i][1] + '</frequency></reminder>';
+        //        }
+        //    }
 
-            if (remindersXML != '') {
-                remindersXML = '<reminders>' + remindersXML + '</reminders>';
-                $('#ReminderXML').val(remindersXML);
-            }
-        }
+        //    if (remindersXML != '') {
+        //        remindersXML = '<reminders>' + remindersXML + '</reminders>';
+        //        $('#ReminderXML').val(remindersXML);
+        //    }
+        //}
 
         
-        return true;
+        //return true;
       
         // prepare target groups
         var selTargetVal = $("input:radio[name='TargetAttendeeGroupId']:checked").val();

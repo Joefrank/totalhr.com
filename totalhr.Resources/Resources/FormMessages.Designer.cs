@@ -1465,6 +1465,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select users to invite.
+        /// </summary>
+        public static string MSG_Users_Invitee_List {
+            get {
+                return ResourceManager.GetString("MSG_Users_Invitee_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to .
         /// </summary>
         public static string String1 {

@@ -19,6 +19,7 @@ namespace Calendar.Implementation
     {
         private readonly ICalendarRepository _calrepos;
         private readonly ICalendarEventRepository _calEventRepos;
+        private const string ReminderAssocFormat = @"<reminder><type>{0}</type><frequencytype>{1}</frequencytype><frequency>{2}</frequency><notification>{3}</notification></reminder>";
 
         public CalendarManagementService(ICalendarRepository calRepos, ICalendarEventRepository calEventRepos)
         {
@@ -66,19 +67,20 @@ namespace Calendar.Implementation
             if (cevent.id > 0)
             {
                 //save reminders.
-                var doc = new XmlDocument();
-                doc.LoadXml(info.ReminderXML);
-                var rootNode =  doc.DocumentElement;
+               // var doc = new XmlDocument();
+                //doc.LoadXml(info.ReminderXML);
+                //var rootNode =  doc.DocumentElement;
 
-                if (rootNode != null)
+                if (info.Reminders != null)
                 {
-                    foreach (XmlNode node in rootNode.ChildNodes)
+                    foreach (CalendarEventReminder reminder in info.Reminders)
                     {
                         var eventAssociation = new CalendarAssociation
                             {
                                 EventId = cevent.id,
                                 AssociationTypeid = (int) Variables.CalendarEventAssociationType.Reminder,
-                                AssociationValue = node.OuterXml,
+                                AssociationValue = string.Format(ReminderAssocFormat, reminder.ReminderType, 
+                                reminder.FrequencyType, reminder.Frequency, reminder.NotificationType),
                                 Created = DateTime.Now,
                                 CreatedBy = info.CreatedBy
                             };
@@ -91,23 +93,17 @@ namespace Calendar.Implementation
                 if (info.TargetAttendeeGroupId > 0)
                 {
                     var assocValue = string.Empty;
-                   
-                    if (info.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.User)
+                    var targetlist = string.Empty;
+
+                    if (info.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.User || 
+                        info.TargetAttendeeGroupId == (int)Variables.CalendarEventTarget.Department)
                     {
-                        assocValue = string.Format("<target><type>{0}</type><value>{1}</value></target>",
-                            info.TargetAttendeeGroupId,info.InvitedUserIds);                       
-                    }
-                    else if (info.TargetAttendeeGroupId == (int)Variables.CalendarEventTarget.Department)
-                    {
-                        assocValue = string.Format("<target><type>{0}</type><value>{1}</value></target>", 
-                            info.TargetAttendeeGroupId, info.InvitedDepartmentIds);
-                    }
-                    else
-                    {
-                        assocValue = string.Format("<target><type>{0}</type></target>", info.TargetAttendeeGroupId);
+                         targetlist =  string.Join<int>(",", info.TargetAttendeeIdList);                    
                     }
 
+                    assocValue = string.Format("<target><type>{0}</type><value>{1}</value></target>", info.TargetAttendeeGroupId, targetlist);
                    
+                                       
                         var attendeeEvtAssociation = new CalendarAssociation
                             {
                                 EventId = cevent.id,
@@ -125,9 +121,10 @@ namespace Calendar.Implementation
                 //save repeat for event if they have been specified
                 if (info.RepeatType > 0)
                 {
+                    var doc = new XmlDocument();
                     doc = new XmlDocument();
                     doc.LoadXml(info.RepeatXML);
-                    rootNode = doc.DocumentElement;
+                    var rootNode = doc.DocumentElement;
                     
                     if (rootNode != null)
                     {
@@ -207,14 +204,14 @@ namespace Calendar.Implementation
                 if (attendeeTypeId > 0)
                 {
                     info.TargetAttendeeGroupId = attendeeTypeId;
-                    if (attendeeTypeId == (int)Variables.CalendarEventTarget.User)
+                    if (attendeeTypeId == (int)Variables.CalendarEventTarget.User ||
+                        attendeeTypeId == (int)Variables.CalendarEventTarget.Department)
                     {
-                        info.InvitedUserIds = root.SelectSingleNode("//value").InnerText;
+                        var csv = root.SelectSingleNode("//value").InnerText;
+                        var lst = csv.Split(',').Select(n => int.Parse(n)).ToList();
+                        info.TargetAttendeeIdList = lst;
                     }
-                    else if (attendeeTypeId == (int)Variables.CalendarEventTarget.Department)
-                    {
-                        info.InvitedDepartmentIds = root.SelectSingleNode("//value").InnerText;
-                    }                    
+                    else { info.TargetAttendeeIdList = new List<int>(); }                                     
                 }
             }
             return info;

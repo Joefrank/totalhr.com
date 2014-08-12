@@ -639,4 +639,7 @@
   <data name="MSG_Duplicate_Reminder" xml:space="preserve">
     <value>Reminder already added.</value>
   </data>
+  <data name="MSG_Users_Invitee_List" xml:space="preserve">
+    <value>Select users to invite</value>
+  </data>
 </root>

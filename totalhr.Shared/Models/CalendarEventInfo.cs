@@ -42,20 +42,8 @@ namespace totalhr.Shared.Models
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_Event_Target_Required")]
         public int TargetAttendeeGroupId { get; set; }
                 
-        public string InvitedUserIds { get; set; }
-
-        public string InvitedDepartmentIds { get; set; }
-
+        public List<int> TargetAttendeeIdList { get; set; }
        
-
-
-        public int ReminderType { get; set; }
-
-        public int ReminderFrequencyType { get; set; }
-
-        public int ReminderFrequency { get; set; }
-
-        public string ReminderXML { get; set; }
 
         public int CalendarId { get; set; }
 
