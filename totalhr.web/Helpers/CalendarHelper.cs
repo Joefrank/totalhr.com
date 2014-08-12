@@ -87,7 +87,7 @@ namespace totalhr.web.Helpers
 
             foreach (var num in (Variables.CalendarEventReminderValues[])Enum.GetValues(typeof(Variables.CalendarEventReminderValues)))
             {
-                sbTemp.Append(string.Format(@"<option value=""{0}"">{1}</option>", num, EnumExtensions.Description(num)));
+                sbTemp.Append(string.Format(@"<option value=""{0}"">{1}</option>", (int)num, EnumExtensions.Description(num)));
             }
 
             return string.Format(@"<select id=""{0}"" name=""{1}"" {2}>
@@ -101,7 +101,7 @@ namespace totalhr.web.Helpers
 
             foreach (var num in (Variables.CalendarEventNotificationType[])Enum.GetValues(typeof(Variables.CalendarEventNotificationType)))
             {
-                sbTemp.Append(string.Format(@"<option value=""{0}"">{1}</option>", num, EnumExtensions.Description(num)));
+                sbTemp.Append(string.Format(@"<option value=""{0}"">{1}</option>", (int)num, EnumExtensions.Description(num)));
             }
 
             return string.Format(@"<select id=""{0}"" name=""{1}"" {2}>
