@@ -133,7 +133,7 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minute.
+        ///   Looks up a localized string similar to Min.
         /// </summary>
         public static string EvtMinute {
             get {
@@ -205,7 +205,7 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 15 minutes before.
+        ///   Looks up a localized string similar to 15 mins before.
         /// </summary>
         public static string R15MinsBefore {
             get {

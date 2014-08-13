@@ -38,6 +38,10 @@ namespace totalhr.web.Helpers
                 temp = @" onclick=""OpenSelector('DEPARTMENT');"" ";
                 selector = "DEPARTMENT";
             }
+            else
+            {
+                temp = @" onclick=""CollapseSelector();"" ";
+            }
             
             return string.Format(@"<span class=""row"" id=""spAttendeeTarget_{0}"" title=""{1}"" onmouseover=""ShowDetails(this);"" 
                 onmouseout=""HideDetails(this);"" onclick=""ApplyAttendeeTargetSelection(this, {0}, '{5}')""><i class=""info"" title=""{1}"">&nbsp;</i>

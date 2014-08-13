@@ -133,14 +133,12 @@ namespace totalhr.services.messaging.Implementation
             var lstUsers = new List<User>();
            
             if (eventinfo.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.User)
-            {
-                List<int> lstUserids = eventinfo.InvitedUserIds.Split(',').Select(int.Parse).ToList();
-                lstUsers = _userrepos.FindBy(x => lstUserids.Contains(x.id)).ToList();
+            {               
+                lstUsers = _userrepos.FindBy(x => eventinfo.TargetAttendeeIdList.Contains(x.id)).ToList();
             }
             else if(eventinfo.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.Department)
             {
-                List<int> lstDepartments = eventinfo.InvitedDepartmentIds.Split(',').Select(int.Parse).ToList();
-                lstUsers = _userrepos.FindBy(x => lstDepartments.Contains(x.departmentid)).ToList();
+                lstUsers = _userrepos.FindBy(x => eventinfo.TargetAttendeeIdList.Contains(x.departmentid)).ToList();
             }
             else if (eventinfo.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.MyselfOnly)
             {

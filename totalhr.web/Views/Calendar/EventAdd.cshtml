@@ -18,12 +18,14 @@
     string defaultEndDate;
     var sbRemindersJS = new StringBuilder();
     var reminderscount = (Model.Reminders == null) ? 0 : Model.Reminders.Count;
-        
+    var sJSChosenTargetUsers = string.Empty;
+    var sJSChosenTargeDepartments = string.Empty;
     var culture = new System.Globalization.CultureInfo(Model.UserCulture);
 
     defaultStartDate = (Model.StartDate > DateTime.MinValue) ? Model.StartDate.ToString(culture) : DateTime.Now.ToString(culture);
     defaultEndDate = (Model.EndDate > DateTime.MinValue) ? Model.EndDate.ToString(culture) : DateTime.Now.ToString(culture);
     
+
     if (Model.Reminders != null)
     {
         int i=0;
@@ -35,6 +37,23 @@
             i++;
         }
     }
+
+    if (Model.TargetAttendeeGroupId == (int)Variables.CalendarEventTarget.User)
+    {
+        sJSChosenTargetUsers = string.Join<int>(",", Model.TargetAttendeeIdList);
+    }
+    else if (Model.TargetAttendeeGroupId == (int)Variables.CalendarEventTarget.Department)
+    {
+        sJSChosenTargeDepartments = string.Join<int>(",", Model.TargetAttendeeIdList);
+    }  
+    
+    var attendeecount = Model.TargetAttendeeIdList != null? Model.TargetAttendeeIdList.Count() + " " : "";
+    
+    var targetattendeetitle = Model.TargetAttendeeGroupId > 0 ?
+                                 attendeecount + EnumExtensions.Description((Variables.CalendarEventTarget)Model.TargetAttendeeGroupId) :
+                                FormMessages.V_None_Added;
+                         
+                             
 }
 
 
@@ -109,16 +128,15 @@
                              
                              <span id="spaddrem" class="spadd" onclick="AddReminderRow();" />
 
-
                              @if (reminderscount > 0)
                              {
-                                 <span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick=" Expand('spReminders'); ">
+                                 <span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick="Expand('spReminders');">
                                      &nbsp;
                                  </span>
                              }
                          </span>
 
-                        <span id="spReminders" class="spview" style="display:none;">
+                        <span id="spReminders" style="display:none;">
                             &nbsp;
                         </span>
 
@@ -132,7 +150,7 @@
                             <div id="dvRemindersData"></div>
                          </div>
 
-                         <div id="dvReminderList" class="reminderedit" style="display:none">
+                         <div id="dvReminderList" class="popupedit" style="display:none">
                              <span class="spclose" onclick="CancelDivPopup('dvReminderList');">&nbsp;</span>
                              <table>
                                  <tr>
@@ -165,15 +183,12 @@
                                          &nbsp;
                                      </td>
                                  </tr>
-                             </table>
+                             </table>                             
                              
-                             
-                         </div>
-                        
+                         </div>                        
 
                      </div>
-
-                       @Html.HiddenFor(x => x.ReminderXML)
+                      
                  </div>
 
               </div>
@@ -189,19 +204,16 @@
                  <div class="childblock">
                     
                      <div class="head" onclick="ToggleExpand('dvAttendeesContent')">
-                         <span class="actiontitle">(
-                             @(Model.TargetAttendeeGroupId > 0 ? EnumExtensions.Description((Variables.CalendarEventTarget)Model.TargetAttendeeGroupId) :
-                                FormMessages.V_None_Added)
-                         
-                             )
-                         </span>
+                         <span id="spattendeeCount" class="actiontitle">(
+                             @targetattendeetitle
+                         )</span>
 
                          <span class="buttons">
                           <span class="spedit" title="@FormMessages.Toolt_Edit_Reminder" onclick="Expand('spReminders');">
                             &nbsp;
                         </span>
 
-                        <span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick="DialogAddReminder('dvReminders');">
+                        <span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick="">
                             &nbsp;
                         </span>
                              </span>
@@ -214,10 +226,18 @@
                             @Html.Raw(CalendarHelper.GenerateAttendee(num, "TargetAttendeeGroupId", schecked));
                         }                         
                        
-                        @Html.HiddenFor(x => x.InvitedUserIds)
-                        @Html.HiddenFor(x => x.InvitedDepartmentIds)
+                        <div id="dvHiddenAttendees" style="display:none">
+                        </div>
                          
-                        <div id="dvAttendeesOptions" class="optionbox" style="display:none;">
+                        
+                        <div id="dvAttendeesOptions" class="popupedit" style="display:none;">
+                            <span class="spclose" onclick="CancelDivPopup('dvAttendeesOptions');">&nbsp;</span>
+
+                            <div id="dvAttendeesList"></div>
+
+                            <div>
+                                <input type="button" value="Add" class="btnsmall" onclick="SaveInvitees();"/>
+                            </div>
                         </div>
                      </div>
 
@@ -246,7 +266,7 @@
                                 &nbsp;
                             </span>
 
-                            <span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick="DialogAddReminder('dvReminders');">
+                            <span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick="">
                                 &nbsp;
                             </span>
                             </span>
@@ -341,6 +361,8 @@
     var REMINDER_TYPE_CUSTOMIZE = "@((int)Variables.CalendarEventReminderValues.Customize)";
     var NONE_ADDED_MESSAGE = "@FormMessages.V_None_Added";
     var MSG_BEFORE = "@Common.V_Before";
+    var InvitedUsers;
+    var InvitedDepartments;
 
     @sbJS.ToString()
    
@@ -355,6 +377,7 @@
     MSG_ERROR_SUBMIT_FAILED = "@Html.Raw(FormMessages.Error_Could_Not_Submit_Form)";
     MSG_ERROR_STARTDATE_AFTER_ENDDATE = "@Html.Raw(FormMessages.Error_StartDate_After_EndDate)";
     MSG_DUPLICATE_REMINDER = "@FormMessages.MSG_Duplicate_Reminder";
+    MSG_USERS_FROM_SERVER = "@FormMessages.MSG_Users_Invitee_List";
 
     $(document).ready(function() {
 
@@ -379,6 +402,9 @@
         @Html.Raw(sbRemindersJS.ToString())
 
         ApplyMessagesToReminders();
+
+        InvitedUsers = @("[" + sJSChosenTargetUsers + "]");
+        InvitedDepartments = @("[" + sJSChosenTargeDepartments + "]");
     });
 
     

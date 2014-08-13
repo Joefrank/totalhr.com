@@ -176,4 +176,13 @@ Index (zero based) must be greater than or equal to zero and less than the size 
 ]2014-08-11 15:03:04,329 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
 ]2014-08-11 15:03:15,661 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
 ]2014-08-11 15:47:20,619 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-11 21:02:43,169 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-11 23:39:03,874 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-11 23:39:03,998 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-11 23:39:04,024 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-11 23:39:13,189 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-12 23:00:00,782 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-12 23:00:01,180 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-12 23:00:01,201 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]2014-08-12 23:00:05,170 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
 ]
