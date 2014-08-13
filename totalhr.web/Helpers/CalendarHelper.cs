@@ -27,6 +27,7 @@ namespace totalhr.web.Helpers
             var temp = string.Empty;
             var targetId = (int)myenum;
             var selector = string.Empty;
+            var applycollapse = string.Empty;
           
             if (targetId == (int)Variables.CalendarEventTarget.User)
             {
@@ -41,13 +42,14 @@ namespace totalhr.web.Helpers
             else
             {
                 temp = @" onclick=""CollapseSelector();"" ";
+                applycollapse = "CollapseSelector();";
             }
             
             return string.Format(@"<span class=""row"" id=""spAttendeeTarget_{0}"" title=""{1}"" onmouseover=""ShowDetails(this);"" 
-                onmouseout=""HideDetails(this);"" onclick=""ApplyAttendeeTargetSelection(this, {0}, '{5}')""><i class=""info"" title=""{1}"">&nbsp;</i>
+                onmouseout=""HideDetails(this);"" onclick=""ApplyAttendeeTargetSelection(this, {0}, '{5}');{7}""><i class=""info"" title=""{1}"">&nbsp;</i>
                 <input type=""radio"" {6} name=""{4}"" value=""{0}"" {3} />
                 <span id=""spAttendeeDesc_{0}"">{2}</span></span>", (int)myenum, EnumExtensions.FurtherInfo(myenum),
-                                              EnumExtensions.Description(myenum), temp, groupname, selector, checkedHtml);
+                                              EnumExtensions.Description(myenum), temp, groupname, selector, checkedHtml, applycollapse);
         }
 
         public static string GenerateFrequencyDDl(string id, string name, string callback)

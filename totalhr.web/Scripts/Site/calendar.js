@@ -91,7 +91,7 @@ function OpenSelector(mode) {
 function CollapseSelector() {
     $('#dvAttendeesOptions').slideUp();
 }
-
+/** Target user stuff */
 function PrintUser(div, item) {
     var sChecked = '';
     if (InvitedUsers != null) {
@@ -134,6 +134,30 @@ function PickDepartment(objck) {
     }
 }
 
+
+function ApplyAttendeeTargetSelection(obj, id, selector) {
+    var objInput = $('#' + obj.id).children("input[type=radio]");
+    var objInfo = $('#' + obj.id).children("i");
+
+    if (prevTargetSelected != null && prevTargetSelected != obj) {
+        var opt = $('#' + prevTargetSelected.id).children("input[type=radio]");
+        opt.attr('checked', false);
+        var desc = $('#' + prevTargetSelected.id).children("#spAttendeeDesc_" + id);
+        desc.css("color", "black");
+    }
+
+    objInput.prop('checked', true);
+
+    //doesn't update twice BUG
+    prevTargetSelected = obj;
+
+    if (selector != null && selector != "") {
+        OpenSelector(selector);
+    } else {
+        $('#spattendeeCount').html('( ' + $('#spAttendeeDesc_' + id).text() + ' )');
+    }
+}
+
 function SaveInvitees() {
     if (dialogmode == 'USERS') {
         SaveUserInvitees();
@@ -147,7 +171,7 @@ function SaveUserInvitees() {
     var listAttendeesHTML = '';
     var count = 0;
     //*** use name in jquery to retrieve selected value of radios
-    var val = $('#TargetAttendeeGroupId').val();
+    var val = $(":radio[name='TargetAttendeeGroupId']:checked").val();
 
     for (var key in ckSelectedTargetUsers) {
         if (ckSelectedTargetUsers[key] != null) {
@@ -232,26 +256,6 @@ function ApplyRepeatSelection(obj) {
     $('#sprepeatinfo').html(currenttitle);
 }
 
-
-function ApplyAttendeeTargetSelection(obj, id, selector) {
-    var objInput = $('#' + obj.id).children("input[type=radio]");
-    var objInfo = $('#' + obj.id).children("i");
-
-    if (prevTargetSelected != null) {
-        var opt =$('#' + prevTargetSelected.id).children("input[type=radio]");
-        opt.attr('checked', false);
-        var desc = $('#' + prevTargetSelected.id).children("#spAttendeeDesc_" + id);
-        desc.css("color", "black");
-    }
-   
-    objInput.attr('checked', true);    
-   
-    //doesn't update twice BUG
-    prevTargetSelected = obj;
-
-    if (selector != null)
-        OpenSelector(selector);
-}
 
 function ShowDetails(obj) {
     obj.style.fontWeight = "bold";
