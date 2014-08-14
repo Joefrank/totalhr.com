@@ -640,6 +640,15 @@
     <value>Reminder already added.</value>
   </data>
   <data name="MSG_Users_Invitee_List" xml:space="preserve">
-    <value>Select users to invite</value>
+    <value>Select user(s) to invite</value>
+  </data>
+  <data name="Label_Enter_Year" xml:space="preserve">
+    <value>Enter year</value>
+  </data>
+  <data name="MSG_Departments_Invitee_List" xml:space="preserve">
+    <value>Select department(s) to invite </value>
+  </data>
+  <data name="MSG_Error_NoAttendee_Chosen" xml:space="preserve">
+    <value>You cannot invite attendees without selecting any!</value>
   </data>
 </root>

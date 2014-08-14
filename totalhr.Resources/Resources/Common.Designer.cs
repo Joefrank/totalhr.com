@@ -241,6 +241,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add.
+        /// </summary>
+        public static string V_Add {
+            get {
+                return ResourceManager.GetString("V_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Before.
         /// </summary>
         public static string V_Before {
@@ -268,11 +277,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set.
+        /// </summary>
+        public static string V_Set {
+            get {
+                return ResourceManager.GetString("V_Set", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show.
         /// </summary>
         public static string V_Show {
             get {
                 return ResourceManager.GetString("V_Show", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Until.
+        /// </summary>
+        public static string V_Until {
+            get {
+                return ResourceManager.GetString("V_Until", resourceCulture);
             }
         }
     }

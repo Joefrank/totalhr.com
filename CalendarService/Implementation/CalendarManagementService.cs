@@ -118,29 +118,44 @@ namespace Calendar.Implementation
 
                 }
 
-                //save repeat for event if they have been specified
+                //***save repeat for event if they have been specified
                 if (info.RepeatType > 0)
                 {
-                    var doc = new XmlDocument();
-                    doc = new XmlDocument();
-                    doc.LoadXml(info.RepeatXML);
-                    var rootNode = doc.DocumentElement;
-                    
-                    if (rootNode != null)
+                    var assocvalue = string.Empty;
+
+                    if (info.RepeatType == (int) Variables.RepeatType.OnDates
+                        || info.RepeatType == (int)Variables.RepeatType.MonthlyOnDates)
                     {
-                        
+                       // info.RepeatDates
+                        //assocvalue
+                    }else if (info.RepeatType == (int) Variables.RepeatType.DailyMonToFri
+                        || info.RepeatType == (int)Variables.RepeatType.OnDayOfTheWeek)
+                    {
+                        //info.RepeatUntil
+                    }else if (info.RepeatType == (int) Variables.RepeatType.YearlyOnSameDate)
+                    {
+                        //info.RepeatYears
+                    }
+                  
+                 
+                    //var doc = new XmlDocument();
+                    //doc = new XmlDocument();
+                    //doc.LoadXml(info.RepeatXML);
+                    //var rootNode = doc.DocumentElement;
+                    
+                    
                             var eventAssociation = new CalendarAssociation
                             {
                                 EventId = cevent.id,
                                 AssociationTypeid = (int)Variables.CalendarEventAssociationType.Repeat,
-                                AssociationValue = rootNode.OuterXml,
+                                AssociationValue = assocvalue,
                                 Created = DateTime.Now,
                                 CreatedBy = info.CreatedBy
                             };
 
                             _calEventRepos.CreateEventAssociation(eventAssociation);
                         
-                    }
+                   
                 }
                
 

@@ -43,18 +43,19 @@ namespace totalhr.Shared.Models
         public int TargetAttendeeGroupId { get; set; }
                 
         public List<int> TargetAttendeeIdList { get; set; }
-       
+        
+        public int RepeatType { get; set; }
 
+        public DateTime RepeatUntil { get; set; }
+        
+        public List<DateTime> RepeatDates { get; set; }
+
+        public List<int> RepeatYears { get; set; } 
+        
         public int CalendarId { get; set; }
 
         public string CalendarName { get; set; }
-
-        public int RepeatType { get; set; }
-
-        public DateTime RepeatDate { get; set; }
-
-        public string RepeatXML { get; set; }
-
+        
         public int CompanyId { get; set; }
 
 

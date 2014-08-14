@@ -1,8 +1,14 @@
 ﻿//document.onclick = AdjustEvents;
 
-
-var MSG_ADDED;
-var MSG_MISSING_REMINDER_TYPE;
+var ERROR_INVALID_DATE = '';
+var REMINDER_TYPE_CUSTOMIZE = '';
+var NONE_ADDED_MESSAGE = '';
+var MSG_BEFORE = '';
+var MSG_ADDED='';
+var MSG_MISSING_REMINDER_TYPE ='';
+var MSG_USERS_FROM_SERVER = '';
+var MSG_DEPARTMENTS_FROM_SERVER = '';
+var MSG_ERROR_NOATTENDEE_CHOSEN = '';
 
 var eventid = 0;
 var CalendarId = null;
@@ -13,7 +19,15 @@ var SelectedReminderType = null;
 var Reminders = new Array();
 var reminderTemplateHTML = '<tr><td></td><td></td></tr>';
 var dialogmode = '';
-
+var bUsersLoaded = false;
+var bDepartmentsLoaded = false;
+var InvitedUsers;
+var InvitedDepartments;
+var previousSelectedId = null;
+var repeatTypeSelectedid = null;
+var prevSelDisplayObj = null;
+var RepeatsToSave = new Array();
+var EventId = '';
 
 function ManageActiveDay(objTd) {
     var objTdId = objTd.id;
@@ -61,29 +75,54 @@ function PickEventTargetSelection(obj, objid) {
 function OpenSelector(mode) {
     var url;
     var func;
+    var divid = '';
+    var message = '';
+    var usercount = 0;
+    var departmentcount = 0;
+    
     dialogmode = mode;
 
     if (mode == 'USERS') {
         url = '/Account/GetCompanyUsersJson/';
         func = 1;
+        divid = 'dvAttendeesList';
+        message = MSG_USERS_FROM_SERVER;
+        $('#dvAttendeesDepartments').css("display", "none");
+        if (bUsersLoaded) {
+            $('#' + divid).css("display", "");
+            $('#dvAttendeesOptions').slideDown("slow");
+            return;
+        }
     }else if (mode == 'DEPARTMENT') {
         url = '/Account/GetCompanyDepartmentsJson/';
         func = 2;
+        divid = 'dvAttendeesDepartments';
+        message = MSG_DEPARTMENTS_FROM_SERVER;
+        $('#dvAttendeesList').css("display", "none");
+        if (bDepartmentsLoaded) {
+            $('#' + divid).css("display", "");
+            $('#dvAttendeesOptions').slideDown("slow");
+            return;
+        }
     }
-   
-
+    
+    var div = $('#' + divid);
+    
     $.getJSON(url, null, function (data) {
-        $('#dvAttendeesOptions').slideDown("slow");
-        var div = $('#dvAttendeesList');
-        div.html(MSG_USERS_FROM_SERVER + "<br/>");
+        div.css("display", "");
+        div.html(message + "<br/>");
         
         $.each(data, function (i, item) {
-            if (func == 1)
+            if (func == 1) {
                 PrintUser(div, item);
-            else if (func == 2)
+                bUsersLoaded = true;
+            } else if (func == 2) {
                 PrintDepartment(div, item);
+                bDepartmentsLoaded = true;
+            }
         });
-        div.slideDown("slow");
+        
+        $('#dvAttendeesOptions').slideDown("slow");
     });    
     
 }
@@ -170,7 +209,7 @@ function SaveUserInvitees() {
     var allinvitees = '';
     var listAttendeesHTML = '';
     var count = 0;
-    //*** use name in jquery to retrieve selected value of radios
+  
     var val = $(":radio[name='TargetAttendeeGroupId']:checked").val();
 
     for (var key in ckSelectedTargetUsers) {
@@ -187,15 +226,15 @@ function SaveUserInvitees() {
     }
     $('#dvHiddenAttendees').html(listAttendeesHTML);
     $('#dvAttendeesOptions').fadeOut("slow");
-    $('#spattendeeCount').html('( ' + count + $('#spAttendeeDesc_' + val).text() + ' )');
+    $('#spattendeeCount').html('( ' + count + " " + $('#spAttendeeDesc_' + val).text() + ' )');
 }
 
 function SaveDepartmentInvitees() {
     var allinvitees = '';
     var listAttendeesHTML = '';
     var count = 0;
-    //*** use name in jquery to retrieve selected value of radios
-    var val = $('#TargetAttendeeGroupId').val();
+   
+    var val = $(":radio[name='TargetAttendeeGroupId']:checked").val();
 
     for (var key in ckSelectedDepartment) {
         if (ckSelectedDepartment[key] != null) {
@@ -213,7 +252,7 @@ function SaveDepartmentInvitees() {
     $('#dvAttendeesOptions').fadeOut("slow");
     
 
-    $('#spattendeeCount').html('( ' + count + $('#spAttendeeDesc_' + val).text() + ' )');
+    $('#spattendeeCount').html('( ' + count + ' ' + $('#spAttendeeDesc_' + val).text() + ' )');
 }
 
 function Expand(objid) {

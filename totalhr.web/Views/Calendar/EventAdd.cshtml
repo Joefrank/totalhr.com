@@ -24,7 +24,7 @@
 
     defaultStartDate = (Model.StartDate > DateTime.MinValue) ? Model.StartDate.ToString(culture) : DateTime.Now.ToString(culture);
     defaultEndDate = (Model.EndDate > DateTime.MinValue) ? Model.EndDate.ToString(culture) : DateTime.Now.ToString(culture);
-    
+    var defaultDate = DateTime.Now.ToString(culture);
 
     if (Model.Reminders != null)
     {
@@ -177,7 +177,7 @@
                                  </tr>
                                  <tr>
                                      <td>
-                                         <input type="button" value="Add" class="btnsmall" onclick="SaveReminder();"/>
+                                         <input type="button" value="@Common.V_Add" class="btnsmall" onclick="SaveReminder();"/>
                                      </td>
                                      <td>
                                          &nbsp;
@@ -234,9 +234,11 @@
                             <span class="spclose" onclick="CancelDivPopup('dvAttendeesOptions');">&nbsp;</span>
 
                             <div id="dvAttendeesList"></div>
+                            
+                            <div id="dvAttendeesDepartments"></div>
 
                             <div>
-                                <input type="button" value="Add" class="btnsmall" onclick="SaveInvitees();"/>
+                                <input type="button" value="@Common.V_Add" class="btnsmall" onclick="SaveInvitees();"/>
                             </div>
                         </div>
                      </div>
@@ -280,41 +282,34 @@
                             @Html.Raw(CalendarHelper.GenerateRepeatByType(num, "RepeatTypeGroup", schecked));
                         }
                     
-                        <div id="repeatOptions" class="optionbox" style="display:none;">
-                        
-                            <span id="spRepeatBattery" style="display:none;float:left;position:relative;z-index:1004;">
-                                <input type="text" id="txtRepeatDate" name="txtRepeatDate" class="datetype"
-                                    data-beatpicker="true" 
-                                    data-beatpicker-format="[&#39;DD&#39;,&#39;MM&#39;,&#39;YYYY&#39;],separator:&#39;/&#39;" 
-                                    data-beatpicker-module="gotoDate,clear" 
-                                    data-beatpicker-position="[&#39;*&#39;,&#39;*&#39;]"  />
+                        <div id="repeatOptions" class="popupedit" style="display:none;">
+                            <span id="sprepeatinfo" class="linespan"></span>
 
-                                <input type="button" value="Add" onclick="KeepDateIn('txtRepeatDate')" />
+                            <span id="spRepeatBattery" class="linespan" style="display:none;">
+                                <input type="text" id="txtRepeatDate" name="txtRepeatDate" class="datetype" value="@defaultDate" />
+                                <input type="button" value="@Common.V_Add" class="btnsmall" onclick="KeepDateIn('txtRepeatDate')" />
                             </span>
                         
-                            <span id="spUntilDate" style="display:none;float:left;position:relative;z-index:1004;">
-                                Until: <input type="text" id="txtRepeatUntil" name="txtRepeatUntil" class="datetype"
-                                    data-beatpicker="true" 
-                                    data-beatpicker-format="[&#39;DD&#39;,&#39;MM&#39;,&#39;YYYY&#39;],separator:&#39;/&#39;" 
-                                    data-beatpicker-module="gotoDate,clear" 
-                                    data-beatpicker-position="[&#39;*&#39;,&#39;*&#39;]"  />
-                                <input type="button" value="Set" onclick="SetUntilDateIn('txtRepeatUntil')" />
+                            <span id="spUntilDate" class="linespan" style="display:none;">
+                                <span>@Common.V_Until:</span> <input type="text" id="txtRepeatUntil" name="txtRepeatUntil" class="datetype" value="@defaultDate"  /><br/>
+                                <input type="button" value="@Common.V_Set" class="btnsmall" onclick="SetUntilDateIn('txtRepeatUntil')" />
                             </span>
                         
-                            <span id="spRepeatValue" style="display:none;float:left;position:relative;z-index:1004;">
-                                Enter year:  <input type="text" id="txtRepeatValue" class="datetype"  />
-                                <input type="button" value="Add" onclick="KeepDateIn('txtRepeatValue')" />
+                            <span id="spRepeatValue" class="linespan" style="display:none;">
+                                <label style="float:left;">@FormMessages.Label_Enter_Year:</label>  <input type="text" id="txtRepeatValue" class="smalltxt" value="@DateTime.Now.Year"  /><br/>
+                                <input type="button" value="@Common.V_Add" class="btnsmall" onclick="KeepDateIn('txtRepeatValue')" />
                             </span>
                             
-                            <span id="sprepeatinfo"></span>
+                            <div style="display:none" id="dvRepeatHiddenDates"></div>
+                            <div style="display:none" id="dvRepeatHiddenValues"></div>
+
                         </div>
                         
                       </div>
                     </div>
 
                     @Html.HiddenFor(x => x.RepeatType)
-                    @Html.HiddenFor(x => x.RepeatXML)  
-                    
+                   
                     <span id="spmonthlydate"></span>              
                 </div>
 
@@ -341,28 +336,13 @@
 
 }
 
-    
-<div class="status-box" id="status"></div>
-
-@* <script type="text/javascript" src="/Scripts/Site/BeatPicker.min.js"></script>
-    <script type="text/javascript" src="/Scripts/date.js"></script>*@
 
     <script type="text/javascript" src="/Scripts/Site/DatePicker.js"></script>
     <script type="text/javascript" src="/Scripts/Site/calendar.js" ></script>
 
 <script type="text/javascript">
-
-    var previousSelectedId = null;
-    var repeatTypeSelectedid = null;
-    var prevSelDisplayObj = null;
-    var RepeatsToSave = new Array();
-    var EventId = @Model.EventId;
-    var ERROR_INVALID_DATE = "@FormMessages.Error_Invalid_Date";
-    var REMINDER_TYPE_CUSTOMIZE = "@((int)Variables.CalendarEventReminderValues.Customize)";
-    var NONE_ADDED_MESSAGE = "@FormMessages.V_None_Added";
-    var MSG_BEFORE = "@Common.V_Before";
-    var InvitedUsers;
-    var InvitedDepartments;
+    
+    EventId = @Model.EventId;
 
     @sbJS.ToString()
    
@@ -370,7 +350,10 @@
 
     @Html.Raw(sbAttendees)
     
-
+    ERROR_INVALID_DATE = "@FormMessages.Error_Invalid_Date";
+    REMINDER_TYPE_CUSTOMIZE = "@((int)Variables.CalendarEventReminderValues.Customize)";
+    NONE_ADDED_MESSAGE = "@FormMessages.V_None_Added";
+    MSG_BEFORE = "@Common.V_Before";
     MSG_ADDED = "@Html.Raw(FormMessages.V_Added)";
     MSG_MISSING_REMINDER_TYPE = "@Html.Raw(FormMessages.Error_Missing_Reminder_Type)";
     MSG_MISSING_REMINDER_VALUES = "@Html.Raw(FormMessages.Error_Missing_Reminder_Frequency_AndValues)";
@@ -378,7 +361,9 @@
     MSG_ERROR_STARTDATE_AFTER_ENDDATE = "@Html.Raw(FormMessages.Error_StartDate_After_EndDate)";
     MSG_DUPLICATE_REMINDER = "@FormMessages.MSG_Duplicate_Reminder";
     MSG_USERS_FROM_SERVER = "@FormMessages.MSG_Users_Invitee_List";
-
+    MSG_DEPARTMENTS_FROM_SERVER = "@FormMessages.MSG_Departments_Invitee_List";
+    MSG_ERROR_NOATTENDEE_CHOSEN = "@FormMessages.MSG_Error_NoAttendee_Chosen";
+    
     $(document).ready(function() {
 
         //var statusGenerator = function(text) {
