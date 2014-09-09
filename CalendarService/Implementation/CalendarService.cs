@@ -159,16 +159,28 @@ namespace Calendar.Implementation
                 {
                     var foundEvents = lstEvents.FindAll(x => x.StartOfEvent.Date == currentdate.Date
                         || x.EndOfEvent.Date == currentdate.Date).ToList();
+                    var tempspan = string.Empty;
+                    var evtDetails = new StringBuilder();
 
                     foreach (CalendarEventCache ce in foundEvents)
                     {
-                        sbEvents.Append(string.Format(@"<span class=""event"" id=""evt_{0}_{1}"" {2}>", ClientPageId, ce.id, rqStruct.ClientConfig.EventClickCallBack)
-                            + ce.Title + "</span>");
+                        //use delegates for event details
+                        evtDetails.Append("Title: " + ce.Title + "<br/>");
+                        evtDetails.Append("Location: " + ce.Location + "<br/>");
+                        evtDetails.Append("From: " + ce.StartOfEvent + " to " + ce.EndOfEvent + "<br/>");
+                        evtDetails.Append("Description: " + ce.Description.Replace(Environment.NewLine, "<br/>") + "<br/>");
+
+                        tempspan = ce.CreatedBy == rqStruct.UserId ?
+                            string.Format(@"<span class=""editevent"" style=""display:none"">{0}</span>", evtDetails.ToString()) : "";
+
+                        sbEvents.Append(string.Format(@"<span class=""event"" id=""evt_{0}_{1}"" {2}>", ClientPageId, ce.id, rqStruct.ClientConfig.PreviewCallBack)
+                            + ce.Title + "</span>" + tempspan);
                         sbJavascript.Append(string.Format(@" {3}['evt_{0}_{1}']=[{0},{1},'{2}'];" + Environment.NewLine, ClientPageId, ce.id, currentTdId, rqStruct.ClientConfig.JsArrayEventName));
                     }
                 }
 
-                sbTemp.Append(string.Format(TdHtml, todayHtml + @" id=""" + currentTdId + @""" " + rqStruct.ClientConfig.ActiveTdClickCallBack,
+                sbTemp.Append(string.Format(TdHtml, todayHtml + @" id=""" + currentTdId + @""" " + 
+                     rqStruct.ClientConfig.ActiveTdClickCallBack,
                         @"<span class=""day"">" + i + "</span>" + sbEvents.ToString()));
 
                 sbEvents.Clear();

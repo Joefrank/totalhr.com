@@ -75,17 +75,37 @@ namespace totalhr.web.Controllers
             return MonthView(DateTime.Now.Year, DateTime.Now.Month, id);
         }
 
+        public ActionResult PreviewEvent(int id)
+        {
+            CalendarEvent cevent = _calMservice.GetEvent(id);
+            return View(cevent);
+        }
+
+        [HttpGet]
         public ActionResult EditEvent(int id)
         {
-            if (id == 0)
-            {
-                return View("EventEdit", new CalendarEventInfo());
-            }
-            else
+            ViewBag.WeekDaysJS = MakeClientJSForWeekDays();
+            CalendarEventInfo info = _calMservice.GetEventInfo(id);
+            info.UserCulture = CurrentUser.Culture; 
+            return View("EventEdit", "~/Views/Shared/_PopupLayout.cshtml",info);
+        }
+
+        [ProfileCheck(Variables.Profiles.CalendarCreateEvent)]
+        [HttpPost]
+        [ValidateInput(false)]
+        public ActionResult EditEvent(CalendarEventInfo eventinfo)
+        {
+            if (!ModelState.IsValid)
             {
                 ViewBag.WeekDaysJS = MakeClientJSForWeekDays();
-                return View("EventEdit", _calMservice.GetEventInfo(id));
+                eventinfo.UserCulture = CurrentUser.Culture;
+                return View("EventEdit", "~/Views/Shared/_PopupLayout.cshtml", eventinfo);
             }
+
+            eventinfo.LastModifiedBy = CurrentUser.UserId;
+            _calMservice.SaveEvent(eventinfo);
+
+            return View("EventEdit", "~/Views/Shared/_PopupLayout.cshtml", eventinfo);
         }
        
         [ProfileCheck(Variables.Profiles.CalendarCreateEvent)]
@@ -155,11 +175,14 @@ namespace totalhr.web.Controllers
                 Month = month,
                 RelatedEvents = calEvents,
                 CalendarId = calendarid,
+                UserCanCreateEvent = CurrentUser.HasProfile((int)Variables.Profiles.CalendarCreateEvent),
+                UserId = CurrentUser.UserId,
                 ClientConfig = new ClientScriptConfig
                     {
                         PageClientId = 1,
                         ActiveTdClickCallBack = @" onclick=""ManageActiveDay(this);"" ",
-                        EventClickCallBack = @" onclick=""ManageEvent(this);"" ",
+                        EventClickCallBack =  @" onclick=""ManageEvent(this);"" ",
+                        PreviewCallBack = @" onclick=""PreviewEvent(this);"" ",
                         JsArrayEventName = "ArrEvents",
                         CurrentDayCssClass = "today"
                     }

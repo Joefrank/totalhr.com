@@ -17,6 +17,10 @@
     string defaultStartDate;
     string defaultEndDate;
     var sbRemindersJS = new StringBuilder();
+    var sbTargetAttendees = new StringBuilder();
+    var sbRepeatDates = new StringBuilder();
+    var sbRepeatYears = new StringBuilder();
+    var repeatuntil = string.Empty;
     var reminderscount = (Model.Reminders == null) ? 0 : Model.Reminders.Count;
     var sJSChosenTargetUsers = string.Empty;
     var sJSChosenTargeDepartments = string.Empty;
@@ -25,7 +29,8 @@
     defaultStartDate = (Model.StartDate > DateTime.MinValue) ? Model.StartDate.ToString(culture) : DateTime.Now.ToString(culture);
     defaultEndDate = (Model.EndDate > DateTime.MinValue) ? Model.EndDate.ToString(culture) : DateTime.Now.ToString(culture);
     var defaultDate = DateTime.Now.ToString(culture);
-
+    var defaultDateShort = defaultDate.Split(' ')[0];
+    
     if (Model.Reminders != null)
     {
         int i=0;
@@ -37,15 +42,53 @@
             i++;
         }
     }
+int count =0;
 
     if (Model.TargetAttendeeGroupId == (int)Variables.CalendarEventTarget.User)
     {
         sJSChosenTargetUsers = string.Join<int>(",", Model.TargetAttendeeIdList);
+        
+        foreach(int i in Model.TargetAttendeeIdList){
+            sbTargetAttendees.Append(string.Format(@"<input type=""hidden"" name=""TargetAttendeeIdList[{0}]"" value=""{1}"" />", count, i));
+            count++;
+        }
+        
     }
     else if (Model.TargetAttendeeGroupId == (int)Variables.CalendarEventTarget.Department)
     {
         sJSChosenTargeDepartments = string.Join<int>(",", Model.TargetAttendeeIdList);
+
+        foreach (int i in Model.TargetAttendeeIdList)
+        {
+            sbTargetAttendees.Append(string.Format(@"<input type=""hidden"" name=""TargetAttendeeIdList[{0}]"" value=""{1}"" />", count, i));
+            count++;
+        }
     }  
+    
+    //sbRepeats
+     if(Model.RepeatType == (int)Variables.RepeatType.DailyMonToFri || 
+         Model.RepeatType == (int)Variables.RepeatType.OnDayOfTheWeek)//repeat until
+     {
+         repeatuntil = Model.RepeatUntil.ToString(culture).Split(' ')[0];
+     }
+     else if(Model.RepeatType == (int)Variables.RepeatType.OnDates ||
+         Model.RepeatType == (int)Variables.RepeatType.MonthlyOnDates)
+     {
+         count = 0;
+         
+         foreach(string date in Model.RepeatDates){
+             sbRepeatDates.Append(string.Format(@"<input type=""hidden"" name=""RepeatDates[{0}]"" value=""{1}"" />", count, date));                 
+         }
+     }
+     else if(Model.RepeatType == (int)Variables.RepeatType.YearlyOnSameDate)
+     {
+         count = 0;
+
+         foreach (int date in Model.RepeatYears)
+         {
+             sbRepeatYears.Append(string.Format(@"<input type=""hidden"" name=""RepeatYears[{0}]"" value=""{1}"" />", count, date));
+         }
+     }
     
     var attendeecount = Model.TargetAttendeeIdList != null? Model.TargetAttendeeIdList.Count() + " " : "";
     
@@ -111,9 +154,9 @@
                 <label class="fix200W"> @FormMessages.Label_Reminders</label>
                 
                  <div class="childblock">
-                    
-                     <div class="head" onclick="ToggleExpand('dvReminderContent');">
-                         <span id="spReminderCount" class="actiontitle">(
+                   
+                     <div class="head" id="dvReminderHead" onclick="ToggleExpandGeneric('dvReminderHead', 'dvReminderContent');AddReminderRow();" >
+                         <span id="spReminderCount" class="actiontitle"> (
                              @if (reminderscount > 0)
                              {
                                 @(reminderscount + " " + FormMessages.V_Added)
@@ -126,20 +169,15 @@
 
                          <span class="buttons">
                              
-                             <span id="spaddrem" class="spadd" onclick="AddReminderRow();" />
-
-                             @if (reminderscount > 0)
+                             
+                             @*if (reminderscount > 0)
                              {
                                  <span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick="Expand('spReminders');">
                                      &nbsp;
                                  </span>
-                             }
+                             }*@
                          </span>
-
-                        <span id="spReminders" style="display:none;">
-                            &nbsp;
-                        </span>
-
+                       
                      </div>
 
                      <div id="dvReminderContent" class="content" style="display:none;">
@@ -203,21 +241,20 @@
 			<label class="fix200W">@FormMessages.Label_TargetGroup <span class="req">*</span></label>
                  <div class="childblock">
                     
-                     <div class="head" onclick="ToggleExpand('dvAttendeesContent')">
-                         <span id="spattendeeCount" class="actiontitle">(
+                     <div class="head" id="dvAttendeeHead" onclick="ToggleExpandGeneric('dvAttendeeHead', 'dvAttendeesContent');">
+                         <span id="spattendeeCount" class="actiontitle"> (
                              @targetattendeetitle
                          )</span>
 
                          <span class="buttons">
-                          <span class="spedit" title="@FormMessages.Toolt_Edit_Reminder" onclick="Expand('spReminders');">
-                            &nbsp;
-                        </span>
+                         
+                          @*  <span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick="">
+                                &nbsp;
+                            </span>*@
 
-                        <span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick="">
-                            &nbsp;
-                        </span>
-                             </span>
+                         </span>
                      </div>
+
                      <div id="dvAttendeesContent" class="content" style="display:none">
                         @foreach (var num in (Variables.CalendarEventTarget[])Enum.GetValues(typeof(Variables.CalendarEventTarget)))
                         {
@@ -226,9 +263,7 @@
                             @Html.Raw(CalendarHelper.GenerateAttendee(num, "TargetAttendeeGroupId", schecked));
                         }                         
                        
-                        <div id="dvHiddenAttendees" style="display:none">
-                        </div>
-                         
+                        <div id="dvHiddenAttendees" style="display:none">@Html.Raw(sbTargetAttendees)</div>                         
                         
                         <div id="dvAttendeesOptions" class="popupedit" style="display:none;">
                             <span class="spclose" onclick="CancelDivPopup('dvAttendeesOptions');">&nbsp;</span>
@@ -254,7 +289,7 @@
                     
                     <div  id="dvRepeat" class="childblock">
                     
-                        <div id="dvRepeatHead" class="head" onclick="ToggleExpand('dvRepeatContent',$.trim($('#StartDate').val()) != '' ,'hdnMissingStartDate', 'AdjustRepeatBasedOnStartDate')">
+                        <div id="dvRepeatHead" class="head" onclick="ToggleExpandGeneric('dvRepeatHead', 'dvRepeatContent', 'AdjustRepeatBasedOnStartDate()');" >
                            <span class="actiontitle">
                             ( @{
                         var title = Model.RepeatType > 0 ? EnumExtensions.Description((Variables.RepeatType)Model.RepeatType) : FormMessages.V_None_Added;
@@ -264,13 +299,11 @@
                             )
                             </span>
                             <span class="buttons">
-                             <span class="spedit" title="@FormMessages.Toolt_Edit_Reminder" onclick="Expand('spReminders');">
-                                &nbsp;
-                            </span>
+                             
+                                @*<span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick="">
+                                    &nbsp;
+                                </span>*@
 
-                            <span class="spview" title="@FormMessages.Toolt_Add_Reminder" onclick="">
-                                &nbsp;
-                            </span>
                             </span>
                         </div>
 
@@ -279,29 +312,32 @@
                         {
                             var schecked = (int)num == Model.RepeatType ? " checked " : "";
                             sbJS.Append(string.Format("{0} = {1};" + Environment.NewLine, num.ToString(), (int)num));
-                            @Html.Raw(CalendarHelper.GenerateRepeatByType(num, "RepeatTypeGroup", schecked));
+                            @Html.Raw(CalendarHelper.GenerateRepeatByType(num, "RepeatType", schecked));
                         }
                     
                         <div id="repeatOptions" class="popupedit" style="display:none;">
                             <span id="sprepeatinfo" class="linespan"></span>
 
                             <span id="spRepeatBattery" class="linespan" style="display:none;">
-                                <input type="text" id="txtRepeatDate" name="txtRepeatDate" class="datetype" value="@defaultDate" />
-                                <input type="button" value="@Common.V_Add" class="btnsmall" onclick="KeepDateIn('txtRepeatDate')" />
+                                <input type="text" id="txtRepeatDate" name="txtRepeatDate" class="datetype" value="@defaultDateShort" onclick = "javascript:NewCal('txtRepeatDate','ddmmyyyy',false,24)" />
+                               <input type="button" value="@Common.V_Add" class="btnsmall" onclick="KeepDateIn('txtRepeatDate')" />
                             </span>
                         
                             <span id="spUntilDate" class="linespan" style="display:none;">
-                                <span>@Common.V_Until:</span> <input type="text" id="txtRepeatUntil" name="txtRepeatUntil" class="datetype" value="@defaultDate"  /><br/>
+                                <span class="linespan"> @Common.V_Until:</span> 
+                                <input type="text" id="txtRepeatUntil" name="txtRepeatUntil" class="datetype" value="@defaultDateShort" onclick = "javascript:NewCal('txtRepeatUntil','ddmmyyyy',false,24)"  />
                                 <input type="button" value="@Common.V_Set" class="btnsmall" onclick="SetUntilDateIn('txtRepeatUntil')" />
+                                @Html.HiddenFor(x => x.RepeatUntil)
                             </span>
                         
                             <span id="spRepeatValue" class="linespan" style="display:none;">
-                                <label style="float:left;">@FormMessages.Label_Enter_Year:</label>  <input type="text" id="txtRepeatValue" class="smalltxt" value="@DateTime.Now.Year"  /><br/>
-                                <input type="button" value="@Common.V_Add" class="btnsmall" onclick="KeepDateIn('txtRepeatValue')" />
+                               <span class="linespan"> @FormMessages.Label_Enter_Year:</span>  
+                                <input type="text" id="txtRepeatValue" class="smalltxt" style="width:50px;" value="@DateTime.Now.Year"  />
+                                <input type="button" value="@Common.V_Add" class="btnsmall" onclick="KeepYearIn()" />
                             </span>
                             
-                            <div style="display:none" id="dvRepeatHiddenDates"></div>
-                            <div style="display:none" id="dvRepeatHiddenValues"></div>
+                            <div style="display:none" id="dvRepeatHiddenDates">@Html.Raw(sbRepeatDates)</div>
+                            <div style="display:none" id="dvRepeatHiddenValues">@Html.Raw(sbRepeatYears)</div>
 
                         </div>
                         
@@ -323,7 +359,7 @@
                 <label class="fix200W">&nbsp;</label>
 
                 <input type="button" value="@FormMessages.btn_Reset" onclick='@( @"document.location.href=""/Calendar/CreateEvent/" + Model.CalendarId + @""" ")' />
-                <input type="submit" value="@FormMessages.btn_Value_Save" onclick="return PrepareToSaveValues()" />
+                <input type="submit" value="@FormMessages.btn_Value_Save" onclick="return IsFormValid()" />
              </div>
         </div>
                 
@@ -363,7 +399,8 @@
     MSG_USERS_FROM_SERVER = "@FormMessages.MSG_Users_Invitee_List";
     MSG_DEPARTMENTS_FROM_SERVER = "@FormMessages.MSG_Departments_Invitee_List";
     MSG_ERROR_NOATTENDEE_CHOSEN = "@FormMessages.MSG_Error_NoAttendee_Chosen";
-    
+    MSG_ERROR_ATTENDEE_REQUIRED = "@FormMessages.Error_Event_Target_Required";
+
     $(document).ready(function() {
 
         //var statusGenerator = function(text) {
@@ -390,6 +427,10 @@
 
         InvitedUsers = @("[" + sJSChosenTargetUsers + "]");
         InvitedDepartments = @("[" + sJSChosenTargeDepartments + "]");
+
+       // ReloadTargetUsers();
+       // ReloadRepeats();
+
     });
 
     

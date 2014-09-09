@@ -66,12 +66,8 @@ namespace Calendar.Implementation
             //event has been created let's create associations
             if (cevent.id > 0)
             {
-                //save reminders.
-               // var doc = new XmlDocument();
-                //doc.LoadXml(info.ReminderXML);
-                //var rootNode =  doc.DocumentElement;
-
-                if (info.Reminders != null)
+               
+                if (info.Reminders != null && info.Reminders.Count > 0)
                 {
                     foreach (CalendarEventReminder reminder in info.Reminders)
                     {
@@ -122,27 +118,32 @@ namespace Calendar.Implementation
                 if (info.RepeatType > 0)
                 {
                     var assocvalue = string.Empty;
+                    var temp = new StringBuilder();
 
                     if (info.RepeatType == (int) Variables.RepeatType.OnDates
                         || info.RepeatType == (int)Variables.RepeatType.MonthlyOnDates)
                     {
-                       // info.RepeatDates
-                        //assocvalue
+                        foreach (string rdate in info.RepeatDates)
+                        {
+                            temp.Append(string.Format("<date>{0}</date>", rdate));
+                        }
+                       
                     }else if (info.RepeatType == (int) Variables.RepeatType.DailyMonToFri
                         || info.RepeatType == (int)Variables.RepeatType.OnDayOfTheWeek)
                     {
-                        //info.RepeatUntil
-                    }else if (info.RepeatType == (int) Variables.RepeatType.YearlyOnSameDate)
+                        temp.Append("<date>" +  info.RepeatUntil + "</date>"); 
+                    }
+                    else if (info.RepeatType == (int) Variables.RepeatType.YearlyOnSameDate)
                     {
-                        //info.RepeatYears
+                        foreach (int year in info.RepeatYears)
+                        {
+                            temp.Append(string.Format("<date>{0}</date>", year));
+                        }
+                       
                     }
                   
-                 
-                    //var doc = new XmlDocument();
-                    //doc = new XmlDocument();
-                    //doc.LoadXml(info.RepeatXML);
-                    //var rootNode = doc.DocumentElement;
-                    
+                  assocvalue = string.Format("<repeat><type>{0}</type><dates>{1}</dates></repeat>", info.RepeatType, temp.ToString());
+
                     
                             var eventAssociation = new CalendarAssociation
                             {
@@ -164,6 +165,120 @@ namespace Calendar.Implementation
             return cevent;
         }
 
+        public CalendarEvent SaveEvent(totalhr.Shared.Models.CalendarEventInfo info)
+        {
+            CalendarEvent cevent = _calEventRepos.FindBy(x => x.id == info.EventId).FirstOrDefault();
+            
+            if (cevent != null)
+            {
+                cevent.Title = info.Title;
+                cevent.Description = info.Description;
+                cevent.StartOfEvent = info.StartDate;
+                cevent.EndOfEvent = info.EndDate;
+                cevent.Location = info.Location;
+                cevent.LastModifed = DateTime.Now;
+                cevent.LastModifiedBy = info.LastModifiedBy;
+
+                //*** check attendees before clearing for notification
+                _calEventRepos.DeleteEventAssociation(cevent);
+                //cevent.CalendarAssociations.Clear();
+                _calEventRepos.Save();
+                //
+
+                if (info.Reminders != null && info.Reminders.Count > 0)
+                {
+                    foreach (CalendarEventReminder reminder in info.Reminders)
+                    {
+                        var eventAssociation = new CalendarAssociation
+                        {
+                            EventId = cevent.id,
+                            AssociationTypeid = (int)Variables.CalendarEventAssociationType.Reminder,
+                            AssociationValue = string.Format(ReminderAssocFormat, reminder.ReminderType,
+                            reminder.FrequencyType, reminder.Frequency, reminder.NotificationType),
+                            Created = DateTime.Now,
+                            CreatedBy = info.LastModifiedBy
+                        };
+
+                        cevent.CalendarAssociations.Add(eventAssociation);
+                    }
+                }
+
+                    //save attendees.
+                if (info.TargetAttendeeGroupId > 0)
+                {
+                    var assocValue = string.Empty;
+                    var targetlist = string.Empty;
+
+                    if (info.TargetAttendeeGroupId == (int)Variables.CalendarEventTarget.User ||
+                        info.TargetAttendeeGroupId == (int)Variables.CalendarEventTarget.Department)
+                    {
+                        targetlist = string.Join<int>(",", info.TargetAttendeeIdList);
+                    }
+
+                    assocValue = string.Format("<target><type>{0}</type><value>{1}</value></target>", info.TargetAttendeeGroupId, targetlist);
+
+
+                    var attendeeEvtAssociation = new CalendarAssociation
+                    {
+                        EventId = cevent.id,
+                        AssociationTypeid = (int)Variables.CalendarEventAssociationType.Attendee,
+                        AssociationValue = assocValue,
+                        Created = DateTime.Now,
+                        CreatedBy = info.CreatedBy
+                    };
+
+                    cevent.CalendarAssociations.Add(attendeeEvtAssociation);
+                }
+
+                //***save repeat for event if they have been specified
+                if (info.RepeatType > 0)
+                {
+                    var assocvalue = string.Empty;
+                    var temp = new StringBuilder();
+
+                    if (info.RepeatType == (int)Variables.RepeatType.OnDates
+                        || info.RepeatType == (int)Variables.RepeatType.MonthlyOnDates)
+                    {
+                        foreach (string rdate in info.RepeatDates)
+                        {
+                            temp.Append(string.Format("<date>{0}</date>", rdate));
+                        }
+
+                    }
+                    else if (info.RepeatType == (int)Variables.RepeatType.DailyMonToFri
+                       || info.RepeatType == (int)Variables.RepeatType.OnDayOfTheWeek)
+                    {
+                        temp.Append("<date>" + info.RepeatUntil + "</date>");
+                    }
+                    else if (info.RepeatType == (int)Variables.RepeatType.YearlyOnSameDate)
+                    {
+                        foreach (int year in info.RepeatYears)
+                        {
+                            temp.Append(string.Format("<date>{0}</date>", year));
+                        }
+
+                    }
+
+                    assocvalue = string.Format("<repeat><type>{0}</type><dates>{1}</dates></repeat>", info.RepeatType, temp.ToString());
+
+
+                    var eventAssociation = new CalendarAssociation
+                    {
+                        EventId = cevent.id,
+                        AssociationTypeid = (int)Variables.CalendarEventAssociationType.Repeat,
+                        AssociationValue = assocvalue,
+                        Created = DateTime.Now,
+                        CreatedBy = info.CreatedBy
+                    };
+
+                    cevent.CalendarAssociations.Add(eventAssociation);
+                }
+            }
+
+            _calEventRepos.Save();
+            return cevent;
+        }
+
         public CalendarEventInfo GetEventInfo(int eventid)
         {
             var evt = _calEventRepos.FindBy(x => x.id == eventid).FirstOrDefault();
@@ -177,10 +292,8 @@ namespace Calendar.Implementation
                     Title = evt.Title,
                     Location = evt.Location,
                     Description = evt.Description,
-                    StartDate = evt.StartOfEvent.Date,
-                    EndDate = evt.EndOfEvent.Date,
-                    StartTime = evt.StartOfEvent.ToString("HH:mm"),
-                    EndTime = evt.EndOfEvent.ToString("HH:mm"),
+                    StartDate = evt.StartOfEvent,
+                    EndDate = evt.EndOfEvent,
                     CreatedBy = evt.CreatedBy                    
                 };
 
@@ -250,7 +363,8 @@ namespace Calendar.Implementation
                     {
                         ReminderType =reminderTypeId,
                         Frequency = Convert.ToInt32(root.SelectSingleNode("//frequency").InnerText),
-                        FrequencyType = Convert.ToInt32(root.SelectSingleNode("//frequencytype").InnerText)
+                        FrequencyType = Convert.ToInt32(root.SelectSingleNode("//frequencytype").InnerText),
+                        NotificationType = Convert.ToInt32(root.SelectSingleNode("//notification").InnerText)
                     };
 
                     if (info.Reminders == null)
@@ -272,18 +386,40 @@ namespace Calendar.Implementation
             var root = doc.DocumentElement;
             var repeatTypeNode = root.SelectSingleNode("//type");
 
-            if (repeatTypeNode != null)
-            {
-                Int32.TryParse(repeatTypeNode.InnerText, out repeatTypeId);
 
-                if (repeatTypeId > 0)
+            if (info.RepeatType != null)
+            {
+                var assocvalue = string.Empty;
+                var temp = new StringBuilder();
+                Int32.TryParse(repeatTypeNode.InnerText, out repeatTypeId);
+                info.RepeatType = repeatTypeId;
+
+                //list of chosen repeat dates
+                if (repeatTypeId == (int)Variables.RepeatType.OnDates || repeatTypeId == (int)Variables.RepeatType.MonthlyOnDates)
                 {
-                    info.RepeatType = repeatTypeId;
-                    info.RepeatXML = root.OuterXml;                   
+                    var lst = root.SelectNodes("//date");
+                    foreach (XmlNode node in lst)
+                    {
+                        info.RepeatDates.Add(node.InnerText);
+                    }
+                }
+                    //repeat until date
+                else if (repeatTypeId == (int)Variables.RepeatType.DailyMonToFri || repeatTypeId == (int)Variables.RepeatType.OnDayOfTheWeek)
+                {
+                    info.RepeatUntil = Convert.ToDateTime(root.SelectSingleNode("//date").InnerText);
+                }
+                else if (repeatTypeId == (int)Variables.RepeatType.YearlyOnSameDate)//list of repeat years
+                {
+                    var lst = root.SelectNodes("//date");
+                    foreach (XmlNode node in lst)
+                    {
+                        info.RepeatYears.Add(Int32.Parse(node.InnerText));
+                    }
+
                 }
             }
-            return info;
 
+            return info;
         }
 
         public CalendarEvent GetEvent(int eventid)

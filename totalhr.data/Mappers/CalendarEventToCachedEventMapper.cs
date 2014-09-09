@@ -6,11 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using totalhr.data.EF;
+using log4net;
 
 namespace totalhr.Shared.Models.Mappers
 {
     public class CalendarEventToCachedEventMapper : ITypeConverter<CalendarEvent, CalendarEventCache>
     {
+        private static readonly ILog log = LogManager.GetLogger(typeof(CalendarEventToCachedEventMapper));
+
         public CalendarEventCache Convert(ResolutionContext context)
         {
             CalendarEventCache eventcache = new CalendarEventCache();
@@ -49,7 +52,9 @@ namespace totalhr.Shared.Models.Mappers
 
     public class CalendarAssociationToCacheMapper : ITypeConverter<CalendarAssociation, CalendarAssociationCache>
     {
-        public CalendarAssociationCache Convert(ResolutionContext context)
+        private static readonly ILog log = LogManager.GetLogger(typeof(CalendarEventToCachedEventMapper));
+
+                public CalendarAssociationCache Convert(ResolutionContext context)
         {
             CalendarAssociationCache assocCache = new CalendarAssociationCache();
             CalendarAssociation assocSource = (CalendarAssociation)context.SourceValue;
@@ -85,6 +90,7 @@ namespace totalhr.Shared.Models.Mappers
             }
             catch (Exception ex)
             {
+                log.Debug("Error occured " + ex.Message);
                 assoccache.AssociationTypeid = -1;
                 assoccache.AssociationValue = "";
             }
@@ -106,6 +112,7 @@ namespace totalhr.Shared.Models.Mappers
             }
             catch (Exception ex)
             {
+                log.Debug("Error occured: " + ex.Message);
                 assoccache.AssociationTypeid = -1;
                 assoccache.AssociationValue = "";
             }
@@ -122,6 +129,7 @@ namespace totalhr.Shared.Models.Mappers
             }
             catch (Exception ex)
             {
+                log.Debug("Error occured " + ex.Message);
                 assoccache.AssociationTypeid = -1;
                 assoccache.AssociationValue = "";
             }

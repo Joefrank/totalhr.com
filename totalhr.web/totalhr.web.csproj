@@ -218,6 +218,7 @@
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\css\BeatPicker.min.css" />
     <Content Include="Content\calendar.css" />
+    <Content Include="Content\css\calendar.css" />
     <Content Include="Content\css\popup.css" />
     <Content Include="Content\images\cal.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -335,12 +336,14 @@
     <Content Include="Views\Shared\_CalendarEventEdit.cshtml" />
     <Content Include="Views\Calendar\Edit.cshtml" />
     <Content Include="Views\Calendar\EventEdit.cshtml" />
+    <None Include="Views\Calendar\EventEdit.cshtml.old" />
     <Content Include="Views\Account\MyDetails.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\Account\CompanyUsersSelector.cshtml" />
     <Content Include="Views\Account\CompanyDepartmentSelector.cshtml" />
     <Content Include="Views\Shared\_PopupLayout.cshtml" />
     <Content Include="Views\Calendar\EventAdd.cshtml" />
+    <Content Include="Views\Calendar\PreviewEvent.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

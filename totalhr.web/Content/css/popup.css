@@ -103,6 +103,10 @@ body, html {
 
 .line .content .delete {padding: 2px 0 0 17px;color:blue;cursor:pointer;margin-left:5px;background:transparent url('/Content/images/minus-icon.png') left center no-repeat; }
 
+.line .collapse {
+    background:transparent url('/Content/images/minus.png') right center no-repeat; 
+}
+
 .line .head .spedit{float:left;margin-right:10px;display:block;width:16px;height:16px;background:transparent url('/Content/images/edit-icon.png') center center no-repeat;}
 
 .line .actiontitle {float:left;margin-right:10px;}
@@ -143,8 +147,10 @@ body, html {
  #dvReminderContent span.row{height: 30px;float: left;}
 
   .childblock .head{ 
-      float: left;width: 100%;height: 20px;padding: 2px 0;text-align: left;cursor: pointer;color: blue;font-weight: bold;
+      float: left;width: 100%;height: 20px;padding: 2px 2px;text-align: left;cursor: pointer;color: blue;font-weight: bold;
       -webkit-box-shadow: 0 2px #666633;box-shadow: 0 2px #666633;background-color:beige;border: 1px solid grey;
+      background:transparent url('/Content/images/plus-icon.png') right center no-repeat;
+
   }
 
    .childblock .content{ float: left;width: 98%;background-color: beige;padding:1%;}
@@ -249,3 +255,4 @@ div.popupedit .spclose {
 .smalltxt{ width: 100px;}
 
 .linespan{ float: left;width: 100%;display: block;}
+

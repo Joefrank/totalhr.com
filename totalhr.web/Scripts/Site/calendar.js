@@ -9,6 +9,7 @@ var MSG_MISSING_REMINDER_TYPE ='';
 var MSG_USERS_FROM_SERVER = '';
 var MSG_DEPARTMENTS_FROM_SERVER = '';
 var MSG_ERROR_NOATTENDEE_CHOSEN = '';
+var MSG_ERROR_ATTENDEE_REQUIRED = '';
 
 var eventid = 0;
 var CalendarId = null;
@@ -27,6 +28,7 @@ var previousSelectedId = null;
 var repeatTypeSelectedid = null;
 var prevSelDisplayObj = null;
 var RepeatsToSave = new Array();
+var RepeatYears = new Array();
 var EventId = '';
 
 function ManageActiveDay(objTd) {
@@ -40,6 +42,7 @@ function ManageActiveDay(objTd) {
 }
 
 function ManageEvent(evt) {
+    alert('edit');
     var sEventClientId = evt.id;
     eventid = ArrEvents[sEventClientId][1];
     var urltoload = "/Calendar/EditEvent/" + eventid;
@@ -48,6 +51,19 @@ function ManageEvent(evt) {
     $('#dvPopup').css("min-height", "600px");
     event.stopPropagation();
     event.preventDefault();
+}
+
+function PreviewEvent(evt) {
+    alert('preview');
+    var sEventClientId = evt.id;
+    eventid = ArrEvents[sEventClientId][1];
+    var urltoload = "/Calendar/PreviewEvent/" + eventid;
+    $('#ipopup').attr("src", urltoload);
+    $('#dvPopup').css("display", "");
+    $('#dvPopup').css("min-height", "300px");
+    event.stopPropagation();
+    event.preventDefault();
+
 }
 
 function GrabValues() {
@@ -306,7 +322,7 @@ function HideDetails(obj) {
 /* validate date entered. ERROR_INVALID_DATE expected to be on page */
 function KeepDateIn(inputid) {
     var arrOffset = 0;
-    var dateEntered = $.trim($('#' + inputid).val());
+    var dateEntered = $.trim($('#' + inputid).val());    
 
     //init array if empty
     if (RepeatsToSave['RepeatTypeId_' + previousSelectedId] == null) {
@@ -315,6 +331,8 @@ function KeepDateIn(inputid) {
     } else {
         arrOffset = RepeatsToSave['RepeatTypeId_' + previousSelectedId].length;
     }
+
+    var arrtemp = RepeatsToSave['RepeatTypeId_' + previousSelectedId];
 
     //save date to array
     RepeatsToSave['RepeatTypeId_' + previousSelectedId][arrOffset] = dateEntered;    
@@ -326,6 +344,16 @@ function KeepDateIn(inputid) {
     $('#repeatOptions').fadeOut("slow");
     $('#spRepeatTypeCount_' + previousSelectedId).html(arrOffset + ' ' + MSG_ADDED);
     $('#dvRepeatHead').html($('#spRepeatDesc_' + previousSelectedId).html() + ' - ' + arrOffset + ' ' + MSG_ADDED);
+
+   
+    var temp = '';
+
+    for (var item = 1; item < arrtemp.length; item++) {
+        temp += '<input type="hidden" name="RepeatDates[' + (item - 1) + ']" value="' + arrtemp[item] + '" />';
+    }
+
+    $('#dvRepeatHiddenDates').html(temp);
+
 }
     
 function SetUntilDateIn(objid) {
@@ -340,13 +368,49 @@ function SetUntilDateIn(objid) {
     $('#spRepeatTypeCount_' + previousSelectedId).html("Until " + RepeatsToSave['RepeatTypeId_' + previousSelectedId][1]);
 
     $('#dvRepeatHead').html($('#spRepeatDesc_' + previousSelectedId).html() + ' - ' + RepeatsToSave['RepeatTypeId_' + previousSelectedId][0] + ' ' + MSG_ADDED);
+
+    $('#RepeatUntil').val(dateEntered);
 }
     
+function KeepYearIn() {
+    var yearval = $('#txtRepeatValue').val();
+    RepeatYears[RepeatYears.length] = yearval;
+    var temp = '';
+
+    for (var year = 0; year < RepeatYears.length; year++) {
+        temp += '<input type="hidden" name="RepeatYears[' + year + ']" value="' + RepeatYears[year] + '" />';
+    }
+
+    $('#dvRepeatHiddenValues').html(temp);
+}
+
 function ShowRepeats(objid) {
     $('#sppreview').html($('#' + objid).html());
 }
 
+function ToggleExpandGeneric(ctrHeadId, ctrToExpandId, callback) {
+    var o = document.getElementById(ctrHeadId); //$('#' + objid);
+    var ojq = $('#' + ctrHeadId);
+    var ocollapse = $('#' + ctrToExpandId);
+
+    if (ojq.hasClass('collapse')) {
+       o.style.backgroundImage = "url('/Content/images/plus-icon.png')";
+        ojq.removeClass('collapse');
+        ocollapse.slideUp("slow");
+    } else {
+        o.style.backgroundImage = "url('/Content/images/minus.png')";
+        ojq.addClass('collapse');
+        ocollapse.slideDown("slow");
+    }
+
+    if (callback != typeof ("undefined") && callback != null) {
+        eval(callback);
+    }
+}
+
+
 function ToggleExpand(objid, bCondition, hdnMessage, callback) {
+
     if (bCondition != null && bCondition == true || bCondition == null) {
         $('#' + objid).slideToggle(500);
     } else if (hdnMessage != null) {
@@ -356,7 +420,7 @@ function ToggleExpand(objid, bCondition, hdnMessage, callback) {
     }
     
     if (callback != typeof("undefined") && callback != null) {
-        AdjustRepeatBasedOnStartDate();
+        eval(callback);
     }
 }
 
@@ -514,12 +578,23 @@ function DisplayAddedReminders() {
     $('#dvRemindersData').html(tempFormHtml);
 }
 
+/** when page is reloaded */
+function ReloadTargetUsers() {
+    $('#dvAttendeesList').html();
+}
+
+function ReloadRepeats() {
+    alert($('#RepeatType').val());
+    //$('#dvRepeatHiddenDates')
+   // $('#dvRepeatHiddenValues')
+}
+
 function DeleteReminder(index) {
     Reminders.splice(index, 1);
     DisplayAddedReminders();
 }
 
-function AdjustRepeatBasedOnStartDate() {
+function AdjustRepeatBasedOnStartDate() {   
     var selectedDate =$('#StartDate').val();
     var objDate = parseDate(selectedDate);
     var dayIndex = objDate.getDay();
@@ -528,56 +603,42 @@ function AdjustRepeatBasedOnStartDate() {
     objList.each(function (i) {
         $(this).html(weekday[dayIndex]);
     });
-
 }
 
-function PrepareToSaveValues() {
+function IsFormValid() {
     
     try{
 
-        //prepare reminders
-        //var reminderlen = Reminders.length;
-        //var remindersXML = '';
     
-        //if (reminderlen != null && reminderlen > 0) {
-        //    for (var i = 0; i < reminderlen; i++) {
-        //        if (Reminders[i] != null) {
-        //            remindersXML += '<reminder><type>' + Reminders[i][0] + '</type><frequencytype>' + Reminders[i][2] + '</frequencytype><frequency>' + Reminders[i][1] + '</frequency></reminder>';
-        //        }
-        //    }
-
-        //    if (remindersXML != '') {
-        //        remindersXML = '<reminders>' + remindersXML + '</reminders>';
-        //        $('#ReminderXML').val(remindersXML);
-        //    }
-        //}
-
-        
-        //return true;
       
         // prepare target groups
         var selTargetVal = $("input:radio[name='TargetAttendeeGroupId']:checked").val();
     
-        if (selTargetVal == Department) {
-            var temp = '';
+        if (selTargetVal == null) {
+            alert(MSG_ERROR_ATTENDEE_REQUIRED);
+            return false;
+        }
 
-            for (var key in ckSelectedDepartment) {
-                temp += (temp != '') ? ',' + ckSelectedDepartment[key] : ckSelectedDepartment[key];
-            }
+        //if (selTargetVal == Department) {
+        //    var temp = '';
 
-            $('#InvitedDepartmentIds').val(temp);
+        //    for (var key in ckSelectedDepartment) {
+        //        temp += (temp != '') ? ',' + ckSelectedDepartment[key] : ckSelectedDepartment[key];
+        //    }
 
-        } else if (selTargetVal == User) {
-            var temp = '';
+        //    $('#InvitedDepartmentIds').val(temp);
 
-            for (var key in ckSelectedTargetUsers) {
-                if (ckSelectedTargetUsers[key] != null) {
-                    temp += (temp != '') ? ',' + ckSelectedTargetUsers[key] : ckSelectedTargetUsers[key];
-                }
-            }
+        //} else if (selTargetVal == User) {
+        //    var temp = '';
 
-            $('#InvitedUserIds').val(temp);
-        } 
+        //    for (var key in ckSelectedTargetUsers) {
+        //        if (ckSelectedTargetUsers[key] != null) {
+        //            temp += (temp != '') ? ',' + ckSelectedTargetUsers[key] : ckSelectedTargetUsers[key];
+        //        }
+        //    }
+
+        //    $('#InvitedUserIds').val(temp);
+        //} 
 
 
         //prepare repeats
@@ -590,23 +651,32 @@ function PrepareToSaveValues() {
 
 
         if (repeatType == DailyMonToFri || repeatType == OnDayOfTheWeek) {
-            repeatDateXML = '<dates><date>' + RepeatsToSave['RepeatTypeId_' + previousSelectedId][1] + '</date></dates>';
-        } else if (repeatType == OnDates || repeatType == MonthlyOnDates || repeatType == YearlyOnSameDate) {
+            //validate repeat until
+            if ($('#RepeatUntil').val() == '') {
+                alert('Your repeat will not be saved until you add a date.');
+            }
+           // repeatDateXML = '<dates><date>' + RepeatsToSave['RepeatTypeId_' + previousSelectedId][1] + '</date></dates>';
+        }
+        else if (repeatType == OnDates || repeatType == MonthlyOnDates)            
+        {
             var arrTemp = RepeatsToSave['RepeatTypeId_' + repeatType];
-
+            var found = false;
             for (var key=1; key < arrTemp.length; key++) {
-                repeatDateXML += '<date>' + arrTemp[key] + '</date>';
+                found = true;
+            }
+            if (!found) {
+                alert('Your repeat will not be saved until you add some date(s).');
+            }
+        }
+        else if(repeatType == YearlyOnSameDate) {
+           
+            if (RepeatYears.length < 1) {
+                alert('Your repeat will not be saved if you don\'t add years');
             }
 
-            repeatDateXML = '<dates>' + repeatDateXML + '</dates>';
+            //repeatDateXML = '<dates>' + repeatDateXML + '</dates>';
         }
        
-        if(repeatDateXML != '')
-            repeatDateXML = '<repeat><type>' + repeatType + '</type>' + repeatDateXML + '</repeat>';
-
-        $('#RepeatType').val(repeatType);
-        $('#RepeatXML').val(repeatDateXML);
-
        
         return true;
 

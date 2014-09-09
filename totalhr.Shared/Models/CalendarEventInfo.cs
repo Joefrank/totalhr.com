@@ -22,18 +22,15 @@ namespace totalhr.Shared.Models
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_EventStartDate_Rq")]       
         [DataType(DataType.DateTime)]
         public DateTime StartDate { get; set; }
-       
-        public string StartTime { get; set; }
-
+      
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_EventEndDate_Rq")]
         [DataType(DataType.DateTime)]
         public DateTime EndDate { get; set; }
-
         
-        public string EndTime { get; set; }
-
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_Event_UserNotLogged")]
         public int CreatedBy { get; set; }
+
+        public int LastModifiedBy { get; set; }
 
         public string UserCulture { get; set; }
 
@@ -48,9 +45,15 @@ namespace totalhr.Shared.Models
 
         public DateTime RepeatUntil { get; set; }
         
-        public List<DateTime> RepeatDates { get; set; }
+        public List<string> RepeatDates { get; set; }
 
         public List<int> RepeatYears { get; set; } 
+
+        /// <summary>
+        /// used only when loading repeats from database
+        /// </summary>
+        public string RepeatXML { get; set; }
+        
         
         public int CalendarId { get; set; }
 

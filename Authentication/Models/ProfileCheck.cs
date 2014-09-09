@@ -50,9 +50,7 @@ namespace Authentication.Models
 
                 if (_user == null || _user.UserId < 1 || _user.Profiles.Count < 1)//user must be authenticated
                     return false;
-
-                //var arrProfiles = Enum.GetValues(typeof(Variables.Profiles)).Cast<int>();
-
+                
                 return _user.IsInProfile(RequiredProfiles);
             }
             catch (Exception ex)

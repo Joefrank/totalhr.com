@@ -43,8 +43,10 @@ namespace totalhr.data.Repositories.Implementation
                 CacheHelper = new HttpCacheHelper();
         }
 
+       
+
         //we need to get details of user or companyid, we might bind cache object to companyid
-        public List<CalendarEventCache> GetAllCalendarEvents(int calendarid = 0)
+        public List<CalendarEventCache> GetAllCalendarEvents(int companyId, int calendarid = 0)
         {
             var result = CacheHelper.Get<List<CalendarEventCache>>(calendarEventCacheKey);
 
@@ -53,7 +55,7 @@ namespace totalhr.data.Repositories.Implementation
                 lock (CacheLockObject)
                 {
                     result = new List<CalendarEventCache>();
-                    var allevents = this.FindBy(x => (calendarid == 0 || x.CalendarId == calendarid)).ToList();
+                    var allevents = this.FindBy(x => (companyId == x.Calendar.CompanyId && (calendarid == 0 || x.CalendarId == calendarid))).ToList();
                     //use mapping to map event to eventcache
 
                     Mapper.CreateMap<CalendarEvent, CalendarEventCache>().ConvertUsing<CalendarEventToCachedEventMapper>();
@@ -66,16 +68,25 @@ namespace totalhr.data.Repositories.Implementation
                     CacheHelper.Add<List<CalendarEventCache>>(result, calendarEventCacheKey);                    
                 }
             }
-
+           
             return result;
         }
-        
+
+        public void DeleteEventAssociation(CalendarEvent evt)
+        {
+            foreach (CalendarAssociation assocs in evt.CalendarAssociations)
+            {
+                Context.CalendarAssociations.Remove(assocs);
+            }
+            Context.SaveChanges();
+        }
 
         public List<CalendarEventCache> GetMonthlyCalendarEvents(int userid, int year, int month, int calendarid=0)
         {
-            var lstEvents = GetAllCalendarEvents();
+            
             var foundEvents = new List<CalendarEventCache>();
             var user = Context.Users.FirstOrDefault(x => x.id == userid);
+            var lstEvents = GetAllCalendarEvents(user.CompanyId);
 
             foreach (CalendarEventCache assocevt in lstEvents)
             {
@@ -118,6 +129,7 @@ namespace totalhr.data.Repositories.Implementation
                       targetassoc.SubTypeId == (int)Variables.CalendarEventTarget.Company ||
                       (targetassoc.SubTypeId == (int)Variables.CalendarEventTarget.MyselfOnly && creatorid == userid) ||
                       (targetassoc.SubTypeId == (int)Variables.CalendarEventTarget.User && assocvalue.Split(',').Select(int.Parse).ToList().Contains(userid)) ||
+                      (targetassoc.SubTypeId == (int)Variables.CalendarEventTarget.User && userid == creatorid) ||
                       (targetassoc.SubTypeId == (int)Variables.CalendarEventTarget.Department && assocvalue.Split(',').Select(int.Parse).ToList().Contains(departmentid))
                    );
         }
@@ -130,9 +142,10 @@ namespace totalhr.data.Repositories.Implementation
         }
 
         public List<CalendarEventCache> GetCalendarDailyEventsByUser(int userid, DateTime date, int calendarid=0){
-            var lstEvents = GetAllCalendarEvents();
+            
             var foundEvents = new List<CalendarEventCache>();
             var user = Context.Users.FirstOrDefault(x => x.id == userid);
+            var lstEvents = GetAllCalendarEvents(user.CompanyId);
 
             foreach (CalendarEventCache assocevt in lstEvents)
             {

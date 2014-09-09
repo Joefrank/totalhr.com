@@ -52,6 +52,11 @@ namespace Authentication.Models
             return requiredprofiles.All(rprof => this.Profiles.Contains(((int)rprof).ToString(CultureInfo.InvariantCulture)));
         }
 
+        public bool HasProfile(int profileid)
+        {
+            return this.Profiles.Contains(profileid.ToString());
+        }
+
         public bool IsLogged()
         {
             return (UserId > 0 && LanguageId > 0 && CompanyId > 0 && Roles != null && Roles.Count > 0);
