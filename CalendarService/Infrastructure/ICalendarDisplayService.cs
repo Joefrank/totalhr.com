@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Calendar.Infrastructure
 {
-    public interface ICalendarService
+    public interface ICalendarDisplayService
     {
         CalendarHTML GenerateCalendarHTML(CalendarRequestStruct rqStruct);
 

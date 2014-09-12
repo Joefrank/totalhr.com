@@ -42,7 +42,7 @@ function ManageActiveDay(objTd) {
 }
 
 function ManageEvent(evt) {
-    alert('edit');
+   
     var sEventClientId = evt.id;
     eventid = ArrEvents[sEventClientId][1];
     var urltoload = "/Calendar/EditEvent/" + eventid;
@@ -54,16 +54,21 @@ function ManageEvent(evt) {
 }
 
 function PreviewEvent(evt) {
-    alert('preview');
     var sEventClientId = evt.id;
     eventid = ArrEvents[sEventClientId][1];
+
+    $('#sp_preview_' + eventid).fadeIn("slow");
+    /*
     var urltoload = "/Calendar/PreviewEvent/" + eventid;
     $('#ipopup').attr("src", urltoload);
     $('#dvPopup').css("display", "");
     $('#dvPopup').css("min-height", "300px");
-    event.stopPropagation();
-    event.preventDefault();
-
+    */
+    if (typeof event.stopPropagation != "undefined") {
+        event.stopPropagation();
+    } else {
+        event.cancelBubble = true;
+    }
 }
 
 function GrabValues() {

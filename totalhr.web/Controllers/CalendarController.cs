@@ -31,14 +31,14 @@ namespace totalhr.web.Controllers
    
     public class CalendarController : BaseController
     {
-        readonly ICalendarService _calService;
+        readonly ICalendarDisplayService _calService;
         readonly ICalendarManagementService _calMservice;
         private IOAuthService _authService;
         private readonly IMessagingService _messagingService;
 
         private static readonly ILog Log = LogManager.GetLogger(typeof(AccountController));
 
-        public CalendarController(ICalendarService cservice, ICalendarManagementService calmservice, IMessagingService messageService, IOAuthService authservice)
+        public CalendarController(ICalendarDisplayService cservice, ICalendarManagementService calmservice, IMessagingService messageService, IOAuthService authservice)
             : base(authservice)
         {
             _calService = cservice;

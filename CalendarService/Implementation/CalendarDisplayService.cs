@@ -12,7 +12,7 @@ using totalhr.Shared.Models;
 
 namespace Calendar.Implementation
 {
-    public class CalendarService : ICalendarService
+    public class CalendarDisplayService : ICalendarDisplayService
     {
         private const string HeaderHtml = "<tr><th>{0}</th><th>{1}</th><th>{2}</th><th>{3}</th><th>{4}</th><th>{5}</th><th>{6}</th></tr>";
         private const string TdHtml = "<td {0}>{1}</td>";
@@ -34,13 +34,14 @@ namespace Calendar.Implementation
         public string LocalizedAm { get; set; }
         public string LocalizedPm { get; set; }
 
-        public CalendarService()
+        public CalendarDisplayService()
         {
             LocalizedAm = "AM";
             LocalizedPm = "PM";
         }
 
-        public CalendarService(CultureInfo info) : this()
+        public CalendarDisplayService(CultureInfo info)
+            : this()
         {
             _info = info;
         }
@@ -161,6 +162,7 @@ namespace Calendar.Implementation
                         || x.EndOfEvent.Date == currentdate.Date).ToList();
                     var tempspan = string.Empty;
                     var evtDetails = new StringBuilder();
+                    var edithtml = string.Empty;
 
                     foreach (CalendarEventCache ce in foundEvents)
                     {
@@ -169,12 +171,24 @@ namespace Calendar.Implementation
                         evtDetails.Append("Location: " + ce.Location + "<br/>");
                         evtDetails.Append("From: " + ce.StartOfEvent + " to " + ce.EndOfEvent + "<br/>");
                         evtDetails.Append("Description: " + ce.Description.Replace(Environment.NewLine, "<br/>") + "<br/>");
+                        
+                       
+                             
 
-                        tempspan = ce.CreatedBy == rqStruct.UserId ?
-                            string.Format(@"<span class=""editevent"" style=""display:none"">{0}</span>", evtDetails.ToString()) : "";
+                        if (ce.CreatedBy == rqStruct.UserId)
+                        {
+                            edithtml = string.Format(@"<br/><span class=""editevent"" id=""evt_{0}_{1}"" style=""border:1px solid green;color:red;width:20px;height:20px;"" {2}>Edit</span>",
+                               ClientPageId, ce.id, rqStruct.ClientConfig.EventClickCallBack);
+                        }
+                            tempspan = string.Format(@"<span id=""sp_preview_{0}""  style=""display:none"">{1} {2}</span>",
+                                                    ce.id, evtDetails.ToString(), edithtml);
 
-                        sbEvents.Append(string.Format(@"<span class=""event"" id=""evt_{0}_{1}"" {2}>", ClientPageId, ce.id, rqStruct.ClientConfig.PreviewCallBack)
-                            + ce.Title + "</span>" + tempspan);
+                            
+                       
+
+                        sbEvents.Append(string.Format(@"<span class=""event"" id=""evt_{0}_{1}"" {2}>{3}</span>", ClientPageId, ce.id, rqStruct.ClientConfig.PreviewCallBack,
+                             ce.Title + tempspan));
+
                         sbJavascript.Append(string.Format(@" {3}['evt_{0}_{1}']=[{0},{1},'{2}'];" + Environment.NewLine, ClientPageId, ce.id, currentTdId, rqStruct.ClientConfig.JsArrayEventName));
                     }
                 }
