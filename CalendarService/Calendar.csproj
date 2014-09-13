@@ -66,6 +66,10 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=1.2.13.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -75,10 +79,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Implementation\CalendarDisplayService.cs" />
     <Compile Include="Implementation\CalendarManagementService.cs" />
-    <Compile Include="Implementation\CalendarService.cs" />
+    <Compile Include="Infrastructure\ICalendarDisplayService.cs" />
     <Compile Include="Infrastructure\ICalendarManagementService.cs" />
-    <Compile Include="Infrastructure\ICalendarService.cs" />
     <Compile Include="Models\CalendarHTML.cs" />
     <Compile Include="Models\CalendarRequestStruct.cs" />
     <Compile Include="Models\CalendarWeekRequestStruct.cs" />
@@ -95,6 +99,9 @@
       <Project>{1af1abb5-66b8-4e3f-a5aa-12025159514f}</Project>
       <Name>totalhr.Shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

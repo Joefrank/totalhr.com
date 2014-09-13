@@ -98,5 +98,18 @@ table.calendar tr td span.event {
 }
 
 .editevent {
-    border: 1px solid red;background-color:white;position:relative;z-index:1400;
+    position:relative;z-index:1400;width:16px;height:16px;
+    float:right;margin:-14px 5px 0 0;background:transparent url('/Content/images/edit-icon.png') center center no-repeat;
 }
+
+.spdelete{float:right;margin:0;position:relative;z-index:1400;width:16px;height:16px;background:transparent url('/Content/images/close-icon.png') center center no-repeat;}
+
+span.previewevent {
+
+    float:left;position:relative;z-index:1410;background-color:green;color:white;
+    text-align:left;padding:5px;
+}
+
+    span.previewevent .edit {
+    
+    }

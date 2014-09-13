@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using totalhr.Shared;
 using totalhr.data.EF;
 using totalhr.Shared.Models;
+using log4net;
 
 namespace Calendar.Implementation
 {
@@ -167,21 +168,22 @@ namespace Calendar.Implementation
                     foreach (CalendarEventCache ce in foundEvents)
                     {
                         //use delegates for event details
-                        evtDetails.Append("Title: " + ce.Title + "<br/>");
-                        evtDetails.Append("Location: " + ce.Location + "<br/>");
-                        evtDetails.Append("From: " + ce.StartOfEvent + " to " + ce.EndOfEvent + "<br/>");
-                        evtDetails.Append("Description: " + ce.Description.Replace(Environment.NewLine, "<br/>") + "<br/>");
+                        evtDetails.Append("<b>Title:</b> " + ce.Title + "<br/>");
+                        evtDetails.Append("<b>Location:</b> " + ce.Location + "<br/>");
+                        evtDetails.Append("<b>From:</b> " + ce.StartOfEvent + " <b>to</b> " + ce.EndOfEvent + "<br/>");
+                        evtDetails.Append("<b>Description:</b> " + ce.Description.Replace(Environment.NewLine, "<br/>") + "<br/>");
                         
                        
                              
 
                         if (ce.CreatedBy == rqStruct.UserId)
                         {
-                            edithtml = string.Format(@"<br/><span class=""editevent"" id=""evt_{0}_{1}"" style=""border:1px solid green;color:red;width:20px;height:20px;"" {2}>Edit</span>",
-                               ClientPageId, ce.id, rqStruct.ClientConfig.EventClickCallBack);
+                            edithtml = string.Format(@"<br/><span class=""editevent"" id=""evt_{0}_{1}"" {2} title=""{3}""></span>",
+                               ClientPageId, ce.id, rqStruct.ClientConfig.EventClickCallBack, "Edit event");
                         }
-                            tempspan = string.Format(@"<span id=""sp_preview_{0}""  style=""display:none"">{1} {2}</span>",
-                                                    ce.id, evtDetails.ToString(), edithtml);
+                            tempspan = string.Format(@"<span class=""previewevent"" id=""sp_preview_{0}""  style=""display:none""> 
+                                <span class=""spdelete"" onclick=""ClosePreview();"" title=""Close"">&nbsp;</span>{1} {2}</span>",
+                                                    ce.id,edithtml , evtDetails.ToString());
 
                             
                        
