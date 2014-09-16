@@ -90,6 +90,14 @@ namespace Calendar.Implementation
             return arrOfDays;
         }
 
+        public CalendarHTML GenerateYearHTML(CalendarRequestStruct rqStruct)
+        {
+            string[,] cells = new string[32,13];
+
+
+        }
+
+
         public CalendarHTML GenerateCalendarHTML(CalendarRequestStruct rqStruct)
         {   
             var sbAllHtml = new StringBuilder();
@@ -168,24 +176,20 @@ namespace Calendar.Implementation
                     foreach (CalendarEventCache ce in foundEvents)
                     {
                         //use delegates for event details
-                        evtDetails.Append("<b>Title:</b> " + ce.Title + "<br/>");
-                        evtDetails.Append("<b>Location:</b> " + ce.Location + "<br/>");
-                        evtDetails.Append("<b>From:</b> " + ce.StartOfEvent + " <b>to</b> " + ce.EndOfEvent + "<br/>");
-                        evtDetails.Append("<b>Description:</b> " + ce.Description.Replace(Environment.NewLine, "<br/>") + "<br/>");
+                        evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventTitle"] , ce.Title));
+                        evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>",rqStruct.LabelsAndNames["EventLocation"] , ce.Location));
+                        evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventStart"], ce.StartOfEvent));
+                        evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventEnd"], ce.EndOfEvent));
+                        evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventDescription"], ce.Description.Replace(Environment.NewLine, "<br/>")));
                         
-                       
-                             
-
                         if (ce.CreatedBy == rqStruct.UserId)
                         {
                             edithtml = string.Format(@"<br/><span class=""editevent"" id=""evt_{0}_{1}"" {2} title=""{3}""></span>",
-                               ClientPageId, ce.id, rqStruct.ClientConfig.EventClickCallBack, "Edit event");
+                               ClientPageId, ce.id, rqStruct.ClientConfig.EventClickCallBack, rqStruct.LabelsAndNames["TooltipEditEvent"]);
                         }
                             tempspan = string.Format(@"<span class=""previewevent"" id=""sp_preview_{0}""  style=""display:none""> 
-                                <span class=""spdelete"" onclick=""ClosePreview();"" title=""Close"">&nbsp;</span>{1} {2}</span>",
-                                                    ce.id,edithtml , evtDetails.ToString());
-
-                            
+                                <span class=""spdelete"" onclick=""ClosePreview($('#sp_preview_{0}'));"" title=""{3}"">&nbsp;</span>{1} {2}</span>",
+                                                    ce.id, edithtml, evtDetails.ToString(), rqStruct.LabelsAndNames["ClosePreview"]);                          
                        
 
                         sbEvents.Append(string.Format(@"<span class=""event"" id=""evt_{0}_{1}"" {2}>{3}</span>", ClientPageId, ce.id, rqStruct.ClientConfig.PreviewCallBack,
@@ -195,8 +199,10 @@ namespace Calendar.Implementation
                     }
                 }
 
+                string spDate = string.Format(@"<span style=""display:none"" id=""sp_{0}"">{1}/{2}/{3}</span>", currentTdId, rqStruct.Year, rqStruct.Month, i);
+
                 sbTemp.Append(string.Format(TdHtml, todayHtml + @" id=""" + currentTdId + @""" " + 
-                     rqStruct.ClientConfig.ActiveTdClickCallBack,
+                     rqStruct.ClientConfig.ActiveTdClickCallBack, spDate +
                         @"<span class=""day"">" + i + "</span>" + sbEvents.ToString()));
 
                 sbEvents.Clear();

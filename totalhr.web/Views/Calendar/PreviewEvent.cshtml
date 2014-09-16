@@ -9,12 +9,21 @@
 }
 <div id="flashpreviewcontent">
 
-    <div class="line">@Model.Title</div>
+    <p>
+        Your event has been created successfully!<br />
+        You can edit it by going to the calendar and clicking  on it.
+    </p>
+    <div class="line">@Calendar.Evt_Title: @Model.Title</div>
 
-    <div class="line">Start: @Model.StartOfEvent - End: @Model.EndOfEvent</div>
+    <div class="line">@Calendar.Evt_Start: @Model.StartOfEvent - @Calendar.Evt_End: @Model.EndOfEvent</div>
 
-    <div class="line">@Model.Location</div>
+    <div class="line">@Calendar.Evt_Location: @Model.Location</div>
 
-    <div class="line">@Model.Description</div>
+    <div class="line">@Calendar.Evt_Description: @Model.Description</div>
 
+    <div class="line">Reminders: @Model.CalendarAssociations.Count</div>
+
+    <div class="line">Attendee(s): @Model.CalendarAssociations.Count</div>
+
+    <div class="line">Repeats: @Model.CalendarAssociations.Count</div>
 </div>

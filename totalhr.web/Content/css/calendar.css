@@ -55,6 +55,7 @@ table.calendarweek, table.calendar {
     -webkit-border-radius: 10px;
     border-radius: 10px; /* future proofing */
     -khtml-border-radius: 10px; /* for old Konqueror browsers */
+    margin:5px 0;
 }
 
 table.calendar tr td.next, table.calendar tr td.prev {
@@ -75,6 +76,7 @@ table.calendar tr td span.event {
     font-weight:normal;
     background-color:blue;
     color:white;
+    margin:5px 0;
 }
 
 #dvReminders {

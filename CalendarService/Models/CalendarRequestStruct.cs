@@ -28,5 +28,7 @@ namespace Calendar.Models
         public int UserId { get; set; }
 
         public bool UserCanCreateEvent { get; set; }
+
+        public Dictionary<string, string> LabelsAndNames { get; set; }
     }
 }

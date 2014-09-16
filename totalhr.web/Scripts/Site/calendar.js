@@ -30,19 +30,17 @@ var prevSelDisplayObj = null;
 var RepeatsToSave = new Array();
 var RepeatYears = new Array();
 var EventId = '';
+var CurrentEventPreview = null;
 
 function ManageActiveDay(objTd) {
     var objTdId = objTd.id;
-    eventid = 0;
-    
-    var urltoload = "/Calendar/CreateEvent/" + CalendarId;
+    var urltoload = "/Calendar/CreateEvent/" + CalendarId + "/" + $('#sp_' + objTdId).html();
     $('#ipopup').attr("src", urltoload);
     $('#dvPopup').css("display", "");
     $('#dvPopup').css("min-height", "600px");
 }
 
-function ManageEvent(evt) {
-   
+function ManageEvent(evt) {   
     var sEventClientId = evt.id;
     eventid = ArrEvents[sEventClientId][1];
     var urltoload = "/Calendar/EditEvent/" + eventid;
@@ -57,13 +55,24 @@ function PreviewEvent(evt) {
     var sEventClientId = evt.id;
     eventid = ArrEvents[sEventClientId][1];
 
-    $('#sp_preview_' + eventid).fadeIn("slow");
-    /*
-    var urltoload = "/Calendar/PreviewEvent/" + eventid;
-    $('#ipopup').attr("src", urltoload);
-    $('#dvPopup').css("display", "");
-    $('#dvPopup').css("min-height", "300px");
-    */
+    if (CurrentEventPreview != null && CurrentEventPreview != 'sp_preview_' + eventid) {
+        $('#' + CurrentEventPreview).fadeOut("slow");
+    }       
+   
+    if(CurrentEventPreview != '#sp_preview_' + eventid) 
+        $('#sp_preview_' + eventid).fadeIn("slow");
+    
+    CurrentEventPreview = 'sp_preview_' + eventid;
+
+    if (typeof event.stopPropagation != "undefined") {
+        event.stopPropagation();
+    } else {
+        event.cancelBubble = true;
+    }
+}
+
+function ClosePreview(objq) {
+    objq.fadeOut("slow");
     if (typeof event.stopPropagation != "undefined") {
         event.stopPropagation();
     } else {
