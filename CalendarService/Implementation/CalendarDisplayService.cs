@@ -22,9 +22,14 @@ namespace Calendar.Implementation
         private const string TdHtmlNoAttrib = "<td>{0}</td>";
         private const string TrHtmlNoAttrib = "<tr>{0}</tr>";
         private const string TableHtml = "<table {0}>{1}</table>";
+
+        private const string CalendarYearViewLink = @"/Calendar/GetCalendarYear/{0}/{1}";
         private const string CalendarMonthViewLink = @"/Calendar/GetCalendarMonth/{0}/{1}/{2}";
         private const string CalendarWeekViewLink = @"/Calendar/GetWeekView/{0}/{1}/{2}/{3}";
         private const string CalendarDayViewLink = @"/Calendar/GetDayView/{0}/{1}/{2}/{3}";
+        
+        private const int maxDaysInMonth = 31;
+        private const int noOfMonthsinYear = 12;
 
         private readonly CultureInfo _info;
         private const int NoWeekDays = 7;
@@ -90,10 +95,45 @@ namespace Calendar.Implementation
             return arrOfDays;
         }
 
-        public CalendarHTML GenerateYearHTML(CalendarRequestStruct rqStruct)
+        private string BuildTableGrid(string[,] arrValues, string tableattrib)
         {
-            string[,] cells = new string[32,13];
+            StringBuilder sbTemp = new StringBuilder();
+            StringBuilder sbFinal = new StringBuilder();
 
+            for (int x = 0; x <= maxDaysInMonth; x++)
+            {
+                for (int y = 0; y <= noOfMonthsinYear; y++)
+                {
+                    sbTemp.Append(string.Format(TdHtmlNoAttrib, arrValues[x, y]));
+                }
+                sbFinal.Append(string.Format(TrHtmlNoAttrib, sbTemp.ToString()));
+                sbTemp.Clear();
+            }
+
+            return string.Format(TableHtml, tableattrib, sbFinal.ToString());
+        }
+
+        public CalendarHTML GenerateYearHTML(CalendarRequestStruct rqStruct)
+        {            
+
+            string[,] cells = new string[maxDaysInMonth + 1, noOfMonthsinYear + 1];
+
+            for (int x = 0; x <= maxDaysInMonth; x++)
+            {
+                for (int y = 0; y <= noOfMonthsinYear; y++)
+                {
+                    cells[x, y] = (x + y).ToString();
+                }
+            }
+
+            return new CalendarHTML
+            {
+                GridHTML = BuildTableGrid(cells, rqStruct.TableTemplate),
+                NextRequest = string.Format(CalendarYearViewLink,rqStruct.Year + 1  ,rqStruct.CalendarId),
+                PreviousRequest = string.Format(CalendarYearViewLink, rqStruct.Year - 1, rqStruct.CalendarId),
+                Javascript = "",
+                ViewType = Variables.CalendarViewType.YearView
+            };
 
         }
 

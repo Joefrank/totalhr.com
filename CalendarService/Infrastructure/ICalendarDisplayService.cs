@@ -10,6 +10,8 @@ namespace Calendar.Infrastructure
 {
     public interface ICalendarDisplayService
     {
+        CalendarHTML GenerateYearHTML(CalendarRequestStruct rqStruct);
+
         CalendarHTML GenerateCalendarHTML(CalendarRequestStruct rqStruct);
 
         CalendarHTML GenerateWeekHTML(CalendarWeekRequestStruct rqStruct);

@@ -123,6 +123,7 @@ namespace totalhr.Shared
         
         public enum CalendarViewType
         {
+            YearView,
             MonthView,
             WeekView,
             DayView

@@ -160,7 +160,33 @@ namespace totalhr.web.Controllers
             }
             
         }
-        
+
+        public ActionResult GetCalendarYear(int year, int calendarid)
+        {
+            var rqStruct = new CalendarRequestStruct
+            {
+                Info = CultureInfo.CreateSpecificCulture(CurrentUser.Culture),
+                TableTemplate = @" border=""1"" class=""calendar"" ",
+                Year = year,
+                //Month = DateTime.Now.Month,
+                //RelatedEvents = calEvents,
+                CalendarId = calendarid,
+                UserCanCreateEvent = CurrentUser.HasProfile((int)Variables.Profiles.CalendarCreateEvent),
+                UserId = CurrentUser.UserId,
+                ClientConfig = new ClientScriptConfig
+                {
+                    PageClientId = 1,
+                    ActiveTdClickCallBack = @" onclick=""ManageActiveDay(this);"" ",
+                    EventClickCallBack = @" onclick=""ManageEvent(this);"" ",
+                    PreviewCallBack = @" onclick=""PreviewEvent(this);"" ",
+                    JsArrayEventName = "ArrEvents",
+                    CurrentDayCssClass = "today"
+                },
+                LabelsAndNames = GetLabelsForMonthView()
+            };
+            return View("Generate", _calService.GenerateYearHTML(rqStruct));
+        }
+
         private ActionResult MonthView(int year, int month, int calendarid =0)
         {
 
