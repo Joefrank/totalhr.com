@@ -160,7 +160,7 @@
       <DependentUpon>DatabaseModels.edmx</DependentUpon>
     </Compile>
     <Compile Include="EF\Department.cs">
-      <DependentUpon>DatabaseModels.tt</DependentUpon>
+      <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\EmailTemplate.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
@@ -178,22 +178,46 @@
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Language.cs">
-      <DependentUpon>DatabaseModels.tt</DependentUpon>
+      <DependentUpon>TimeRecording.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Note.cs">
+      <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Profile.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Role.cs">
-      <DependentUpon>DatabaseModels.tt</DependentUpon>
+      <DependentUpon>TimeRecording.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TaskScheduler.cs">
+      <DependentUpon>TimeRecording.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TimeRecording.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeRecording.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TimeRecording.cs">
+      <DependentUpon>TimeRecording.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TimeRecording.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeRecording.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TimeRecording1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\User.cs">
-      <DependentUpon>DatabaseModels.tt</DependentUpon>
+      <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\UserProfile.cs">
-      <DependentUpon>DatabaseModels.tt</DependentUpon>
+      <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\UserRole.cs">
-      <DependentUpon>DatabaseModels.tt</DependentUpon>
+      <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
     <Compile Include="Mappers\CalendarEventToCachedEventMapper.cs" />
     <Compile Include="Models\UserDetailsStruct.cs" />
@@ -210,6 +234,7 @@
     <Compile Include="Repositories\Implementation\GlossaryRepository.cs" />
     <Compile Include="Repositories\Implementation\GenericRepository.cs" />
     <Compile Include="Repositories\Implementation\LanguageRepository.cs" />
+    <Compile Include="Repositories\Implementation\TimeRecording\TimeRecordingRepository.cs" />
     <Compile Include="Repositories\Implementation\UserRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICalendarEventRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICalendarRepository.cs" />
@@ -219,6 +244,7 @@
     <Compile Include="Repositories\Infrastructure\IGenericRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ILanguageRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IUserRepository.cs" />
+    <Compile Include="Repositories\Infrastructure\TimeRecording\ITimeRecordingRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\" />
@@ -247,6 +273,23 @@
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>DatabaseModels.edmx</DependentUpon>
       <LastGenOutput>DatabaseModels.cs</LastGenOutput>
+    </None>
+    <EntityDeploy Include="EF\TimeRecording.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TimeRecording.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EF\TimeRecording.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TimeRecording.edmx</DependentUpon>
+      <LastGenOutput>TimeRecording.Context.cs</LastGenOutput>
+    </None>
+    <None Include="EF\TimeRecording.edmx.diagram">
+      <DependentUpon>TimeRecording.edmx</DependentUpon>
+    </None>
+    <None Include="EF\TimeRecording.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>TimeRecording.edmx</DependentUpon>
+      <LastGenOutput>TimeRecording1.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

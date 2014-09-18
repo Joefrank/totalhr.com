@@ -14,6 +14,21 @@ namespace totalhr.data.EF
     
     public partial class User
     {
+        public User()
+        {
+            this.Notes = new HashSet<Note>();
+            this.Notes1 = new HashSet<Note>();
+            this.Notes2 = new HashSet<Note>();
+            this.TaskSchedulers = new HashSet<TaskScheduler>();
+            this.TaskSchedulers1 = new HashSet<TaskScheduler>();
+            this.TaskSchedulers2 = new HashSet<TaskScheduler>();
+            this.TaskSchedulers3 = new HashSet<TaskScheduler>();
+            this.TaskSchedulers4 = new HashSet<TaskScheduler>();
+            this.TimeRecordings = new HashSet<TimeRecording>();
+            this.TimeRecordings1 = new HashSet<TimeRecording>();
+            this.TimeRecordings2 = new HashSet<TimeRecording>();
+        }
+    
         public int id { get; set; }
         public int GenderId { get; set; }
         public string firstname { get; set; }
@@ -28,7 +43,7 @@ namespace totalhr.data.EF
         public string Town { get; set; }
         public string stateorcounty { get; set; }
         public string PostCode { get; set; }
-        public int countryId { get; set; }
+        public Nullable<int> countryId { get; set; }
         public string Phone { get; set; }
         public string Mobile { get; set; }
         public int CompanyId { get; set; }
@@ -47,6 +62,18 @@ namespace totalhr.data.EF
         public bool tersmaccepted { get; set; }
         public string activationcode { get; set; }
         public string chosenculture { get; set; }
-        public int departmentid { get; set; }
+        public Nullable<int> departmentid { get; set; }
+    
+        public virtual ICollection<Note> Notes { get; set; }
+        public virtual ICollection<Note> Notes1 { get; set; }
+        public virtual ICollection<Note> Notes2 { get; set; }
+        public virtual ICollection<TaskScheduler> TaskSchedulers { get; set; }
+        public virtual ICollection<TaskScheduler> TaskSchedulers1 { get; set; }
+        public virtual ICollection<TaskScheduler> TaskSchedulers2 { get; set; }
+        public virtual ICollection<TaskScheduler> TaskSchedulers3 { get; set; }
+        public virtual ICollection<TaskScheduler> TaskSchedulers4 { get; set; }
+        public virtual ICollection<TimeRecording> TimeRecordings { get; set; }
+        public virtual ICollection<TimeRecording> TimeRecordings1 { get; set; }
+        public virtual ICollection<TimeRecording> TimeRecordings2 { get; set; }
     }
 }
