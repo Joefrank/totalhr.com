@@ -23,11 +23,13 @@ namespace totalhr.services.messaging.Implementation
         private IEmailRepository _mailRepos;
         private SMTPSettings _smtpsettings;
         private static readonly ILog log = LogManager.GetLogger(typeof(MessagingService));
+        private readonly IUserRepository _userrepos;
 
-        public MessagingService(IEmailService emailService, IEmailRepository mailRepos)
+        public MessagingService(IEmailService emailService, IEmailRepository mailRepos, IUserRepository userrepos)
         {
             _emailService = emailService;
             _mailRepos = mailRepos;
+            _userrepos = userrepos;
         }
 
         public void ReadSMTPSettings(SMTPSettings smtpsettings)
@@ -123,6 +125,47 @@ namespace totalhr.services.messaging.Implementation
             });
 
             log.Debug("AcknowledgeAccountActivation - Admin notified ");
+        }
+
+        public bool NotifyUserOfCalendarEvent(AdminStruct adminstruct, CalendarEventInfo eventinfo)
+        {
+            var userTemplate = _mailRepos.FindBy(x => x.Identifier.Equals(Variables.EmailTemplateIds.CalendarEventNotification.ToString())).FirstOrDefault();
+            var lstUsers = new List<User>();
+           
+            if (eventinfo.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.User)
+            {               
+                lstUsers = _userrepos.FindBy(x => eventinfo.TargetAttendeeIdList.Contains(x.id)).ToList();
+            }
+            else if(eventinfo.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.Department)
+            {
+                lstUsers = _userrepos.FindBy(x => eventinfo.TargetAttendeeIdList.Contains(x.departmentid)).ToList();
+            }
+            else if (eventinfo.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.MyselfOnly)
+            {
+                lstUsers = _userrepos.FindBy(x => x.id == eventinfo.CreatedBy).ToList();
+            }
+            else if (eventinfo.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.Company)
+            {
+                lstUsers = _userrepos.FindBy(x => x.CompanyId == eventinfo.CompanyId).ToList();
+            }
+
+            // try using multiple recipient emails
+            foreach (var user in lstUsers)
+            {
+                NotifyUser(new EmailStruct
+                    {
+                        SenderName = adminstruct.AdminName,
+                        SenderEmail = adminstruct.AdminEmail,
+                        ReceiverName = user.firstname + " " + user.surname,
+                        ReceiverEmail = user.email,
+                        EmailTitle = string.Format(userTemplate.Subject, eventinfo.Title),
+                        EmailBody =
+                            string.Format(userTemplate.Template, user.firstname, eventinfo.Title,
+                                          adminstruct.SiteRootURL, Variables.AdminEmailSignature)
+                    });
+            }          
+
+            return true;
         }
 
         public bool NotifyUser(EmailStruct estruct)

@@ -636,4 +636,19 @@
   <data name="MSG_Details_Saved" xml:space="preserve">
     <value>Your details have been saved successfully!</value>
   </data>
+  <data name="MSG_Duplicate_Reminder" xml:space="preserve">
+    <value>Reminder already added.</value>
+  </data>
+  <data name="MSG_Users_Invitee_List" xml:space="preserve">
+    <value>Select user(s) to invite</value>
+  </data>
+  <data name="Label_Enter_Year" xml:space="preserve">
+    <value>Enter year</value>
+  </data>
+  <data name="MSG_Departments_Invitee_List" xml:space="preserve">
+    <value>Select department(s) to invite </value>
+  </data>
+  <data name="MSG_Error_NoAttendee_Chosen" xml:space="preserve">
+    <value>You cannot invite attendees without selecting any!</value>
+  </data>
 </root>

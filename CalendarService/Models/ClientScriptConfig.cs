@@ -34,6 +34,11 @@ namespace Calendar.Models
         public string InActiveTdClickCallBack { get; set; }
 
         /// <summary>
+        /// This is when user has not edit right on event
+        /// </summary>
+        public string PreviewCallBack { get; set; }
+
+        /// <summary>
         /// You can pass a class to style the current day
         /// </summary>
         public string CurrentDayCssClass { get; set; }

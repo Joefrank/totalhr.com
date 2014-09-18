@@ -218,7 +218,9 @@
     <Content Include="bin\WebGrease.dll" />
     <Content Include="Content\css\BeatPicker.min.css" />
     <Content Include="Content\calendar.css" />
+    <Content Include="Content\css\calendar.css" />
     <Content Include="Content\css\popup.css" />
+    <Content Include="Content\images\cal.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -285,6 +287,7 @@
     <Content Include="Scripts\jquery-1.7.1.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
+    <Content Include="Scripts\jquery-1.9.0.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.js" />
     <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
     <Content Include="Scripts\jquery-ui-1.8.24.js" />
@@ -301,6 +304,7 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\Site\BeatPicker.min.js" />
     <Content Include="Scripts\Site\calendar.js" />
+    <Content Include="Scripts\Site\DatePicker.js" />
     <Content Include="Scripts\Site\common.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
@@ -332,11 +336,14 @@
     <Content Include="Views\Shared\_CalendarEventEdit.cshtml" />
     <Content Include="Views\Calendar\Edit.cshtml" />
     <Content Include="Views\Calendar\EventEdit.cshtml" />
+    <None Include="Views\Calendar\EventEdit.cshtml.old" />
     <Content Include="Views\Account\MyDetails.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\Account\CompanyUsersSelector.cshtml" />
     <Content Include="Views\Account\CompanyDepartmentSelector.cshtml" />
     <Content Include="Views\Shared\_PopupLayout.cshtml" />
+    <Content Include="Views\Calendar\EventAdd.cshtml" />
+    <Content Include="Views\Calendar\PreviewEvent.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -353,7 +360,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\Database\" />
-    <Folder Include="Content\images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -446,7 +452,7 @@
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>http://localhost:50698/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
-          <UseCustomServer>True</UseCustomServer>
+          <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>http://localhost</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>

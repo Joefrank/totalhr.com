@@ -24,6 +24,7 @@ namespace Authentication.Implementation
         private const string CkNameCompanyId = "CompanyId";
         private const string CkNameProfiles = "Profiles";
         private const string CkNameRoles = "Roles";
+        private const string CkNameDepartmentId = "DepartmentId";
 
         private readonly HttpContext _context;
         private readonly ClientUser _user = new ClientUser();
@@ -49,6 +50,12 @@ namespace Authentication.Implementation
         {
             get { return ReadEncryptedCookie<int>(CkNameCompanyId); }
         }
+
+        public int UserDepartmentId
+        {
+            get { return ReadEncryptedCookie<int>(CkNameDepartmentId); }
+        }
+
         public string UserProfiles
         {
             get { return ReadEncryptedCookie<string>(CkNameProfiles); }
@@ -176,7 +183,8 @@ namespace Authentication.Implementation
                         FullName = this.UserFullName,
                         Culture = this.UserCulture,
                         LanguageId = this.UserLanguageId,
-                        CompanyId = this.UserCompanyId
+                        CompanyId = this.UserCompanyId,
+                        DepartmentId = this.UserDepartmentId
                     };
             }
             catch(Exception ex)
@@ -200,6 +208,7 @@ namespace Authentication.Implementation
                 PlaceClientEncryptedCookie(CkNameCulture, user.Culture, user.CookieDuration);
                 PlaceClientEncryptedCookie(CkNameLanguageId, user.LanguageId.ToString(CultureInfo.InvariantCulture), user.CookieDuration);
                 PlaceClientEncryptedCookie(CkNameCompanyId, user.CompanyId.ToString(), user.CookieDuration);
+                PlaceClientEncryptedCookie(CkNameDepartmentId, user.DepartmentId.ToString(), user.CookieDuration);
                 PlaceClientEncryptedCookie(CkNameProfiles, sProfiles, user.CookieDuration);
                 PlaceClientEncryptedCookie(CkNameRoles,sRoles , user.CookieDuration);
             }
@@ -222,6 +231,7 @@ namespace Authentication.Implementation
                 DeleteClientCookie(CkNameProfiles);
                 DeleteClientCookie(CkNameRoles);
                 DeleteClientCookie(CkNameCompanyId);
+                DeleteClientCookie(CkNameDepartmentId);
             }
             catch (Exception ex)
             {

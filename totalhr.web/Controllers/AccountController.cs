@@ -137,6 +137,7 @@ namespace totalhr.web.Controllers
                 clientUser.CookieDuration = new TimeSpan(0, 0, LoginDuration, 0);
                 clientUser.Culture = userstruct.UserBasicDetails.chosenculture;
                 clientUser.CompanyId = userstruct.UserBasicDetails.CompanyId;
+                clientUser.DepartmentId = userstruct.UserBasicDetails.departmentid;
 
                 AuthService.PersistClientUser(clientUser);
 
@@ -252,6 +253,7 @@ namespace totalhr.web.Controllers
                 {
                     FullName = "Joe Tester Temp",
                     CompanyId = 30,
+                    DepartmentId = 2,
                     CookieDuration = new TimeSpan(0, 5, 0,0),
                     Culture = "en-GB",
                     UserName = "jbolla@cyberminds.co.uk",

@@ -94,13 +94,28 @@ body, html {
 .line .reminders span{float:left;display:block;width:16px;height:16px;cursor:pointer;}
 .line .reminders .spcount{color:blue;width:100px;font-weight:bold;padding:5px 0 0 5px;}
 
-.line .reminders .spview{padding:2px 3px;float:right;margin:5px 10px 0 0px;width:200px;}
+.line .head .spview{float:left;display:block;width:16px;height:16px;background:transparent url('/Content/images/view.gif') center center no-repeat;}
 
-.line .reminders .spadd{padding:10px 0 0 2px;margin-left:10px;background:transparent url('../images/plus-icon.png') left center no-repeat;}
+.line .content .spadd, .line .head .spadd{float: left;display:block;width:16px;height:16px;padding: 2px 0 0 17px;color:blue;cursor:pointer;background:transparent url('/Content/images/plus-icon.png') left center no-repeat;}
+.line .head .spadd {
+    float: right;padding: 0;
+}
 
-.line .reminders .spedit{padding:10px 0 0 2px;background:transparent url('../images/edit-icon.png') center center no-repeat;}
+.line .content .delete {padding: 2px 0 0 17px;color:blue;cursor:pointer;margin-left:5px;background:transparent url('/Content/images/minus-icon.png') left center no-repeat; }
 
-.line .reminders .spdelete{background:transparent url('../images/delete-icon.png') center center no-repeat;}
+.line .collapse {
+    background:transparent url('/Content/images/minus.png') right center no-repeat; 
+}
+
+.line .head .spedit{float:left;margin-right:10px;display:block;width:16px;height:16px;background:transparent url('/Content/images/edit-icon.png') center center no-repeat;}
+
+.line .actiontitle {float:left;margin-right:10px;}
+
+.line .buttons {
+    float:right;display:block;margin-right:2px;
+}
+
+.line .reminders .spdelete{background:transparent url('/Content/images/delete-icon.png') center center no-repeat;}
 
 .reminderpopup {
     background-color:#59a8dc;
@@ -131,7 +146,12 @@ body, html {
 
  #dvReminderContent span.row{height: 30px;float: left;}
 
-  .childblock .head{ float: left;width: 100%;height: 20px;padding: 2px 0;text-align: left;cursor: pointer;color: blue;font-weight: bold;}
+  .childblock .head{ 
+      float: left;width: 100%;height: 20px;padding: 2px 2px;text-align: left;cursor: pointer;color: blue;font-weight: bold;
+      -webkit-box-shadow: 0 2px #666633;box-shadow: 0 2px #666633;background-color:beige;border: 1px solid grey;
+      background:transparent url('/Content/images/plus-icon.png') right center no-repeat;
+
+  }
 
    .childblock .content{ float: left;width: 98%;background-color: beige;padding:1%;}
    
@@ -142,7 +162,7 @@ body, html {
     #dvReminderContent span.row span.td, #dvReminderContent span.row span.tdtop{display: block;float: left;left:2px;}
     #dvReminderContent span.row span.tdtop{ position: relative;top: 0px;}
 
-   #sprepeatinfo{ display: block;float: left;width: 100%;margin: 10px 0;color:#7b7b7b;}
+   #sprepeatinfo{ display: block;float: left;margin: 10px 0;width: 100%;color:#7b7b7b;}
 
 .block .repeatcount {
     color:blue;cursor:pointer;
@@ -156,7 +176,7 @@ body, html {
 /*span.row i.info{ margin-top: -16px;}*/
 
 .line input[type="text"].datetype {
-    width:100px;
+    width:130px;background:transparent url('/content/images/cal.gif') right center no-repeat;padding-right:16px;
 }
 
 #dvPopupAjax {
@@ -186,3 +206,53 @@ div#toolbox {
         background:transparent url('/content/images/close.png') center center no-repeat;float:right;display:block;width:22px;height:22px;
     cursor:pointer;
         }
+
+/*validation styles*/
+
+.validation-summary-errors {
+    border:1px solid red;
+    background-color:#fcacca;
+    color:red;
+    font-weight:bold;
+    float:left;
+    position:relative;    
+    margin:10px;  
+    width:95%;
+}
+
+    .validation-summary-errors ul li {
+        padding:5px;
+    }
+
+.line input[type="button"].btnsmall {
+    /*box-sizing: border-box;
+    height: 32px;
+    line-height: 32px;*/
+    padding: 0 5px;
+    background-color: #198fff;
+    color: #fff;
+    -webkit-box-shadow: 0 2px #063a93;
+    box-shadow: 0 2px #063a93;
+    border-radius: 3px;
+    font-weight: 100;
+    border: 2px solid transparent;
+
+}
+
+div.popupedit {
+    float: left;width: 240px;position: relative;left:200px;z-index: 10000;background-color:#f9f9f9;border: 1px solid grey;padding:5px 0 0 5px;
+}
+
+div.popupedit .spclose {
+    background:transparent url('/content/images/close-icon.png') center center no-repeat;float:right;display:block;width:16px;height:16px;
+    cursor:pointer;position:relative;top:-3px;right:2px;
+    }
+
+.collapse {
+    background-image:url('/content/images/minus.png');
+}
+
+.smalltxt{ width: 100px;}
+
+.linespan{ float: left;width: 100%;display: block;}
+

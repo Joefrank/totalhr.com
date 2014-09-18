@@ -1,0 +1,29 @@
+﻿@model totalhr.data.EF.CalendarEvent
+@using totalhr.Resources
+ 
+@{    
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+@section head2{
+    <h2>@Common.Page_TT_Calendar_Event_Edit</h2>
+}
+<div id="flashpreviewcontent">
+
+    <p>
+        Your event has been created successfully!<br />
+        You can edit it by going to the calendar and clicking  on it.
+    </p>
+    <div class="line">@Calendar.Evt_Title: @Model.Title</div>
+
+    <div class="line">@Calendar.Evt_Start: @Model.StartOfEvent - @Calendar.Evt_End: @Model.EndOfEvent</div>
+
+    <div class="line">@Calendar.Evt_Location: @Model.Location</div>
+
+    <div class="line">@Calendar.Evt_Description: @Model.Description</div>
+
+    <div class="line">Reminders: @Model.CalendarAssociations.Count</div>
+
+    <div class="line">Attendee(s): @Model.CalendarAssociations.Count</div>
+
+    <div class="line">Repeats: @Model.CalendarAssociations.Count</div>
+</div>

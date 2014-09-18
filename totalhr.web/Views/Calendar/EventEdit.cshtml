@@ -1,30 +1,406 @@
 ﻿@model totalhr.Shared.Models.CalendarEventInfo
 @using totalhr.Resources
+@using System.Text
+@using totalhr.Resources
+@using System.Collections
+@using totalhr.Shared
+@using totalhr.web.Helpers
+
 @{
     Layout = "~/Views/Shared/_PopupLayout.cshtml";
-    ViewBag.Title = "EventEdit";
-}
+    ViewBag.Title = Common.Page_TT_Calendar_Event_Edit;
 
-@section extrastyles{
-    @Styles.Render("~/Content/css/BeatPicker.min.css")
-}
 
-@{
-    Html.RenderPartial("_FormScripts"); 
+    var WeekDaysJS = ViewBag.WeekDaysJS;
+    var sbJS = new StringBuilder();
+    var sbAttendees = new StringBuilder();
+    string defaultStartDate;
+    string defaultEndDate;
+    var sbRemindersJS = new StringBuilder();
+    var sbTargetAttendees = new StringBuilder();
+    var sbRepeatDates = new StringBuilder();
+    var sbRepeatYears = new StringBuilder();
+    var repeatuntil = string.Empty;
+    var reminderscount = (Model.Reminders == null) ? 0 : Model.Reminders.Count;
+    var sJSChosenTargetUsers = string.Empty;
+    var sJSChosenTargeDepartments = string.Empty;
+    var culture = new System.Globalization.CultureInfo(Model.UserCulture);
+
+    defaultStartDate = (Model.StartDate > DateTime.MinValue) ? Model.StartDate.ToString(culture) : DateTime.Now.ToString(culture);
+    defaultEndDate = (Model.EndDate > DateTime.MinValue) ? Model.EndDate.ToString(culture) : DateTime.Now.ToString(culture);
+    var defaultDate = DateTime.Now.ToString(culture);
+    var defaultDateShort = defaultDate.Split(' ')[0];
+    
+    if (Model.Reminders != null)
+    {
+        int i=0;
+        
+        foreach (totalhr.Shared.Models.CalendarEventReminder reminder in Model.Reminders)
+        {
+            sbRemindersJS.Append(string.Format(" Reminders[{0}]=[{1}, {2}, {3}, '{4}',{5}];" + Environment.NewLine,i, reminder.ReminderType,
+                reminder.Frequency, reminder.FrequencyType, "", reminder.NotificationType));
+            i++;
+        }
+    }
+int count =0;
+
+    if (Model.TargetAttendeeGroupId == (int)Variables.CalendarEventTarget.User && Model.TargetAttendeeIdList != null)
+    {
+        sJSChosenTargetUsers = string.Join<int>(",", Model.TargetAttendeeIdList);
+        
+        foreach(int i in Model.TargetAttendeeIdList){
+            sbTargetAttendees.Append(string.Format(@"<input type=""hidden"" name=""TargetAttendeeIdList[{0}]"" value=""{1}"" />", count, i));
+            count++;
+        }
+        
+    }
+    else if (Model.TargetAttendeeGroupId == (int)Variables.CalendarEventTarget.Department && Model.TargetAttendeeIdList != null)
+    {
+        sJSChosenTargeDepartments = string.Join<int>(",", Model.TargetAttendeeIdList);
+
+        foreach (int i in Model.TargetAttendeeIdList)
+        {
+            sbTargetAttendees.Append(string.Format(@"<input type=""hidden"" name=""TargetAttendeeIdList[{0}]"" value=""{1}"" />", count, i));
+            count++;
+        }
+    }  
+    
+    //sbRepeats
+     if(Model.RepeatType == (int)Variables.RepeatType.DailyMonToFri || 
+         Model.RepeatType == (int)Variables.RepeatType.OnDayOfTheWeek)//repeat until
+     {
+         repeatuntil = Model.RepeatUntil.ToString(culture).Split(' ')[0];
+     }
+     else if(Model.RepeatType == (int)Variables.RepeatType.OnDates ||
+         Model.RepeatType == (int)Variables.RepeatType.MonthlyOnDates)
+     {
+         count = 0;
+         if(Model.RepeatDates != null){
+             foreach(string date in Model.RepeatDates){
+                 sbRepeatDates.Append(string.Format(@"<input type=""hidden"" name=""RepeatDates[{0}]"" value=""{1}"" />", count, date));                 
+             }
+         }
+     }
+     else if(Model.RepeatType == (int)Variables.RepeatType.YearlyOnSameDate && Model.RepeatYears != null)
+     {
+         count = 0;
+
+         foreach (int date in Model.RepeatYears)
+         {
+             sbRepeatYears.Append(string.Format(@"<input type=""hidden"" name=""RepeatYears[{0}]"" value=""{1}"" />", count, date));
+         }
+     }
+    
+    var attendeecount = Model.TargetAttendeeIdList != null? Model.TargetAttendeeIdList.Count() + " " : "";
+    
+    var targetattendeetitle = Model.TargetAttendeeGroupId > 0 ?
+                                 attendeecount + EnumExtensions.Description((Variables.CalendarEventTarget)Model.TargetAttendeeGroupId) :
+                                FormMessages.V_None_Added;
+                         
+                             
 }
 
 
 @section head2{
-    <h2>@((Model.EventId > 0)? Common.Page_TT_Calendar_Event_Edit : Common.Page_TT_Calendar_Event_Add)</h2>
+    <h2>@Common.Page_TT_Calendar_Event_Edit</h2>
 }
+
+
+
+@using (Html.BeginForm("EditEvent", "Calendar"))
+{
+     @Html.ValidationSummary()
+
+    <div class="formwrapper">
+
+            <div class="line">
+                <div class="block">
+			        <label class="fix200W">@FormMessages.Label_Title: <span class="req">*</span></label>
+                    @Html.TextBoxFor(x => x.Title)                    
+                </div>
+            </div>
+
+             <div class="line">
+                 <div class="block">
+                    <label class="fix200W">@FormMessages.Label_Location:</label>
+                    @Html.TextBoxFor(x => x.Location) 
+               </div>
+            </div>
+
+            <div class="longline">
+                <div class="block">
+                    <label class="fix200W">@FormMessages.Label_Description:</label>
+                    @Html.TextAreaFor(x => x.Description, new { @rows = "6", @cols = "40" })
+                </div>               
+            </div>
+        
+            <div class="line">
+                <div class="block">
+                <label class="fix200W">@FormMessages.Label_Start_Date:<span class="req">*</span></label>
+                    @Html.TextBoxFor(x => x.StartDate, defaultStartDate, new { @class = "datetype", onclick = "javascript:NewCal('StartDate','ddmmyyyy',true,24)" })
+                </div>
+            </div>          
     
+            <div class="line"> 
+                <div class="block">
+                    <label class="fix200W">@FormMessages.Label_End_Date:<span class="req">*</span></label>
+                    @Html.TextBoxFor(x => x.EndDate, defaultEndDate, new { @class = "datetype", onclick = "javascript:NewCal('EndDate','ddmmyyyy',true,24)" })
+                    
+                </div>
               
-        <p>@Calendar.V_Calendar_Name: @Model.CalendarName</p>
+            </div>           
+            
+        <div class="line">
+            <div class="block">
+                <label class="fix200W"> @FormMessages.Label_Reminders</label>
+                
+                 <div class="childblock">
+                   
+                     <div class="head" id="dvReminderHead" onclick="ToggleExpandGeneric('dvReminderHead', 'dvReminderContent');AddReminderRow();" >
+                         <span id="spReminderCount" class="actiontitle"> (
+                             @if (reminderscount > 0)
+                             {
+                                @(reminderscount + " " + FormMessages.V_Added)
+                             }
+                             else
+                             {
+                                @FormMessages.V_None_Added
+                             }
+                       ) </span>
 
-        @{
-            Html.RenderPartial("_CalendarEventEdit");
-        }
+                         <span class="buttons">                             
+                           &nbsp;
+                         </span>
+                       
+                     </div>
+
+                     <div id="dvReminderContent" class="content" style="display:none;">
+                           
+                        <div id="dvReminderOptions" >
+                             <div id="dvAddedReminders" style="min-height:100px;">                                
+                             </div>
+                            <div id="dvRemindersData"></div>
+                         </div>
+
+                         <div id="dvReminderList" class="popupedit" style="display:none">
+                             <span class="spclose" onclick="CancelDivPopup('dvReminderList');">&nbsp;</span>
+                             <table>
+                                 <tr>
+                                     <td>
+                                         <span id="ctremtype_1">
+                                             @Html.Raw(CalendarHelper.GenerateReminderTypeSelect("selReminder_1", "selReminder_1", @" onchange=""CheckReminderValue(this);"" "))
+                                         </span>
+                                     </td>
+                                     <td>
+                                         <span id="ctremnotification_1">
+                                             @Html.Raw(CalendarHelper.GenerateReminderNotificationSelect("selRemindernotif_1", "selRemindernotif_1", ""))
+                                         </span>
+                                     </td>
+                                     
+                                 </tr>
+                                 <tr id="trCustomReminder" style="display:none;">
+
+                                     <td><input type="text" class="shortnum" style="float:right" id="txtFrequency" value="5" /></td>
+                                     <td>
+                                         
+                                         @Html.Raw(CalendarHelper.GenerateFrequencyDDl("ddlFrequencyBeforeType", "ddlFrequencyBeforeType", "")) 
+
+                                     </td>
+                                 </tr>
+                                 <tr>
+                                     <td>
+                                         <input type="button" value="@Common.V_Add" class="btnsmall" onclick="SaveReminder();"/>
+                                     </td>
+                                     <td>
+                                         &nbsp;
+                                     </td>
+                                 </tr>
+                             </table>                             
+                             
+                         </div>                        
+
+                     </div>
+                      
+                 </div>
+
+              </div>
+		    <div class="block">
+			   
+		    </div>
+	    </div>
+
+
+             <div class="line">
+                  <div class="block">
+			<label class="fix200W">@FormMessages.Label_TargetGroup <span class="req">*</span></label>
+                 <div class="childblock">
+                    
+                     <div class="head" id="dvAttendeeHead" onclick="ToggleExpandGeneric('dvAttendeeHead', 'dvAttendeesContent');">
+                         <span id="spattendeeCount" class="actiontitle"> (
+                             @targetattendeetitle
+                         )</span>
+
+                         <span class="buttons">
+                         &nbsp;
+                         </span>
+                     </div>
+
+                     <div id="dvAttendeesContent" class="content" style="display:none">
+                        @foreach (var num in (Variables.CalendarEventTarget[])Enum.GetValues(typeof(Variables.CalendarEventTarget)))
+                        {
+                            var schecked = (int)num == Model.TargetAttendeeGroupId ? " checked " : "";
+                            sbAttendees.Append(string.Format("{0} = {1};" + Environment.NewLine, num.ToString(), (int)num));
+                            @Html.Raw(CalendarHelper.GenerateAttendee(num, "TargetAttendeeGroupId", schecked));
+                        }                         
+                       
+                        <div id="dvHiddenAttendees" style="display:none">@Html.Raw(sbTargetAttendees)</div>                         
+                        
+                        <div id="dvAttendeesOptions" class="popupedit" style="display:none;">
+                            <span class="spclose" onclick="CancelDivPopup('dvAttendeesOptions');">&nbsp;</span>
+
+                            <div id="dvAttendeesList"></div>
+                            
+                            <div id="dvAttendeesDepartments"></div>
+
+                            <div>
+                                <input type="button" value="@Common.V_Add" class="btnsmall" onclick="SaveInvitees();"/>
+                            </div>
+                        </div>
+                     </div>
+
+                </div>
+                
+              </div>
+            </div>
+            
+          <div class="line">
+                <div class="block">
+			        <label class="fix200W">@FormMessages.Label_Repeat:</label>
+                    
+                    <div  id="dvRepeat" class="childblock">
+                    
+                        <div id="dvRepeatHead" class="head" onclick="ToggleExpandGeneric('dvRepeatHead', 'dvRepeatContent', 'AdjustRepeatBasedOnStartDate()');" >
+                           <span class="actiontitle">
+                            ( @{
+                        var title = Model.RepeatType > 0 ? EnumExtensions.Description((Variables.RepeatType)Model.RepeatType) : FormMessages.V_None_Added;
+                        title = (title.Contains("{0}")) ? string.Format(title, Model.StartDate.DayOfWeek.ToString()) : title;
+                            }
+                            @Html.Raw(title)
+                            )
+                            </span>
+                            <span class="buttons">
+                             &nbsp;
+                            </span>
+                        </div>
+
+                    <div id="dvRepeatContent" class="content" style="display:none">
+                        @foreach (var num in (Variables.RepeatType[])Enum.GetValues(typeof(Variables.RepeatType)))
+                        {
+                            var schecked = (int)num == Model.RepeatType ? " checked " : "";
+                            sbJS.Append(string.Format("{0} = {1};" + Environment.NewLine, num.ToString(), (int)num));
+                            @Html.Raw(CalendarHelper.GenerateRepeatByType(num, "RepeatType", schecked));
+                        }
+                    
+                        <div id="repeatOptions" class="popupedit" style="display:none;">
+                            <span id="sprepeatinfo" class="linespan"></span>
+
+                            <span id="spRepeatBattery" class="linespan" style="display:none;">
+                                <input type="text" id="txtRepeatDate" name="txtRepeatDate" class="datetype" value="@defaultDateShort" onclick = "javascript:NewCal('txtRepeatDate','ddmmyyyy',false,24)" />
+                               <input type="button" value="@Common.V_Add" class="btnsmall" onclick="KeepDateIn('txtRepeatDate')" />
+                            </span>
+                        
+                            <span id="spUntilDate" class="linespan" style="display:none;">
+                                <span class="linespan"> @Common.V_Until:</span> 
+                                <input type="text" id="txtRepeatUntil" name="txtRepeatUntil" class="datetype" value="@defaultDateShort" onclick = "javascript:NewCal('txtRepeatUntil','ddmmyyyy',false,24)"  />
+                                <input type="button" value="@Common.V_Set" class="btnsmall" onclick="SetUntilDateIn('txtRepeatUntil')" />
+                                @Html.HiddenFor(x => x.RepeatUntil)
+                            </span>
+                        
+                            <span id="spRepeatValue" class="linespan" style="display:none;">
+                               <span class="linespan"> @FormMessages.Label_Enter_Year:</span>  
+                                <input type="text" id="txtRepeatValue" class="smalltxt" style="width:50px;" value="@DateTime.Now.Year"  />
+                                <input type="button" value="@Common.V_Add" class="btnsmall" onclick="KeepYearIn()" />
+                            </span>
+                            
+                            <div style="display:none" id="dvRepeatHiddenDates">@Html.Raw(sbRepeatDates)</div>
+                            <div style="display:none" id="dvRepeatHiddenValues">@Html.Raw(sbRepeatYears)</div>
+
+                        </div>
+                        
+                      </div>
+                    </div>
+
+                    @Html.HiddenFor(x => x.RepeatType)
+                   
+                    <span id="spmonthlydate"></span>              
+                </div>
+
+                <div class="block">
+                    <span class="preview" id="sppreview"></span>
+                </div>
+            </div>    
+
+        <div class="line">
+            <div class="block">
+                <label class="fix200W">&nbsp;</label>
+
+                <input type="button" value="@FormMessages.btn_Cancel" onclick="parent.ClosePopup('dvPopup')" />
+                <input type="submit" value="@FormMessages.btn_Value_Save" onclick="return IsFormValid()" />
+             </div>
+        </div>
+                
+            @Html.HiddenFor(x => x.UserCulture)
+            @Html.HiddenFor(x => x.CalendarId)
+            @Html.HiddenFor(x => x.EventId)
+
+      </div>
+      
+
+}
+
+
+    <script type="text/javascript" src="/Scripts/Site/DatePicker.js"></script>
+    <script type="text/javascript" src="/Scripts/Site/calendar.js" ></script>
+
+<script type="text/javascript">
     
+    EventId = @Model.EventId;
 
+    @sbJS.ToString()
+   
+    @Html.Raw(WeekDaysJS)
+
+    @Html.Raw(sbAttendees)
+    
+    ERROR_INVALID_DATE = "@FormMessages.Error_Invalid_Date";
+    REMINDER_TYPE_CUSTOMIZE = "@((int)Variables.CalendarEventReminderValues.Customize)";
+    NONE_ADDED_MESSAGE = "@FormMessages.V_None_Added";
+    MSG_BEFORE = "@Common.V_Before";
+    MSG_ADDED = "@Html.Raw(FormMessages.V_Added)";
+    MSG_MISSING_REMINDER_TYPE = "@Html.Raw(FormMessages.Error_Missing_Reminder_Type)";
+    MSG_MISSING_REMINDER_VALUES = "@Html.Raw(FormMessages.Error_Missing_Reminder_Frequency_AndValues)";
+    MSG_ERROR_SUBMIT_FAILED = "@Html.Raw(FormMessages.Error_Could_Not_Submit_Form)";
+    MSG_ERROR_STARTDATE_AFTER_ENDDATE = "@Html.Raw(FormMessages.Error_StartDate_After_EndDate)";
+    MSG_DUPLICATE_REMINDER = "@FormMessages.MSG_Duplicate_Reminder";
+    MSG_USERS_FROM_SERVER = "@FormMessages.MSG_Users_Invitee_List";
+    MSG_DEPARTMENTS_FROM_SERVER = "@FormMessages.MSG_Departments_Invitee_List";
+    MSG_ERROR_NOATTENDEE_CHOSEN = "@FormMessages.MSG_Error_NoAttendee_Chosen";
+    MSG_ERROR_ATTENDEE_REQUIRED = "@FormMessages.Error_Event_Target_Required";
+
+    $(document).ready(function() {
+
+        @Html.Raw(sbRemindersJS.ToString())
+
+        ApplyMessagesToReminders();
+
+        InvitedUsers = @("[" + sJSChosenTargetUsers + "]");
+        InvitedDepartments = @("[" + sJSChosenTargeDepartments + "]");
+
+    });
+
+    
+</script>
+
+<input type="hidden" id="hdnMissingStartDate" value="@totalhr.Resources.FormMessages.Error_StartDate_Before_Repeat" />
 
 

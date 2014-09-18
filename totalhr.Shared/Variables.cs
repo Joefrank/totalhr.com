@@ -35,7 +35,8 @@ namespace totalhr.Shared
             AdminNewUserNotify,
             PasswordReminder,
             AccountActivated,
-            AdminAccountActivated
+            AdminAccountActivated,
+            CalendarEventNotification
         }
 
         public enum Roles
@@ -78,6 +79,32 @@ namespace totalhr.Shared
             EveryXTime = 2
         }
 
+        public enum CalendarEventReminderValues
+        {
+            R5MinsBefore=1,
+            R10MinsBefore=2,
+            R15MinsBefore=3,
+            R20MinsBefore=4,
+            R25MinsBefore=5,
+            R30MinsBefore=6,
+            R45MinsBefore=7,
+            R1HourBefore=8,
+            R2HoursBefore=9,
+            R4HoursBefore=10,
+            R1DayBefore=11,
+            R2DaysBefore=12,
+            R1WeekBefore=13,
+            R2WeeksBefore=14,
+            R1MonthBefore=15,
+            Customize=16
+        }
+
+        public enum CalendarEventNotificationType
+        {
+            ByEmail=1,
+            ByTextPhone=2
+        }
+
         public enum EventFrequency
         {
             EvtHour=2,
@@ -94,6 +121,14 @@ namespace totalhr.Shared
             Repeat = 3
         }
         
+        public enum CalendarViewType
+        {
+            YearView,
+            MonthView,
+            WeekView,
+            DayView
+        }
+
         public static string AdminEmailSignature
         {
             get

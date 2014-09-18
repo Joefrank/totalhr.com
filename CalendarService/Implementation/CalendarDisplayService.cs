@@ -6,12 +6,14 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using totalhr.Shared;
 using totalhr.data.EF;
 using totalhr.Shared.Models;
+using log4net;
 
 namespace Calendar.Implementation
 {
-    public class CalendarService : ICalendarService
+    public class CalendarDisplayService : ICalendarDisplayService
     {
         private const string HeaderHtml = "<tr><th>{0}</th><th>{1}</th><th>{2}</th><th>{3}</th><th>{4}</th><th>{5}</th><th>{6}</th></tr>";
         private const string TdHtml = "<td {0}>{1}</td>";
@@ -20,9 +22,14 @@ namespace Calendar.Implementation
         private const string TdHtmlNoAttrib = "<td>{0}</td>";
         private const string TrHtmlNoAttrib = "<tr>{0}</tr>";
         private const string TableHtml = "<table {0}>{1}</table>";
+
+        private const string CalendarYearViewLink = @"/Calendar/GetCalendarYear/{0}/{1}";
         private const string CalendarMonthViewLink = @"/Calendar/GetCalendarMonth/{0}/{1}/{2}";
         private const string CalendarWeekViewLink = @"/Calendar/GetWeekView/{0}/{1}/{2}/{3}";
         private const string CalendarDayViewLink = @"/Calendar/GetDayView/{0}/{1}/{2}/{3}";
+        
+        private const int maxDaysInMonth = 31;
+        private const int noOfMonthsinYear = 12;
 
         private readonly CultureInfo _info;
         private const int NoWeekDays = 7;
@@ -33,13 +40,14 @@ namespace Calendar.Implementation
         public string LocalizedAm { get; set; }
         public string LocalizedPm { get; set; }
 
-        public CalendarService()
+        public CalendarDisplayService()
         {
             LocalizedAm = "AM";
             LocalizedPm = "PM";
         }
 
-        public CalendarService(CultureInfo info) : this()
+        public CalendarDisplayService(CultureInfo info)
+            : this()
         {
             _info = info;
         }
@@ -86,6 +94,49 @@ namespace Calendar.Implementation
             }
             return arrOfDays;
         }
+
+        private string BuildTableGrid(string[,] arrValues, string tableattrib)
+        {
+            StringBuilder sbTemp = new StringBuilder();
+            StringBuilder sbFinal = new StringBuilder();
+
+            for (int x = 0; x <= maxDaysInMonth; x++)
+            {
+                for (int y = 0; y <= noOfMonthsinYear; y++)
+                {
+                    sbTemp.Append(string.Format(TdHtmlNoAttrib, arrValues[x, y]));
+                }
+                sbFinal.Append(string.Format(TrHtmlNoAttrib, sbTemp.ToString()));
+                sbTemp.Clear();
+            }
+
+            return string.Format(TableHtml, tableattrib, sbFinal.ToString());
+        }
+
+        public CalendarHTML GenerateYearHTML(CalendarRequestStruct rqStruct)
+        {            
+
+            string[,] cells = new string[maxDaysInMonth + 1, noOfMonthsinYear + 1];
+
+            for (int x = 0; x <= maxDaysInMonth; x++)
+            {
+                for (int y = 0; y <= noOfMonthsinYear; y++)
+                {
+                    cells[x, y] = (x + y).ToString();
+                }
+            }
+
+            return new CalendarHTML
+            {
+                GridHTML = BuildTableGrid(cells, rqStruct.TableTemplate),
+                NextRequest = string.Format(CalendarYearViewLink,rqStruct.Year + 1  ,rqStruct.CalendarId),
+                PreviousRequest = string.Format(CalendarYearViewLink, rqStruct.Year - 1, rqStruct.CalendarId),
+                Javascript = "",
+                ViewType = Variables.CalendarViewType.YearView
+            };
+
+        }
+
 
         public CalendarHTML GenerateCalendarHTML(CalendarRequestStruct rqStruct)
         {   
@@ -158,16 +209,40 @@ namespace Calendar.Implementation
                 {
                     var foundEvents = lstEvents.FindAll(x => x.StartOfEvent.Date == currentdate.Date
                         || x.EndOfEvent.Date == currentdate.Date).ToList();
+                    var tempspan = string.Empty;
+                    var evtDetails = new StringBuilder();
+                    var edithtml = string.Empty;
 
                     foreach (CalendarEventCache ce in foundEvents)
                     {
-                        sbEvents.Append(string.Format(@"<span class=""event"" id=""evt_{0}_{1}"" {2}>", ClientPageId, ce.id, rqStruct.ClientConfig.EventClickCallBack)
-                            + ce.Title + "</span>");
+                        //use delegates for event details
+                        evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventTitle"] , ce.Title));
+                        evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>",rqStruct.LabelsAndNames["EventLocation"] , ce.Location));
+                        evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventStart"], ce.StartOfEvent));
+                        evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventEnd"], ce.EndOfEvent));
+                        evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventDescription"], ce.Description.Replace(Environment.NewLine, "<br/>")));
+                        
+                        if (ce.CreatedBy == rqStruct.UserId)
+                        {
+                            edithtml = string.Format(@"<br/><span class=""editevent"" id=""evt_{0}_{1}"" {2} title=""{3}""></span>",
+                               ClientPageId, ce.id, rqStruct.ClientConfig.EventClickCallBack, rqStruct.LabelsAndNames["TooltipEditEvent"]);
+                        }
+                            tempspan = string.Format(@"<span class=""previewevent"" id=""sp_preview_{0}""  style=""display:none""> 
+                                <span class=""spdelete"" onclick=""ClosePreview($('#sp_preview_{0}'));"" title=""{3}"">&nbsp;</span>{1} {2}</span>",
+                                                    ce.id, edithtml, evtDetails.ToString(), rqStruct.LabelsAndNames["ClosePreview"]);                          
+                       
+
+                        sbEvents.Append(string.Format(@"<span class=""event"" id=""evt_{0}_{1}"" {2}>{3}</span>", ClientPageId, ce.id, rqStruct.ClientConfig.PreviewCallBack,
+                             ce.Title + tempspan));
+
                         sbJavascript.Append(string.Format(@" {3}['evt_{0}_{1}']=[{0},{1},'{2}'];" + Environment.NewLine, ClientPageId, ce.id, currentTdId, rqStruct.ClientConfig.JsArrayEventName));
                     }
                 }
 
-                sbTemp.Append(string.Format(TdHtml, todayHtml + @" id=""" + currentTdId + @""" " + rqStruct.ClientConfig.ActiveTdClickCallBack,
+                string spDate = string.Format(@"<span style=""display:none"" id=""sp_{0}"">{1}/{2}/{3}</span>", currentTdId, rqStruct.Year, rqStruct.Month, i);
+
+                sbTemp.Append(string.Format(TdHtml, todayHtml + @" id=""" + currentTdId + @""" " + 
+                     rqStruct.ClientConfig.ActiveTdClickCallBack, spDate +
                         @"<span class=""day"">" + i + "</span>" + sbEvents.ToString()));
 
                 sbEvents.Clear();
@@ -207,8 +282,8 @@ namespace Calendar.Implementation
                 GridHTML = sbAllHtml.ToString(),
                 NextRequest = string.Format(CalendarMonthViewLink, nextMonthDate.Year, nextMonthDate.Month, rqStruct.CalendarId ),
                 PreviousRequest = string.Format(CalendarMonthViewLink, prevMonthDate.Year, prevMonthDate.Month,rqStruct.CalendarId),
-                Javascript = sbJavascript.ToString()
-
+                Javascript = sbJavascript.ToString(),
+                ViewType = Variables.CalendarViewType.MonthView
             };
         }
 
@@ -287,7 +362,8 @@ namespace Calendar.Implementation
                     GridHTML = string.Format(TableHtml, rqStruct.TableTemplate, sbHtml.ToString()),
                     NextRequest = string.Format(CalendarWeekViewLink, nextweek.Year, nextweek.Month, nextweek.Day, rqStruct.CalendarId),
                     PreviousRequest = string.Format(CalendarWeekViewLink, prevweek.Year, prevweek.Month, prevweek.Day, rqStruct.CalendarId),
-                    Javascript = sbJavascript.ToString()
+                    Javascript = sbJavascript.ToString(),
+                    ViewType = Variables.CalendarViewType.WeekView
                 };
 
             return html;
@@ -359,7 +435,8 @@ namespace Calendar.Implementation
                 {
                     GridHTML = string.Format(TableHtml, rqStruct.TableTemplate, sbHtml.ToString()),
                     NextRequest = string.Format(CalendarDayViewLink, nextday.Year, nextday.Month, nextday.Day, rqStruct.CalendarId),
-                    PreviousRequest = string.Format(CalendarDayViewLink, prevday.Year, prevday.Month, prevday.Day, rqStruct.CalendarId)
+                    PreviousRequest = string.Format(CalendarDayViewLink, prevday.Year, prevday.Month, prevday.Day, rqStruct.CalendarId),
+                    ViewType = Variables.CalendarViewType.DayView
                 };
         }       
 

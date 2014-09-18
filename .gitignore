@@ -11,7 +11,6 @@
 *.suo
 *.tlb
 *.tlh
-*.bak
 *.[Cc]ache
 *.ilk
 *.log
@@ -38,3 +37,5 @@ _ReSharper*/
 
 # Office Temp Files
 ~$*
+
+log-file.txt
