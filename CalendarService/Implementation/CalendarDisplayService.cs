@@ -27,7 +27,7 @@ namespace Calendar.Implementation
         private const string CalendarMonthViewLink = @"/Calendar/GetCalendarMonth/{0}/{1}/{2}";
         private const string CalendarWeekViewLink = @"/Calendar/GetWeekView/{0}/{1}/{2}/{3}";
         private const string CalendarDayViewLink = @"/Calendar/GetDayView/{0}/{1}/{2}/{3}";
-        
+
         private const int maxDaysInMonth = 31;
         private const int noOfMonthsinYear = 12;
 
@@ -35,7 +35,7 @@ namespace Calendar.Implementation
         private const int NoWeekDays = 7;
 
         readonly int[] _dayHours = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23 };
-        int[] _dayMinutes = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55 };        
+        int[] _dayMinutes = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55 };
 
         public string LocalizedAm { get; set; }
         public string LocalizedPm { get; set; }
@@ -90,10 +90,11 @@ namespace Calendar.Implementation
             {
                 var currentDay = (DayOfWeek)(((int)firstDay + dayIndex) % NoWeekDays);
                 // Output the day               
-                arrOfDays[dayIndex] = currentDay.ToString();
+                arrOfDays[dayIndex] = info.DateTimeFormat.GetDayName(currentDay);
             }
             return arrOfDays;
         }
+
 
         private string BuildTableGrid(string[,] arrValues, string tableattrib)
         {
@@ -104,7 +105,10 @@ namespace Calendar.Implementation
             {
                 for (int y = 0; y <= noOfMonthsinYear; y++)
                 {
-                    sbTemp.Append(string.Format(TdHtmlNoAttrib, arrValues[x, y]));
+                    if(x == 0)
+                        sbTemp.Append(string.Format(ThHtmlNoAttrib, arrValues[x, y]));
+                    else
+                        sbTemp.Append(string.Format(TdHtmlNoAttrib, arrValues[x, y]));
                 }
                 sbFinal.Append(string.Format(TrHtmlNoAttrib, sbTemp.ToString()));
                 sbTemp.Clear();
@@ -114,22 +118,36 @@ namespace Calendar.Implementation
         }
 
         public CalendarHTML GenerateYearHTML(CalendarRequestStruct rqStruct)
-        {            
-
+        {
+            string[] monthNames = rqStruct.Info.DateTimeFormat.MonthNames;
+            string[] weekdaysNames = GetWeekDaysByName(rqStruct.Info);
+            int[] noDaysInMonths = new int[12];
+                       
             string[,] cells = new string[maxDaysInMonth + 1, noOfMonthsinYear + 1];
+            string tempval = string.Empty;
 
             for (int x = 0; x <= maxDaysInMonth; x++)
             {
                 for (int y = 0; y <= noOfMonthsinYear; y++)
                 {
-                    cells[x, y] = (x + y).ToString();
+                    if (x == 0)
+                    {
+                        tempval = (y > 0) ? monthNames[y - 1] : "";
+                        if(y < 12)
+                            noDaysInMonths[y] = DateTime.DaysInMonth(rqStruct.Year, y + 1);
+                    }
+                    else
+                    {
+                        tempval = (y == 0) ? weekdaysNames[(x-1) % NoWeekDays] : (noDaysInMonths[y -1] >= x? x.ToString() : "");
+                    }
+                    cells[x, y] = tempval;
                 }
             }
 
             return new CalendarHTML
             {
                 GridHTML = BuildTableGrid(cells, rqStruct.TableTemplate),
-                NextRequest = string.Format(CalendarYearViewLink,rqStruct.Year + 1  ,rqStruct.CalendarId),
+                NextRequest = string.Format(CalendarYearViewLink, rqStruct.Year + 1, rqStruct.CalendarId),
                 PreviousRequest = string.Format(CalendarYearViewLink, rqStruct.Year - 1, rqStruct.CalendarId),
                 Javascript = "",
                 ViewType = Variables.CalendarViewType.YearView
@@ -138,8 +156,9 @@ namespace Calendar.Implementation
         }
 
 
+
         public CalendarHTML GenerateCalendarHTML(CalendarRequestStruct rqStruct)
-        {   
+        {
             var sbAllHtml = new StringBuilder();
             var sbTemp = new StringBuilder();
             var dateTime = Convert.ToDateTime("01-" + rqStruct.Month + "-" + rqStruct.Year, rqStruct.Info);
@@ -149,7 +168,7 @@ namespace Calendar.Implementation
             var startDay = dateTime.Day;
             var frontGap = (int)(((int)dateTime.DayOfWeek == 0 ? 7 : (int)dateTime.DayOfWeek) - info.DateTimeFormat.FirstDayOfWeek);
             var noDays = DateTime.DaysInMonth(dateTime.Year, dateTime.Month);
-            var noRows =0;
+            var noRows = 0;
             var rearGap = 0;
             var ClientPageId = 0;
             var lstEvents = rqStruct.RelatedEvents;
@@ -166,7 +185,7 @@ namespace Calendar.Implementation
             {
                 var currentDay = (DayOfWeek)(((int)firstDay + dayIndex) % NoWeekDays);
                 // Output the day               
-                sbTemp.Append(string.Format(ThHtmlNoAttrib, currentDay)); 
+                sbTemp.Append(string.Format(ThHtmlNoAttrib, currentDay));
             }
 
             //This is top row with Month's name
@@ -179,7 +198,7 @@ namespace Calendar.Implementation
 
             //let's calculate how many days on the last week of calendar we need from next month
             rearGap = (NoWeekDays - (frontGap + noDays) % NoWeekDays);
-            
+
             //let's generate html for all days of chosen month
             for (int i = 1; i <= noDays; i++)
             {
@@ -198,7 +217,7 @@ namespace Calendar.Implementation
                 var currentdate = new DateTime(rqStruct.Year, rqStruct.Month, i);
                 currentTdId = "td_" + ClientPageId + "_" + i;
                 var todayHtml = string.Empty;
-                
+
                 if (DateTime.Now.Date == currentdate.Date)
                 {
                     todayHtml = string.Format(@" class=""{0}"" ", rqStruct.ClientConfig.CurrentDayCssClass);
@@ -216,21 +235,21 @@ namespace Calendar.Implementation
                     foreach (CalendarEventCache ce in foundEvents)
                     {
                         //use delegates for event details
-                        evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventTitle"] , ce.Title));
-                        evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>",rqStruct.LabelsAndNames["EventLocation"] , ce.Location));
+                        evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventTitle"], ce.Title));
+                        evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventLocation"], ce.Location));
                         evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventStart"], ce.StartOfEvent));
                         evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventEnd"], ce.EndOfEvent));
                         evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventDescription"], ce.Description.Replace(Environment.NewLine, "<br/>")));
-                        
+
                         if (ce.CreatedBy == rqStruct.UserId)
                         {
                             edithtml = string.Format(@"<br/><span class=""editevent"" id=""evt_{0}_{1}"" {2} title=""{3}""></span>",
                                ClientPageId, ce.id, rqStruct.ClientConfig.EventClickCallBack, rqStruct.LabelsAndNames["TooltipEditEvent"]);
                         }
-                            tempspan = string.Format(@"<span class=""previewevent"" id=""sp_preview_{0}""  style=""display:none""> 
+                        tempspan = string.Format(@"<span class=""previewevent"" id=""sp_preview_{0}""  style=""display:none""> 
                                 <span class=""spdelete"" onclick=""ClosePreview($('#sp_preview_{0}'));"" title=""{3}"">&nbsp;</span>{1} {2}</span>",
-                                                    ce.id, edithtml, evtDetails.ToString(), rqStruct.LabelsAndNames["ClosePreview"]);                          
-                       
+                                                ce.id, edithtml, evtDetails.ToString(), rqStruct.LabelsAndNames["ClosePreview"]);
+
 
                         sbEvents.Append(string.Format(@"<span class=""event"" id=""evt_{0}_{1}"" {2}>{3}</span>", ClientPageId, ce.id, rqStruct.ClientConfig.PreviewCallBack,
                              ce.Title + tempspan));
@@ -241,7 +260,7 @@ namespace Calendar.Implementation
 
                 string spDate = string.Format(@"<span style=""display:none"" id=""sp_{0}"">{1}/{2}/{3}</span>", currentTdId, rqStruct.Year, rqStruct.Month, i);
 
-                sbTemp.Append(string.Format(TdHtml, todayHtml + @" id=""" + currentTdId + @""" " + 
+                sbTemp.Append(string.Format(TdHtml, todayHtml + @" id=""" + currentTdId + @""" " +
                      rqStruct.ClientConfig.ActiveTdClickCallBack, spDate +
                         @"<span class=""day"">" + i + "</span>" + sbEvents.ToString()));
 
@@ -274,14 +293,15 @@ namespace Calendar.Implementation
 
             sbAllHtml.Insert(0, string.Format("<table {0}>", rqStruct.TableTemplate))
                 .Append(sbTemp.ToString());
-            
+
             var nextMonthDate = firstDayDate.AddMonths(1);
             var prevMonthDate = firstDayDate.AddMonths(-1);
 
-            return new CalendarHTML { 
+            return new CalendarHTML
+            {
                 GridHTML = sbAllHtml.ToString(),
-                NextRequest = string.Format(CalendarMonthViewLink, nextMonthDate.Year, nextMonthDate.Month, rqStruct.CalendarId ),
-                PreviousRequest = string.Format(CalendarMonthViewLink, prevMonthDate.Year, prevMonthDate.Month,rqStruct.CalendarId),
+                NextRequest = string.Format(CalendarMonthViewLink, nextMonthDate.Year, nextMonthDate.Month, rqStruct.CalendarId),
+                PreviousRequest = string.Format(CalendarMonthViewLink, prevMonthDate.Year, prevMonthDate.Month, rqStruct.CalendarId),
                 Javascript = sbJavascript.ToString(),
                 ViewType = Variables.CalendarViewType.MonthView
             };
@@ -324,7 +344,7 @@ namespace Calendar.Implementation
             foreach (var hour in _dayHours)
             {
                 //add hour cell
-                sbTemp.Append(string.Format(TdHtml, "", + hour + " " + (hour < 12 ? LocalizedAm : LocalizedPm)));
+                sbTemp.Append(string.Format(TdHtml, "", +hour + " " + (hour < 12 ? LocalizedAm : LocalizedPm)));
                 //add other cells
                 for (int i = 0; i < NoWeekDays; i++)
                 {
@@ -358,13 +378,13 @@ namespace Calendar.Implementation
             }
 
             var html = new CalendarHTML
-                {
-                    GridHTML = string.Format(TableHtml, rqStruct.TableTemplate, sbHtml.ToString()),
-                    NextRequest = string.Format(CalendarWeekViewLink, nextweek.Year, nextweek.Month, nextweek.Day, rqStruct.CalendarId),
-                    PreviousRequest = string.Format(CalendarWeekViewLink, prevweek.Year, prevweek.Month, prevweek.Day, rqStruct.CalendarId),
-                    Javascript = sbJavascript.ToString(),
-                    ViewType = Variables.CalendarViewType.WeekView
-                };
+            {
+                GridHTML = string.Format(TableHtml, rqStruct.TableTemplate, sbHtml.ToString()),
+                NextRequest = string.Format(CalendarWeekViewLink, nextweek.Year, nextweek.Month, nextweek.Day, rqStruct.CalendarId),
+                PreviousRequest = string.Format(CalendarWeekViewLink, prevweek.Year, prevweek.Month, prevweek.Day, rqStruct.CalendarId),
+                Javascript = sbJavascript.ToString(),
+                ViewType = Variables.CalendarViewType.WeekView
+            };
 
             return html;
         }
@@ -382,11 +402,11 @@ namespace Calendar.Implementation
             var sbJavascript = new StringBuilder(" var " + rqStruct.ClientConfig.JsArrayEventName + " = new Array(); " + Environment.NewLine);
             var currentTdId = string.Empty;
             var ClientPageId = 0;
-            int i=0;
+            int i = 0;
 
             //insert table left top edge
             sbTemp.Append(string.Format(ThHtml, @" width=""50px"" ", rqStruct.CrossEdgeContent));
-                     
+
             //add requested day headers
             sbTemp.Append(string.Format(ThHtmlNoAttrib, rqStruct.DateRequested
                     .ToString(rqStruct.DayHeaderFormat, info)));
@@ -399,9 +419,9 @@ namespace Calendar.Implementation
 
             if (lstEvents != null)
             {
-               foundEvents = lstEvents.FindAll((
-                    x => (x.StartOfEvent.Date == rqStruct.DateRequested.Date || x.EndOfEvent.Date == rqStruct.DateRequested.Date)                    
-                    )).ToList();
+                foundEvents = lstEvents.FindAll((
+                     x => (x.StartOfEvent.Date == rqStruct.DateRequested.Date || x.EndOfEvent.Date == rqStruct.DateRequested.Date)
+                     )).ToList();
             }
 
             //add row for each hour
@@ -412,18 +432,18 @@ namespace Calendar.Implementation
                 var eventbyhour = foundEvents.FindAll(x => x.StartOfEvent.Hour == hour || x.EndOfEvent.Hour == hour);
 
                 foreach (var ce in eventbyhour)
-                    {
-                        sbTD.Append(string.Format(@"<span class=""event"" id=""evt_{0}_{1}"" {2}>", ClientPageId, ce.id, rqStruct.ClientConfig.EventClickCallBack)
-                            + ce.Title + "</span>");
-                        sbJavascript.Append(string.Format(@" {3}['evt_{0}_{1}']=[{0},{1},'{2}'];" + Environment.NewLine, ClientPageId, ce.id, currentTdId, rqStruct.ClientConfig.JsArrayEventName));
-                    }
-                
+                {
+                    sbTD.Append(string.Format(@"<span class=""event"" id=""evt_{0}_{1}"" {2}>", ClientPageId, ce.id, rqStruct.ClientConfig.EventClickCallBack)
+                        + ce.Title + "</span>");
+                    sbJavascript.Append(string.Format(@" {3}['evt_{0}_{1}']=[{0},{1},'{2}'];" + Environment.NewLine, ClientPageId, ce.id, currentTdId, rqStruct.ClientConfig.JsArrayEventName));
+                }
+
 
 
                 //add hour cell
-                sbTemp.Append(string.Format(TdHtml, "", + hour + " " + (hour < 12 ? LocalizedAm : LocalizedPm)));
+                sbTemp.Append(string.Format(TdHtml, "", +hour + " " + (hour < 12 ? LocalizedAm : LocalizedPm)));
                 //add other cells              
-                sbTemp.Append(string.Format(TdHtml, "", sbTD.ToString()));             
+                sbTemp.Append(string.Format(TdHtml, "", sbTD.ToString()));
 
                 //add the whole row
                 sbHtml.Append(string.Format(TrHtmlNoAttrib, sbTemp.ToString()));
@@ -432,13 +452,13 @@ namespace Calendar.Implementation
             }
 
             return new CalendarHTML
-                {
-                    GridHTML = string.Format(TableHtml, rqStruct.TableTemplate, sbHtml.ToString()),
-                    NextRequest = string.Format(CalendarDayViewLink, nextday.Year, nextday.Month, nextday.Day, rqStruct.CalendarId),
-                    PreviousRequest = string.Format(CalendarDayViewLink, prevday.Year, prevday.Month, prevday.Day, rqStruct.CalendarId),
-                    ViewType = Variables.CalendarViewType.DayView
-                };
-        }       
+            {
+                GridHTML = string.Format(TableHtml, rqStruct.TableTemplate, sbHtml.ToString()),
+                NextRequest = string.Format(CalendarDayViewLink, nextday.Year, nextday.Month, nextday.Day, rqStruct.CalendarId),
+                PreviousRequest = string.Format(CalendarDayViewLink, prevday.Year, prevday.Month, prevday.Day, rqStruct.CalendarId),
+                ViewType = Variables.CalendarViewType.DayView
+            };
+        }
 
     }
 }
