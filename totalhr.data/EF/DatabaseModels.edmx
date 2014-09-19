@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TotalHRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TotalHRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Calendar">
           <Key>
             <PropertyRef Name="id" />
@@ -222,7 +222,7 @@
           <Property Name="tersmaccepted" Type="bit" Nullable="false" />
           <Property Name="activationcode" Type="nvarchar" MaxLength="150" />
           <Property Name="chosenculture" Type="varchar" MaxLength="10" />
-          <Property Name="departmentid" Type="int" />
+          <Property Name="departmentid" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -566,7 +566,7 @@
           <Property Name="tersmaccepted" Type="Boolean" Nullable="false" />
           <Property Name="activationcode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="chosenculture" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="departmentid" Type="Int32" />
+          <Property Name="departmentid" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>

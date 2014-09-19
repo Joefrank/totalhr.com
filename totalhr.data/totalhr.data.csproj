@@ -29,6 +29,8 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <ProjectConfigFileName>App.Config</ProjectConfigFileName>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -160,7 +162,7 @@
       <DependentUpon>DatabaseModels.edmx</DependentUpon>
     </Compile>
     <Compile Include="EF\Department.cs">
-      <DependentUpon>TimeRecording.tt</DependentUpon>
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\EmailTemplate.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
@@ -178,7 +180,7 @@
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Language.cs">
-      <DependentUpon>TimeRecording.tt</DependentUpon>
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Note.cs">
       <DependentUpon>TimeRecording.tt</DependentUpon>
@@ -187,7 +189,7 @@
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Role.cs">
-      <DependentUpon>TimeRecording.tt</DependentUpon>
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\TaskScheduler.cs">
       <DependentUpon>TimeRecording.tt</DependentUpon>
@@ -211,13 +213,13 @@
       <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\User.cs">
-      <DependentUpon>TimeRecording.tt</DependentUpon>
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\UserProfile.cs">
-      <DependentUpon>TimeRecording.tt</DependentUpon>
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\UserRole.cs">
-      <DependentUpon>TimeRecording.tt</DependentUpon>
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="Mappers\CalendarEventToCachedEventMapper.cs" />
     <Compile Include="Models\UserDetailsStruct.cs" />
@@ -234,7 +236,7 @@
     <Compile Include="Repositories\Implementation\GlossaryRepository.cs" />
     <Compile Include="Repositories\Implementation\GenericRepository.cs" />
     <Compile Include="Repositories\Implementation\LanguageRepository.cs" />
-    <Compile Include="Repositories\Implementation\TimeRecording\TimeRecordingRepository.cs" />
+    <Compile Include="EF\TimeRecordingRepository.cs" />
     <Compile Include="Repositories\Implementation\UserRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICalendarEventRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICalendarRepository.cs" />
@@ -248,6 +250,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Start\" />
+    <Folder Include="Repositories\Implementation\TimeRecording\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -349,4 +352,5 @@
     </ItemGroup>
   </Target>
   <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
 </Project>

@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "totalhr.web", "totalhr.web\totalhr.web.csproj", "{E171E95D-6C8C-443E-B121-5F40882D6863}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "totalhr.Resources", "totalhr.Resources\Resources\totalhr.Resources.csproj", "{9C706121-A522-4F91-970A-5D0D3929EAEE}"
@@ -28,6 +30,17 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "Authentication\Authentication.csproj", "{ED4D8EC1-24A9-4E53-9D27-9CFD86AAA6CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calendar", "CalendarService\Calendar.csproj", "{67516845-FB4C-4820-954D-3382A86BA6E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{71426F98-F8D2-4614-A460-E6C49F932AA0}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DB", "DB", "{E33BA4B9-EDCD-4BF3-83A0-36640A45BA1D}"
+EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "TotalHR", "TotalHR\TotalHR.sqlproj", "{8641BB29-D482-4652-9920-1B7E0443C6D8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -183,6 +196,24 @@ Global
 		{67516845-FB4C-4820-954D-3382A86BA6E1}.JoesLaptop|Any CPU.Build.0 = JoesLaptop|Any CPU
 		{67516845-FB4C-4820-954D-3382A86BA6E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67516845-FB4C-4820-954D-3382A86BA6E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.AliceLaptop|Any CPU.ActiveCfg = Debug|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.AliceLaptop|Any CPU.Build.0 = Debug|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.AliceLaptop|Any CPU.Deploy.0 = Debug|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.HomeDesktop|Any CPU.ActiveCfg = Debug|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.HomeDesktop|Any CPU.Build.0 = Debug|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.HomeDesktop|Any CPU.Deploy.0 = Debug|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.IMPC1003Office|Any CPU.ActiveCfg = Debug|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.IMPC1003Office|Any CPU.Build.0 = Debug|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.IMPC1003Office|Any CPU.Deploy.0 = Debug|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.JoesLaptop|Any CPU.ActiveCfg = Debug|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.JoesLaptop|Any CPU.Build.0 = Debug|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.JoesLaptop|Any CPU.Deploy.0 = Debug|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8641BB29-D482-4652-9920-1B7E0443C6D8}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -195,5 +226,6 @@ Global
 		{6E3B8E70-4722-40F8-9141-977E3D495F39} = {05416EEB-0590-4920-AD87-217CB195F6A4}
 		{9FC0A661-9B86-41D9-9945-F879E12A634A} = {05416EEB-0590-4920-AD87-217CB195F6A4}
 		{FF5C3573-33F2-4CA3-BFC1-AB33561253B5} = {05416EEB-0590-4920-AD87-217CB195F6A4}
+		{8641BB29-D482-4652-9920-1B7E0443C6D8} = {E33BA4B9-EDCD-4BF3-83A0-36640A45BA1D}
 	EndGlobalSection
 EndGlobal

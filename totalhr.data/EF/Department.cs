@@ -14,11 +14,6 @@ namespace totalhr.data.EF
     
     public partial class Department
     {
-        public Department()
-        {
-            this.TaskSchedulers = new HashSet<TaskScheduler>();
-        }
-    
         public int id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -28,6 +23,6 @@ namespace totalhr.data.EF
         public Nullable<System.DateTime> LastModified { get; set; }
         public int CompanyId { get; set; }
     
-        public virtual ICollection<TaskScheduler> TaskSchedulers { get; set; }
+        public virtual Company Company { get; set; }
     }
 }
