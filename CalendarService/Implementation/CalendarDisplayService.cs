@@ -126,23 +126,37 @@ namespace Calendar.Implementation
             string[,] cells = new string[maxDaysInMonth + 1, noOfMonthsinYear + 1];
             string tempval = string.Empty;
 
-            for (int x = 0; x <= maxDaysInMonth; x++)
+            // get no of days in the month
+            //get first day of month
+            // calculate offset to add into calendar matrix
+            for (int y = 0; y <= noOfMonthsinYear; y++)
             {
-                for (int y = 0; y <= noOfMonthsinYear; y++)
+                
+                
+                // fill this last.
+                for (int x = 0; x <= maxDaysInMonth; x++)
                 {
-                    if (x == 0)
-                    {
-                        tempval = (y > 0) ? monthNames[y - 1] : "";
-                        if(y < 12)
-                            noDaysInMonths[y] = DateTime.DaysInMonth(rqStruct.Year, y + 1);
-                    }
-                    else
-                    {
-                        tempval = (y == 0) ? weekdaysNames[(x-1) % NoWeekDays] : (noDaysInMonths[y -1] >= x? x.ToString() : "");
-                    }
-                    cells[x, y] = tempval;
+
                 }
             }
+
+            //for (int x = 0; x <= maxDaysInMonth; x++)
+            //{
+            //    for (int y = 0; y <= noOfMonthsinYear; y++)
+            //    {
+            //        if (x == 0)
+            //        {
+            //            tempval = (y > 0) ? monthNames[y - 1] : "";
+            //            if(y < 12)
+            //                noDaysInMonths[y] = DateTime.DaysInMonth(rqStruct.Year, y + 1);
+            //        }
+            //        else
+            //        {
+            //            tempval = (y == 0) ? weekdaysNames[(x-1) % NoWeekDays] : (noDaysInMonths[y -1] >= x? x.ToString() : "");
+            //        }
+            //        cells[x, y] = tempval;
+            //    }
+            //}
 
             return new CalendarHTML
             {
