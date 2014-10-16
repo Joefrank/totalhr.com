@@ -96,14 +96,14 @@ namespace Calendar.Implementation
         }
 
 
-        private string BuildTableGrid(string[,] arrValues, string tableattrib)
+        private string BuildTableGrid(string[,] arrValues, int lenX, int lenY, string tableattrib)
         {
             StringBuilder sbTemp = new StringBuilder();
             StringBuilder sbFinal = new StringBuilder();
 
-            for (int x = 0; x <= maxDaysInMonth; x++)
+            for (int x = 0; x <= lenX; x++)
             {
-                for (int y = 0; y <= noOfMonthsinYear; y++)
+                for (int y = 0; y <= lenY; y++)
                 {
                     if(x == 0)
                         sbTemp.Append(string.Format(ThHtmlNoAttrib, arrValues[x, y]));
@@ -122,45 +122,68 @@ namespace Calendar.Implementation
             string[] monthNames = rqStruct.Info.DateTimeFormat.MonthNames;
             string[] weekdaysNames = GetWeekDaysByName(rqStruct.Info);
             int[] noDaysInMonths = new int[12];
-                       
-            string[,] cells = new string[maxDaysInMonth + 1, noOfMonthsinYear + 1];
+
+            
             string tempval = string.Empty;
 
-            // get no of days in the month
-            //get first day of month
-            // calculate offset to add into calendar matrix
-            for (int y = 0; y <= noOfMonthsinYear; y++)
-            {
-                
-                
-                // fill this last.
-                for (int x = 0; x <= maxDaysInMonth; x++)
-                {
+            var firstDay = rqStruct.Info.DateTimeFormat.FirstDayOfWeek;
+            int daysInCurrentMonth = 0;
+            int indexOfFirstDay;
+            int offset;
+            int topList = 0;
+            string[,] cells = null; 
+            Dictionary<int, List<int>> dico = new Dictionary<int, List<int>>();
 
+            // calculate offset to add into calendar matrix
+            for (int y = 1; y <= noOfMonthsinYear; y++)
+            {
+                //get first day of month            
+                indexOfFirstDay = (int)((new DateTime(rqStruct.Year, y, 1)).DayOfWeek);
+                indexOfFirstDay = (indexOfFirstDay == 0 ? 7 : indexOfFirstDay);
+                //offset of first day of month in the week.
+                offset = indexOfFirstDay - (int)firstDay;                
+                // get no of days in the month
+                daysInCurrentMonth = DateTime.DaysInMonth(rqStruct.Year, y);
+                List<int> currentLst = new List<int>();
+
+                for (int i = 0; i < offset; i++)
+                {
+                    currentLst.Add(0);
+                }
+
+                // fill this last.
+                for (int x = 1; x <= daysInCurrentMonth; x++)
+                {
+                    currentLst.Add(x);
+                }
+
+                dico[y] = currentLst;
+                topList = (currentLst.Count > topList) ? currentLst.Count : topList;
+            }
+
+            cells = new string[topList + 1, noOfMonthsinYear + 1];
+
+
+            for (int x = 0; x <= topList; x++)
+            {
+                for (int y = 0; y <= noOfMonthsinYear; y++)
+                {
+                    if (x == 0)
+                    {
+                        tempval = (y > 0) ? monthNames[y - 1] : "";
+                    }
+                    else
+                    {
+                        tempval = (y == 0) ? weekdaysNames[(x - 1) % NoWeekDays] :
+                            (dico[y].Count >= x && dico[y][x-1] != 0? dico[y][x-1].ToString() : "");
+                    }
+                    cells[x, y] = tempval;
                 }
             }
 
-            //for (int x = 0; x <= maxDaysInMonth; x++)
-            //{
-            //    for (int y = 0; y <= noOfMonthsinYear; y++)
-            //    {
-            //        if (x == 0)
-            //        {
-            //            tempval = (y > 0) ? monthNames[y - 1] : "";
-            //            if(y < 12)
-            //                noDaysInMonths[y] = DateTime.DaysInMonth(rqStruct.Year, y + 1);
-            //        }
-            //        else
-            //        {
-            //            tempval = (y == 0) ? weekdaysNames[(x-1) % NoWeekDays] : (noDaysInMonths[y -1] >= x? x.ToString() : "");
-            //        }
-            //        cells[x, y] = tempval;
-            //    }
-            //}
-
             return new CalendarHTML
             {
-                GridHTML = BuildTableGrid(cells, rqStruct.TableTemplate),
+                GridHTML = BuildTableGrid(cells, topList, noOfMonthsinYear, rqStruct.TableTemplate),
                 NextRequest = string.Format(CalendarYearViewLink, rqStruct.Year + 1, rqStruct.CalendarId),
                 PreviousRequest = string.Format(CalendarYearViewLink, rqStruct.Year - 1, rqStruct.CalendarId),
                 Javascript = "",
