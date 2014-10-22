@@ -101,8 +101,8 @@ namespace totalhr.Shared
 
         public enum CalendarEventNotificationType
         {
-            ByEmail=1,
-            ByTextPhone=2
+            ByEmail=255,
+            ByTextPhone=256
         }
 
         public enum EventFrequency
