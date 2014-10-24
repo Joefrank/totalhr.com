@@ -1,11 +1,11 @@
 
-create proc BuildCalEventReminderRecipientList
+alter proc BuildCalEventReminderRecipientList
 
  @eventid int,  -- feed as parameter from proc
  @companyid int, -- feed as param
- @ListName nvarchar(250), 
+ @RecipientListName nvarchar(250), 
  @description nvarchar(500),
- @CreatedBy int
+ @CreatedBy int   
  
 As
 Begin
@@ -21,8 +21,11 @@ declare @recipientListId int
 
 
 -- create recipient list first
+if not exists(select 1 from RecipientList where eventid = @eventid)
+begin
+
 insert into RecipientList
-select @ListName, @description, GETDATE(), @createdby, null, null, @eventid
+select @RecipientListName, @description, GETDATE(), @createdby, null, null, @eventid
 
 select @recipientListId = @@IDENTITY
 
@@ -54,8 +57,6 @@ begin
 	end
 	else if @targetypeid = 252 -- department
 	begin
-		--*** loop through department list
-		-- *** insert users for each department listed. (active users only)
 		declare @tempdept as table(departmentid int)
 		insert into @tempdept
 		select * from [dbo].[SplitCSV](@val, ',')
@@ -64,13 +65,14 @@ begin
 		select distinct u.id, u.email, ISNULL(u.Mobile, u.Phone),  0, null, @recipientListId
 		from [User]  u
 		inner join @tempdept tt on tt.departmentid = u.departmentid
+		inner join Department dp on dp.id = tt.departmentid
 		where u.active = 1 
 		
-		if not exist (select 1 from Recipient where RecipientUserId = @CreatedBy and RecipientListId = @recipientListId)
+		if not exists (select 1 from Recipient where RecipientUserId = @CreatedBy and RecipientListId = @recipientListId)
 		begin
 			insert into Recipient
 			select u.id, u.email, ISNULL(u.Mobile, u.Phone),  0, null, @recipientListId
-			from [User] where id = @CreatedBy and active = 1
+			from [User] u where id = @CreatedBy and active = 1
 		end
 		
 	end
@@ -105,3 +107,6 @@ begin
 end
 
 End
+	select @recipientListId as RecipientListId
+	
+end
