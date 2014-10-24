@@ -1,5 +1,5 @@
 
-alter proc BuildCalEventReminderRecipientList
+create proc BuildCalEventReminderRecipientList
 
  @eventid int,  -- feed as parameter from proc
  @companyid int, -- feed as param
