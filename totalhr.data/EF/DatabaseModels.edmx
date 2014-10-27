@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TotalHRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="TotalHRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Calendar">
           <Key>
             <PropertyRef Name="id" />
@@ -46,6 +46,20 @@
           <Property Name="EndOfEvent" Type="datetime" Nullable="false" />
           <Property Name="Location" Type="nvarchar" MaxLength="50" />
           <Property Name="CalendarId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CalEventReminderType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="frequency" Type="int" Nullable="false" />
+          <Property Name="frequencytype" Type="int" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="createdby" Type="int" Nullable="false" />
+          <Property Name="lastmodified" Type="datetime" />
+          <Property Name="lastmodifiedby" Type="int" />
+          <Property Name="obsolete" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -118,6 +132,18 @@
           <Property Name="LastUpdated" Type="datetime" />
           <Property Name="Identifier" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="EventToSchedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="RecipientListName" Type="nvarchar" MaxLength="250" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Feature">
           <Key>
             <PropertyRef Name="id" />
@@ -172,6 +198,31 @@
           <Property Name="LastModifiedBy" Type="int" />
           <Property Name="Identifier" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Recipient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RecipientUserId" Type="int" Nullable="false" />
+          <Property Name="RecipientEmail" Type="nvarchar" MaxLength="150" />
+          <Property Name="RecipientPhone" Type="nvarchar" MaxLength="30" />
+          <Property Name="NoNotifications" Type="int" Nullable="false" />
+          <Property Name="LastNotificationDate" Type="datetime" />
+          <Property Name="RecipientListId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RecipientList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Lastupdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="id" />
@@ -184,6 +235,23 @@
           <Property Name="LastModified" Type="datetime" />
           <Property Name="LastModifiedBy" Type="int" />
           <Property Name="Identifier" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScheduledNotifications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GenericNotificationlTypeId" Type="int" Nullable="false" />
+          <Property Name="NotificationTypeId" Type="int" Nullable="false" />
+          <Property Name="ObjectId" Type="int" Nullable="false" />
+          <Property Name="MessageBody" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="MessageTitle" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="RecipientListid" Type="int" Nullable="false" />
+          <Property Name="ScheduledSendDate" Type="datetime" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="SenderName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SenderEmail" Type="nvarchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -222,7 +290,7 @@
           <Property Name="tersmaccepted" Type="bit" Nullable="false" />
           <Property Name="activationcode" Type="nvarchar" MaxLength="150" />
           <Property Name="chosenculture" Type="varchar" MaxLength="10" />
-          <Property Name="departmentid" Type="int" />
+          <Property Name="departmentid" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -292,6 +360,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="BuildCalEventReminderRecipientList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eventid" Type="int" Mode="In" />
+          <Parameter Name="companyid" Type="int" Mode="In" />
+          <Parameter Name="RecipientListName" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetUserProfileIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="int" Mode="In" />
         </Function>
@@ -304,19 +379,40 @@
         <Function Name="GetUserRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="int" Mode="In" />
         </Function>
+        <Function Name="PrepareCalendarEventScheduledReminder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SenderName" Type="nvarchar" Mode="In" />
+          <Parameter Name="SenderEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="RecipientListId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SplitCSV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="String" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Delimiter" Type="char" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="items" Type="varchar(max)" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <EntityContainer Name="TotalHRModelStoreContainer">
           <EntitySet Name="Calendar" EntityType="Self.Calendar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CalendarAssociation" EntityType="Self.CalendarAssociation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CalendarEvent" EntityType="Self.CalendarEvent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CalEventReminderType" EntityType="Self.CalEventReminderType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyFeature" EntityType="Self.CompanyFeature" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailTemplate" EntityType="Self.EmailTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventToSchedule" EntityType="Self.EventToSchedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Glossary" EntityType="Self.Glossary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recipient" EntityType="Self.Recipient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecipientList" EntityType="Self.RecipientList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduledNotifications" EntityType="Self.ScheduledNotifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
@@ -337,10 +433,14 @@
             <End Role="Department" EntitySet="Department" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TotalHRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="SplitCSV_Result">
+          <Property Name="items" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </ComplexType>
         <EntityType Name="Calendar">
           <Key>
             <PropertyRef Name="id" />
@@ -368,7 +468,7 @@
           <Property Name="AssociationValue" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CalendarEvent" Relationship="TotalHRModel.FK_CalendarAssociation_CalendarEvent" FromRole="CalendarAssociation" ToRole="CalendarEvent" />
+          <NavigationProperty Name="CalendarEvent" Relationship="Self.FK_CalendarAssociation_CalendarEvent" FromRole="CalendarAssociation" ToRole="CalendarEvent" />
         </EntityType>
         <EntityType Name="CalendarEvent">
           <Key>
@@ -386,7 +486,21 @@
           <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CalendarId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Calendar" Relationship="Self.FK_CalendarEvent_Calendar" FromRole="CalendarEvent" ToRole="Calendar" />
-          <NavigationProperty Name="CalendarAssociations" Relationship="TotalHRModel.FK_CalendarAssociation_CalendarEvent" FromRole="CalendarEvent" ToRole="CalendarAssociation" />
+          <NavigationProperty Name="CalendarAssociations" Relationship="Self.FK_CalendarAssociation_CalendarEvent" FromRole="CalendarEvent" ToRole="CalendarAssociation" />
+        </EntityType>
+        <EntityType Name="CalEventReminderType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="frequency" Type="Int32" Nullable="false" />
+          <Property Name="frequencytype" Type="Int32" Nullable="false" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdby" Type="Int32" Nullable="false" />
+          <Property Name="lastmodified" Type="DateTime" Precision="3" />
+          <Property Name="lastmodifiedby" Type="Int32" />
+          <Property Name="obsolete" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -462,6 +576,18 @@
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="EventToSchedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="RecipientListName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         <EntityType Name="Feature">
           <Key>
             <PropertyRef Name="id" />
@@ -516,6 +642,31 @@
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Recipient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RecipientUserId" Type="Int32" Nullable="false" />
+          <Property Name="RecipientEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="RecipientPhone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NoNotifications" Type="Int32" Nullable="false" />
+          <Property Name="LastNotificationDate" Type="DateTime" Precision="3" />
+          <Property Name="RecipientListId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RecipientList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Lastupdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="id" />
@@ -528,6 +679,23 @@
           <Property Name="LastModified" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScheduledNotification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenericNotificationlTypeId" Type="Int32" Nullable="false" />
+          <Property Name="NotificationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ObjectId" Type="Int32" Nullable="false" />
+          <Property Name="MessageBody" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MessageTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RecipientListid" Type="Int32" Nullable="false" />
+          <Property Name="ScheduledSendDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SenderName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SenderEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -566,7 +734,7 @@
           <Property Name="tersmaccepted" Type="Boolean" Nullable="false" />
           <Property Name="activationcode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="chosenculture" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
-          <Property Name="departmentid" Type="Int32" />
+          <Property Name="departmentid" Type="Int32" Nullable="false" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -612,6 +780,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CalendarAssociation_CalendarEvent">
+          <End Role="CalendarEvent" Type="Self.CalendarEvent" Multiplicity="1" />
+          <End Role="CalendarAssociation" Type="Self.CalendarAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CalendarEvent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CalendarAssociation">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Department_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="Department" Type="Self.Department" Multiplicity="*" />
@@ -624,19 +804,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TotalHREntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TotalHREntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Calendars" EntityType="Self.Calendar" />
           <EntitySet Name="CalendarAssociations" EntityType="Self.CalendarAssociation" />
           <EntitySet Name="CalendarEvents" EntityType="Self.CalendarEvent" />
+          <EntitySet Name="CalEventReminderTypes" EntityType="Self.CalEventReminderType" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
           <EntitySet Name="CompanyFeatures" EntityType="Self.CompanyFeature" />
           <EntitySet Name="Departments" EntityType="Self.Department" />
           <EntitySet Name="EmailTemplates" EntityType="Self.EmailTemplate" />
+          <EntitySet Name="EventToSchedules" EntityType="Self.EventToSchedule" />
           <EntitySet Name="Features" EntityType="Self.Feature" />
           <EntitySet Name="Glossaries" EntityType="Self.Glossary" />
           <EntitySet Name="Languages" EntityType="Self.Language" />
           <EntitySet Name="Profiles" EntityType="Self.Profile" />
+          <EntitySet Name="Recipients" EntityType="Self.Recipient" />
+          <EntitySet Name="RecipientLists" EntityType="Self.RecipientList" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="ScheduledNotifications" EntityType="Self.ScheduledNotification" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
@@ -648,26 +833,42 @@
             <End Role="Calendar" EntitySet="Calendars" />
             <End Role="CalendarEvent" EntitySet="CalendarEvents" />
           </AssociationSet>
+          <AssociationSet Name="FK_CalendarAssociation_CalendarEvent" Association="Self.FK_CalendarAssociation_CalendarEvent">
+            <End Role="CalendarEvent" EntitySet="CalendarEvents" />
+            <End Role="CalendarAssociation" EntitySet="CalendarAssociations" />
+          </AssociationSet>
           <AssociationSet Name="FK_Department_Company" Association="Self.FK_Department_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="Department" EntitySet="Departments" />
           </AssociationSet>
+          <FunctionImport Name="SplitCSV" ReturnType="Collection(TotalHRModel.SplitCSV_Result)" IsComposable="true">
+            <Parameter Name="String" Mode="In" Type="String" />
+            <Parameter Name="Delimiter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="BuildCalEventReminderRecipientList" ReturnType="Collection(Int32)">
+            <Parameter Name="eventid" Mode="In" Type="Int32" />
+            <Parameter Name="companyid" Mode="In" Type="Int32" />
+            <Parameter Name="RecipientListName" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="GetUserProfileIds" ReturnType="Collection(Int32)">
-          <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserProfiles" ReturnType="Collection(TotalHRModel.GetUserProfiles_Result)">
-          <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserRoleIds" ReturnType="Collection(Int32)">
-          <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserRoles" ReturnType="Collection(TotalHRModel.GetUserRoles_Result)">
-          <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
-          <AssociationSet Name="FK_CalendarAssociation_CalendarEvent" Association="TotalHRModel.FK_CalendarAssociation_CalendarEvent">
-            <End Role="CalendarEvent" EntitySet="CalendarEvents" />
-            <End Role="CalendarAssociation" EntitySet="CalendarAssociations" />
-          </AssociationSet>
+          <FunctionImport Name="PrepareCalendarEventScheduledReminder">
+            <Parameter Name="SenderName" Mode="In" Type="String" />
+            <Parameter Name="SenderEmail" Mode="In" Type="String" />
+            <Parameter Name="RecipientListId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetUserProfiles_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -689,24 +890,12 @@
           <Property Type="Int32" Name="LastModifiedBy" Nullable="true" />
           <Property Type="String" Name="Identifier" Nullable="false" MaxLength="50" />
         </ComplexType>
-        <Association Name="FK_CalendarAssociation_CalendarEvent">
-          <End Type="TotalHRModel.CalendarEvent" Role="CalendarEvent" Multiplicity="1" />
-          <End Type="TotalHRModel.CalendarAssociation" Role="CalendarAssociation" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CalendarEvent">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="CalendarAssociation">
-              <PropertyRef Name="EventId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TotalHRModelStoreContainer" CdmEntityContainer="TotalHREntities2">
+        <EntityContainerMapping StorageEntityContainer="TotalHRModelStoreContainer" CdmEntityContainer="TotalHREntities">
           <EntitySetMapping Name="Calendars">
             <EntityTypeMapping TypeName="TotalHRModel.Calendar">
               <MappingFragment StoreEntitySet="Calendar">
@@ -749,6 +938,21 @@
                 <ScalarProperty Name="EndOfEvent" ColumnName="EndOfEvent" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CalEventReminderTypes">
+            <EntityTypeMapping TypeName="TotalHRModel.CalEventReminderType">
+              <MappingFragment StoreEntitySet="CalEventReminderType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="frequency" ColumnName="frequency" />
+                <ScalarProperty Name="frequencytype" ColumnName="frequencytype" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="lastmodified" ColumnName="lastmodified" />
+                <ScalarProperty Name="lastmodifiedby" ColumnName="lastmodifiedby" />
+                <ScalarProperty Name="obsolete" ColumnName="obsolete" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -826,6 +1030,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EventToSchedules">
+            <EntityTypeMapping TypeName="TotalHRModel.EventToSchedule">
+              <MappingFragment StoreEntitySet="EventToSchedule">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="RecipientListName" ColumnName="RecipientListName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Features">
             <EntityTypeMapping TypeName="TotalHRModel.Feature">
               <MappingFragment StoreEntitySet="Feature">
@@ -884,6 +1101,33 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Recipients">
+            <EntityTypeMapping TypeName="TotalHRModel.Recipient">
+              <MappingFragment StoreEntitySet="Recipient">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="RecipientUserId" ColumnName="RecipientUserId" />
+                <ScalarProperty Name="RecipientEmail" ColumnName="RecipientEmail" />
+                <ScalarProperty Name="RecipientPhone" ColumnName="RecipientPhone" />
+                <ScalarProperty Name="NoNotifications" ColumnName="NoNotifications" />
+                <ScalarProperty Name="LastNotificationDate" ColumnName="LastNotificationDate" />
+                <ScalarProperty Name="RecipientListId" ColumnName="RecipientListId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecipientLists">
+            <EntityTypeMapping TypeName="TotalHRModel.RecipientList">
+              <MappingFragment StoreEntitySet="RecipientList">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Lastupdated" ColumnName="Lastupdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="TotalHRModel.Role">
               <MappingFragment StoreEntitySet="Roles">
@@ -895,6 +1139,24 @@
                 <ScalarProperty Name="LastModified" ColumnName="LastModified" />
                 <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
                 <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduledNotifications">
+            <EntityTypeMapping TypeName="TotalHRModel.ScheduledNotification">
+              <MappingFragment StoreEntitySet="ScheduledNotifications">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GenericNotificationlTypeId" ColumnName="GenericNotificationlTypeId" />
+                <ScalarProperty Name="NotificationTypeId" ColumnName="NotificationTypeId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="MessageBody" ColumnName="MessageBody" />
+                <ScalarProperty Name="MessageTitle" ColumnName="MessageTitle" />
+                <ScalarProperty Name="RecipientListid" ColumnName="RecipientListid" />
+                <ScalarProperty Name="ScheduledSendDate" ColumnName="ScheduledSendDate" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="SenderName" ColumnName="SenderName" />
+                <ScalarProperty Name="SenderEmail" ColumnName="SenderEmail" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -958,6 +1220,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionName="TotalHRModel.Store.SplitCSV" FunctionImportName="SplitCSV">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalHRModel.SplitCSV_Result">
+                <ScalarProperty Name="items" ColumnName="items" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuildCalEventReminderRecipientList" FunctionName="TotalHRModel.Store.BuildCalEventReminderRecipientList" />
           <FunctionImportMapping FunctionImportName="GetUserProfileIds" FunctionName="TotalHRModel.Store.GetUserProfileIds" />
           <FunctionImportMapping FunctionImportName="GetUserProfiles" FunctionName="TotalHRModel.Store.GetUserProfiles">
             <ResultMapping>
@@ -988,6 +1258,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PrepareCalendarEventScheduledReminder" FunctionName="TotalHRModel.Store.PrepareCalendarEventScheduledReminder" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

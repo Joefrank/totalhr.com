@@ -81,6 +81,19 @@ namespace totalhr.data.Repositories.Implementation
             Context.SaveChanges();
         }
 
+        public void RequestEventRemindersSceduling(CalendarEvent evt, int companyid)
+        {
+            EventToSchedule evtToSchedule = new EventToSchedule();
+            evtToSchedule.EventId = evt.id;
+            evtToSchedule.CompanyId = companyid;
+            evtToSchedule.RecipientListName = string.Format("Calendar event reminder recipient list for Event Id # {0}", evt.id);            
+            evtToSchedule.CreatedBy = evt.CreatedBy;
+            evtToSchedule.Created = DateTime.Now;
+
+            Context.EventToSchedules.Add(evtToSchedule);
+            Context.SaveChanges();
+        }
+
         public List<CalendarEventCache> GetMonthlyCalendarEvents(int userid, int year, int month, int calendarid=0)
         {
             

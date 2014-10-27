@@ -138,6 +138,9 @@
     <Compile Include="EF\CalendarEvent.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\CalEventReminderType.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\Company.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
@@ -165,6 +168,9 @@
     <Compile Include="EF\EmailTemplate.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\EventToSchedule.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\Feature.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
@@ -183,7 +189,19 @@
     <Compile Include="EF\Profile.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\Recipient.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\RecipientList.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\Role.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\ScheduledNotification.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SplitCSV_Result.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\User.cs">

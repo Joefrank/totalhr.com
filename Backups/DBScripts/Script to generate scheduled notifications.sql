@@ -1,5 +1,12 @@
+USE [totalhr]
+GO
+/****** Object:  StoredProcedure [dbo].[PrepareCalendarEventScheduledReminder]    Script Date: 10/26/2014 11:28:34 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
 
-Create Proc PrepareCalendarEventScheduledReminder
+Create Proc [dbo].[PrepareCalendarEventScheduledReminder]
  @SenderName nvarchar(100), -- send from current app
  @SenderEmail nvarchar(150), -- send from current app
  @RecipientListId int -- send from current app
@@ -32,6 +39,7 @@ select ca.EventAssociationId, ca.EventId, ce.CalendarId, ce.CreatedBy, ca.Associ
 	ce.Title, ce.[Description], ce.Location, ce.StartOfEvent, ce.EndOfEvent
 from CalendarAssociation ca
 inner join CalendarEvent ce on ce.id = ca.EventId
+inner join EventToSchedule evts on evts.eventid = ce.id
 left join ScheduledNotifications sn on sn.ObjectId = ca.EventAssociationId
 where AssociationTypeid = 2 and sn.ObjectId is null -- reminders only
 

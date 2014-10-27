@@ -83,6 +83,9 @@ namespace Calendar.Implementation
 
                         _calEventRepos.CreateEventAssociation(eventAssociation);
                     }
+
+                    //adds entry for reminders to be scheduled.
+                    _calEventRepos.RequestEventRemindersSceduling(cevent, info.CompanyId);
                 }
 
                 //save attendees. *** include notification
