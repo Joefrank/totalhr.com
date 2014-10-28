@@ -186,7 +186,8 @@ namespace Calendar.Implementation
                 _calEventRepos.DeleteEventAssociation(cevent);
                 //cevent.CalendarAssociations.Clear();
                 _calEventRepos.Save();
-                //
+                
+                //***delete all old reminder scheduled tasks
 
                 if (info.Reminders != null && info.Reminders.Count > 0)
                 {
@@ -204,6 +205,7 @@ namespace Calendar.Implementation
 
                         cevent.CalendarAssociations.Add(eventAssociation);
                     }
+                    //*** create new reminder schedules for event _calEventRepos.RequestEventRemindersSceduling(cevent, info.CompanyId);
                 }
 
                     //save attendees.
