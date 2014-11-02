@@ -392,7 +392,7 @@ namespace Calendar.Implementation
             var repeatTypeNode = root.SelectSingleNode("//type");
 
 
-            if (info.RepeatType != null)
+            if (info.RepeatType > 0)
             {
                 var assocvalue = string.Empty;
                 var temp = new StringBuilder();

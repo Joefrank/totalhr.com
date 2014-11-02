@@ -96,7 +96,7 @@ namespace Calendar.Implementation
         }
 
 
-        private string BuildTableGrid(string[,] arrValues, int lenX, int lenY, string tableattrib)
+        private string BuildTableGrid(CalendarCellDetails[,] arrValues, int lenX, int lenY, string tableattrib)
         {
             StringBuilder sbTemp = new StringBuilder();
             StringBuilder sbFinal = new StringBuilder();
@@ -106,9 +106,11 @@ namespace Calendar.Implementation
                 for (int y = 0; y <= lenY; y++)
                 {
                     if(x == 0)
-                        sbTemp.Append(string.Format(ThHtmlNoAttrib, arrValues[x, y]));
-                    else
-                        sbTemp.Append(string.Format(TdHtmlNoAttrib, arrValues[x, y]));
+                        sbTemp.Append(string.Format(ThHtmlNoAttrib, arrValues[x, y].Content));
+                    else{
+                        var attrib = (y > 0) ? arrValues[x, y].CSSClass + arrValues[x, y].CallbackScript + @" id=""" + arrValues[x, y].Id + @""" " : "";
+                        sbTemp.Append(string.Format(TdHtml, attrib, arrValues[x, y].Content));
+                    }
                 }
                 sbFinal.Append(string.Format(TrHtmlNoAttrib, sbTemp.ToString()));
                 sbTemp.Clear();
@@ -131,7 +133,7 @@ namespace Calendar.Implementation
             int indexOfFirstDay;
             int offset;
             int topList = 0;
-            string[,] cells = null;
+            CalendarCellDetails[,] cells = null;
             int ClientPageId = rqStruct.ClientConfig.PageClientId == 0 ? 1 : rqStruct.ClientConfig.PageClientId;
             var sbJavascript = new StringBuilder(" var " + rqStruct.ClientConfig.JsArrayEventName + " = new Array(); " + Environment.NewLine);
             DateTime currentdate;
@@ -167,7 +169,7 @@ namespace Calendar.Implementation
                 topList = (currentLst.Count > topList) ? currentLst.Count : topList;
             }
 
-            cells = new string[topList + 1, noOfMonthsinYear + 1];
+            cells = new CalendarCellDetails[topList + 1, noOfMonthsinYear + 1];
 
 
             for (int x = 0; x <= topList; x++)
@@ -180,22 +182,42 @@ namespace Calendar.Implementation
                     }
                     else
                     {
-                        currentdate = new DateTime(dico[y][x - 1], y , rqStruct.Year);
+                        CalendarCellReturn result = null;
+                        currentTdId = string.Empty;
 
-                        if (DateTime.Now.Date == currentdate.Date)
+                        if (y == 0)
                         {
-                            todayHtml = string.Format(@" class=""{0}"" ", rqStruct.ClientConfig.CurrentDayCssClass);
+                            tempval = weekdaysNames[(x - 1) % NoWeekDays];
                         }
+                        else if (y > 0)
+                        {
+                            
+                            if(dico[y].Count >= x && dico[y][x - 1] != 0){
 
-                        var result = MakeHTMLForCalendarCell(currentdate, rqStruct, ClientPageId);
+                                currentdate = new DateTime(rqStruct.Year, y, dico[y][x - 1]);
+                                currentTdId = "td_" + ClientPageId + "_" + dico[y][x - 1] + "_" + y;
 
-                        sbJavascript.Append(result.Scripts);
+                                if (DateTime.Now.Date == currentdate.Date)
+                                {
+                                    todayHtml = string.Format(@" class=""{0}"" ", rqStruct.ClientConfig.CurrentDayCssClass);
+                                }
+                                else
+                                {
+                                    todayHtml = string.Empty;
+                                }
 
-                        tempval = (y == 0) ? weekdaysNames[(x - 1) % NoWeekDays] :
-                            (dico[y].Count >= x && dico[y][x - 1] != 0 ? 
-                                result.Events : "");
+                                result = MakeHTMLForCalendarCell(currentdate, rqStruct, ClientPageId);
+                                sbJavascript.Append(result.Scripts);
+                                tempval = @"<span class=""day"">" + dico[y][x - 1] + "</span>" + result.Events;
+                            }else{
+                                tempval = "";
+                            }
+                        }
+                      
                     }
-                    cells[x, y] = tempval;
+
+                   
+                    cells[x, y] = new CalendarCellDetails {Id =currentTdId, Content = tempval, CSSClass = todayHtml, CallbackScript = rqStruct.ClientConfig.ActiveTdClickCallBack };
                 }
             }
 
@@ -203,8 +225,8 @@ namespace Calendar.Implementation
              
            
                 //sbTemp.Append(string.Format(TdHtml, todayHtml + @" id=""" + currentTdId + @""" " +
-                //     rqStruct.ClientConfig.ActiveTdClickCallBack, spDate +
-                //        @"<span class=""day"">" + i + "</span>" + sbEvents.ToString()));
+                  //  rqStruct.ClientConfig.ActiveTdClickCallBack, spDate +
+               
 
                 //sbEvents.Clear();
 
@@ -219,6 +241,14 @@ namespace Calendar.Implementation
 
         }
 
+        private class CalendarCellDetails
+        {
+            public string CSSClass { get; set; }
+            public string Id { get; set; }
+            public string CallbackScript { get; set; }
+            public string Content{get;set;}
+        }
+
         private CalendarCellReturn MakeHTMLForCalendarCell(DateTime date, CalendarRequestStruct rqStruct, int clientpageid)
         {
            var currentTdId = "td_" + clientpageid + "_" + date.Day + "_" + date.Month;
@@ -228,7 +258,7 @@ namespace Calendar.Implementation
             if (rqStruct.RelatedEvents != null)
             {
                 var foundEvents = rqStruct.RelatedEvents.FindAll(x => x.StartOfEvent.Date <= date.Date
-                    || x.EndOfEvent.Date >= date.Date).ToList();
+                    && x.EndOfEvent.Date >= date.Date).ToList();
                 var tempspan = string.Empty;
                 var evtDetails = new StringBuilder();
                 var edithtml = string.Empty;
@@ -258,7 +288,7 @@ namespace Calendar.Implementation
                     sbJavascript.Append(string.Format(@" {3}['evt_{0}_{1}']=[{0},{1},'{2}'];" + Environment.NewLine, clientpageid, ce.id, currentTdId, rqStruct.ClientConfig.JsArrayEventName));
                 }
 
-                string spDate = string.Format(@"<span style=""display:none"" id=""sp_{0}"">{1}/{2}/{3}</span>", currentTdId, rqStruct.Year, rqStruct.Month, date.Day);
+                string spDate = string.Format(@"<span style=""display:none"" id=""sp_{0}"">{1}/{2}/{3}</span>", currentTdId, rqStruct.Year, date.Month, date.Day);
                 sbEvents.Append(spDate);
 
                 return new CalendarCellReturn
