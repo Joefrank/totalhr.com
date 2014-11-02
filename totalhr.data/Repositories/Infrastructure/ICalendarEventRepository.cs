@@ -21,5 +21,7 @@ namespace totalhr.data.Repositories.Infrastructure
         void DeleteEventAssociation(CalendarEvent evt);
 
         void RequestEventRemindersSceduling(CalendarEvent evt, int companyid);
+
+        void ClearCache();
     }
 }

@@ -221,14 +221,8 @@ namespace Calendar.Implementation
                 }
             }
 
-             sbJavascript.AppendLine(string.Format(" CalendarId = {0};", rqStruct.CalendarId));
-             
+             sbJavascript.AppendLine(string.Format(" CalendarId = {0};", rqStruct.CalendarId));            
            
-                //sbTemp.Append(string.Format(TdHtml, todayHtml + @" id=""" + currentTdId + @""" " +
-                  //  rqStruct.ClientConfig.ActiveTdClickCallBack, spDate +
-               
-
-                //sbEvents.Clear();
 
             return new CalendarHTML
             {

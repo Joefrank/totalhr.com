@@ -18,7 +18,7 @@ namespace totalhr.data.Repositories.Implementation
 {
     public class CalendarEventRepository : GenericRepository<TotalHREntities, CalendarEvent>, ICalendarEventRepository
     {
-        string calendarEventCacheKey = "AllCalendarEvents";
+        const string calendarEventCacheKey = "AllCalendarEvents";
         private static readonly object CacheLockObject = new object();
         int _defaultCacheDuration = 60;
 
@@ -70,6 +70,11 @@ namespace totalhr.data.Repositories.Implementation
             }
            
             return result;
+        }
+
+        public void ClearCache()
+        {
+            CacheHelper.Clear(calendarEventCacheKey);
         }
 
         public void DeleteEventAssociation(CalendarEvent evt)

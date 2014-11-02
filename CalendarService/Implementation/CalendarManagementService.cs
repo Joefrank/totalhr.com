@@ -164,7 +164,7 @@ namespace Calendar.Implementation
                
 
             }
-
+            _calEventRepos.ClearCache();
             return cevent;
         }
 
