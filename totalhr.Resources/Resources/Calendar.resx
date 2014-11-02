@@ -219,4 +219,7 @@
   <data name="V_Week_View" xml:space="preserve">
     <value>Week View</value>
   </data>
+  <data name="V_Year_View" xml:space="preserve">
+    <value>Year View</value>
+  </data>
 </root>

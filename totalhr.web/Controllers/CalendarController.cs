@@ -163,13 +163,24 @@ namespace totalhr.web.Controllers
 
         public ActionResult GetCalendarYear(int year, int calendarid)
         {
+
+            var calendar = _calMservice.GetCalendar(calendarid);
+
+            if (calendar != null)
+            {
+                ViewBag.CalendarName = calendar.Name;
+                ViewBag.CalendarId = calendar.id;
+            }
+
+            var calEvents = calendarid == 0 ? _calMservice.GetUserCalendarEvents(CurrentUser.UserId, year, 0) :
+               _calMservice.GetUserCalendarEvents(CurrentUser.UserId, year, 0, calendarid);
+
             var rqStruct = new CalendarRequestStruct
             {
                 Info = CultureInfo.CreateSpecificCulture(CurrentUser.Culture),
                 TableTemplate = @" border=""1"" class=""calendar"" ",
                 Year = year,
-                //Month = DateTime.Now.Month,
-                //RelatedEvents = calEvents,
+                RelatedEvents = calEvents,
                 CalendarId = calendarid,
                 UserCanCreateEvent = CurrentUser.HasProfile((int)Variables.Profiles.CalendarCreateEvent),
                 UserId = CurrentUser.UserId,

@@ -125,14 +125,20 @@ namespace Calendar.Implementation
 
             
             string tempval = string.Empty;
-
+            var currentTdId = string.Empty;
             var firstDay = rqStruct.Info.DateTimeFormat.FirstDayOfWeek;
             int daysInCurrentMonth = 0;
             int indexOfFirstDay;
             int offset;
             int topList = 0;
-            string[,] cells = null; 
+            string[,] cells = null;
+            int ClientPageId = rqStruct.ClientConfig.PageClientId == 0 ? 1 : rqStruct.ClientConfig.PageClientId;
+            var sbJavascript = new StringBuilder(" var " + rqStruct.ClientConfig.JsArrayEventName + " = new Array(); " + Environment.NewLine);
+            DateTime currentdate;
+            string todayHtml = string.Empty;
+            //currentTdId = "td_" + ClientPageId + "_" + i;
             Dictionary<int, List<int>> dico = new Dictionary<int, List<int>>();
+             
 
             // calculate offset to add into calendar matrix
             for (int y = 1; y <= noOfMonthsinYear; y++)
@@ -174,25 +180,102 @@ namespace Calendar.Implementation
                     }
                     else
                     {
+                        currentdate = new DateTime(dico[y][x - 1], y , rqStruct.Year);
+
+                        if (DateTime.Now.Date == currentdate.Date)
+                        {
+                            todayHtml = string.Format(@" class=""{0}"" ", rqStruct.ClientConfig.CurrentDayCssClass);
+                        }
+
+                        var result = MakeHTMLForCalendarCell(currentdate, rqStruct, ClientPageId);
+
+                        sbJavascript.Append(result.Scripts);
+
                         tempval = (y == 0) ? weekdaysNames[(x - 1) % NoWeekDays] :
-                            (dico[y].Count >= x && dico[y][x-1] != 0? dico[y][x-1].ToString() : "");
+                            (dico[y].Count >= x && dico[y][x - 1] != 0 ? 
+                                result.Events : "");
                     }
                     cells[x, y] = tempval;
                 }
             }
+
+             sbJavascript.AppendLine(string.Format(" CalendarId = {0};", rqStruct.CalendarId));
+             
+           
+                //sbTemp.Append(string.Format(TdHtml, todayHtml + @" id=""" + currentTdId + @""" " +
+                //     rqStruct.ClientConfig.ActiveTdClickCallBack, spDate +
+                //        @"<span class=""day"">" + i + "</span>" + sbEvents.ToString()));
+
+                //sbEvents.Clear();
 
             return new CalendarHTML
             {
                 GridHTML = BuildTableGrid(cells, topList, noOfMonthsinYear, rqStruct.TableTemplate),
                 NextRequest = string.Format(CalendarYearViewLink, rqStruct.Year + 1, rqStruct.CalendarId),
                 PreviousRequest = string.Format(CalendarYearViewLink, rqStruct.Year - 1, rqStruct.CalendarId),
-                Javascript = "",
+                Javascript = sbJavascript.ToString(),
                 ViewType = Variables.CalendarViewType.YearView
             };
 
         }
 
+        private CalendarCellReturn MakeHTMLForCalendarCell(DateTime date, CalendarRequestStruct rqStruct, int clientpageid)
+        {
+           var currentTdId = "td_" + clientpageid + "_" + date.Day + "_" + date.Month;
+            StringBuilder sbEvents = new StringBuilder();
+            StringBuilder sbJavascript = new StringBuilder();
 
+            if (rqStruct.RelatedEvents != null)
+            {
+                var foundEvents = rqStruct.RelatedEvents.FindAll(x => x.StartOfEvent.Date <= date.Date
+                    || x.EndOfEvent.Date >= date.Date).ToList();
+                var tempspan = string.Empty;
+                var evtDetails = new StringBuilder();
+                var edithtml = string.Empty;
+
+                foreach (CalendarEventCache ce in foundEvents)
+                {
+                    //use delegates for event details
+                    evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventTitle"], ce.Title));
+                    evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventLocation"], ce.Location));
+                    evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventStart"], ce.StartOfEvent));
+                    evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventEnd"], ce.EndOfEvent));
+                    evtDetails.Append(string.Format("<b>{0}: {1}</b> <br/>", rqStruct.LabelsAndNames["EventDescription"], ce.Description.Replace(Environment.NewLine, "<br/>")));
+
+                    if (ce.CreatedBy == rqStruct.UserId)
+                    {
+                        edithtml = string.Format(@"<br/><span class=""editevent"" id=""evt_{0}_{1}"" {2} title=""{3}""></span>",
+                           clientpageid, ce.id, rqStruct.ClientConfig.EventClickCallBack, rqStruct.LabelsAndNames["TooltipEditEvent"]);
+                    }
+                    tempspan = string.Format(@"<span class=""previewevent"" id=""sp_preview_{0}""  style=""display:none""> 
+                                <span class=""spdelete"" onclick=""ClosePreview($('#sp_preview_{0}'));"" title=""{3}"">&nbsp;</span>{1} {2}</span>",
+                                            ce.id, edithtml, evtDetails.ToString(), rqStruct.LabelsAndNames["ClosePreview"]);
+
+
+                    sbEvents.Append(string.Format(@"<span class=""event"" id=""evt_{0}_{1}"" {2}>{3}</span>", clientpageid, ce.id, rqStruct.ClientConfig.PreviewCallBack,
+                         ce.Title + tempspan));
+
+                    sbJavascript.Append(string.Format(@" {3}['evt_{0}_{1}']=[{0},{1},'{2}'];" + Environment.NewLine, clientpageid, ce.id, currentTdId, rqStruct.ClientConfig.JsArrayEventName));
+                }
+
+                string spDate = string.Format(@"<span style=""display:none"" id=""sp_{0}"">{1}/{2}/{3}</span>", currentTdId, rqStruct.Year, rqStruct.Month, date.Day);
+                sbEvents.Append(spDate);
+
+                return new CalendarCellReturn
+                {
+                    Events = sbEvents.ToString(),
+                    Scripts = sbJavascript.ToString()
+                };
+            }
+            else { return null; }
+
+        }
+
+        private class CalendarCellReturn
+        {
+            public string Events { get; set; }
+            public string Scripts { get; set; }
+        }
 
         public CalendarHTML GenerateCalendarHTML(CalendarRequestStruct rqStruct)
         {

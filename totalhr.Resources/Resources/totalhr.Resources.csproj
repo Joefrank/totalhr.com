@@ -115,6 +115,7 @@
     <EmbeddedResource Include="Calendar.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Calendar.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Common.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

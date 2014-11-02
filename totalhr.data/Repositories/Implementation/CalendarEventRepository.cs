@@ -106,7 +106,7 @@ namespace totalhr.data.Repositories.Implementation
                 if (
                     (calendarid == 0 || assocevt.CalendarId == calendarid)
                     &&
-                    (assocevt.StartOfEvent.Month == month || assocevt.EndOfEvent.Month == month)
+                    (month == 0 || (assocevt.StartOfEvent.Month == month || assocevt.EndOfEvent.Month == month))
                     &&
                     (assocevt.StartOfEvent.Year == year || assocevt.EndOfEvent.Year == year)
                   )
