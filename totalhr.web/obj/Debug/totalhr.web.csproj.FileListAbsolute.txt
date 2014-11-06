@@ -375,3 +375,4 @@ D:\Projects\MyGithub\totalhr.com\totalhr.web\obj\Debug\totalhr.web.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.web\obj\Debug\totalhr.web.pdb
 D:\Projects\MyGithub\totalhr.com\totalhr.web\bin\AutoMapper.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.web\bin\AutoMapper.xml
+D:\Projects\MyGithub\totalhr.com\totalhr.web\bin\AutoMapper.Net4.dll
