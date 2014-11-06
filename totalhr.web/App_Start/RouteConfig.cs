@@ -99,8 +99,14 @@ namespace totalhr.web
                    month = DateTime.Now.Month,
                    day = UrlParameter.Optional
                });
-                       
-        
+
+
+            routes.MapRoute(
+                "Default",
+                "admin/{controller}/{action}/{id}",
+                new { controller = "AdminHome", action = "Index", id = "" }
+            );
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

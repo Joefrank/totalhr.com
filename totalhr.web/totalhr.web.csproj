@@ -146,10 +146,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Admin\AdminHomeController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\Dependencies\Container.cs" />
+    <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -336,6 +338,7 @@
     <Content Include="Views\Shared\_CalendarEventEdit.cshtml" />
     <Content Include="Views\Calendar\Edit.cshtml" />
     <Content Include="Views\Calendar\EventEdit.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
     <None Include="Views\Calendar\EventEdit.cshtml.old" />
     <Content Include="Views\Account\MyDetails.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />

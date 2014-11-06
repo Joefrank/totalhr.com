@@ -223,6 +223,7 @@
     </Compile>
     <Compile Include="Repositories\Implementation\CalendarEventRepository.cs" />
     <Compile Include="Repositories\Implementation\CalendarRepository.cs" />
+    <Compile Include="Repositories\Implementation\CompanyDocumentRepository.cs" />
     <Compile Include="Repositories\Implementation\CompanyRepository.cs" />
     <Compile Include="Repositories\Implementation\EmailTemplateRepository.cs" />
     <Compile Include="Repositories\Implementation\GlossaryRepository.cs" />
@@ -231,6 +232,7 @@
     <Compile Include="Repositories\Implementation\UserRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICalendarEventRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICalendarRepository.cs" />
+    <Compile Include="Repositories\Infrastructure\ICompanyDocumentRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICompanyRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IEmailRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IGlossaryRepository.cs" />

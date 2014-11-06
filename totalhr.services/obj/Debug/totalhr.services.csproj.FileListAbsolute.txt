@@ -222,3 +222,6 @@ D:\Projects\MyGithub\totalhr.com\totalhr.services\bin\Debug\Ninject.xml
 D:\Projects\MyGithub\totalhr.com\totalhr.services\obj\Debug\totalhr.services.csprojResolveAssemblyReference.cache
 D:\Projects\MyGithub\totalhr.com\totalhr.services\obj\Debug\totalhr.services.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.services\obj\Debug\totalhr.services.pdb
+D:\Projects\MyGithub\totalhr.com\totalhr.services\bin\Debug\AutoMapper.Net4.dll
+D:\Projects\MyGithub\totalhr.com\totalhr.services\bin\Debug\AutoMapper.dll
+D:\Projects\MyGithub\totalhr.com\totalhr.services\bin\Debug\AutoMapper.xml

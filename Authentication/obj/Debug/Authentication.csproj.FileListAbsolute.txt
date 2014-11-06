@@ -58,3 +58,4 @@ D:\Projects\MyGithub\totalhr.com\Authentication\bin\Debug\Resources.pdb
 D:\Projects\MyGithub\totalhr.com\Authentication\obj\Debug\Authentication.csprojResolveAssemblyReference.cache
 D:\Projects\MyGithub\totalhr.com\Authentication\obj\Debug\Authentication.dll
 D:\Projects\MyGithub\totalhr.com\Authentication\obj\Debug\Authentication.pdb
+D:\Projects\MyGithub\totalhr.com\Authentication\bin\Debug\common.dll

@@ -189,6 +189,6 @@ D:\Projects\MyGithub\totalhr.com\totalhr.admin\bin\System.Web.Razor.xml
 D:\Projects\MyGithub\totalhr.com\totalhr.admin\bin\System.Web.WebPages.xml
 D:\Projects\MyGithub\totalhr.com\totalhr.admin\bin\System.Web.WebPages.Deployment.xml
 D:\Projects\MyGithub\totalhr.com\totalhr.admin\bin\System.Web.WebPages.Razor.xml
-D:\Projects\MyGithub\totalhr.com\totalhr.admin\obj\Debug\totalhr.admin.csprojResolveAssemblyReference.cache
 D:\Projects\MyGithub\totalhr.com\totalhr.admin\obj\Debug\totalhr.admin.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.admin\obj\Debug\totalhr.admin.pdb
+D:\Projects\MyGithub\totalhr.com\totalhr.admin\obj\Debug\totalhr.admin.csprojResolveAssemblyReference.cache

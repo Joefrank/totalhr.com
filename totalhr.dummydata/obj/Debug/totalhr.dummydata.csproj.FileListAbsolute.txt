@@ -136,3 +136,6 @@ D:\Projects\MyGithub\totalhr.com\totalhr.dummydata\bin\Debug\Resources.pdb
 D:\Projects\MyGithub\totalhr.com\totalhr.dummydata\obj\Debug\totalhr.dummydata.csprojResolveAssemblyReference.cache
 D:\Projects\MyGithub\totalhr.com\totalhr.dummydata\obj\Debug\totalhr.dummydata.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.dummydata\obj\Debug\totalhr.dummydata.pdb
+D:\Projects\MyGithub\totalhr.com\totalhr.dummydata\bin\Debug\AutoMapper.Net4.dll
+D:\Projects\MyGithub\totalhr.com\totalhr.dummydata\bin\Debug\AutoMapper.dll
+D:\Projects\MyGithub\totalhr.com\totalhr.dummydata\bin\Debug\AutoMapper.xml
