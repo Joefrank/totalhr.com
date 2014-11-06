@@ -97,4 +97,3 @@ D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\totalhr.R
 D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.csproj.GenerateResource.Cache
 D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\Resources.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\Resources.pdb
-D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.csprojResolveAssemblyReference.cache

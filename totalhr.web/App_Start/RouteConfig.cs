@@ -102,7 +102,7 @@ namespace totalhr.web
 
 
             routes.MapRoute(
-                "Default",
+                "AdminDefault",
                 "admin/{controller}/{action}/{id}",
                 new { controller = "AdminHome", action = "Index", id = "" }
             );
