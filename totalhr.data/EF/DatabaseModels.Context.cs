@@ -47,6 +47,14 @@ namespace totalhr.data.EF
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserProfile> UserProfiles { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<CompanyDocument> CompanyDocuments { get; set; }
+        public virtual DbSet<CompanyDocumentDownload> CompanyDocumentDownloads { get; set; }
+        public virtual DbSet<CompanyDocumentPermission> CompanyDocumentPermissions { get; set; }
+        public virtual DbSet<CompanyDocumentShare> CompanyDocumentShares { get; set; }
+        public virtual DbSet<CompanyDocumentView> CompanyDocumentViews { get; set; }
+        public virtual DbSet<CompanyFolder> CompanyFolders { get; set; }
+        public virtual DbSet<CompanyFolderDocument> CompanyFolderDocuments { get; set; }
+        public virtual DbSet<File> Files { get; set; }
     
         [DbFunction("TotalHREntities", "SplitCSV")]
         public virtual IQueryable<SplitCSV_Result> SplitCSV(string @string, string delimiter)
@@ -138,6 +146,19 @@ namespace totalhr.data.EF
                 new ObjectParameter("RecipientListId", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PrepareCalendarEventScheduledReminder", senderNameParameter, senderEmailParameter, recipientListIdParameter);
+        }
+    
+        public virtual ObjectResult<GetCompanyFoldersByUser_Result> GetCompanyFoldersByUser(Nullable<int> userid, Nullable<int> departmentid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(int));
+    
+            var departmentidParameter = departmentid.HasValue ?
+                new ObjectParameter("departmentid", departmentid) :
+                new ObjectParameter("departmentid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCompanyFoldersByUser_Result>("GetCompanyFoldersByUser", useridParameter, departmentidParameter);
         }
     }
 }

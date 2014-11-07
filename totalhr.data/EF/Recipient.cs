@@ -21,5 +21,6 @@ namespace totalhr.data.EF
         public int NoNotifications { get; set; }
         public Nullable<System.DateTime> LastNotificationDate { get; set; }
         public int RecipientListId { get; set; }
+        public string RecipientName { get; set; }
     }
 }

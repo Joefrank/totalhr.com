@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TotalHRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TotalHRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Calendar">
           <Key>
             <PropertyRef Name="id" />
@@ -91,6 +91,65 @@
           <Property Name="Website" Type="nvarchar" MaxLength="500" />
           <Property Name="PreferredLanguageId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="CompanyDocument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="OriginalFileName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="FolderId" Type="int" />
+          <Property Name="FileId" Type="int" Nullable="false" />
+          <Property Name="NoOfViews" Type="int" Nullable="false" />
+          <Property Name="NoOfDownloads" Type="int" Nullable="false" />
+          <Property Name="LastViewed" Type="datetime" />
+          <Property Name="LastViewedBy" Type="int" />
+          <Property Name="LastDownloaded" Type="datetime" />
+          <Property Name="LastDownloadedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentDownloads">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocumentId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="DownloadDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentPermissions">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="PermissionTypeId" />
+          </Key>
+          <Property Name="DocumentId" Type="int" Nullable="false" />
+          <Property Name="PermissionTypeId" Type="int" Nullable="false" />
+          <Property Name="ObjectId" Type="int" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentShares">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="DocumentId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="DateShared" Type="datetime" Nullable="false" />
+          <Property Name="TypeofShare" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentViews">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="DocumentId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ViewDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="CompanyFeature">
           <Key>
             <PropertyRef Name="CompanyId" />
@@ -98,6 +157,29 @@
           </Key>
           <Property Name="CompanyId" Type="int" Nullable="false" />
           <Property Name="FeatureId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyFolder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="NoOfFiles" Type="int" Nullable="false" />
+          <Property Name="NoOfOpenings" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyFolderDocument">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="FolderId" />
+          </Key>
+          <Property Name="DocumentId" Type="int" Nullable="false" />
+          <Property Name="FolderId" Type="int" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
@@ -156,6 +238,20 @@
           <Property Name="LastModified" Type="datetime" />
           <Property Name="LastModifiedBy" Type="int" />
         </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shortname" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="typeid" Type="int" Nullable="false" />
+          <Property Name="size" Type="bigint" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="createdby" Type="int" Nullable="false" />
+          <Property Name="extension" Type="nvarchar" MaxLength="10" />
+          <Property Name="lastupdated" Type="datetime" />
+          <Property Name="lastupdatedby" Type="int" />
+        </EntityType>
         <EntityType Name="Glossary">
           <Key>
             <PropertyRef Name="Id" />
@@ -205,6 +301,7 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RecipientUserId" Type="int" Nullable="false" />
           <Property Name="RecipientEmail" Type="nvarchar" MaxLength="150" />
+          <Property Name="RecipientName" Type="nvarchar" MaxLength="100" />
           <Property Name="RecipientPhone" Type="nvarchar" MaxLength="30" />
           <Property Name="NoNotifications" Type="int" Nullable="false" />
           <Property Name="LastNotificationDate" Type="datetime" />
@@ -348,6 +445,78 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CompanyDocument_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CompanyDocument" Type="Self.CompanyDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyDocument">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyDocumentPermissions_CompanyDocument">
+          <End Role="CompanyDocument" Type="Self.CompanyDocument" Multiplicity="1" />
+          <End Role="CompanyDocumentPermissions" Type="Self.CompanyDocumentPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyDocument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyDocumentPermissions">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyDocumentPermissions_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="CompanyDocumentPermissions" Type="Self.CompanyDocumentPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyDocumentPermissions">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyFolder_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CompanyFolder" Type="Self.CompanyFolder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyFolder">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyFolderDocument_CompanyDocument">
+          <End Role="CompanyDocument" Type="Self.CompanyDocument" Multiplicity="1" />
+          <End Role="CompanyFolderDocument" Type="Self.CompanyFolderDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyDocument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyFolderDocument">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyFolderDocument_CompanyFolder">
+          <End Role="CompanyFolder" Type="Self.CompanyFolder" Multiplicity="1" />
+          <End Role="CompanyFolderDocument" Type="Self.CompanyFolderDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyFolder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyFolderDocument">
+              <PropertyRef Name="FolderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Department_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="Department" Type="Self.Department" Multiplicity="*" />
@@ -366,6 +535,10 @@
           <Parameter Name="RecipientListName" Type="nvarchar" Mode="In" />
           <Parameter Name="description" Type="nvarchar" Mode="In" />
           <Parameter Name="CreatedBy" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetCompanyFoldersByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="departmentid" Type="int" Mode="In" />
         </Function>
         <Function Name="GetUserProfileIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="int" Mode="In" />
@@ -401,11 +574,19 @@
           <EntitySet Name="CalendarEvent" EntityType="Self.CalendarEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CalEventReminderType" EntityType="Self.CalEventReminderType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyDocument" EntityType="Self.CompanyDocument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyDocumentDownloads" EntityType="Self.CompanyDocumentDownloads" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyDocumentPermissions" EntityType="Self.CompanyDocumentPermissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyDocumentShares" EntityType="Self.CompanyDocumentShares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyDocumentViews" EntityType="Self.CompanyDocumentViews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyFeature" EntityType="Self.CompanyFeature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyFolder" EntityType="Self.CompanyFolder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyFolderDocument" EntityType="Self.CompanyFolderDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailTemplate" EntityType="Self.EmailTemplate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EventToSchedule" EntityType="Self.EventToSchedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="File" EntityType="Self.File" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Glossary" EntityType="Self.Glossary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
@@ -428,13 +609,36 @@
             <End Role="Calendar" EntitySet="Calendar" />
             <End Role="CalendarEvent" EntitySet="CalendarEvent" />
           </AssociationSet>
+          <AssociationSet Name="FK_CompanyDocument_User" Association="Self.FK_CompanyDocument_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CompanyDocument" EntitySet="CompanyDocument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyDocumentPermissions_CompanyDocument" Association="Self.FK_CompanyDocumentPermissions_CompanyDocument">
+            <End Role="CompanyDocument" EntitySet="CompanyDocument" />
+            <End Role="CompanyDocumentPermissions" EntitySet="CompanyDocumentPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyDocumentPermissions_User" Association="Self.FK_CompanyDocumentPermissions_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CompanyDocumentPermissions" EntitySet="CompanyDocumentPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyFolder_User" Association="Self.FK_CompanyFolder_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CompanyFolder" EntitySet="CompanyFolder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyFolderDocument_CompanyDocument" Association="Self.FK_CompanyFolderDocument_CompanyDocument">
+            <End Role="CompanyDocument" EntitySet="CompanyDocument" />
+            <End Role="CompanyFolderDocument" EntitySet="CompanyFolderDocument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyFolderDocument_CompanyFolder" Association="Self.FK_CompanyFolderDocument_CompanyFolder">
+            <End Role="CompanyFolder" EntitySet="CompanyFolder" />
+            <End Role="CompanyFolderDocument" EntitySet="CompanyFolderDocument" />
+          </AssociationSet>
           <AssociationSet Name="FK_Department_Company" Association="Self.FK_Department_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="Department" EntitySet="Department" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TotalHRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -653,6 +857,7 @@
           <Property Name="NoNotifications" Type="Int32" Nullable="false" />
           <Property Name="LastNotificationDate" Type="DateTime" Precision="3" />
           <Property Name="RecipientListId" Type="Int32" Nullable="false" />
+          <Property Name="RecipientName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="RecipientList">
           <Key>
@@ -735,6 +940,9 @@
           <Property Name="activationcode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="chosenculture" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="departmentid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CompanyDocuments" Relationship="TotalHRModel.FK_CompanyDocument_User" FromRole="User" ToRole="CompanyDocument" />
+          <NavigationProperty Name="CompanyFolders" Relationship="TotalHRModel.FK_CompanyFolder_User" FromRole="User" ToRole="CompanyFolder" />
+          <NavigationProperty Name="CompanyDocumentPermissions" Relationship="TotalHRModel.FK_CompanyDocumentPermissions_User" FromRole="User" ToRole="CompanyDocumentPermission" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -853,21 +1061,57 @@
             <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserProfileIds" ReturnType="Collection(Int32)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserProfiles" ReturnType="Collection(TotalHRModel.GetUserProfiles_Result)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserRoleIds" ReturnType="Collection(Int32)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserRoles" ReturnType="Collection(TotalHRModel.GetUserRoles_Result)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PrepareCalendarEventScheduledReminder">
             <Parameter Name="SenderName" Mode="In" Type="String" />
             <Parameter Name="SenderEmail" Mode="In" Type="String" />
             <Parameter Name="RecipientListId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="CompanyDocuments" EntityType="TotalHRModel.CompanyDocument" />
+          <EntitySet Name="CompanyDocumentDownloads" EntityType="TotalHRModel.CompanyDocumentDownload" />
+          <EntitySet Name="CompanyDocumentPermissions" EntityType="TotalHRModel.CompanyDocumentPermission" />
+          <EntitySet Name="CompanyDocumentShares" EntityType="TotalHRModel.CompanyDocumentShare" />
+          <EntitySet Name="CompanyDocumentViews" EntityType="TotalHRModel.CompanyDocumentView" />
+          <EntitySet Name="CompanyFolders" EntityType="TotalHRModel.CompanyFolder" />
+          <EntitySet Name="CompanyFolderDocuments" EntityType="TotalHRModel.CompanyFolderDocument" />
+          <EntitySet Name="Files" EntityType="TotalHRModel.File" />
+          <AssociationSet Name="FK_CompanyDocument_User" Association="TotalHRModel.FK_CompanyDocument_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CompanyDocument" EntitySet="CompanyDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyFolderDocument_CompanyDocument" Association="TotalHRModel.FK_CompanyFolderDocument_CompanyDocument">
+            <End Role="CompanyDocument" EntitySet="CompanyDocuments" />
+            <End Role="CompanyFolderDocument" EntitySet="CompanyFolderDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyFolder_User" Association="TotalHRModel.FK_CompanyFolder_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CompanyFolder" EntitySet="CompanyFolders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyFolderDocument_CompanyFolder" Association="TotalHRModel.FK_CompanyFolderDocument_CompanyFolder">
+            <End Role="CompanyFolder" EntitySet="CompanyFolders" />
+            <End Role="CompanyFolderDocument" EntitySet="CompanyFolderDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyDocumentPermissions_CompanyDocument" Association="TotalHRModel.FK_CompanyDocumentPermissions_CompanyDocument">
+            <End Role="CompanyDocument" EntitySet="CompanyDocuments" />
+            <End Role="CompanyDocumentPermission" EntitySet="CompanyDocumentPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyDocumentPermissions_User" Association="TotalHRModel.FK_CompanyDocumentPermissions_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CompanyDocumentPermission" EntitySet="CompanyDocumentPermissions" />
+          </AssociationSet>
+          <FunctionImport Name="GetCompanyFoldersByUser" ReturnType="Collection(TotalHRModel.GetCompanyFoldersByUser_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="departmentid" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetUserProfiles_Result">
@@ -889,6 +1133,193 @@
           <Property Type="DateTime" Name="LastModified" Nullable="true" Precision="23" />
           <Property Type="Int32" Name="LastModifiedBy" Nullable="true" />
           <Property Type="String" Name="Identifier" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <EntityType Name="CompanyDocument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OriginalFileName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="FolderId" Type="Int32" />
+          <Property Name="FileId" Type="Int32" Nullable="false" />
+          <Property Name="NoOfViews" Type="Int32" Nullable="false" />
+          <Property Name="NoOfDownloads" Type="Int32" Nullable="false" />
+          <Property Name="LastViewed" Type="DateTime" Precision="3" />
+          <Property Name="LastViewedBy" Type="Int32" />
+          <Property Name="LastDownloaded" Type="DateTime" Precision="3" />
+          <Property Name="LastDownloadedBy" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_CompanyDocument_User" FromRole="CompanyDocument" ToRole="User" />
+          <NavigationProperty Name="CompanyFolderDocuments" Relationship="TotalHRModel.FK_CompanyFolderDocument_CompanyDocument" FromRole="CompanyDocument" ToRole="CompanyFolderDocument" />
+          <NavigationProperty Name="CompanyDocumentPermissions" Relationship="TotalHRModel.FK_CompanyDocumentPermissions_CompanyDocument" FromRole="CompanyDocument" ToRole="CompanyDocumentPermission" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentDownload">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="DownloadDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentPermission">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="PermissionTypeId" />
+          </Key>
+          <Property Name="DocumentId" Type="Int32" Nullable="false" />
+          <Property Name="PermissionTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ObjectId" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <NavigationProperty Name="CompanyDocument" Relationship="TotalHRModel.FK_CompanyDocumentPermissions_CompanyDocument" FromRole="CompanyDocumentPermission" ToRole="CompanyDocument" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_CompanyDocumentPermissions_User" FromRole="CompanyDocumentPermission" ToRole="User" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentShare">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="DocumentId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="DateShared" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TypeofShare" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentView">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="DocumentId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ViewDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="CompanyFolder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="NoOfFiles" Type="Int32" Nullable="false" />
+          <Property Name="NoOfOpenings" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_CompanyFolder_User" FromRole="CompanyFolder" ToRole="User" />
+          <NavigationProperty Name="CompanyFolderDocuments" Relationship="TotalHRModel.FK_CompanyFolderDocument_CompanyFolder" FromRole="CompanyFolder" ToRole="CompanyFolderDocument" />
+        </EntityType>
+        <EntityType Name="CompanyFolderDocument">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="FolderId" />
+          </Key>
+          <Property Name="DocumentId" Type="Int32" Nullable="false" />
+          <Property Name="FolderId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CompanyDocument" Relationship="TotalHRModel.FK_CompanyFolderDocument_CompanyDocument" FromRole="CompanyFolderDocument" ToRole="CompanyDocument" />
+          <NavigationProperty Name="CompanyFolder" Relationship="TotalHRModel.FK_CompanyFolderDocument_CompanyFolder" FromRole="CompanyFolderDocument" ToRole="CompanyFolder" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shortname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="typeid" Type="Int32" Nullable="false" />
+          <Property Name="size" Type="Int64" Nullable="false" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdby" Type="Int32" Nullable="false" />
+          <Property Name="extension" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="lastupdated" Type="DateTime" Precision="3" />
+          <Property Name="lastupdatedby" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_CompanyDocument_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.CompanyDocument" Role="CompanyDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyDocument">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyFolderDocument_CompanyDocument">
+          <End Type="TotalHRModel.CompanyDocument" Role="CompanyDocument" Multiplicity="1" />
+          <End Type="TotalHRModel.CompanyFolderDocument" Role="CompanyFolderDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyDocument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyFolderDocument">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyFolder_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.CompanyFolder" Role="CompanyFolder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyFolder">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyFolderDocument_CompanyFolder">
+          <End Type="TotalHRModel.CompanyFolder" Role="CompanyFolder" Multiplicity="1" />
+          <End Type="TotalHRModel.CompanyFolderDocument" Role="CompanyFolderDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyFolder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyFolderDocument">
+              <PropertyRef Name="FolderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyDocumentPermissions_CompanyDocument">
+          <End Type="TotalHRModel.CompanyDocument" Role="CompanyDocument" Multiplicity="1" />
+          <End Type="TotalHRModel.CompanyDocumentPermission" Role="CompanyDocumentPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyDocument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyDocumentPermission">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyDocumentPermissions_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.CompanyDocumentPermission" Role="CompanyDocumentPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyDocumentPermission">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetCompanyFoldersByUser_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="250" />
+          <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="LastUpdatedBy" Nullable="true" />
+          <Property Type="Int32" Name="NoOfFiles" Nullable="false" />
+          <Property Type="Int32" Name="NoOfOpenings" Nullable="false" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1104,6 +1535,7 @@
           <EntitySetMapping Name="Recipients">
             <EntityTypeMapping TypeName="TotalHRModel.Recipient">
               <MappingFragment StoreEntitySet="Recipient">
+                <ScalarProperty Name="RecipientName" ColumnName="RecipientName" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="RecipientUserId" ColumnName="RecipientUserId" />
                 <ScalarProperty Name="RecipientEmail" ColumnName="RecipientEmail" />
@@ -1259,6 +1691,120 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="PrepareCalendarEventScheduledReminder" FunctionName="TotalHRModel.Store.PrepareCalendarEventScheduledReminder" />
+          <EntitySetMapping Name="CompanyDocuments">
+            <EntityTypeMapping TypeName="TotalHRModel.CompanyDocument">
+              <MappingFragment StoreEntitySet="CompanyDocument">
+                <ScalarProperty Name="LastDownloadedBy" ColumnName="LastDownloadedBy" />
+                <ScalarProperty Name="LastDownloaded" ColumnName="LastDownloaded" />
+                <ScalarProperty Name="LastViewedBy" ColumnName="LastViewedBy" />
+                <ScalarProperty Name="LastViewed" ColumnName="LastViewed" />
+                <ScalarProperty Name="NoOfDownloads" ColumnName="NoOfDownloads" />
+                <ScalarProperty Name="NoOfViews" ColumnName="NoOfViews" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="OriginalFileName" ColumnName="OriginalFileName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyDocumentDownloads">
+            <EntityTypeMapping TypeName="TotalHRModel.CompanyDocumentDownload">
+              <MappingFragment StoreEntitySet="CompanyDocumentDownloads">
+                <ScalarProperty Name="DownloadDate" ColumnName="DownloadDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyDocumentPermissions">
+            <EntityTypeMapping TypeName="TotalHRModel.CompanyDocumentPermission">
+              <MappingFragment StoreEntitySet="CompanyDocumentPermissions">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="PermissionTypeId" ColumnName="PermissionTypeId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyDocumentShares">
+            <EntityTypeMapping TypeName="TotalHRModel.CompanyDocumentShare">
+              <MappingFragment StoreEntitySet="CompanyDocumentShares">
+                <ScalarProperty Name="TypeofShare" ColumnName="TypeofShare" />
+                <ScalarProperty Name="DateShared" ColumnName="DateShared" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyDocumentViews">
+            <EntityTypeMapping TypeName="TotalHRModel.CompanyDocumentView">
+              <MappingFragment StoreEntitySet="CompanyDocumentViews">
+                <ScalarProperty Name="ViewDate" ColumnName="ViewDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyFolders">
+            <EntityTypeMapping TypeName="TotalHRModel.CompanyFolder">
+              <MappingFragment StoreEntitySet="CompanyFolder">
+                <ScalarProperty Name="NoOfOpenings" ColumnName="NoOfOpenings" />
+                <ScalarProperty Name="NoOfFiles" ColumnName="NoOfFiles" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyFolderDocuments">
+            <EntityTypeMapping TypeName="TotalHRModel.CompanyFolderDocument">
+              <MappingFragment StoreEntitySet="CompanyFolderDocument">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="TotalHRModel.File">
+              <MappingFragment StoreEntitySet="File">
+                <ScalarProperty Name="lastupdatedby" ColumnName="lastupdatedby" />
+                <ScalarProperty Name="lastupdated" ColumnName="lastupdated" />
+                <ScalarProperty Name="extension" ColumnName="extension" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="typeid" ColumnName="typeid" />
+                <ScalarProperty Name="shortname" ColumnName="shortname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCompanyFoldersByUser" FunctionName="TotalHRModel.Store.GetCompanyFoldersByUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalHRModel.GetCompanyFoldersByUser_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="NoOfFiles" ColumnName="NoOfFiles" />
+                <ScalarProperty Name="NoOfOpenings" ColumnName="NoOfOpenings" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

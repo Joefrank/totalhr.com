@@ -161,6 +161,7 @@
     </Compile>
     <Compile Include="Helpers\CalendarHelper.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
+    <Compile Include="Helpers\GenericHelper.cs" />
     <Compile Include="Helpers\GossaryHelper.cs" />
     <Compile Include="Models\UserAccountStruct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -341,7 +342,6 @@
     <Content Include="Views\Calendar\EventEdit.cshtml" />
     <Content Include="Views\Admin\Index.cshtml" />
     <Content Include="Views\AdminHome\Index.cshtml" />
-    <None Include="Views\Calendar\EventEdit.cshtml.old" />
     <Content Include="Views\Account\MyDetails.cshtml" />
     <Content Include="Views\Error\AccessDenied.cshtml" />
     <Content Include="Views\Account\CompanyUsersSelector.cshtml" />
@@ -349,6 +349,7 @@
     <Content Include="Views\Shared\_PopupLayout.cshtml" />
     <Content Include="Views\Calendar\EventAdd.cshtml" />
     <Content Include="Views\Calendar\PreviewEvent.cshtml" />
+    <Content Include="Views\Document\Index.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -378,6 +379,10 @@
     <ProjectReference Include="..\CalendarService\Calendar.csproj">
       <Project>{67516845-fb4c-4820-954d-3382a86ba6e1}</Project>
       <Name>Calendar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CompanyDocumentService\CompanyDocumentService.csproj">
+      <Project>{44b7bfe7-5325-47eb-91b0-e08d0bbaa170}</Project>
+      <Name>CompanyDocumentService</Name>
     </ProjectReference>
     <ProjectReference Include="..\totalhr.data\totalhr.data.csproj">
       <Project>{f5a3d97a-a1b9-463a-850e-23cf6e1fc488}</Project>

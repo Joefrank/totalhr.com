@@ -29,6 +29,20 @@
         <AssociationConnector Association="TotalHRModel.FK_CalendarEvent_Calendar" ManuallyRouted="false" />
         <AssociationConnector Association="TotalHRModel.FK_CalendarAssociation_CalendarEvent" ManuallyRouted="false" />
         <AssociationConnector Association="TotalHRModel.FK_Department_Company" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TotalHRModel.CompanyDocument" Width="1.5" PointX="14" PointY="5.25" />
+        <EntityTypeShape EntityType="TotalHRModel.CompanyDocumentDownload" Width="1.5" PointX="3.375" PointY="12.75" />
+        <EntityTypeShape EntityType="TotalHRModel.CompanyDocumentPermission" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TotalHRModel.CompanyDocumentShare" Width="1.5" PointX="5.375" PointY="14.75" />
+        <EntityTypeShape EntityType="TotalHRModel.CompanyDocumentView" Width="1.5" PointX="7.375" PointY="14.75" />
+        <EntityTypeShape EntityType="TotalHRModel.CompanyFolder" Width="1.5" PointX="14.375" PointY="9.75" />
+        <EntityTypeShape EntityType="TotalHRModel.CompanyFolderDocument" Width="1.5" PointX="9.375" PointY="14.75" />
+        <EntityTypeShape EntityType="TotalHRModel.File" Width="1.5" PointX="11.375" PointY="14.75" />
+        <AssociationConnector Association="TotalHRModel.FK_CompanyDocument_User" />
+        <AssociationConnector Association="TotalHRModel.FK_CompanyFolderDocument_CompanyDocument" />
+        <AssociationConnector Association="TotalHRModel.FK_CompanyFolder_User" />
+        <AssociationConnector Association="TotalHRModel.FK_CompanyFolderDocument_CompanyFolder" />
+        <AssociationConnector Association="TotalHRModel.FK_CompanyDocumentPermissions_CompanyDocument" />
+        <AssociationConnector Association="TotalHRModel.FK_CompanyDocumentPermissions_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

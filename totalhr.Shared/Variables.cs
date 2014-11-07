@@ -73,6 +73,13 @@ namespace totalhr.Shared
             YearlyOnSameDate = 5
         }
 
+        public enum DocumentPermissionType
+        {
+            WholeCompany = 1,
+            SelectedUsers = 2,
+            Department = 3
+        }
+
         public enum ReminderType
         {
             TimeBefore= 1,

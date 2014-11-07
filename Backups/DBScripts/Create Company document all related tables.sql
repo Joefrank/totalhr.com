@@ -1,6 +1,20 @@
 
-Create table FFile(
-	id int
+
+
+CREATE TABLE [dbo].[File](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[shortname] [nvarchar](255) NOT NULL,
+	[typeid] [int] NOT NULL,
+	[size] [bigint] NOT NULL,
+	[created] [datetime] NOT NULL,
+	[createdby] [int] NOT NULL,
+	[extension] [nvarchar](10) NULL,
+	[lastupdated] [datetime] NULL,
+	[lastupdatedby] [int] NULL,
+ CONSTRAINT [PK_files] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
 )
 
 Create table CompanyDocument(

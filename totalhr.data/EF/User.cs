@@ -14,6 +14,13 @@ namespace totalhr.data.EF
     
     public partial class User
     {
+        public User()
+        {
+            this.CompanyDocuments = new HashSet<CompanyDocument>();
+            this.CompanyFolders = new HashSet<CompanyFolder>();
+            this.CompanyDocumentPermissions = new HashSet<CompanyDocumentPermission>();
+        }
+    
         public int id { get; set; }
         public int GenderId { get; set; }
         public string firstname { get; set; }
@@ -48,5 +55,9 @@ namespace totalhr.data.EF
         public string activationcode { get; set; }
         public string chosenculture { get; set; }
         public int departmentid { get; set; }
+    
+        public virtual ICollection<CompanyDocument> CompanyDocuments { get; set; }
+        public virtual ICollection<CompanyFolder> CompanyFolders { get; set; }
+        public virtual ICollection<CompanyDocumentPermission> CompanyDocumentPermissions { get; set; }
     }
 }
