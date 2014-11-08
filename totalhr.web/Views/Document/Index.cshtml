@@ -1,0 +1,40 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Helpers;
+
+@model List<totalhr.data.EF.CompanyFolder>
+
+@{
+    ViewBag.Title = GenericHelper.WebsiteName + " | " + Document.V_Document_title;
+    bool bViewTable = Model != null && Model.Count > 0;
+}
+
+<h2>@Document.V_Document_title</h2>
+
+<div>
+@if(bViewTable){
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Files</th>
+        <th>Created</th>
+        <th>CreatedBy</th>
+        <th>View</th>
+       </tr>
+    @foreach (var folder in Model)
+    {
+        <tr>
+            <td>@folder.DisplayName</td>
+            <td>@folder.NoOfFiles</td>
+            <td>@folder.Created</td>
+            <td>@folder.CreatedBy</td>
+            <td><a href="" title=""></a></td>
+        </tr>
+    }
+    </table>
+}else{
+    <p class="error">
+        Sorry but no folder to view.
+    </p>   
+}
+
+</div>
