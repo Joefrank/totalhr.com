@@ -61,11 +61,173 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry could not create document!.
+        /// </summary>
+        public static string Error_Could_Not_Create_Doc {
+            get {
+                return ResourceManager.GetString("Error_Could_Not_Create_Doc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry could not upload file!.
+        /// </summary>
+        public static string Error_Could_Not_Upload_Doc {
+            get {
+                return ResourceManager.GetString("Error_Could_Not_Upload_Doc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creator is required.
+        /// </summary>
+        public static string Error_CreatorIsRequried_Rq {
+            get {
+                return ResourceManager.GetString("Error_CreatorIsRequried_Rq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Display name is required.
+        /// </summary>
+        public static string Error_DisplayName_Rq {
+            get {
+                return ResourceManager.GetString("Error_DisplayName_Rq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only file of type:.
+        /// </summary>
+        public static string Error_File_Type {
+            get {
+                return ResourceManager.GetString("Error_File_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File is required.
+        /// </summary>
+        public static string Error_FileIsRequried_Rq {
+            get {
+                return ResourceManager.GetString("Error_FileIsRequried_Rq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Original file name is required..
+        /// </summary>
+        public static string Error_OriginalFileName_Rq {
+            get {
+                return ResourceManager.GetString("Error_OriginalFileName_Rq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please Upload Your file.
+        /// </summary>
+        public static string Error_Upload_File {
+            get {
+                return ResourceManager.GetString("Error_Upload_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back to list.
+        /// </summary>
+        public static string V_Back_To_List {
+            get {
+                return ResourceManager.GetString("V_Back_To_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create.
+        /// </summary>
+        public static string V_Create {
+            get {
+                return ResourceManager.GetString("V_Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create new document.
+        /// </summary>
+        public static string V_Create_New {
+            get {
+                return ResourceManager.GetString("V_Create_New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create new folder.
+        /// </summary>
+        public static string V_Create_New_Folder {
+            get {
+                return ResourceManager.GetString("V_Create_New_Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DisplayName.
+        /// </summary>
+        public static string V_DisplayName {
+            get {
+                return ResourceManager.GetString("V_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document details.
+        /// </summary>
+        public static string V_Document_Details_Title {
+            get {
+                return ResourceManager.GetString("V_Document_Details_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company Documents and Folders.
         /// </summary>
         public static string V_Document_title {
             get {
                 return ResourceManager.GetString("V_Document_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File.
+        /// </summary>
+        public static string v_File {
+            get {
+                return ResourceManager.GetString("v_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Folder.
+        /// </summary>
+        public static string V_Folder {
+            get {
+                return ResourceManager.GetString("V_Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Id.
+        /// </summary>
+        public static string V_Id {
+            get {
+                return ResourceManager.GetString("V_Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload.
+        /// </summary>
+        public static string V_Upload {
+            get {
+                return ResourceManager.GetString("V_Upload", resourceCulture);
             }
         }
     }

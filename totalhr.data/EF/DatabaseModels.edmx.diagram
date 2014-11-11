@@ -43,6 +43,22 @@
         <AssociationConnector Association="TotalHRModel.FK_CompanyFolderDocument_CompanyFolder" />
         <AssociationConnector Association="TotalHRModel.FK_CompanyDocumentPermissions_CompanyDocument" />
         <AssociationConnector Association="TotalHRModel.FK_CompanyDocumentPermissions_User" />
+        <EntityTypeShape EntityType="TotalHRModel.ContractFormFieldValue" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="TotalHRModel.ContractTemplate" Width="1.5" PointX="14.375" PointY="17" />
+        <EntityTypeShape EntityType="TotalHRModel.ContractTemplateSection" Width="1.5" PointX="15.125" PointY="20.625" />
+        <EntityTypeShape EntityType="TotalHRModel.CTemplateSectionLink" Width="1.5" PointX="17.375" PointY="21" />
+        <EntityTypeShape EntityType="TotalHRModel.CTSectionFieldLink" Width="1.5" PointX="17.375" PointY="6.5" />
+        <EntityTypeShape EntityType="TotalHRModel.FormControl" Width="1.5" PointX="2.75" PointY="15.75" />
+        <EntityTypeShape EntityType="TotalHRModel.FormField" Width="1.5" PointX="15.125" PointY="24" />
+        <EntityTypeShape EntityType="TotalHRModel.Label" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TotalHRModel.UserContract" Width="1.5" PointX="14.375" PointY="13.5" />
+        <AssociationConnector Association="TotalHRModel.FK_Template_User" />
+        <AssociationConnector Association="TotalHRModel.FK_CTemplateSectionLink_ContractTemplateSection" />
+        <AssociationConnector Association="TotalHRModel.FK_CTSectionFieldLink_ContractTemplateSection" />
+        <AssociationConnector Association="TotalHRModel.FK_CTSectionFieldLink_FormField" />
+        <AssociationConnector Association="TotalHRModel.FK_CTSectionFieldLink_User" />
+        <AssociationConnector Association="TotalHRModel.FK_ContractTemplate_User" />
+        <AssociationConnector Association="TotalHRModel.FK_UserContract_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

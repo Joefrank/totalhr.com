@@ -76,3 +76,4 @@ function isDate(txtDate)
 function ClosePopup(objid) {   
     document.getElementById(objid).style.display = "none";   
 }
+

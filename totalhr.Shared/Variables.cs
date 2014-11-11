@@ -136,6 +136,37 @@ namespace totalhr.Shared
             DayView
         }
 
+        public enum FileType
+        {
+            CompanyDocument = 1
+        }
+
+        public enum AllowedFileExtension
+        {
+            doc,
+            docx,
+            txt,
+            ppt,
+            rtf,
+            pdf,
+            odt,
+            log,
+            tex,
+            wps,
+            wpd,
+            mp3,
+            mov,
+            gif,
+            jpg,
+            png,
+            psd,
+            pspimage,
+            tif,
+            tiff,
+            thm
+
+        }
+
         public static string AdminEmailSignature
         {
             get

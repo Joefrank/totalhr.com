@@ -46,6 +46,11 @@ namespace CompanyDocumentService.Implementation
             return _docRepos.ListFoldersByUser(userId, userDepartmentId);
         }
 
+        public List<CompanyDocument> ListDocumentAndFoldersByUser(int userId, int userDepartmentId)
+        {
+            return _docRepos.ListDocumentAndFoldersByUser(userId, userDepartmentId);
+        }
+
         public CompanyFolder GetFolder()
         {
             return null;
@@ -56,9 +61,20 @@ namespace CompanyDocumentService.Implementation
 
         #region Documents
 
-        public int CreateDocument(string documentDisplayName, string originalFileName, IO.FileInfo file, int folderId, int createdBy)
+        public int CreateDocument(string documentDisplayName, string originalFileName, int fileId, int folderId, int createdBy)
         {
-            return 0;
+            CompanyDocument doc = new CompanyDocument();
+            doc.DisplayName = documentDisplayName;
+            doc.OriginalFileName = originalFileName;
+            doc.FileId = fileId;
+            doc.FolderId = folderId;
+            doc.Created = DateTime.Now;
+            doc.CreatedBy = createdBy;
+
+            _docRepos.Add(doc);
+            _docRepos.Save();
+
+            return doc.Id;
         }
 
         public int UpdateDocument(int documentId, string documentDisplayName, string originalFileName, int folderId, int updatedBy, IO.FileInfo file = null)
@@ -91,9 +107,9 @@ namespace CompanyDocumentService.Implementation
             return null;
         }
 
-        public CompanyDocument GetDocument()
+        public CompanyDocument GetDocument(int docId)
         {
-            return null;
+            return _docRepos.FindBy(x => x.Id == docId).FirstOrDefault();
         }
 
         #endregion Documents

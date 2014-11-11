@@ -1,0 +1,73 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Helpers;
+@using totalhr.data.EF;
+
+@model totalhr.Shared.Models.DocumentInfoUpdate
+
+@{
+    ViewBag.Title = GenericHelper.WebsiteName + " | " + Document.V_Document_Details_Title;
+    bool bViewable = Model != null;
+    var doc = ViewBag.CurrentDocument as CompanyDocument;
+    
+    List<CompanyFolder> folders = new List<CompanyFolder>
+    {
+        new CompanyFolder{DisplayName= "Test Folder", Id = 1}
+    };
+}
+
+
+
+<div id="main">
+    <div class="content">
+
+        <h1>@Document.V_Document_Details_Title</h1>
+
+        @if (bViewable)
+        {
+            using (Html.BeginForm("UpdateDocument", "Document", FormMethod.Post, new { enctype = "multipart/form-data" }))
+            { 
+             @Html.ValidationSummary();
+         
+                <div class="formdiv midform">
+                    <div class="wrapper">
+                        <div class="line">
+                            <label>@Document.V_Id</label>
+                             <span>@Model.Id</span>
+                            @Html.HiddenFor(x => x.Id)                    
+                        </div>
+                         <div class="line">
+                            <label>@Document.V_DisplayName <b class="req">*</b></label>
+                             <span>@Html.TextBoxFor(x => x.DisplayName, new {size="40", maxlength="250"})</span>                    
+                        </div>
+                        <div class="line">
+                            <label>@Document.V_Folder</label>
+                             <span>@Html.DropDownListFor(x => x.FolderId,  new SelectList(folders, "Id", "DisplayName"))</span>                    
+                        </div>
+                        <div class="line">
+                            <label>@Document.v_File <b class="req">*</b></label>
+                             <span>
+                                 <input type="file" id="fileToUpload" name="File" />
+                             </span>
+                            <span>@Model.ExistingFileName</span>                    
+                        </div>
+                        <div class="line">
+                            <label>&nbsp;</label>
+                             <span>
+                                 <input type="submit" id="btnSubmit" value="@Document.V_Upload" />
+                             </span>                    
+                        </div>
+
+                    </div>
+                </div>
+         
+            }
+
+        }
+    
+    
+    <p>
+        <a href="/Document" title="@Document.V_Back_To_List">@Document.V_Back_To_List</a>
+     </p>
+
+       </div>
+</div>

@@ -228,7 +228,12 @@ namespace totalhr.web.Controllers
         public JsonResult GetCompanyUsersJson()
         {
             List<User> lstUsers = _accountService.GetCompanyUsers(CurrentUser.CompanyId);
-            return Json(lstUsers, JsonRequestBehavior.AllowGet);
+
+            var qry = from user in lstUsers
+                      orderby user.firstname
+                      select new {UserId = user.id, FullName = user.firstname + " " + user.surname};
+
+            return Json(qry, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetCompanyDepartmentsJson()

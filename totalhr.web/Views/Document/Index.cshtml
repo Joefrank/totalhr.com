@@ -1,40 +1,52 @@
 ﻿@using totalhr.Resources;
 @using totalhr.web.Helpers;
 
-@model List<totalhr.data.EF.CompanyFolder>
+@model List<totalhr.data.EF.CompanyDocument>
 
 @{
     ViewBag.Title = GenericHelper.WebsiteName + " | " + Document.V_Document_title;
     bool bViewTable = Model != null && Model.Count > 0;
 }
 
-<h2>@Document.V_Document_title</h2>
 
-<div>
+
+<div id="main">
+    <div class="content">
+
+        <h1>@Document.V_Document_title</h1>
+
 @if(bViewTable){
-    <table>
+    <table class="tab">
       <tr>
-        <th>Name</th>
-        <th>Files</th>
+        <th>DisplayName</th>
         <th>Created</th>
         <th>CreatedBy</th>
-        <th>View</th>
+        <th>Views</th>
+        <th>Downloads</th>
+        <th>Details</th>
        </tr>
-    @foreach (var folder in Model)
+    @foreach (var doc in Model)
     {
         <tr>
-            <td>@folder.DisplayName</td>
-            <td>@folder.NoOfFiles</td>
-            <td>@folder.Created</td>
-            <td>@folder.CreatedBy</td>
-            <td><a href="" title=""></a></td>
+            <td>@doc.DisplayName</td>            
+            <td>@doc.Created.ToShortDateString()</td>
+            <td>@(doc.User.firstname + " " + doc.User.surname)</td>
+            <td>@doc.NoOfViews</td>
+            <td>@doc.NoOfDownloads</td>
+            <td><a href="/Document/Details/@doc.Id" title="View details">Go..</a></td>
         </tr>
     }
     </table>
-}else{
-    <p class="error">
-        Sorry but no folder to view.
-    </p>   
-}
+    }else{
+        <p class="error">
+            Sorry but no folder to view.
+        </p>   
+    }
+    <p>
+        <a href="/Document/Create" title="@Document.V_Create_New">@Document.V_Create_New</a>&nbsp;
+        <a href="/Document/CreateFolder" title="@Document.V_Create_New_Folder">@Document.V_Create_New_Folder</a>
 
+     </p>
+
+        </div>
 </div>

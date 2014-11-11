@@ -161,6 +161,7 @@
     </Compile>
     <Compile Include="Helpers\CalendarHelper.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
+    <Compile Include="Helpers\DocumentHelper.cs" />
     <Compile Include="Helpers\GenericHelper.cs" />
     <Compile Include="Helpers\GossaryHelper.cs" />
     <Compile Include="Models\UserAccountStruct.cs" />
@@ -308,6 +309,7 @@
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\Site\BeatPicker.min.js" />
     <Content Include="Scripts\Site\calendar.js" />
+    <Content Include="Scripts\Site\CompanyDocument.js" />
     <Content Include="Scripts\Site\DatePicker.js" />
     <Content Include="Scripts\Site\common.js" />
     <Content Include="Scripts\_references.js" />
@@ -350,6 +352,9 @@
     <Content Include="Views\Calendar\EventAdd.cshtml" />
     <Content Include="Views\Calendar\PreviewEvent.cshtml" />
     <Content Include="Views\Document\Index.cshtml" />
+    <Content Include="Views\Document\Create.cshtml" />
+    <Content Include="Views\Document\Details.cshtml" />
+    <Content Include="Views\Shared\_FolderCreate.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -367,6 +372,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\Database\" />
+    <Folder Include="CompanyDocuments\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -383,6 +389,10 @@
     <ProjectReference Include="..\CompanyDocumentService\CompanyDocumentService.csproj">
       <Project>{44b7bfe7-5325-47eb-91b0-e08d0bbaa170}</Project>
       <Name>CompanyDocumentService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileManagementService\FileManagementService.csproj">
+      <Project>{25e457d8-382f-4d73-9d1d-8f17d8927bd1}</Project>
+      <Name>FileManagementService</Name>
     </ProjectReference>
     <ProjectReference Include="..\totalhr.data\totalhr.data.csproj">
       <Project>{f5a3d97a-a1b9-463a-850e-23cf6e1fc488}</Project>

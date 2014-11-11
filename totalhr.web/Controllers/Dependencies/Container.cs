@@ -22,6 +22,8 @@ using Calendar.Infrastructure;
 using Calendar.Implementation;
 using CompanyDocumentService.Implementation;
 using CompanyDocumentService.Infrastructure;
+using FileManagementService.Infrastructure;
+using FileManagementService.Implementation;
 
 namespace totalhr.web.Controllers.Dependencies
 {
@@ -60,6 +62,8 @@ namespace totalhr.web.Controllers.Dependencies
             ninjectKernel.Bind<ICalendarEventRepository>().To<CalendarEventRepository>();
             ninjectKernel.Bind<IDocumentManager>().To<DocumentManager>();
             ninjectKernel.Bind<ICompanyDocumentRepository>().To<CompanyDocumentRepository>();
+            ninjectKernel.Bind<IFileRepository>().To<FileRepository>();
+            ninjectKernel.Bind<IFileUploadService>().To<FileUploadService>();
         }
 
     }

@@ -55,6 +55,15 @@ namespace totalhr.data.EF
         public virtual DbSet<CompanyFolder> CompanyFolders { get; set; }
         public virtual DbSet<CompanyFolderDocument> CompanyFolderDocuments { get; set; }
         public virtual DbSet<File> Files { get; set; }
+        public virtual DbSet<ContractFormFieldValue> ContractFormFieldValues { get; set; }
+        public virtual DbSet<ContractTemplate> ContractTemplates { get; set; }
+        public virtual DbSet<ContractTemplateSection> ContractTemplateSections { get; set; }
+        public virtual DbSet<CTemplateSectionLink> CTemplateSectionLinks { get; set; }
+        public virtual DbSet<CTSectionFieldLink> CTSectionFieldLinks { get; set; }
+        public virtual DbSet<FormControl> FormControls { get; set; }
+        public virtual DbSet<FormField> FormFields { get; set; }
+        public virtual DbSet<Label> Labels { get; set; }
+        public virtual DbSet<UserContract> UserContracts { get; set; }
     
         [DbFunction("TotalHREntities", "SplitCSV")]
         public virtual IQueryable<SplitCSV_Result> SplitCSV(string @string, string delimiter)

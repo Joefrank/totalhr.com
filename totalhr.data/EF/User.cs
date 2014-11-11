@@ -19,6 +19,10 @@ namespace totalhr.data.EF
             this.CompanyDocuments = new HashSet<CompanyDocument>();
             this.CompanyFolders = new HashSet<CompanyFolder>();
             this.CompanyDocumentPermissions = new HashSet<CompanyDocumentPermission>();
+            this.ContractTemplates = new HashSet<ContractTemplate>();
+            this.CTSectionFieldLinks = new HashSet<CTSectionFieldLink>();
+            this.UserContracts = new HashSet<UserContract>();
+            this.UserContracts1 = new HashSet<UserContract>();
         }
     
         public int id { get; set; }
@@ -59,5 +63,9 @@ namespace totalhr.data.EF
         public virtual ICollection<CompanyDocument> CompanyDocuments { get; set; }
         public virtual ICollection<CompanyFolder> CompanyFolders { get; set; }
         public virtual ICollection<CompanyDocumentPermission> CompanyDocumentPermissions { get; set; }
+        public virtual ICollection<ContractTemplate> ContractTemplates { get; set; }
+        public virtual ICollection<CTSectionFieldLink> CTSectionFieldLinks { get; set; }
+        public virtual ICollection<UserContract> UserContracts { get; set; }
+        public virtual ICollection<UserContract> UserContracts1 { get; set; }
     }
 }

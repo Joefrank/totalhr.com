@@ -160,18 +160,19 @@ function OpenSelector(mode) {
 function CollapseSelector() {
     $('#dvAttendeesOptions').slideUp();
 }
+
 /** Target user stuff */
 function PrintUser(div, item) {
     var sChecked = '';
     if (InvitedUsers != null) {
         for (var sc in InvitedUsers) {
-            if (InvitedUsers[sc] == item.id) {
+            if (InvitedUsers[sc] == item.UserId) {
                 sChecked = " checked ";
             }
         }
     }
     
-    div.append("<input type='checkbox' " + sChecked + " id='ckuser_" + item.id + "' value='" + item.id + "' onclick='PickUser(this);' />" + item.firstname + " " + item.surname);
+    div.append("<input type='checkbox' " + sChecked + " id='ckuser_" + item.UserId + "' value='" + item.UserId + "' onclick='PickUser(this);' />" + item.FullName);
 }
 
 function PrintDepartment(div, item) {

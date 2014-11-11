@@ -207,11 +207,17 @@
   <data name="R5MinsBefore" xml:space="preserve">
     <value>5 mins before</value>
   </data>
+  <data name="SelectedUsers" xml:space="preserve">
+    <value>Specific user(s)</value>
+  </data>
   <data name="TimeBefore" xml:space="preserve">
     <value>Before</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>Selected user(s)</value>
+  </data>
+  <data name="WholeCompany" xml:space="preserve">
+    <value>Whole Company</value>
   </data>
   <data name="YearlyOnSameDate" xml:space="preserve">
     <value>Yearly (on chosen years)</value>

@@ -117,7 +117,61 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Error_Could_Not_Create_Doc" xml:space="preserve">
+    <value>Sorry could not create document!</value>
+  </data>
+  <data name="Error_Could_Not_Upload_Doc" xml:space="preserve">
+    <value>Sorry could not upload file!</value>
+  </data>
+  <data name="Error_CreatorIsRequried_Rq" xml:space="preserve">
+    <value>Creator is required</value>
+  </data>
+  <data name="Error_DisplayName_Rq" xml:space="preserve">
+    <value>Display name is required</value>
+  </data>
+  <data name="Error_FileIsRequried_Rq" xml:space="preserve">
+    <value>File is required</value>
+  </data>
+  <data name="Error_File_Type" xml:space="preserve">
+    <value>Only file of type:</value>
+  </data>
+  <data name="Error_OriginalFileName_Rq" xml:space="preserve">
+    <value>Original file name is required.</value>
+  </data>
+  <data name="Error_Upload_File" xml:space="preserve">
+    <value>Please Upload Your file</value>
+  </data>
+  <data name="V_Back_To_List" xml:space="preserve">
+    <value>Back to list</value>
+  </data>
+  <data name="V_Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="V_Create_New" xml:space="preserve">
+    <value>Create new document</value>
+  </data>
+  <data name="V_Create_New_Folder" xml:space="preserve">
+    <value>Create new folder</value>
+  </data>
+  <data name="V_DisplayName" xml:space="preserve">
+    <value>DisplayName</value>
+  </data>
+  <data name="V_Document_Details_Title" xml:space="preserve">
+    <value>Document details</value>
+  </data>
   <data name="V_Document_title" xml:space="preserve">
     <value>Company Documents and Folders</value>
+  </data>
+  <data name="v_File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="V_Folder" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="V_Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="V_Upload" xml:space="preserve">
+    <value>Upload</value>
   </data>
 </root>
