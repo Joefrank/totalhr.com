@@ -63,6 +63,7 @@ C:\GitHubProjects\TotalHR\Authentication\bin\Debug\Authentication.pdb
 C:\GitHubProjects\TotalHR\Authentication\bin\Debug\common.dll
 C:\GitHubProjects\TotalHR\Authentication\bin\Debug\log4net.dll
 C:\GitHubProjects\TotalHR\Authentication\bin\Debug\Ninject.dll
+C:\GitHubProjects\TotalHR\Authentication\bin\Debug\System.Web.Mvc.dll
 C:\GitHubProjects\TotalHR\Authentication\bin\Debug\totalhr.Shared.dll
 C:\GitHubProjects\TotalHR\Authentication\bin\Debug\Resources.dll
 C:\GitHubProjects\TotalHR\Authentication\bin\Debug\totalhr.Shared.pdb

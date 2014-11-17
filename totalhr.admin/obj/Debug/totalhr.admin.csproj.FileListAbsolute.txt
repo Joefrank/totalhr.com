@@ -189,7 +189,6 @@ D:\Projects\MyGithub\totalhr.com\totalhr.admin\bin\System.Web.Razor.xml
 D:\Projects\MyGithub\totalhr.com\totalhr.admin\bin\System.Web.WebPages.xml
 D:\Projects\MyGithub\totalhr.com\totalhr.admin\bin\System.Web.WebPages.Deployment.xml
 D:\Projects\MyGithub\totalhr.com\totalhr.admin\bin\System.Web.WebPages.Razor.xml
-D:\Projects\MyGithub\totalhr.com\totalhr.admin\obj\Debug\totalhr.admin.csprojResolveAssemblyReference.cache
 D:\Projects\MyGithub\totalhr.com\totalhr.admin\obj\Debug\totalhr.admin.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.admin\obj\Debug\totalhr.admin.pdb
 C:\GitHubProjects\TotalHR\totalhr.admin\bin\totalhr.admin.dll.config
@@ -201,9 +200,6 @@ C:\GitHubProjects\TotalHR\totalhr.admin\bin\Microsoft.Web.Infrastructure.dll
 C:\GitHubProjects\TotalHR\totalhr.admin\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
 C:\GitHubProjects\TotalHR\totalhr.admin\bin\Newtonsoft.Json.dll
 C:\GitHubProjects\TotalHR\totalhr.admin\bin\Ninject.dll
-C:\GitHubProjects\TotalHR\totalhr.admin\bin\System.Net.Http.Formatting.dll
-C:\GitHubProjects\TotalHR\totalhr.admin\bin\System.Web.Http.dll
-C:\GitHubProjects\TotalHR\totalhr.admin\bin\System.Web.Http.WebHost.dll
 C:\GitHubProjects\TotalHR\totalhr.admin\bin\System.Web.Mvc.dll
 C:\GitHubProjects\TotalHR\totalhr.admin\bin\System.Web.Optimization.dll
 C:\GitHubProjects\TotalHR\totalhr.admin\bin\System.Web.Providers.dll
@@ -215,14 +211,11 @@ C:\GitHubProjects\TotalHR\totalhr.admin\bin\WebGrease.dll
 C:\GitHubProjects\TotalHR\totalhr.admin\bin\Ninject.xml
 C:\GitHubProjects\TotalHR\totalhr.admin\bin\EntityFramework.xml
 C:\GitHubProjects\TotalHR\totalhr.admin\bin\Newtonsoft.Json.xml
-C:\GitHubProjects\TotalHR\totalhr.admin\bin\System.Net.Http.Formatting.xml
-C:\GitHubProjects\TotalHR\totalhr.admin\bin\System.Web.Http.xml
-C:\GitHubProjects\TotalHR\totalhr.admin\bin\System.Web.Http.WebHost.xml
 C:\GitHubProjects\TotalHR\totalhr.admin\bin\System.Web.Mvc.xml
 C:\GitHubProjects\TotalHR\totalhr.admin\bin\System.Web.Razor.xml
 C:\GitHubProjects\TotalHR\totalhr.admin\bin\System.Web.WebPages.xml
 C:\GitHubProjects\TotalHR\totalhr.admin\bin\System.Web.WebPages.Deployment.xml
 C:\GitHubProjects\TotalHR\totalhr.admin\bin\System.Web.WebPages.Razor.xml
+C:\GitHubProjects\TotalHR\totalhr.admin\obj\Debug\totalhr.admin.csprojResolveAssemblyReference.cache
 C:\GitHubProjects\TotalHR\totalhr.admin\obj\Debug\totalhr.admin.dll
 C:\GitHubProjects\TotalHR\totalhr.admin\obj\Debug\totalhr.admin.pdb
-C:\GitHubProjects\TotalHR\totalhr.admin\obj\Debug\totalhr.admin.csprojResolveAssemblyReference.cache

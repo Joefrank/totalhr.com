@@ -18,7 +18,7 @@ namespace totalhr.web.Controllers
 
         protected IOAuthService AuthService;
 
-        private ClientUser _currentUser;
+        private readonly ClientUser _currentUser;
 
        
         public BaseController(IOAuthService authService)

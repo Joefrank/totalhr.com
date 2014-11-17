@@ -88,6 +88,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company Documents.
+        /// </summary>
+        public static string tt_My_Documents {
+            get {
+                return ResourceManager.GetString("tt_My_Documents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Personal Details.
         /// </summary>
         public static string tt_Personal_Details {

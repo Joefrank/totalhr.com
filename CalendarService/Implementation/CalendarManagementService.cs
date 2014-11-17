@@ -83,6 +83,9 @@ namespace Calendar.Implementation
 
                         _calEventRepos.CreateEventAssociation(eventAssociation);
                     }
+
+                    //adds entry for reminders to be scheduled.
+                    _calEventRepos.RequestEventRemindersSceduling(cevent, info.CompanyId);
                 }
 
                 //save attendees. *** include notification
@@ -161,7 +164,7 @@ namespace Calendar.Implementation
                
 
             }
-
+            _calEventRepos.ClearCache();
             return cevent;
         }
 
@@ -183,7 +186,8 @@ namespace Calendar.Implementation
                 _calEventRepos.DeleteEventAssociation(cevent);
                 //cevent.CalendarAssociations.Clear();
                 _calEventRepos.Save();
-                //
+                
+                //***delete all old reminder scheduled tasks
 
                 if (info.Reminders != null && info.Reminders.Count > 0)
                 {
@@ -201,6 +205,7 @@ namespace Calendar.Implementation
 
                         cevent.CalendarAssociations.Add(eventAssociation);
                     }
+                    //*** create new reminder schedules for event _calEventRepos.RequestEventRemindersSceduling(cevent, info.CompanyId);
                 }
 
                     //save attendees.
@@ -387,7 +392,7 @@ namespace Calendar.Implementation
             var repeatTypeNode = root.SelectSingleNode("//type");
 
 
-            if (info.RepeatType != null)
+            if (info.RepeatType > 0)
             {
                 var assocvalue = string.Empty;
                 var temp = new StringBuilder();
@@ -448,7 +453,7 @@ namespace Calendar.Implementation
         {
             return _calEventRepos.GetMonthlyCalendarEvents( userid, year,month, calendarid);
         }
-
+        
         public List<CalendarEventCache> GetUserDayCalendarEvents(int userid, DateTime date, int calendarid=0)
         {
             return _calEventRepos.GetCalendarDailyEventsByUser(userid, date, calendarid);

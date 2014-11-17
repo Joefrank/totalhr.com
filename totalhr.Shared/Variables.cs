@@ -73,6 +73,13 @@ namespace totalhr.Shared
             YearlyOnSameDate = 5
         }
 
+        public enum DocumentPermissionType
+        {
+            WholeCompany = 1,
+            SelectedUsers = 2,
+            Department = 3
+        }
+
         public enum ReminderType
         {
             TimeBefore= 1,
@@ -101,8 +108,8 @@ namespace totalhr.Shared
 
         public enum CalendarEventNotificationType
         {
-            ByEmail=1,
-            ByTextPhone=2
+            ByEmail=255,
+            ByTextPhone=256
         }
 
         public enum EventFrequency
@@ -127,6 +134,37 @@ namespace totalhr.Shared
             MonthView,
             WeekView,
             DayView
+        }
+
+        public enum FileType
+        {
+            CompanyDocument = 1
+        }
+
+        public enum AllowedFileExtension
+        {
+            doc,
+            docx,
+            txt,
+            ppt,
+            rtf,
+            pdf,
+            odt,
+            log,
+            tex,
+            wps,
+            wpd,
+            mp3,
+            mov,
+            gif,
+            jpg,
+            png,
+            psd,
+            pspimage,
+            tif,
+            tiff,
+            thm
+
         }
 
         public static string AdminEmailSignature

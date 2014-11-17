@@ -18,7 +18,7 @@ namespace totalhr.data.Repositories.Implementation
 {
     public class CalendarEventRepository : GenericRepository<TotalHREntities, CalendarEvent>, ICalendarEventRepository
     {
-        string calendarEventCacheKey = "AllCalendarEvents";
+        const string calendarEventCacheKey = "AllCalendarEvents";
         private static readonly object CacheLockObject = new object();
         int _defaultCacheDuration = 60;
 
@@ -72,12 +72,30 @@ namespace totalhr.data.Repositories.Implementation
             return result;
         }
 
+        public void ClearCache()
+        {
+            CacheHelper.Clear(calendarEventCacheKey);
+        }
+
         public void DeleteEventAssociation(CalendarEvent evt)
         {
             foreach (CalendarAssociation assocs in evt.CalendarAssociations)
             {
                 Context.CalendarAssociations.Remove(assocs);
             }
+            Context.SaveChanges();
+        }
+
+        public void RequestEventRemindersSceduling(CalendarEvent evt, int companyid)
+        {
+            EventToSchedule evtToSchedule = new EventToSchedule();
+            evtToSchedule.EventId = evt.id;
+            evtToSchedule.CompanyId = companyid;
+            evtToSchedule.RecipientListName = string.Format("Calendar event reminder recipient list for Event Id # {0}", evt.id);            
+            evtToSchedule.CreatedBy = evt.CreatedBy;
+            evtToSchedule.Created = DateTime.Now;
+
+            Context.EventToSchedules.Add(evtToSchedule);
             Context.SaveChanges();
         }
 
@@ -93,7 +111,7 @@ namespace totalhr.data.Repositories.Implementation
                 if (
                     (calendarid == 0 || assocevt.CalendarId == calendarid)
                     &&
-                    (assocevt.StartOfEvent.Month == month || assocevt.EndOfEvent.Month == month)
+                    (month == 0 || (assocevt.StartOfEvent.Month == month || assocevt.EndOfEvent.Month == month))
                     &&
                     (assocevt.StartOfEvent.Year == year || assocevt.EndOfEvent.Year == year)
                   )

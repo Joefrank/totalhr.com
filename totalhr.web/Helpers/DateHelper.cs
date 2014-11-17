@@ -8,6 +8,12 @@ namespace totalhr.web.Helpers
 {
     public class DateHelper
     {
+        public static string CurrentYearCalendarLink(string text, int calendarid = 0)
+        {
+            return string.Format(@"<a href=""/Calendar/GetCalendarYear/{0}/{1}"">{2}</a>",
+                DateTime.Now.Year, calendarid, text);
+        }
+        
         //*** pass current date as links will depend on dates being viewed
         public static string CurrentMonthCalendarLink(string text, int calendarid = 0)
         {

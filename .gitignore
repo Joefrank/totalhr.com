@@ -38,4 +38,5 @@ _ReSharper*/
 # Office Temp Files
 ~$*
 
-totalhr.web/log-file.txt
+log-file.txt
+*.suo

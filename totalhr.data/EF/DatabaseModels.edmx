@@ -47,6 +47,20 @@
           <Property Name="Location" Type="nvarchar" MaxLength="50" />
           <Property Name="CalendarId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="CalEventReminderType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="frequency" Type="int" Nullable="false" />
+          <Property Name="frequencytype" Type="int" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="createdby" Type="int" Nullable="false" />
+          <Property Name="lastmodified" Type="datetime" />
+          <Property Name="lastmodifiedby" Type="int" />
+          <Property Name="obsolete" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="ID" />
@@ -77,6 +91,65 @@
           <Property Name="Website" Type="nvarchar" MaxLength="500" />
           <Property Name="PreferredLanguageId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="CompanyDocument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="OriginalFileName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="FolderId" Type="int" />
+          <Property Name="FileId" Type="int" Nullable="false" />
+          <Property Name="NoOfViews" Type="int" Nullable="false" />
+          <Property Name="NoOfDownloads" Type="int" Nullable="false" />
+          <Property Name="LastViewed" Type="datetime" />
+          <Property Name="LastViewedBy" Type="int" />
+          <Property Name="LastDownloaded" Type="datetime" />
+          <Property Name="LastDownloadedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentDownloads">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DocumentId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="DownloadDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentPermissions">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="PermissionTypeId" />
+          </Key>
+          <Property Name="DocumentId" Type="int" Nullable="false" />
+          <Property Name="PermissionTypeId" Type="int" Nullable="false" />
+          <Property Name="ObjectId" Type="int" />
+          <Property Name="Created" Type="datetime" />
+          <Property Name="CreatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentShares">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="DocumentId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="DateShared" Type="datetime" Nullable="false" />
+          <Property Name="TypeofShare" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentViews">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="DocumentId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ViewDate" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="CompanyFeature">
           <Key>
             <PropertyRef Name="CompanyId" />
@@ -84,6 +157,88 @@
           </Key>
           <Property Name="CompanyId" Type="int" Nullable="false" />
           <Property Name="FeatureId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyFolder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="NoOfFiles" Type="int" Nullable="false" />
+          <Property Name="NoOfOpenings" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyFolderDocument">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="FolderId" />
+          </Key>
+          <Property Name="DocumentId" Type="int" Nullable="false" />
+          <Property Name="FolderId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ContractFormFieldValues">
+          <Key>
+            <PropertyRef Name="FormFieldid" />
+            <PropertyRef Name="Userid" />
+          </Key>
+          <Property Name="FormFieldid" Type="int" Nullable="false" />
+          <Property Name="Userid" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar(max)" />
+          <Property Name="IntValue" Type="int" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Lastupdated" Type="datetime" />
+          <Property Name="LastupdatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="ContractTemplate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="30" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Lastupdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="ContractTemplateSection">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectionName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Heading" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="TemplateId" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="CTemplateSectionLink">
+          <Key>
+            <PropertyRef Name="TemplateSectionId" />
+            <PropertyRef Name="TemplateId" />
+          </Key>
+          <Property Name="TemplateSectionId" Type="int" Nullable="false" />
+          <Property Name="TemplateId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CTSectionFieldLink">
+          <Key>
+            <PropertyRef Name="TemplateSectionId" />
+            <PropertyRef Name="FormFieldId" />
+          </Key>
+          <Property Name="TemplateSectionId" Type="int" Nullable="false" />
+          <Property Name="FormFieldId" Type="int" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
@@ -118,6 +273,18 @@
           <Property Name="LastUpdated" Type="datetime" />
           <Property Name="Identifier" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="EventToSchedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="RecipientListName" Type="nvarchar" MaxLength="250" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Feature">
           <Key>
             <PropertyRef Name="id" />
@@ -129,6 +296,47 @@
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="LastModified" Type="datetime" />
           <Property Name="LastModifiedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="shortname" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="typeid" Type="int" Nullable="false" />
+          <Property Name="size" Type="bigint" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="createdby" Type="int" Nullable="false" />
+          <Property Name="extension" Type="nvarchar" MaxLength="10" />
+          <Property Name="lastupdated" Type="datetime" />
+          <Property Name="lastupdatedby" Type="int" />
+        </EntityType>
+        <EntityType Name="FormControl">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="HtmlCode" Type="nvarchar" MaxLength="255" />
+          <Property Name="LastModified" Type="datetime" />
+          <Property Name="LastModifiedBy" Type="int" />
+          <Property Name="obsolete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormField">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormControlId" Type="int" Nullable="false" />
+          <Property Name="LabelId" Type="int" />
+          <Property Name="TooltipId" Type="int" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="obsolete" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Glossary">
           <Key>
@@ -145,6 +353,20 @@
           <Property Name="Obsolete" Type="bit" Nullable="false" />
           <Property Name="GlossaryGroup" Type="varchar" MaxLength="50" />
           <Property Name="GroupOrder" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Label">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Term" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="RootId" Type="int" Nullable="false" />
+          <Property Name="LanguageId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedOn" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="Obsolete" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="Language">
           <Key>
@@ -172,6 +394,32 @@
           <Property Name="LastModifiedBy" Type="int" />
           <Property Name="Identifier" Type="varchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Recipient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RecipientUserId" Type="int" Nullable="false" />
+          <Property Name="RecipientEmail" Type="nvarchar" MaxLength="150" />
+          <Property Name="RecipientName" Type="nvarchar" MaxLength="100" />
+          <Property Name="RecipientPhone" Type="nvarchar" MaxLength="30" />
+          <Property Name="NoNotifications" Type="int" Nullable="false" />
+          <Property Name="LastNotificationDate" Type="datetime" />
+          <Property Name="RecipientListId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RecipientList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="250" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Lastupdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Roles">
           <Key>
             <PropertyRef Name="id" />
@@ -184,6 +432,23 @@
           <Property Name="LastModified" Type="datetime" />
           <Property Name="LastModifiedBy" Type="int" />
           <Property Name="Identifier" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScheduledNotifications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GenericNotificationlTypeId" Type="int" Nullable="false" />
+          <Property Name="NotificationTypeId" Type="int" Nullable="false" />
+          <Property Name="ObjectId" Type="int" Nullable="false" />
+          <Property Name="MessageBody" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="MessageTitle" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="RecipientListid" Type="int" Nullable="false" />
+          <Property Name="ScheduledSendDate" Type="datetime" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="SenderName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SenderEmail" Type="nvarchar" MaxLength="150" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -223,6 +488,20 @@
           <Property Name="activationcode" Type="nvarchar" MaxLength="150" />
           <Property Name="chosenculture" Type="varchar" MaxLength="10" />
           <Property Name="departmentid" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserContract">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Userid" Type="int" Nullable="false" />
+          <Property Name="TemplateId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Lastupdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="Views" Type="int" Nullable="false" />
+          <Property Name="LastViewed" Type="datetime" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -280,6 +559,138 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CompanyDocument_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CompanyDocument" Type="Self.CompanyDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyDocument">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyDocumentPermissions_CompanyDocument">
+          <End Role="CompanyDocument" Type="Self.CompanyDocument" Multiplicity="1" />
+          <End Role="CompanyDocumentPermissions" Type="Self.CompanyDocumentPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyDocument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyDocumentPermissions">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyDocumentPermissions_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="CompanyDocumentPermissions" Type="Self.CompanyDocumentPermissions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyDocumentPermissions">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyFolder_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CompanyFolder" Type="Self.CompanyFolder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyFolder">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyFolderDocument_CompanyDocument">
+          <End Role="CompanyDocument" Type="Self.CompanyDocument" Multiplicity="1" />
+          <End Role="CompanyFolderDocument" Type="Self.CompanyFolderDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyDocument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyFolderDocument">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyFolderDocument_CompanyFolder">
+          <End Role="CompanyFolder" Type="Self.CompanyFolder" Multiplicity="1" />
+          <End Role="CompanyFolderDocument" Type="Self.CompanyFolderDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyFolder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyFolderDocument">
+              <PropertyRef Name="FolderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractTemplate_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserContract" Type="Self.UserContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserContract">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTemplateSectionLink_ContractTemplateSection">
+          <End Role="ContractTemplateSection" Type="Self.ContractTemplateSection" Multiplicity="1" />
+          <End Role="CTemplateSectionLink" Type="Self.CTemplateSectionLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractTemplateSection">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CTemplateSectionLink">
+              <PropertyRef Name="TemplateSectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTSectionFieldLink_ContractTemplateSection">
+          <End Role="ContractTemplateSection" Type="Self.ContractTemplateSection" Multiplicity="1" />
+          <End Role="CTSectionFieldLink" Type="Self.CTSectionFieldLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractTemplateSection">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CTSectionFieldLink">
+              <PropertyRef Name="TemplateSectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTSectionFieldLink_FormField">
+          <End Role="FormField" Type="Self.FormField" Multiplicity="1" />
+          <End Role="CTSectionFieldLink" Type="Self.CTSectionFieldLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormField">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CTSectionFieldLink">
+              <PropertyRef Name="FormFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTSectionFieldLink_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="CTSectionFieldLink" Type="Self.CTSectionFieldLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CTSectionFieldLink">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Department_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="Department" Type="Self.Department" Multiplicity="*" />
@@ -292,6 +703,41 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Template_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ContractTemplate" Type="Self.ContractTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ContractTemplate">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContract_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserContract" Type="Self.UserContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserContract">
+              <PropertyRef Name="Userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="BuildCalEventReminderRecipientList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="eventid" Type="int" Mode="In" />
+          <Parameter Name="companyid" Type="int" Mode="In" />
+          <Parameter Name="RecipientListName" Type="nvarchar" Mode="In" />
+          <Parameter Name="description" Type="nvarchar" Mode="In" />
+          <Parameter Name="CreatedBy" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetCompanyFoldersByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="userid" Type="int" Mode="In" />
+          <Parameter Name="departmentid" Type="int" Mode="In" />
+        </Function>
         <Function Name="GetUserProfileIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="int" Mode="In" />
         </Function>
@@ -304,20 +750,58 @@
         <Function Name="GetUserRoles" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="int" Mode="In" />
         </Function>
+        <Function Name="PrepareCalendarEventScheduledReminder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="SenderName" Type="nvarchar" Mode="In" />
+          <Parameter Name="SenderEmail" Type="nvarchar" Mode="In" />
+          <Parameter Name="RecipientListId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SplitCSV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="String" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Delimiter" Type="char" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="items" Type="varchar(max)" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
         <EntityContainer Name="TotalHRModelStoreContainer">
           <EntitySet Name="Calendar" EntityType="Self.Calendar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CalendarAssociation" EntityType="Self.CalendarAssociation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CalendarEvent" EntityType="Self.CalendarEvent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CalEventReminderType" EntityType="Self.CalEventReminderType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyDocument" EntityType="Self.CompanyDocument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyDocumentDownloads" EntityType="Self.CompanyDocumentDownloads" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyDocumentPermissions" EntityType="Self.CompanyDocumentPermissions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyDocumentShares" EntityType="Self.CompanyDocumentShares" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyDocumentViews" EntityType="Self.CompanyDocumentViews" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyFeature" EntityType="Self.CompanyFeature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyFolder" EntityType="Self.CompanyFolder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CompanyFolderDocument" EntityType="Self.CompanyFolderDocument" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractFormFieldValues" EntityType="Self.ContractFormFieldValues" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractTemplate" EntityType="Self.ContractTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ContractTemplateSection" EntityType="Self.ContractTemplateSection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CTemplateSectionLink" EntityType="Self.CTemplateSectionLink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CTSectionFieldLink" EntityType="Self.CTSectionFieldLink" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailTemplate" EntityType="Self.EmailTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventToSchedule" EntityType="Self.EventToSchedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="File" EntityType="Self.File" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormControl" EntityType="Self.FormControl" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormField" EntityType="Self.FormField" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Glossary" EntityType="Self.Glossary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Label" EntityType="Self.Label" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recipient" EntityType="Self.Recipient" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecipientList" EntityType="Self.RecipientList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduledNotifications" EntityType="Self.ScheduledNotifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserContract" EntityType="Self.UserContract" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Calendar_Company" Association="Self.FK_Calendar_Company">
@@ -332,15 +816,70 @@
             <End Role="Calendar" EntitySet="Calendar" />
             <End Role="CalendarEvent" EntitySet="CalendarEvent" />
           </AssociationSet>
+          <AssociationSet Name="FK_CompanyDocument_User" Association="Self.FK_CompanyDocument_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CompanyDocument" EntitySet="CompanyDocument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyDocumentPermissions_CompanyDocument" Association="Self.FK_CompanyDocumentPermissions_CompanyDocument">
+            <End Role="CompanyDocument" EntitySet="CompanyDocument" />
+            <End Role="CompanyDocumentPermissions" EntitySet="CompanyDocumentPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyDocumentPermissions_User" Association="Self.FK_CompanyDocumentPermissions_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CompanyDocumentPermissions" EntitySet="CompanyDocumentPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyFolder_User" Association="Self.FK_CompanyFolder_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CompanyFolder" EntitySet="CompanyFolder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyFolderDocument_CompanyDocument" Association="Self.FK_CompanyFolderDocument_CompanyDocument">
+            <End Role="CompanyDocument" EntitySet="CompanyDocument" />
+            <End Role="CompanyFolderDocument" EntitySet="CompanyFolderDocument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyFolderDocument_CompanyFolder" Association="Self.FK_CompanyFolderDocument_CompanyFolder">
+            <End Role="CompanyFolder" EntitySet="CompanyFolder" />
+            <End Role="CompanyFolderDocument" EntitySet="CompanyFolderDocument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractTemplate_User" Association="Self.FK_ContractTemplate_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserContract" EntitySet="UserContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTemplateSectionLink_ContractTemplateSection" Association="Self.FK_CTemplateSectionLink_ContractTemplateSection">
+            <End Role="ContractTemplateSection" EntitySet="ContractTemplateSection" />
+            <End Role="CTemplateSectionLink" EntitySet="CTemplateSectionLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTSectionFieldLink_ContractTemplateSection" Association="Self.FK_CTSectionFieldLink_ContractTemplateSection">
+            <End Role="ContractTemplateSection" EntitySet="ContractTemplateSection" />
+            <End Role="CTSectionFieldLink" EntitySet="CTSectionFieldLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTSectionFieldLink_FormField" Association="Self.FK_CTSectionFieldLink_FormField">
+            <End Role="FormField" EntitySet="FormField" />
+            <End Role="CTSectionFieldLink" EntitySet="CTSectionFieldLink" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTSectionFieldLink_User" Association="Self.FK_CTSectionFieldLink_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="CTSectionFieldLink" EntitySet="CTSectionFieldLink" />
+          </AssociationSet>
           <AssociationSet Name="FK_Department_Company" Association="Self.FK_Department_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Template_User" Association="Self.FK_Template_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ContractTemplate" EntitySet="ContractTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContract_User" Association="Self.FK_UserContract_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserContract" EntitySet="UserContract" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TotalHRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="SplitCSV_Result">
+          <Property Name="items" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </ComplexType>
         <EntityType Name="Calendar">
           <Key>
             <PropertyRef Name="id" />
@@ -368,7 +907,7 @@
           <Property Name="AssociationValue" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="CalendarEvent" Relationship="TotalHRModel.FK_CalendarAssociation_CalendarEvent" FromRole="CalendarAssociation" ToRole="CalendarEvent" />
+          <NavigationProperty Name="CalendarEvent" Relationship="Self.FK_CalendarAssociation_CalendarEvent" FromRole="CalendarAssociation" ToRole="CalendarEvent" />
         </EntityType>
         <EntityType Name="CalendarEvent">
           <Key>
@@ -386,7 +925,21 @@
           <Property Name="Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="CalendarId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Calendar" Relationship="Self.FK_CalendarEvent_Calendar" FromRole="CalendarEvent" ToRole="Calendar" />
-          <NavigationProperty Name="CalendarAssociations" Relationship="TotalHRModel.FK_CalendarAssociation_CalendarEvent" FromRole="CalendarEvent" ToRole="CalendarAssociation" />
+          <NavigationProperty Name="CalendarAssociations" Relationship="Self.FK_CalendarAssociation_CalendarEvent" FromRole="CalendarEvent" ToRole="CalendarAssociation" />
+        </EntityType>
+        <EntityType Name="CalEventReminderType">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="frequency" Type="Int32" Nullable="false" />
+          <Property Name="frequencytype" Type="Int32" Nullable="false" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdby" Type="Int32" Nullable="false" />
+          <Property Name="lastmodified" Type="DateTime" Precision="3" />
+          <Property Name="lastmodifiedby" Type="Int32" />
+          <Property Name="obsolete" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -462,6 +1015,18 @@
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="EventToSchedule">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="RecipientListName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
         <EntityType Name="Feature">
           <Key>
             <PropertyRef Name="id" />
@@ -516,6 +1081,32 @@
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="Recipient">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RecipientUserId" Type="Int32" Nullable="false" />
+          <Property Name="RecipientEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="RecipientPhone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="NoNotifications" Type="Int32" Nullable="false" />
+          <Property Name="LastNotificationDate" Type="DateTime" Precision="3" />
+          <Property Name="RecipientListId" Type="Int32" Nullable="false" />
+          <Property Name="RecipientName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="RecipientList">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Lastupdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+        </EntityType>
         <EntityType Name="Role">
           <Key>
             <PropertyRef Name="id" />
@@ -528,6 +1119,23 @@
           <Property Name="LastModified" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScheduledNotification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenericNotificationlTypeId" Type="Int32" Nullable="false" />
+          <Property Name="NotificationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ObjectId" Type="Int32" Nullable="false" />
+          <Property Name="MessageBody" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MessageTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RecipientListid" Type="Int32" Nullable="false" />
+          <Property Name="ScheduledSendDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SenderName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SenderEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
         </EntityType>
         <EntityType Name="User">
           <Key>
@@ -567,6 +1175,13 @@
           <Property Name="activationcode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Name="chosenculture" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="departmentid" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CompanyDocuments" Relationship="TotalHRModel.FK_CompanyDocument_User" FromRole="User" ToRole="CompanyDocument" />
+          <NavigationProperty Name="CompanyFolders" Relationship="TotalHRModel.FK_CompanyFolder_User" FromRole="User" ToRole="CompanyFolder" />
+          <NavigationProperty Name="CompanyDocumentPermissions" Relationship="TotalHRModel.FK_CompanyDocumentPermissions_User" FromRole="User" ToRole="CompanyDocumentPermission" />
+          <NavigationProperty Name="ContractTemplates" Relationship="TotalHRModel.FK_Template_User" FromRole="User" ToRole="ContractTemplate" />
+          <NavigationProperty Name="CTSectionFieldLinks" Relationship="TotalHRModel.FK_CTSectionFieldLink_User" FromRole="User" ToRole="CTSectionFieldLink" />
+          <NavigationProperty Name="UserContracts" Relationship="TotalHRModel.FK_ContractTemplate_User" FromRole="User" ToRole="UserContract" />
+          <NavigationProperty Name="UserContracts1" Relationship="TotalHRModel.FK_UserContract_User" FromRole="User" ToRole="UserContract" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -612,6 +1227,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CalendarAssociation_CalendarEvent">
+          <End Role="CalendarEvent" Type="Self.CalendarEvent" Multiplicity="1" />
+          <End Role="CalendarAssociation" Type="Self.CalendarAssociation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CalendarEvent">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CalendarAssociation">
+              <PropertyRef Name="EventId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Department_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="Department" Type="Self.Department" Multiplicity="*" />
@@ -624,19 +1251,24 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TotalHREntities2" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="TotalHREntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Calendars" EntityType="Self.Calendar" />
           <EntitySet Name="CalendarAssociations" EntityType="Self.CalendarAssociation" />
           <EntitySet Name="CalendarEvents" EntityType="Self.CalendarEvent" />
+          <EntitySet Name="CalEventReminderTypes" EntityType="Self.CalEventReminderType" />
           <EntitySet Name="Companies" EntityType="Self.Company" />
           <EntitySet Name="CompanyFeatures" EntityType="Self.CompanyFeature" />
           <EntitySet Name="Departments" EntityType="Self.Department" />
           <EntitySet Name="EmailTemplates" EntityType="Self.EmailTemplate" />
+          <EntitySet Name="EventToSchedules" EntityType="Self.EventToSchedule" />
           <EntitySet Name="Features" EntityType="Self.Feature" />
           <EntitySet Name="Glossaries" EntityType="Self.Glossary" />
           <EntitySet Name="Languages" EntityType="Self.Language" />
           <EntitySet Name="Profiles" EntityType="Self.Profile" />
+          <EntitySet Name="Recipients" EntityType="Self.Recipient" />
+          <EntitySet Name="RecipientLists" EntityType="Self.RecipientList" />
           <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="ScheduledNotifications" EntityType="Self.ScheduledNotification" />
           <EntitySet Name="Users" EntityType="Self.User" />
           <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
           <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
@@ -648,10 +1280,25 @@
             <End Role="Calendar" EntitySet="Calendars" />
             <End Role="CalendarEvent" EntitySet="CalendarEvents" />
           </AssociationSet>
+          <AssociationSet Name="FK_CalendarAssociation_CalendarEvent" Association="Self.FK_CalendarAssociation_CalendarEvent">
+            <End Role="CalendarEvent" EntitySet="CalendarEvents" />
+            <End Role="CalendarAssociation" EntitySet="CalendarAssociations" />
+          </AssociationSet>
           <AssociationSet Name="FK_Department_Company" Association="Self.FK_Department_Company">
             <End Role="Company" EntitySet="Companies" />
             <End Role="Department" EntitySet="Departments" />
           </AssociationSet>
+          <FunctionImport Name="SplitCSV" ReturnType="Collection(TotalHRModel.SplitCSV_Result)" IsComposable="true">
+            <Parameter Name="String" Mode="In" Type="String" />
+            <Parameter Name="Delimiter" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="BuildCalEventReminderRecipientList" ReturnType="Collection(Int32)">
+            <Parameter Name="eventid" Mode="In" Type="Int32" />
+            <Parameter Name="companyid" Mode="In" Type="Int32" />
+            <Parameter Name="RecipientListName" Mode="In" Type="String" />
+            <Parameter Name="description" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+          </FunctionImport>
           <FunctionImport Name="GetUserProfileIds" ReturnType="Collection(Int32)">
           <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -664,9 +1311,83 @@
           <FunctionImport Name="GetUserRoles" ReturnType="Collection(TotalHRModel.GetUserRoles_Result)">
           <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
-          <AssociationSet Name="FK_CalendarAssociation_CalendarEvent" Association="TotalHRModel.FK_CalendarAssociation_CalendarEvent">
-            <End Role="CalendarEvent" EntitySet="CalendarEvents" />
-            <End Role="CalendarAssociation" EntitySet="CalendarAssociations" />
+          <FunctionImport Name="PrepareCalendarEventScheduledReminder">
+            <Parameter Name="SenderName" Mode="In" Type="String" />
+            <Parameter Name="SenderEmail" Mode="In" Type="String" />
+            <Parameter Name="RecipientListId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="CompanyDocuments" EntityType="TotalHRModel.CompanyDocument" />
+          <EntitySet Name="CompanyDocumentDownloads" EntityType="TotalHRModel.CompanyDocumentDownload" />
+          <EntitySet Name="CompanyDocumentPermissions" EntityType="TotalHRModel.CompanyDocumentPermission" />
+          <EntitySet Name="CompanyDocumentShares" EntityType="TotalHRModel.CompanyDocumentShare" />
+          <EntitySet Name="CompanyDocumentViews" EntityType="TotalHRModel.CompanyDocumentView" />
+          <EntitySet Name="CompanyFolders" EntityType="TotalHRModel.CompanyFolder" />
+          <EntitySet Name="CompanyFolderDocuments" EntityType="TotalHRModel.CompanyFolderDocument" />
+          <EntitySet Name="Files" EntityType="TotalHRModel.File" />
+          <AssociationSet Name="FK_CompanyDocument_User" Association="TotalHRModel.FK_CompanyDocument_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CompanyDocument" EntitySet="CompanyDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyFolderDocument_CompanyDocument" Association="TotalHRModel.FK_CompanyFolderDocument_CompanyDocument">
+            <End Role="CompanyDocument" EntitySet="CompanyDocuments" />
+            <End Role="CompanyFolderDocument" EntitySet="CompanyFolderDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyFolder_User" Association="TotalHRModel.FK_CompanyFolder_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CompanyFolder" EntitySet="CompanyFolders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyFolderDocument_CompanyFolder" Association="TotalHRModel.FK_CompanyFolderDocument_CompanyFolder">
+            <End Role="CompanyFolder" EntitySet="CompanyFolders" />
+            <End Role="CompanyFolderDocument" EntitySet="CompanyFolderDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyDocumentPermissions_CompanyDocument" Association="TotalHRModel.FK_CompanyDocumentPermissions_CompanyDocument">
+            <End Role="CompanyDocument" EntitySet="CompanyDocuments" />
+            <End Role="CompanyDocumentPermission" EntitySet="CompanyDocumentPermissions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyDocumentPermissions_User" Association="TotalHRModel.FK_CompanyDocumentPermissions_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CompanyDocumentPermission" EntitySet="CompanyDocumentPermissions" />
+          </AssociationSet>
+          <FunctionImport Name="GetCompanyFoldersByUser" ReturnType="Collection(TotalHRModel.GetCompanyFoldersByUser_Result)">
+            <Parameter Name="userid" Mode="In" Type="Int32" />
+            <Parameter Name="departmentid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="ContractFormFieldValues" EntityType="TotalHRModel.ContractFormFieldValue" />
+          <EntitySet Name="ContractTemplates" EntityType="TotalHRModel.ContractTemplate" />
+          <EntitySet Name="ContractTemplateSections" EntityType="TotalHRModel.ContractTemplateSection" />
+          <EntitySet Name="CTemplateSectionLinks" EntityType="TotalHRModel.CTemplateSectionLink" />
+          <EntitySet Name="CTSectionFieldLinks" EntityType="TotalHRModel.CTSectionFieldLink" />
+          <EntitySet Name="FormControls" EntityType="TotalHRModel.FormControl" />
+          <EntitySet Name="FormFields" EntityType="TotalHRModel.FormField" />
+          <EntitySet Name="Labels" EntityType="TotalHRModel.Label" />
+          <EntitySet Name="UserContracts" EntityType="TotalHRModel.UserContract" />
+          <AssociationSet Name="FK_Template_User" Association="TotalHRModel.FK_Template_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ContractTemplate" EntitySet="ContractTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTemplateSectionLink_ContractTemplateSection" Association="TotalHRModel.FK_CTemplateSectionLink_ContractTemplateSection">
+            <End Role="ContractTemplateSection" EntitySet="ContractTemplateSections" />
+            <End Role="CTemplateSectionLink" EntitySet="CTemplateSectionLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTSectionFieldLink_ContractTemplateSection" Association="TotalHRModel.FK_CTSectionFieldLink_ContractTemplateSection">
+            <End Role="ContractTemplateSection" EntitySet="ContractTemplateSections" />
+            <End Role="CTSectionFieldLink" EntitySet="CTSectionFieldLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTSectionFieldLink_FormField" Association="TotalHRModel.FK_CTSectionFieldLink_FormField">
+            <End Role="FormField" EntitySet="FormFields" />
+            <End Role="CTSectionFieldLink" EntitySet="CTSectionFieldLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CTSectionFieldLink_User" Association="TotalHRModel.FK_CTSectionFieldLink_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CTSectionFieldLink" EntitySet="CTSectionFieldLinks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractTemplate_User" Association="TotalHRModel.FK_ContractTemplate_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserContract" EntitySet="UserContracts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContract_User" Association="TotalHRModel.FK_UserContract_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserContract" EntitySet="UserContracts" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetUserProfiles_Result">
@@ -689,15 +1410,398 @@
           <Property Type="Int32" Name="LastModifiedBy" Nullable="true" />
           <Property Type="String" Name="Identifier" Nullable="false" MaxLength="50" />
         </ComplexType>
-        <Association Name="FK_CalendarAssociation_CalendarEvent">
-          <End Type="TotalHRModel.CalendarEvent" Role="CalendarEvent" Multiplicity="1" />
-          <End Type="TotalHRModel.CalendarAssociation" Role="CalendarAssociation" Multiplicity="*" />
+        <EntityType Name="CompanyDocument">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="OriginalFileName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="FolderId" Type="Int32" />
+          <Property Name="FileId" Type="Int32" Nullable="false" />
+          <Property Name="NoOfViews" Type="Int32" Nullable="false" />
+          <Property Name="NoOfDownloads" Type="Int32" Nullable="false" />
+          <Property Name="LastViewed" Type="DateTime" Precision="3" />
+          <Property Name="LastViewedBy" Type="Int32" />
+          <Property Name="LastDownloaded" Type="DateTime" Precision="3" />
+          <Property Name="LastDownloadedBy" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_CompanyDocument_User" FromRole="CompanyDocument" ToRole="User" />
+          <NavigationProperty Name="CompanyFolderDocuments" Relationship="TotalHRModel.FK_CompanyFolderDocument_CompanyDocument" FromRole="CompanyDocument" ToRole="CompanyFolderDocument" />
+          <NavigationProperty Name="CompanyDocumentPermissions" Relationship="TotalHRModel.FK_CompanyDocumentPermissions_CompanyDocument" FromRole="CompanyDocument" ToRole="CompanyDocumentPermission" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentDownload">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DocumentId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="DownloadDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentPermission">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="PermissionTypeId" />
+          </Key>
+          <Property Name="DocumentId" Type="Int32" Nullable="false" />
+          <Property Name="PermissionTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ObjectId" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <NavigationProperty Name="CompanyDocument" Relationship="TotalHRModel.FK_CompanyDocumentPermissions_CompanyDocument" FromRole="CompanyDocumentPermission" ToRole="CompanyDocument" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_CompanyDocumentPermissions_User" FromRole="CompanyDocumentPermission" ToRole="User" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentShare">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="DocumentId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="DateShared" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TypeofShare" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CompanyDocumentView">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="DocumentId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ViewDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="CompanyFolder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="NoOfFiles" Type="Int32" Nullable="false" />
+          <Property Name="NoOfOpenings" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_CompanyFolder_User" FromRole="CompanyFolder" ToRole="User" />
+          <NavigationProperty Name="CompanyFolderDocuments" Relationship="TotalHRModel.FK_CompanyFolderDocument_CompanyFolder" FromRole="CompanyFolder" ToRole="CompanyFolderDocument" />
+        </EntityType>
+        <EntityType Name="CompanyFolderDocument">
+          <Key>
+            <PropertyRef Name="DocumentId" />
+            <PropertyRef Name="FolderId" />
+          </Key>
+          <Property Name="DocumentId" Type="Int32" Nullable="false" />
+          <Property Name="FolderId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CompanyDocument" Relationship="TotalHRModel.FK_CompanyFolderDocument_CompanyDocument" FromRole="CompanyFolderDocument" ToRole="CompanyDocument" />
+          <NavigationProperty Name="CompanyFolder" Relationship="TotalHRModel.FK_CompanyFolderDocument_CompanyFolder" FromRole="CompanyFolderDocument" ToRole="CompanyFolder" />
+        </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="shortname" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="typeid" Type="Int32" Nullable="false" />
+          <Property Name="size" Type="Int64" Nullable="false" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdby" Type="Int32" Nullable="false" />
+          <Property Name="extension" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="lastupdated" Type="DateTime" Precision="3" />
+          <Property Name="lastupdatedby" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_CompanyDocument_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.CompanyDocument" Role="CompanyDocument" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="CalendarEvent">
+            <Principal Role="User">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="CalendarAssociation">
-              <PropertyRef Name="EventId" />
+            <Dependent Role="CompanyDocument">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyFolderDocument_CompanyDocument">
+          <End Type="TotalHRModel.CompanyDocument" Role="CompanyDocument" Multiplicity="1" />
+          <End Type="TotalHRModel.CompanyFolderDocument" Role="CompanyFolderDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyDocument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyFolderDocument">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyFolder_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.CompanyFolder" Role="CompanyFolder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyFolder">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyFolderDocument_CompanyFolder">
+          <End Type="TotalHRModel.CompanyFolder" Role="CompanyFolder" Multiplicity="1" />
+          <End Type="TotalHRModel.CompanyFolderDocument" Role="CompanyFolderDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyFolder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyFolderDocument">
+              <PropertyRef Name="FolderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyDocumentPermissions_CompanyDocument">
+          <End Type="TotalHRModel.CompanyDocument" Role="CompanyDocument" Multiplicity="1" />
+          <End Type="TotalHRModel.CompanyDocumentPermission" Role="CompanyDocumentPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CompanyDocument">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CompanyDocumentPermission">
+              <PropertyRef Name="DocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyDocumentPermissions_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.CompanyDocumentPermission" Role="CompanyDocumentPermission" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyDocumentPermission">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetCompanyFoldersByUser_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="DisplayName" Nullable="false" MaxLength="250" />
+          <Property Type="DateTime" Name="Created" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="CreatedBy" Nullable="false" />
+          <Property Type="DateTime" Name="LastUpdated" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="LastUpdatedBy" Nullable="true" />
+          <Property Type="Int32" Name="NoOfFiles" Nullable="false" />
+          <Property Type="Int32" Name="NoOfOpenings" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="ContractFormFieldValue">
+          <Key>
+            <PropertyRef Name="FormFieldid" />
+            <PropertyRef Name="Userid" />
+          </Key>
+          <Property Name="FormFieldid" Type="Int32" Nullable="false" />
+          <Property Name="Userid" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IntValue" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Lastupdated" Type="DateTime" Precision="3" />
+          <Property Name="LastupdatedBy" Type="Int32" />
+        </EntityType>
+        <EntityType Name="ContractTemplate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Lastupdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_Template_User" FromRole="ContractTemplate" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ContractTemplateSection">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectionName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Heading" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="TemplateId" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <NavigationProperty Name="CTemplateSectionLinks" Relationship="TotalHRModel.FK_CTemplateSectionLink_ContractTemplateSection" FromRole="ContractTemplateSection" ToRole="CTemplateSectionLink" />
+          <NavigationProperty Name="CTSectionFieldLinks" Relationship="TotalHRModel.FK_CTSectionFieldLink_ContractTemplateSection" FromRole="ContractTemplateSection" ToRole="CTSectionFieldLink" />
+        </EntityType>
+        <EntityType Name="CTemplateSectionLink">
+          <Key>
+            <PropertyRef Name="TemplateSectionId" />
+            <PropertyRef Name="TemplateId" />
+          </Key>
+          <Property Name="TemplateSectionId" Type="Int32" Nullable="false" />
+          <Property Name="TemplateId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ContractTemplateSection" Relationship="TotalHRModel.FK_CTemplateSectionLink_ContractTemplateSection" FromRole="CTemplateSectionLink" ToRole="ContractTemplateSection" />
+        </EntityType>
+        <EntityType Name="CTSectionFieldLink">
+          <Key>
+            <PropertyRef Name="TemplateSectionId" />
+            <PropertyRef Name="FormFieldId" />
+          </Key>
+          <Property Name="TemplateSectionId" Type="Int32" Nullable="false" />
+          <Property Name="FormFieldId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ContractTemplateSection" Relationship="TotalHRModel.FK_CTSectionFieldLink_ContractTemplateSection" FromRole="CTSectionFieldLink" ToRole="ContractTemplateSection" />
+          <NavigationProperty Name="FormField" Relationship="TotalHRModel.FK_CTSectionFieldLink_FormField" FromRole="CTSectionFieldLink" ToRole="FormField" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_CTSectionFieldLink_User" FromRole="CTSectionFieldLink" ToRole="User" />
+        </EntityType>
+        <EntityType Name="FormControl">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="HtmlCode" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="LastModified" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" />
+          <Property Name="obsolete" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormField">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormControlId" Type="Int32" Nullable="false" />
+          <Property Name="LabelId" Type="Int32" />
+          <Property Name="TooltipId" Type="Int32" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="obsolete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CTSectionFieldLinks" Relationship="TotalHRModel.FK_CTSectionFieldLink_FormField" FromRole="FormField" ToRole="CTSectionFieldLink" />
+        </EntityType>
+        <EntityType Name="Label">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Term" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="RootId" Type="Int32" Nullable="false" />
+          <Property Name="LanguageId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="Obsolete" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserContract">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Userid" Type="Int32" Nullable="false" />
+          <Property Name="TemplateId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Lastupdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="Views" Type="Int32" Nullable="false" />
+          <Property Name="LastViewed" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_ContractTemplate_User" FromRole="UserContract" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_UserContract_User" FromRole="UserContract" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Template_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.ContractTemplate" Role="ContractTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ContractTemplate">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTemplateSectionLink_ContractTemplateSection">
+          <End Type="TotalHRModel.ContractTemplateSection" Role="ContractTemplateSection" Multiplicity="1" />
+          <End Type="TotalHRModel.CTemplateSectionLink" Role="CTemplateSectionLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractTemplateSection">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CTemplateSectionLink">
+              <PropertyRef Name="TemplateSectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTSectionFieldLink_ContractTemplateSection">
+          <End Type="TotalHRModel.ContractTemplateSection" Role="ContractTemplateSection" Multiplicity="1" />
+          <End Type="TotalHRModel.CTSectionFieldLink" Role="CTSectionFieldLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ContractTemplateSection">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CTSectionFieldLink">
+              <PropertyRef Name="TemplateSectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTSectionFieldLink_FormField">
+          <End Type="TotalHRModel.FormField" Role="FormField" Multiplicity="1" />
+          <End Type="TotalHRModel.CTSectionFieldLink" Role="CTSectionFieldLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormField">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CTSectionFieldLink">
+              <PropertyRef Name="FormFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CTSectionFieldLink_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.CTSectionFieldLink" Role="CTSectionFieldLink" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CTSectionFieldLink">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractTemplate_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.UserContract" Role="UserContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserContract">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContract_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.UserContract" Role="UserContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserContract">
+              <PropertyRef Name="Userid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -706,7 +1810,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="TotalHRModelStoreContainer" CdmEntityContainer="TotalHREntities2">
+        <EntityContainerMapping StorageEntityContainer="TotalHRModelStoreContainer" CdmEntityContainer="TotalHREntities">
           <EntitySetMapping Name="Calendars">
             <EntityTypeMapping TypeName="TotalHRModel.Calendar">
               <MappingFragment StoreEntitySet="Calendar">
@@ -749,6 +1853,21 @@
                 <ScalarProperty Name="EndOfEvent" ColumnName="EndOfEvent" />
                 <ScalarProperty Name="Location" ColumnName="Location" />
                 <ScalarProperty Name="CalendarId" ColumnName="CalendarId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CalEventReminderTypes">
+            <EntityTypeMapping TypeName="TotalHRModel.CalEventReminderType">
+              <MappingFragment StoreEntitySet="CalEventReminderType">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="frequency" ColumnName="frequency" />
+                <ScalarProperty Name="frequencytype" ColumnName="frequencytype" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="lastmodified" ColumnName="lastmodified" />
+                <ScalarProperty Name="lastmodifiedby" ColumnName="lastmodifiedby" />
+                <ScalarProperty Name="obsolete" ColumnName="obsolete" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -826,6 +1945,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="EventToSchedules">
+            <EntityTypeMapping TypeName="TotalHRModel.EventToSchedule">
+              <MappingFragment StoreEntitySet="EventToSchedule">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="RecipientListName" ColumnName="RecipientListName" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Features">
             <EntityTypeMapping TypeName="TotalHRModel.Feature">
               <MappingFragment StoreEntitySet="Feature">
@@ -884,6 +2016,34 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="Recipients">
+            <EntityTypeMapping TypeName="TotalHRModel.Recipient">
+              <MappingFragment StoreEntitySet="Recipient">
+                <ScalarProperty Name="RecipientName" ColumnName="RecipientName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="RecipientUserId" ColumnName="RecipientUserId" />
+                <ScalarProperty Name="RecipientEmail" ColumnName="RecipientEmail" />
+                <ScalarProperty Name="RecipientPhone" ColumnName="RecipientPhone" />
+                <ScalarProperty Name="NoNotifications" ColumnName="NoNotifications" />
+                <ScalarProperty Name="LastNotificationDate" ColumnName="LastNotificationDate" />
+                <ScalarProperty Name="RecipientListId" ColumnName="RecipientListId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecipientLists">
+            <EntityTypeMapping TypeName="TotalHRModel.RecipientList">
+              <MappingFragment StoreEntitySet="RecipientList">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Lastupdated" ColumnName="Lastupdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="Roles">
             <EntityTypeMapping TypeName="TotalHRModel.Role">
               <MappingFragment StoreEntitySet="Roles">
@@ -895,6 +2055,24 @@
                 <ScalarProperty Name="LastModified" ColumnName="LastModified" />
                 <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
                 <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduledNotifications">
+            <EntityTypeMapping TypeName="TotalHRModel.ScheduledNotification">
+              <MappingFragment StoreEntitySet="ScheduledNotifications">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GenericNotificationlTypeId" ColumnName="GenericNotificationlTypeId" />
+                <ScalarProperty Name="NotificationTypeId" ColumnName="NotificationTypeId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="MessageBody" ColumnName="MessageBody" />
+                <ScalarProperty Name="MessageTitle" ColumnName="MessageTitle" />
+                <ScalarProperty Name="RecipientListid" ColumnName="RecipientListid" />
+                <ScalarProperty Name="ScheduledSendDate" ColumnName="ScheduledSendDate" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="SenderName" ColumnName="SenderName" />
+                <ScalarProperty Name="SenderEmail" ColumnName="SenderEmail" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -958,6 +2136,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionName="TotalHRModel.Store.SplitCSV" FunctionImportName="SplitCSV">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalHRModel.SplitCSV_Result">
+                <ScalarProperty Name="items" ColumnName="items" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="BuildCalEventReminderRecipientList" FunctionName="TotalHRModel.Store.BuildCalEventReminderRecipientList" />
           <FunctionImportMapping FunctionImportName="GetUserProfileIds" FunctionName="TotalHRModel.Store.GetUserProfileIds" />
           <FunctionImportMapping FunctionImportName="GetUserProfiles" FunctionName="TotalHRModel.Store.GetUserProfiles">
             <ResultMapping>
@@ -988,6 +2174,241 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PrepareCalendarEventScheduledReminder" FunctionName="TotalHRModel.Store.PrepareCalendarEventScheduledReminder" />
+          <EntitySetMapping Name="CompanyDocuments">
+            <EntityTypeMapping TypeName="TotalHRModel.CompanyDocument">
+              <MappingFragment StoreEntitySet="CompanyDocument">
+                <ScalarProperty Name="LastDownloadedBy" ColumnName="LastDownloadedBy" />
+                <ScalarProperty Name="LastDownloaded" ColumnName="LastDownloaded" />
+                <ScalarProperty Name="LastViewedBy" ColumnName="LastViewedBy" />
+                <ScalarProperty Name="LastViewed" ColumnName="LastViewed" />
+                <ScalarProperty Name="NoOfDownloads" ColumnName="NoOfDownloads" />
+                <ScalarProperty Name="NoOfViews" ColumnName="NoOfViews" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="OriginalFileName" ColumnName="OriginalFileName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyDocumentDownloads">
+            <EntityTypeMapping TypeName="TotalHRModel.CompanyDocumentDownload">
+              <MappingFragment StoreEntitySet="CompanyDocumentDownloads">
+                <ScalarProperty Name="DownloadDate" ColumnName="DownloadDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyDocumentPermissions">
+            <EntityTypeMapping TypeName="TotalHRModel.CompanyDocumentPermission">
+              <MappingFragment StoreEntitySet="CompanyDocumentPermissions">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="PermissionTypeId" ColumnName="PermissionTypeId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyDocumentShares">
+            <EntityTypeMapping TypeName="TotalHRModel.CompanyDocumentShare">
+              <MappingFragment StoreEntitySet="CompanyDocumentShares">
+                <ScalarProperty Name="TypeofShare" ColumnName="TypeofShare" />
+                <ScalarProperty Name="DateShared" ColumnName="DateShared" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyDocumentViews">
+            <EntityTypeMapping TypeName="TotalHRModel.CompanyDocumentView">
+              <MappingFragment StoreEntitySet="CompanyDocumentViews">
+                <ScalarProperty Name="ViewDate" ColumnName="ViewDate" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyFolders">
+            <EntityTypeMapping TypeName="TotalHRModel.CompanyFolder">
+              <MappingFragment StoreEntitySet="CompanyFolder">
+                <ScalarProperty Name="NoOfOpenings" ColumnName="NoOfOpenings" />
+                <ScalarProperty Name="NoOfFiles" ColumnName="NoOfFiles" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CompanyFolderDocuments">
+            <EntityTypeMapping TypeName="TotalHRModel.CompanyFolderDocument">
+              <MappingFragment StoreEntitySet="CompanyFolderDocument">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+                <ScalarProperty Name="DocumentId" ColumnName="DocumentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="TotalHRModel.File">
+              <MappingFragment StoreEntitySet="File">
+                <ScalarProperty Name="lastupdatedby" ColumnName="lastupdatedby" />
+                <ScalarProperty Name="lastupdated" ColumnName="lastupdated" />
+                <ScalarProperty Name="extension" ColumnName="extension" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="typeid" ColumnName="typeid" />
+                <ScalarProperty Name="shortname" ColumnName="shortname" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetCompanyFoldersByUser" FunctionName="TotalHRModel.Store.GetCompanyFoldersByUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalHRModel.GetCompanyFoldersByUser_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="NoOfFiles" ColumnName="NoOfFiles" />
+                <ScalarProperty Name="NoOfOpenings" ColumnName="NoOfOpenings" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="ContractFormFieldValues">
+            <EntityTypeMapping TypeName="TotalHRModel.ContractFormFieldValue">
+              <MappingFragment StoreEntitySet="ContractFormFieldValues">
+                <ScalarProperty Name="LastupdatedBy" ColumnName="LastupdatedBy" />
+                <ScalarProperty Name="Lastupdated" ColumnName="Lastupdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="IntValue" ColumnName="IntValue" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="FormFieldid" ColumnName="FormFieldid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractTemplates">
+            <EntityTypeMapping TypeName="TotalHRModel.ContractTemplate">
+              <MappingFragment StoreEntitySet="ContractTemplate">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="Lastupdated" ColumnName="Lastupdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ContractTemplateSections">
+            <EntityTypeMapping TypeName="TotalHRModel.ContractTemplateSection">
+              <MappingFragment StoreEntitySet="ContractTemplateSection">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Heading" ColumnName="Heading" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CTemplateSectionLinks">
+            <EntityTypeMapping TypeName="TotalHRModel.CTemplateSectionLink">
+              <MappingFragment StoreEntitySet="CTemplateSectionLink">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+                <ScalarProperty Name="TemplateSectionId" ColumnName="TemplateSectionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CTSectionFieldLinks">
+            <EntityTypeMapping TypeName="TotalHRModel.CTSectionFieldLink">
+              <MappingFragment StoreEntitySet="CTSectionFieldLink">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="FormFieldId" ColumnName="FormFieldId" />
+                <ScalarProperty Name="TemplateSectionId" ColumnName="TemplateSectionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormControls">
+            <EntityTypeMapping TypeName="TotalHRModel.FormControl">
+              <MappingFragment StoreEntitySet="FormControl">
+                <ScalarProperty Name="obsolete" ColumnName="obsolete" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="HtmlCode" ColumnName="HtmlCode" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormFields">
+            <EntityTypeMapping TypeName="TotalHRModel.FormField">
+              <MappingFragment StoreEntitySet="FormField">
+                <ScalarProperty Name="obsolete" ColumnName="obsolete" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="TooltipId" ColumnName="TooltipId" />
+                <ScalarProperty Name="LabelId" ColumnName="LabelId" />
+                <ScalarProperty Name="FormControlId" ColumnName="FormControlId" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Labels">
+            <EntityTypeMapping TypeName="TotalHRModel.Label">
+              <MappingFragment StoreEntitySet="Label">
+                <ScalarProperty Name="Obsolete" ColumnName="Obsolete" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LanguageId" ColumnName="LanguageId" />
+                <ScalarProperty Name="RootId" ColumnName="RootId" />
+                <ScalarProperty Name="Term" ColumnName="Term" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserContracts">
+            <EntityTypeMapping TypeName="TotalHRModel.UserContract">
+              <MappingFragment StoreEntitySet="UserContract">
+                <ScalarProperty Name="LastViewed" ColumnName="LastViewed" />
+                <ScalarProperty Name="Views" ColumnName="Views" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="Lastupdated" ColumnName="Lastupdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="TemplateId" ColumnName="TemplateId" />
+                <ScalarProperty Name="Userid" ColumnName="Userid" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

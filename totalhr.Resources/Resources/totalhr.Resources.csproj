@@ -90,6 +90,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Common.resx</DependentUpon>
     </Compile>
+    <Compile Include="Document.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Document.resx</DependentUpon>
+    </Compile>
     <Compile Include="EnumDescription.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -115,10 +120,15 @@
     <EmbeddedResource Include="Calendar.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Calendar.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Common.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Common.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Document.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Document.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="EnumDescription.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -331,6 +331,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Specific user(s).
+        /// </summary>
+        public static string SelectedUsers {
+            get {
+                return ResourceManager.GetString("SelectedUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Before.
         /// </summary>
         public static string TimeBefore {
@@ -345,6 +354,15 @@ namespace totalhr.Resources {
         public static string User {
             get {
                 return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whole Company.
+        /// </summary>
+        public static string WholeCompany {
+            get {
+                return ResourceManager.GetString("WholeCompany", resourceCulture);
             }
         }
         

@@ -1,0 +1,24 @@
+﻿@using totalhr.Resources; 
+
+@using (Html.BeginForm("CreateFolder", "Document", FormMethod.Post))
+        { 
+                 
+            <div class="formdiv midform">
+                <div class="wrapper">
+
+                     <div class="line">
+                        <label>@Document.V_DisplayName <b class="req">*</b></label>
+                         <span><input type="text" name="FolderDisplayName" id="FolderDisplayName" /></span>                    
+                    </div>
+                   
+                    <div class="line">
+                        <label>&nbsp;</label>
+                         <span>
+                             <input type="submit" value="@Document.V_Create" />
+                         </span>                    
+                    </div>
+
+                </div>
+            </div>
+         
+        }

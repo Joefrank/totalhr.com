@@ -19,5 +19,9 @@ namespace totalhr.data.Repositories.Infrastructure
         List<CalendarEventCache> GetCalendarDailyEventsByUser(int userid, DateTime date, int calendarid = 0);
 
         void DeleteEventAssociation(CalendarEvent evt);
+
+        void RequestEventRemindersSceduling(CalendarEvent evt, int companyid);
+
+        void ClearCache();
     }
 }
