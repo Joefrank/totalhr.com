@@ -94,7 +94,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementation\AccountService.cs" />
+    <Compile Include="Implementation\CompanyService.cs" />
     <Compile Include="Implementation\GlossaryService.cs" />
+    <Compile Include="Infrastructure\ICompanyService.cs" />
     <Compile Include="Infrastructure\IAccountService.cs" />
     <Compile Include="Infrastructure\IGlossaryService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

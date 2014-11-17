@@ -451,9 +451,7 @@ function parseDate(input) {
     return new Date(parts[2], parts[1] - 1, parts[0]); // months are 0-based
 }
 
-function CancelDivPopup(objid) {
-    $('#' + objid).fadeOut("slow");
-}
+
 
 /* Reminders work */
 

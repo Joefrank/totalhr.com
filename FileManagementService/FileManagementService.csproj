@@ -40,8 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Implementation\FileUploadService.cs" />
-    <Compile Include="Infrastructure\IFileUploadService.cs" />
+    <Compile Include="Implementation\FileService.cs" />
+    <Compile Include="Infrastructure\IFileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -103,6 +103,7 @@
           <Property Name="LastUpdated" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="int" />
           <Property Name="FolderId" Type="int" />
+          <Property Name="FolderDisplayName" Type="nvarchar" MaxLength="250" />
           <Property Name="FileId" Type="int" Nullable="false" />
           <Property Name="NoOfViews" Type="int" Nullable="false" />
           <Property Name="NoOfDownloads" Type="int" Nullable="false" />
@@ -110,6 +111,7 @@
           <Property Name="LastViewedBy" Type="int" />
           <Property Name="LastDownloaded" Type="datetime" />
           <Property Name="LastDownloadedBy" Type="int" />
+          <Property Name="PermissionTypeId" Type="int" />
         </EntityType>
         <EntityType Name="CompanyDocumentDownloads">
           <Key>
@@ -124,10 +126,11 @@
           <Key>
             <PropertyRef Name="DocumentId" />
             <PropertyRef Name="PermissionTypeId" />
+            <PropertyRef Name="ObjectId" />
           </Key>
           <Property Name="DocumentId" Type="int" Nullable="false" />
           <Property Name="PermissionTypeId" Type="int" Nullable="false" />
-          <Property Name="ObjectId" Type="int" />
+          <Property Name="ObjectId" Type="int" Nullable="false" />
           <Property Name="Created" Type="datetime" />
           <Property Name="CreatedBy" Type="int" />
         </EntityType>
@@ -172,6 +175,7 @@
           <Property Name="LastUpdatedBy" Type="int" />
           <Property Name="NoOfFiles" Type="int" Nullable="false" />
           <Property Name="NoOfOpenings" Type="int" Nullable="false" />
+          <Property Name="OpenedPublic" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CompanyFolderDocument">
           <Key>
@@ -1432,6 +1436,8 @@
           <NavigationProperty Name="User" Relationship="TotalHRModel.FK_CompanyDocument_User" FromRole="CompanyDocument" ToRole="User" />
           <NavigationProperty Name="CompanyFolderDocuments" Relationship="TotalHRModel.FK_CompanyFolderDocument_CompanyDocument" FromRole="CompanyDocument" ToRole="CompanyFolderDocument" />
           <NavigationProperty Name="CompanyDocumentPermissions" Relationship="TotalHRModel.FK_CompanyDocumentPermissions_CompanyDocument" FromRole="CompanyDocument" ToRole="CompanyDocumentPermission" />
+          <Property Name="FolderDisplayName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="PermissionTypeId" Type="Int32" />
         </EntityType>
         <EntityType Name="CompanyDocumentDownload">
           <Key>
@@ -1446,10 +1452,11 @@
           <Key>
             <PropertyRef Name="DocumentId" />
             <PropertyRef Name="PermissionTypeId" />
+            <PropertyRef Name="ObjectId" />
           </Key>
           <Property Name="DocumentId" Type="Int32" Nullable="false" />
           <Property Name="PermissionTypeId" Type="Int32" Nullable="false" />
-          <Property Name="ObjectId" Type="Int32" />
+          <Property Name="ObjectId" Type="Int32" Nullable="false" />
           <Property Name="Created" Type="DateTime" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" />
           <NavigationProperty Name="CompanyDocument" Relationship="TotalHRModel.FK_CompanyDocumentPermissions_CompanyDocument" FromRole="CompanyDocumentPermission" ToRole="CompanyDocument" />
@@ -1488,6 +1495,7 @@
           <Property Name="NoOfOpenings" Type="Int32" Nullable="false" />
           <NavigationProperty Name="User" Relationship="TotalHRModel.FK_CompanyFolder_User" FromRole="CompanyFolder" ToRole="User" />
           <NavigationProperty Name="CompanyFolderDocuments" Relationship="TotalHRModel.FK_CompanyFolderDocument_CompanyFolder" FromRole="CompanyFolder" ToRole="CompanyFolderDocument" />
+          <Property Name="OpenedPublic" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="CompanyFolderDocument">
           <Key>
@@ -2178,6 +2186,8 @@
           <EntitySetMapping Name="CompanyDocuments">
             <EntityTypeMapping TypeName="TotalHRModel.CompanyDocument">
               <MappingFragment StoreEntitySet="CompanyDocument">
+                <ScalarProperty Name="PermissionTypeId" ColumnName="PermissionTypeId" />
+                <ScalarProperty Name="FolderDisplayName" ColumnName="FolderDisplayName" />
                 <ScalarProperty Name="LastDownloadedBy" ColumnName="LastDownloadedBy" />
                 <ScalarProperty Name="LastDownloaded" ColumnName="LastDownloaded" />
                 <ScalarProperty Name="LastViewedBy" ColumnName="LastViewedBy" />
@@ -2239,6 +2249,7 @@
           <EntitySetMapping Name="CompanyFolders">
             <EntityTypeMapping TypeName="TotalHRModel.CompanyFolder">
               <MappingFragment StoreEntitySet="CompanyFolder">
+                <ScalarProperty Name="OpenedPublic" ColumnName="OpenedPublic" />
                 <ScalarProperty Name="NoOfOpenings" ColumnName="NoOfOpenings" />
                 <ScalarProperty Name="NoOfFiles" ColumnName="NoOfFiles" />
                 <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />

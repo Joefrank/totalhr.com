@@ -14,5 +14,7 @@ namespace totalhr.data.Repositories.Infrastructure
         List<Role> GetUserRoles(int UserId);
 
         List<User> GetCompanyUsers(int companyid);
+
+        List<string> GetUserNamesByIds(List<int> ids);
     }
 }

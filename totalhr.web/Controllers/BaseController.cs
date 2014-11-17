@@ -30,9 +30,14 @@ namespace totalhr.web.Controllers
             //keep user logged in if already logged.
             if (_currentUser != null && _currentUser.IsLogged())
             {
-                _currentUser.CookieDuration = new TimeSpan(0, 0, LoginDuration,0); 
-                AuthService.PersistClientUser(_currentUser);    
+                _currentUser.CookieDuration = new TimeSpan(0, 0, LoginDuration, 0);
+                AuthService.PersistClientUser(_currentUser);
             }
+            //else
+            //{
+                
+            //    System.Web.HttpContext.Current.Response.Redirect("/Home/Index");
+            //}
 
             //this must be after initialization of authservice, find user regional settings and give local language as default
             ViewingLanguageId = (CurrentUser != null) ? CurrentUser.LanguageId : (int)Variables.Languages.English ;

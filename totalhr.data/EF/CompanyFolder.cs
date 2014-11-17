@@ -27,6 +27,7 @@ namespace totalhr.data.EF
         public Nullable<int> LastUpdatedBy { get; set; }
         public int NoOfFiles { get; set; }
         public int NoOfOpenings { get; set; }
+        public bool OpenedPublic { get; set; }
     
         public virtual User User { get; set; }
         public virtual ICollection<CompanyFolderDocument> CompanyFolderDocuments { get; set; }

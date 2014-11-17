@@ -84,6 +84,10 @@ div.formdiv
     width:600px;
 }
 
+.smallform {
+    width: 400px;
+}
+
     div.formdiv input, div.formdiv select
     {
         font-size:9pt;
@@ -268,4 +272,45 @@ div.line
     border-radius: 3px;
     font-weight: 400;
     border: 2px solid transparent;
+}
+
+
+
+div.popupedit {
+    float: left;width: 240px;position: relative;left:200px;z-index: 10000;background-color:#f9f9f9;border: 1px solid grey;padding:5px 0 0 5px;
+    overflow:scroll;min-height:200px;
+}
+
+div.popupedit .spclose {
+    background:transparent url('/content/images/close-icon.png') center center no-repeat;float:right;display:block;width:16px;height:16px;
+    cursor:pointer;position:relative;top:-3px;right:2px;
+    }
+
+input[type="button"].btnsmall, input[type="submit"].btnsmall {
+   cursor:pointer;
+    padding: 0 5px;
+    background-color: #198fff;
+    color: #fff;
+    -webkit-box-shadow: 0 2px #063a93;
+    box-shadow: 0 2px #063a93;
+    border-radius: 3px;
+    font-weight: 100;
+    border: 2px solid transparent;
+
+}
+
+table.tab .private {
+    color: red;
+}
+
+table.tab .company {
+    color: green;
+}
+
+table.tab .department {
+    color: #be4646;
+}
+
+table.tab .user {
+    color: #198fff;
 }

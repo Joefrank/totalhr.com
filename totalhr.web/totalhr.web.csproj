@@ -355,6 +355,9 @@
     <Content Include="Views\Document\Create.cshtml" />
     <Content Include="Views\Document\Details.cshtml" />
     <Content Include="Views\Shared\_FolderCreate.cshtml" />
+    <Content Include="Views\Document\CreateFolder.cshtml" />
+    <Content Include="Views\Document\EditDocument.cshtml" />
+    <Content Include="Views\Shared\_CompanyDocItemSelector.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
