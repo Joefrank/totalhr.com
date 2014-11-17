@@ -1,13 +1,40 @@
 ﻿@using totalhr.Resources;
 @using totalhr.web.Helpers;
+@using totalhr.data.EF;
+@using System.Text;
 
-@model List<totalhr.data.EF.CompanyDocument>
+@model List<CompanyDocument>
 
 @{
     ViewBag.Title = GenericHelper.WebsiteName + " | " + Document.V_Document_title;
     bool bViewTable = Model != null && Model.Count > 0;
-}
+   
+    var dicFolders = new Dictionary<int, StringBuilder>();
+    var folderNames = new Dictionary<int, string>();
+    dicFolders[0] = new StringBuilder();
+    folderNames[0] = Document.V_No_Folder;
+    int lastFolderId = -1, currentIndex = 0;
+    int CurrentUserId = Convert.ToInt32(ViewBag.CurrentUserId);
+    
+    foreach(CompanyDocument doc in Model){
+        
+        if(lastFolderId == doc.FolderId && lastFolderId > 0)
+        {
+            currentIndex = lastFolderId;             
+        }else if(doc.FolderId == 0){
+            currentIndex = 0;            
+        }else{
+            currentIndex = doc.FolderId.GetValueOrDefault();
+            dicFolders[currentIndex] = new StringBuilder();
+            folderNames[currentIndex] = doc.FolderDisplayName;           
+        }
 
+        dicFolders[currentIndex].Append(DocumentHelper.MakeTableRowHtml(doc, CurrentUserId));
+        lastFolderId = doc.FolderId.GetValueOrDefault();
+    }
+    
+    
+}
 
 
 <div id="main">
@@ -15,31 +42,18 @@
 
         <h1>@Document.V_Document_title</h1>
 
-@if(bViewTable){
-    <table class="tab">
-      <tr>
-        <th>DisplayName</th>
-        <th>Created</th>
-        <th>CreatedBy</th>
-        <th>Views</th>
-        <th>Downloads</th>
-        <th>Details</th>
-       </tr>
-    @foreach (var doc in Model)
-    {
-        <tr>
-            <td>@doc.DisplayName</td>            
-            <td>@doc.Created.ToShortDateString()</td>
-            <td>@(doc.User.firstname + " " + doc.User.surname)</td>
-            <td>@doc.NoOfViews</td>
-            <td>@doc.NoOfDownloads</td>
-            <td><a href="/Document/Details/@doc.Id" title="View details">Go..</a></td>
-        </tr>
-    }
-    </table>
+    @if(bViewTable){
+        foreach(int key in dicFolders.Keys){
+        
+            <h4>@Html.Raw(folderNames[key])</h4>
+            @Html.Raw(DocumentHelper.SpitDocTableHeader())
+            @Html.Raw(dicFolders[key])
+            @Html.Raw(DocumentHelper.SpitDocTableFooter())
+        }
+    
     }else{
         <p class="error">
-            Sorry but no folder to view.
+            @Document.Error_No_Folder
         </p>   
     }
     <p>

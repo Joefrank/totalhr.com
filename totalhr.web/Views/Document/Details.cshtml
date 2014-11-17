@@ -2,17 +2,12 @@
 @using totalhr.web.Helpers;
 @using totalhr.data.EF;
 
-@model totalhr.Shared.Models.DocumentInfoUpdate
+@model totalhr.data.EF.CompanyDocument
 
 @{
     ViewBag.Title = GenericHelper.WebsiteName + " | " + Document.V_Document_Details_Title;
     bool bViewable = Model != null;
-    var doc = ViewBag.CurrentDocument as CompanyDocument;
-    
-    List<CompanyFolder> folders = new List<CompanyFolder>
-    {
-        new CompanyFolder{DisplayName= "Test Folder", Id = 1}
-    };
+   
 }
 
 
@@ -23,51 +18,85 @@
         <h1>@Document.V_Document_Details_Title</h1>
 
         @if (bViewable)
-        {
-            using (Html.BeginForm("UpdateDocument", "Document", FormMethod.Post, new { enctype = "multipart/form-data" }))
-            { 
-             @Html.ValidationSummary();
+        {          
          
                 <div class="formdiv midform">
                     <div class="wrapper">
                         <div class="line">
                             <label>@Document.V_Id</label>
-                             <span>@Model.Id</span>
-                            @Html.HiddenFor(x => x.Id)                    
+                             <span>@Model.Id</span>                    
                         </div>
                          <div class="line">
-                            <label>@Document.V_DisplayName <b class="req">*</b></label>
-                             <span>@Html.TextBoxFor(x => x.DisplayName, new {size="40", maxlength="250"})</span>                    
+                            <label>@Document.V_DisplayName </label>
+                             <span>@Model.DisplayName</span>                    
                         </div>
                         <div class="line">
                             <label>@Document.V_Folder</label>
-                             <span>@Html.DropDownListFor(x => x.FolderId,  new SelectList(folders, "Id", "DisplayName"))</span>                    
+                             <span>@Model.FolderDisplayName</span>                    
                         </div>
                         <div class="line">
-                            <label>@Document.v_File <b class="req">*</b></label>
+                            <label>@Document.v_File </label>                            
+                            <span>@Model.OriginalFileName</span>                    
+                        </div>
+                        <div class="line">
+                            <label>@Document.V_Create </label>                            
+                            <span>@Model.Created.ToShortDateString()</span>                    
+                        </div>
+                         <div class="line">
+                            <label>@Document.TH_CreatedBy </label>                            
+                            <span>@Model.CreatedBy</span>                    
+                        </div>
+                         <div class="line">
+                            <label>LastUpdatedBy </label>                            
+                            <span>@Model.LastUpdated</span>                    
+                        </div>
+                         <div class="line">
+                            <label>LastUpdated </label>                            
+                            <span>@Model.LastUpdated</span>                    
+                        </div>
+                         <div class="line">
+                            <label>No Views </label>                            
+                            <span>@Model.NoOfViews</span>                    
+                        </div>
+                         <div class="line">
+                            <label>No of Downloads </label>                            
+                            <span>@Model.NoOfDownloads</span>                    
+                        </div>
+                         <div class="line">
+                            <label>Last downloaded </label>                            
+                            <span>@Model.LastDownloaded</span>                    
+                        </div>
+                         <div class="line">
+                            <label>Last downloaded by </label>                            
+                            <span>@Model.LastDownloadedBy</span>                    
+                        </div>
+                        <div class="line">
+                            <label>Permissions</label>
                              <span>
-                                 <input type="file" id="fileToUpload" name="File" />
-                             </span>
-                            <span>@Model.ExistingFileName</span>                    
+                                 @(ViewBag.PermissonSummary as string)
+                             </span>                    
                         </div>
                         <div class="line">
                             <label>&nbsp;</label>
                              <span>
-                                 <input type="submit" id="btnSubmit" value="@Document.V_Upload" />
+                                <input type="button" value="@Document.V_Back_To_List" onclick="document.location.href='/Document'" /> &nbsp;
+                                  
+                                 <input type="button"  value="@Document.V_Edit" onclick="document.location.href='/Document/Edit/@Model.Id'" />
+                                
+                                 <input type="button"  value="@Document.V_Download" onclick="alert('please implement')" />
+                                
                              </span>                    
                         </div>
 
                     </div>
                 </div>
-         
-            }
+                 
 
-        }
+        }else{
+            <p class="error">@Document.Error_No_Doc_Details</p>   
+        }    
     
-    
-    <p>
-        <a href="/Document" title="@Document.V_Back_To_List">@Document.V_Back_To_List</a>
-     </p>
+   
 
        </div>
 </div>

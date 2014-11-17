@@ -1,0 +1,19 @@
+﻿@using totalhr.Resources; 
+ 
+<div id="dvPermissionOption" class="popupedit" style="display:none;">
+        <div>
+            <b id="bPermTitle"></b>
+            <span class="spclose" onclick="CancelDivPopup('dvPermissionOption');">&nbsp;</span>
+        </div>
+
+        <div id="dvPermissionItems">
+            <div id="dvSelusers" style="display:none"></div>
+            <div id="dvSelDepts" style="display:none"></div>
+        </div>
+
+         <input type="hidden" id="hdnPermMode" />
+
+         <div>
+            <input type="button" onclick="SaveItemsInPopup();" value="@Document.V_Save" class="btnsmall" />
+        </div>
+    </div>

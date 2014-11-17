@@ -35,6 +35,8 @@ namespace totalhr.data.EF
         public Nullable<int> LastViewedBy { get; set; }
         public Nullable<System.DateTime> LastDownloaded { get; set; }
         public Nullable<int> LastDownloadedBy { get; set; }
+        public string FolderDisplayName { get; set; }
+        public Nullable<int> PermissionTypeId { get; set; }
     
         public virtual User User { get; set; }
         public virtual ICollection<CompanyFolderDocument> CompanyFolderDocuments { get; set; }

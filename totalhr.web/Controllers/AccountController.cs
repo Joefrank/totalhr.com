@@ -57,7 +57,7 @@ namespace totalhr.web.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            ViewBag.Currentuser = CurrentUser;
+            ViewBag.Currentuser = CurrentUser;            
             return View();
         }
 

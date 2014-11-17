@@ -33,7 +33,7 @@ _ReSharper*/
 [Bb]uild/
 
 #Subversion files
-.svn
+.svn 
 
 # Office Temp Files
 ~$*

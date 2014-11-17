@@ -16,7 +16,7 @@ namespace totalhr.data.EF
     {
         public int DocumentId { get; set; }
         public int PermissionTypeId { get; set; }
-        public Nullable<int> ObjectId { get; set; }
+        public int ObjectId { get; set; }
         public Nullable<System.DateTime> Created { get; set; }
         public Nullable<int> CreatedBy { get; set; }
     

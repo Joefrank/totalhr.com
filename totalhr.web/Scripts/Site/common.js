@@ -77,3 +77,6 @@ function ClosePopup(objid) {
     document.getElementById(objid).style.display = "none";   
 }
 
+function CancelDivPopup(objid) {
+    $('#' + objid).fadeOut("slow");
+}

@@ -75,9 +75,10 @@ namespace totalhr.Shared
 
         public enum DocumentPermissionType
         {
-            WholeCompany = 1,
+            Private = 1,
             SelectedUsers = 2,
-            Department = 3
+            Department = 3,
+            WholeCompany = 4
         }
 
         public enum ReminderType

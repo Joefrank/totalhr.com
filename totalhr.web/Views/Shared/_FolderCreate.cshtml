@@ -1,24 +1,51 @@
 ﻿@using totalhr.Resources; 
 
-@using (Html.BeginForm("CreateFolder", "Document", FormMethod.Post))
-        { 
-                 
-            <div class="formdiv midform">
-                <div class="wrapper">
+@{
+    bool hide = true;
+    
+    if (ViewData != null && ViewData["Hide"] != null)
+    {
+        hide = Convert.ToBoolean(ViewData["Hide"]);
+    }
 
-                     <div class="line">
-                        <label>@Document.V_DisplayName <b class="req">*</b></label>
-                         <span><input type="text" name="FolderDisplayName" id="FolderDisplayName" /></span>                    
-                    </div>
-                   
-                    <div class="line">
-                        <label>&nbsp;</label>
-                         <span>
-                             <input type="submit" value="@Document.V_Create" />
-                         </span>                    
-                    </div>
+    string popupStyle = hide ? @" style=""display:none;"" " : "";
+}
+<div id="frmCreateFolder" class="popupedit" @Html.Raw(popupStyle)>
+    <div>
+        <b>@Document.V_New_Folder</b>
+        <span class="spclose" onclick="CancelDivPopup('frmCreateFolder');">&nbsp;</span>
+    </div>
+        
+        
+    
 
-                </div>
+@using (Ajax.BeginForm("CreateFolder", "Document", new AjaxOptions { UpdateTargetId = "result" })) 
+{                  
+    <div class="formdiv smallform">
+        <div class="wrapper">
+            <br />
+            <div>
+                <label>@Document.V_DisplayName </label>
+                    <span><input type="text" name="DisplayName" id="DisplayName" /><b class="req"> *</b></span>                    
             </div>
+            <div>
+                <label>@Document.V_Folder_Make_Public</label>
+                    <span>
+                        <input type="checkbox" name="ckMakePublic" id="ckMakePublic" onclick="ToggleCheckedValue(this, 'MakePublic');" />
+                        @Html.Hidden("MakePublic", 0)
+                    </span>                    
+            </div>    
+            <div>
+                <label>&nbsp;</label>
+                    <div style="width:100px;padding:5px;">
+                        <input type="submit" onsubmit="alert($('#MakePublic').val());return false;" value="@Document.V_Create" class="btnsmall" />
+                    </div>                    
+            </div>
+
+        </div>
+    </div>
          
-        }
+    
+}
+        
+ </div> 

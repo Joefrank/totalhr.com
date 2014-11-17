@@ -45,5 +45,7 @@ namespace totalhr.services.Infrastructure
         UserPersonalInfo GetUserInfoByEmail(string email);
 
         int UpdateUserDetails(UserPersonalInfo info);
+
+        List<string> GetUserNamesByIds(List<int> ids);
     }
 }

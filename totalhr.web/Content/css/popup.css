@@ -225,9 +225,7 @@ div#toolbox {
     }
 
 .line input[type="button"].btnsmall {
-    /*box-sizing: border-box;
-    height: 32px;
-    line-height: 32px;*/
+    cursor:pointer;
     padding: 0 5px;
     background-color: #198fff;
     color: #fff;

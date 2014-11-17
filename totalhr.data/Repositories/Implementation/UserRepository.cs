@@ -24,5 +24,11 @@ namespace totalhr.data.Repositories.Implementation
         {
             return this.FindBy(x => x.CompanyId == companyid).ToList();
         }
+
+        public List<string> GetUserNamesByIds(List<int> ids)
+        {
+            return this.Context.Users.Where(x => ids.Contains(x.id)).
+                Select(y => y.firstname + " " + y.surname).ToList();
+        }
     }
 }

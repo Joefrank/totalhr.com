@@ -11,5 +11,13 @@ namespace totalhr.web.Helpers
         {
             get { return System.Configuration.ConfigurationManager.AppSettings["WebsiteName"]; }
         }
+
+        public static string WebsiteRoot
+        {
+            get
+            {
+                return System.Configuration.ConfigurationManager.AppSettings["RootURL"];
+            }
+        }
     }
 }

@@ -70,6 +70,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry could not update document!.
+        /// </summary>
+        public static string Error_Could_Not_Update_Doc {
+            get {
+                return ResourceManager.GetString("Error_Could_Not_Update_Doc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry could not upload file!.
         /// </summary>
         public static string Error_Could_Not_Upload_Doc {
@@ -115,6 +124,42 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry couldn&apos;t retrieve document details..
+        /// </summary>
+        public static string Error_No_Doc_Details {
+            get {
+                return ResourceManager.GetString("Error_No_Doc_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry but no folder or document to view..
+        /// </summary>
+        public static string Error_No_Folder {
+            get {
+                return ResourceManager.GetString("Error_No_Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You haven&apos;t selected any department..
+        /// </summary>
+        public static string Error_NoDept_ForPermission {
+            get {
+                return ResourceManager.GetString("Error_NoDept_ForPermission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You haven&apos;t selected any user..
+        /// </summary>
+        public static string Error_NoUser_ForPermission {
+            get {
+                return ResourceManager.GetString("Error_NoUser_ForPermission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Original file name is required..
         /// </summary>
         public static string Error_OriginalFileName_Rq {
@@ -129,6 +174,87 @@ namespace totalhr.Resources {
         public static string Error_Upload_File {
             get {
                 return ResourceManager.GetString("Error_Upload_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created.
+        /// </summary>
+        public static string TH_Created {
+            get {
+                return ResourceManager.GetString("TH_Created", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created By.
+        /// </summary>
+        public static string TH_CreatedBy {
+            get {
+                return ResourceManager.GetString("TH_CreatedBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string TH_Details {
+            get {
+                return ResourceManager.GetString("TH_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DisplayName.
+        /// </summary>
+        public static string TH_DisplayName {
+            get {
+                return ResourceManager.GetString("TH_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Downloads.
+        /// </summary>
+        public static string TH_Downloads {
+            get {
+                return ResourceManager.GetString("TH_Downloads", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Permissions.
+        /// </summary>
+        public static string TH_Permissions {
+            get {
+                return ResourceManager.GetString("TH_Permissions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Views.
+        /// </summary>
+        public static string TH_Views {
+            get {
+                return ResourceManager.GetString("TH_Views", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Folder.
+        /// </summary>
+        public static string V_Add_Folder {
+            get {
+                return ResourceManager.GetString("V_Add_Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Archive.
+        /// </summary>
+        public static string V_Archive {
+            get {
+                return ResourceManager.GetString("V_Archive", resourceCulture);
             }
         }
         
@@ -160,11 +286,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create new folder.
+        ///   Looks up a localized string similar to Create Folder.
         /// </summary>
         public static string V_Create_New_Folder {
             get {
                 return ResourceManager.GetString("V_Create_New_Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string V_Delete {
+            get {
+                return ResourceManager.GetString("V_Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Details.
+        /// </summary>
+        public static string V_Details {
+            get {
+                return ResourceManager.GetString("V_Details", resourceCulture);
             }
         }
         
@@ -174,6 +318,15 @@ namespace totalhr.Resources {
         public static string V_DisplayName {
             get {
                 return ResourceManager.GetString("V_DisplayName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document Edit.
+        /// </summary>
+        public static string V_Doc_Edit {
+            get {
+                return ResourceManager.GetString("V_Doc_Edit", resourceCulture);
             }
         }
         
@@ -196,6 +349,24 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download.
+        /// </summary>
+        public static string V_Download {
+            get {
+                return ResourceManager.GetString("V_Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string V_Edit {
+            get {
+                return ResourceManager.GetString("V_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File.
         /// </summary>
         public static string v_File {
@@ -214,6 +385,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Make public.
+        /// </summary>
+        public static string V_Folder_Make_Public {
+            get {
+                return ResourceManager.GetString("V_Folder_Make_Public", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Id.
         /// </summary>
         public static string V_Id {
@@ -223,11 +403,92 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Folder.
+        /// </summary>
+        public static string V_New_Folder {
+            get {
+                return ResourceManager.GetString("V_New_Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document(s) With No Folder.
+        /// </summary>
+        public static string V_No_Folder {
+            get {
+                return ResourceManager.GetString("V_No_Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whole company.
+        /// </summary>
+        public static string V_Permission_Company {
+            get {
+                return ResourceManager.GetString("V_Permission_Company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Private.
+        /// </summary>
+        public static string V_Permission_Private {
+            get {
+                return ResourceManager.GetString("V_Permission_Private", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string V_Save {
+            get {
+                return ResourceManager.GetString("V_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select.
+        /// </summary>
+        public static string v_Select {
+            get {
+                return ResourceManager.GetString("v_Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Department.
+        /// </summary>
+        public static string V_Select_Department {
+            get {
+                return ResourceManager.GetString("V_Select_Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select user.
+        /// </summary>
+        public static string V_Select_User {
+            get {
+                return ResourceManager.GetString("V_Select_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Upload.
         /// </summary>
         public static string V_Upload {
             get {
                 return ResourceManager.GetString("V_Upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View.
+        /// </summary>
+        public static string V_View {
+            get {
+                return ResourceManager.GetString("V_View", resourceCulture);
             }
         }
     }

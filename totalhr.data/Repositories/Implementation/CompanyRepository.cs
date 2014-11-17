@@ -14,5 +14,11 @@ namespace totalhr.data.Repositories.Implementation
         {
             return this.Context.Departments.Where(x => x.CompanyId == companyid).ToList();
         }
+
+        public List<string> GetCompanyDepartmentsByIds(List<int> ids)
+        {
+            return this.Context.Departments.Where(x => ids.Contains(x.id)).
+               Select(y => y.Name).ToList();
+        }
     }
 }

@@ -1,0 +1,47 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Helpers;
+
+@{
+    ViewBag.Title = GenericHelper.WebsiteName + " | " + Document.V_Create_New_Folder;
+}
+@section scripts{
+    <script type="text/javascript" src="/Scripts/Site/CompanyDocument.js"></script>
+
+}
+
+<h1>@Document.V_Create_New_Folder</h1>
+
+<div id="main">
+    <div class="content">
+
+    @using (Html.BeginForm("CreateFolder", "Document", FormMethod.Post)) 
+    {                  
+        <div class="formdiv smallform">
+            <div class="wrapper">
+                <br />
+                <div>
+                    <label>@Document.V_DisplayName </label>
+                        <span><input type="text" name="DisplayName" id="DisplayName" /><b class="req"> *</b></span>                    
+                </div>
+                <div>
+                    <label>@Document.V_Folder_Make_Public</label>
+                        <span>
+                            <input type="checkbox" name="ckMakePublic" id="ckMakePublic" onclick="ToggleCheckedValue(this,'MakePublic');" />
+                            @Html.Hidden("MakePublic", 0)
+                        </span>                    
+                </div>    
+                <div>
+                    <label>&nbsp;</label>
+                        <div style="width:100px;padding:5px;">
+                            <input type="submit" onsubmit="alert($('#MakePublic').val());return false;" value="@Document.V_Create" class="btnsmall" />
+                        </div>                    
+                </div>
+
+            </div>
+        </div>
+         
+    
+    }
+
+     </div>
+</div>

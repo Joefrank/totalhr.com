@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using totalhr.data.EF;
 using CompanyDocumentService.Infrastructure;
 using totalhr.data.Repositories.Infrastructure;
+using totalhr.Shared.Models;
 
 namespace CompanyDocumentService.Implementation
 {
@@ -21,9 +22,15 @@ namespace CompanyDocumentService.Implementation
 
         #region Folders
 
-        public int CreateFolder(string displayName, int createdBy)
+        public int CreateFolder(string displayName, bool MakePublic, int createdBy)
         {
-            return 0;
+            CompanyFolder folder = new CompanyFolder();
+            folder.DisplayName = displayName;
+            folder.CreatedBy = createdBy;
+            folder.Created = DateTime.Now;
+            folder.OpenedPublic = MakePublic;
+
+            return _docRepos.AddFolder(folder);
         }
 
         public int UpdateFolder(int folderId, string displayName, int updatedBy)
@@ -41,9 +48,9 @@ namespace CompanyDocumentService.Implementation
             return null;
         }
 
-        public List<CompanyFolder> ListFoldersByUser(int userId, int userDepartmentId)
+        public List<CompanyFolder> ListFoldersByUser(int userId)
         {
-            return _docRepos.ListFoldersByUser(userId, userDepartmentId);
+            return _docRepos.ListFoldersByUser(userId);
         }
 
         public List<CompanyDocument> ListDocumentAndFoldersByUser(int userId, int userDepartmentId)
@@ -51,9 +58,9 @@ namespace CompanyDocumentService.Implementation
             return _docRepos.ListDocumentAndFoldersByUser(userId, userDepartmentId);
         }
 
-        public CompanyFolder GetFolder()
+        public CompanyFolder GetFolder(int folderId)
         {
-            return null;
+            return _docRepos.GetFolder(folderId);
         }
 
         #endregion folders
@@ -61,20 +68,68 @@ namespace CompanyDocumentService.Implementation
 
         #region Documents
 
-        public int CreateDocument(string documentDisplayName, string originalFileName, int fileId, int folderId, int createdBy)
+        public int UpdateDocument(DocumentInfoUpdate info)
+        {
+            CompanyDocument doc = _docRepos.FindBy(x => x.Id == info.DocId).FirstOrDefault(); ;
+            doc.DisplayName = info.DisplayName;
+            doc.OriginalFileName = (info.File == null)? doc.OriginalFileName : info.File.FileName;
+            doc.FolderId = (info.FolderId > 0) ? info.FolderId : 0;
+            doc.FolderDisplayName = (info.FolderId > 0) ? _docRepos.GetFolder(info.FolderId).DisplayName : "";
+            doc.LastUpdated = DateTime.Now;
+            doc.LastUpdatedBy = info.LastUpdatedBy;
+            doc.PermissionTypeId = info.PermissionSelection;
+
+            _docRepos.Save();
+            return doc.Id;
+        }
+
+        public int CreateDocument(DocumentInfo info)
         {
             CompanyDocument doc = new CompanyDocument();
-            doc.DisplayName = documentDisplayName;
-            doc.OriginalFileName = originalFileName;
-            doc.FileId = fileId;
-            doc.FolderId = folderId;
+            doc.DisplayName = info.DisplayName;
+            doc.OriginalFileName = info.File.FileName;
+            doc.FileId = info.NewFileId;
+            doc.FolderId = (info.FolderId > 0)? info.FolderId : 0;
+            doc.FolderDisplayName = (info.FolderId > 0)? this.GetFolder(info.FolderId).DisplayName : "";
             doc.Created = DateTime.Now;
-            doc.CreatedBy = createdBy;
+            doc.CreatedBy = info.CreatedBy;
+            doc.PermissionTypeId = info.PermissionSelection;
 
             _docRepos.Add(doc);
             _docRepos.Save();
 
             return doc.Id;
+        }
+
+        public void CreateDocsPermission(DocumentInfo info)
+        {
+            if (info.PermissionSelectionValue == null)
+                return;
+
+            if (info.PermissionSelectionValue.Contains(','))
+            {
+                List<int> objids = info.PermissionSelectionValue.Split(',').Select(int.Parse).ToList();
+
+                if (objids != null)
+                {
+                    _docRepos.CreateDocumentPermissions(objids, info.CreatedBy, info.PermissionSelection, info.DocId);
+                }
+            }
+            else
+            {
+                _docRepos.CreateDocumentPermissions(Convert.ToInt32(info.PermissionSelectionValue), info.CreatedBy, info.PermissionSelection, info.DocId);
+            }
+        }
+
+        public void UpdateDocsPermission(DocumentInfoUpdate info)
+        {
+            _docRepos.RemoveDocPermissions(info.DocId);
+            CreateDocsPermission(info);           
+        }
+
+        public List<string> GetPermissionObjectNames(List<CompanyDocumentPermission> permissions)
+        {
+            return _docRepos.GetPermissionObjectNames(permissions);
         }
 
         public int UpdateDocument(int documentId, string documentDisplayName, string originalFileName, int folderId, int updatedBy, IO.FileInfo file = null)
@@ -111,6 +166,8 @@ namespace CompanyDocumentService.Implementation
         {
             return _docRepos.FindBy(x => x.Id == docId).FirstOrDefault();
         }
+
+        
 
         #endregion Documents
 

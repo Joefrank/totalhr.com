@@ -63,7 +63,8 @@ namespace totalhr.web.Controllers.Dependencies
             ninjectKernel.Bind<IDocumentManager>().To<DocumentManager>();
             ninjectKernel.Bind<ICompanyDocumentRepository>().To<CompanyDocumentRepository>();
             ninjectKernel.Bind<IFileRepository>().To<FileRepository>();
-            ninjectKernel.Bind<IFileUploadService>().To<FileUploadService>();
+            ninjectKernel.Bind<IFileService>().To<FileService>();
+            ninjectKernel.Bind<ICompanyService>().To<CompanyService>();
         }
 
     }
