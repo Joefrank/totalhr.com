@@ -178,6 +178,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to archive this document? This document will not be accessed by other users if you click ok..
+        /// </summary>
+        public static string JS_ARE_YOU_SURE_TO_DELETE_DOC {
+            get {
+                return ResourceManager.GetString("JS_ARE_YOU_SURE_TO_DELETE_DOC", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Created.
         /// </summary>
         public static string TH_Created {
@@ -268,6 +277,24 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Click for more details.
+        /// </summary>
+        public static string V_Click_More_Details {
+            get {
+                return ResourceManager.GetString("V_Click_More_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contributor.
+        /// </summary>
+        public static string V_Contributor {
+            get {
+                return ResourceManager.GetString("V_Contributor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create.
         /// </summary>
         public static string V_Create {
@@ -291,6 +318,15 @@ namespace totalhr.Resources {
         public static string V_Create_New_Folder {
             get {
                 return ResourceManager.GetString("V_Create_New_Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string V_Date {
+            get {
+                return ResourceManager.GetString("V_Date", resourceCulture);
             }
         }
         
@@ -367,11 +403,38 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string V_Email {
+            get {
+                return ResourceManager.GetString("V_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File.
         /// </summary>
         public static string v_File {
             get {
                 return ResourceManager.GetString("v_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Size.
+        /// </summary>
+        public static string V_File_Size {
+            get {
+                return ResourceManager.GetString("V_File_Size", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Type.
+        /// </summary>
+        public static string V_File_Type {
+            get {
+                return ResourceManager.GetString("V_File_Type", resourceCulture);
             }
         }
         
@@ -417,6 +480,15 @@ namespace totalhr.Resources {
         public static string V_No_Folder {
             get {
                 return ResourceManager.GetString("V_No_Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string V_Open {
+            get {
+                return ResourceManager.GetString("V_Open", resourceCulture);
             }
         }
         

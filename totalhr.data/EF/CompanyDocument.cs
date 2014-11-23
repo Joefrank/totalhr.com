@@ -37,9 +37,14 @@ namespace totalhr.data.EF
         public Nullable<int> LastDownloadedBy { get; set; }
         public string FolderDisplayName { get; set; }
         public Nullable<int> PermissionTypeId { get; set; }
+        public string ReadableSize { get; set; }
+        public string ReadableType { get; set; }
+        public string FileMimeType { get; set; }
+        public bool Archived { get; set; }
     
         public virtual User User { get; set; }
         public virtual ICollection<CompanyFolderDocument> CompanyFolderDocuments { get; set; }
         public virtual ICollection<CompanyDocumentPermission> CompanyDocumentPermissions { get; set; }
+        public virtual File File { get; set; }
     }
 }

@@ -78,6 +78,9 @@ namespace CompanyDocumentService.Implementation
             doc.LastUpdated = DateTime.Now;
             doc.LastUpdatedBy = info.LastUpdatedBy;
             doc.PermissionTypeId = info.PermissionSelection;
+            doc.ReadableType = info.ReadableType;
+            doc.ReadableSize = info.ReadableSize;
+            doc.FileMimeType = info.FileMimeType;
 
             _docRepos.Save();
             return doc.Id;
@@ -94,11 +97,39 @@ namespace CompanyDocumentService.Implementation
             doc.Created = DateTime.Now;
             doc.CreatedBy = info.CreatedBy;
             doc.PermissionTypeId = info.PermissionSelection;
+            doc.ReadableType = info.ReadableType;
+            doc.ReadableSize = info.ReadableSize;
+            doc.FileMimeType = info.FileMimeType;
 
             _docRepos.Add(doc);
             _docRepos.Save();
 
             return doc.Id;
+        }
+
+        public void UpdateDocViewCount(int docId, int increment, int userId)
+        {
+            CompanyDocument doc = _docRepos.FindBy(x => x.Id == docId).FirstOrDefault();
+            if (doc != null)
+            {
+                doc.NoOfViews += increment;
+                doc.LastUpdatedBy = userId;
+                doc.LastUpdated = DateTime.Now;
+                _docRepos.Save();
+            }
+        }
+
+        public void UpdateDocDownloadCount(int docId, int increment, int userId)
+        {
+            CompanyDocument doc = _docRepos.FindBy(x => x.Id == docId).FirstOrDefault();
+            if (doc != null)
+            {
+
+                doc.LastUpdatedBy = userId;
+                doc.LastUpdated = DateTime.Now;
+                doc.NoOfDownloads += increment;
+                _docRepos.Save();
+            }
         }
 
         public void CreateDocsPermission(DocumentInfo info)
@@ -167,7 +198,38 @@ namespace CompanyDocumentService.Implementation
             return _docRepos.FindBy(x => x.Id == docId).FirstOrDefault();
         }
 
-        
+        public CompanyDocument GetDocumentWithViewCountUpdate(int docId, int userId)
+        {
+            CompanyDocument doc  = _docRepos.FindBy(x => x.Id == docId).FirstOrDefault();
+            if (doc != null)
+            {
+                doc.NoOfViews++;
+                _docRepos.Save();
+            }
+            return doc;
+        }
+
+        public CompanyDocument GetDocumentWithDownloadCountUpdate(int docId, int userId)
+        {
+            CompanyDocument doc = _docRepos.FindBy(x => x.Id == docId).FirstOrDefault();
+            if (doc != null)
+            {
+                doc.NoOfDownloads++;
+                _docRepos.Save();
+                doc.LastUpdated = DateTime.Now;
+                doc.LastUpdatedBy = userId;
+            }
+            return doc;
+        }
+
+        public void Archive(int docId, int userId)
+        {
+            CompanyDocument doc = _docRepos.FindBy(x => x.Id == docId).FirstOrDefault();
+            doc.Archived = true;
+            doc.LastUpdated = DateTime.Now;
+            doc.LastUpdatedBy = userId;
+            _docRepos.Save();
+        }
 
         #endregion Documents
 

@@ -53,7 +53,14 @@ namespace totalhr.data.Repositories.Implementation
 
         public virtual void Save()
         {
-             _entities.SaveChanges();
+            try
+            {
+                _entities.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

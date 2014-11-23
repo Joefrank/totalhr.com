@@ -1,4 +1,5 @@
 ﻿using FileManagementService.Infrastructure;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 using System.Web;
 using totalhr.data.Repositories.Infrastructure;
 using EF = totalhr.data.EF;
+
 
 namespace FileManagementService.Implementation
 {
@@ -67,11 +69,46 @@ namespace FileManagementService.Implementation
 
             //rename old file
             FileInfo info = new FileInfo(oldpath);
-            info.MoveTo(backuppath);
+            if (!File.Exists(backuppath))
+            {
+                info.MoveTo(backuppath);
+            }
 
             IOfile.SaveAs(Path.Combine(destinationFolder, FileId + Path.GetExtension(IOfile.FileName)));
 
             return FileId;
+        }
+
+        public String BytesToString(long byteCount)
+        {
+            string[] suf = { "B", "KB", "MB", "GB", "TB", "PB", "EB" }; //Longs run out around EB
+            if (byteCount == 0)
+                return "0" + suf[0];
+            long bytes = Math.Abs(byteCount);
+            int place = Convert.ToInt32(Math.Floor(Math.Log(bytes, 1024)));
+            double num = Math.Round(bytes / Math.Pow(1024, place), 1);
+            return (Math.Sign(byteCount) * num).ToString() + suf[place];
+        }
+
+        public string GetMimeType(string fileName)
+        {
+            var extension = Path.GetExtension(fileName);
+ 
+            if (String.IsNullOrWhiteSpace(extension))
+            {
+                return null;
+            }
+ 
+            var registryKey = Registry.ClassesRoot.OpenSubKey(extension);
+ 
+            if (registryKey == null)
+            {
+                return null;
+            }
+ 
+            var value = registryKey.GetValue("Content Type") as string;
+             
+            return String.IsNullOrWhiteSpace(value) ? null : value;
         }
 
         #region Download

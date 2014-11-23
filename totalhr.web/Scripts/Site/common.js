@@ -80,3 +80,30 @@ function ClosePopup(objid) {
 function CancelDivPopup(objid) {
     $('#' + objid).fadeOut("slow");
 }
+
+
+function ToggleExpandGeneric(ctrHeadId, ctrToExpandId, callback, expandIcon, collapseIcon) {
+    var o = document.getElementById(ctrHeadId);
+    var ojq = $('#' + ctrHeadId);
+    var ocollapse = $('#' + ctrToExpandId);
+    var defaultExpandIcon = (expandIcon == null || expandIcon == '') ? '/Content/images/plus-icon.png' : expandIcon;
+    var defaultCollapseIcon = (collapseIcon == null || collapseIcon == '') ? '/Content/images/minus.png' : collapseIcon;
+
+    if (ojq.hasClass('collapse')) {
+        o.style.backgroundImage = "url('" + defaultExpandIcon + "')";
+        ojq.removeClass('collapse');
+        ocollapse.slideUp("slow");
+    } else if (ojq.hasClass('expand')) {
+        o.style.backgroundImage = "url('" + defaultCollapseIcon + "')";
+        ojq.addClass('collapse');
+        ocollapse.slideDown("slow");
+    }
+
+    if (callback != typeof ("undefined") && callback != null) {
+        eval(callback);
+    }
+}
+
+function OpenEmployeeProfile(empid) {
+    alert('implement me');
+}

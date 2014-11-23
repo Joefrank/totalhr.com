@@ -7,7 +7,7 @@
 
 @{
     ViewBag.Title = GenericHelper.WebsiteName + " | " + Document.V_Document_title;
-    bool bViewTable = Model != null && Model.Count > 0;
+    bool bViewTable =  Model != null && Model.Count > 0;
    
     var dicFolders = new Dictionary<int, StringBuilder>();
     var folderNames = new Dictionary<int, string>();
@@ -29,38 +29,63 @@
             folderNames[currentIndex] = doc.FolderDisplayName;           
         }
 
-        dicFolders[currentIndex].Append(DocumentHelper.MakeTableRowHtml(doc, CurrentUserId));
+        if(!doc.Archived){
+            dicFolders[currentIndex].Append(DocumentHelper.MakeDocumentRow(doc, CurrentUserId));
+        }
+        
         lastFolderId = doc.FolderId.GetValueOrDefault();
     }
     
     
 }
 
+@section extrastyles{
+    <link rel="stylesheet" type="text/css" href="/Content/css/companydocument.css" />
+ }
+
+@section scripts{
+     <script type="text/javascript" src="/Scripts/Site/CompanyDocument.js"></script>
+}
 
 <div id="main">
     <div class="content">
 
         <h1>@Document.V_Document_title</h1>
 
-    @if(bViewTable){
-        foreach(int key in dicFolders.Keys){
-        
-            <h4>@Html.Raw(folderNames[key])</h4>
-            @Html.Raw(DocumentHelper.SpitDocTableHeader())
-            @Html.Raw(dicFolders[key])
-            @Html.Raw(DocumentHelper.SpitDocTableFooter())
-        }
-    
-    }else{
-        <p class="error">
-            @Document.Error_No_Folder
-        </p>   
-    }
-    <p>
-        <a href="/Document/Create" title="@Document.V_Create_New">@Document.V_Create_New</a>&nbsp;
-        <a href="/Document/CreateFolder" title="@Document.V_Create_New_Folder">@Document.V_Create_New_Folder</a>
+      <div class="foldergroup">
 
-     </p>
+        @if(bViewTable){
+            foreach(int key in dicFolders.Keys){
+            
+                <fieldset>
+                    <legend>@Html.Raw(folderNames[key])</legend>
+                    <div class="folder">
+                        @Html.Raw(dicFolders[key])
+                    </div>
+                </fieldset>
+           
+            }
+    
+        }else{
+            <p class="error">
+                @Document.Error_No_Folder
+            </p>   
+        }
+
+     </div>
+        <br />
+     <div class="wide">
+        <input type="button" onclick="document.location.href='/Document/Create'" value="@Document.V_Create_New" />
+         &nbsp;
+        <input type="button" onclick="document.location.href='/Document/CreateFolder'" value="@Document.V_Create_New_Folder"/>
+
+     </div>
 
         </div>
 </div>
+
+<script type="text/javascript">
+    var expandButton = '/Content/images/expand.gif';
+    var collapseButton = '/Content/images/collapse.gif';
+    var MSG_ARE_YOU_SURE_TO_DELETE = '@Html.Raw(HttpUtility.JavaScriptStringEncode(Document.JS_ARE_YOU_SURE_TO_DELETE_DOC))';
+</script>

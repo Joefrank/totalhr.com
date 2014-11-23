@@ -287,7 +287,7 @@ div.popupedit .spclose {
     }
 
 input[type="button"].btnsmall, input[type="submit"].btnsmall {
-   cursor:pointer;
+   
     padding: 0 5px;
     background-color: #198fff;
     color: #fff;
@@ -297,6 +297,9 @@ input[type="button"].btnsmall, input[type="submit"].btnsmall {
     font-weight: 100;
     border: 2px solid transparent;
 
+}
+input[type='button'] {
+    cursor: pointer;
 }
 
 table.tab .private {
@@ -313,4 +316,12 @@ table.tab .department {
 
 table.tab .user {
     color: #198fff;
+}
+
+div.wide {
+    float: left;
+    width: 98%;
+    margin: 10px 0;
+    text-align: left;
+    padding: 1%;
 }

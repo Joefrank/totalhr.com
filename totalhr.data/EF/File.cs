@@ -14,6 +14,11 @@ namespace totalhr.data.EF
     
     public partial class File
     {
+        public File()
+        {
+            this.CompanyDocuments = new HashSet<CompanyDocument>();
+        }
+    
         public int id { get; set; }
         public string shortname { get; set; }
         public int typeid { get; set; }
@@ -23,5 +28,7 @@ namespace totalhr.data.EF
         public string extension { get; set; }
         public Nullable<System.DateTime> lastupdated { get; set; }
         public Nullable<int> lastupdatedby { get; set; }
+    
+        public virtual ICollection<CompanyDocument> CompanyDocuments { get; set; }
     }
 }

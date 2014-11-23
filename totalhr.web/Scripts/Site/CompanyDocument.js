@@ -146,3 +146,14 @@ function ToggleCheckedValue(ckObj, objTargetId) {
     var val = ckObj.checked ? 1 : 0;
     $('#' + objTargetId).val(val);
 }
+
+function OpenEmailEditor() {
+    alert('implement');
+}
+
+function DeleteDoc(url) {
+    var result = confirm(MSG_ARE_YOU_SURE_TO_DELETE);
+    if (result == true) {
+        document.location.href = url;
+    }
+}

@@ -18,5 +18,9 @@ namespace FileManagementService.Infrastructure
         int UpdateWith(int FileId, HttpPostedFileBase IOfile, string destinationFolder, int createdBy, int fileTypeId);
 
         byte[] ReadFileBytes(string filePath);
+
+        String BytesToString(long byteCount);
+
+        string GetMimeType(string fileName);
     }
 }

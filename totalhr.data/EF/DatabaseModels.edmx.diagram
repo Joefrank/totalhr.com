@@ -59,6 +59,7 @@
         <AssociationConnector Association="TotalHRModel.FK_CTSectionFieldLink_User" />
         <AssociationConnector Association="TotalHRModel.FK_ContractTemplate_User" />
         <AssociationConnector Association="TotalHRModel.FK_UserContract_User" />
+        <AssociationConnector Association="TotalHRModel.FK_CompanyDocument_File" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

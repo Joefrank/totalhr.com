@@ -117,172 +117,46 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Error_Could_Not_Create_Doc" xml:space="preserve">
-    <value>Sorry could not create document!</value>
+  <data name="doc" xml:space="preserve">
+    <value>MS Word</value>
   </data>
-  <data name="Error_Could_Not_Upload_Doc" xml:space="preserve">
-    <value>Sorry could not upload file!</value>
+  <data name="docx" xml:space="preserve">
+    <value>MS Word</value>
   </data>
-  <data name="Error_CreatorIsRequried_Rq" xml:space="preserve">
-    <value>Creator is required</value>
+  <data name="gif" xml:space="preserve">
+    <value>IMAGE/GIF</value>
   </data>
-  <data name="Error_DisplayName_Rq" xml:space="preserve">
-    <value>Display name is required</value>
+  <data name="jpg" xml:space="preserve">
+    <value>IMAGE/JPG</value>
   </data>
-  <data name="Error_FileIsRequried_Rq" xml:space="preserve">
-    <value>File is required</value>
+  <data name="log" xml:space="preserve">
+    <value>LOG</value>
   </data>
-  <data name="Error_File_Type" xml:space="preserve">
-    <value>Only file of type:</value>
+  <data name="odt" xml:space="preserve">
+    <value>ODT</value>
   </data>
-  <data name="Error_OriginalFileName_Rq" xml:space="preserve">
-    <value>Original file name is required.</value>
+  <data name="pdf" xml:space="preserve">
+    <value>PDF</value>
   </data>
-  <data name="Error_Upload_File" xml:space="preserve">
-    <value>Please Upload Your file</value>
+  <data name="png" xml:space="preserve">
+    <value>IMAGE/PNG</value>
   </data>
-  <data name="V_Back_To_List" xml:space="preserve">
-    <value>Back to list</value>
+  <data name="ppt" xml:space="preserve">
+    <value>Power Point</value>
   </data>
-  <data name="V_Create" xml:space="preserve">
-    <value>Create</value>
+  <data name="pptx" xml:space="preserve">
+    <value>Power Point</value>
   </data>
-  <data name="V_Create_New" xml:space="preserve">
-    <value>Create new document</value>
+  <data name="rtf" xml:space="preserve">
+    <value>RTF</value>
   </data>
-  <data name="V_Create_New_Folder" xml:space="preserve">
-    <value>Create Folder</value>
+  <data name="tif" xml:space="preserve">
+    <value>IMAGE/TIF</value>
   </data>
-  <data name="V_DisplayName" xml:space="preserve">
-    <value>DisplayName</value>
+  <data name="tiff" xml:space="preserve">
+    <value>IMAGE/TIFF</value>
   </data>
-  <data name="V_Document_Details_Title" xml:space="preserve">
-    <value>Document details</value>
-  </data>
-  <data name="V_Document_title" xml:space="preserve">
-    <value>Company Documents and Folders</value>
-  </data>
-  <data name="v_File" xml:space="preserve">
-    <value>File</value>
-  </data>
-  <data name="V_Folder" xml:space="preserve">
-    <value>Folder</value>
-  </data>
-  <data name="V_Id" xml:space="preserve">
-    <value>Id</value>
-  </data>
-  <data name="V_Upload" xml:space="preserve">
-    <value>Upload</value>
-  </data>
-  <data name="Error_NoDept_ForPermission" xml:space="preserve">
-    <value>You haven't selected any department.</value>
-  </data>
-  <data name="Error_NoUser_ForPermission" xml:space="preserve">
-    <value>You haven't selected any user.</value>
-  </data>
-  <data name="V_Add_Folder" xml:space="preserve">
-    <value>Add Folder</value>
-  </data>
-  <data name="V_Folder_Make_Public" xml:space="preserve">
-    <value>Make public</value>
-  </data>
-  <data name="V_New_Folder" xml:space="preserve">
-    <value>New Folder</value>
-  </data>
-  <data name="V_Save" xml:space="preserve">
-    <value>Save</value>
-  </data>
-  <data name="v_Select" xml:space="preserve">
-    <value>Select</value>
-  </data>
-  <data name="V_Select_Department" xml:space="preserve">
-    <value>Select Department</value>
-  </data>
-  <data name="V_Select_User" xml:space="preserve">
-    <value>Select user</value>
-  </data>
-  <data name="Error_No_Folder" xml:space="preserve">
-    <value>Sorry but no folder or document to view.</value>
-  </data>
-  <data name="TH_Created" xml:space="preserve">
-    <value>Created</value>
-  </data>
-  <data name="TH_CreatedBy" xml:space="preserve">
-    <value>Created By</value>
-  </data>
-  <data name="TH_Details" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="TH_DisplayName" xml:space="preserve">
-    <value>DisplayName</value>
-  </data>
-  <data name="TH_Downloads" xml:space="preserve">
-    <value>Downloads</value>
-  </data>
-  <data name="TH_Permissions" xml:space="preserve">
-    <value>Permissions</value>
-  </data>
-  <data name="TH_Views" xml:space="preserve">
-    <value>Views</value>
-  </data>
-  <data name="V_No_Folder" xml:space="preserve">
-    <value>Document(s) With No Folder</value>
-  </data>
-  <data name="Error_No_Doc_Details" xml:space="preserve">
-    <value>Sorry couldn't retrieve document details.</value>
-  </data>
-  <data name="V_Download" xml:space="preserve">
-    <value>Download</value>
-  </data>
-  <data name="V_Edit" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="V_Permission_Company" xml:space="preserve">
-    <value>Whole company</value>
-  </data>
-  <data name="V_Permission_Private" xml:space="preserve">
-    <value>Private</value>
-  </data>
-  <data name="Error_Could_Not_Update_Doc" xml:space="preserve">
-    <value>Sorry could not update document!</value>
-  </data>
-  <data name="V_Archive" xml:space="preserve">
-    <value>Archive</value>
-  </data>
-  <data name="V_Delete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="V_Details" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="V_Doc_Edit" xml:space="preserve">
-    <value>Document Edit</value>
-  </data>
-  <data name="V_View" xml:space="preserve">
-    <value>View</value>
-  </data>
-  <data name="JS_ARE_YOU_SURE_TO_DELETE_DOC" xml:space="preserve">
-    <value>Are you sure you want to archive this document? This document will not be accessed by other users if you click ok.</value>
-  </data>
-  <data name="V_Click_More_Details" xml:space="preserve">
-    <value>Click for more details</value>
-  </data>
-  <data name="V_Contributor" xml:space="preserve">
-    <value>Contributor</value>
-  </data>
-  <data name="V_Date" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="V_Email" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="V_File_Size" xml:space="preserve">
-    <value>File Size</value>
-  </data>
-  <data name="V_File_Type" xml:space="preserve">
-    <value>File Type</value>
-  </data>
-  <data name="V_Open" xml:space="preserve">
-    <value>Open</value>
+  <data name="txt" xml:space="preserve">
+    <value>Text</value>
   </data>
 </root>

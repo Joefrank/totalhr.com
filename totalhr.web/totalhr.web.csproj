@@ -224,6 +224,7 @@
     <Content Include="Content\css\BeatPicker.min.css" />
     <Content Include="Content\calendar.css" />
     <Content Include="Content\css\calendar.css" />
+    <Content Include="Content\css\companydocument.css" />
     <Content Include="Content\css\popup.css" />
     <Content Include="Content\images\cal.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />

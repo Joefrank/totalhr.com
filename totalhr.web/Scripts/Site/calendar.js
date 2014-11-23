@@ -403,26 +403,6 @@ function ShowRepeats(objid) {
     $('#sppreview').html($('#' + objid).html());
 }
 
-function ToggleExpandGeneric(ctrHeadId, ctrToExpandId, callback) {
-    var o = document.getElementById(ctrHeadId); //$('#' + objid);
-    var ojq = $('#' + ctrHeadId);
-    var ocollapse = $('#' + ctrToExpandId);
-
-    if (ojq.hasClass('collapse')) {
-       o.style.backgroundImage = "url('/Content/images/plus-icon.png')";
-        ojq.removeClass('collapse');
-        ocollapse.slideUp("slow");
-    } else {
-        o.style.backgroundImage = "url('/Content/images/minus.png')";
-        ojq.addClass('collapse');
-        ocollapse.slideDown("slow");
-    }
-
-    if (callback != typeof ("undefined") && callback != null) {
-        eval(callback);
-    }
-}
-
 
 function ToggleExpand(objid, bCondition, hdnMessage, callback) {
 

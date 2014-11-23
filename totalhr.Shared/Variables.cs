@@ -143,11 +143,12 @@ namespace totalhr.Shared
         }
 
         public enum AllowedFileExtension
-        {
+        {            
             doc,
             docx,
             txt,
             ppt,
+            pptx,
             rtf,
             pdf,
             odt,

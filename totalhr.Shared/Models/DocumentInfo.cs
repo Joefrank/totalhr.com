@@ -29,7 +29,13 @@ namespace totalhr.Shared.Models
 
         public int PermissionSelection { get; set; }
 
-        public string PermissionSelectionValue { get; set; }       
+        public string PermissionSelectionValue { get; set; }
+
+        public string ReadableSize { get; set; }
+
+        public string ReadableType { get; set; }
+
+        public string FileMimeType { get; set; }
         
     }
 

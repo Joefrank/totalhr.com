@@ -173,6 +173,10 @@ namespace totalhr.web.Controllers
                         if (newFileId > 0)
                         {
                             info.NewFileId = newFileId;
+                            info.ReadableSize = _fileService.BytesToString(info.File.ContentLength);
+                            info.ReadableType = Path.GetExtension(info.File.FileName).Replace(".", "");
+                            info.FileMimeType = _fileService.GetMimeType(info.File.FileName);
+
                             int docid = _docService.CreateDocument(info);
 
                             if (docid < 1)
@@ -197,8 +201,8 @@ namespace totalhr.web.Controllers
                     }
                 }
             }
-            
-            return View("Create");            
+            ViewBag.Folders = _docService.ListFoldersByUser(CurrentUser.UserId);
+            return View("Create", info);           
 
         }
 
@@ -230,6 +234,11 @@ namespace totalhr.web.Controllers
                     //upload the file
                     _fileService.UpdateWith(info.OldFileId, info.File, Server.MapPath("~/CompanyDocuments/") + 
                         CurrentUser.CompanyId, CurrentUser.UserId, (int)Variables.FileType.CompanyDocument);
+
+                    info.ReadableSize = _fileService.BytesToString(info.File.ContentLength);
+                    info.ReadableType = Path.GetExtension(info.File.FileName).Replace(".", "");
+                    info.FileMimeType = _fileService.GetMimeType(info.File.FileName);
+
                 }
 
                 int result = _docService.UpdateDocument(info);
@@ -253,9 +262,17 @@ namespace totalhr.web.Controllers
 
         }
 
+        public FileResult OpenFile(int id)
+        {
+            CompanyDocument doc = _docService.GetDocumentWithViewCountUpdate(id, CurrentUser.UserId);
+            FileResult fr =  File(DocPath + "\\" + doc.FileId + Path.GetExtension(doc.OriginalFileName), doc.FileMimeType);
+            fr.FileDownloadName = doc.OriginalFileName;
+            return fr;
+        }
+
         public FileResult Download(int id)
         {
-            CompanyDocument doc = _docService.GetDocument(id);
+            CompanyDocument doc = _docService.GetDocumentWithDownloadCountUpdate(id, CurrentUser.UserId);
             byte[] fileBytes = _fileService.ReadFileBytes(DocPath + "\\" + doc.FileId + Path.GetExtension(doc.OriginalFileName));
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, doc.OriginalFileName);
         }
@@ -263,7 +280,8 @@ namespace totalhr.web.Controllers
         public ActionResult Delete(int id)
         {
             //*** check that use has right to delete this doc otherwise no access page.
-            return null;
+            _docService.Archive(id, CurrentUser.UserId);
+            return RedirectToAction("Index");
         }
     }
 }

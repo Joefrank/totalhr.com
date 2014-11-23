@@ -121,5 +121,49 @@ namespace totalhr.web.Helpers
                 @doc.Id, Document.V_View, Document.V_Download, edit, delete
                 );
         }
+
+        public static string MakeDocumentRow(CompanyDocument doc, int currentUserId)
+        {           
+
+            string personalAction = (currentUserId == doc.CreatedBy) ?
+                    string.Format(@" <input type=""button"" onclick=""DeleteDoc('/Document/Delete/{0}');"" value=""{1}"" /> &nbsp; 
+                            <input type=""button"" onclick=""document.location.href='/Document/Edit/{0}'"" value=""{2}"" />",
+                              doc.Id,  Document.V_Archive,  Document.V_Edit) :"";
+
+            string sHtml = @"<div id=""doc{0}"" class=""document"">
+                    <div class=""core"">
+                        <div class=""left"">
+                            <h4><span id=""spHead{0}"" class=""expand"" title=""{3}"" onclick=""javascript:ToggleExpandGeneric('spHead{0}', 'moreinfo{0}', null, expandButton, collapseButton);"">&nbsp;</span>
+                                <span onclick=""OpenDoc({0});"" title=""{2}"">{2}</span>
+                            </h4>
+                            <div class=""highlight"">
+                                {5}: <span class=""actionspan"" onclick=""OpenEmployeeProfile({1});"">{4}</span>
+                                - {6}: {7}
+                            </div>
+                        </div>
+                        <div class=""right"">                       
+                            <div class=""line"">
+                                <input type=""button"" value=""{8}"" onclick=""document.location.href='/Document/Download/{0}'"" /> &nbsp; 
+                                <input type=""button"" value=""{9}"" onclick=""document.location.href='/Document/OpenFile/{0}'"" />   &nbsp; 
+                                <input type=""button"" value=""{10}"" onclick=""OpenEmailEditor();"" />
+                            </div>                    
+                        </div>
+                   </div>
+                    <div id=""moreinfo{0}"" class=""moreinfo"" style=""display:none;"">
+                        <div class=""left"">
+                           <span class=""details"">{11}:{17} | {12}: {18} | {13}: {14} | {15}: {16}</span> &nbsp;
+                        </div>
+                        <div class=""right"">
+                           {19}
+                        </div>
+                    </div>
+                </div>";
+
+            return string.Format(sHtml, doc.Id, doc.CreatedBy, doc.DisplayName,Document.V_Click_More_Details,
+                (doc.User.firstname + " " + doc.User.surname), Document.V_Contributor, Document.V_Date,
+                doc.Created.ToShortDateString(), Document.V_Download, Document.V_Open, Document.V_Email,
+                Document.V_File_Size, Document.V_File_Type, Document.V_Download, doc.NoOfDownloads, Document.V_View,
+                doc.NoOfViews, doc.ReadableSize, EnumExtensions.FileType(doc.ReadableType), personalAction);
+        }
     }
 }

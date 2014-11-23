@@ -30,6 +30,11 @@ namespace CompanyDocumentService.Infrastructure
         List<string> GetPermissionObjectNames(List<CompanyDocumentPermission> permissions);
         List<CompanyDocument> ListDocumentAndFoldersByUser(int userId, int userDepartmentId);
         void UpdateDocsPermission(DocumentInfoUpdate info);
+        void UpdateDocViewCount(int docId, int increment, int userId);
+        void UpdateDocDownloadCount(int docId, int increment, int userId);
+        CompanyDocument GetDocumentWithViewCountUpdate(int docId, int userId);
+        CompanyDocument GetDocumentWithDownloadCountUpdate(int docId, int userId);
+        void Archive(int docId, int userId);
 
         void ShareDocumentByEmail(int documentId, int shearerId);
         string GetDocumentLink(int documentId, int userId);
