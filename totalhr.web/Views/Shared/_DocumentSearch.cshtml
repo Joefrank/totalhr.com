@@ -1,0 +1,88 @@
+﻿@using totalhr.Resources;
+@using totalhr.Shared;
+
+@model totalhr.Shared.Models.DocumentSearchInfo
+
+@{
+    var defaultStartDate = (Model.StartDate > DateTime.MinValue)? Model.StartDate.ToShortDateString() : "";
+    var defaultEndDate = (Model.EndDate > DateTime.MinValue)? Model.EndDate.ToShortDateString() : DateTime.Now.ToShortDateString();
+
+    var lstFileTypes = Enum.GetValues(typeof(Variables.AllowedFileExtension)).Cast<Variables.AllowedFileExtension>().Select(v => new SelectListItem
+    {
+        Text = EnumExtensions.Description(v),
+        Value = v.ToString()
+    });
+
+    //lstFileTypes.Join(new List<SelectListItem> {{ Value = "0", Text = Document.v_Select }});
+    
+}
+<div id="searchbox">
+     <fieldset>
+       <legend>Document Search</legend>                  
+               
+          
+@using (Html.BeginForm("Search", "Document"))
+{
+     @Html.ValidationSummary()
+
+    <div id="dvform" class="formwide">
+
+            <div class="line"> 
+               <table>  
+               <tr>   
+                   <td>          
+			         <b>@Document.V_DisplayName</b>
+                   </td>
+                   <td>
+                        @Html.TextBoxFor(x => x.Name)                   
+                       
+                   </td>
+                   <td>
+                    <b>@Document.V_Folder</b>
+                   </td>
+                   <td>
+                      @Html.DropDownListFor(x => x.FolderId, Model.Folders)                  
+                   </td>
+                   <td>
+                     <b>@Document.V_Contributor</b>
+                   </td>
+                   <td>                      
+                       @Html.DropDownListFor(x => x.AuthorId, Model.Contributors )
+                   </td>
+                <td>
+                <b>@Document.V_File_Type</b>
+                    </td>
+                <td>
+                   @* @Html.DropDownListFor(x => x.FileTypeId,  new SelectList(folders, "Id", "DisplayName"))*@
+                    @Html.DropDownListFor(x => x.FolderId,  lstFileTypes)
+                    </td>
+                </tr>
+                <tr> 
+                    <td>               
+                <b>@Document.V_Dates_Between</b>
+                       
+                @Document.V_Start</td>
+                    <td> 
+                        @Html.TextBoxFor(x => x.StartDate, defaultStartDate, new { @class = "datetype", onclick = "javascript:NewCal('StartDate','ddmmyyyy',true,24)" }) 
+                    </td>
+                    <td>
+                    @Document.V_End 
+                       </td>
+                  <td>
+                        @Html.TextBoxFor(x => x.EndDate, defaultEndDate, new { @class = "datetype", onclick = "javascript:NewCal('EndDate','ddmmyyyy',true,24)" })
+                        </td>
+                </tr>
+                </table>
+             
+             
+             </div>
+
+            <div class="line">  
+                <input type="submit" value="@Document.V_Search" />
+            </div>
+       </div>
+        
+}
+
+                </fieldset>
+      </div>

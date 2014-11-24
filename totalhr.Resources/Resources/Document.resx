@@ -285,4 +285,19 @@
   <data name="V_Open" xml:space="preserve">
     <value>Open</value>
   </data>
+  <data name="V_And" xml:space="preserve">
+    <value>And</value>
+  </data>
+  <data name="V_Dates_Between" xml:space="preserve">
+    <value>Dates between</value>
+  </data>
+  <data name="V_End" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="V_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="V_Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
 </root>

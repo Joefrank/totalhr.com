@@ -2,6 +2,7 @@
 @using totalhr.web.Helpers;
 @using totalhr.data.EF;
 @using System.Text;
+@using totalhr.Shared.Models;
 
 @model List<CompanyDocument>
 
@@ -11,12 +12,27 @@
    
     var dicFolders = new Dictionary<int, StringBuilder>();
     var folderNames = new Dictionary<int, string>();
+    var contributors = new Dictionary<int, string>();
+    var contributorList = new List<SelectListItem>();
+    var folderList = new List<SelectListItem>();
+    
     dicFolders[0] = new StringBuilder();
     folderNames[0] = Document.V_No_Folder;
     int lastFolderId = -1, currentIndex = 0;
     int CurrentUserId = Convert.ToInt32(ViewBag.CurrentUserId);
-    
-    foreach(CompanyDocument doc in Model){
+
+    contributorList.Add(new SelectListItem { Value = "0", Text = Document.v_Select });
+
+    foreach(CompanyDocument doc in Model){        
+        if(!contributors.Keys.Contains(doc.CreatedBy))
+        {
+            contributors[doc.CreatedBy] = doc.User.firstname + " " + doc.User.surname;
+            contributorList.Add(new SelectListItem
+            {
+                Text = contributors[doc.CreatedBy],
+                Value = doc.CreatedBy.ToString()
+            });
+        }
         
         if(lastFolderId == doc.FolderId && lastFolderId > 0)
         {
@@ -26,7 +42,7 @@
         }else{
             currentIndex = doc.FolderId.GetValueOrDefault();
             dicFolders[currentIndex] = new StringBuilder();
-            folderNames[currentIndex] = doc.FolderDisplayName;           
+            folderNames[currentIndex] = doc.FolderDisplayName;               
         }
 
         if(!doc.Archived){
@@ -35,7 +51,23 @@
         
         lastFolderId = doc.FolderId.GetValueOrDefault();
     }
+
+    folderList.Add(new SelectListItem { Value = "0", Text = Document.v_Select });
     
+    foreach (int key in folderNames.Keys)
+    {
+        folderList.Add(new SelectListItem
+        {
+            Text = folderNames[key],
+            Value = key.ToString()
+        });
+    }
+    
+    DocumentSearchInfo searchInfo = new DocumentSearchInfo();
+    searchInfo.Contributors = contributorList;
+    searchInfo.Folders = folderList;
+
+    //searchInfo.FileTypes = totalhr.Shared.Variables.FileType;
     
 }
 
@@ -51,6 +83,8 @@
     <div class="content">
 
         <h1>@Document.V_Document_title</h1>
+
+      @Html.Partial("_DocumentSearch", searchInfo)
 
       <div class="foldergroup">
 
@@ -89,3 +123,5 @@
     var collapseButton = '/Content/images/collapse.gif';
     var MSG_ARE_YOU_SURE_TO_DELETE = '@Html.Raw(HttpUtility.JavaScriptStringEncode(Document.JS_ARE_YOU_SURE_TO_DELETE_DOC))';
 </script>
+
+<script type="text/javascript" src="/Scripts/Site/DatePicker.js"></script>

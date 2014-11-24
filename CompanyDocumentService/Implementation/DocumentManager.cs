@@ -68,6 +68,23 @@ namespace CompanyDocumentService.Implementation
 
         #region Documents
 
+        public List<CompanyDocument> SearchDocument(DocumentSearchInfo info)
+        {
+            return _docRepos.FindBy(x =>
+                (string.IsNullOrEmpty(info.Name) || x.FolderDisplayName.Contains(info.Name))
+                &&
+                (string.IsNullOrEmpty(info.FileMimeType) || x.FileMimeType == info.FileMimeType)
+                &&
+                (info.FolderId == 0 || info.FolderId == x.FolderId)
+                &&
+                (info.AuthorId == 0 || info.AuthorId == x.CreatedBy)
+                &&
+                (info.StartDate == DateTime.MinValue || x.Created >= info.StartDate)
+                &&
+                (info.EndDate == DateTime.MinValue || x.Created <= info.EndDate)
+                ).ToList();
+        }
+
         public int UpdateDocument(DocumentInfoUpdate info)
         {
             CompanyDocument doc = _docRepos.FindBy(x => x.Id == info.DocId).FirstOrDefault(); ;

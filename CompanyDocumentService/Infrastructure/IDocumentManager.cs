@@ -35,6 +35,7 @@ namespace CompanyDocumentService.Infrastructure
         CompanyDocument GetDocumentWithViewCountUpdate(int docId, int userId);
         CompanyDocument GetDocumentWithDownloadCountUpdate(int docId, int userId);
         void Archive(int docId, int userId);
+        List<CompanyDocument> SearchDocument(DocumentSearchInfo info);
 
         void ShareDocumentByEmail(int documentId, int shearerId);
         string GetDocumentLink(int documentId, int userId);

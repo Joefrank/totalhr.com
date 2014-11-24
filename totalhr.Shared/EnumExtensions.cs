@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Resources;
@@ -49,5 +50,6 @@ namespace totalhr.Shared
             var localizedDescription = FileTypeNameResources.GetString(fileType);
             return localizedDescription ?? fileType;
         }
+      
     }
 }

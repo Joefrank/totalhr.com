@@ -283,5 +283,17 @@ namespace totalhr.web.Controllers
             _docService.Archive(id, CurrentUser.UserId);
             return RedirectToAction("Index");
         }
+
+        public ActionResult Search(DocumentSearchInfo info )
+        {
+            ViewBag.CurrentUserId = CurrentUser.UserId;
+
+            if (!ModelState.IsValid) {               
+                return View("Index", _docService.ListDocumentAndFoldersByUser(CurrentUser.UserId, CurrentUser.CompanyId));
+            }
+
+            var lstDocs = _docService.SearchDocument(info);
+            return View("Index", lstDocs);
+        }
     }
 }
