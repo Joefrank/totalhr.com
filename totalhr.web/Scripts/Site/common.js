@@ -107,3 +107,10 @@ function ToggleExpandGeneric(ctrHeadId, ctrToExpandId, callback, expandIcon, col
 function OpenEmployeeProfile(empid) {
     alert('implement me');
 }
+
+function OpenPopup(url, width, height) {    
+    $('#ipopup').attr("src", url);
+    $('#dvPopup').css("display", "");
+    $('#dvPopup').css("height", height);
+    $('#dvPopup').css("width", width);
+}

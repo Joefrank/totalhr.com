@@ -8,13 +8,14 @@ using totalhr.data.EF;
 using CompanyDocumentService.Infrastructure;
 using totalhr.data.Repositories.Infrastructure;
 using totalhr.Shared.Models;
+using totalhr.services.messaging.Infrastructure;
 
 namespace CompanyDocumentService.Implementation
 {
     public class DocumentManager : IDocumentManager
     {
         ICompanyDocumentRepository _docRepos;
-
+        
         public DocumentManager(ICompanyDocumentRepository docRepos)
         {
             _docRepos = docRepos;
@@ -71,7 +72,7 @@ namespace CompanyDocumentService.Implementation
         public List<CompanyDocument> SearchDocument(DocumentSearchInfo info)
         {
             return _docRepos.FindBy(x =>
-                (string.IsNullOrEmpty(info.Name) || x.FolderDisplayName.Contains(info.Name))
+                (string.IsNullOrEmpty(info.Name) || x.DisplayName.Contains(info.Name))
                 &&
                 (string.IsNullOrEmpty(info.FileMimeType) || x.FileMimeType == info.FileMimeType)
                 &&
@@ -246,7 +247,7 @@ namespace CompanyDocumentService.Implementation
             doc.LastUpdated = DateTime.Now;
             doc.LastUpdatedBy = userId;
             _docRepos.Save();
-        }
+        }       
 
         #endregion Documents
 

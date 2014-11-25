@@ -360,6 +360,7 @@
     <Content Include="Views\Document\EditDocument.cshtml" />
     <Content Include="Views\Shared\_CompanyDocItemSelector.cshtml" />
     <Content Include="Views\Shared\_DocumentSearch.cshtml" />
+    <Content Include="Views\Document\Share.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -16,8 +16,8 @@ namespace totalhr.Shared.Models
 
         public int AuthorId { get; set; }
 
-        [DataType(DataType.DateTime)]
-        [DisplayFormat(ApplyFormatInEditMode = true,DataFormatString = "{0:MM/dd/yyyy}")]
+        //[DataType(DataType.DateTime)]
+        //[DisplayFormat(ApplyFormatInEditMode = true,DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.DateTime)]

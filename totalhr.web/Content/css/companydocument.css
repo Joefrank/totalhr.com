@@ -72,7 +72,8 @@ html {
         font-size:8pt;
     }
 
-        .document .core .right input[type='button'], .moreinfo input[type='button']  {
+        .document .core .right input[type='button'], .moreinfo input[type='button'], #searchbox input[type='submit'],
+        #searchbox input[type='button']  {
             font-size:8pt;float:right;margin:5px 5px 0 0;cursor:pointer;
         }
 
@@ -98,3 +99,48 @@ html {
         .document .moreinfo .right {
              text-align:right;float:left;width:28%;padding:0 1% 5px;
         }
+
+#searchbox {
+    float:left;
+    width:800px;
+    font: 0.80em/1.13em "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+}
+
+    #searchbox input[type='submit'], #searchbox select, #searchbox input[type='text'], #searchbox input[type='button'] {
+        float: left;font-size:8pt;
+    }
+
+    #searchbox input[type='text'] {
+        height:10px;font-size:7pt !important;
+    }
+
+    #searchbox fieldset legend span.icon {
+        position:relative;
+        top:10px;   
+        padding:20px 20px 0 0;
+        background:transparent url('/Content/images/search.png') center center no-repeat;
+    }
+
+.foldergroup fieldset legend span.expand {
+        position:relative;
+        top:10px;   
+        padding:20px 20px 0 0;
+        background:transparent url('/Content/images/folder-close.png') center center no-repeat;
+        cursor:pointer;
+}
+
+.foldergroup fieldset legend span.collapse {
+     position:relative;
+        top:10px;   
+        padding:20px 20px 0 0;
+    background:transparent url('/Content/images/folder-open.png') center center no-repeat;
+    cursor:pointer;
+}
+
+div.wide {
+    width:98%;
+    float:left;
+    text-align:left;
+    margin:10px 0;
+    padding:1%;
+}

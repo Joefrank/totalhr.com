@@ -12,6 +12,7 @@ using totalhr.Resources;
 using System.IO;
 using FileManagementService.Infrastructure;
 using totalhr.data.EF;
+using totalhr.services.messaging.Infrastructure;
 
 namespace totalhr.web.Controllers
 {
@@ -22,13 +23,14 @@ namespace totalhr.web.Controllers
         private IFileService _fileService;
         private IAccountService _accountService;
         private ICompanyService _companyService;
+        private readonly IMessagingService _messagingService;
 
         public string DocPath{
             get{return Path.Combine(Server.MapPath("~/CompanyDocuments/") , CurrentUser.CompanyId.ToString());}
         }
 
         public DocumentController(IOAuthService authservice, IDocumentManager docManager, IFileService fileService,
-            IAccountService acctService, ICompanyService companyService)
+            IAccountService acctService, ICompanyService companyService, IMessagingService messageService)
             : base(authservice)
         {
             _authService = authservice;
@@ -36,13 +38,14 @@ namespace totalhr.web.Controllers
             _fileService = fileService;
             _accountService = acctService;
             _companyService = companyService;
+            _messagingService = messageService;
             ViewBag.CompanyId = (CurrentUser != null)? CurrentUser.CompanyId : 0;
         }
 
         public ActionResult Index()
         {
             ViewBag.CurrentUserId = CurrentUser.UserId;
-            return View(_docService.ListDocumentAndFoldersByUser(CurrentUser.UserId, CurrentUser.CompanyId));
+            return View(_docService.ListDocumentAndFoldersByUser(CurrentUser.UserId, CurrentUser.DepartmentId));
         }
 
         public ActionResult Create()
@@ -289,11 +292,78 @@ namespace totalhr.web.Controllers
             ViewBag.CurrentUserId = CurrentUser.UserId;
 
             if (!ModelState.IsValid) {               
-                return View("Index", _docService.ListDocumentAndFoldersByUser(CurrentUser.UserId, CurrentUser.CompanyId));
+                return View("Index", _docService.ListDocumentAndFoldersByUser(CurrentUser.UserId, CurrentUser.DepartmentId));
             }
 
             var lstDocs = _docService.SearchDocument(info);
             return View("Index", lstDocs);
+        }
+
+        public ActionResult Share(int id)
+        {
+            var doc = _docService.GetDocument(id);
+
+            DocumentShareInfo info = new DocumentShareInfo
+            {
+                DocumentId = doc.Id,
+                DocumentName = doc.DisplayName,
+                FileName = doc.OriginalFileName
+            };
+
+            ViewBag.UserList = _accountService.GetCompanyUsersSimple(CurrentUser.CompanyId, CurrentUser.UserId);
+            return View(info);
+        }
+
+        [HttpPost]
+        public ActionResult Share(DocumentShareInfo info)
+        {
+            ViewBag.UserList = _accountService.GetCompanyUsersSimple(CurrentUser.CompanyId, CurrentUser.UserId);
+
+            if (!ModelState.IsValid)
+            {                
+                return View(info);
+            }
+
+            var recipientEmail = string.Empty;
+            
+            if(string.IsNullOrEmpty(info.WithUserEmail) && info.WithUserId < 1){
+               ModelState.AddModelError("NoRecipient", "No Recipient has been specified");
+            }
+            else if(!string.IsNullOrEmpty(info.WithUserEmail))
+            {
+                recipientEmail = info.WithUserEmail; 
+            }
+            else if(info.WithUserId > 0)
+            {
+                recipientEmail = _accountService.GetUser(info.WithUserId).email; 
+            }
+
+            if (!string.IsNullOrEmpty(recipientEmail))
+            {
+                _messagingService.ReadSMTPSettings(SiteMailSettings);
+
+                var emailStruct = new HTMLEmailStruct
+                {
+                    SenderEmail = CurrentUser.UserName,
+                    SenderName = CurrentUser.FullName,
+                    ReceiverEmail = recipientEmail,
+                    ReceiverName = "",
+                    EmailBody = info.Message,
+                    EmailTitle = string.Format(Document.V_Share_Doc_Email_Title, CurrentUser.FullName),
+                    AttachmentPath = DocPath + "\\" + info.DocumentId + Path.GetExtension(info.FileName),
+                    AttachmentName = info.FileName
+                };
+                
+                bool result = _messagingService.EmailUserWithAttachment(emailStruct);  // .SendEmailWithAttachment(emailStruct);
+                
+                if (result)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
+                        
+            return View(info);
+  
         }
     }
 }

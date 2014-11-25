@@ -190,13 +190,18 @@ div.popuphead {
 
 
     div.popuphead h2 {
-        float:left;width:400px;margin: 10px 0 0;color:white;
+        float:left;width:78%;padding:1%;margin: 10px 0 0;color:white;
     }
 
 div#toolbox {
-    float:right;width:200px;height:98%;padding:1%;
+    float:right;width:18%;height:98%;padding:1%;margin-top:15px;
 }
 
+#popupBody {
+    float:left;
+    width:98%;
+    padding:1%;
+}
     div#toolbox .spsave {
         background:transparent url('/content/images/save.png') center center no-repeat;float:right;display:block;width:24px;height:24px;
         cursor:pointer;margin-right:10px;

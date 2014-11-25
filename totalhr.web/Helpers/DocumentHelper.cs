@@ -145,7 +145,7 @@ namespace totalhr.web.Helpers
                             <div class=""line"">
                                 <input type=""button"" value=""{8}"" onclick=""document.location.href='/Document/Download/{0}'"" /> &nbsp; 
                                 <input type=""button"" value=""{9}"" onclick=""document.location.href='/Document/OpenFile/{0}'"" />   &nbsp; 
-                                <input type=""button"" value=""{10}"" onclick=""OpenEmailEditor();"" />
+                                <input type=""button"" value=""{10}"" onclick=""OpenEmailEditor({0});"" />
                             </div>                    
                         </div>
                    </div>

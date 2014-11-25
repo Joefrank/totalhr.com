@@ -185,6 +185,3 @@ D:\Projects\MyGithub\totalhr.com\totalhr.tests.libs\bin\Debug\Resources.pdb
 D:\Projects\MyGithub\totalhr.com\totalhr.tests.libs\obj\Debug\totalhr.tests.libs.csprojResolveAssemblyReference.cache
 D:\Projects\MyGithub\totalhr.com\totalhr.tests.libs\obj\Debug\totalhr.tests.libs.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.tests.libs\obj\Debug\totalhr.tests.libs.pdb
-D:\Projects\MyGithub\totalhr.com\totalhr.tests.libs\bin\Debug\AutoMapper.Net4.dll
-D:\Projects\MyGithub\totalhr.com\totalhr.tests.libs\bin\Debug\AutoMapper.dll
-D:\Projects\MyGithub\totalhr.com\totalhr.tests.libs\bin\Debug\AutoMapper.xml

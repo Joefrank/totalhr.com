@@ -24,6 +24,12 @@
     contributorList.Add(new SelectListItem { Value = "0", Text = Document.v_Select });
 
     foreach(CompanyDocument doc in Model){        
+        
+        if(doc.Archived)
+        {
+            continue;   
+        }
+        
         if(!contributors.Keys.Contains(doc.CreatedBy))
         {
             contributors[doc.CreatedBy] = doc.User.firstname + " " + doc.User.surname;
@@ -31,6 +37,15 @@
             {
                 Text = contributors[doc.CreatedBy],
                 Value = doc.CreatedBy.ToString()
+            });
+        }
+
+        if (!folderNames.Keys.Contains(doc.FolderId.GetValueOrDefault()) && doc.FolderId > 0)
+        {
+            folderList.Add(new SelectListItem
+            {
+                Text = doc.FolderDisplayName,
+                Value = doc.FolderId.ToString()
             });
         }
         
@@ -44,30 +59,24 @@
             dicFolders[currentIndex] = new StringBuilder();
             folderNames[currentIndex] = doc.FolderDisplayName;               
         }
-
-        if(!doc.Archived){
-            dicFolders[currentIndex].Append(DocumentHelper.MakeDocumentRow(doc, CurrentUserId));
-        }
-        
+       
+        dicFolders[currentIndex].Append(DocumentHelper.MakeDocumentRow(doc, CurrentUserId));
         lastFolderId = doc.FolderId.GetValueOrDefault();
+    }    
+     
+    if(dicFolders[0].Length < 10)
+    {
+        dicFolders.Remove(0);   
+    }else{
+        folderList.Add(new SelectListItem { Value = "0.1", Text = Document.V_No_Folder });
     }
 
     folderList.Add(new SelectListItem { Value = "0", Text = Document.v_Select });
     
-    foreach (int key in folderNames.Keys)
-    {
-        folderList.Add(new SelectListItem
-        {
-            Text = folderNames[key],
-            Value = key.ToString()
-        });
-    }
     
     DocumentSearchInfo searchInfo = new DocumentSearchInfo();
     searchInfo.Contributors = contributorList;
     searchInfo.Folders = folderList;
-
-    //searchInfo.FileTypes = totalhr.Shared.Variables.FileType;
     
 }
 
@@ -92,8 +101,15 @@
             foreach(int key in dicFolders.Keys){
             
                 <fieldset>
-                    <legend>@Html.Raw(folderNames[key])</legend>
-                    <div class="folder">
+                    <legend>
+                        <span id="spFolder_@key" class="expand" onclick="javascript:ToggleExpandGeneric('spFolder_@key', 
+                        'folder_@key', null, folderExpandButton, folderCollapseButton);">&nbsp;</span> 
+                        
+                        @Html.Raw(folderNames[key])
+
+                    </legend>
+
+                    <div id="folder_@key" class="folder" style="display:none">
                         @Html.Raw(dicFolders[key])
                     </div>
                 </fieldset>
@@ -121,6 +137,8 @@
 <script type="text/javascript">
     var expandButton = '/Content/images/expand.gif';
     var collapseButton = '/Content/images/collapse.gif';
+    var folderExpandButton = '/Content/images/folder-close.png';
+    var folderCollapseButton = '/Content/images/folder-open.png';
     var MSG_ARE_YOU_SURE_TO_DELETE = '@Html.Raw(HttpUtility.JavaScriptStringEncode(Document.JS_ARE_YOU_SURE_TO_DELETE_DOC))';
 </script>
 

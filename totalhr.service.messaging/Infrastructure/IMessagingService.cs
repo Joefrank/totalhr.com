@@ -22,5 +22,7 @@ namespace totalhr.services.messaging.Infrastructure
         void AcknowledgeAccountActivation(AdminStruct adminstruct, User user);
 
         bool NotifyUserOfCalendarEvent(AdminStruct adminstruct, CalendarEventInfo eventinfo);
+
+        bool EmailUserWithAttachment(HTMLEmailStruct estruct);
     }
 }

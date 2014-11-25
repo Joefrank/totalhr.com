@@ -147,9 +147,11 @@ function ToggleCheckedValue(ckObj, objTargetId) {
     $('#' + objTargetId).val(val);
 }
 
-function OpenEmailEditor() {
-    alert('implement');
+function OpenEmailEditor(docId) {
+    var urltoload = "/Document/Share/" + docId;
+    OpenPopup(urltoload, 450, 500);
 }
+
 
 function DeleteDoc(url) {
     var result = confirm(MSG_ARE_YOU_SURE_TO_DELETE);

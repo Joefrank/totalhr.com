@@ -169,6 +169,12 @@ namespace totalhr.Shared
 
         }
 
+        public enum DocumentShareType
+        {
+            Link = 1,
+            Attachment = 2
+        }
+
         public static string AdminEmailSignature
         {
             get

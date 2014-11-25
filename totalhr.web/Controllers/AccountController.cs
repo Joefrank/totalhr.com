@@ -31,8 +31,8 @@ namespace totalhr.web.Controllers
         {
             _glossaryService = glossaryService;
             _accountService = accountService;
-            _messagingService = messageService;           
-            _messagingService.ReadSMTPSettings(new SMTPSettings {SMTPServer = WebsiteKernel.SMTPServer, UserName = WebsiteKernel.SMTPUser, Password = WebsiteKernel.SMTPPassword });
+            _messagingService = messageService;
+            _messagingService.ReadSMTPSettings(SiteMailSettings);
         }
         
         public ActionResult Index()

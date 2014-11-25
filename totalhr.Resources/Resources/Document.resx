@@ -300,4 +300,64 @@
   <data name="V_Start" xml:space="preserve">
     <value>Start</value>
   </data>
+  <data name="V_Created_After" xml:space="preserve">
+    <value>Created After</value>
+  </data>
+  <data name="V_Created_Before" xml:space="preserve">
+    <value>Created Before</value>
+  </data>
+  <data name="V_Document_Search" xml:space="preserve">
+    <value>Document Search</value>
+  </data>
+  <data name="Error_DocId_Rq" xml:space="preserve">
+    <value>Document Id is required</value>
+  </data>
+  <data name="Error_FileName_Rq" xml:space="preserve">
+    <value>File name is required</value>
+  </data>
+  <data name="Error_ShareType_Rq" xml:space="preserve">
+    <value>Share type is required</value>
+  </data>
+  <data name="V_Attachment" xml:space="preserve">
+    <value>Attachment</value>
+  </data>
+  <data name="V_Document_Share" xml:space="preserve">
+    <value>Document Share</value>
+  </data>
+  <data name="V_Doc_Name" xml:space="preserve">
+    <value>Document Name</value>
+  </data>
+  <data name="V_Link" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="V_Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="V_Or_Email" xml:space="preserve">
+    <value>Or Email</value>
+  </data>
+  <data name="V_Recipient" xml:space="preserve">
+    <value>Recipient</value>
+  </data>
+  <data name="V_Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="V_Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="V_Share_As" xml:space="preserve">
+    <value>Share as</value>
+  </data>
+  <data name="V_Share_Attachment" xml:space="preserve">
+    <value>Send as attachment</value>
+  </data>
+  <data name="V_Share_Doc_Email_Title" xml:space="preserve">
+    <value>{0} shared document with you.</value>
+  </data>
+  <data name="V_Share_Intro" xml:space="preserve">
+    <value>You can share a link to this document or send it as attachment to a user email.&lt;br/&gt; Select a user from list or type in an email address.</value>
+  </data>
+  <data name="V_Share_Link" xml:space="preserve">
+    <value>Send as link</value>
+  </data>
 </root>
