@@ -261,4 +261,118 @@
   <data name="V_View" xml:space="preserve">
     <value>View</value>
   </data>
+  <data name="JS_ARE_YOU_SURE_TO_DELETE_DOC" xml:space="preserve">
+    <value>Are you sure you want to archive this document? This document will not be accessed by other users if you click ok.</value>
+  </data>
+  <data name="V_Click_More_Details" xml:space="preserve">
+    <value>Click for more details</value>
+  </data>
+  <data name="V_Contributor" xml:space="preserve">
+    <value>Contributor</value>
+  </data>
+  <data name="V_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="V_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="V_File_Size" xml:space="preserve">
+    <value>File Size</value>
+  </data>
+  <data name="V_File_Type" xml:space="preserve">
+    <value>File Type</value>
+  </data>
+  <data name="V_Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="V_And" xml:space="preserve">
+    <value>And</value>
+  </data>
+  <data name="V_Dates_Between" xml:space="preserve">
+    <value>Dates between</value>
+  </data>
+  <data name="V_End" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="V_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="V_Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="V_Created_After" xml:space="preserve">
+    <value>Created After</value>
+  </data>
+  <data name="V_Created_Before" xml:space="preserve">
+    <value>Created Before</value>
+  </data>
+  <data name="V_Document_Search" xml:space="preserve">
+    <value>Document Search</value>
+  </data>
+  <data name="Error_DocId_Rq" xml:space="preserve">
+    <value>Document Id is required</value>
+  </data>
+  <data name="Error_FileName_Rq" xml:space="preserve">
+    <value>File name is required</value>
+  </data>
+  <data name="Error_ShareType_Rq" xml:space="preserve">
+    <value>Share type is required</value>
+  </data>
+  <data name="V_Attachment" xml:space="preserve">
+    <value>Attachment</value>
+  </data>
+  <data name="V_Document_Share" xml:space="preserve">
+    <value>Document Share</value>
+  </data>
+  <data name="V_Doc_Name" xml:space="preserve">
+    <value>Document Name</value>
+  </data>
+  <data name="V_Link" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="V_Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="V_Or_Email" xml:space="preserve">
+    <value>Or Email</value>
+  </data>
+  <data name="V_Recipient" xml:space="preserve">
+    <value>Recipient</value>
+  </data>
+  <data name="V_Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="V_Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="V_Share_As" xml:space="preserve">
+    <value>Share as</value>
+  </data>
+  <data name="V_Share_Attachment" xml:space="preserve">
+    <value>Send as attachment</value>
+  </data>
+  <data name="V_Share_Doc_Email_Title" xml:space="preserve">
+    <value>{0} shared document with you.</value>
+  </data>
+  <data name="V_Share_Intro" xml:space="preserve">
+    <value>You can share a link to this document or send it as attachment to a user email.&lt;br/&gt; Select a user from list or type in an email address.</value>
+  </data>
+  <data name="V_Share_Link" xml:space="preserve">
+    <value>Send as link</value>
+  </data>
+  <data name="Error_Cant_Edit_Others_Doc" xml:space="preserve">
+    <value>You cannot edit somebody else's document!</value>
+  </data>
+  <data name="V_Close_Dialog" xml:space="preserve">
+    <value>Close Dialog</value>
+  </data>
+  <data name="V_Document_Share_Complete" xml:space="preserve">
+    <value>Document Share Complete</value>
+  </data>
+  <data name="V_Document_Share_Message" xml:space="preserve">
+    <value>You have successfully shared the following document:{0}</value>
+  </data>
+  <data name="V_Document_Was_Shared_With" xml:space="preserve">
+    <value>The document was sent to {0}</value>
+  </data>
 </root>

@@ -20,6 +20,18 @@ namespace totalhr.web.Controllers
 
         private readonly ClientUser _currentUser;
 
+        public SMTPSettings SiteMailSettings
+        {
+            get
+            {
+                return new SMTPSettings
+                {
+                    SMTPServer = WebsiteKernel.SMTPServer,
+                    UserName = WebsiteKernel.SMTPUser,
+                    Password = WebsiteKernel.SMTPPassword
+                };
+            }
+        }
        
         public BaseController(IOAuthService authService)
         {
@@ -68,6 +80,6 @@ namespace totalhr.web.Controllers
                 return _currentUser;
             }
         }
-                 
+           
     }
 }

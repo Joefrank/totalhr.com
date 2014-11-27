@@ -2,21 +2,52 @@
 @using totalhr.web.Helpers;
 @using totalhr.data.EF;
 @using System.Text;
+@using totalhr.Shared.Models;
 
 @model List<CompanyDocument>
 
 @{
     ViewBag.Title = GenericHelper.WebsiteName + " | " + Document.V_Document_title;
-    bool bViewTable = Model != null && Model.Count > 0;
+    bool bViewTable =  Model != null && Model.Count > 0;
    
     var dicFolders = new Dictionary<int, StringBuilder>();
     var folderNames = new Dictionary<int, string>();
+    var contributors = new Dictionary<int, string>();
+    var contributorList = new List<SelectListItem>();
+    var folderList = new List<SelectListItem>();
+    
     dicFolders[0] = new StringBuilder();
     folderNames[0] = Document.V_No_Folder;
     int lastFolderId = -1, currentIndex = 0;
     int CurrentUserId = Convert.ToInt32(ViewBag.CurrentUserId);
-    
-    foreach(CompanyDocument doc in Model){
+
+    contributorList.Add(new SelectListItem { Value = "0", Text = Document.v_Select });
+
+    foreach(CompanyDocument doc in Model){        
+        
+        if(doc.Archived)
+        {
+            continue;   
+        }
+        
+        if(!contributors.Keys.Contains(doc.CreatedBy))
+        {
+            contributors[doc.CreatedBy] = doc.User.firstname + " " + doc.User.surname;
+            contributorList.Add(new SelectListItem
+            {
+                Text = contributors[doc.CreatedBy],
+                Value = doc.CreatedBy.ToString()
+            });
+        }
+
+        if (!folderNames.Keys.Contains(doc.FolderId.GetValueOrDefault()) && doc.FolderId > 0)
+        {
+            folderList.Add(new SelectListItem
+            {
+                Text = doc.FolderDisplayName,
+                Value = doc.FolderId.ToString()
+            });
+        }
         
         if(lastFolderId == doc.FolderId && lastFolderId > 0)
         {
@@ -26,41 +57,89 @@
         }else{
             currentIndex = doc.FolderId.GetValueOrDefault();
             dicFolders[currentIndex] = new StringBuilder();
-            folderNames[currentIndex] = doc.FolderDisplayName;           
+            folderNames[currentIndex] = doc.FolderDisplayName;               
         }
-
-        dicFolders[currentIndex].Append(DocumentHelper.MakeTableRowHtml(doc, CurrentUserId));
+       
+        dicFolders[currentIndex].Append(DocumentHelper.MakeDocumentRow(doc, CurrentUserId));
         lastFolderId = doc.FolderId.GetValueOrDefault();
+    }    
+     
+    if(dicFolders[0].Length < 10)
+    {
+        dicFolders.Remove(0);   
+    }else{
+        folderList.Add(new SelectListItem { Value = "0.1", Text = Document.V_No_Folder });
     }
+
+    folderList.Add(new SelectListItem { Value = "0", Text = Document.v_Select });
     
+    
+    DocumentSearchInfo searchInfo = new DocumentSearchInfo();
+    searchInfo.Contributors = contributorList;
+    searchInfo.Folders = folderList;
     
 }
 
+@section extrastyles{
+    <link rel="stylesheet" type="text/css" href="/Content/css/companydocument.css" />
+ }
+
+@section scripts{
+     <script type="text/javascript" src="/Scripts/Site/CompanyDocument.js"></script>
+}
 
 <div id="main">
     <div class="content">
 
         <h1>@Document.V_Document_title</h1>
 
-    @if(bViewTable){
-        foreach(int key in dicFolders.Keys){
-        
-            <h4>@Html.Raw(folderNames[key])</h4>
-            @Html.Raw(DocumentHelper.SpitDocTableHeader())
-            @Html.Raw(dicFolders[key])
-            @Html.Raw(DocumentHelper.SpitDocTableFooter())
-        }
-    
-    }else{
-        <p class="error">
-            @Document.Error_No_Folder
-        </p>   
-    }
-    <p>
-        <a href="/Document/Create" title="@Document.V_Create_New">@Document.V_Create_New</a>&nbsp;
-        <a href="/Document/CreateFolder" title="@Document.V_Create_New_Folder">@Document.V_Create_New_Folder</a>
+      @Html.Partial("_DocumentSearch", searchInfo)
 
-     </p>
+      <div class="foldergroup">
+
+        @if(bViewTable){
+            foreach(int key in dicFolders.Keys){
+            
+                <fieldset>
+                    <legend>
+                        <span id="spFolder_@key" class="expand" onclick="javascript:ToggleExpandGeneric('spFolder_@key', 
+                        'folder_@key', null, folderExpandButton, folderCollapseButton);">&nbsp;</span> 
+                        
+                        @Html.Raw(folderNames[key])
+
+                    </legend>
+
+                    <div id="folder_@key" class="folder" style="display:none">
+                        @Html.Raw(dicFolders[key])
+                    </div>
+                </fieldset>
+           
+            }
+    
+        }else{
+            <p class="error">
+                @Document.Error_No_Folder
+            </p>   
+        }
+
+     </div>
+        <br />
+     <div class="wide">
+        <input type="button" onclick="document.location.href='/Document/Create'" value="@Document.V_Create_New" />
+         &nbsp;
+        <input type="button" onclick="document.location.href='/Document/CreateFolder'" value="@Document.V_Create_New_Folder"/>
+
+     </div>
 
         </div>
 </div>
+
+<script type="text/javascript">
+    var expandButton = '/Content/images/expand.gif';
+    var collapseButton = '/Content/images/collapse.gif';
+    var folderExpandButton = '/Content/images/folder-close.png';
+    var folderCollapseButton = '/Content/images/folder-open.png';
+    var MSG_ARE_YOU_SURE_TO_DELETE = '@Html.Raw(HttpUtility.JavaScriptStringEncode(Document.JS_ARE_YOU_SURE_TO_DELETE_DOC))';
+</script>
+
+<script type="text/javascript" src="/Scripts/Site/DatePicker.js"></script>

@@ -14,6 +14,7 @@ using totalhr.services.messaging.Infrastructure;
 using CM;
 using log4net;
 using totalhr.data.Models;
+using System.Collections;
 
 namespace totalhr.services.Implementation
 {
@@ -198,6 +199,11 @@ namespace totalhr.services.Implementation
                 EncryptedPassword == x.password).FirstOrDefault();
         }
 
+        public User GetUser(int userId)
+        {
+            return _userRepos.FindBy(x => x.id == userId).FirstOrDefault();
+        }
+
         public UserDetailsStruct GetUserDetailsForLogin(string UserName, string Password)
         {
             User user = this.GetActiveUser(UserName, Password);
@@ -252,6 +258,11 @@ namespace totalhr.services.Implementation
         public List<User> GetCompanyUsers(int companyid)
         {
             return _userRepos.GetCompanyUsers(companyid);
+        }
+
+        public IEnumerable<SimpleUser> GetCompanyUsersSimple(int companyid, int exudedUserId)
+        {
+            return _userRepos.GetCompanyUsers(companyid, exudedUserId);
         }
 
         public List<Department> GetCompanyDepartments(int companyid)

@@ -1,0 +1,31 @@
+﻿@using totalhr.Resources;
+@using System.Collections;
+@using totalhr.Shared.Models;
+@using totalhr.Shared;
+
+@model totalhr.Shared.Models.DocumentShareInfo
+
+@{    
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+@section head2{
+    <h2>@Document.V_Document_Share_Complete</h2>
+}
+
+<p>
+    @Html.Raw(string.Format(Document.V_Document_Share_Message, Model.DocumentName))    
+</p>
+<p>
+    @Html.Raw(string.Format(Document.V_Document_Was_Shared_With, Model.WithUserEmail))
+</p>
+
+
+    <div class="formwrapper">       
+        <div class="line">
+            <div class="block">
+                <label class="fix200W">&nbsp; </label>
+                <input type="submit" value="@Document.V_Close_Dialog" />               
+            </div>
+        </div>
+    </div>

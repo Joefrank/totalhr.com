@@ -101,19 +101,22 @@ namespace totalhr.web
                });
 
 
-            //routes.MapRoute(
-            //    "AdminDefault",
-            //    "admin/{controller}/{action}/{id}",
-            //    new { controller = "AdminHome", action = "Index", id = "" }
-            //);
-
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
-           
+            routes.MapRoute(
+                 "SimpleRouteGuid",
+                 "{controller}/{action}/{uniqueid}",
+                 new
+                 {
+                     controller = "Home",
+                     action = "Index",
+                     uniqueid = System.Guid.Empty
+                 }
+             );
         }
     }
 }

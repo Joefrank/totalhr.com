@@ -61,6 +61,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot edit somebody else&apos;s document!.
+        /// </summary>
+        public static string Error_Cant_Edit_Others_Doc {
+            get {
+                return ResourceManager.GetString("Error_Cant_Edit_Others_Doc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry could not create document!.
         /// </summary>
         public static string Error_Could_Not_Create_Doc {
@@ -106,6 +115,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Document Id is required.
+        /// </summary>
+        public static string Error_DocId_Rq {
+            get {
+                return ResourceManager.GetString("Error_DocId_Rq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Only file of type:.
         /// </summary>
         public static string Error_File_Type {
@@ -120,6 +138,15 @@ namespace totalhr.Resources {
         public static string Error_FileIsRequried_Rq {
             get {
                 return ResourceManager.GetString("Error_FileIsRequried_Rq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File name is required.
+        /// </summary>
+        public static string Error_FileName_Rq {
+            get {
+                return ResourceManager.GetString("Error_FileName_Rq", resourceCulture);
             }
         }
         
@@ -169,11 +196,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Share type is required.
+        /// </summary>
+        public static string Error_ShareType_Rq {
+            get {
+                return ResourceManager.GetString("Error_ShareType_Rq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please Upload Your file.
         /// </summary>
         public static string Error_Upload_File {
             get {
                 return ResourceManager.GetString("Error_Upload_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to archive this document? This document will not be accessed by other users if you click ok..
+        /// </summary>
+        public static string JS_ARE_YOU_SURE_TO_DELETE_DOC {
+            get {
+                return ResourceManager.GetString("JS_ARE_YOU_SURE_TO_DELETE_DOC", resourceCulture);
             }
         }
         
@@ -250,6 +295,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to And.
+        /// </summary>
+        public static string V_And {
+            get {
+                return ResourceManager.GetString("V_And", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Archive.
         /// </summary>
         public static string V_Archive {
@@ -259,11 +313,47 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attachment.
+        /// </summary>
+        public static string V_Attachment {
+            get {
+                return ResourceManager.GetString("V_Attachment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back to list.
         /// </summary>
         public static string V_Back_To_List {
             get {
                 return ResourceManager.GetString("V_Back_To_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Click for more details.
+        /// </summary>
+        public static string V_Click_More_Details {
+            get {
+                return ResourceManager.GetString("V_Click_More_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close Dialog.
+        /// </summary>
+        public static string V_Close_Dialog {
+            get {
+                return ResourceManager.GetString("V_Close_Dialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contributor.
+        /// </summary>
+        public static string V_Contributor {
+            get {
+                return ResourceManager.GetString("V_Contributor", resourceCulture);
             }
         }
         
@@ -291,6 +381,42 @@ namespace totalhr.Resources {
         public static string V_Create_New_Folder {
             get {
                 return ResourceManager.GetString("V_Create_New_Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created After.
+        /// </summary>
+        public static string V_Created_After {
+            get {
+                return ResourceManager.GetString("V_Created_After", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created Before.
+        /// </summary>
+        public static string V_Created_Before {
+            get {
+                return ResourceManager.GetString("V_Created_Before", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string V_Date {
+            get {
+                return ResourceManager.GetString("V_Date", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Dates between.
+        /// </summary>
+        public static string V_Dates_Between {
+            get {
+                return ResourceManager.GetString("V_Dates_Between", resourceCulture);
             }
         }
         
@@ -331,6 +457,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Document Name.
+        /// </summary>
+        public static string V_Doc_Name {
+            get {
+                return ResourceManager.GetString("V_Doc_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Document details.
         /// </summary>
         public static string V_Document_Details_Title {
@@ -340,11 +475,56 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Document Search.
+        /// </summary>
+        public static string V_Document_Search {
+            get {
+                return ResourceManager.GetString("V_Document_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document Share.
+        /// </summary>
+        public static string V_Document_Share {
+            get {
+                return ResourceManager.GetString("V_Document_Share", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Document Share Complete.
+        /// </summary>
+        public static string V_Document_Share_Complete {
+            get {
+                return ResourceManager.GetString("V_Document_Share_Complete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have successfully shared the following document:{0}.
+        /// </summary>
+        public static string V_Document_Share_Message {
+            get {
+                return ResourceManager.GetString("V_Document_Share_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company Documents and Folders.
         /// </summary>
         public static string V_Document_title {
             get {
                 return ResourceManager.GetString("V_Document_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The document was sent to {0}.
+        /// </summary>
+        public static string V_Document_Was_Shared_With {
+            get {
+                return ResourceManager.GetString("V_Document_Was_Shared_With", resourceCulture);
             }
         }
         
@@ -367,11 +547,47 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string V_Email {
+            get {
+                return ResourceManager.GetString("V_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End.
+        /// </summary>
+        public static string V_End {
+            get {
+                return ResourceManager.GetString("V_End", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File.
         /// </summary>
         public static string v_File {
             get {
                 return ResourceManager.GetString("v_File", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Size.
+        /// </summary>
+        public static string V_File_Size {
+            get {
+                return ResourceManager.GetString("V_File_Size", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File Type.
+        /// </summary>
+        public static string V_File_Type {
+            get {
+                return ResourceManager.GetString("V_File_Type", resourceCulture);
             }
         }
         
@@ -403,6 +619,24 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Link.
+        /// </summary>
+        public static string V_Link {
+            get {
+                return ResourceManager.GetString("V_Link", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message.
+        /// </summary>
+        public static string V_Message {
+            get {
+                return ResourceManager.GetString("V_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Folder.
         /// </summary>
         public static string V_New_Folder {
@@ -417,6 +651,24 @@ namespace totalhr.Resources {
         public static string V_No_Folder {
             get {
                 return ResourceManager.GetString("V_No_Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open.
+        /// </summary>
+        public static string V_Open {
+            get {
+                return ResourceManager.GetString("V_Open", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Or Email.
+        /// </summary>
+        public static string V_Or_Email {
+            get {
+                return ResourceManager.GetString("V_Or_Email", resourceCulture);
             }
         }
         
@@ -439,11 +691,38 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recipient.
+        /// </summary>
+        public static string V_Recipient {
+            get {
+                return ResourceManager.GetString("V_Recipient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reset.
+        /// </summary>
+        public static string V_Reset {
+            get {
+                return ResourceManager.GetString("V_Reset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string V_Save {
             get {
                 return ResourceManager.GetString("V_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string V_Search {
+            get {
+                return ResourceManager.GetString("V_Search", resourceCulture);
             }
         }
         
@@ -471,6 +750,69 @@ namespace totalhr.Resources {
         public static string V_Select_User {
             get {
                 return ResourceManager.GetString("V_Select_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share.
+        /// </summary>
+        public static string V_Share {
+            get {
+                return ResourceManager.GetString("V_Share", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share as.
+        /// </summary>
+        public static string V_Share_As {
+            get {
+                return ResourceManager.GetString("V_Share_As", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send as attachment.
+        /// </summary>
+        public static string V_Share_Attachment {
+            get {
+                return ResourceManager.GetString("V_Share_Attachment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} shared document with you..
+        /// </summary>
+        public static string V_Share_Doc_Email_Title {
+            get {
+                return ResourceManager.GetString("V_Share_Doc_Email_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can share a link to this document or send it as attachment to a user email.&lt;br/&gt; Select a user from list or type in an email address..
+        /// </summary>
+        public static string V_Share_Intro {
+            get {
+                return ResourceManager.GetString("V_Share_Intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send as link.
+        /// </summary>
+        public static string V_Share_Link {
+            get {
+                return ResourceManager.GetString("V_Share_Link", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        public static string V_Start {
+            get {
+                return ResourceManager.GetString("V_Start", resourceCulture);
             }
         }
         

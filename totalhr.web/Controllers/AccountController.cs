@@ -31,8 +31,8 @@ namespace totalhr.web.Controllers
         {
             _glossaryService = glossaryService;
             _accountService = accountService;
-            _messagingService = messageService;           
-            _messagingService.ReadSMTPSettings(new SMTPSettings {SMTPServer = WebsiteKernel.SMTPServer, UserName = WebsiteKernel.SMTPUser, Password = WebsiteKernel.SMTPPassword });
+            _messagingService = messageService;
+            _messagingService.ReadSMTPSettings(SiteMailSettings);
         }
         
         public ActionResult Index()
@@ -261,7 +261,7 @@ namespace totalhr.web.Controllers
                     DepartmentId = 2,
                     CookieDuration = new TimeSpan(0, 5, 0,0),
                     Culture = "en-GB",
-                    UserName = "jbolla@cyberminds.co.uk",
+                    UserName = "joe_bolla@cyberminds.co.uk",
                     LanguageId = 1,
                     Profiles = new List<string>{"1","4"},
                     Roles = new List<string>{"1","2","3"},

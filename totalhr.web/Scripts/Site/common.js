@@ -74,9 +74,46 @@ function isDate(txtDate)
 
 
 function ClosePopup(objid) {   
-    document.getElementById(objid).style.display = "none";   
+    document.getElementById(objid).style.display = "none";
+    $('#overlay-mask').css("display", "none");
 }
 
 function CancelDivPopup(objid) {
     $('#' + objid).fadeOut("slow");
+    $('#overlay-mask').css("display", "none");
+}
+
+
+function ToggleExpandGeneric(ctrHeadId, ctrToExpandId, callback, expandIcon, collapseIcon) {
+    var o = document.getElementById(ctrHeadId);
+    var ojq = $('#' + ctrHeadId);
+    var ocollapse = $('#' + ctrToExpandId);
+    var defaultExpandIcon = (expandIcon == null || expandIcon == '') ? '/Content/images/plus-icon.png' : expandIcon;
+    var defaultCollapseIcon = (collapseIcon == null || collapseIcon == '') ? '/Content/images/minus.png' : collapseIcon;
+
+    if (ojq.hasClass('collapse')) {
+        o.style.backgroundImage = "url('" + defaultExpandIcon + "')";
+        ojq.removeClass('collapse');
+        ocollapse.slideUp("slow");
+    } else if (ojq.hasClass('expand')) {
+        o.style.backgroundImage = "url('" + defaultCollapseIcon + "')";
+        ojq.addClass('collapse');
+        ocollapse.slideDown("slow");
+    }
+
+    if (callback != typeof ("undefined") && callback != null) {
+        eval(callback);
+    }
+}
+
+function OpenEmployeeProfile(empid) {
+    alert('implement me');
+}
+
+function OpenPopup(url, width, height) {    
+    $('#ipopup').attr("src", url);
+    $('#dvPopup').css("display", "");
+    $('#dvPopup').css("height", height);
+    $('#dvPopup').css("width", width);
+    $('#overlay-mask').css("display", "");
 }

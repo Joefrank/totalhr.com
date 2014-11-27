@@ -105,6 +105,9 @@
           <Property Name="FolderId" Type="int" />
           <Property Name="FolderDisplayName" Type="nvarchar" MaxLength="250" />
           <Property Name="FileId" Type="int" Nullable="false" />
+          <Property Name="ReadableSize" Type="varchar" MaxLength="30" />
+          <Property Name="ReadableType" Type="varchar" MaxLength="30" />
+          <Property Name="FileMimeType" Type="varchar" MaxLength="255" />
           <Property Name="NoOfViews" Type="int" Nullable="false" />
           <Property Name="NoOfDownloads" Type="int" Nullable="false" />
           <Property Name="LastViewed" Type="datetime" />
@@ -112,6 +115,8 @@
           <Property Name="LastDownloaded" Type="datetime" />
           <Property Name="LastDownloadedBy" Type="int" />
           <Property Name="PermissionTypeId" Type="int" />
+          <Property Name="Archived" Type="bit" Nullable="false" />
+          <Property Name="Identifier" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="CompanyDocumentDownloads">
           <Key>
@@ -563,6 +568,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_CompanyDocument_File">
+          <End Role="File" Type="Self.File" Multiplicity="1" />
+          <End Role="CompanyDocument" Type="Self.CompanyDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyDocument">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CompanyDocument_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="CompanyDocument" Type="Self.CompanyDocument" Multiplicity="*" />
@@ -819,6 +836,10 @@
           <AssociationSet Name="FK_CalendarEvent_Calendar" Association="Self.FK_CalendarEvent_Calendar">
             <End Role="Calendar" EntitySet="Calendar" />
             <End Role="CalendarEvent" EntitySet="CalendarEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CompanyDocument_File" Association="Self.FK_CompanyDocument_File">
+            <End Role="File" EntitySet="File" />
+            <End Role="CompanyDocument" EntitySet="CompanyDocument" />
           </AssociationSet>
           <AssociationSet Name="FK_CompanyDocument_User" Association="Self.FK_CompanyDocument_User">
             <End Role="User" EntitySet="User" />
@@ -1393,6 +1414,10 @@
             <End Role="User" EntitySet="Users" />
             <End Role="UserContract" EntitySet="UserContracts" />
           </AssociationSet>
+          <AssociationSet Name="FK_CompanyDocument_File" Association="TotalHRModel.FK_CompanyDocument_File">
+            <End Role="File" EntitySet="Files" />
+            <End Role="CompanyDocument" EntitySet="CompanyDocuments" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetUserProfiles_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1438,6 +1463,12 @@
           <NavigationProperty Name="CompanyDocumentPermissions" Relationship="TotalHRModel.FK_CompanyDocumentPermissions_CompanyDocument" FromRole="CompanyDocument" ToRole="CompanyDocumentPermission" />
           <Property Name="FolderDisplayName" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="PermissionTypeId" Type="Int32" />
+          <Property Name="ReadableSize" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="ReadableType" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="File" Relationship="TotalHRModel.FK_CompanyDocument_File" FromRole="CompanyDocument" ToRole="File" />
+          <Property Name="FileMimeType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Archived" Type="Boolean" Nullable="false" />
+          <Property Name="Identifier" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="CompanyDocumentDownload">
           <Key>
@@ -1522,6 +1553,7 @@
           <Property Name="extension" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="lastupdated" Type="DateTime" Precision="3" />
           <Property Name="lastupdatedby" Type="Int32" />
+          <NavigationProperty Name="CompanyDocuments" Relationship="TotalHRModel.FK_CompanyDocument_File" FromRole="File" ToRole="CompanyDocument" />
         </EntityType>
         <Association Name="FK_CompanyDocument_User">
           <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
@@ -1810,6 +1842,18 @@
             </Principal>
             <Dependent Role="UserContract">
               <PropertyRef Name="Userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CompanyDocument_File">
+          <End Type="TotalHRModel.File" Role="File" Multiplicity="1" />
+          <End Type="TotalHRModel.CompanyDocument" Role="CompanyDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CompanyDocument">
+              <PropertyRef Name="FileId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -2186,6 +2230,11 @@
           <EntitySetMapping Name="CompanyDocuments">
             <EntityTypeMapping TypeName="TotalHRModel.CompanyDocument">
               <MappingFragment StoreEntitySet="CompanyDocument">
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="FileMimeType" ColumnName="FileMimeType" />
+                <ScalarProperty Name="ReadableType" ColumnName="ReadableType" />
+                <ScalarProperty Name="ReadableSize" ColumnName="ReadableSize" />
                 <ScalarProperty Name="PermissionTypeId" ColumnName="PermissionTypeId" />
                 <ScalarProperty Name="FolderDisplayName" ColumnName="FolderDisplayName" />
                 <ScalarProperty Name="LastDownloadedBy" ColumnName="LastDownloadedBy" />

@@ -49,6 +49,14 @@
       <Project>{f5a3d97a-a1b9-463a-850e-23cf6e1fc488}</Project>
       <Name>totalhr.data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\totalhr.service.messaging\totalhr.services.messaging.csproj">
+      <Project>{8219decc-2439-4be9-a5b2-167a5b70cdf0}</Project>
+      <Name>totalhr.services.messaging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\totalhr.services\totalhr.services.csproj">
+      <Project>{e80cd858-bba6-4650-8475-9987337e3ea8}</Project>
+      <Name>totalhr.services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\totalhr.Shared\totalhr.Shared.csproj">
       <Project>{1af1abb5-66b8-4e3f-a5aa-12025159514f}</Project>
       <Name>totalhr.Shared</Name>

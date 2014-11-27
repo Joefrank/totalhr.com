@@ -28,7 +28,7 @@ namespace totalhr.tests.libs
             AdminEmail = "admin@test.com",
             AdminName = "Dummy Admin",
             WebsiteName = "TotalHR",
-            SiteRootURL = "http://localhost:8080/test/",
+            SiteRootURL = "http://totalhr.local/test/",
             SMTPServer = "127.0.0.1",
             SMTPUser = "administrator",
             SMTPPassword = "password"

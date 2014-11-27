@@ -184,19 +184,32 @@ body, html {
 }
 
 div.popuphead {
-    float:left;width:100%;height:50px;margin-top:-15px;background-color:grey;color:white;
+    float:left;width:100%;margin-top:-15px;color:white;
+    height: 50px;
+    position: relative;
+    background: #161b7a;
+    background: -webkit-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: -moz-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: -o-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: -ms-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: linear-gradient(to bottom, #1e249e 0%, #011e62 100%);
 }
 
 
 
     div.popuphead h2 {
-        float:left;width:400px;margin: 10px 0 0;color:white;
+        float:left;width:78%;padding:1%;margin: 15px 0 0;color:white;font-size:14pt;
     }
 
 div#toolbox {
-    float:right;width:200px;height:98%;padding:1%;
+    float:right;width:18%;height:98%;padding:1%;margin-top:15px;
 }
 
+#popupBody {
+    float:left;
+    width:98%;
+    padding:1%;
+}
     div#toolbox .spsave {
         background:transparent url('/content/images/save.png') center center no-repeat;float:right;display:block;width:24px;height:24px;
         cursor:pointer;margin-right:10px;
@@ -254,3 +267,30 @@ div.popupedit .spclose {
 
 .linespan{ float: left;width: 100%;display: block;}
 
+/*
+.popInContainer .popToolbar {
+    height: 45px;
+    position: relative;
+    background: #161b7a;
+    background: -webkit-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: -moz-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: -o-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: -ms-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: linear-gradient(to bottom, #1e249e 0%, #011e62 100%);
+}*/
+
+input[type="text"].txtlink {
+    font-size:8pt;
+    width:100%;
+    border:1px solid blue;
+    background:#ccc1c1;
+    color:blue;
+    padding:2px;
+}
+
+html, body {
+    min-height: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased !important;
+}

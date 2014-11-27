@@ -12,6 +12,7 @@ using totalhr.Resources;
 using System.IO;
 using FileManagementService.Infrastructure;
 using totalhr.data.EF;
+using totalhr.services.messaging.Infrastructure;
 
 namespace totalhr.web.Controllers
 {
@@ -22,13 +23,14 @@ namespace totalhr.web.Controllers
         private IFileService _fileService;
         private IAccountService _accountService;
         private ICompanyService _companyService;
+        private readonly IMessagingService _messagingService;
 
         public string DocPath{
             get{return Path.Combine(Server.MapPath("~/CompanyDocuments/") , CurrentUser.CompanyId.ToString());}
         }
 
         public DocumentController(IOAuthService authservice, IDocumentManager docManager, IFileService fileService,
-            IAccountService acctService, ICompanyService companyService)
+            IAccountService acctService, ICompanyService companyService, IMessagingService messageService)
             : base(authservice)
         {
             _authService = authservice;
@@ -36,13 +38,14 @@ namespace totalhr.web.Controllers
             _fileService = fileService;
             _accountService = acctService;
             _companyService = companyService;
+            _messagingService = messageService;
             ViewBag.CompanyId = (CurrentUser != null)? CurrentUser.CompanyId : 0;
         }
 
         public ActionResult Index()
         {
             ViewBag.CurrentUserId = CurrentUser.UserId;
-            return View(_docService.ListDocumentAndFoldersByUser(CurrentUser.UserId, CurrentUser.CompanyId));
+            return View(_docService.ListDocumentAndFoldersByUser(CurrentUser.UserId, CurrentUser.DepartmentId));
         }
 
         public ActionResult Create()
@@ -83,19 +86,23 @@ namespace totalhr.web.Controllers
             return View(doc);
         }
 
-        public ActionResult Edit(int id)
+        public ActionResult Edit(Guid id)
         {
             CompanyDocument doc = _docService.GetDocument(id);
 
-            //*** if user request a doc id that doesn't exist or he doesn't have access to redirect to no access page.
-
+            //don't allow non owner to edit somebody else's doc
+            if (doc.CreatedBy != CurrentUser.UserId)
+            {
+                return RedirectToAction("AccessDenied", "Error", new { ModelError = Document.Error_Cant_Edit_Others_Doc });
+            }
+             
             var docperms = doc.CompanyDocumentPermissions.ToList();
             ViewBag.DocumentPermission = docperms;
             ViewBag.Folders = _docService.ListFoldersByUser(CurrentUser.UserId);
 
             DocumentInfoUpdate info = new DocumentInfoUpdate
             {
-                DocId = id,
+                DocId = doc.Id,
                 OldFileId = doc.FileId,
                 DisplayName = doc.DisplayName,
                 ExistingFileName = doc.OriginalFileName,
@@ -173,6 +180,10 @@ namespace totalhr.web.Controllers
                         if (newFileId > 0)
                         {
                             info.NewFileId = newFileId;
+                            info.ReadableSize = _fileService.BytesToString(info.File.ContentLength);
+                            info.ReadableType = Path.GetExtension(info.File.FileName).Replace(".", "");
+                            info.FileMimeType = _fileService.GetMimeType(info.File.FileName);
+
                             int docid = _docService.CreateDocument(info);
 
                             if (docid < 1)
@@ -197,15 +208,20 @@ namespace totalhr.web.Controllers
                     }
                 }
             }
-            
-            return View("Create");            
+            ViewBag.Folders = _docService.ListFoldersByUser(CurrentUser.UserId);
+            return View("Create", info);           
 
         }
 
         [HttpPost]
         public ActionResult UpdateDocument(DocumentInfoUpdate info)
         {
-            //*** check if user request a is allowed to modify this doc rect to no access page.
+            //don't allow non owner to edit somebody else's doc
+            CompanyDocument doc = _docService.GetDocument(info.DocId);
+            if (doc.CreatedBy != CurrentUser.UserId)
+            {
+                return RedirectToAction("AccessDenied", "Error", new { ModelError = Document.Error_Cant_Edit_Others_Doc });
+            }
             
             if (ModelState.ContainsKey("File"))
                 ModelState["File"].Errors.Clear();
@@ -230,6 +246,11 @@ namespace totalhr.web.Controllers
                     //upload the file
                     _fileService.UpdateWith(info.OldFileId, info.File, Server.MapPath("~/CompanyDocuments/") + 
                         CurrentUser.CompanyId, CurrentUser.UserId, (int)Variables.FileType.CompanyDocument);
+
+                    info.ReadableSize = _fileService.BytesToString(info.File.ContentLength);
+                    info.ReadableType = Path.GetExtension(info.File.FileName).Replace(".", "");
+                    info.FileMimeType = _fileService.GetMimeType(info.File.FileName);
+
                 }
 
                 int result = _docService.UpdateDocument(info);
@@ -253,17 +274,115 @@ namespace totalhr.web.Controllers
 
         }
 
-        public FileResult Download(int id)
+        public FileResult OpenFile(Guid id)
         {
-            CompanyDocument doc = _docService.GetDocument(id);
+            CompanyDocument doc = _docService.GetDocumentWithViewCountUpdate(id, CurrentUser.UserId);
+            FileResult fr =  File(DocPath + "\\" + doc.FileId + Path.GetExtension(doc.OriginalFileName), doc.FileMimeType);
+            fr.FileDownloadName = doc.OriginalFileName;
+            return fr;
+        }
+
+        public FileResult Download(Guid id)
+        {
+            CompanyDocument doc = _docService.GetDocumentWithDownloadCountUpdate(id, CurrentUser.UserId);
             byte[] fileBytes = _fileService.ReadFileBytes(DocPath + "\\" + doc.FileId + Path.GetExtension(doc.OriginalFileName));
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, doc.OriginalFileName);
         }
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(Guid id)
         {
-            //*** check that use has right to delete this doc otherwise no access page.
-            return null;
+            CompanyDocument doc = _docService.GetDocument(id);
+            if (doc.CreatedBy != CurrentUser.UserId)
+            {
+                return RedirectToAction("AccessDenied", "Error", new { ModelError = Document.Error_Cant_Edit_Others_Doc });
+            }
+            _docService.Archive(id, CurrentUser.UserId);
+            return RedirectToAction("Index");
+        }
+
+        public ActionResult Search(DocumentSearchInfo info)
+        {
+            ViewBag.CurrentUserId = CurrentUser.UserId;
+
+            if (!ModelState.IsValid) {               
+                return View("Index", _docService.ListDocumentAndFoldersByUser(CurrentUser.UserId, CurrentUser.DepartmentId));
+            }
+
+            var lstDocs = _docService.SearchDocument(info);
+            return View("Index", lstDocs);
+        }
+
+        public ActionResult Share(Guid id)
+        {
+            var doc = _docService.GetDocument(id);
+
+            DocumentShareInfo info = new DocumentShareInfo
+            {
+                DocumentId = doc.Id,
+                DocumentName = doc.DisplayName,
+                FileName = doc.OriginalFileName,
+                DocumentLink = string.Format("{0}Document/OpenFile/{1}", WebsiteKernel.SiteRootURL, doc.Identifier)
+            };
+
+            ViewBag.UserList = _accountService.GetCompanyUsersSimple(CurrentUser.CompanyId, CurrentUser.UserId);
+            return View(info);
+        }
+
+        [HttpPost]
+        public ActionResult Share(DocumentShareInfo info)
+        {
+            ViewBag.UserList = _accountService.GetCompanyUsersSimple(CurrentUser.CompanyId, CurrentUser.UserId);
+
+            if (!ModelState.IsValid)
+            {                
+                return View(info);
+            }
+
+            var recipientEmail = string.Empty;
+            var recipientName = string.Empty;
+
+            if(string.IsNullOrEmpty(info.WithUserEmail) && info.WithUserId < 1){
+               ModelState.AddModelError("NoRecipient", "No Recipient has been specified");
+            }
+            else if(!string.IsNullOrEmpty(info.WithUserEmail))
+            {
+                recipientEmail = info.WithUserEmail; 
+            }
+            else if(info.WithUserId > 0)
+            {
+                var user = _accountService.GetUser(info.WithUserId);
+                recipientEmail = user.email;
+                recipientName = user.firstname + " " + user.surname;
+            }
+
+            if (!string.IsNullOrEmpty(recipientEmail))
+            {
+                _messagingService.ReadSMTPSettings(SiteMailSettings);
+
+                var emailStruct = new HTMLEmailStruct
+                {
+                    SenderEmail = CurrentUser.UserName,
+                    SenderName = CurrentUser.FullName,
+                    ReceiverEmail = recipientEmail,
+                    ReceiverName = "",
+                    EmailBody = info.Message,
+                    EmailTitle = string.Format(Document.V_Share_Doc_Email_Title, CurrentUser.FullName),
+                    AttachmentPath = DocPath + "\\" + info.DocumentId + Path.GetExtension(info.FileName),
+                    AttachmentName = info.FileName
+                };
+                
+                bool result = _messagingService.EmailUserWithAttachment(emailStruct);  // .SendEmailWithAttachment(emailStruct);
+                
+                if (result)
+                {
+                    if (!string.IsNullOrEmpty(recipientName))
+                        info.WithUserEmail = recipientName + " - (" + recipientEmail + ")";
+                    return View("ShareComplete", info);
+                }
+            }
+                        
+            return View(info);
+  
         }
     }
 }

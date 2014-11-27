@@ -172,6 +172,11 @@ namespace totalhr.services.messaging.Implementation
         {
             return _emailService.SendEmailHTML(estruct.ReceiverEmail, estruct.ReceiverName, estruct.SenderEmail, estruct.SenderName, estruct.EmailTitle, estruct.EmailBody);
         }
+
+        public bool EmailUserWithAttachment(HTMLEmailStruct estruct)
+        {
+            return _emailService.SendEmailWithAttachment(estruct);
+        }
        
     }
 }

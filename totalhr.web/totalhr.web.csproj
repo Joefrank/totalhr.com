@@ -226,6 +226,7 @@
     <Content Include="Content\css\BeatPicker.min.css" />
     <Content Include="Content\calendar.css" />
     <Content Include="Content\css\calendar.css" />
+    <Content Include="Content\css\companydocument.css" />
     <Content Include="Content\css\popup.css" />
     <Content Include="Content\images\cal.gif" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -360,6 +361,9 @@
     <Content Include="Views\Document\CreateFolder.cshtml" />
     <Content Include="Views\Document\EditDocument.cshtml" />
     <Content Include="Views\Shared\_CompanyDocItemSelector.cshtml" />
+    <Content Include="Views\Shared\_DocumentSearch.cshtml" />
+    <Content Include="Views\Document\Share.cshtml" />
+    <Content Include="Views\Document\ShareComplete.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

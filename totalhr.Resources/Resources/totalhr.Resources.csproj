@@ -105,6 +105,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FieldFurtherInfo.resx</DependentUpon>
     </Compile>
+    <Compile Include="FileTypeNames.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FileTypeNames.resx</DependentUpon>
+    </Compile>
     <Compile Include="FormMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -137,6 +142,10 @@
     <EmbeddedResource Include="FieldFurtherInfo.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FieldFurtherInfo.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileTypeNames.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FileTypeNames.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

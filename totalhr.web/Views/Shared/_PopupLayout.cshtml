@@ -20,13 +20,13 @@
               @RenderSection("head2", required: true)             
 
               <div id="toolbox">
-                  <span class="spclose" onclick="parent.ClosePopup('dvPopup')">&nbsp;</span>  
-                  <!--<span class="spsave">&nbsp;</span>-->
-                                  
+                  <span class="spclose" onclick="parent.ClosePopup('dvPopup')">&nbsp;</span> 
               </div>
         </div> 
         
-        @RenderBody()
+        <div id="popupBody">
+            @RenderBody()
+         </div>
             
         </div>
     </div>

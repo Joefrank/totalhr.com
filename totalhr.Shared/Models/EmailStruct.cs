@@ -19,6 +19,10 @@ namespace totalhr.Shared
         public string EmailBody { get; set; }
 
         public string EmailTitle { get; set; }
+
+        public string AttachmentPath { get; set; }
+
+        public string AttachmentName { get; set; }
     }
 
     public class HTMLEmailStruct : EmailStruct

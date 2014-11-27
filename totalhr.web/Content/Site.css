@@ -202,17 +202,14 @@ div.line
         width:100%;background-color:beige;
     }
 
-#dvPopup {
-    
+#dvPopup {    
     width: 700px;
     height: 650px;
     position: absolute;
     top: 200px;
     left: 200px;
     z-index: 10000;
-    background-color: beige;
     color: grey;
-    border: 2px solid blue;
 }
 
 #ipopup {
@@ -287,7 +284,7 @@ div.popupedit .spclose {
     }
 
 input[type="button"].btnsmall, input[type="submit"].btnsmall {
-   cursor:pointer;
+   
     padding: 0 5px;
     background-color: #198fff;
     color: #fff;
@@ -297,6 +294,9 @@ input[type="button"].btnsmall, input[type="submit"].btnsmall {
     font-weight: 100;
     border: 2px solid transparent;
 
+}
+input[type='button'] {
+    cursor: pointer;
 }
 
 table.tab .private {
@@ -313,4 +313,44 @@ table.tab .department {
 
 table.tab .user {
     color: #198fff;
+}
+
+div.wide {
+    float: left;
+    width: 98%;
+    margin: 10px 0;
+    text-align: left;
+    padding: 1%;
+}
+.line input[type="text"].datetype {
+    width:130px;background:transparent url('/content/images/cal.gif') right center no-repeat;padding-right:16px;
+}
+
+.formwide {
+     float:left;
+     width:98%;
+     padding:1%;
+     text-align:left;
+}
+
+    .formwide .line {
+         float:left;
+         width:100%;
+         text-align:left;
+    }
+        .formwide .line label {
+            width:auto;
+        }
+
+#overlay-mask {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 9998;
+    opacity: 0.5;
+    background: rgb(0, 0, 0);
+    width: 100% !important;
+    min-height:800px;
 }
