@@ -80,6 +80,6 @@ namespace totalhr.web.Controllers
                 return _currentUser;
             }
         }
-                 
+           
     }
 }

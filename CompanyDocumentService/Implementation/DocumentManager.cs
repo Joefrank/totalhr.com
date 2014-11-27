@@ -216,9 +216,26 @@ namespace CompanyDocumentService.Implementation
             return _docRepos.FindBy(x => x.Id == docId).FirstOrDefault();
         }
 
+        public CompanyDocument GetDocument(Guid docId)
+        {
+            return _docRepos.FindBy(x => x.Identifier == docId).FirstOrDefault();
+        }
+             
+
         public CompanyDocument GetDocumentWithViewCountUpdate(int docId, int userId)
         {
             CompanyDocument doc  = _docRepos.FindBy(x => x.Id == docId).FirstOrDefault();
+            if (doc != null)
+            {
+                doc.NoOfViews++;
+                _docRepos.Save();
+            }
+            return doc;
+        }
+
+        public CompanyDocument GetDocumentWithViewCountUpdate(Guid docId, int userId)
+        {
+            CompanyDocument doc = _docRepos.FindBy(x => x.Identifier == docId).FirstOrDefault();
             if (doc != null)
             {
                 doc.NoOfViews++;
@@ -240,6 +257,19 @@ namespace CompanyDocumentService.Implementation
             return doc;
         }
 
+        public CompanyDocument GetDocumentWithDownloadCountUpdate(Guid docId, int userId)
+        {
+            CompanyDocument doc = _docRepos.FindBy(x => x.Identifier == docId).FirstOrDefault();
+            if (doc != null)
+            {
+                doc.NoOfDownloads++;
+                _docRepos.Save();
+                doc.LastUpdated = DateTime.Now;
+                doc.LastUpdatedBy = userId;
+            }
+            return doc;
+        }
+
         public void Archive(int docId, int userId)
         {
             CompanyDocument doc = _docRepos.FindBy(x => x.Id == docId).FirstOrDefault();
@@ -247,7 +277,16 @@ namespace CompanyDocumentService.Implementation
             doc.LastUpdated = DateTime.Now;
             doc.LastUpdatedBy = userId;
             _docRepos.Save();
-        }       
+        }
+
+        public void Archive(Guid docId, int userId)
+        {
+            CompanyDocument doc = _docRepos.FindBy(x => x.Identifier == docId).FirstOrDefault();
+            doc.Archived = true;
+            doc.LastUpdated = DateTime.Now;
+            doc.LastUpdatedBy = userId;
+            _docRepos.Save();
+        } 
 
         #endregion Documents
 

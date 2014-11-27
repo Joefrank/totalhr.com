@@ -7,7 +7,7 @@
 
 
 @{
-    ViewBag.Title = "Share";
+    
     Layout = "~/Views/Shared/_PopupLayout.cshtml";
     var lstUsers = ViewBag.UserList as IEnumerable<SimpleUser>;
     var lstUserDDL = new SelectList(lstUsers, "Id", "FullName");
@@ -36,8 +36,13 @@
         <div class="line">
             <div class="block">
 			    <label class="fix200W">@Document.V_Share_As: <span class="req">*</span></label>
-                <input type="radio" name="ShareType" value="@((int)Variables.DocumentShareType.Link)" />@Document.V_Link
-                <input type="radio" name="ShareType" value="@((int)Variables.DocumentShareType.Attachment)" />@Document.V_Attachment
+                <input onclick="javascript:CheckLink('ShareType', 'dvLink');" type="radio" name="ShareType" value="@((int)Variables.DocumentShareType.Link)" />@Document.V_Link
+                <input onclick="javascript:CheckLink('ShareType', 'dvLink');" type="radio" name="ShareType" value="@((int)Variables.DocumentShareType.Attachment)" />@Document.V_Attachment
+            </div>
+        </div>
+        <div id="dvLink" class="line" style="display:none">
+            <div class="block">
+                <input type="text" readonly="true" class="txtlink" value="@Model.DocumentLink" />
             </div>
         </div>
         <div class="line">
@@ -66,3 +71,18 @@
         </div>
     </div>
 }
+
+<script type="text/javascript">
+    var LINK = '@((int)Variables.DocumentShareType.Link)';
+    var ATTACHMENT = '@((int)Variables.DocumentShareType.Attachment)';
+
+    function CheckLink(objid, dvtochange) {
+        var val = $(":radio[name='" + objid + "']:checked").val();
+        if (val == LINK) {
+            $('#' + dvtochange).show();
+        } else {
+            $('#' + dvtochange).hide();
+        }
+    }
+
+</script>

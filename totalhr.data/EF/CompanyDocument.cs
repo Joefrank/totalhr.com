@@ -41,6 +41,7 @@ namespace totalhr.data.EF
         public string ReadableType { get; set; }
         public string FileMimeType { get; set; }
         public bool Archived { get; set; }
+        public System.Guid Identifier { get; set; }
     
         public virtual User User { get; set; }
         public virtual ICollection<CompanyFolderDocument> CompanyFolderDocuments { get; set; }

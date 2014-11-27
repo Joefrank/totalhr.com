@@ -202,17 +202,14 @@ div.line
         width:100%;background-color:beige;
     }
 
-#dvPopup {
-    
+#dvPopup {    
     width: 700px;
     height: 650px;
     position: absolute;
     top: 200px;
     left: 200px;
     z-index: 10000;
-    background-color: beige;
     color: grey;
-    border: 2px solid blue;
 }
 
 #ipopup {
@@ -344,3 +341,16 @@ div.wide {
         .formwide .line label {
             width:auto;
         }
+
+#overlay-mask {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 9998;
+    opacity: 0.5;
+    background: rgb(0, 0, 0);
+    width: 100% !important;
+    min-height:800px;
+}

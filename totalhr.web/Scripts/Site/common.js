@@ -74,11 +74,13 @@ function isDate(txtDate)
 
 
 function ClosePopup(objid) {   
-    document.getElementById(objid).style.display = "none";   
+    document.getElementById(objid).style.display = "none";
+    $('#overlay-mask').css("display", "none");
 }
 
 function CancelDivPopup(objid) {
     $('#' + objid).fadeOut("slow");
+    $('#overlay-mask').css("display", "none");
 }
 
 
@@ -113,4 +115,5 @@ function OpenPopup(url, width, height) {
     $('#dvPopup').css("display", "");
     $('#dvPopup').css("height", height);
     $('#dvPopup').css("width", width);
+    $('#overlay-mask').css("display", "");
 }

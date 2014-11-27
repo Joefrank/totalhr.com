@@ -27,14 +27,23 @@ namespace CompanyDocumentService.Infrastructure
         List<CompanyDocument> ListDocuments();
         List<CompanyDocument> ListDocumentsByUser(int userId);
         CompanyDocument GetDocument(int docid);
+        CompanyDocument GetDocument(Guid docid);
+        
         List<string> GetPermissionObjectNames(List<CompanyDocumentPermission> permissions);
         List<CompanyDocument> ListDocumentAndFoldersByUser(int userId, int userDepartmentId);
         void UpdateDocsPermission(DocumentInfoUpdate info);
         void UpdateDocViewCount(int docId, int increment, int userId);
         void UpdateDocDownloadCount(int docId, int increment, int userId);
+
         CompanyDocument GetDocumentWithViewCountUpdate(int docId, int userId);
+        CompanyDocument GetDocumentWithViewCountUpdate(Guid docId, int userId);
+
         CompanyDocument GetDocumentWithDownloadCountUpdate(int docId, int userId);
+        CompanyDocument GetDocumentWithDownloadCountUpdate(Guid docId, int userId);
+
         void Archive(int docId, int userId);
+        void Archive(Guid docId, int userId);
+
         List<CompanyDocument> SearchDocument(DocumentSearchInfo info);
 
         void ShareDocumentByEmail(int documentId, int shearerId);

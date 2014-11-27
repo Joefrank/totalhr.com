@@ -61,6 +61,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot edit somebody else&apos;s document!.
+        /// </summary>
+        public static string Error_Cant_Edit_Others_Doc {
+            get {
+                return ResourceManager.GetString("Error_Cant_Edit_Others_Doc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry could not create document!.
         /// </summary>
         public static string Error_Could_Not_Create_Doc {
@@ -331,6 +340,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Close Dialog.
+        /// </summary>
+        public static string V_Close_Dialog {
+            get {
+                return ResourceManager.GetString("V_Close_Dialog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contributor.
         /// </summary>
         public static string V_Contributor {
@@ -475,11 +493,38 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Document Share Complete.
+        /// </summary>
+        public static string V_Document_Share_Complete {
+            get {
+                return ResourceManager.GetString("V_Document_Share_Complete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have successfully shared the following document:{0}.
+        /// </summary>
+        public static string V_Document_Share_Message {
+            get {
+                return ResourceManager.GetString("V_Document_Share_Message", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company Documents and Folders.
         /// </summary>
         public static string V_Document_title {
             get {
                 return ResourceManager.GetString("V_Document_title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The document was sent to {0}.
+        /// </summary>
+        public static string V_Document_Was_Shared_With {
+            get {
+                return ResourceManager.GetString("V_Document_Was_Shared_With", resourceCulture);
             }
         }
         

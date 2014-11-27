@@ -26,5 +26,7 @@ namespace totalhr.Shared.Models
 
         [Required(ErrorMessageResourceType = typeof(Document), ErrorMessageResourceName = "Error_FileName_Rq")]
         public string FileName { get; set; }
+
+        public string DocumentLink { get; set; }
     }
 }

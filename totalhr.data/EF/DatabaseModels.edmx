@@ -116,6 +116,7 @@
           <Property Name="LastDownloadedBy" Type="int" />
           <Property Name="PermissionTypeId" Type="int" />
           <Property Name="Archived" Type="bit" Nullable="false" />
+          <Property Name="Identifier" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <EntityType Name="CompanyDocumentDownloads">
           <Key>
@@ -1467,6 +1468,7 @@
           <NavigationProperty Name="File" Relationship="TotalHRModel.FK_CompanyDocument_File" FromRole="CompanyDocument" ToRole="File" />
           <Property Name="FileMimeType" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Archived" Type="Boolean" Nullable="false" />
+          <Property Name="Identifier" Type="Guid" Nullable="false" />
         </EntityType>
         <EntityType Name="CompanyDocumentDownload">
           <Key>
@@ -2228,6 +2230,7 @@
           <EntitySetMapping Name="CompanyDocuments">
             <EntityTypeMapping TypeName="TotalHRModel.CompanyDocument">
               <MappingFragment StoreEntitySet="CompanyDocument">
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
                 <ScalarProperty Name="Archived" ColumnName="Archived" />
                 <ScalarProperty Name="FileMimeType" ColumnName="FileMimeType" />
                 <ScalarProperty Name="ReadableType" ColumnName="ReadableType" />

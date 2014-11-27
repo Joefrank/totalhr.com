@@ -159,3 +159,8 @@ function DeleteDoc(url) {
         document.location.href = url;
     }
 }
+
+function OpenDoc(guid) {
+    document.location.href = '/Document/OpenFile/' + guid;
+}
+
