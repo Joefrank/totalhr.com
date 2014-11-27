@@ -67,12 +67,17 @@ C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\totalhr.data.dll
 C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\totalhr.Shared.dll
 C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\EntityFramework.dll
 C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\AutoMapper.dll
+C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\Ninject.Web.Common.dll
+C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\Ninject.dll
+C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\WebActivatorEx.dll
 C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\Resources.dll
 C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\totalhr.data.pdb
 C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\totalhr.Shared.pdb
 C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\log4net.xml
 C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\EntityFramework.xml
 C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\AutoMapper.xml
+C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\Ninject.Web.Common.xml
+C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\Ninject.xml
 C:\GitHubProjects\TotalHR\CalendarService\bin\Debug\Resources.pdb
 C:\GitHubProjects\TotalHR\CalendarService\obj\Debug\Calendar.csprojResolveAssemblyReference.cache
 C:\GitHubProjects\TotalHR\CalendarService\obj\Debug\CalendarService.dll

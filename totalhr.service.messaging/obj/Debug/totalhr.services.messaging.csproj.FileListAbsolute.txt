@@ -119,12 +119,17 @@ C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\totalhr.data.dll
 C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\totalhr.Shared.dll
 C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\EntityFramework.dll
 C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\AutoMapper.dll
+C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\Ninject.Web.Common.dll
+C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\Ninject.dll
+C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\WebActivatorEx.dll
 C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\Resources.dll
 C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\totalhr.data.pdb
 C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\totalhr.Shared.pdb
 C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\log4net.xml
 C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\EntityFramework.xml
 C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\AutoMapper.xml
+C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\Ninject.Web.Common.xml
+C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\Ninject.xml
 C:\GitHubProjects\TotalHR\totalhr.service.messaging\bin\Debug\Resources.pdb
 C:\GitHubProjects\TotalHR\totalhr.service.messaging\obj\Debug\totalhr.services.messaging.csprojResolveAssemblyReference.cache
 C:\GitHubProjects\TotalHR\totalhr.service.messaging\obj\Debug\totalhr.service.messaging.dll

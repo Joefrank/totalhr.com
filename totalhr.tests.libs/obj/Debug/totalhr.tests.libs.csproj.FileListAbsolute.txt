@@ -198,7 +198,9 @@ C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\totalhr.service.messaging
 C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\totalhr.services.dll
 C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\totalhr.Shared.dll
 C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\AutoMapper.dll
+C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\Ninject.Web.Common.dll
 C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\log4net.dll
+C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\WebActivatorEx.dll
 C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\common.dll
 C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\Resources.dll
 C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\totalhr.data.pdb
@@ -210,6 +212,7 @@ C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\EntityFramework.xml
 C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\EntityFramework.SqlServer.xml
 C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\Ninject.xml
 C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\AutoMapper.xml
+C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\Ninject.Web.Common.xml
 C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\log4net.xml
 C:\GitHubProjects\TotalHR\totalhr.tests.libs\bin\Debug\Resources.pdb
 C:\GitHubProjects\TotalHR\totalhr.tests.libs\obj\Debug\totalhr.tests.libs.csprojResolveAssemblyReference.cache

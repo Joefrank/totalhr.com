@@ -237,6 +237,8 @@ C:\GitHubProjects\TotalHR\totalhr.services\bin\Debug\totalhr.data.dll
 C:\GitHubProjects\TotalHR\totalhr.services\bin\Debug\totalhr.service.messaging.dll
 C:\GitHubProjects\TotalHR\totalhr.services\bin\Debug\totalhr.Shared.dll
 C:\GitHubProjects\TotalHR\totalhr.services\bin\Debug\AutoMapper.dll
+C:\GitHubProjects\TotalHR\totalhr.services\bin\Debug\Ninject.Web.Common.dll
+C:\GitHubProjects\TotalHR\totalhr.services\bin\Debug\WebActivatorEx.dll
 C:\GitHubProjects\TotalHR\totalhr.services\bin\Debug\totalhr.data.pdb
 C:\GitHubProjects\TotalHR\totalhr.services\bin\Debug\Resources.pdb
 C:\GitHubProjects\TotalHR\totalhr.services\bin\Debug\totalhr.service.messaging.pdb
@@ -246,6 +248,7 @@ C:\GitHubProjects\TotalHR\totalhr.services\bin\Debug\EntityFramework.SqlServer.x
 C:\GitHubProjects\TotalHR\totalhr.services\bin\Debug\log4net.xml
 C:\GitHubProjects\TotalHR\totalhr.services\bin\Debug\Ninject.xml
 C:\GitHubProjects\TotalHR\totalhr.services\bin\Debug\AutoMapper.xml
+C:\GitHubProjects\TotalHR\totalhr.services\bin\Debug\Ninject.Web.Common.xml
 C:\GitHubProjects\TotalHR\totalhr.services\obj\Debug\totalhr.services.csprojResolveAssemblyReference.cache
 C:\GitHubProjects\TotalHR\totalhr.services\obj\Debug\totalhr.services.dll
 C:\GitHubProjects\TotalHR\totalhr.services\obj\Debug\totalhr.services.pdb
