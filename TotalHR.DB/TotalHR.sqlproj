@@ -1,0 +1,118 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>TotalHR</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{8641bb29-d482-4652-9920-1b7e0443c6d8}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql110DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>TotalHR</RootNamespace>
+    <AssemblyName>TotalHR</AssemblyName>
+    <ModelCollation>1033,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <DefaultCollation>Latin1_General_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <!-- VS10 without SP1 will not have VisualStudioVersion set, so do that here -->
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <!-- Default to the v10.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\Functions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Glossary.sql" />
+    <Build Include="dbo\Tables\User.sql" />
+    <Build Include="dbo\Tables\Language.sql" />
+    <Build Include="dbo\Tables\Company.sql" />
+    <Build Include="dbo\Tables\EmailTemplate.sql" />
+    <Build Include="dbo\Tables\UserRole.sql" />
+    <Build Include="dbo\Tables\Feature.sql" />
+    <Build Include="dbo\Tables\CompanyFeature.sql" />
+    <Build Include="dbo\Tables\Roles.sql" />
+    <Build Include="dbo\Tables\Profile.sql" />
+    <Build Include="dbo\Tables\UserProfile.sql" />
+    <Build Include="dbo\Tables\Department.sql" />
+    <Build Include="dbo\Tables\CalendarEvent.sql" />
+    <Build Include="dbo\Tables\Calendar.sql" />
+    <Build Include="dbo\Tables\CalendarAssociation.sql" />
+    <Build Include="dbo\Stored Procedures\GetUserProfiles.sql" />
+    <Build Include="dbo\Stored Procedures\GetUserRoles.sql" />
+    <Build Include="dbo\Stored Procedures\GetUserProfileIds.sql" />
+    <Build Include="dbo\Stored Procedures\GetUserRoleIds.sql" />
+    <Build Include="dbo\Tables\TimeRecording.sql" />
+    <Build Include="dbo\Tables\UserContract.sql" />
+    <Build Include="dbo\Tables\ScheduledNotifications.sql" />
+    <Build Include="dbo\Tables\RecipientList.sql" />
+    <Build Include="dbo\Tables\Recipient.sql" />
+    <Build Include="dbo\Tables\Label.sql" />
+    <Build Include="dbo\Tables\FormField.sql" />
+    <Build Include="dbo\Tables\FormControl.sql" />
+    <Build Include="dbo\Tables\File.sql" />
+    <Build Include="dbo\Tables\EventToSchedule.sql" />
+    <Build Include="dbo\Tables\CTSectionFieldLink.sql" />
+    <Build Include="dbo\Tables\CTemplateSectionLink.sql" />
+    <Build Include="dbo\Tables\ContractTemplateSection.sql" />
+    <Build Include="dbo\Tables\ContractTemplate.sql" />
+    <Build Include="dbo\Tables\ContractFormFieldValues.sql" />
+    <Build Include="dbo\Tables\CompanyFolderDocument.sql" />
+    <Build Include="dbo\Tables\CompanyFolder.sql" />
+    <Build Include="dbo\Tables\CompanyDocumentViews.sql" />
+    <Build Include="dbo\Tables\CompanyDocumentShares.sql" />
+    <Build Include="dbo\Tables\CompanyDocumentPermissions.sql" />
+    <Build Include="dbo\Tables\CompanyDocumentDownloads.sql" />
+    <Build Include="dbo\Tables\CompanyDocument.sql" />
+    <Build Include="dbo\Tables\CalEventReminderType.sql" />
+    <Build Include="dbo\Functions\SplitCSV.sql" />
+    <Build Include="dbo\Stored Procedures\PrepareCalendarEventScheduledReminder.sql" />
+    <Build Include="dbo\Stored Procedures\GetNextScheduledEmail.sql" />
+    <Build Include="dbo\Stored Procedures\GetCompanyFoldersByUser.sql" />
+    <Build Include="dbo\Stored Procedures\BuildCalEventReminderRecipientList.sql" />
+    <Build Include="dbo\Tables\TaskScheduler.sql" />
+    <Build Include="dbo\Tables\Notes.sql" />
+  </ItemGroup>
+</Project>
