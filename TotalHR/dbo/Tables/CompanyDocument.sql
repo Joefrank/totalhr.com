@@ -1,0 +1,28 @@
+﻿CREATE TABLE [dbo].[CompanyDocument] (
+    [Id]                INT              IDENTITY (1, 1) NOT NULL,
+    [DisplayName]       NVARCHAR (250)   NOT NULL,
+    [OriginalFileName]  NVARCHAR (250)   NOT NULL,
+    [Created]           DATETIME         CONSTRAINT [DF_CompanyDocument_Created] DEFAULT (getdate()) NOT NULL,
+    [CreatedBy]         INT              NOT NULL,
+    [LastUpdated]       DATETIME         NULL,
+    [LastUpdatedBy]     INT              NULL,
+    [FolderId]          INT              NULL,
+    [FolderDisplayName] NVARCHAR (250)   NULL,
+    [FileId]            INT              NOT NULL,
+    [ReadableSize]      VARCHAR (30)     NULL,
+    [ReadableType]      VARCHAR (30)     NULL,
+    [FileMimeType]      VARCHAR (255)    NULL,
+    [NoOfViews]         INT              CONSTRAINT [DF__CompanyDo__NoOfV__3E1D39E1] DEFAULT ((0)) NOT NULL,
+    [NoOfDownloads]     INT              CONSTRAINT [DF__CompanyDo__NoOfD__3F115E1A] DEFAULT ((0)) NOT NULL,
+    [LastViewed]        DATETIME         NULL,
+    [LastViewedBy]      INT              NULL,
+    [LastDownloaded]    DATETIME         NULL,
+    [LastDownloadedBy]  INT              NULL,
+    [PermissionTypeId]  INT              NULL,
+    [Archived]          BIT              CONSTRAINT [DF_CompanyDocument_Archived] DEFAULT ((0)) NOT NULL,
+    [Identifier]        UNIQUEIDENTIFIER CONSTRAINT [DF_CompanyDocument_Identifier] DEFAULT (newid()) NOT NULL,
+    CONSTRAINT [PK_CompanyDocument] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_CompanyDocument_File] FOREIGN KEY ([FileId]) REFERENCES [dbo].[File] ([id]),
+    CONSTRAINT [FK_CompanyDocument_User] FOREIGN KEY ([CreatedBy]) REFERENCES [dbo].[User] ([id])
+);
+

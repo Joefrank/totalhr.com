@@ -62,6 +62,7 @@
     <Folder Include="dbo\" />
     <Folder Include="dbo\Tables\" />
     <Folder Include="dbo\Stored Procedures\" />
+    <Folder Include="dbo\Functions\" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Glossary.sql" />
@@ -84,5 +85,32 @@
     <Build Include="dbo\Stored Procedures\GetUserProfileIds.sql" />
     <Build Include="dbo\Stored Procedures\GetUserRoleIds.sql" />
     <Build Include="dbo\Tables\TimeRecording.sql" />
+    <Build Include="dbo\Tables\UserContract.sql" />
+    <Build Include="dbo\Tables\ScheduledNotifications.sql" />
+    <Build Include="dbo\Tables\RecipientList.sql" />
+    <Build Include="dbo\Tables\Recipient.sql" />
+    <Build Include="dbo\Tables\Label.sql" />
+    <Build Include="dbo\Tables\FormField.sql" />
+    <Build Include="dbo\Tables\FormControl.sql" />
+    <Build Include="dbo\Tables\File.sql" />
+    <Build Include="dbo\Tables\EventToSchedule.sql" />
+    <Build Include="dbo\Tables\CTSectionFieldLink.sql" />
+    <Build Include="dbo\Tables\CTemplateSectionLink.sql" />
+    <Build Include="dbo\Tables\ContractTemplateSection.sql" />
+    <Build Include="dbo\Tables\ContractTemplate.sql" />
+    <Build Include="dbo\Tables\ContractFormFieldValues.sql" />
+    <Build Include="dbo\Tables\CompanyFolderDocument.sql" />
+    <Build Include="dbo\Tables\CompanyFolder.sql" />
+    <Build Include="dbo\Tables\CompanyDocumentViews.sql" />
+    <Build Include="dbo\Tables\CompanyDocumentShares.sql" />
+    <Build Include="dbo\Tables\CompanyDocumentPermissions.sql" />
+    <Build Include="dbo\Tables\CompanyDocumentDownloads.sql" />
+    <Build Include="dbo\Tables\CompanyDocument.sql" />
+    <Build Include="dbo\Tables\CalEventReminderType.sql" />
+    <Build Include="dbo\Functions\SplitCSV.sql" />
+    <Build Include="dbo\Stored Procedures\PrepareCalendarEventScheduledReminder.sql" />
+    <Build Include="dbo\Stored Procedures\GetNextScheduledEmail.sql" />
+    <Build Include="dbo\Stored Procedures\GetCompanyFoldersByUser.sql" />
+    <Build Include="dbo\Stored Procedures\BuildCalEventReminderRecipientList.sql" />
   </ItemGroup>
 </Project>
