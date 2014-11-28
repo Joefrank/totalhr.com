@@ -418,3 +418,4 @@ C:\GitHubProjects\TotalHR\totalhr.web\bin\AutoMapper.xml
 C:\GitHubProjects\TotalHR\totalhr.web\obj\Debug\totalhr.web.csprojResolveAssemblyReference.cache
 C:\GitHubProjects\TotalHR\totalhr.web\obj\Debug\totalhr.web.dll
 C:\GitHubProjects\TotalHR\totalhr.web\obj\Debug\totalhr.web.pdb
+C:\GitHubProjects\TotalHR\totalhr.web\bin\AutoMapper.Net4.dll
