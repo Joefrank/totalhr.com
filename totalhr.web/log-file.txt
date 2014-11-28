@@ -1,0 +1,2 @@
+2014-11-28 22:20:45,994 DEBUG Authentication.Implementation.AuthService - [GetUser - Could not compile user dataObject reference not set to an instance of an object.
+]

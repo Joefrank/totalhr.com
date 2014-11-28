@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[TaskScheduler] (
+    [Id]                INT            IDENTITY (1, 1) NOT NULL,
+    [Name]              NVARCHAR (500) NOT NULL,
+    [Description]       NVARCHAR (MAX) NULL,
+    [DepartmentId]      INT            NOT NULL,
+    [ApprovalNeeded]    BIT            CONSTRAINT [DF_TaskScheduler_ApprovalNeeded] DEFAULT ((0)) NOT NULL,
+    [Approved]          BIT            NULL,
+    [AssignedBy]        INT            NOT NULL,
+    [AssignedTo]        INT            NOT NULL,
+    [ScheduledDateTime] DATETIME       NULL,
+    [ScheduleLog]       NVARCHAR (MAX) NULL,
+    [AddedBy]           INT            NOT NULL,
+    [UpdatedBy]         INT            NULL,
+    [AddedDate]         DATETIME       NOT NULL,
+    [UpdatedDate]       DATETIME       NULL,
+    [ApprovedBy]        INT            NULL,
+    CONSTRAINT [PK_TaskScheduler] PRIMARY KEY CLUSTERED ([Id] ASC),
+    CONSTRAINT [FK_TaskScheduler_Department] FOREIGN KEY ([DepartmentId]) REFERENCES [dbo].[Department] ([id]),
+    CONSTRAINT [FK_TaskScheduler_User] FOREIGN KEY ([AssignedTo]) REFERENCES [dbo].[User] ([id]),
+    CONSTRAINT [FK_TaskScheduler_User1] FOREIGN KEY ([AssignedBy]) REFERENCES [dbo].[User] ([id]),
+    CONSTRAINT [FK_TaskScheduler_User2] FOREIGN KEY ([AddedBy]) REFERENCES [dbo].[User] ([id]),
+    CONSTRAINT [FK_TaskScheduler_User3] FOREIGN KEY ([UpdatedBy]) REFERENCES [dbo].[User] ([id]),
+    CONSTRAINT [FK_TaskScheduler_User4] FOREIGN KEY ([ApprovedBy]) REFERENCES [dbo].[User] ([id])
+);
+
