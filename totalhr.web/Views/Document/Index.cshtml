@@ -77,7 +77,8 @@
     DocumentSearchInfo searchInfo = new DocumentSearchInfo();
     searchInfo.Contributors = contributorList;
     searchInfo.Folders = folderList;
-    
+
+    var searchcriteria = ViewBag.SearchCriteria;
 }
 
 @section extrastyles{
@@ -94,6 +95,12 @@
         <h1>@Document.V_Document_title</h1>
 
       @Html.Partial("_DocumentSearch", searchInfo)
+
+        @if(!string.IsNullOrEmpty(searchcriteria)){
+          <div class="foldergroup">
+              @Html.Raw(searchcriteria)
+          </div>
+        }
 
       <div class="foldergroup">
 

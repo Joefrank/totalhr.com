@@ -16,8 +16,8 @@ namespace totalhr.Shared.Models
 
         public int AuthorId { get; set; }
 
-        //[DataType(DataType.DateTime)]
-        //[DisplayFormat(ApplyFormatInEditMode = true,DataFormatString = "{0:MM/dd/yyyy}")]
+        [DataType(DataType.DateTime)]
+        [DisplayFormat(ApplyFormatInEditMode = true,DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime StartDate { get; set; }
 
         [DataType(DataType.DateTime)]
@@ -29,6 +29,20 @@ namespace totalhr.Shared.Models
         public List<System.Web.Mvc.SelectListItem> Folders { get; set; }
 
         public List<System.Web.Mvc.SelectListItem> Contributors { get; set; }
+
+        public string ContributorName { get; set; }
+
+        public string FolderName { get; set; }
+
+        public string FileTypeName { get; set; }
+
+        public int SearchingUserId { get; set; }
+
+        public int SearchingUserSepartmentId { get; set; }
+
+        public string SearchCriteria { get; set; }
+
+        public object FoundDocuments { get; set; }
 
     }
 }

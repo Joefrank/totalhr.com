@@ -71,7 +71,9 @@ namespace CompanyDocumentService.Implementation
 
         public List<CompanyDocument> SearchDocument(DocumentSearchInfo info)
         {
-            return _docRepos.FindBy(x =>
+            var docs = _docRepos.ListDocumentAndFoldersByUser(info.SearchingUserId, info.SearchingUserSepartmentId);
+
+            return docs.FindAll(x =>
                 (string.IsNullOrEmpty(info.Name) || x.DisplayName.Contains(info.Name))
                 &&
                 (string.IsNullOrEmpty(info.FileMimeType) || x.FileMimeType == info.FileMimeType)

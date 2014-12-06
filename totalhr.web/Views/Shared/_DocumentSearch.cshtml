@@ -13,7 +13,7 @@
         Value = v.ToString()
     }).ToList();
 
-    lstFileTypes.Insert(0, new SelectListItem { Value = "0", Text = Document.v_Select });
+    lstFileTypes.Insert(0, new SelectListItem { Value = "", Text = Document.v_Select });
     
 }
 <div id="searchbox">
@@ -23,7 +23,12 @@
           
 @using (Html.BeginForm("Search", "Document"))
 {
-     @Html.ValidationSummary()
+    
+    @Html.HiddenFor(x => x.ContributorName)
+    @Html.HiddenFor(x => x.FolderName)
+    @Html.HiddenFor(x => x.FileTypeName)
+     
+    @Html.ValidationSummary()
 
     <div id="dvform" class="formwide">
 
@@ -41,13 +46,13 @@
                         <b>@Document.V_Created_After</b>
                     </td>
                     <td> 
-                        @Html.TextBox("StartDate", defaultStartDate, new { @class = "datetype", onclick = "javascript:NewCal('StartDate','ddmmyyyy',true,24)" })
+                        @Html.TextBox("StartDate", defaultStartDate, new { @class = "datetype", Readonly="true", onclick = "javascript:NewCal('StartDate','ddmmyyyy',true,24)" })
                     </td>
                     <td>
                         <b>@Document.V_Created_Before</b> 
                     </td>
                     <td>
-                        @Html.TextBox("EndDate", defaultEndDate, new { @class = "datetype", onclick = "javascript:NewCal('EndDate','ddmmyyyy',true,24)" })
+                        @Html.TextBox("EndDate", defaultEndDate, new { @class = "datetype", Readonly="true", onclick = "javascript:NewCal('EndDate','ddmmyyyy',true,24)" })
                     </td>
                </tr>
                 <tr> 
@@ -55,19 +60,19 @@
                     <b>@Document.V_Folder</b>
                    </td>
                    <td>
-                      @Html.DropDownListFor(x => x.FolderId, Model.Folders)                  
+                      @Html.DropDownListFor(x => x.FolderId, Model.Folders, new {onchange = "PutValueIn(this, 'FolderName')" })                  
                    </td>
                    <td>
                      <b>@Document.V_Contributor</b>
                    </td>
                    <td>                      
-                       @Html.DropDownListFor(x => x.AuthorId, Model.Contributors )
+                       @Html.DropDownListFor(x => x.AuthorId, Model.Contributors, new {onchange = "PutValueIn(this, 'ContributorName')" } )
                    </td>
                     <td>
                         <b>@Document.V_File_Type</b>
                     </td>
                     <td>
-                        @Html.DropDownListFor(x => x.FolderId,  lstFileTypes)
+                        @Html.DropDownListFor(x => x.FileMimeType, lstFileTypes, new {onchange = "PutValueIn(this, 'FileTypeName')" })
                     </td>                
                     
                    

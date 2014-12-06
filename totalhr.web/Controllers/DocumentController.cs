@@ -302,7 +302,22 @@ namespace totalhr.web.Controllers
 
         public ActionResult Search(DocumentSearchInfo info)
         {
+            info.SearchingUserSepartmentId = CurrentUser.DepartmentId;
+            info.SearchingUserId = CurrentUser.UserId;
             ViewBag.CurrentUserId = CurrentUser.UserId;
+            string SearchCriteria = string.Empty;
+
+            SearchCriteria = string.IsNullOrEmpty(info.Name) ? "" : " <b>" + Document.V_With_Document_Name + ":</b> " + info.Name;
+            SearchCriteria += (info.StartDate > DateTime.MinValue) ? " <b>" + Document.V_Created_After + ":</b> " + info.StartDate.ToShortDateString() : "";
+            SearchCriteria += (info.EndDate > DateTime.MinValue) ? " <b>" + Document.V_Created_Before + ":</b> " + info.EndDate.ToShortDateString() : "";
+            SearchCriteria += (info.AuthorId > 0) ? " <b>" + Document.V_Contributed_By + ":</b> " + info.ContributorName : "";
+            SearchCriteria += (info.FolderId > 0) ? " <b>" + Document.V_In_Folder + ":</b> " + info.FolderName : "";
+            SearchCriteria += (string.IsNullOrEmpty(info.FileMimeType) || info.FileMimeType  == "0") ? "" : " <b>" + Document.V_With_File_Type + ":</b> " + info.FileTypeName;
+
+            // ** pass everything to the Model and handle it from there.
+            ViewBag.SearchCriteria = !string.IsNullOrEmpty(SearchCriteria) ? Document.V_Your_Search + SearchCriteria : Document.V_No_Search_Criteria;
+
+            ModelState["StartDate"].Errors.Clear();//get rid of empty date validation
 
             if (!ModelState.IsValid) {               
                 return View("Index", _docService.ListDocumentAndFoldersByUser(CurrentUser.UserId, CurrentUser.DepartmentId));
