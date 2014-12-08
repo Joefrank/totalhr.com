@@ -396,4 +396,7 @@
   <data name="V_Your_Search" xml:space="preserve">
     <value>You made a search with the following criteria:</value>
   </data>
+  <data name="Error_No_Recipient_Specified" xml:space="preserve">
+    <value>No recipient specified</value>
+  </data>
 </root>

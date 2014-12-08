@@ -57,6 +57,7 @@ namespace totalhr.web.Controllers
             return View(new DocumentInfo { DocId = 0 });
         }
 
+        [Obsolete("No being used at the moment")]
         public ActionResult Details(int id)
         {
             CompanyDocument doc = _docService.GetDocument(id);
@@ -364,7 +365,7 @@ namespace totalhr.web.Controllers
             var recipientName = string.Empty;
 
             if(string.IsNullOrEmpty(info.WithUserEmail) && info.WithUserId < 1){
-               ModelState.AddModelError("NoRecipient", "No Recipient has been specified");
+                ModelState.AddModelError("NoRecipient", Document.Error_No_Recipient_Specified);
             }
             else if(!string.IsNullOrEmpty(info.WithUserEmail))
             {
