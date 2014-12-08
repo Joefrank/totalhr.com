@@ -30,18 +30,79 @@ namespace totalhr.data.EF
         public virtual DbSet<Calendar> Calendars { get; set; }
         public virtual DbSet<CalendarAssociation> CalendarAssociations { get; set; }
         public virtual DbSet<CalendarEvent> CalendarEvents { get; set; }
+        public virtual DbSet<CalEventReminderType> CalEventReminderTypes { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<CompanyFeature> CompanyFeatures { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
+        public virtual DbSet<EventToSchedule> EventToSchedules { get; set; }
         public virtual DbSet<Feature> Features { get; set; }
         public virtual DbSet<Glossary> Glossaries { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
+        public virtual DbSet<Recipient> Recipients { get; set; }
+        public virtual DbSet<RecipientList> RecipientLists { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
+        public virtual DbSet<ScheduledNotification> ScheduledNotifications { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserProfile> UserProfiles { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<CompanyDocument> CompanyDocuments { get; set; }
+        public virtual DbSet<CompanyDocumentDownload> CompanyDocumentDownloads { get; set; }
+        public virtual DbSet<CompanyDocumentPermission> CompanyDocumentPermissions { get; set; }
+        public virtual DbSet<CompanyDocumentShare> CompanyDocumentShares { get; set; }
+        public virtual DbSet<CompanyDocumentView> CompanyDocumentViews { get; set; }
+        public virtual DbSet<CompanyFolder> CompanyFolders { get; set; }
+        public virtual DbSet<CompanyFolderDocument> CompanyFolderDocuments { get; set; }
+        public virtual DbSet<File> Files { get; set; }
+        public virtual DbSet<ContractFormFieldValue> ContractFormFieldValues { get; set; }
+        public virtual DbSet<ContractTemplate> ContractTemplates { get; set; }
+        public virtual DbSet<ContractTemplateSection> ContractTemplateSections { get; set; }
+        public virtual DbSet<CTemplateSectionLink> CTemplateSectionLinks { get; set; }
+        public virtual DbSet<CTSectionFieldLink> CTSectionFieldLinks { get; set; }
+        public virtual DbSet<FormControl> FormControls { get; set; }
+        public virtual DbSet<FormField> FormFields { get; set; }
+        public virtual DbSet<Label> Labels { get; set; }
+        public virtual DbSet<UserContract> UserContracts { get; set; }
+    
+        [DbFunction("TotalHREntities", "SplitCSV")]
+        public virtual IQueryable<SplitCSV_Result> SplitCSV(string @string, string delimiter)
+        {
+            var stringParameter = @string != null ?
+                new ObjectParameter("String", @string) :
+                new ObjectParameter("String", typeof(string));
+    
+            var delimiterParameter = delimiter != null ?
+                new ObjectParameter("Delimiter", delimiter) :
+                new ObjectParameter("Delimiter", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<SplitCSV_Result>("[TotalHREntities].[SplitCSV](@String, @Delimiter)", stringParameter, delimiterParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> BuildCalEventReminderRecipientList(Nullable<int> eventid, Nullable<int> companyid, string recipientListName, string description, Nullable<int> createdBy)
+        {
+            var eventidParameter = eventid.HasValue ?
+                new ObjectParameter("eventid", eventid) :
+                new ObjectParameter("eventid", typeof(int));
+    
+            var companyidParameter = companyid.HasValue ?
+                new ObjectParameter("companyid", companyid) :
+                new ObjectParameter("companyid", typeof(int));
+    
+            var recipientListNameParameter = recipientListName != null ?
+                new ObjectParameter("RecipientListName", recipientListName) :
+                new ObjectParameter("RecipientListName", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("description", description) :
+                new ObjectParameter("description", typeof(string));
+    
+            var createdByParameter = createdBy.HasValue ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("BuildCalEventReminderRecipientList", eventidParameter, companyidParameter, recipientListNameParameter, descriptionParameter, createdByParameter);
+        }
     
         public virtual ObjectResult<Nullable<int>> GetUserProfileIds(Nullable<int> userid)
         {
@@ -77,6 +138,36 @@ namespace totalhr.data.EF
                 new ObjectParameter("userid", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserRoles_Result>("GetUserRoles", useridParameter);
+        }
+    
+        public virtual int PrepareCalendarEventScheduledReminder(string senderName, string senderEmail, Nullable<int> recipientListId)
+        {
+            var senderNameParameter = senderName != null ?
+                new ObjectParameter("SenderName", senderName) :
+                new ObjectParameter("SenderName", typeof(string));
+    
+            var senderEmailParameter = senderEmail != null ?
+                new ObjectParameter("SenderEmail", senderEmail) :
+                new ObjectParameter("SenderEmail", typeof(string));
+    
+            var recipientListIdParameter = recipientListId.HasValue ?
+                new ObjectParameter("RecipientListId", recipientListId) :
+                new ObjectParameter("RecipientListId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PrepareCalendarEventScheduledReminder", senderNameParameter, senderEmailParameter, recipientListIdParameter);
+        }
+    
+        public virtual ObjectResult<GetCompanyFoldersByUser_Result> GetCompanyFoldersByUser(Nullable<int> userid, Nullable<int> departmentid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(int));
+    
+            var departmentidParameter = departmentid.HasValue ?
+                new ObjectParameter("departmentid", departmentid) :
+                new ObjectParameter("departmentid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCompanyFoldersByUser_Result>("GetCompanyFoldersByUser", useridParameter, departmentidParameter);
         }
     }
 }

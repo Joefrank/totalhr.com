@@ -163,5 +163,33 @@ namespace totalhr.services.messaging.Implementation
                 return false;
             }
         }
+
+        public bool SendEmailWithAttachment(HTMLEmailStruct htmlEmailStruct)
+        {
+            try
+            {
+                if (!bSMTPInitialized) throw new Exception("Error: SMTP Not initialized");
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress(htmlEmailStruct.SenderEmail);
+                mail.To.Add(htmlEmailStruct.ReceiverEmail);
+                mail.Subject = htmlEmailStruct.EmailTitle;
+                mail.Body = htmlEmailStruct.EmailBody;
+
+                if (!string.IsNullOrEmpty(htmlEmailStruct.AttachmentPath))
+                {
+                    var attachment = new System.Net.Mail.Attachment(htmlEmailStruct.AttachmentPath);
+                    
+                    mail.Attachments.Add(attachment);
+                }
+                emailClient.Send(mail);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                log.Debug("EmailService (Send Email with attachment) - email send failed: " + ex.Message);
+                return false;
+            }
+
+        }
     }
 }

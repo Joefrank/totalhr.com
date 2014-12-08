@@ -10,5 +10,7 @@ namespace totalhr.data.Repositories.Infrastructure
     public interface ICompanyRepository :IGenericRepository<Company>
     {
         List<Department> GetCompanyDepartments(int companyid);
+
+        List<string> GetCompanyDepartmentsByIds(List<int> ids);
     }
 }

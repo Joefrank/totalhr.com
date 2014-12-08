@@ -16,7 +16,8 @@ namespace Authentication.Models
 {
     public class CustomAuthAttribute : AuthorizeAttribute 
     {
-         public IOAuthService AuthService;
+        public IOAuthService AuthService;
+
         private readonly IKernel _ninjectKernel;
         private static readonly ILog Log = LogManager.GetLogger(typeof(CustomAuthorizeAttribute));
         private ClientUser _user;

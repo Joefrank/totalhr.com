@@ -18,7 +18,7 @@ namespace totalhr.data.Repositories.Implementation
 {
     public class CalendarEventRepository : GenericRepository<TotalHREntities, CalendarEvent>, ICalendarEventRepository
     {
-        string calendarEventCacheKey = "AllCalendarEvents";
+        const string calendarEventCacheKey = "AllCalendarEvents";
         private static readonly object CacheLockObject = new object();
         int _defaultCacheDuration = 60;
 
@@ -43,8 +43,10 @@ namespace totalhr.data.Repositories.Implementation
                 CacheHelper = new HttpCacheHelper();
         }
 
+       
+
         //we need to get details of user or companyid, we might bind cache object to companyid
-        public List<CalendarEventCache> GetAllCalendarEvents(int calendarid = 0)
+        public List<CalendarEventCache> GetAllCalendarEvents(int companyId, int calendarid = 0)
         {
             var result = CacheHelper.Get<List<CalendarEventCache>>(calendarEventCacheKey);
 
@@ -53,7 +55,7 @@ namespace totalhr.data.Repositories.Implementation
                 lock (CacheLockObject)
                 {
                     result = new List<CalendarEventCache>();
-                    var allevents = this.FindBy(x => (calendarid == 0 || x.CalendarId == calendarid)).ToList();
+                    var allevents = this.FindBy(x => (companyId == x.Calendar.CompanyId && (calendarid == 0 || x.CalendarId == calendarid))).ToList();
                     //use mapping to map event to eventcache
 
                     Mapper.CreateMap<CalendarEvent, CalendarEventCache>().ConvertUsing<CalendarEventToCachedEventMapper>();
@@ -66,23 +68,50 @@ namespace totalhr.data.Repositories.Implementation
                     CacheHelper.Add<List<CalendarEventCache>>(result, calendarEventCacheKey);                    
                 }
             }
-
+           
             return result;
         }
-        
+
+        public void ClearCache()
+        {
+            CacheHelper.Clear(calendarEventCacheKey);
+        }
+
+        public void DeleteEventAssociation(CalendarEvent evt)
+        {
+            foreach (CalendarAssociation assocs in evt.CalendarAssociations)
+            {
+                Context.CalendarAssociations.Remove(assocs);
+            }
+            Context.SaveChanges();
+        }
+
+        public void RequestEventRemindersSceduling(CalendarEvent evt, int companyid)
+        {
+            EventToSchedule evtToSchedule = new EventToSchedule();
+            evtToSchedule.EventId = evt.id;
+            evtToSchedule.CompanyId = companyid;
+            evtToSchedule.RecipientListName = string.Format("Calendar event reminder recipient list for Event Id # {0}", evt.id);            
+            evtToSchedule.CreatedBy = evt.CreatedBy;
+            evtToSchedule.Created = DateTime.Now;
+
+            Context.EventToSchedules.Add(evtToSchedule);
+            Context.SaveChanges();
+        }
 
         public List<CalendarEventCache> GetMonthlyCalendarEvents(int userid, int year, int month, int calendarid=0)
         {
-            var lstEvents = GetAllCalendarEvents();
+            
             var foundEvents = new List<CalendarEventCache>();
             var user = Context.Users.FirstOrDefault(x => x.id == userid);
+            var lstEvents = GetAllCalendarEvents(user.CompanyId);
 
             foreach (CalendarEventCache assocevt in lstEvents)
             {
                 if (
                     (calendarid == 0 || assocevt.CalendarId == calendarid)
                     &&
-                    (assocevt.StartOfEvent.Month == month || assocevt.EndOfEvent.Month == month)
+                    (month == 0 || (assocevt.StartOfEvent.Month == month || assocevt.EndOfEvent.Month == month))
                     &&
                     (assocevt.StartOfEvent.Year == year || assocevt.EndOfEvent.Year == year)
                   )
@@ -118,6 +147,7 @@ namespace totalhr.data.Repositories.Implementation
                       targetassoc.SubTypeId == (int)Variables.CalendarEventTarget.Company ||
                       (targetassoc.SubTypeId == (int)Variables.CalendarEventTarget.MyselfOnly && creatorid == userid) ||
                       (targetassoc.SubTypeId == (int)Variables.CalendarEventTarget.User && assocvalue.Split(',').Select(int.Parse).ToList().Contains(userid)) ||
+                      (targetassoc.SubTypeId == (int)Variables.CalendarEventTarget.User && userid == creatorid) ||
                       (targetassoc.SubTypeId == (int)Variables.CalendarEventTarget.Department && assocvalue.Split(',').Select(int.Parse).ToList().Contains(departmentid))
                    );
         }
@@ -130,9 +160,10 @@ namespace totalhr.data.Repositories.Implementation
         }
 
         public List<CalendarEventCache> GetCalendarDailyEventsByUser(int userid, DateTime date, int calendarid=0){
-            var lstEvents = GetAllCalendarEvents();
+            
             var foundEvents = new List<CalendarEventCache>();
             var user = Context.Users.FirstOrDefault(x => x.id == userid);
+            var lstEvents = GetAllCalendarEvents(user.CompanyId);
 
             foreach (CalendarEventCache assocevt in lstEvents)
             {

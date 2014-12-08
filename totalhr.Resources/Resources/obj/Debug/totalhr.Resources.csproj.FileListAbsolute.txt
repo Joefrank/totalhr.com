@@ -88,7 +88,6 @@ C:\Projects\totalhr.com\totalhr.Resources\Resources\obj\Debug\Resources.pdb
 C:\Projects\totalhr.com\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.csprojResolveAssemblyReference.cache
 D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\bin\Debug\Resources.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\bin\Debug\Resources.pdb
-D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.csprojResolveAssemblyReference.cache
 D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.Account.resources
 D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.Calendar.resources
 D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.Common.resources
@@ -98,3 +97,18 @@ D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\totalhr.R
 D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.csproj.GenerateResource.Cache
 D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\Resources.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\Resources.pdb
+D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.csprojResolveAssemblyReference.cache
+R:\GitProjects\TotalHR\totalhr.Resources\Resources\bin\Debug\Resources.dll
+R:\GitProjects\TotalHR\totalhr.Resources\Resources\bin\Debug\Resources.pdb
+R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.csprojResolveAssemblyReference.cache
+R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.Account.resources
+R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.Calendar.resources
+R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.Common.resources
+R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.Document.resources
+R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.EnumDescription.resources
+R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.FieldFurtherInfo.resources
+R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.FileTypeNames.resources
+R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.FormMessages.resources
+R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.csproj.GenerateResource.Cache
+R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\Resources.dll
+R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\Resources.pdb

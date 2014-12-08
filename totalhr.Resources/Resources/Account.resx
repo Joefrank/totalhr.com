@@ -129,4 +129,34 @@
   <data name="tt_Personal_Details" xml:space="preserve">
     <value>Personal Details</value>
   </data>
+  <data name="tt_My_Documents" xml:space="preserve">
+    <value>Company Documents</value>
+  </data>
+  <data name="V_Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="V_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="V_Firstname" xml:space="preserve">
+    <value>Firstname</value>
+  </data>
+  <data name="V_Mobile" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="V_Other_Names" xml:space="preserve">
+    <value>Other Names</value>
+  </data>
+  <data name="V_Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="V_Profile_View" xml:space="preserve">
+    <value>Profile View</value>
+  </data>
+  <data name="V_Surname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="V_Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
 </root>

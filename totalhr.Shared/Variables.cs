@@ -73,10 +73,44 @@ namespace totalhr.Shared
             YearlyOnSameDate = 5
         }
 
+        public enum DocumentPermissionType
+        {
+            Private = 1,
+            SelectedUsers = 2,
+            Department = 3,
+            WholeCompany = 4
+        }
+
         public enum ReminderType
         {
             TimeBefore= 1,
             EveryXTime = 2
+        }
+
+        public enum CalendarEventReminderValues
+        {
+            R5MinsBefore=1,
+            R10MinsBefore=2,
+            R15MinsBefore=3,
+            R20MinsBefore=4,
+            R25MinsBefore=5,
+            R30MinsBefore=6,
+            R45MinsBefore=7,
+            R1HourBefore=8,
+            R2HoursBefore=9,
+            R4HoursBefore=10,
+            R1DayBefore=11,
+            R2DaysBefore=12,
+            R1WeekBefore=13,
+            R2WeeksBefore=14,
+            R1MonthBefore=15,
+            Customize=16
+        }
+
+        public enum CalendarEventNotificationType
+        {
+            ByEmail=255,
+            ByTextPhone=256
         }
 
         public enum EventFrequency
@@ -97,9 +131,49 @@ namespace totalhr.Shared
         
         public enum CalendarViewType
         {
+            YearView,
             MonthView,
             WeekView,
             DayView
+        }
+
+        public enum FileType
+        {
+            CompanyDocument = 1
+        }
+
+        public enum AllowedFileExtension
+        {            
+            doc,
+            docx,
+            txt,
+            ppt,
+            pptx,
+            rtf,
+            pdf,
+            odt,
+            log,
+            tex,
+            wps,
+            wpd,
+            mp3,
+            mov,
+            gif,
+            jpg,
+            png,
+            psd,
+            pspimage,
+            tif,
+            tiff,
+            thm,
+            xls
+
+        }
+
+        public enum DocumentShareType
+        {
+            Link = 1,
+            Attachment = 2
         }
 
         public static string AdminEmailSignature

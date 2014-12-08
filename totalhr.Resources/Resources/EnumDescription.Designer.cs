@@ -61,6 +61,24 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to By Mail.
+        /// </summary>
+        public static string ByEmail {
+            get {
+                return ResourceManager.GetString("ByEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By SMS.
+        /// </summary>
+        public static string ByTextPhone {
+            get {
+                return ResourceManager.GetString("ByTextPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Whole company.
         /// </summary>
         public static string Company {
@@ -115,7 +133,7 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minute.
+        ///   Looks up a localized string similar to Min.
         /// </summary>
         public static string EvtMinute {
             get {
@@ -178,6 +196,150 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 10 mins before.
+        /// </summary>
+        public static string R10MinsBefore {
+            get {
+                return ResourceManager.GetString("R10MinsBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 15 mins before.
+        /// </summary>
+        public static string R15MinsBefore {
+            get {
+                return ResourceManager.GetString("R15MinsBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 day before.
+        /// </summary>
+        public static string R1DayBefore {
+            get {
+                return ResourceManager.GetString("R1DayBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 hour before.
+        /// </summary>
+        public static string R1HourBefore {
+            get {
+                return ResourceManager.GetString("R1HourBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 month before.
+        /// </summary>
+        public static string R1MonthBefore {
+            get {
+                return ResourceManager.GetString("R1MonthBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1 week before.
+        /// </summary>
+        public static string R1WeekBefore {
+            get {
+                return ResourceManager.GetString("R1WeekBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 20 mins before.
+        /// </summary>
+        public static string R20MinsBefore {
+            get {
+                return ResourceManager.GetString("R20MinsBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 25 mins before.
+        /// </summary>
+        public static string R25MinsBefore {
+            get {
+                return ResourceManager.GetString("R25MinsBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 days before.
+        /// </summary>
+        public static string R2DaysBefore {
+            get {
+                return ResourceManager.GetString("R2DaysBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 hours before.
+        /// </summary>
+        public static string R2HoursBefore {
+            get {
+                return ResourceManager.GetString("R2HoursBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 weeks before.
+        /// </summary>
+        public static string R2WeeksBefore {
+            get {
+                return ResourceManager.GetString("R2WeeksBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 30 mins before.
+        /// </summary>
+        public static string R30MinsBefore {
+            get {
+                return ResourceManager.GetString("R30MinsBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 45 mins before.
+        /// </summary>
+        public static string R45MinsBefore {
+            get {
+                return ResourceManager.GetString("R45MinsBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 4 hours before.
+        /// </summary>
+        public static string R4HoursBefore {
+            get {
+                return ResourceManager.GetString("R4HoursBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5 mins before.
+        /// </summary>
+        public static string R5MinsBefore {
+            get {
+                return ResourceManager.GetString("R5MinsBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specific user(s).
+        /// </summary>
+        public static string SelectedUsers {
+            get {
+                return ResourceManager.GetString("SelectedUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Before.
         /// </summary>
         public static string TimeBefore {
@@ -192,6 +354,15 @@ namespace totalhr.Resources {
         public static string User {
             get {
                 return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Whole Company.
+        /// </summary>
+        public static string WholeCompany {
+            get {
+                return ResourceManager.GetString("WholeCompany", resourceCulture);
             }
         }
         

@@ -26,6 +26,8 @@ namespace Authentication.Models
 
         public int CompanyId { get; set; }
 
+        public int DepartmentId { get; set; }
+
         public string Culture { get; set; }
 
         public TimeSpan CookieDuration { get; set; }
@@ -40,6 +42,11 @@ namespace Authentication.Models
             return requiredroles.All(rrole => this.Roles.Contains(((int) rrole).ToString(CultureInfo.InvariantCulture)));
         }
 
+        public bool HasRole(int roleid)
+        {
+            return this.Roles.Contains(roleid.ToString());
+        }
+
         public bool IsInProfile(List<string> profiles)
         {
             return !profiles.Except(this.Profiles).Any();
@@ -48,6 +55,11 @@ namespace Authentication.Models
         public bool IsInProfile(Variables.Profiles[] requiredprofiles)
         {
             return requiredprofiles.All(rprof => this.Profiles.Contains(((int)rprof).ToString(CultureInfo.InvariantCulture)));
+        }
+
+        public bool HasProfile(int profileid)
+        {
+            return this.Profiles.Contains(profileid.ToString());
         }
 
         public bool IsLogged()

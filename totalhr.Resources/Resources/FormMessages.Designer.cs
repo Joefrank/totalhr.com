@@ -1060,6 +1060,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter year.
+        /// </summary>
+        public static string Label_Enter_Year {
+            get {
+                return ResourceManager.GetString("Label_Enter_Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First Name.
         /// </summary>
         public static string Label_First_Name {
@@ -1429,11 +1438,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select department(s) to invite .
+        /// </summary>
+        public static string MSG_Departments_Invitee_List {
+            get {
+                return ResourceManager.GetString("MSG_Departments_Invitee_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your details have been saved successfully!.
         /// </summary>
         public static string MSG_Details_Saved {
             get {
                 return ResourceManager.GetString("MSG_Details_Saved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reminder already added..
+        /// </summary>
+        public static string MSG_Duplicate_Reminder {
+            get {
+                return ResourceManager.GetString("MSG_Duplicate_Reminder", resourceCulture);
             }
         }
         
@@ -1447,11 +1474,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You cannot invite attendees without selecting any!.
+        /// </summary>
+        public static string MSG_Error_NoAttendee_Chosen {
+            get {
+                return ResourceManager.GetString("MSG_Error_NoAttendee_Chosen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to I have read and agree to the Terms of Use and the TotalHR Privacy Statement.
         /// </summary>
         public static string MSG_Terms_Of_Service {
             get {
                 return ResourceManager.GetString("MSG_Terms_Of_Service", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select user(s) to invite.
+        /// </summary>
+        public static string MSG_Users_Invitee_List {
+            get {
+                return ResourceManager.GetString("MSG_Users_Invitee_List", resourceCulture);
             }
         }
         

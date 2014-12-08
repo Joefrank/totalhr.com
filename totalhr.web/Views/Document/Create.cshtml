@@ -1,0 +1,93 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Helpers;
+@using totalhr.data.EF;
+@using totalhr.Shared;
+
+@model totalhr.Shared.Models.DocumentInfo
+
+@{
+    ViewBag.Title = GenericHelper.WebsiteName + " | " + Document.V_Document_title;
+    var folders = ViewBag.Folders as List<CompanyFolder>;
+       
+    if(folders == null){
+        folders = new List<CompanyFolder> { new CompanyFolder { Id = -1, DisplayName = Document.v_Select } };     
+    }else{
+        folders.Insert(0, new CompanyFolder { Id = -1, DisplayName = Document.v_Select });
+    }
+    
+    int CompanyId = Convert.ToInt32(ViewBag.CompanyId);
+}
+
+
+
+@section scripts{
+    <script type="text/javascript" src="/Scripts/Site/CompanyDocument.js"></script>
+
+}
+
+<div id="main">
+    <div class="content">
+
+        <h1>@Document.V_Create_New</h1>
+
+        @using (Html.BeginForm("CreateDocument", "Document", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        { 
+         @Html.ValidationSummary();
+         
+            <div class="formdiv midform">
+                <div class="wrapper">
+                    @Html.HiddenFor(x => x.DocId)
+
+                     <div class="line">
+                        <label>@Document.V_DisplayName <b class="req">*</b></label>
+                         <span>@Html.TextBoxFor(x => x.DisplayName, new {size="40", maxlength="250"})</span>                    
+                    </div>
+                    <div class="line">
+                        <label>@Document.V_Folder</label>
+                         <span>@Html.DropDownListFor(x => x.FolderId, new SelectList(folders, "Id", "DisplayName"))
+                            <input type="button" value="@Document.V_Add_Folder" onclick="OpenSelectorForFolder('frmCreateFolder');" />
+                         </span> 
+                                           
+                    </div>
+                    <div class="line">
+                        <label>@Document.v_File <b class="req">*</b></label>
+                         <span>
+                             <input type="file" id="fileToUpload" name="File" />
+                         </span>                    
+                    </div>
+                     <div class="line">
+                        <label>Permissions <b class="req">*</b></label>
+                         <span>
+                             @Html.Raw(DocumentHelper.GetDocumentPermissionType())
+                         </span>                    
+                    </div>
+                    <div class="line">
+                        <label>&nbsp;</label>
+                         <span>
+                             <input type="button" value="@Document.V_Back_To_List" onclick="document.location.href = '/Document'" />
+                                 &nbsp;
+                             <input type="submit" id="btnSubmit" value="@Document.V_Upload" />
+                         </span>                    
+                    </div>
+
+                </div>
+            </div>
+         
+        }
+    </div>
+</div>
+<script type="text/javascript">
+    var CompanyId = @CompanyId;
+    var WHOLE_COMPANY = @((int)Variables.DocumentPermissionType.WholeCompany);
+    var SELECTED_USERS = @((int)Variables.DocumentPermissionType.SelectedUsers);
+    var DEPARTMENT = @((int)Variables.DocumentPermissionType.Department);
+    var MSG_SELECT_USER = '@Html.Raw(HttpUtility.JavaScriptStringEncode(Document.V_Select_User))';
+    var MSG_SELECT_DEPARTMENT = '@Html.Raw(HttpUtility.JavaScriptStringEncode(Document.V_Select_Department))';
+    var MSG_Error_NoUser_ForPermission = '@Html.Raw(HttpUtility.JavaScriptStringEncode(Document.Error_NoUser_ForPermission))';
+    var MSG_Error_NoDept_ForPermission ='@Html.Raw(HttpUtility.JavaScriptStringEncode(Document.Error_NoDept_ForPermission))';
+</script>
+
+ @Html.Partial("_CompanyDocItemSelector")
+  
+ @Html.Partial("_FolderCreate")
+        

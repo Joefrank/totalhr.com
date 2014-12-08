@@ -94,13 +94,28 @@ body, html {
 .line .reminders span{float:left;display:block;width:16px;height:16px;cursor:pointer;}
 .line .reminders .spcount{color:blue;width:100px;font-weight:bold;padding:5px 0 0 5px;}
 
-.line .reminders .spview{padding:2px 3px;float:right;margin:5px 10px 0 0px;width:200px;}
+.line .head .spview{float:left;display:block;width:16px;height:16px;background:transparent url('/Content/images/view.gif') center center no-repeat;}
 
-.line .reminders .spadd{padding:10px 0 0 2px;margin-left:10px;background:transparent url('../images/plus-icon.png') left center no-repeat;}
+.line .content .spadd, .line .head .spadd{float: left;display:block;width:16px;height:16px;padding: 2px 0 0 17px;color:blue;cursor:pointer;background:transparent url('/Content/images/plus-icon.png') left center no-repeat;}
+.line .head .spadd {
+    float: right;padding: 0;
+}
 
-.line .reminders .spedit{padding:10px 0 0 2px;background:transparent url('../images/edit-icon.png') center center no-repeat;}
+.line .content .delete {padding: 2px 0 0 17px;color:blue;cursor:pointer;margin-left:5px;background:transparent url('/Content/images/minus-icon.png') left center no-repeat; }
 
-.line .reminders .spdelete{background:transparent url('../images/delete-icon.png') center center no-repeat;}
+.line .collapse {
+    background:transparent url('/Content/images/minus.png') right center no-repeat; 
+}
+
+.line .head .spedit{float:left;margin-right:10px;display:block;width:16px;height:16px;background:transparent url('/Content/images/edit-icon.png') center center no-repeat;}
+
+.line .actiontitle {float:left;margin-right:10px;}
+
+.line .buttons {
+    float:right;display:block;margin-right:2px;
+}
+
+.line .reminders .spdelete{background:transparent url('/Content/images/delete-icon.png') center center no-repeat;}
 
 .reminderpopup {
     background-color:#59a8dc;
@@ -131,7 +146,12 @@ body, html {
 
  #dvReminderContent span.row{height: 30px;float: left;}
 
-  .childblock .head{ float: left;width: 100%;height: 20px;padding: 2px 0;text-align: left;cursor: pointer;color: blue;font-weight: bold;}
+  .childblock .head{ 
+      float: left;width: 100%;height: 20px;padding: 2px 2px;text-align: left;cursor: pointer;color: blue;font-weight: bold;
+      -webkit-box-shadow: 0 2px #666633;box-shadow: 0 2px #666633;background-color:beige;border: 1px solid grey;
+      background:transparent url('/Content/images/plus-icon.png') right center no-repeat;
+
+  }
 
    .childblock .content{ float: left;width: 98%;background-color: beige;padding:1%;}
    
@@ -142,7 +162,7 @@ body, html {
     #dvReminderContent span.row span.td, #dvReminderContent span.row span.tdtop{display: block;float: left;left:2px;}
     #dvReminderContent span.row span.tdtop{ position: relative;top: 0px;}
 
-   #sprepeatinfo{ display: block;float: left;width: 100%;margin: 10px 0;color:#7b7b7b;}
+   #sprepeatinfo{ display: block;float: left;margin: 10px 0;width: 100%;color:#7b7b7b;}
 
 .block .repeatcount {
     color:blue;cursor:pointer;
@@ -156,7 +176,7 @@ body, html {
 /*span.row i.info{ margin-top: -16px;}*/
 
 .line input[type="text"].datetype {
-    width:100px;
+    width:130px;background:transparent url('/content/images/cal.gif') right center no-repeat;padding-right:16px;
 }
 
 #dvPopupAjax {
@@ -164,19 +184,32 @@ body, html {
 }
 
 div.popuphead {
-    float:left;width:100%;height:50px;margin-top:-15px;background-color:grey;color:white;
+    float:left;width:100%;margin-top:-15px;color:white;
+    height: 50px;
+    position: relative;
+    background: #161b7a;
+    background: -webkit-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: -moz-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: -o-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: -ms-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: linear-gradient(to bottom, #1e249e 0%, #011e62 100%);
 }
 
 
 
     div.popuphead h2 {
-        float:left;width:400px;margin: 10px 0 0;color:white;
+        float:left;width:78%;padding:1%;margin: 15px 0 0;color:white;font-size:14pt;
     }
 
 div#toolbox {
-    float:right;width:200px;height:98%;padding:1%;
+    float:right;width:18%;height:98%;padding:1%;margin-top:15px;
 }
 
+#popupBody {
+    float:left;
+    width:98%;
+    padding:1%;
+}
     div#toolbox .spsave {
         background:transparent url('/content/images/save.png') center center no-repeat;float:right;display:block;width:24px;height:24px;
         cursor:pointer;margin-right:10px;
@@ -186,3 +219,78 @@ div#toolbox {
         background:transparent url('/content/images/close.png') center center no-repeat;float:right;display:block;width:22px;height:22px;
     cursor:pointer;
         }
+
+/*validation styles*/
+
+.validation-summary-errors {
+    border:1px solid red;
+    background-color:#fcacca;
+    color:red;
+    font-weight:bold;
+    float:left;
+    position:relative;    
+    margin:10px;  
+    width:95%;
+}
+
+    .validation-summary-errors ul li {
+        padding:5px;
+    }
+
+.line input[type="button"].btnsmall {
+    cursor:pointer;
+    padding: 0 5px;
+    background-color: #198fff;
+    color: #fff;
+    -webkit-box-shadow: 0 2px #063a93;
+    box-shadow: 0 2px #063a93;
+    border-radius: 3px;
+    font-weight: 100;
+    border: 2px solid transparent;
+
+}
+
+div.popupedit {
+    float: left;width: 240px;position: relative;left:200px;z-index: 10000;background-color:#f9f9f9;border: 1px solid grey;padding:5px 0 0 5px;
+}
+
+div.popupedit .spclose {
+    background:transparent url('/content/images/close-icon.png') center center no-repeat;float:right;display:block;width:16px;height:16px;
+    cursor:pointer;position:relative;top:-3px;right:2px;
+    }
+
+.collapse {
+    background-image:url('/content/images/minus.png');
+}
+
+.smalltxt{ width: 100px;}
+
+.linespan{ float: left;width: 100%;display: block;}
+
+/*
+.popInContainer .popToolbar {
+    height: 45px;
+    position: relative;
+    background: #161b7a;
+    background: -webkit-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: -moz-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: -o-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: -ms-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: linear-gradient(to bottom, #1e249e 0%, #011e62 100%);
+}*/
+
+input[type="text"].txtlink {
+    font-size:8pt;
+    width:100%;
+    border:1px solid blue;
+    background:#ccc1c1;
+    color:blue;
+    padding:2px;
+}
+
+html, body {
+    min-height: 100%;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased !important;
+}

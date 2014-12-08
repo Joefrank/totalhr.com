@@ -1,0 +1,399 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Error_Could_Not_Create_Doc" xml:space="preserve">
+    <value>Sorry could not create document!</value>
+  </data>
+  <data name="Error_Could_Not_Upload_Doc" xml:space="preserve">
+    <value>Sorry could not upload file!</value>
+  </data>
+  <data name="Error_CreatorIsRequried_Rq" xml:space="preserve">
+    <value>Creator is required</value>
+  </data>
+  <data name="Error_DisplayName_Rq" xml:space="preserve">
+    <value>Display name is required</value>
+  </data>
+  <data name="Error_FileIsRequried_Rq" xml:space="preserve">
+    <value>File is required</value>
+  </data>
+  <data name="Error_File_Type" xml:space="preserve">
+    <value>Only file of type:</value>
+  </data>
+  <data name="Error_OriginalFileName_Rq" xml:space="preserve">
+    <value>Original file name is required.</value>
+  </data>
+  <data name="Error_Upload_File" xml:space="preserve">
+    <value>Please Upload Your file</value>
+  </data>
+  <data name="V_Back_To_List" xml:space="preserve">
+    <value>Back to list</value>
+  </data>
+  <data name="V_Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="V_Create_New" xml:space="preserve">
+    <value>Create new document</value>
+  </data>
+  <data name="V_Create_New_Folder" xml:space="preserve">
+    <value>Create Folder</value>
+  </data>
+  <data name="V_DisplayName" xml:space="preserve">
+    <value>DisplayName</value>
+  </data>
+  <data name="V_Document_Details_Title" xml:space="preserve">
+    <value>Document details</value>
+  </data>
+  <data name="V_Document_title" xml:space="preserve">
+    <value>Company Documents and Folders</value>
+  </data>
+  <data name="v_File" xml:space="preserve">
+    <value>File</value>
+  </data>
+  <data name="V_Folder" xml:space="preserve">
+    <value>Folder</value>
+  </data>
+  <data name="V_Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="V_Upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="Error_NoDept_ForPermission" xml:space="preserve">
+    <value>You haven't selected any department.</value>
+  </data>
+  <data name="Error_NoUser_ForPermission" xml:space="preserve">
+    <value>You haven't selected any user.</value>
+  </data>
+  <data name="V_Add_Folder" xml:space="preserve">
+    <value>Add Folder</value>
+  </data>
+  <data name="V_Folder_Make_Public" xml:space="preserve">
+    <value>Make public</value>
+  </data>
+  <data name="V_New_Folder" xml:space="preserve">
+    <value>New Folder</value>
+  </data>
+  <data name="V_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="v_Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
+  <data name="V_Select_Department" xml:space="preserve">
+    <value>Select Department</value>
+  </data>
+  <data name="V_Select_User" xml:space="preserve">
+    <value>Select user</value>
+  </data>
+  <data name="Error_No_Folder" xml:space="preserve">
+    <value>Sorry but no folder or document to view.</value>
+  </data>
+  <data name="TH_Created" xml:space="preserve">
+    <value>Created</value>
+  </data>
+  <data name="TH_CreatedBy" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="TH_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="TH_DisplayName" xml:space="preserve">
+    <value>DisplayName</value>
+  </data>
+  <data name="TH_Downloads" xml:space="preserve">
+    <value>Downloads</value>
+  </data>
+  <data name="TH_Permissions" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
+  <data name="TH_Views" xml:space="preserve">
+    <value>Views</value>
+  </data>
+  <data name="V_No_Folder" xml:space="preserve">
+    <value>Document(s) With No Folder</value>
+  </data>
+  <data name="Error_No_Doc_Details" xml:space="preserve">
+    <value>Sorry couldn't retrieve document details.</value>
+  </data>
+  <data name="V_Download" xml:space="preserve">
+    <value>Download</value>
+  </data>
+  <data name="V_Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="V_Permission_Company" xml:space="preserve">
+    <value>Whole company</value>
+  </data>
+  <data name="V_Permission_Private" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="Error_Could_Not_Update_Doc" xml:space="preserve">
+    <value>Sorry could not update document!</value>
+  </data>
+  <data name="V_Archive" xml:space="preserve">
+    <value>Archive</value>
+  </data>
+  <data name="V_Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="V_Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="V_Doc_Edit" xml:space="preserve">
+    <value>Document Edit</value>
+  </data>
+  <data name="V_View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="JS_ARE_YOU_SURE_TO_DELETE_DOC" xml:space="preserve">
+    <value>Are you sure you want to archive this document? This document will not be accessed by other users if you click ok.</value>
+  </data>
+  <data name="V_Click_More_Details" xml:space="preserve">
+    <value>Click for more details</value>
+  </data>
+  <data name="V_Contributor" xml:space="preserve">
+    <value>Contributor</value>
+  </data>
+  <data name="V_Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="V_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="V_File_Size" xml:space="preserve">
+    <value>File Size</value>
+  </data>
+  <data name="V_File_Type" xml:space="preserve">
+    <value>File Type</value>
+  </data>
+  <data name="V_Open" xml:space="preserve">
+    <value>Open</value>
+  </data>
+  <data name="V_And" xml:space="preserve">
+    <value>And</value>
+  </data>
+  <data name="V_Dates_Between" xml:space="preserve">
+    <value>Dates between</value>
+  </data>
+  <data name="V_End" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="V_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="V_Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="V_Created_After" xml:space="preserve">
+    <value>Created After</value>
+  </data>
+  <data name="V_Created_Before" xml:space="preserve">
+    <value>Created Before</value>
+  </data>
+  <data name="V_Document_Search" xml:space="preserve">
+    <value>Document Search</value>
+  </data>
+  <data name="Error_DocId_Rq" xml:space="preserve">
+    <value>Document Id is required</value>
+  </data>
+  <data name="Error_FileName_Rq" xml:space="preserve">
+    <value>File name is required</value>
+  </data>
+  <data name="Error_ShareType_Rq" xml:space="preserve">
+    <value>Share type is required</value>
+  </data>
+  <data name="V_Attachment" xml:space="preserve">
+    <value>Attachment</value>
+  </data>
+  <data name="V_Document_Share" xml:space="preserve">
+    <value>Document Share</value>
+  </data>
+  <data name="V_Doc_Name" xml:space="preserve">
+    <value>Document Name</value>
+  </data>
+  <data name="V_Link" xml:space="preserve">
+    <value>Link</value>
+  </data>
+  <data name="V_Message" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="V_Or_Email" xml:space="preserve">
+    <value>Or Email</value>
+  </data>
+  <data name="V_Recipient" xml:space="preserve">
+    <value>Recipient</value>
+  </data>
+  <data name="V_Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
+  <data name="V_Share" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="V_Share_As" xml:space="preserve">
+    <value>Share as</value>
+  </data>
+  <data name="V_Share_Attachment" xml:space="preserve">
+    <value>Send as attachment</value>
+  </data>
+  <data name="V_Share_Doc_Email_Title" xml:space="preserve">
+    <value>{0} shared document with you.</value>
+  </data>
+  <data name="V_Share_Intro" xml:space="preserve">
+    <value>You can share a link to this document or send it as attachment to a user email.&lt;br/&gt; Select a user from list or type in an email address.</value>
+  </data>
+  <data name="V_Share_Link" xml:space="preserve">
+    <value>Send as link</value>
+  </data>
+  <data name="Error_Cant_Edit_Others_Doc" xml:space="preserve">
+    <value>You cannot edit somebody else's document!</value>
+  </data>
+  <data name="V_Close_Dialog" xml:space="preserve">
+    <value>Close Dialog</value>
+  </data>
+  <data name="V_Document_Share_Complete" xml:space="preserve">
+    <value>Document Share Complete</value>
+  </data>
+  <data name="V_Document_Share_Message" xml:space="preserve">
+    <value>You have successfully shared the following document:{0}</value>
+  </data>
+  <data name="V_Document_Was_Shared_With" xml:space="preserve">
+    <value>The document was sent to {0}</value>
+  </data>
+  <data name="V_Contributed_By" xml:space="preserve">
+    <value>Contributed by</value>
+  </data>
+  <data name="V_In_Folder" xml:space="preserve">
+    <value>In Folder</value>
+  </data>
+  <data name="V_No_Search_Criteria" xml:space="preserve">
+    <value>You entered no search criteria</value>
+  </data>
+  <data name="V_Search_Result" xml:space="preserve">
+    <value>See results below.</value>
+  </data>
+  <data name="V_With_Document_Name" xml:space="preserve">
+    <value>With Document Name</value>
+  </data>
+  <data name="V_With_File_Type" xml:space="preserve">
+    <value>With File type</value>
+  </data>
+  <data name="V_Your_Search" xml:space="preserve">
+    <value>You made a search with the following criteria:</value>
+  </data>
+</root>

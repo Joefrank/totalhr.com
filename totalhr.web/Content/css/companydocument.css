@@ -1,0 +1,174 @@
+﻿
+html {
+   
+}
+
+.foldergroup {
+    float:left;width:800px;
+    font-size:9pt;
+}
+
+.folder {
+     width:100%;
+     float:left;
+}
+
+.document {
+    float:left;
+    width:100%;
+    /*height:55px;*/
+    overflow:hidden;
+    border-radius: 5px;
+    box-shadow: rgba(0,0,0,0.3) 0 1px 3px;
+    -ms-box-shadow: rgba(0,0,0,0.3) 0 1px 3px;
+    position: relative;
+    font: 0.95em/1.13em "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+    background: #f2f2f2;
+}
+
+    .document .line {
+        margin: 0 5px 5px;
+        text-align: left;
+    }
+
+    .document.core {
+        height:30px;
+        float:left;
+        width:100%;
+    }
+    .document .core .left {
+        float:left;
+        width:68%;
+        text-align:left;
+        padding:5px 1% 0;
+    }
+
+        .document .core .left h4 {
+            margin:0;
+            color:#0f2671;                       
+            cursor:pointer;
+        }
+
+            .document .core .left h4 .expand {
+                padding-left:15px; 
+                background:transparent url('/Content/images/expand.gif') left center no-repeat;
+            }
+        .document .core .left .highlight {
+            margin-top:3px;
+            font-size:0.85em;
+            padding-left:20px;
+        }
+
+            .document .core .left .highlight .actionspan {
+                cursor:pointer;color:#0d5e25;font-weight:bold;
+
+            }
+             
+    .document .core .right {
+        float:left;
+        width:28%;
+        text-align:right;
+        padding: 5px 1%;
+        font-size:8pt;
+    }
+
+        .document .core .right input[type='button'], .moreinfo input[type='button'], #searchbox input[type='submit'],
+        #searchbox input[type='button']  {
+            font-size:8pt;float:right;margin:5px 5px 0 0;cursor:pointer;
+        }
+
+.moreinfo input[type='button'] {
+    margin: 0 5px;
+}
+
+
+    .document .moreinfo {
+        color:white;
+        float:left;
+        width:100%;background:rgba(0,0,0,0.3);
+        padding-top:5px;
+    }
+
+        .document .moreinfo .left {
+            float:left;width:68%;text-align:left;padding:5px 1% 0;
+        }
+            .document .moreinfo .left .details {
+                margin-left:20px;
+            }
+
+        .document .moreinfo .right {
+             text-align:right;float:left;width:28%;padding:0 1% 5px;
+        }
+
+#searchbox {
+    float:left;
+    width:800px;
+    font: 0.80em/1.13em "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+}
+
+    #searchbox input[type='submit'], #searchbox select, #searchbox input[type='text'], #searchbox input[type='button'] {
+        float: left;font-size:8pt;
+    }
+
+    #searchbox input[type='text'] {
+        height:10px;font-size:7pt !important;
+    }
+
+    #searchbox fieldset legend span.icon {
+        position:relative;
+        top:10px;   
+        padding:20px 20px 0 0;
+        background:transparent url('/Content/images/search.png') center center no-repeat;
+    }
+
+.foldergroup fieldset legend span.expand {
+        position:relative;
+        top:10px;   
+        padding:20px 20px 0 0;
+        background:transparent url('/Content/images/folder-close.png') center center no-repeat;
+        cursor:pointer;
+}
+
+.foldergroup fieldset legend span.collapse {
+     position:relative;
+        top:10px;   
+        padding:20px 20px 0 0;
+    background:transparent url('/Content/images/folder-open.png') center center no-repeat;
+    cursor:pointer;
+}
+
+div.wide {
+    width:98%;
+    float:left;
+    text-align:left;
+    margin:10px 0;
+    padding:1%;
+}
+
+span.icon {
+    padding:8px 0 8px 16px;background:transparent url('/Content/images/FileIcons/unknown.png') left center no-repeat;
+}
+
+span.doc{background-image:url('/Content/images/FileIcons/doc.png');}
+span.docx{background-image:url('/Content/images/FileIcons/doc.png');}
+span.txt{background-image:url('/Content/images/FileIcons/txt.png');}
+span.ppt{background-image:url('/Content/images/FileIcons/ppt.png');}
+span.pptx{background-image:url('/Content/images/FileIcons/ppt.png');}
+span.rtf{background-image:url('/Content/images/FileIcons/rtf.png');}
+span.pdf{background-image:url('/Content/images/FileIcons/pdf.png');}
+span.odt{background-image:url('/Content/images/FileIcons/odt.png');}
+span.log{background-image:url('/Content/images/FileIcons/log.png');}
+span.tex{background-image:url('/Content/images/FileIcons/tex.png');}
+span.wps{background-image:url('/Content/images/FileIcons/wps.png');}
+span.wpd{background-image:url('/Content/images/FileIcons/wpd.png');}
+span.mp3{background-image:url('/Content/images/FileIcons/mp3.png');}
+span.mov{background-image:url('/Content/images/FileIcons/mov.png');}
+span.gif{background-image:url('/Content/images/FileIcons/gif.png');}
+span.jpg{background-image:url('/Content/images/FileIcons/jpg.png');}
+span.png{background-image:url('/Content/images/FileIcons/png.png');}
+span.psd{background-image:url('/Content/images/FileIcons/psd.png');}
+span.pspimage{}
+span.tif{background-image:url('/Content/images/FileIcons/tiff.png');}
+span.tiff{background-image:url('/Content/images/FileIcons/tiff.png');}
+span.thm{background-image:url('/Content/images/FileIcons/thm.png');}
+span.xls {background-image:url('/Content/images/FileIcons/xls.png');}

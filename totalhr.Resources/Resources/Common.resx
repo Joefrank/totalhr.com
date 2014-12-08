@@ -186,4 +186,16 @@
   <data name="V_Show" xml:space="preserve">
     <value>Show</value>
   </data>
+  <data name="V_Before" xml:space="preserve">
+    <value>Before</value>
+  </data>
+  <data name="V_Add" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="V_Set" xml:space="preserve">
+    <value>Set</value>
+  </data>
+  <data name="V_Until" xml:space="preserve">
+    <value>Until</value>
+  </data>
 </root>

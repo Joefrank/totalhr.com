@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ByEmail" xml:space="preserve">
+    <value>By Mail</value>
+  </data>
+  <data name="ByTextPhone" xml:space="preserve">
+    <value>By SMS</value>
+  </data>
   <data name="Company" xml:space="preserve">
     <value>Whole company</value>
   </data>
@@ -136,7 +142,7 @@
     <value>Hour</value>
   </data>
   <data name="EvtMinute" xml:space="preserve">
-    <value>Minute</value>
+    <value>Min</value>
   </data>
   <data name="EvtMonth" xml:space="preserve">
     <value>Month</value>
@@ -156,11 +162,62 @@
   <data name="OnDayOfTheWeek" xml:space="preserve">
     <value>On &lt;span class="repDay"&gt;{0}&lt;/span&gt; every week</value>
   </data>
+  <data name="R10MinsBefore" xml:space="preserve">
+    <value>10 mins before</value>
+  </data>
+  <data name="R15MinsBefore" xml:space="preserve">
+    <value>15 mins before</value>
+  </data>
+  <data name="R1DayBefore" xml:space="preserve">
+    <value>1 day before</value>
+  </data>
+  <data name="R1HourBefore" xml:space="preserve">
+    <value>1 hour before</value>
+  </data>
+  <data name="R1MonthBefore" xml:space="preserve">
+    <value>1 month before</value>
+  </data>
+  <data name="R1WeekBefore" xml:space="preserve">
+    <value>1 week before</value>
+  </data>
+  <data name="R20MinsBefore" xml:space="preserve">
+    <value>20 mins before</value>
+  </data>
+  <data name="R25MinsBefore" xml:space="preserve">
+    <value>25 mins before</value>
+  </data>
+  <data name="R2DaysBefore" xml:space="preserve">
+    <value>2 days before</value>
+  </data>
+  <data name="R2HoursBefore" xml:space="preserve">
+    <value>2 hours before</value>
+  </data>
+  <data name="R2WeeksBefore" xml:space="preserve">
+    <value>2 weeks before</value>
+  </data>
+  <data name="R30MinsBefore" xml:space="preserve">
+    <value>30 mins before</value>
+  </data>
+  <data name="R45MinsBefore" xml:space="preserve">
+    <value>45 mins before</value>
+  </data>
+  <data name="R4HoursBefore" xml:space="preserve">
+    <value>4 hours before</value>
+  </data>
+  <data name="R5MinsBefore" xml:space="preserve">
+    <value>5 mins before</value>
+  </data>
+  <data name="SelectedUsers" xml:space="preserve">
+    <value>Specific user(s)</value>
+  </data>
   <data name="TimeBefore" xml:space="preserve">
     <value>Before</value>
   </data>
   <data name="User" xml:space="preserve">
     <value>Selected user(s)</value>
+  </data>
+  <data name="WholeCompany" xml:space="preserve">
+    <value>Whole Company</value>
   </data>
   <data name="YearlyOnSameDate" xml:space="preserve">
     <value>Yearly (on chosen years)</value>

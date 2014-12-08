@@ -124,6 +124,69 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Evt_Description {
+            get {
+                return ResourceManager.GetString("Evt_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit event.
+        /// </summary>
+        public static string Evt_Edit {
+            get {
+                return ResourceManager.GetString("Evt_Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End.
+        /// </summary>
+        public static string Evt_End {
+            get {
+                return ResourceManager.GetString("Evt_End", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Location.
+        /// </summary>
+        public static string Evt_Location {
+            get {
+                return ResourceManager.GetString("Evt_Location", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string Evt_Preview_Close {
+            get {
+                return ResourceManager.GetString("Evt_Preview_Close", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        public static string Evt_Start {
+            get {
+                return ResourceManager.GetString("Evt_Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string Evt_Title {
+            get {
+                return ResourceManager.GetString("Evt_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to April.
         /// </summary>
         public static string Month_April {
@@ -300,6 +363,15 @@ namespace totalhr.Resources {
         public static string V_Week_View {
             get {
                 return ResourceManager.GetString("V_Week_View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year View.
+        /// </summary>
+        public static string V_Year_View {
+            get {
+                return ResourceManager.GetString("V_Year_View", resourceCulture);
             }
         }
     }

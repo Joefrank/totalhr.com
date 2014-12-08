@@ -31,8 +31,8 @@ namespace totalhr.web.Controllers
         {
             _glossaryService = glossaryService;
             _accountService = accountService;
-            _messagingService = messageService;           
-            _messagingService.ReadSMTPSettings(new SMTPSettings {SMTPServer = WebsiteKernel.SMTPServer, UserName = WebsiteKernel.SMTPUser, Password = WebsiteKernel.SMTPPassword });
+            _messagingService = messageService;
+            _messagingService.ReadSMTPSettings(SiteMailSettings);
         }
         
         public ActionResult Index()
@@ -57,7 +57,7 @@ namespace totalhr.web.Controllers
         [AllowAnonymous]
         public ActionResult Login()
         {
-            ViewBag.Currentuser = CurrentUser;
+            ViewBag.Currentuser = CurrentUser;            
             return View();
         }
 
@@ -137,6 +137,7 @@ namespace totalhr.web.Controllers
                 clientUser.CookieDuration = new TimeSpan(0, 0, LoginDuration, 0);
                 clientUser.Culture = userstruct.UserBasicDetails.chosenculture;
                 clientUser.CompanyId = userstruct.UserBasicDetails.CompanyId;
+                clientUser.DepartmentId = userstruct.UserBasicDetails.departmentid;
 
                 AuthService.PersistClientUser(clientUser);
 
@@ -227,7 +228,12 @@ namespace totalhr.web.Controllers
         public JsonResult GetCompanyUsersJson()
         {
             List<User> lstUsers = _accountService.GetCompanyUsers(CurrentUser.CompanyId);
-            return Json(lstUsers, JsonRequestBehavior.AllowGet);
+
+            var qry = from user in lstUsers
+                      orderby user.firstname
+                      select new {UserId = user.id, FullName = user.firstname + " " + user.surname};
+
+            return Json(qry, JsonRequestBehavior.AllowGet);
         }
 
         public JsonResult GetCompanyDepartmentsJson()
@@ -252,9 +258,10 @@ namespace totalhr.web.Controllers
                 {
                     FullName = "Joe Tester Temp",
                     CompanyId = 30,
+                    DepartmentId = 2,
                     CookieDuration = new TimeSpan(0, 5, 0,0),
                     Culture = "en-GB",
-                    UserName = "jbolla@cyberminds.co.uk",
+                    UserName = "joe_bolla@cyberminds.co.uk",
                     LanguageId = 1,
                     Profiles = new List<string>{"1","4"},
                     Roles = new List<string>{"1","2","3"},
@@ -292,6 +299,18 @@ namespace totalhr.web.Controllers
             LoadGlossaries();
             return View("MyDetails", userinfo);
 
+        }
+
+        public ActionResult ProfilePreview(string id)
+        {
+            User user = _accountService.GetUserByGuid(id);
+
+            if (user != null)
+            {
+                return View(user);
+            }
+
+            return RedirectToAction("AccessDenied", "Error");
         }
     }
 }

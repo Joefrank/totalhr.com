@@ -5,8 +5,12 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css/popup.css")
+    @RenderSection("extrastyles", required: false)
+    
+    @Scripts.Render("~/Scripts/jquery-1.11.0.min.js")
+    @Scripts.Render("~/Scripts/Site/common.js")
 
-     @RenderSection("extrastyles", required: false)
+    @RenderSection("headerScripts", required:false)
 </head>
 <body>
    <div id="main">
@@ -16,13 +20,13 @@
               @RenderSection("head2", required: true)             
 
               <div id="toolbox">
-                  <span class="spclose" onclick="parent.ClosePopup('dvPopup')">&nbsp;</span>  
-                  <!--<span class="spsave">&nbsp;</span>-->
-                                  
+                  <span class="spclose" onclick="parent.ClosePopup('dvPopup')">&nbsp;</span> 
               </div>
         </div> 
         
-        @RenderBody()
+        <div id="popupBody">
+            @RenderBody()
+         </div>
             
         </div>
     </div>

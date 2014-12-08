@@ -14,6 +14,18 @@ namespace totalhr.web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+               name: "CalendarCreateEvent",
+               url: "Calendar/CreateEvent/{calendarid}/{year}/{month}/{day}",
+               defaults: new
+               {
+                   controller = "Calendar",
+                   action = "CreateEvent",
+                   year = DateTime.Now.Year,
+                   month = DateTime.Now.Month,
+                   day = UrlParameter.Optional
+               });
+
+            routes.MapRoute(
                name: "CalendarEdit",
                url: "Calendar/{action}/{id}",
                defaults: new
@@ -25,6 +37,16 @@ namespace totalhr.web
                    day = UrlParameter.Optional
                });
 
+            routes.MapRoute(
+              name: "CalendarYear",
+              url: "Calendar/GetCalendarYear/{year}/{calendarid}",
+              defaults: new
+              {
+                  controller = "Calendar",
+                  action = "GetCalendarYear",
+                  year = DateTime.Now.Year,                  
+                  calendarid = UrlParameter.Optional
+              });
 
             routes.MapRoute(
                name: "CalendarMonth",
@@ -37,6 +59,8 @@ namespace totalhr.web
                    month = DateTime.Now.Month,
                    calendarid = UrlParameter.Optional
                });
+
+           
 
             routes.MapRoute(
                name: "CalendarWeek",
@@ -75,15 +99,25 @@ namespace totalhr.web
                    month = DateTime.Now.Month,
                    day = UrlParameter.Optional
                });
-                       
-        
+
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new string[]{"totalhr.web.Controllers"}
             );
 
-           
+            routes.MapRoute(
+                 "SimpleRouteGuid",
+                 "{controller}/{action}/{uniqueid}",
+                 new
+                 {
+                     controller = "Home",
+                     action = "Index",
+                     uniqueid = System.Guid.Empty
+                 }
+             );
         }
     }
 }

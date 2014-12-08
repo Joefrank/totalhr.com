@@ -4,26 +4,62 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="9ca7c36976d24862aa622c0a67b48f48" Name="Diagram1">
-        <EntityTypeShape EntityType="TotalHRModel.Calendar" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TotalHRModel.CalendarAssociation" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+      <Diagram DiagramId="4a2d9dc3f8cf48cfbf2976b72edc80f4" Name="Diagram1">
+        <EntityTypeShape EntityType="TotalHRModel.Calendar" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.CalendarAssociation" Width="1.5" PointX="7.5" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TotalHRModel.CalendarEvent" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="TotalHRModel.Company" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="TotalHRModel.CompanyFeature" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TotalHRModel.Department" Width="1.5" PointX="3" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TotalHRModel.EmailTemplate" Width="1.5" PointX="7.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TotalHRModel.Feature" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TotalHRModel.Glossary" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TotalHRModel.Language" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TotalHRModel.Profile" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TotalHRModel.Role" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TotalHRModel.User" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TotalHRModel.UserProfile" Width="1.5" PointX="6.75" PointY="10.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="TotalHRModel.UserRole" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.CalEventReminderType" Width="1.5" PointX="5.75" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.Company" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.CompanyFeature" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.Department" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.EmailTemplate" Width="1.5" PointX="7.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.EventToSchedule" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.Feature" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.Glossary" Width="1.5" PointX="9.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.Language" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.Profile" Width="1.5" PointX="4.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.Recipient" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.RecipientList" Width="1.5" PointX="9.75" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.Role" Width="1.5" PointX="11.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.ScheduledNotification" Width="1.5" PointX="0.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.User" Width="1.5" PointX="11.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.UserProfile" Width="1.5" PointX="6.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TotalHRModel.UserRole" Width="1.5" PointX="11.75" PointY="11.75" IsExpanded="true" />
         <AssociationConnector Association="TotalHRModel.FK_Calendar_Company" ManuallyRouted="false" />
         <AssociationConnector Association="TotalHRModel.FK_CalendarEvent_Calendar" ManuallyRouted="false" />
+        <AssociationConnector Association="TotalHRModel.FK_CalendarAssociation_CalendarEvent" ManuallyRouted="false" />
         <AssociationConnector Association="TotalHRModel.FK_Department_Company" ManuallyRouted="false" />
-        <AssociationConnector Association="TotalHRModel.FK_CalendarAssociation_CalendarEvent" />
+        <EntityTypeShape EntityType="TotalHRModel.CompanyDocument" Width="1.5" PointX="14" PointY="5.25" />
+        <EntityTypeShape EntityType="TotalHRModel.CompanyDocumentDownload" Width="1.5" PointX="3.375" PointY="12.75" />
+        <EntityTypeShape EntityType="TotalHRModel.CompanyDocumentPermission" Width="1.5" PointX="14.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TotalHRModel.CompanyDocumentShare" Width="1.5" PointX="5.375" PointY="14.75" />
+        <EntityTypeShape EntityType="TotalHRModel.CompanyDocumentView" Width="1.5" PointX="7.375" PointY="14.75" />
+        <EntityTypeShape EntityType="TotalHRModel.CompanyFolder" Width="1.5" PointX="14.375" PointY="9.75" />
+        <EntityTypeShape EntityType="TotalHRModel.CompanyFolderDocument" Width="1.5" PointX="9.375" PointY="14.75" />
+        <EntityTypeShape EntityType="TotalHRModel.File" Width="1.5" PointX="11.375" PointY="14.75" />
+        <AssociationConnector Association="TotalHRModel.FK_CompanyDocument_User" />
+        <AssociationConnector Association="TotalHRModel.FK_CompanyFolderDocument_CompanyDocument" />
+        <AssociationConnector Association="TotalHRModel.FK_CompanyFolder_User" />
+        <AssociationConnector Association="TotalHRModel.FK_CompanyFolderDocument_CompanyFolder" />
+        <AssociationConnector Association="TotalHRModel.FK_CompanyDocumentPermissions_CompanyDocument" />
+        <AssociationConnector Association="TotalHRModel.FK_CompanyDocumentPermissions_User" />
+        <EntityTypeShape EntityType="TotalHRModel.ContractFormFieldValue" Width="1.5" PointX="0.75" PointY="15.75" />
+        <EntityTypeShape EntityType="TotalHRModel.ContractTemplate" Width="1.5" PointX="14.375" PointY="17" />
+        <EntityTypeShape EntityType="TotalHRModel.ContractTemplateSection" Width="1.5" PointX="15.125" PointY="20.625" />
+        <EntityTypeShape EntityType="TotalHRModel.CTemplateSectionLink" Width="1.5" PointX="17.375" PointY="21" />
+        <EntityTypeShape EntityType="TotalHRModel.CTSectionFieldLink" Width="1.5" PointX="17.375" PointY="6.5" />
+        <EntityTypeShape EntityType="TotalHRModel.FormControl" Width="1.5" PointX="2.75" PointY="15.75" />
+        <EntityTypeShape EntityType="TotalHRModel.FormField" Width="1.5" PointX="15.125" PointY="24" />
+        <EntityTypeShape EntityType="TotalHRModel.Label" Width="1.5" PointX="16.75" PointY="0.75" />
+        <EntityTypeShape EntityType="TotalHRModel.UserContract" Width="1.5" PointX="14.375" PointY="13.5" />
+        <AssociationConnector Association="TotalHRModel.FK_Template_User" />
+        <AssociationConnector Association="TotalHRModel.FK_CTemplateSectionLink_ContractTemplateSection" />
+        <AssociationConnector Association="TotalHRModel.FK_CTSectionFieldLink_ContractTemplateSection" />
+        <AssociationConnector Association="TotalHRModel.FK_CTSectionFieldLink_FormField" />
+        <AssociationConnector Association="TotalHRModel.FK_CTSectionFieldLink_User" />
+        <AssociationConnector Association="TotalHRModel.FK_ContractTemplate_User" />
+        <AssociationConnector Association="TotalHRModel.FK_UserContract_User" />
+        <AssociationConnector Association="TotalHRModel.FK_CompanyDocument_File" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

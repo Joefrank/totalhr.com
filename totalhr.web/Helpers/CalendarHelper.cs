@@ -27,6 +27,7 @@ namespace totalhr.web.Helpers
             var temp = string.Empty;
             var targetId = (int)myenum;
             var selector = string.Empty;
+            var applycollapse = string.Empty;
           
             if (targetId == (int)Variables.CalendarEventTarget.User)
             {
@@ -38,12 +39,17 @@ namespace totalhr.web.Helpers
                 temp = @" onclick=""OpenSelector('DEPARTMENT');"" ";
                 selector = "DEPARTMENT";
             }
+            else
+            {
+                temp = @" onclick=""CollapseSelector();"" ";
+                applycollapse = "CollapseSelector();";
+            }
             
             return string.Format(@"<span class=""row"" id=""spAttendeeTarget_{0}"" title=""{1}"" onmouseover=""ShowDetails(this);"" 
-                onmouseout=""HideDetails(this);"" onclick=""ApplyAttendeeTargetSelection(this, {0}, '{5}')""><i class=""info"" title=""{1}"">&nbsp;</i>
+                onmouseout=""HideDetails(this);"" onclick=""ApplyAttendeeTargetSelection(this, {0}, '{5}');{7}""><i class=""info"" title=""{1}"">&nbsp;</i>
                 <input type=""radio"" {6} name=""{4}"" value=""{0}"" {3} />
                 <span id=""spAttendeeDesc_{0}"">{2}</span></span>", (int)myenum, EnumExtensions.FurtherInfo(myenum),
-                                              EnumExtensions.Description(myenum), temp, groupname, selector, checkedHtml);
+                                              EnumExtensions.Description(myenum), temp, groupname, selector, checkedHtml, applycollapse);
         }
 
         public static string GenerateFrequencyDDl(string id, string name, string callback)
@@ -80,7 +86,34 @@ namespace totalhr.web.Helpers
             }
             return sbTemp.ToString();
         }
+
+        public static string GenerateReminderTypeSelect(string id, string name, string callback)
+        {
+            var sbTemp = new StringBuilder();
+
+            foreach (var num in (Variables.CalendarEventReminderValues[])Enum.GetValues(typeof(Variables.CalendarEventReminderValues)))
+            {
+                sbTemp.Append(string.Format(@"<option value=""{0}"">{1}</option>", (int)num, EnumExtensions.Description(num)));
+            }
+
+            return string.Format(@"<select id=""{0}"" name=""{1}"" {2}>
+                                        {3}
+                                    </select>", id, name, callback, sbTemp.ToString());
+        }
+
+        public static string GenerateReminderNotificationSelect(string id, string name, string callback)
+        {
+            var sbTemp = new StringBuilder();
+
+            foreach (var num in (Variables.CalendarEventNotificationType[])Enum.GetValues(typeof(Variables.CalendarEventNotificationType)))
+            {
+                sbTemp.Append(string.Format(@"<option value=""{0}"">{1}</option>", (int)num, EnumExtensions.Description(num)));
+            }
+
+            return string.Format(@"<select id=""{0}"" name=""{1}"" {2}>
+                                        {3}
+                                    </select>", id, name, callback, sbTemp.ToString());
+        }
+
     }
-
-
 }

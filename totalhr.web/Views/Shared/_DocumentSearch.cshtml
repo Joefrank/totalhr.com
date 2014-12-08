@@ -1,0 +1,94 @@
+﻿@using totalhr.Resources;
+@using totalhr.Shared;
+
+@model totalhr.Shared.Models.DocumentSearchInfo
+
+@{
+    var defaultStartDate = (Model.StartDate > DateTime.MinValue)? Model.StartDate.ToShortDateString() : "";
+    var defaultEndDate = (Model.EndDate > DateTime.MinValue)? Model.EndDate.ToShortDateString() : DateTime.Now.ToShortDateString();
+
+    var lstFileTypes = Enum.GetValues(typeof(Variables.AllowedFileExtension)).Cast<Variables.AllowedFileExtension>().Select(v => new SelectListItem
+    {
+        Text = EnumExtensions.FileType(v),
+        Value = v.ToString()
+    }).ToList();
+
+    lstFileTypes.Insert(0, new SelectListItem { Value = "", Text = Document.v_Select });
+    
+}
+<div id="searchbox">
+     <fieldset>
+       <legend>@Document.V_Document_Search<span class="icon">&nbsp;</span></legend>                  
+               
+          
+@using (Html.BeginForm("Search", "Document"))
+{
+    
+    @Html.HiddenFor(x => x.ContributorName)
+    @Html.HiddenFor(x => x.FolderName)
+    @Html.HiddenFor(x => x.FileTypeName)
+     
+    @Html.ValidationSummary()
+
+    <div id="dvform" class="formwide">
+
+            <div class="line"> 
+               <table>  
+               <tr>   
+                   <td>          
+			         <b>@Document.V_DisplayName</b>
+                   </td>
+                   <td>
+                        @Html.TextBoxFor(x => x.Name)
+                   </td>
+                   
+                    <td>                       
+                        <b>@Document.V_Created_After</b>
+                    </td>
+                    <td> 
+                        @Html.TextBox("StartDate", defaultStartDate, new { @class = "datetype", Readonly="true", onclick = "javascript:NewCal('StartDate','ddmmyyyy',false,24)" })
+                    </td>
+                    <td>
+                        <b>@Document.V_Created_Before</b> 
+                    </td>
+                    <td>
+                        @Html.TextBox("EndDate", defaultEndDate, new { @class = "datetype", Readonly="true", onclick = "javascript:NewCal('EndDate','ddmmyyyy',false,24)" })
+                    </td>
+               </tr>
+                <tr> 
+                   <td>
+                    <b>@Document.V_Folder</b>
+                   </td>
+                   <td>
+                      @Html.DropDownListFor(x => x.FolderId, Model.Folders, new {onchange = "PutValueIn(this, 'FolderName')" })                  
+                   </td>
+                   <td>
+                     <b>@Document.V_Contributor</b>
+                   </td>
+                   <td>                      
+                       @Html.DropDownListFor(x => x.AuthorId, Model.Contributors, new {onchange = "PutValueIn(this, 'ContributorName')" } )
+                   </td>
+                    <td>
+                        <b>@Document.V_File_Type</b>
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(x => x.FileMimeType, lstFileTypes, new {onchange = "PutValueIn(this, 'FileTypeName')" })
+                    </td>                
+                    
+                   
+                </tr>
+                </table>
+             
+             
+             </div>
+
+            <div class="line">  
+                <input type="submit" value="@Document.V_Search" />&nbsp;
+                <input type="button" value="@Document.V_Reset" onclick="document.location.href='/Document/'" />
+            </div>
+       </div>
+        
+}
+
+                </fieldset>
+      </div>

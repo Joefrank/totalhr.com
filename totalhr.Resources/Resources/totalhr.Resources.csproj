@@ -90,6 +90,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Common.resx</DependentUpon>
     </Compile>
+    <Compile Include="Document.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Document.resx</DependentUpon>
+    </Compile>
     <Compile Include="EnumDescription.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -99,6 +104,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FieldFurtherInfo.resx</DependentUpon>
+    </Compile>
+    <Compile Include="FileTypeNames.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FileTypeNames.resx</DependentUpon>
     </Compile>
     <Compile Include="FormMessages.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -115,10 +125,15 @@
     <EmbeddedResource Include="Calendar.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Calendar.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Common.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Common.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Document.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Document.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="EnumDescription.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -127,6 +142,10 @@
     <EmbeddedResource Include="FieldFurtherInfo.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FieldFurtherInfo.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FileTypeNames.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FileTypeNames.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

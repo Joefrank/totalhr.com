@@ -138,6 +138,27 @@
   <data name="Day_Wednesday" xml:space="preserve">
     <value>Wednesday</value>
   </data>
+  <data name="Evt_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Evt_Edit" xml:space="preserve">
+    <value>Edit event</value>
+  </data>
+  <data name="Evt_End" xml:space="preserve">
+    <value>End</value>
+  </data>
+  <data name="Evt_Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="Evt_Preview_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Evt_Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Evt_Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
   <data name="Month_April" xml:space="preserve">
     <value>April</value>
   </data>
@@ -197,5 +218,8 @@
   </data>
   <data name="V_Week_View" xml:space="preserve">
     <value>Week View</value>
+  </data>
+  <data name="V_Year_View" xml:space="preserve">
+    <value>Year View</value>
   </data>
 </root>

@@ -88,11 +88,101 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company Documents.
+        /// </summary>
+        public static string tt_My_Documents {
+            get {
+                return ResourceManager.GetString("tt_My_Documents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Personal Details.
         /// </summary>
         public static string tt_Personal_Details {
             get {
                 return ResourceManager.GetString("tt_Personal_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Department.
+        /// </summary>
+        public static string V_Department {
+            get {
+                return ResourceManager.GetString("V_Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string V_Email {
+            get {
+                return ResourceManager.GetString("V_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Firstname.
+        /// </summary>
+        public static string V_Firstname {
+            get {
+                return ResourceManager.GetString("V_Firstname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mobile.
+        /// </summary>
+        public static string V_Mobile {
+            get {
+                return ResourceManager.GetString("V_Mobile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other Names.
+        /// </summary>
+        public static string V_Other_Names {
+            get {
+                return ResourceManager.GetString("V_Other_Names", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone.
+        /// </summary>
+        public static string V_Phone {
+            get {
+                return ResourceManager.GetString("V_Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile View.
+        /// </summary>
+        public static string V_Profile_View {
+            get {
+                return ResourceManager.GetString("V_Profile_View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Surname.
+        /// </summary>
+        public static string V_Surname {
+            get {
+                return ResourceManager.GetString("V_Surname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Title.
+        /// </summary>
+        public static string V_Title {
+            get {
+                return ResourceManager.GetString("V_Title", resourceCulture);
             }
         }
     }

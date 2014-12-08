@@ -20,49 +20,47 @@ namespace totalhr.Shared.Models
         public string Location { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_EventStartDate_Rq")]       
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public DateTime StartDate { get; set; }
-
-       
-        public string StartTime { get; set; }
-
+      
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_EventEndDate_Rq")]
-        [DataType(DataType.Date)]
+        [DataType(DataType.DateTime)]
         public DateTime EndDate { get; set; }
-
         
-        public string EndTime { get; set; }
-
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_Event_UserNotLogged")]
         public int CreatedBy { get; set; }
+
+        public int LastModifiedBy { get; set; }
+
+        public string UserCulture { get; set; }
+
+        public List<CalendarEventReminder> Reminders { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_Event_Target_Required")]
         public int TargetAttendeeGroupId { get; set; }
                 
-        public string InvitedUserIds { get; set; }
+        public List<int> TargetAttendeeIdList { get; set; }
+        
+        public int RepeatType { get; set; }
 
-        public string InvitedDepartmentIds { get; set; }
+        public DateTime RepeatUntil { get; set; }
+        
+        public List<string> RepeatDates { get; set; }
 
-        public List<CalendarEventReminder> Reminders { get; set; }
+        public List<int> RepeatYears { get; set; } 
 
-        public int ReminderType { get; set; }
-
-        public int ReminderFrequencyType { get; set; }
-
-        public int ReminderFrequency { get; set; }
-
-        public string ReminderXML { get; set; }
-
+        /// <summary>
+        /// used only when loading repeats from database
+        /// </summary>
+        public string RepeatXML { get; set; }
+        
+        
         public int CalendarId { get; set; }
 
         public string CalendarName { get; set; }
-
-        public int RepeatType { get; set; }
-
-        public DateTime RepeatDate { get; set; }
-
-        public string RepeatXML { get; set; }
-
         
+        public int CompanyId { get; set; }
+
+
     }
 }

@@ -1,0 +1,88 @@
+﻿@using totalhr.Resources;
+@using System.Collections;
+@using totalhr.Shared.Models;
+@using totalhr.Shared;
+
+@model totalhr.Shared.Models.DocumentShareInfo
+
+
+@{
+    
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+    var lstUsers = ViewBag.UserList as IEnumerable<SimpleUser>;
+    var lstUserDDL = new SelectList(lstUsers, "Id", "FullName");
+}
+
+@section head2{
+    <h2>@Document.V_Document_Share</h2>
+}
+
+<p>
+    @Html.Raw(Document.V_Share_Intro)
+    
+</p>
+<p>
+    @Html.Raw(Document.V_Doc_Name + ": <b>" + Model.DocumentName + "</b>")
+</p>
+@using (Html.BeginForm("Share", "Document"))
+{
+     @Html.ValidationSummary()
+
+    <div class="formwrapper">
+        @Html.HiddenFor(x => x.DocumentId)
+        @Html.HiddenFor(x => x.FileName)
+        @Html.HiddenFor(x => x.DocumentName)
+
+        <div class="line">
+            <div class="block">
+			    <label class="fix200W">@Document.V_Share_As: <span class="req">*</span></label>
+                <input onclick="javascript:CheckLink('ShareType', 'dvLink');" type="radio" name="ShareType" value="@((int)Variables.DocumentShareType.Link)" />@Document.V_Link
+                <input onclick="javascript:CheckLink('ShareType', 'dvLink');" type="radio" name="ShareType" value="@((int)Variables.DocumentShareType.Attachment)" />@Document.V_Attachment
+            </div>
+        </div>
+        <div id="dvLink" class="line" style="display:none">
+            <div class="block">
+                <input type="text" readonly="true" class="txtlink" value="@Model.DocumentLink" />
+            </div>
+        </div>
+        <div class="line">
+            <div class="block">
+			    <label class="fix200W">@Document.V_Recipient: <span class="req">*</span></label>
+                @Html.DropDownListFor(x => x.WithUserId, lstUserDDL)
+            </div>
+        </div>
+        <div class="line">
+            <div class="block">
+                <label class="fix200W">@Document.V_Or_Email: </label>
+                @Html.TextBoxFor(x => x.WithUserEmail)              
+            </div>
+        </div>
+        <div class="line">
+            <div class="block">
+                <label class="fix200W">@Document.V_Message: </label>
+                <textarea name="Message" id="Message" rows="8" cols="25"></textarea>               
+            </div>
+        </div>
+        <div class="line">
+            <div class="block">
+                <label class="fix200W">&nbsp; </label>
+                <input type="submit" value="@Document.V_Share" />               
+            </div>
+        </div>
+    </div>
+}
+
+<script type="text/javascript">
+    var LINK = '@((int)Variables.DocumentShareType.Link)';
+    var ATTACHMENT = '@((int)Variables.DocumentShareType.Attachment)';
+
+    function CheckLink(objid, dvtochange) {
+        var val = $(":radio[name='" + objid + "']:checked").val();
+        if (val == LINK) {
+            $('#' + dvtochange).show();
+        } else {
+            $('#' + dvtochange).hide();
+        }
+    }
+
+</script>

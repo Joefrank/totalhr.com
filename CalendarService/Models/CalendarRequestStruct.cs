@@ -24,5 +24,11 @@ namespace Calendar.Models
         public List<CalendarEventCache> RelatedEvents { get; set; }
 
         public ClientScriptConfig ClientConfig { get; set; }
+
+        public int UserId { get; set; }
+
+        public bool UserCanCreateEvent { get; set; }
+
+        public Dictionary<string, string> LabelsAndNames { get; set; }
     }
 }

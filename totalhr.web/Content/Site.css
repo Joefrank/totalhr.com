@@ -84,6 +84,10 @@ div.formdiv
     width:600px;
 }
 
+.smallform {
+    width: 400px;
+}
+
     div.formdiv input, div.formdiv select
     {
         font-size:9pt;
@@ -198,17 +202,14 @@ div.line
         width:100%;background-color:beige;
     }
 
-#dvPopup {
-    
+#dvPopup {    
     width: 700px;
     height: 650px;
     position: absolute;
     top: 200px;
     left: 200px;
     z-index: 10000;
-    background-color: beige;
     color: grey;
-    border: 2px solid blue;
 }
 
 #ipopup {
@@ -268,4 +269,88 @@ div.line
     border-radius: 3px;
     font-weight: 400;
     border: 2px solid transparent;
+}
+
+
+
+div.popupedit {
+    float: left;width: 240px;position: relative;left:200px;z-index: 10000;background-color:#f9f9f9;border: 1px solid grey;padding:5px 0 0 5px;
+    overflow:scroll;min-height:200px;
+}
+
+div.popupedit .spclose {
+    background:transparent url('/content/images/close-icon.png') center center no-repeat;float:right;display:block;width:16px;height:16px;
+    cursor:pointer;position:relative;top:-3px;right:2px;
+    }
+
+input[type="button"].btnsmall, input[type="submit"].btnsmall {
+   
+    padding: 0 5px;
+    background-color: #198fff;
+    color: #fff;
+    -webkit-box-shadow: 0 2px #063a93;
+    box-shadow: 0 2px #063a93;
+    border-radius: 3px;
+    font-weight: 100;
+    border: 2px solid transparent;
+
+}
+input[type='button'] {
+    cursor: pointer;
+}
+
+table.tab .private {
+    color: red;
+}
+
+table.tab .company {
+    color: green;
+}
+
+table.tab .department {
+    color: #be4646;
+}
+
+table.tab .user {
+    color: #198fff;
+}
+
+div.wide {
+    float: left;
+    width: 98%;
+    margin: 10px 0;
+    text-align: left;
+    padding: 1%;
+}
+.line input[type="text"].datetype {
+    width:130px;background:transparent url('/content/images/cal.gif') right center no-repeat;padding-right:16px;
+}
+
+.formwide {
+     float:left;
+     width:98%;
+     padding:1%;
+     text-align:left;
+}
+
+    .formwide .line {
+         float:left;
+         width:100%;
+         text-align:left;
+    }
+        .formwide .line label {
+            width:auto;
+        }
+
+#overlay-mask {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 9998;
+    opacity: 0.5;
+    background: rgb(0, 0, 0);
+    width: 100% !important;
+    min-height:800px;
 }

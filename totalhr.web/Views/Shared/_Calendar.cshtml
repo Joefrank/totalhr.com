@@ -10,7 +10,7 @@
     }
 }
 
-<link href="~/Content/calendar.css" rel="stylesheet" />
+<link href="~/Content/css/calendar.css" rel="stylesheet" />
 
 <p>
    
@@ -19,6 +19,12 @@
     <a href="@Model.NextRequest">@totalhr.Resources.Calendar.V_Next</a>
     &nbsp;
     
+     @if (Model.ViewType != Variables.CalendarViewType.YearView)
+    {
+        @Html.Raw(DateHelper.CurrentYearCalendarLink(totalhr.Resources.Calendar.V_Year_View, calendarId))
+        @:&nbsp; 
+    }
+
     @if (Model.ViewType != Variables.CalendarViewType.MonthView)
     {
          @Html.Raw(DateHelper.CurrentMonthCalendarLink(totalhr.Resources.Calendar.V_Month_View, calendarId))
@@ -37,6 +43,7 @@
         @:&nbsp; 
     }
     
+   
    
 </p>
 @Html.Raw(Model.GridHTML)

@@ -23,11 +23,13 @@ namespace totalhr.services.messaging.Implementation
         private IEmailRepository _mailRepos;
         private SMTPSettings _smtpsettings;
         private static readonly ILog log = LogManager.GetLogger(typeof(MessagingService));
+        private readonly IUserRepository _userrepos;
 
-        public MessagingService(IEmailService emailService, IEmailRepository mailRepos)
+        public MessagingService(IEmailService emailService, IEmailRepository mailRepos, IUserRepository userrepos)
         {
             _emailService = emailService;
             _mailRepos = mailRepos;
+            _userrepos = userrepos;
         }
 
         public void ReadSMTPSettings(SMTPSettings smtpsettings)
@@ -131,22 +133,23 @@ namespace totalhr.services.messaging.Implementation
             var lstUsers = new List<User>();
            
             if (eventinfo.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.User)
-            {
-                
+            {               
+                lstUsers = _userrepos.FindBy(x => eventinfo.TargetAttendeeIdList.Contains(x.id)).ToList();
             }
             else if(eventinfo.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.Department)
             {
-
+                lstUsers = _userrepos.FindBy(x => eventinfo.TargetAttendeeIdList.Contains(x.departmentid)).ToList();
             }
             else if (eventinfo.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.MyselfOnly)
             {
-
+                lstUsers = _userrepos.FindBy(x => x.id == eventinfo.CreatedBy).ToList();
             }
             else if (eventinfo.TargetAttendeeGroupId == (int) Variables.CalendarEventTarget.Company)
             {
-                
+                lstUsers = _userrepos.FindBy(x => x.CompanyId == eventinfo.CompanyId).ToList();
             }
 
+            // try using multiple recipient emails
             foreach (var user in lstUsers)
             {
                 NotifyUser(new EmailStruct
@@ -160,8 +163,7 @@ namespace totalhr.services.messaging.Implementation
                             string.Format(userTemplate.Template, user.firstname, eventinfo.Title,
                                           adminstruct.SiteRootURL, Variables.AdminEmailSignature)
                     });
-            }
-           
+            }          
 
             return true;
         }
@@ -169,6 +171,11 @@ namespace totalhr.services.messaging.Implementation
         public bool NotifyUser(EmailStruct estruct)
         {
             return _emailService.SendEmailHTML(estruct.ReceiverEmail, estruct.ReceiverName, estruct.SenderEmail, estruct.SenderName, estruct.EmailTitle, estruct.EmailBody);
+        }
+
+        public bool EmailUserWithAttachment(HTMLEmailStruct estruct)
+        {
+            return _emailService.SendEmailWithAttachment(estruct);
         }
        
     }

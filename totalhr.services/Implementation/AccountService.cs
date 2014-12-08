@@ -14,6 +14,7 @@ using totalhr.services.messaging.Infrastructure;
 using CM;
 using log4net;
 using totalhr.data.Models;
+using System.Collections;
 
 namespace totalhr.services.Implementation
 {
@@ -146,12 +147,16 @@ namespace totalhr.services.Implementation
                 return userstruct;
             }
 
+            //*** create the default department which is HR and set user to that also create default calendar.
+            //*** give user some default roles and profiles when they are activated.
+
             Company company = CreateCompany(info);
 
             if (company.ID > 0)
             {
                 log.Debug("RegisterUserCompany - company created");
 
+                info.CompanyId = company.ID;
                 User user = CreateUser(info);
 
                 if (user.id > 0)
@@ -192,6 +197,11 @@ namespace totalhr.services.Implementation
             return _userRepos.FindBy(x => (x.username.Trim().ToLower() == UserName.Trim().ToLower()
                 || x.email.Trim().ToLower() == UserName.Trim().ToLower()) &&
                 EncryptedPassword == x.password).FirstOrDefault();
+        }
+
+        public User GetUser(int userId)
+        {
+            return _userRepos.FindBy(x => x.id == userId).FirstOrDefault();
         }
 
         public UserDetailsStruct GetUserDetailsForLogin(string UserName, string Password)
@@ -248,6 +258,11 @@ namespace totalhr.services.Implementation
         public List<User> GetCompanyUsers(int companyid)
         {
             return _userRepos.GetCompanyUsers(companyid);
+        }
+
+        public IEnumerable<SimpleUser> GetCompanyUsersSimple(int companyid, int exudedUserId)
+        {
+            return _userRepos.GetCompanyUsers(companyid, exudedUserId);
         }
 
         public List<Department> GetCompanyDepartments(int companyid)
@@ -319,6 +334,11 @@ namespace totalhr.services.Implementation
             _userRepos.Save();
 
             return 1;
+        }
+
+        public List<string> GetUserNamesByIds(List<int> ids)
+        {
+            return _userRepos.GetUserNamesByIds(ids);
         }
     }
 }

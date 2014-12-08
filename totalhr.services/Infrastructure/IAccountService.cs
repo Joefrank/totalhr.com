@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,6 +27,8 @@ namespace totalhr.services.Infrastructure
 
         User GetUser(string UserName, string Password);
 
+        User GetUser(int userId);
+
         User GetUserByEmail(string email);
 
         User GetUserByUsername(string username);
@@ -40,10 +43,14 @@ namespace totalhr.services.Infrastructure
 
         List<User> GetCompanyUsers(int companyid);
 
+        IEnumerable<SimpleUser> GetCompanyUsersSimple(int companyid, int exudedUserId);
+
         List<Department> GetCompanyDepartments(int companyid);
 
         UserPersonalInfo GetUserInfoByEmail(string email);
 
         int UpdateUserDetails(UserPersonalInfo info);
+
+        List<string> GetUserNamesByIds(List<int> ids);
     }
 }
