@@ -45,7 +45,10 @@ namespace totalhr.web.Controllers
         public ActionResult Index()
         {
             ViewBag.CurrentUserId = CurrentUser.UserId;
-            return View(_docService.ListDocumentAndFoldersByUser(CurrentUser.UserId, CurrentUser.DepartmentId));
+            var info = new DocumentSearchInfo();
+            info.FoundDocuments = _docService.ListDocumentAndFoldersByUser(CurrentUser.UserId, CurrentUser.DepartmentId);
+
+            return View(info);
         }
 
         public ActionResult Create()
@@ -302,11 +305,14 @@ namespace totalhr.web.Controllers
 
         public ActionResult Search(DocumentSearchInfo info)
         {
+            ModelState["StartDate"].Errors.Clear();//get rid of empty date validation
+
             info.SearchingUserSepartmentId = CurrentUser.DepartmentId;
             info.SearchingUserId = CurrentUser.UserId;
             ViewBag.CurrentUserId = CurrentUser.UserId;
+            
+            //prepare search details
             string SearchCriteria = string.Empty;
-
             SearchCriteria = string.IsNullOrEmpty(info.Name) ? "" : " <b>" + Document.V_With_Document_Name + ":</b> " + info.Name;
             SearchCriteria += (info.StartDate > DateTime.MinValue) ? " <b>" + Document.V_Created_After + ":</b> " + info.StartDate.ToShortDateString() : "";
             SearchCriteria += (info.EndDate > DateTime.MinValue) ? " <b>" + Document.V_Created_Before + ":</b> " + info.EndDate.ToShortDateString() : "";
@@ -314,17 +320,18 @@ namespace totalhr.web.Controllers
             SearchCriteria += (info.FolderId > 0) ? " <b>" + Document.V_In_Folder + ":</b> " + info.FolderName : "";
             SearchCriteria += (string.IsNullOrEmpty(info.FileMimeType) || info.FileMimeType  == "0") ? "" : " <b>" + Document.V_With_File_Type + ":</b> " + info.FileTypeName;
 
-            // ** pass everything to the Model and handle it from there.
-            ViewBag.SearchCriteria = !string.IsNullOrEmpty(SearchCriteria) ? Document.V_Your_Search + SearchCriteria : Document.V_No_Search_Criteria;
-
-            ModelState["StartDate"].Errors.Clear();//get rid of empty date validation
-
-            if (!ModelState.IsValid) {               
-                return View("Index", _docService.ListDocumentAndFoldersByUser(CurrentUser.UserId, CurrentUser.DepartmentId));
+            info.SearchCriteria = !string.IsNullOrEmpty(SearchCriteria) ? Document.V_Your_Search + SearchCriteria : Document.V_No_Search_Criteria;
+           
+            if (!ModelState.IsValid)
+            {
+                info.FoundDocuments = _docService.ListDocumentAndFoldersByUser(CurrentUser.UserId, CurrentUser.DepartmentId);
+            }
+            else
+            {
+                info.FoundDocuments = _docService.SearchDocument(info);
             }
 
-            var lstDocs = _docService.SearchDocument(info);
-            return View("Index", lstDocs);
+            return View("Index", info);
         }
 
         public ActionResult Share(Guid id)

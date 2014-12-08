@@ -4,11 +4,13 @@
 @using System.Text;
 @using totalhr.Shared.Models;
 
-@model List<CompanyDocument>
+@model DocumentSearchInfo
 
 @{
     ViewBag.Title = GenericHelper.WebsiteName + " | " + Document.V_Document_title;
-    bool bViewTable =  Model != null && Model.Count > 0;
+    var lstDocuments = (Model.FoundDocuments  != null)? Model.FoundDocuments as List<CompanyDocument> : null;
+
+    bool bViewTable = (lstDocuments != null && lstDocuments.Count > 0);
    
     var dicFolders = new Dictionary<int, StringBuilder>();
     var folderNames = new Dictionary<int, string>();
@@ -23,8 +25,8 @@
 
     contributorList.Add(new SelectListItem { Value = "0", Text = Document.v_Select });
 
-    foreach(CompanyDocument doc in Model){        
-        
+    foreach (CompanyDocument doc in lstDocuments)
+    {   
         if(doc.Archived)
         {
             continue;   
@@ -55,11 +57,11 @@
         }else if(doc.FolderId == 0){
             currentIndex = 0;            
         }else{
-            currentIndex = doc.FolderId.GetValueOrDefault();
-            dicFolders[currentIndex] = new StringBuilder();
+            currentIndex = doc.FolderId.GetValueOrDefault();            
             folderNames[currentIndex] = doc.FolderDisplayName;               
         }
-       
+
+        if (!dicFolders.Keys.Contains(currentIndex)) { dicFolders.Add(currentIndex,new StringBuilder()); }
         dicFolders[currentIndex].Append(DocumentHelper.MakeDocumentRow(doc, CurrentUserId));
         lastFolderId = doc.FolderId.GetValueOrDefault();
     }    
@@ -74,9 +76,9 @@
     folderList.Add(new SelectListItem { Value = "0", Text = Document.v_Select });
     
     
-    DocumentSearchInfo searchInfo = new DocumentSearchInfo();
-    searchInfo.Contributors = contributorList;
-    searchInfo.Folders = folderList;
+    //DocumentSearchInfo searchInfo = new DocumentSearchInfo();
+    Model.Contributors = contributorList;
+    Model.Folders = folderList;
 
     var searchcriteria = ViewBag.SearchCriteria;
 }
@@ -94,7 +96,7 @@
 
         <h1>@Document.V_Document_title</h1>
 
-      @Html.Partial("_DocumentSearch", searchInfo)
+      @Html.Partial("_DocumentSearch")
 
         @if(!string.IsNullOrEmpty(searchcriteria)){
           <div class="foldergroup">

@@ -107,7 +107,8 @@ function ToggleExpandGeneric(ctrHeadId, ctrToExpandId, callback, expandIcon, col
 }
 
 function OpenEmployeeProfile(empid) {
-    alert('implement me');
+    
+    OpenPopup('/Account/ProfilePreview/' + empid, 600, 600);
 }
 
 function OpenPopup(url, width, height) {    

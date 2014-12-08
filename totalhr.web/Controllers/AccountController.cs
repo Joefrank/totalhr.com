@@ -300,5 +300,17 @@ namespace totalhr.web.Controllers
             return View("MyDetails", userinfo);
 
         }
+
+        public ActionResult ProfilePreview(string id)
+        {
+            User user = _accountService.GetUserByGuid(id);
+
+            if (user != null)
+            {
+                return View(user);
+            }
+
+            return RedirectToAction("AccessDenied", "Error");
+        }
     }
 }

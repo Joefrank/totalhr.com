@@ -46,13 +46,13 @@
                         <b>@Document.V_Created_After</b>
                     </td>
                     <td> 
-                        @Html.TextBox("StartDate", defaultStartDate, new { @class = "datetype", Readonly="true", onclick = "javascript:NewCal('StartDate','ddmmyyyy',true,24)" })
+                        @Html.TextBox("StartDate", defaultStartDate, new { @class = "datetype", Readonly="true", onclick = "javascript:NewCal('StartDate','ddmmyyyy',false,24)" })
                     </td>
                     <td>
                         <b>@Document.V_Created_Before</b> 
                     </td>
                     <td>
-                        @Html.TextBox("EndDate", defaultEndDate, new { @class = "datetype", Readonly="true", onclick = "javascript:NewCal('EndDate','ddmmyyyy',true,24)" })
+                        @Html.TextBox("EndDate", defaultEndDate, new { @class = "datetype", Readonly="true", onclick = "javascript:NewCal('EndDate','ddmmyyyy',false,24)" })
                     </td>
                </tr>
                 <tr> 

@@ -49,10 +49,16 @@ Field highlights on errors.
 Remaining tasks on Company docs.
 
 - (done)Search is returning docs that don't belong to folders.
-- Add doc type icon next to each doc
-- Make ddl persis their search values.
-- Search date field are not in correct format and should allow null entries.
-- They should not be editable. and should not include time.
+- (done) Add doc type icon next to each doc
+- (Done) Make ddl persis their search values.
+- (Done) Search date field are not in correct format and should allow null entries.
+- (done) They should not be editable. and should not include time.
 - User profile window needs to be created.
 - Files are not being opened, just downloaded.
 - pagination to be added when docs on folder exceed certain number.
+
+
+
+
+------------- 06/12/2014 --------------------------------
+Style calendar, make it iframe and customize to hide time. and localize month days names

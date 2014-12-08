@@ -165,7 +165,8 @@ namespace totalhr.Shared
             pspimage,
             tif,
             tiff,
-            thm
+            thm,
+            xls
 
         }
 

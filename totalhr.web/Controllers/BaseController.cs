@@ -18,7 +18,7 @@ namespace totalhr.web.Controllers
 
         protected IOAuthService AuthService;
 
-        private readonly ClientUser _currentUser;
+        protected readonly ClientUser _currentUser;
 
         public SMTPSettings SiteMailSettings
         {

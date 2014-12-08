@@ -122,6 +122,7 @@ namespace totalhr.web.Helpers
                 );
         }
 
+
         public static string MakeDocumentRow(CompanyDocument doc, int currentUserId)
         {           
 
@@ -134,10 +135,10 @@ namespace totalhr.web.Helpers
                     <div class=""core"">
                         <div class=""left"">
                             <h4><span id=""spHead{0}"" class=""expand"" title=""{3}"" onclick=""javascript:ToggleExpandGeneric('spHead{0}', 'moreinfo{0}', null, expandButton, collapseButton);"">&nbsp;</span>
-                                <span onclick=""OpenDoc('{20}');"" title=""{2}"">{2}</span>
+                                <span class=""icon {21}"" onclick=""OpenDoc('{20}');"" title=""{2}"">{2}</span>
                             </h4>
                             <div class=""highlight"">
-                                {5}: <span class=""actionspan"" onclick=""OpenEmployeeProfile({1});"">{4}</span>
+                                {5}: <span class=""actionspan"" onclick=""OpenEmployeeProfile('{1}');"">{4}</span>
                                 - {6}: {7}
                             </div>
                         </div>
@@ -159,11 +160,12 @@ namespace totalhr.web.Helpers
                     </div>
                 </div>";
 
-            return string.Format(sHtml,doc.Id , doc.CreatedBy, doc.DisplayName,Document.V_Click_More_Details,
+            return string.Format(sHtml,doc.Id , doc.User.userguid, doc.DisplayName,Document.V_Click_More_Details,
                 (doc.User.firstname + " " + doc.User.surname), Document.V_Contributor, Document.V_Date,
                 doc.Created.ToShortDateString(), Document.V_Download, Document.V_Open, Document.V_Email,
                 Document.V_File_Size, Document.V_File_Type, Document.V_Download, doc.NoOfDownloads, Document.V_View,
-                doc.NoOfViews, doc.ReadableSize, EnumExtensions.FileType(doc.ReadableType), personalAction, doc.Identifier);
+                doc.NoOfViews, doc.ReadableSize, EnumExtensions.FileType(doc.ReadableType), personalAction, 
+                doc.Identifier,  doc.File.extension.Replace(".", ""));
         }
     }
 }
