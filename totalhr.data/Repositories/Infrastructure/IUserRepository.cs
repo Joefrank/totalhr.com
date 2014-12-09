@@ -20,5 +20,7 @@ namespace totalhr.data.Repositories.Infrastructure
         IEnumerable<SimpleUser> GetCompanyUsers(int companyid, int excludedUserId);
 
         List<string> GetUserNamesByIds(List<int> ids);
+
+        List<Profile> GetUserProfile(int userId);
     }
 }

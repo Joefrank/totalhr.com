@@ -23,6 +23,8 @@ namespace totalhr.data.EF
             this.CTSectionFieldLinks = new HashSet<CTSectionFieldLink>();
             this.UserContracts = new HashSet<UserContract>();
             this.UserContracts1 = new HashSet<UserContract>();
+            this.UserProfiles = new HashSet<UserProfile>();
+            this.UserRoles = new HashSet<UserRole>();
         }
     
         public int id { get; set; }
@@ -67,5 +69,7 @@ namespace totalhr.data.EF
         public virtual ICollection<CTSectionFieldLink> CTSectionFieldLinks { get; set; }
         public virtual ICollection<UserContract> UserContracts { get; set; }
         public virtual ICollection<UserContract> UserContracts1 { get; set; }
+        public virtual ICollection<UserProfile> UserProfiles { get; set; }
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

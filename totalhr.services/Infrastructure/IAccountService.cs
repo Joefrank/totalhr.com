@@ -52,5 +52,7 @@ namespace totalhr.services.Infrastructure
         int UpdateUserDetails(UserPersonalInfo info);
 
         List<string> GetUserNamesByIds(List<int> ids);
+
+        List<Profile> GetUserProfile(int userId);
     }
 }
