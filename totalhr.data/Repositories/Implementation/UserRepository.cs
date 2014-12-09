@@ -41,5 +41,11 @@ namespace totalhr.data.Repositories.Implementation
             return this.Context.Users.Where(x => ids.Contains(x.id)).
                 Select(y => y.firstname + " " + y.surname).ToList();
         }
+
+        public List<Profile> GetUserProfile(int userId)
+        {
+            List<int> userProfiles = Context.UserProfiles.Where(x => x.UserId == userId).Select(i => i.ProfileId).ToList();
+            return Context.Profiles.Where(x => userProfiles.Contains(x.id)).ToList();
+        }
     }
 }

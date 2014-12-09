@@ -23,6 +23,8 @@ namespace totalhr.services.Implementation
         private IUserRepository _userRepos;
         private ICompanyRepository _companyRepos;
         private ILanguageRepository _langRepos;
+        private IProfileRepository _profileRepos;
+        
         private static readonly ILog log = LogManager.GetLogger(typeof(AccountService));
         
         public AccountService(IUserRepository userRepos, ICompanyRepository companyRepos, ILanguageRepository langRepos)
@@ -340,5 +342,15 @@ namespace totalhr.services.Implementation
         {
             return _userRepos.GetUserNamesByIds(ids);
         }
+
+        public List<Profile> GetUserProfile(int userId)
+        {
+            return _userRepos.GetUserProfile(userId);
+        }
+
+        //public List<Role> GetUserRole(int userId)
+        //{
+
+        //}
     }
 }

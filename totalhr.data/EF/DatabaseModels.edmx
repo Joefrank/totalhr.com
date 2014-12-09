@@ -748,6 +748,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserProfile_Profile">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="BuildCalEventReminderRecipientList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="eventid" Type="int" Mode="In" />
           <Parameter Name="companyid" Type="int" Mode="In" />
@@ -896,6 +944,22 @@
           <AssociationSet Name="FK_UserContract_User" Association="Self.FK_UserContract_User">
             <End Role="User" EntitySet="User" />
             <End Role="UserContract" EntitySet="UserContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_Profile" Association="Self.FK_UserProfile_Profile">
+            <End Role="Profile" EntitySet="Profile" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_User" Association="Self.FK_UserProfile_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_Roles" Association="Self.FK_UserRole_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRole" EntitySet="UserRole" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1105,6 +1169,7 @@
           <Property Name="LastModified" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserProfiles" Relationship="TotalHRModel.FK_UserProfile_Profile" FromRole="Profile" ToRole="UserProfile" />
         </EntityType>
         <EntityType Name="Recipient">
           <Key>
@@ -1144,6 +1209,7 @@
           <Property Name="LastModified" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="UserRoles" Relationship="TotalHRModel.FK_UserRole_Roles" FromRole="Role" ToRole="UserRole" />
         </EntityType>
         <EntityType Name="ScheduledNotification">
           <Key>
@@ -1207,6 +1273,8 @@
           <NavigationProperty Name="CTSectionFieldLinks" Relationship="TotalHRModel.FK_CTSectionFieldLink_User" FromRole="User" ToRole="CTSectionFieldLink" />
           <NavigationProperty Name="UserContracts" Relationship="TotalHRModel.FK_ContractTemplate_User" FromRole="User" ToRole="UserContract" />
           <NavigationProperty Name="UserContracts1" Relationship="TotalHRModel.FK_UserContract_User" FromRole="User" ToRole="UserContract" />
+          <NavigationProperty Name="UserProfiles" Relationship="TotalHRModel.FK_UserProfile_User" FromRole="User" ToRole="UserProfile" />
+          <NavigationProperty Name="UserRoles" Relationship="TotalHRModel.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -1217,6 +1285,8 @@
           <Property Name="ProfileId" Type="Int32" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Profile" Relationship="TotalHRModel.FK_UserProfile_Profile" FromRole="UserProfile" ToRole="Profile" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_UserProfile_User" FromRole="UserProfile" ToRole="User" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -1227,6 +1297,8 @@
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="TotalHRModel.FK_UserRole_Roles" FromRole="UserRole" ToRole="Role" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_UserRole_User" FromRole="UserRole" ToRole="User" />
         </EntityType>
         <Association Name="FK_Calendar_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
@@ -1417,6 +1489,22 @@
           <AssociationSet Name="FK_CompanyDocument_File" Association="TotalHRModel.FK_CompanyDocument_File">
             <End Role="File" EntitySet="Files" />
             <End Role="CompanyDocument" EntitySet="CompanyDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_Profile" Association="TotalHRModel.FK_UserProfile_Profile">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_Roles" Association="TotalHRModel.FK_UserRole_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_User" Association="TotalHRModel.FK_UserProfile_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_User" Association="TotalHRModel.FK_UserRole_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserRole" EntitySet="UserRoles" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetUserProfiles_Result">
@@ -1854,6 +1942,54 @@
             </Principal>
             <Dependent Role="CompanyDocument">
               <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_Profile">
+          <End Type="TotalHRModel.Profile" Role="Profile" Multiplicity="1" />
+          <End Type="TotalHRModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_Roles">
+          <End Type="TotalHRModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="TotalHRModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>

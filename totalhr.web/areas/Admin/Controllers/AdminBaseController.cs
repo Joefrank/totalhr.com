@@ -17,8 +17,7 @@ namespace totalhr.web.Areas.Admin.Controllers
 
         public AdminBaseController(IOAuthService authService): base(authService)
         {
-            var roles = (CurrentUser == null)? null : CurrentUser.Roles;
-                      
+                  
         }
 
     }

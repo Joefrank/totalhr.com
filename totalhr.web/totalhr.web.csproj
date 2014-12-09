@@ -155,6 +155,9 @@
     <Compile Include="Areas\TimeRecording\ViewModels\SearchVM.cs" />
     <Compile Include="Areas\TimeRecording\ViewModels\TimeRecordingDetailsVM.cs" />
     <Compile Include="Areas\TimeRecording\ViewModels\TimeRecordingVM.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProfileController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
+    <Compile Include="Areas\Admin\Helpers\ProfileHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Admin\AdminBaseController.cs" />
     <Compile Include="Controllers\Admin\AdminHomeController.cs" />
@@ -178,6 +181,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Content\css\SiteAdmin.css" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Authentication.dll" />
     <Content Include="bin\Authentication.pdb" />
@@ -289,6 +293,11 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Views\TimeRecording\RecordTime.cshtml" />
     <Content Include="Views\TimeRecording\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\Profile\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\date.js" />
     <Content Include="Scripts\jquery-1.11.0.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
@@ -377,7 +386,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="bin\Database\" />
     <Folder Include="CompanyDocuments\" />
     <Folder Include="Users\Profile\Images\" />
