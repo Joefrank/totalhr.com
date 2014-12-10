@@ -239,6 +239,7 @@ R:\GitProjects\TotalHR\totalhr.services\bin\Debug\totalhr.data.dll
 R:\GitProjects\TotalHR\totalhr.services\bin\Debug\totalhr.service.messaging.dll
 R:\GitProjects\TotalHR\totalhr.services\bin\Debug\totalhr.Shared.dll
 R:\GitProjects\TotalHR\totalhr.services\bin\Debug\AutoMapper.dll
+R:\GitProjects\TotalHR\totalhr.services\bin\Debug\System.Web.Mvc.dll
 R:\GitProjects\TotalHR\totalhr.services\bin\Debug\totalhr.data.pdb
 R:\GitProjects\TotalHR\totalhr.services\bin\Debug\Resources.pdb
 R:\GitProjects\TotalHR\totalhr.services\bin\Debug\totalhr.service.messaging.pdb
@@ -248,6 +249,9 @@ R:\GitProjects\TotalHR\totalhr.services\bin\Debug\EntityFramework.SqlServer.xml
 R:\GitProjects\TotalHR\totalhr.services\bin\Debug\log4net.xml
 R:\GitProjects\TotalHR\totalhr.services\bin\Debug\Ninject.xml
 R:\GitProjects\TotalHR\totalhr.services\bin\Debug\AutoMapper.xml
+R:\GitProjects\TotalHR\totalhr.services\bin\Debug\System.Web.Mvc.xml
 R:\GitProjects\TotalHR\totalhr.services\obj\Debug\totalhr.services.csprojResolveAssemblyReference.cache
 R:\GitProjects\TotalHR\totalhr.services\obj\Debug\totalhr.services.dll
 R:\GitProjects\TotalHR\totalhr.services\obj\Debug\totalhr.services.pdb
+R:\GitProjects\TotalHR\totalhr.services\bin\Debug\totalhr.data.TimeRecordingSystem.dll
+R:\GitProjects\TotalHR\totalhr.services\bin\Debug\totalhr.data.TimeRecordingSystem.pdb

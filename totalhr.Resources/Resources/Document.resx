@@ -375,4 +375,25 @@
   <data name="V_Document_Was_Shared_With" xml:space="preserve">
     <value>The document was sent to {0}</value>
   </data>
+  <data name="V_Contributed_By" xml:space="preserve">
+    <value>Contributed by</value>
+  </data>
+  <data name="V_In_Folder" xml:space="preserve">
+    <value>In Folder</value>
+  </data>
+  <data name="V_No_Search_Criteria" xml:space="preserve">
+    <value>You entered no search criteria</value>
+  </data>
+  <data name="V_Search_Result" xml:space="preserve">
+    <value>See results below.</value>
+  </data>
+  <data name="V_With_Document_Name" xml:space="preserve">
+    <value>With Document Name</value>
+  </data>
+  <data name="V_With_File_Type" xml:space="preserve">
+    <value>With File type</value>
+  </data>
+  <data name="V_Your_Search" xml:space="preserve">
+    <value>You made a search with the following criteria:</value>
+  </data>
 </root>

@@ -144,3 +144,31 @@ div.wide {
     margin:10px 0;
     padding:1%;
 }
+
+span.icon {
+    padding:8px 0 8px 16px;background:transparent url('/Content/images/FileIcons/unknown.png') left center no-repeat;
+}
+
+span.doc{background-image:url('/Content/images/FileIcons/doc.png');}
+span.docx{background-image:url('/Content/images/FileIcons/doc.png');}
+span.txt{background-image:url('/Content/images/FileIcons/txt.png');}
+span.ppt{background-image:url('/Content/images/FileIcons/ppt.png');}
+span.pptx{background-image:url('/Content/images/FileIcons/ppt.png');}
+span.rtf{background-image:url('/Content/images/FileIcons/rtf.png');}
+span.pdf{background-image:url('/Content/images/FileIcons/pdf.png');}
+span.odt{background-image:url('/Content/images/FileIcons/odt.png');}
+span.log{background-image:url('/Content/images/FileIcons/log.png');}
+span.tex{background-image:url('/Content/images/FileIcons/tex.png');}
+span.wps{background-image:url('/Content/images/FileIcons/wps.png');}
+span.wpd{background-image:url('/Content/images/FileIcons/wpd.png');}
+span.mp3{background-image:url('/Content/images/FileIcons/mp3.png');}
+span.mov{background-image:url('/Content/images/FileIcons/mov.png');}
+span.gif{background-image:url('/Content/images/FileIcons/gif.png');}
+span.jpg{background-image:url('/Content/images/FileIcons/jpg.png');}
+span.png{background-image:url('/Content/images/FileIcons/png.png');}
+span.psd{background-image:url('/Content/images/FileIcons/psd.png');}
+span.pspimage{}
+span.tif{background-image:url('/Content/images/FileIcons/tiff.png');}
+span.tiff{background-image:url('/Content/images/FileIcons/tiff.png');}
+span.thm{background-image:url('/Content/images/FileIcons/thm.png');}
+span.xls {background-image:url('/Content/images/FileIcons/xls.png');}

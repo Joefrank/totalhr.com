@@ -42,3 +42,23 @@ Field highlights on errors.
 - handle authorize at controller level + clean up repeats
 - Update kernel for features based on site also on user assignment.
 -Incorrect date format on empty text box.
+
+
+--------------------------  29/11/2014 ------------------------------------
+
+Remaining tasks on Company docs.
+
+- (done)Search is returning docs that don't belong to folders.
+- (done) Add doc type icon next to each doc
+- (Done) Make ddl persis their search values.
+- (Done) Search date field are not in correct format and should allow null entries.
+- (done) They should not be editable. and should not include time.
+- User profile window needs to be created.
+- Files are not being opened, just downloaded.
+- pagination to be added when docs on folder exceed certain number.
+
+
+
+
+------------- 06/12/2014 --------------------------------
+Style calendar, make it iframe and customize to hide time. and localize month days names

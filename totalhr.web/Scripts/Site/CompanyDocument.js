@@ -164,3 +164,7 @@ function OpenDoc(guid) {
     document.location.href = '/Document/OpenFile/' + guid;
 }
 
+function PutValueIn(obj, targetObjid) {
+    var val = $('#' + obj.id + " :selected").text(); 
+    $('#' + targetObjid).val(val);
+}

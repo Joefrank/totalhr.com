@@ -42,6 +42,11 @@ namespace Authentication.Models
             return requiredroles.All(rrole => this.Roles.Contains(((int) rrole).ToString(CultureInfo.InvariantCulture)));
         }
 
+        public bool HasRole(int roleid)
+        {
+            return this.Roles.Contains(roleid.ToString());
+        }
+
         public bool IsInProfile(List<string> profiles)
         {
             return !profiles.Except(this.Profiles).Any();

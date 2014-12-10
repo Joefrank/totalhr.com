@@ -1,0 +1,1224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TimeRecordingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address1" Type="varchar" MaxLength="255" Nullable="false" />
+          <Property Name="Address2" Type="varchar" MaxLength="255" />
+          <Property Name="Address3" Type="varchar" MaxLength="255" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="StateorCounty" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountryId" Type="int" />
+          <Property Name="Phone1" Type="varchar" MaxLength="30" />
+          <Property Name="Phone2" Type="varchar" MaxLength="30" />
+          <Property Name="PostCode" Type="varchar" MaxLength="30" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdateBy" Type="int" />
+          <Property Name="LastUpdatedOn" Type="datetime" />
+          <Property Name="TaxId" Type="nvarchar" MaxLength="50" />
+          <Property Name="VATId" Type="nvarchar" MaxLength="50" />
+          <Property Name="DNUSNumber" Type="nvarchar" MaxLength="50" />
+          <Property Name="NumberOfEmployees" Type="int" Nullable="false" />
+          <Property Name="CompanyType" Type="nvarchar" MaxLength="50" />
+          <Property Name="AnnualRevenue" Type="decimal" Precision="20" Scale="2" />
+          <Property Name="Description" Type="nvarchar" MaxLength="2000" />
+          <Property Name="Website" Type="nvarchar" MaxLength="500" />
+          <Property Name="PreferredLanguageId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="LastModifiedBy" Type="int" />
+          <Property Name="LastModified" Type="datetime" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="LastUpdatedOn" Type="datetime" />
+          <Property Name="RelatedGlossaryId" Type="int" Nullable="false" />
+          <Property Name="Culture" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Notes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AddedById" Type="int" Nullable="false" />
+          <Property Name="AddedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedById" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdateLog" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="255" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastModified" Type="datetime" />
+          <Property Name="LastModifiedBy" Type="int" />
+          <Property Name="Identifier" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScheduledNotifications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GenericNotificationlTypeId" Type="int" Nullable="false" />
+          <Property Name="NotificationTypeId" Type="int" Nullable="false" />
+          <Property Name="ObjectId" Type="int" Nullable="false" />
+          <Property Name="MessageBody" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="MessageTitle" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="RecipientListid" Type="int" Nullable="false" />
+          <Property Name="ScheduledSendDate" Type="datetime" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="SenderName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="SenderEmail" Type="nvarchar" MaxLength="150" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskScheduler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="ApprovalNeeded" Type="bit" Nullable="false" />
+          <Property Name="Approved" Type="bit" />
+          <Property Name="AssignedBy" Type="int" Nullable="false" />
+          <Property Name="AssignedTo" Type="int" Nullable="false" />
+          <Property Name="ScheduledDateTime" Type="datetime" />
+          <Property Name="ScheduleLog" Type="nvarchar(max)" />
+          <Property Name="AddedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="AddedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="ApprovedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="TimeRecording">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="TypeId" Type="smallint" Nullable="false" />
+          <Property Name="AddedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="NoteId" Type="bigint" Nullable="false" />
+          <Property Name="AddedById" Type="int" Nullable="false" />
+          <Property Name="UpdatedById" Type="int" />
+          <Property Name="TaskRefId" Type="int" />
+        </EntityType>
+        <EntityType Name="TimeRecordingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GenderId" Type="int" Nullable="false" />
+          <Property Name="firstname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="othernames" Type="nvarchar" MaxLength="50" />
+          <Property Name="surname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="title" Type="int" Nullable="false" />
+          <Property Name="othertitle" Type="nvarchar" MaxLength="30" />
+          <Property Name="username" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="255" />
+          <Property Name="Address3" Type="nvarchar" MaxLength="255" />
+          <Property Name="Town" Type="nvarchar" MaxLength="50" />
+          <Property Name="stateorcounty" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostCode" Type="nvarchar" MaxLength="30" />
+          <Property Name="countryId" Type="int" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="30" />
+          <Property Name="Mobile" Type="nvarchar" MaxLength="30" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="created" Type="datetime" Nullable="false" />
+          <Property Name="createdby" Type="int" Nullable="false" />
+          <Property Name="lastvisit" Type="datetime" />
+          <Property Name="novisits" Type="int" Nullable="false" />
+          <Property Name="active" Type="bit" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="lastupdatedby" Type="int" />
+          <Property Name="lastupdated" Type="datetime" />
+          <Property Name="typeid" Type="int" Nullable="false" />
+          <Property Name="userguid" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="preferedlanguageid" Type="int" Nullable="false" />
+          <Property Name="tersmaccepted" Type="bit" Nullable="false" />
+          <Property Name="activationcode" Type="nvarchar" MaxLength="150" />
+          <Property Name="chosenculture" Type="varchar" MaxLength="10" />
+          <Property Name="departmentid" Type="int" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ProfileId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ProfileId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Department_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="AddedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="UpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_User2">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="AddedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="AssignedTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="AssignedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User2">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="AddedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User3">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User4">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_Notes">
+          <End Role="Notes" Type="Self.Notes" Multiplicity="1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="NoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_TaskScheduler">
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="0..1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskScheduler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="TaskRefId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_TimeRecordingType">
+          <End Role="TimeRecordingType" Type="Self.TimeRecordingType" Multiplicity="1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TimeRecordingType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="AddedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_User2">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="UpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TimeRecordingModelStoreContainer">
+          <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notes" EntityType="Self.Notes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ScheduledNotifications" EntityType="Self.ScheduledNotifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskScheduler" EntityType="Self.TaskScheduler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimeRecording" EntityType="Self.TimeRecording" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimeRecordingType" EntityType="Self.TimeRecordingType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Department_Company" Association="Self.FK_Department_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_User" Association="Self.FK_Notes_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_User1" Association="Self.FK_Notes_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_User2" Association="Self.FK_Notes_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_Department" Association="Self.FK_TaskScheduler_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="TaskScheduler" EntitySet="TaskScheduler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User" Association="Self.FK_TaskScheduler_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TaskScheduler" EntitySet="TaskScheduler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User1" Association="Self.FK_TaskScheduler_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="TaskScheduler" EntitySet="TaskScheduler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User2" Association="Self.FK_TaskScheduler_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="TaskScheduler" EntitySet="TaskScheduler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User3" Association="Self.FK_TaskScheduler_User3">
+            <End Role="User" EntitySet="User" />
+            <End Role="TaskScheduler" EntitySet="TaskScheduler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User4" Association="Self.FK_TaskScheduler_User4">
+            <End Role="User" EntitySet="User" />
+            <End Role="TaskScheduler" EntitySet="TaskScheduler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_Notes" Association="Self.FK_TimeRecording_Notes">
+            <End Role="Notes" EntitySet="Notes" />
+            <End Role="TimeRecording" EntitySet="TimeRecording" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_TaskScheduler" Association="Self.FK_TimeRecording_TaskScheduler">
+            <End Role="TaskScheduler" EntitySet="TaskScheduler" />
+            <End Role="TimeRecording" EntitySet="TimeRecording" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_TimeRecordingType" Association="Self.FK_TimeRecording_TimeRecordingType">
+            <End Role="TimeRecordingType" EntitySet="TimeRecordingType" />
+            <End Role="TimeRecording" EntitySet="TimeRecording" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_User" Association="Self.FK_TimeRecording_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TimeRecording" EntitySet="TimeRecording" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_User1" Association="Self.FK_TimeRecording_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="TimeRecording" EntitySet="TimeRecording" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_User2" Association="Self.FK_TimeRecording_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="TimeRecording" EntitySet="TimeRecording" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TimeRecordingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Address3" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="StateorCounty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryId" Type="Int32" />
+          <Property Name="Phone1" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Phone2" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PostCode" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdateBy" Type="Int32" />
+          <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="TaxId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="VATId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DNUSNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NumberOfEmployees" Type="Int32" Nullable="false" />
+          <Property Name="CompanyType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AnnualRevenue" Type="Decimal" Precision="20" Scale="2" />
+          <Property Name="Description" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="PreferredLanguageId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK_Department_Company" FromRole="Company" ToRole="Department" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" />
+          <Property Name="LastModified" Type="DateTime" Precision="3" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="Self.FK_Department_Company" FromRole="Department" ToRole="Company" />
+          <NavigationProperty Name="TaskSchedulers" Relationship="Self.FK_TaskScheduler_Department" FromRole="Department" ToRole="TaskScheduler" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="LastUpdatedOn" Type="DateTime" Precision="3" />
+          <Property Name="RelatedGlossaryId" Type="Int32" Nullable="false" />
+          <Property Name="Culture" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Note1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AddedById" Type="Int32" Nullable="false" />
+          <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedById" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateLog" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Notes_User" FromRole="Notes" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Notes_User1" FromRole="Notes" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="Self.FK_Notes_User2" FromRole="Notes" ToRole="User" />
+          <NavigationProperty Name="TimeRecordings" Relationship="Self.FK_TimeRecording_Notes" FromRole="Notes" ToRole="TimeRecording" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastModified" Type="DateTime" Precision="3" />
+          <Property Name="LastModifiedBy" Type="Int32" />
+          <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ScheduledNotification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenericNotificationlTypeId" Type="Int32" Nullable="false" />
+          <Property Name="NotificationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="ObjectId" Type="Int32" Nullable="false" />
+          <Property Name="MessageBody" Type="String" MaxLength="3000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MessageTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="RecipientListid" Type="Int32" Nullable="false" />
+          <Property Name="ScheduledSendDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SenderName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SenderEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TaskScheduler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="ApprovalNeeded" Type="Boolean" Nullable="false" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="AssignedBy" Type="Int32" Nullable="false" />
+          <Property Name="AssignedTo" Type="Int32" Nullable="false" />
+          <Property Name="ScheduledDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ScheduleLog" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ApprovedBy" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="Self.FK_TaskScheduler_Department" FromRole="TaskScheduler" ToRole="Department" />
+          <NavigationProperty Name="AssignedToUser" Relationship="Self.FK_TaskScheduler_User" FromRole="TaskScheduler" ToRole="User" />
+          <NavigationProperty Name="AssignedByUser" Relationship="Self.FK_TaskScheduler_User1" FromRole="TaskScheduler" ToRole="User" />
+          <NavigationProperty Name="AddedByUser" Relationship="Self.FK_TaskScheduler_User2" FromRole="TaskScheduler" ToRole="User" />
+          <NavigationProperty Name="UpdatedByUser" Relationship="Self.FK_TaskScheduler_User3" FromRole="TaskScheduler" ToRole="User" />
+          <NavigationProperty Name="ApprovedByUser" Relationship="Self.FK_TaskScheduler_User4" FromRole="TaskScheduler" ToRole="User" />
+          <NavigationProperty Name="TimeRecordings" Relationship="Self.FK_TimeRecording_TaskScheduler" FromRole="TaskScheduler" ToRole="TimeRecording" />
+        </EntityType>
+        <EntityType Name="TimeRecording">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="TypeId" Type="Int16" Nullable="false" />
+          <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="NoteId" Type="Int64" Nullable="false" />
+          <Property Name="AddedById" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedById" Type="Int32" />
+          <Property Name="TaskRefId" Type="Int32" />
+          <NavigationProperty Name="Note" Relationship="Self.FK_TimeRecording_Notes" FromRole="TimeRecording" ToRole="Notes" />
+          <NavigationProperty Name="TaskScheduler" Relationship="Self.FK_TimeRecording_TaskScheduler" FromRole="TimeRecording" ToRole="TaskScheduler" />
+          <NavigationProperty Name="User" Relationship="Self.FK_TimeRecording_User" FromRole="TimeRecording" ToRole="User" />
+          <NavigationProperty Name="AddedByUser" Relationship="Self.FK_TimeRecording_User1" FromRole="TimeRecording" ToRole="User" />
+          <NavigationProperty Name="UpdatedByUser" Relationship="Self.FK_TimeRecording_User2" FromRole="TimeRecording" ToRole="User" />
+          <NavigationProperty Name="TimeRecordingType" Relationship="TimeRecordingModel.FK_TimeRecording_TimeRecordingType" FromRole="TimeRecording" ToRole="TimeRecordingType" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GenderId" Type="Int32" Nullable="false" />
+          <Property Name="firstname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="othernames" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="surname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="title" Type="Int32" Nullable="false" />
+          <Property Name="othertitle" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address1" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address2" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Address3" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Town" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="stateorcounty" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostCode" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="countryId" Type="Int32" />
+          <Property Name="Phone" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="CompanyId" Type="Int32" Nullable="false" />
+          <Property Name="created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="createdby" Type="Int32" Nullable="false" />
+          <Property Name="lastvisit" Type="DateTime" Precision="3" />
+          <Property Name="novisits" Type="Int32" Nullable="false" />
+          <Property Name="active" Type="Boolean" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="lastupdatedby" Type="Int32" />
+          <Property Name="lastupdated" Type="DateTime" Precision="3" />
+          <Property Name="typeid" Type="Int32" Nullable="false" />
+          <Property Name="userguid" Type="Guid" Nullable="false" />
+          <Property Name="preferedlanguageid" Type="Int32" Nullable="false" />
+          <Property Name="tersmaccepted" Type="Boolean" Nullable="false" />
+          <Property Name="activationcode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="chosenculture" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="departmentid" Type="Int32" />
+          <NavigationProperty Name="Notes" Relationship="Self.FK_Notes_User" FromRole="User" ToRole="Notes" />
+          <NavigationProperty Name="TaskSchedulers" Relationship="Self.FK_TaskScheduler_User" FromRole="User" ToRole="TaskScheduler" />
+          <NavigationProperty Name="TaskSchedulers1" Relationship="Self.FK_TaskScheduler_User1" FromRole="User" ToRole="TaskScheduler" />
+          <NavigationProperty Name="TimeRecordings" Relationship="Self.FK_TimeRecording_User" FromRole="User" ToRole="TimeRecording" />
+          <NavigationProperty Name="TimeRecordings1" Relationship="Self.FK_TimeRecording_User1" FromRole="User" ToRole="TimeRecording" />
+          <NavigationProperty Name="TimeRecordings2" Relationship="Self.FK_TimeRecording_User2" FromRole="User" ToRole="TimeRecording" />
+        </EntityType>
+        <EntityType Name="UserProfile">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ProfileId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ProfileId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Department_Company">
+          <End Role="Company" Type="Self.Company" Multiplicity="1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Notes" Type="Self.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="AddedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Notes" Type="Self.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="UpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_User2">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Notes" Type="Self.Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="AddedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_Notes">
+          <End Role="Notes" Type="Self.Note" Multiplicity="1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="NoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="AssignedTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="AssignedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User2">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="AddedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User3">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User4">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_TaskScheduler">
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="0..1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskScheduler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="TaskRefId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="AddedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_User2">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="UpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TimeRecordingEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Companies" EntityType="Self.Company" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Languages" EntityType="Self.Language" />
+          <EntitySet Name="Notes" EntityType="Self.Note" />
+          <EntitySet Name="Roles" EntityType="Self.Role" />
+          <EntitySet Name="ScheduledNotifications" EntityType="Self.ScheduledNotification" />
+          <EntitySet Name="TaskSchedulers" EntityType="Self.TaskScheduler" />
+          <EntitySet Name="TimeRecordings" EntityType="Self.TimeRecording" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserProfiles" EntityType="Self.UserProfile" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <AssociationSet Name="FK_Department_Company" Association="Self.FK_Department_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_Department" Association="Self.FK_TaskScheduler_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="TaskScheduler" EntitySet="TaskSchedulers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_User" Association="Self.FK_Notes_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_User1" Association="Self.FK_Notes_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_User2" Association="Self.FK_Notes_User2">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_Notes" Association="Self.FK_TimeRecording_Notes">
+            <End Role="Notes" EntitySet="Notes" />
+            <End Role="TimeRecording" EntitySet="TimeRecordings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User" Association="Self.FK_TaskScheduler_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TaskScheduler" EntitySet="TaskSchedulers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User1" Association="Self.FK_TaskScheduler_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TaskScheduler" EntitySet="TaskSchedulers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User2" Association="Self.FK_TaskScheduler_User2">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TaskScheduler" EntitySet="TaskSchedulers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User3" Association="Self.FK_TaskScheduler_User3">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TaskScheduler" EntitySet="TaskSchedulers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User4" Association="Self.FK_TaskScheduler_User4">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TaskScheduler" EntitySet="TaskSchedulers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_TaskScheduler" Association="Self.FK_TimeRecording_TaskScheduler">
+            <End Role="TaskScheduler" EntitySet="TaskSchedulers" />
+            <End Role="TimeRecording" EntitySet="TimeRecordings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_User" Association="Self.FK_TimeRecording_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TimeRecording" EntitySet="TimeRecordings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_User1" Association="Self.FK_TimeRecording_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TimeRecording" EntitySet="TimeRecordings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_User2" Association="Self.FK_TimeRecording_User2">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TimeRecording" EntitySet="TimeRecordings" />
+          </AssociationSet>
+          <EntitySet Name="TimeRecordingTypes" EntityType="TimeRecordingModel.TimeRecordingType" />
+          <AssociationSet Name="FK_TimeRecording_TimeRecordingType" Association="TimeRecordingModel.FK_TimeRecording_TimeRecordingType">
+            <End Role="TimeRecordingType" EntitySet="TimeRecordingTypes" />
+            <End Role="TimeRecording" EntitySet="TimeRecordings" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="TimeRecordingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TimeRecordings" Relationship="TimeRecordingModel.FK_TimeRecording_TimeRecordingType" FromRole="TimeRecordingType" ToRole="TimeRecording" />
+        </EntityType>
+        <Association Name="FK_TimeRecording_TimeRecordingType">
+          <End Type="TimeRecordingModel.TimeRecordingType" Role="TimeRecordingType" Multiplicity="1" />
+          <End Type="TimeRecordingModel.TimeRecording" Role="TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TimeRecordingType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TimeRecordingModelStoreContainer" CdmEntityContainer="TimeRecordingEntities">
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="TimeRecordingModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="StateorCounty" ColumnName="StateorCounty" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastUpdateBy" ColumnName="LastUpdateBy" />
+                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+                <ScalarProperty Name="TaxId" ColumnName="TaxId" />
+                <ScalarProperty Name="VATId" ColumnName="VATId" />
+                <ScalarProperty Name="DNUSNumber" ColumnName="DNUSNumber" />
+                <ScalarProperty Name="NumberOfEmployees" ColumnName="NumberOfEmployees" />
+                <ScalarProperty Name="CompanyType" ColumnName="CompanyType" />
+                <ScalarProperty Name="AnnualRevenue" ColumnName="AnnualRevenue" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Website" ColumnName="Website" />
+                <ScalarProperty Name="PreferredLanguageId" ColumnName="PreferredLanguageId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="TimeRecordingModel.Department">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Languages">
+            <EntityTypeMapping TypeName="TimeRecordingModel.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdatedOn" ColumnName="LastUpdatedOn" />
+                <ScalarProperty Name="RelatedGlossaryId" ColumnName="RelatedGlossaryId" />
+                <ScalarProperty Name="Culture" ColumnName="Culture" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notes">
+            <EntityTypeMapping TypeName="TimeRecordingModel.Note">
+              <MappingFragment StoreEntitySet="Notes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Note1" ColumnName="Note" />
+                <ScalarProperty Name="AddedById" ColumnName="AddedById" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="UpdatedById" ColumnName="UpdatedById" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdateLog" ColumnName="UpdateLog" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="TimeRecordingModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="LastModified" ColumnName="LastModified" />
+                <ScalarProperty Name="LastModifiedBy" ColumnName="LastModifiedBy" />
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ScheduledNotifications">
+            <EntityTypeMapping TypeName="TimeRecordingModel.ScheduledNotification">
+              <MappingFragment StoreEntitySet="ScheduledNotifications">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="GenericNotificationlTypeId" ColumnName="GenericNotificationlTypeId" />
+                <ScalarProperty Name="NotificationTypeId" ColumnName="NotificationTypeId" />
+                <ScalarProperty Name="ObjectId" ColumnName="ObjectId" />
+                <ScalarProperty Name="MessageBody" ColumnName="MessageBody" />
+                <ScalarProperty Name="MessageTitle" ColumnName="MessageTitle" />
+                <ScalarProperty Name="RecipientListid" ColumnName="RecipientListid" />
+                <ScalarProperty Name="ScheduledSendDate" ColumnName="ScheduledSendDate" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="SenderName" ColumnName="SenderName" />
+                <ScalarProperty Name="SenderEmail" ColumnName="SenderEmail" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskSchedulers">
+            <EntityTypeMapping TypeName="TimeRecordingModel.TaskScheduler">
+              <MappingFragment StoreEntitySet="TaskScheduler">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="ApprovalNeeded" ColumnName="ApprovalNeeded" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="AssignedBy" ColumnName="AssignedBy" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="ScheduledDateTime" ColumnName="ScheduledDateTime" />
+                <ScalarProperty Name="ScheduleLog" ColumnName="ScheduleLog" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeRecordings">
+            <EntityTypeMapping TypeName="TimeRecordingModel.TimeRecording">
+              <MappingFragment StoreEntitySet="TimeRecording">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="NoteId" ColumnName="NoteId" />
+                <ScalarProperty Name="AddedById" ColumnName="AddedById" />
+                <ScalarProperty Name="UpdatedById" ColumnName="UpdatedById" />
+                <ScalarProperty Name="TaskRefId" ColumnName="TaskRefId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TimeRecordingModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="othernames" ColumnName="othernames" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="othertitle" ColumnName="othertitle" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
+                <ScalarProperty Name="stateorcounty" ColumnName="stateorcounty" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="countryId" ColumnName="countryId" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="lastvisit" ColumnName="lastvisit" />
+                <ScalarProperty Name="novisits" ColumnName="novisits" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="lastupdatedby" ColumnName="lastupdatedby" />
+                <ScalarProperty Name="lastupdated" ColumnName="lastupdated" />
+                <ScalarProperty Name="typeid" ColumnName="typeid" />
+                <ScalarProperty Name="userguid" ColumnName="userguid" />
+                <ScalarProperty Name="preferedlanguageid" ColumnName="preferedlanguageid" />
+                <ScalarProperty Name="tersmaccepted" ColumnName="tersmaccepted" />
+                <ScalarProperty Name="activationcode" ColumnName="activationcode" />
+                <ScalarProperty Name="chosenculture" ColumnName="chosenculture" />
+                <ScalarProperty Name="departmentid" ColumnName="departmentid" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserProfiles">
+            <EntityTypeMapping TypeName="TimeRecordingModel.UserProfile">
+              <MappingFragment StoreEntitySet="UserProfile">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="TimeRecordingModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeRecordingTypes">
+            <EntityTypeMapping TypeName="TimeRecordingModel.TimeRecordingType">
+              <MappingFragment StoreEntitySet="TimeRecordingType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

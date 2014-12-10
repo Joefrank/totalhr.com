@@ -100,7 +100,6 @@ D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\Resources
 D:\Projects\MyGithub\totalhr.com\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.csprojResolveAssemblyReference.cache
 R:\GitProjects\TotalHR\totalhr.Resources\Resources\bin\Debug\Resources.dll
 R:\GitProjects\TotalHR\totalhr.Resources\Resources\bin\Debug\Resources.pdb
-R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.csprojResolveAssemblyReference.cache
 R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.Account.resources
 R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.Calendar.resources
 R:\GitProjects\TotalHR\totalhr.Resources\Resources\obj\Debug\totalhr.Resources.Common.resources

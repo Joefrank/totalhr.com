@@ -290,6 +290,7 @@ R:\GitProjects\TotalHR\totalhr.data\bin\Debug\Ninject.Web.Common.dll
 R:\GitProjects\TotalHR\totalhr.data\bin\Debug\Ninject.Web.Mvc.dll
 R:\GitProjects\TotalHR\totalhr.data\bin\Debug\totalhr.Shared.dll
 R:\GitProjects\TotalHR\totalhr.data\bin\Debug\WebActivatorEx.dll
+R:\GitProjects\TotalHR\totalhr.data\bin\Debug\System.Web.Mvc.dll
 R:\GitProjects\TotalHR\totalhr.data\bin\Debug\Resources.dll
 R:\GitProjects\TotalHR\totalhr.data\bin\Debug\totalhr.Shared.pdb
 R:\GitProjects\TotalHR\totalhr.data\bin\Debug\AutoMapper.xml
@@ -299,6 +300,7 @@ R:\GitProjects\TotalHR\totalhr.data\bin\Debug\log4net.xml
 R:\GitProjects\TotalHR\totalhr.data\bin\Debug\Ninject.xml
 R:\GitProjects\TotalHR\totalhr.data\bin\Debug\Ninject.Web.Common.xml
 R:\GitProjects\TotalHR\totalhr.data\bin\Debug\Ninject.Web.Mvc.xml
+R:\GitProjects\TotalHR\totalhr.data\bin\Debug\System.Web.Mvc.xml
 R:\GitProjects\TotalHR\totalhr.data\bin\Debug\Resources.pdb
 R:\GitProjects\TotalHR\totalhr.data\obj\Debug\totalhr.data.csprojResolveAssemblyReference.cache
 R:\GitProjects\TotalHR\totalhr.data\obj\Debug\totalhr.data.dll

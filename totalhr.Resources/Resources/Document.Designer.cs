@@ -349,6 +349,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Contributed by.
+        /// </summary>
+        public static string V_Contributed_By {
+            get {
+                return ResourceManager.GetString("V_Contributed_By", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contributor.
         /// </summary>
         public static string V_Contributor {
@@ -619,6 +628,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to In Folder.
+        /// </summary>
+        public static string V_In_Folder {
+            get {
+                return ResourceManager.GetString("V_In_Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Link.
         /// </summary>
         public static string V_Link {
@@ -651,6 +669,15 @@ namespace totalhr.Resources {
         public static string V_No_Folder {
             get {
                 return ResourceManager.GetString("V_No_Folder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You entered no search criteria.
+        /// </summary>
+        public static string V_No_Search_Criteria {
+            get {
+                return ResourceManager.GetString("V_No_Search_Criteria", resourceCulture);
             }
         }
         
@@ -723,6 +750,15 @@ namespace totalhr.Resources {
         public static string V_Search {
             get {
                 return ResourceManager.GetString("V_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See results below..
+        /// </summary>
+        public static string V_Search_Result {
+            get {
+                return ResourceManager.GetString("V_Search_Result", resourceCulture);
             }
         }
         
@@ -831,6 +867,33 @@ namespace totalhr.Resources {
         public static string V_View {
             get {
                 return ResourceManager.GetString("V_View", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With Document Name.
+        /// </summary>
+        public static string V_With_Document_Name {
+            get {
+                return ResourceManager.GetString("V_With_Document_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With File type.
+        /// </summary>
+        public static string V_With_File_Type {
+            get {
+                return ResourceManager.GetString("V_With_File_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You made a search with the following criteria:.
+        /// </summary>
+        public static string V_Your_Search {
+            get {
+                return ResourceManager.GetString("V_Your_Search", resourceCulture);
             }
         }
     }

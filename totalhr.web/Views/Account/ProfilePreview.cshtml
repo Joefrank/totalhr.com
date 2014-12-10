@@ -1,0 +1,53 @@
+﻿@using totalhr.Resources;
+
+@model totalhr.data.EF.User
+
+@{
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+    
+    ViewBag.Title = Account.V_Profile_View;
+}
+
+@section head2{
+    <h2>@Account.V_Profile_View</h2>
+}
+
+
+<div class="formwrapper">       
+
+    <div class="line">
+        <div class="block">
+             <img src="/Users/Profile/Images/unknown.png" alt="@(Model.firstname + " " + Model.surname)" />
+        </div>
+
+        <div class="block">
+			<label class="fix200W">@Account.V_Title:</label>
+            <span>@Model.title</span>
+        </div>
+        <div class="block">
+			<label class="fix200W">@Account.V_Firstname:</label>
+            <span>@Model.firstname</span>
+        </div>
+        <div class="block">
+			<label class="fix200W">@Account.V_Other_Names:</label>
+            <span>@Model.othernames</span>
+        </div>
+        <div class="block">
+			<label class="fix200W">@Account.V_Surname:</label>
+            <span>@Model.surname</span>
+        </div>
+        <div class="block">
+			<label class="fix200W">@Account.V_Email:</label>
+            <span>@Model.email</span>
+        </div>
+        <div class="block">
+			<label class="fix200W">@Account.V_Phone:</label>
+            <span>@Model.Phone</span>
+        </div>
+        <div class="block">
+			<label class="fix200W">@Account.V_Mobile:</label>
+            <span>@Model.Mobile</span>
+        </div>
+    </div>
+
+</div>
