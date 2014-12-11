@@ -24,6 +24,11 @@ namespace totalhr.web.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
+            return View(_profileService.GetProfileList());
+        }
+
+        public ActionResult ManageUserProfiles(Guid userId)
+        {
             var lst = _accountService.GetUserProfile(CurrentUser.UserId);
             
             var sList = lst.Select(x => new ListItemStruct { Id = x.id, Name = x.Name }).ToList();
@@ -39,6 +44,5 @@ namespace totalhr.web.Areas.Admin.Controllers
             
             return View(profileStruct);
         }
-
     }
 }
