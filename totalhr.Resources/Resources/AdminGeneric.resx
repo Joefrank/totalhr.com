@@ -132,4 +132,7 @@
   <data name="V_Role_Management" xml:space="preserve">
     <value>Role Management</value>
   </data>
+  <data name="V_User_Profile_Management" xml:space="preserve">
+    <value>User Profile Management</value>
+  </data>
 </root>

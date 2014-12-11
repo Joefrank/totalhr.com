@@ -1,12 +1,11 @@
 ﻿@using totalhr.Resources;
 @using totalhr.web.Areas.Admin.Helpers;
 
-@model totalhr.Shared.Models.AdminProfileStruct
+@model IEnumerable<totalhr.data.EF.Profile>
 
 @{
     ViewBag.Title = AdminGeneric.V_Profile_Management;
-    var ddlSelectedProfilesHtml = ProfileHelper.GenerateListBox(Model.UserProfiles, @" size=""10"" id=""SelectedProfiles"" name=""SelectedProfiles"" ");
-    var ddlAllProfilesHtml = ProfileHelper.GenerateListBox(Model.Allprofiles, @" size=""10"" id=""AllProfiles"" name=""AllProfiles"" ");
+   
     }
 
 <div id="main">
@@ -17,30 +16,41 @@
         <div>
 
         </div>
-        <table>
+        <table border="1" class="tabsimple">
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Created On</th>
+                <th>Created By</th>
+                <th>Last Modified</th>
+                <th>Last Modified By</th>
+                <th>Users</th>
+            </tr>
+            @foreach(var profile in Model){
             <tr>
                 <td>
-                    @Html.Raw(ddlAllProfilesHtml)
+                   @profile.Name
                 </td>
                 <td>
-                    <input type="button" value="Add >>" onclick="AddProfileToUser()" />
-                    <br /><br />
-                     <input type="button" value="<< Remove" onclick="StripProfileFromUser()" />
+                   @profile.Description
                 </td>
                 <td>
-                    @Html.Raw(ddlSelectedProfilesHtml)                    
+                    @profile.Created               
                 </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    @using (Html.BeginForm("UpdateUserProfile", "Profile"))
-                    {  
-                        <input type="hidden" id="hdnUserId" value="" />
-                        <input type="hidden" id="hdnSelectedProfileIds" value="" />
-                        <input type="submit" value="Save" onclick="return ValidateAndSaveUserProfile()" />
-                    }
+                <td>
+                    @profile.CreatedBy
                 </td>
-            </tr>
+                <td>
+                    @profile.LastModified
+                </td>
+                <td>
+                    @profile.LastModifiedBy
+                </td>
+                <td>
+                    <input type="button" class="edit" value="View User" onclick="" />
+                </td>
+            </tr>            
+            }
         </table>
     </div>
 </div>

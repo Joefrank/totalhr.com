@@ -23,7 +23,7 @@ namespace totalhr.services.Implementation
         private IUserRepository _userRepos;
         private ICompanyRepository _companyRepos;
         private ILanguageRepository _langRepos;
-        private IProfileRepository _profileRepos;
+        
         
         private static readonly ILog log = LogManager.GetLogger(typeof(AccountService));
         

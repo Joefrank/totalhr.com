@@ -367,3 +367,11 @@ div.wide {
     width: 100% !important;
     min-height:800px;
 }
+
+table.tabsimple {
+    border-collapse:collapse;
+}
+
+    table.tabsimple tr td, table.tabsimple tr th {
+        padding:3px;
+    }
