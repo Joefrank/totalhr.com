@@ -64,6 +64,8 @@
         <AssociationConnector Association="TotalHRModel.FK_UserRole_Roles" />
         <AssociationConnector Association="TotalHRModel.FK_UserProfile_User" />
         <AssociationConnector Association="TotalHRModel.FK_UserRole_User" />
+        <AssociationConnector Association="TotalHRModel.FK_Profile_User" />
+        <AssociationConnector Association="TotalHRModel.FK_Profile_User1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

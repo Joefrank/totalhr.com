@@ -10,13 +10,13 @@ namespace totalhr.Shared.Models
     {
         public int UserId { get; set; }
 
-        public List<ListItemStruct> UserProfiles { get; set; }
+        public IEnumerable<ListItemStruct> UserProfiles { get; set; }
 
-        public List<ListItemStruct> Allprofiles { get; set; }
+        public IEnumerable<ListItemStruct> Allprofiles { get; set; }
 
         public IEnumerable<ListItemStruct> UserRoles { get; set; }
 
-        public List<ListItemStruct> AllUsers { get; set; }
+        public IEnumerable<ListItemStruct> AllUsers { get; set; }
     }
 
     

@@ -1,47 +1,69 @@
 ﻿@using totalhr.Resources;
 @using totalhr.web.Areas.Admin.Helpers;
 
+
 @model totalhr.Shared.Models.AdminProfileStruct
 
 @{
     ViewBag.Title = AdminGeneric.V_User_Profile_Management;
-    var ddlSelectedProfilesHtml = ProfileHelper.GenerateListBox(Model.UserProfiles, @" size=""10"" id=""SelectedProfiles"" name=""SelectedProfiles"" ");
-    var ddlAllProfilesHtml = ProfileHelper.GenerateListBox(Model.Allprofiles, @" size=""10"" id=""AllProfiles"" name=""AllProfiles"" ");
+    string ddlSelectedProfilesHtml = string.Empty;
+    string ddlAllProfilesHtml =string.Empty ;
+
+    if (Model != null && Model.UserProfiles != null) 
+        {
+        ddlSelectedProfilesHtml= ProfileHelper.GenerateListBox(Model.UserProfiles, @" size=""10"" id=""SelectedProfiles"" name=""SelectedProfiles"" ");
     }
+    else{
+        ddlSelectedProfilesHtml = ProfileHelper.GenerateDefaultListBox(@" size=""10"" id=""SelectedProfiles"" name=""SelectedProfiles"" ");
+    }
+    
+    if (Model != null && Model.Allprofiles != null)
+    {
+        ddlAllProfilesHtml = ProfileHelper.GenerateListBox(Model.Allprofiles, @" size=""10"" id=""AllProfiles"" name=""AllProfiles"" ");
+    }
+    
+}
 
-<div id="main">
-    <div class="content">
 
-        <h1>@AdminGeneric.V_User_Profile_Management</h1>
+    <h1>@AdminGeneric.V_User_Profile_Management</h1>
 
-        <div>
-
-        </div>
-        <table>
-            <tr>
-                <td>
-                    @Html.Raw(ddlAllProfilesHtml)
-                </td>
-                <td>
-                    <input type="button" value="Add >>" onclick="AddProfileToUser()" />
-                    <br /><br />
-                     <input type="button" value="<< Remove" onclick="StripProfileFromUser()" />
-                </td>
-                <td>
-                    @Html.Raw(ddlSelectedProfilesHtml)                    
-                </td>
-            </tr>
-            <tr>
-                <td colspan="3">
-                    @using (Html.BeginForm("UpdateUserProfile", "Profile"))
-                    {  
-                        <input type="hidden" id="hdnUserId" value="" />
-                        <input type="hidden" id="hdnSelectedProfileIds" value="" />
-                        <input type="submit" value="Save" onclick="return ValidateAndSaveUserProfile()" />
-                    }
-                </td>
-            </tr>
-        </table>
+    <div class="wide">
+        @string.Format(AdminGeneric.V_You_Viewing_USerProfile_X,  ViewBag.UserName)
     </div>
+    <div class="wid">
+
+    
+    <table>
+        <tr>
+            <td>
+                @Html.Raw(ddlAllProfilesHtml)
+            </td>
+            <td>
+                <input type="button" value="Add >>" onclick="AddProfileToUser()" />
+                <br /><br />
+                    <input type="button" value="<< Remove" onclick="StripProfileFromUser()" />
+            </td>
+            <td>
+                @Html.Raw(ddlSelectedProfilesHtml)                    
+            </td>
+        </tr>
+        <tr>
+            <td colspan="3">
+                @using (Html.BeginForm("UpdateUserProfile", "Profile"))
+                {  
+                    <input type="hidden" id="hdnUserId" value="" />
+                    <input type="hidden" id="hdnSelectedProfileIds" value="" />
+                    <input type="submit" value="Save" onclick="return ValidateAndSaveUserProfile()" />
+                }
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+<div class="wide">
+     <p>
+        <input type="button" value="Back To List" onclick="javascript: history.back()" />
+    </p>
 </div>
 

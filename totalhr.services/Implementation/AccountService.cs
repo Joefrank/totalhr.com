@@ -343,9 +343,14 @@ namespace totalhr.services.Implementation
             return _userRepos.GetUserNamesByIds(ids);
         }
 
-        public List<Profile> GetUserProfile(int userId)
+        public IEnumerable<ListItemStruct> GetUserProfile(int userId)
         {
             return _userRepos.GetUserProfile(userId);
+        }
+
+        public IEnumerable<ListItemStruct> GetUserProfileByGuid(Guid uniqueid)
+        {
+            return _userRepos.GetUserProfileByGuid(uniqueid);
         }
 
         //public List<Role> GetUserRole(int userId)

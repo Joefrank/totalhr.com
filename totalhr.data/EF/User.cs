@@ -25,6 +25,8 @@ namespace totalhr.data.EF
             this.UserContracts1 = new HashSet<UserContract>();
             this.UserProfiles = new HashSet<UserProfile>();
             this.UserRoles = new HashSet<UserRole>();
+            this.Profiles = new HashSet<Profile>();
+            this.Profiles1 = new HashSet<Profile>();
         }
     
         public int id { get; set; }
@@ -71,5 +73,7 @@ namespace totalhr.data.EF
         public virtual ICollection<UserContract> UserContracts1 { get; set; }
         public virtual ICollection<UserProfile> UserProfiles { get; set; }
         public virtual ICollection<UserRole> UserRoles { get; set; }
+        public virtual ICollection<Profile> Profiles { get; set; }
+        public virtual ICollection<Profile> Profiles1 { get; set; }
     }
 }

@@ -29,5 +29,7 @@ namespace totalhr.data.EF
         public string Identifier { get; set; }
     
         public virtual ICollection<UserProfile> UserProfiles { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

@@ -105,6 +105,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EnumDescription.resx</DependentUpon>
     </Compile>
+    <Compile Include="Error.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Error.resx</DependentUpon>
+    </Compile>
     <Compile Include="FieldFurtherInfo.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -147,6 +152,10 @@
     <EmbeddedResource Include="EnumDescription.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>EnumDescription.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Error.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Error.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="FieldFurtherInfo.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

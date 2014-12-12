@@ -124,6 +124,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string V_Email1 {
+            get {
+                return ResourceManager.GetString("V_Email1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Firstname.
         /// </summary>
         public static string V_Firstname {
@@ -183,6 +192,33 @@ namespace totalhr.Resources {
         public static string V_Title {
             get {
                 return ResourceManager.GetString("V_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full Name.
+        /// </summary>
+        public static string V_User_FullName {
+            get {
+                return ResourceManager.GetString("V_User_FullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Id.
+        /// </summary>
+        public static string V_UserId {
+            get {
+                return ResourceManager.GetString("V_UserId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Username.
+        /// </summary>
+        public static string V_UserName {
+            get {
+                return ResourceManager.GetString("V_UserName", resourceCulture);
             }
         }
     }

@@ -27,6 +27,18 @@ namespace totalhr.web.Areas.Admin
                 new { action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { "totalhr.web.Areas.Admin.Controllers" }
             );
+
+            context.MapRoute(
+                 "AdminSimpleRouteGuid",
+                 "Admin/{controller}/{action}/{uniqueid}",
+                 new
+                 {
+                     controller = "Home",
+                     action = "Index",
+                     uniqueid = System.Guid.Empty
+                 },
+                namespaces: new[] { "totalhr.web.Areas.Admin.Controllers" }
+             );
         }
     }
 }

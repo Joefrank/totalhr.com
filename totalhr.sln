@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanyDocumentService", "C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileManagementService", "FileManagementService\FileManagementService.csproj", "{25E457D8-382F-4D73-9D1D-8F17D8927BD1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "totalhr.core", "totalhr.core\totalhr.core.csproj", "{37A1AC80-4903-4855-9436-887DC8C3D5AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AliceLaptop|Any CPU = AliceLaptop|Any CPU
@@ -211,6 +213,18 @@ Global
 		{25E457D8-382F-4D73-9D1D-8F17D8927BD1}.JoesLaptop|Any CPU.Build.0 = Release|Any CPU
 		{25E457D8-382F-4D73-9D1D-8F17D8927BD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{25E457D8-382F-4D73-9D1D-8F17D8927BD1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37A1AC80-4903-4855-9436-887DC8C3D5AD}.AliceLaptop|Any CPU.ActiveCfg = Release|Any CPU
+		{37A1AC80-4903-4855-9436-887DC8C3D5AD}.AliceLaptop|Any CPU.Build.0 = Release|Any CPU
+		{37A1AC80-4903-4855-9436-887DC8C3D5AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37A1AC80-4903-4855-9436-887DC8C3D5AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37A1AC80-4903-4855-9436-887DC8C3D5AD}.HomeDesktop|Any CPU.ActiveCfg = Release|Any CPU
+		{37A1AC80-4903-4855-9436-887DC8C3D5AD}.HomeDesktop|Any CPU.Build.0 = Release|Any CPU
+		{37A1AC80-4903-4855-9436-887DC8C3D5AD}.IMPC1003Office|Any CPU.ActiveCfg = Release|Any CPU
+		{37A1AC80-4903-4855-9436-887DC8C3D5AD}.IMPC1003Office|Any CPU.Build.0 = Release|Any CPU
+		{37A1AC80-4903-4855-9436-887DC8C3D5AD}.JoesLaptop|Any CPU.ActiveCfg = Release|Any CPU
+		{37A1AC80-4903-4855-9436-887DC8C3D5AD}.JoesLaptop|Any CPU.Build.0 = Release|Any CPU
+		{37A1AC80-4903-4855-9436-887DC8C3D5AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37A1AC80-4903-4855-9436-887DC8C3D5AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

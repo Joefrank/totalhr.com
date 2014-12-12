@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using totalhr.services.Infrastructure;
 using totalhr.Shared.Models;
+using totalhr.data.EF;
 
 namespace totalhr.web.Areas.Admin.Controllers
 {
@@ -27,22 +28,35 @@ namespace totalhr.web.Areas.Admin.Controllers
             return View(_profileService.GetProfileList());
         }
 
-        public ActionResult ManageUserProfiles(Guid userId)
-        {
-            var lst = _accountService.GetUserProfile(CurrentUser.UserId);
-            
-            var sList = lst.Select(x => new ListItemStruct { Id = x.id, Name = x.Name }).ToList();
-
-            var profList = _profileService.GetProfileList();
-
-            var profileStruct = new AdminProfileStruct
+        public ActionResult ManageUserProfiles()
+        {            
+            User user = _accountService.GetUserByGuid(Request.QueryString["guid"]);
+            if (user != null)
             {
-                UserId = CurrentUser.UserId,
-                UserProfiles = sList,
-                Allprofiles = profList.Select(x => new ListItemStruct { Id = x.id, Name = x.Name }).ToList() // new List<ListItemStruct>{new ListItemStruct{Id=1,Name ="Test"}}
-            };
+                var profileStruct = new AdminProfileStruct
+                {
+                    UserId = CurrentUser.UserId,
+                    UserProfiles = _accountService.GetUserProfile(user.id),
+                    Allprofiles = _profileService.GetProfileListAgainstUserForListing(user.id)
+                };
+                ViewBag.UserName = user.firstname + " " + user.surname;
+                return View(profileStruct);
+            }
+            else if (user.CompanyId != CurrentUser.CompanyId)
+            {
+                ViewData["ModelError"] = totalhr.Resources.Error.Error_NoAccess_ToUserProfile;
+                return RedirectToAction("AccessDenied", "Error");
+            }
             
-            return View(profileStruct);
+            return View();
+           
+        }
+
+        public ActionResult ViewUsers(int id)
+        {
+            Profile profile = _profileService.GetProfile(id);
+            ViewBag.ProfileName = profile.Name;
+            return View(_profileService.ListUsers(id, CurrentUser.UserId));
         }
     }
 }

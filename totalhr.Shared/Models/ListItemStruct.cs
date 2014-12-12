@@ -11,4 +11,9 @@ namespace totalhr.Shared.Models
         public int Id { get; set; }
         public string Name { get; set; }
     }
+
+    public class ListItemStructExtended : ListItemStruct
+    {
+        public bool Assigned { get; set; }
+    }
 }

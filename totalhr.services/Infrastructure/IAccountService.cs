@@ -53,6 +53,8 @@ namespace totalhr.services.Infrastructure
 
         List<string> GetUserNamesByIds(List<int> ids);
 
-        List<Profile> GetUserProfile(int userId);
+        IEnumerable<ListItemStruct> GetUserProfile(int userId);
+
+        IEnumerable<ListItemStruct> GetUserProfileByGuid(Guid uniqueid);
     }
 }

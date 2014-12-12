@@ -159,4 +159,16 @@
   <data name="V_Title" xml:space="preserve">
     <value>Title</value>
   </data>
+  <data name="V_Email1" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="V_UserId" xml:space="preserve">
+    <value>User Id</value>
+  </data>
+  <data name="V_UserName" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="V_User_FullName" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
 </root>
