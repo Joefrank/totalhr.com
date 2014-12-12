@@ -298,6 +298,7 @@
     <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
     <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
     <Content Include="Areas\Admin\Views\Profile\ManageUserProfiles.cshtml" />
+    <Content Include="Areas\Admin\Views\Profile\ViewUsers.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\date.js" />
     <Content Include="Scripts\jquery-1.11.0.min.js" />
@@ -414,6 +415,9 @@
     <ProjectReference Include="..\totalhr.data.TimeRecordingSystem\totalhr.data.TimeRecordingSystem.csproj">
       <Project>{aae8d583-9a4f-4e69-ab31-9a0cdceb4bcb}</Project>
       <Name>totalhr.data.TimeRecordingSystem</Name>
+    <ProjectReference Include="..\totalhr.core\totalhr.core.csproj">
+      <Project>{37a1ac80-4903-4855-9436-887dc8c3d5ad}</Project>
+      <Name>totalhr.core</Name>
     </ProjectReference>
     <ProjectReference Include="..\totalhr.data\totalhr.data.csproj">
       <Project>{f5a3d97a-a1b9-463a-850e-23cf6e1fc488}</Project>

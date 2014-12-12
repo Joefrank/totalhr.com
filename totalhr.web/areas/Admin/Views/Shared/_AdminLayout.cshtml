@@ -14,8 +14,11 @@
     @RenderSection("scripts", required: false)
 </head>
 <body>
-   
-    @RenderBody()
+   <div id="main">
+        <div class="content">
+            @RenderBody()
+        </div>
+    </div>
 
     <div id="overlay-mask" style="display:none"></div>
 

@@ -1,15 +1,13 @@
-﻿
+﻿@using totalhr.Resources;
+
 @{
     ViewBag.Title = "AccessDenied";
     string ErrorMessage = Request.QueryString["ModelError"];
 }
 
-<h2>AccessDenied</h2>
+<h1>@Error.Error_Access_Denied</h1>
 
-<p>
-    You do not have the correct profile for this feature.<br />
-    Please contact your administrator for more details.
-</p>
-<p>
+<p class="error">
     @ErrorMessage
+    @ViewData["ModelError"]
 </p>

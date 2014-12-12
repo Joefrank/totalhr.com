@@ -8,23 +8,26 @@
    
     }
 
-<div id="main">
-    <div class="content">
 
-        <h1>@AdminGeneric.V_Profile_Management</h1>
 
-        <div>
+   <h1>@AdminGeneric.V_Profile_Management</h1>
+ <div class="wide">
+     <p>
+         @AdminGeneric.V_List_Of_Profiles_Intro
+     </p>
+ </div>
+   <div class="wide">
 
-        </div>
+     
         <table border="1" class="tabsimple">
             <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Created On</th>
-                <th>Created By</th>
-                <th>Last Modified</th>
-                <th>Last Modified By</th>
-                <th>Users</th>
+                <th>@AdminGeneric.V_Name</th>
+                <th>@AdminGeneric.V_Description</th>
+                <th>@AdminGeneric.V_Created_On</th>
+                <th>@AdminGeneric.V_Created_By</th>
+                <th>@AdminGeneric.V_Last_Modified_By</th>
+                <th>@AdminGeneric.V_Last_Modified</th>
+                <th>@AdminGeneric.V_Users</th>
             </tr>
             @foreach(var profile in Model){
             <tr>
@@ -35,23 +38,25 @@
                    @profile.Description
                 </td>
                 <td>
-                    @profile.Created               
+                    @profile.Created.ToShortDateString()               
                 </td>
                 <td>
-                    @profile.CreatedBy
+                    @(profile.User.firstname + " " + profile.User.surname)
                 </td>
                 <td>
                     @profile.LastModified
                 </td>
                 <td>
-                    @profile.LastModifiedBy
+                    @((profile.LastModifiedBy != null)? profile.User1.firstname + " " + profile.User1.surname : "")
                 </td>
                 <td>
-                    <input type="button" class="edit" value="View User" onclick="" />
+                    <input type="button" class="edit" value="@AdminGeneric.V_View_Users" onclick="NavigateTo('/Admin/Profile/ViewUsers/@profile.id');" />
                 </td>
             </tr>            
             }
         </table>
+
+
     </div>
-</div>
+
 

@@ -118,3 +118,7 @@ function OpenPopup(url, width, height) {
     $('#dvPopup').css("width", width);
     $('#overlay-mask').css("display", "");
 }
+
+function NavigateTo(url) {
+    document.location.href = url;
+}

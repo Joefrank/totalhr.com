@@ -42,10 +42,24 @@ namespace totalhr.data.Repositories.Implementation
                 Select(y => y.firstname + " " + y.surname).ToList();
         }
 
-        public List<Profile> GetUserProfile(int userId)
+        public IEnumerable<ListItemStruct> GetUserProfile(int userId)
         {
-            List<int> userProfiles = Context.UserProfiles.Where(x => x.UserId == userId).Select(i => i.ProfileId).ToList();
-            return Context.Profiles.Where(x => userProfiles.Contains(x.id)).ToList();
+            return from profile in this.Context.Profiles
+                   join uprofile in Context.UserProfiles on profile.id equals uprofile.ProfileId
+                   where uprofile.UserId == userId
+                   select new ListItemStruct() { Id = profile.id, Name = profile.Name };
+            
+        }
+
+        public IEnumerable<ListItemStruct> GetUserProfileByGuid(Guid uniqueid)
+        {
+            return from profile in this.Context.Profiles
+                           join uprofile in Context.UserProfiles on profile.id equals uprofile.ProfileId
+                           join user in Context.Users on uprofile.UserId equals user.id
+                           where user.userguid == uniqueid
+                           select new ListItemStruct() { Id = profile.id, Name = profile.Name };  
+
+
         }
     }
 }

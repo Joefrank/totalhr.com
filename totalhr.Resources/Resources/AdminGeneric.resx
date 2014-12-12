@@ -117,22 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Error_No_User_Under_Profile" xml:space="preserve">
+    <value>Sorry but no user has been assigned this profile.</value>
+  </data>
   <data name="V_Admin_Home_Title" xml:space="preserve">
     <value>Admin Home</value>
   </data>
   <data name="V_All_Profiles" xml:space="preserve">
     <value>All Profiles</value>
   </data>
+  <data name="V_Created_By" xml:space="preserve">
+    <value>Created By</value>
+  </data>
+  <data name="V_Created_On" xml:space="preserve">
+    <value>Created On</value>
+  </data>
+  <data name="V_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
   <data name="V_Existing_Profiles" xml:space="preserve">
     <value>Existing Profiles</value>
+  </data>
+  <data name="V_Last_Modified" xml:space="preserve">
+    <value>Last Modified</value>
+  </data>
+  <data name="V_Last_Modified_By" xml:space="preserve">
+    <value>Last Modified By</value>
+  </data>
+  <data name="V_List_Of_Profiles_Intro" xml:space="preserve">
+    <value>Viewing list of all available profiles.</value>
+  </data>
+  <data name="V_Manage_Profiles" xml:space="preserve">
+    <value>Manage User Profiles</value>
+  </data>
+  <data name="V_More_Details" xml:space="preserve">
+    <value>More Details</value>
+  </data>
+  <data name="V_Name" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="V_Profile_Management" xml:space="preserve">
     <value>Profile Management</value>
   </data>
+  <data name="V_Profile_Management_UserList" xml:space="preserve">
+    <value>User List By Profile</value>
+  </data>
   <data name="V_Role_Management" xml:space="preserve">
     <value>Role Management</value>
   </data>
+  <data name="V_Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="V_Users_In_Profile_X" xml:space="preserve">
+    <value>Users who have been assigned profile: {0}</value>
+  </data>
   <data name="V_User_Profile_Management" xml:space="preserve">
     <value>User Profile Management</value>
+  </data>
+  <data name="V_View_Users" xml:space="preserve">
+    <value>View Users</value>
+  </data>
+  <data name="V_You_Viewing_USerProfile_X" xml:space="preserve">
+    <value>You are view profiles related to user "{0}".</value>
   </data>
 </root>
