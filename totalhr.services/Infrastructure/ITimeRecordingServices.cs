@@ -9,6 +9,6 @@ namespace totalhr.services.Infrastructure
 {
     public interface ITimeRecordingServices
     {
-        bool RecordTimeForUser(int userId, DateTime startTime, DateTime endTime, Audit audit);
+        bool RecordTimeForUser(int userId, int companyId, DateTime startTime, DateTime endTime, Audit audit);
     }
 }

@@ -151,6 +151,8 @@
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminBaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\TimeRecording\Controllers\TimeRecordingController.cs" />
+    <Compile Include="Areas\TimeRecording\ViewModels\TimeRecordingViewModel.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Admin\AdminBaseController.cs" />
     <Compile Include="Controllers\Admin\AdminHomeController.cs" />
@@ -295,6 +297,8 @@
     <Content Include="Areas\Admin\Views\Web.config" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Views\TimeRecording\RecordTime.cshtml" />
+    <Content Include="Views\TimeRecording\Index.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\date.js" />
     <Content Include="Scripts\jquery-1.11.0.min.js" />
@@ -413,6 +417,10 @@
     <ProjectReference Include="..\FileManagementService\FileManagementService.csproj">
       <Project>{25e457d8-382f-4d73-9d1d-8f17d8927bd1}</Project>
       <Name>FileManagementService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\totalhr.data.TimeRecordingSystem\totalhr.data.TimeRecordingSystem.csproj">
+      <Project>{aae8d583-9a4f-4e69-ab31-9a0cdceb4bcb}</Project>
+      <Name>totalhr.data.TimeRecordingSystem</Name>
     </ProjectReference>
     <ProjectReference Include="..\totalhr.data\totalhr.data.csproj">
       <Project>{f5a3d97a-a1b9-463a-850e-23cf6e1fc488}</Project>

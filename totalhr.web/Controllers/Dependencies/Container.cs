@@ -24,6 +24,8 @@ using CompanyDocumentService.Implementation;
 using CompanyDocumentService.Infrastructure;
 using FileManagementService.Infrastructure;
 using FileManagementService.Implementation;
+using totalhr.data.TimeRecordingSystem.Repositories.Infrastructure;
+using totalhr.data.TimeRecordingSystem.Repositories.Implementation;
 
 namespace totalhr.web.Controllers.Dependencies
 {
@@ -65,6 +67,12 @@ namespace totalhr.web.Controllers.Dependencies
             ninjectKernel.Bind<IFileRepository>().To<FileRepository>();
             ninjectKernel.Bind<IFileService>().To<FileService>();
             ninjectKernel.Bind<ICompanyService>().To<CompanyService>();
+
+
+            ninjectKernel.Bind<ITimeRecordingServices>().To<TimeRecordingServices>();
+            ninjectKernel.Bind<ITimeRecordingRepository>().To<TimeRecordingRepository>();
+
+
         }
 
     }

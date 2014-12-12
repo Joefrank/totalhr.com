@@ -13,17 +13,25 @@ namespace totalhr.services.Implementation
     public class TimeRecordingServices: ITimeRecordingServices
     {
         private ITimeRecordingRepository _timeRecordingRepository { get; set; }
+        private IAccountService _accountService { get; set; }
 
-        public TimeRecordingServices(ITimeRecordingRepository timeRecordingRepository)
+        public TimeRecordingServices(ITimeRecordingRepository timeRecordingRepository, IAccountService accountService)
         {
             _timeRecordingRepository = timeRecordingRepository;
+            _accountService = accountService;
         }
 
-        public bool RecordTimeForUser(int userId, DateTime startTime, DateTime endTime, Audit audit)
+        public bool RecordTimeForUser(int userId, int companyId, DateTime startTime, DateTime endTime, Audit audit)
         {
-            var timeRecording = new TimeRecording(userId,startTime,endTime,audit);
-            _timeRecordingRepository.Add(timeRecording);
-            return true;
+            //find if user exists
+            if (_accountService.GetUser(userId) != null)
+            {
+                //record time
+                var timeRecording = new TimeRecording(userId, startTime, endTime, audit);
+                _timeRecordingRepository.Add(timeRecording);
+                return true;
+            }
+            return false;
         }
     }
 }
