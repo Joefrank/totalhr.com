@@ -200,6 +200,7 @@ R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\totalhr.Shared.dll
 R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\AutoMapper.dll
 R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\log4net.dll
 R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\common.dll
+R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\totalhr.data.TimeRecordingSystem.dll
 R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\Resources.dll
 R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\System.Web.Mvc.dll
 R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\totalhr.data.pdb
@@ -212,10 +213,9 @@ R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\EntityFramework.SqlServer.xm
 R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\Ninject.xml
 R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\AutoMapper.xml
 R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\log4net.xml
+R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\totalhr.data.TimeRecordingSystem.pdb
 R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\Resources.pdb
 R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\System.Web.Mvc.xml
 R:\GitProjects\TotalHR\totalhr.tests.libs\obj\Debug\totalhr.tests.libs.csprojResolveAssemblyReference.cache
 R:\GitProjects\TotalHR\totalhr.tests.libs\obj\Debug\totalhr.tests.libs.dll
 R:\GitProjects\TotalHR\totalhr.tests.libs\obj\Debug\totalhr.tests.libs.pdb
-R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\totalhr.data.TimeRecordingSystem.dll
-R:\GitProjects\TotalHR\totalhr.tests.libs\bin\Debug\totalhr.data.TimeRecordingSystem.pdb

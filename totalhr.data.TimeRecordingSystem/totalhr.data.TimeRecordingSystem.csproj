@@ -62,20 +62,6 @@
     <Compile Include="EF\Note.cs">
       <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\TimeRecording.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TimeRecording.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\TimeRecording.cs">
-      <DependentUpon>TimeRecording.tt</DependentUpon>
-    </Compile>
-    <Compile Include="EF\TimeRecordingType.cs">
-      <DependentUpon>TimeRecording.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Audit.cs" />
-    <Compile Include="EF\Partials\TimeRecording.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EF\Role.cs">
       <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
@@ -85,10 +71,21 @@
     <Compile Include="EF\TaskScheduler.cs">
       <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
-    <Compile Include="EF\TimeRecording.Designer.cs">
+    <Compile Include="EF\TimeRecording.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>TimeRecording.edmx</DependentUpon>
+      <DependentUpon>TimeRecording.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TimeRecording.cs">
+      <DependentUpon>TimeRecording.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TimeRecording1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeRecording.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TimeRecordingType.cs">
+      <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\User.cs">
       <DependentUpon>TimeRecording.tt</DependentUpon>
@@ -98,6 +95,14 @@
     </Compile>
     <Compile Include="EF\UserRole.cs">
       <DependentUpon>TimeRecording.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Audit.cs" />
+    <Compile Include="EF\Partials\TimeRecording.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="EF\TimeRecording.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeRecording.edmx</DependentUpon>
     </Compile>
     <Compile Include="Repositories\Implementation\TimeRecordingRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ITimeRecordingRepository.cs" />

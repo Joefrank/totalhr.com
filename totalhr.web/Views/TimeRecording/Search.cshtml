@@ -1,0 +1,73 @@
+﻿@model totalhr.web.Areas.TimeRecording.ViewModels.SearchVM
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>
+            Search Time Recordings
+        </legend>
+        <table>
+            <tr>
+                <td>
+                    Start Date: @Html.EditorFor(x => x.StartDate)
+                </td>
+                <td>
+                    End Date: @Html.EditorFor(x => x.EndDate)
+                </td>
+                <td>
+                    Number of Results: @Html.EditorFor(x => x.ResultsPerPage)
+                </td>
+                <td>
+                    <input type="button" value="submit" />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+    
+    if (@Model.Results != null)
+    {
+        <table>
+            <tr>
+                <td>
+                    Start Time
+                </td>
+                <td>
+                    End Time
+                </td>
+                <td>
+                    Recorded by
+                </td>
+                <td>
+                    Duration Recorded
+                </td>
+            </tr>
+            @foreach (var result in Model.Results)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(x => result.StartTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => result.EndTime)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => result.AddedByUser)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(x => result.RecordedDuration)
+                    </td>
+                </tr>
+            }
+        </table>
+
+    <br />
+    @Html.ActionLink("Back to Time Recording Home", "Index");
+    }
+}

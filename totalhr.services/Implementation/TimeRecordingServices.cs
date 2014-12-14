@@ -29,9 +29,16 @@ namespace totalhr.services.Implementation
                 //record time
                 var timeRecording = new TimeRecording(userId, startTime, endTime, audit);
                 _timeRecordingRepository.Add(timeRecording);
+                _timeRecordingRepository.Save();
                 return true;
             }
             return false;
+        }
+
+        public List<TimeRecording> Search(DateTime startDate, DateTime endDate, int skip, int take )
+        {
+            return _timeRecordingRepository.Search(startDate, endDate, skip, take).ToList();
+             
         }
     }
 }

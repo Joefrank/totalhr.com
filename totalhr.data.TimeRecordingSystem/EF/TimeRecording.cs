@@ -22,7 +22,7 @@ namespace totalhr.data.TimeRecordingSystem.EF
         public System.DateTime AddedDate { get; set; }
         public Nullable<System.DateTime> UpdatedDate { get; set; }
         public byte[] TimeStamp { get; set; }
-        public long NoteId { get; set; }
+        public Nullable<long> NoteId { get; set; }
         public int AddedById { get; set; }
         public Nullable<int> UpdatedById { get; set; }
         public Nullable<int> TaskRefId { get; set; }

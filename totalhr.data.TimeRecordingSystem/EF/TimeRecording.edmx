@@ -135,7 +135,7 @@
           <Property Name="AddedDate" Type="datetime" Nullable="false" />
           <Property Name="UpdatedDate" Type="datetime" />
           <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
-          <Property Name="NoteId" Type="bigint" Nullable="false" />
+          <Property Name="NoteId" Type="bigint" />
           <Property Name="AddedById" Type="int" Nullable="false" />
           <Property Name="UpdatedById" Type="int" />
           <Property Name="TaskRefId" Type="int" />
@@ -328,7 +328,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TimeRecording_Notes">
-          <End Role="Notes" Type="Self.Notes" Multiplicity="1" />
+          <End Role="Notes" Type="Self.Notes" Multiplicity="0..1" />
           <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Notes">
@@ -625,11 +625,11 @@
           <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
           <Property Name="TimeStamp" Type="Binary" MaxLength="8" FixedLength="true" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
-          <Property Name="NoteId" Type="Int64" Nullable="false" />
+          <Property Name="NoteId" Type="Int64" Nullable="true" />
           <Property Name="AddedById" Type="Int32" Nullable="false" />
           <Property Name="UpdatedById" Type="Int32" />
           <Property Name="TaskRefId" Type="Int32" />
-          <NavigationProperty Name="Note" Relationship="Self.FK_TimeRecording_Notes" FromRole="TimeRecording" ToRole="Notes" />
+          <NavigationProperty Name="Note" Relationship="TimeRecordingModel.FK_TimeRecording_Notes" FromRole="TimeRecording" ToRole="Notes" />
           <NavigationProperty Name="TaskScheduler" Relationship="Self.FK_TimeRecording_TaskScheduler" FromRole="TimeRecording" ToRole="TaskScheduler" />
           <NavigationProperty Name="User" Relationship="Self.FK_TimeRecording_User" FromRole="TimeRecording" ToRole="User" />
           <NavigationProperty Name="AddedByUser" Relationship="Self.FK_TimeRecording_User1" FromRole="TimeRecording" ToRole="User" />
@@ -762,7 +762,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_TimeRecording_Notes">
-          <End Role="Notes" Type="Self.Note" Multiplicity="1" />
+          <End Role="Notes" Type="Self.Note" Multiplicity="0..1" />
           <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Notes">

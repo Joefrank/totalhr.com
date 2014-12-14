@@ -385,12 +385,14 @@ R:\GitProjects\TotalHR\totalhr.web\bin\CompanyDocumentService.dll
 R:\GitProjects\TotalHR\totalhr.web\bin\FileManagementService.dll
 R:\GitProjects\TotalHR\totalhr.web\bin\Resources.dll
 R:\GitProjects\TotalHR\totalhr.web\bin\totalhr.data.dll
+R:\GitProjects\TotalHR\totalhr.web\bin\totalhr.data.TimeRecordingSystem.dll
 R:\GitProjects\TotalHR\totalhr.web\bin\totalhr.service.messaging.dll
 R:\GitProjects\TotalHR\totalhr.web\bin\totalhr.services.dll
 R:\GitProjects\TotalHR\totalhr.web\bin\totalhr.Shared.dll
 R:\GitProjects\TotalHR\totalhr.web\bin\AutoMapper.dll
 R:\GitProjects\TotalHR\totalhr.web\bin\Authentication.pdb
 R:\GitProjects\TotalHR\totalhr.web\bin\CalendarService.pdb
+R:\GitProjects\TotalHR\totalhr.web\bin\totalhr.data.TimeRecordingSystem.pdb
 R:\GitProjects\TotalHR\totalhr.web\bin\totalhr.data.pdb
 R:\GitProjects\TotalHR\totalhr.web\bin\Resources.pdb
 R:\GitProjects\TotalHR\totalhr.web\bin\totalhr.service.messaging.pdb
@@ -402,5 +404,3 @@ R:\GitProjects\TotalHR\totalhr.web\bin\AutoMapper.xml
 R:\GitProjects\TotalHR\totalhr.web\obj\Debug\totalhr.web.csprojResolveAssemblyReference.cache
 R:\GitProjects\TotalHR\totalhr.web\obj\Debug\totalhr.web.dll
 R:\GitProjects\TotalHR\totalhr.web\obj\Debug\totalhr.web.pdb
-R:\GitProjects\TotalHR\totalhr.web\bin\totalhr.data.TimeRecordingSystem.dll
-R:\GitProjects\TotalHR\totalhr.web\bin\totalhr.data.TimeRecordingSystem.pdb

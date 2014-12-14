@@ -1,10 +1,11 @@
-﻿@model totalhr.web.Areas.TimeRecording.ViewModels.TimeRecordingViewModel
+﻿@model totalhr.web.Areas.TimeRecording.ViewModels.TimeRecordingVM
 
 @{
     ViewBag.Title = "Record Time";
 }
 
 <h2>RecordTime</h2>
+
 
 @using (Html.BeginForm()) {
     @Html.AntiForgeryToken()
@@ -33,28 +34,31 @@
             @Html.LabelFor(model => model.StartTime)
         </div>
         <div class="editor-field">
-            @Html.EditorFor(model => model.StartTime)
+            @Html.EditorFor(model => model.StartTime, new { @class = "dp"})
             @Html.ValidationMessageFor(model => model.StartTime)
-        </div>
+            </div>
 
-        <div class="editor-label">
-            @Html.LabelFor(model => model.EndTime)
-        </div>
-        <div class="editor-field">
-            @Html.EditorFor(model => model.EndTime)
-            @Html.ValidationMessageFor(model => model.EndTime)
-        </div>
+            <div class="editor-label">
+                @Html.LabelFor(model => model.EndTime)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.EndTime)
+                @Html.ValidationMessageFor(model => model.EndTime)
+            </div>
 
-        <p>
-            <input type="submit" value="Save" />
-        </p>
-    </fieldset>
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+</fieldset>
 }
 
 <div>
     @Html.ActionLink("Back to Time Recording Home", "Index")
 </div>
 
-@section Scripts {
+@*@section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
-}
+   
+    }*@
+
+
