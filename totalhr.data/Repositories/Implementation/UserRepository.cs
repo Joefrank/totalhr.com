@@ -61,5 +61,49 @@ namespace totalhr.data.Repositories.Implementation
 
 
         }
+
+        public void UpdateUserProfiles(int hdnUserId, string hdnSelectedProfileIds, int updatedByUser)
+        {
+            this.Context.UserProfiles.RemoveRange(this.Context.UserProfiles.Where(x => x.UserId == hdnUserId));
+            List<int> selectedProfileIds = hdnSelectedProfileIds.Split(',').Select(int.Parse).ToList();
+            foreach (var id in selectedProfileIds)
+            {
+                this.Context.UserProfiles.Add(new UserProfile { UserId = hdnUserId, ProfileId = id, Created = DateTime.Now, CreatedBy = updatedByUser });
+            }
+            this.Context.SaveChanges();
+        }
+
+
+        public IEnumerable<ListItemStruct> GetUserRole(int userId)
+        {
+            return from role in this.Context.Roles
+                   join ur in Context.UserRoles on role.id equals ur.RoleId
+                   where ur.UserId == userId
+                   select new ListItemStruct() { Id = role.id, Name = role.Name };
+        }
+
+        public IEnumerable<ListItemStruct> GetUserRoleByGuid(Guid uniqueid)
+        {
+            return from role in this.Context.Roles
+                   join ur in Context.UserRoles on role.id equals ur.RoleId
+                   join user in Context.Users on ur.UserId equals user.id
+                   where user.userguid == uniqueid
+                   select new ListItemStruct() { Id = role.id, Name = role.Name };  
+
+        }
+
+        public void UpdateUserRoles(int hdnUserId, string hdnSelectedRoleIds, int updatedByUserId)
+        {
+            this.Context.UserRoles.RemoveRange(this.Context.UserRoles.Where(x => x.UserId == hdnUserId));
+
+            List<int> selectedRoleIds = hdnSelectedRoleIds.Split(',').Select(int.Parse).ToList();
+
+            foreach (var id in selectedRoleIds)
+            {
+                this.Context.UserRoles.Add(
+                    new UserRole { UserId = hdnUserId, RoleId = id, Created = DateTime.Now, CreatedBy = updatedByUserId });
+            }
+            this.Context.SaveChanges();
+        }
     }
 }

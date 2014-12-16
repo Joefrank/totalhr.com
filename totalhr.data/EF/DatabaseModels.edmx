@@ -748,6 +748,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Roles_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="LastModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Template_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="ContractTemplate" Type="Self.ContractTemplate" Multiplicity="*" />
@@ -968,6 +992,14 @@
           <AssociationSet Name="FK_Profile_User1" Association="Self.FK_Profile_User1">
             <End Role="User" EntitySet="User" />
             <End Role="Profile" EntitySet="Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_User" Association="Self.FK_Roles_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_User1" Association="Self.FK_Roles_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Roles" EntitySet="Roles" />
           </AssociationSet>
           <AssociationSet Name="FK_Template_User" Association="Self.FK_Template_User">
             <End Role="User" EntitySet="User" />
@@ -1244,6 +1276,8 @@
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="UserRoles" Relationship="TotalHRModel.FK_UserRole_Roles" FromRole="Role" ToRole="UserRole" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_Roles_User" FromRole="Role" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_Roles_User1" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="ScheduledNotification">
           <Key>
@@ -1311,6 +1345,8 @@
           <NavigationProperty Name="UserRoles" Relationship="TotalHRModel.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
           <NavigationProperty Name="Profiles" Relationship="TotalHRModel.FK_Profile_User" FromRole="User" ToRole="Profile" />
           <NavigationProperty Name="Profiles1" Relationship="TotalHRModel.FK_Profile_User1" FromRole="User" ToRole="Profile" />
+          <NavigationProperty Name="Roles" Relationship="TotalHRModel.FK_Roles_User" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Roles1" Relationship="TotalHRModel.FK_Roles_User1" FromRole="User" ToRole="Role" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -1549,6 +1585,14 @@
           <AssociationSet Name="FK_Profile_User1" Association="TotalHRModel.FK_Profile_User1">
             <End Role="User" EntitySet="Users" />
             <End Role="Profile" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_User" Association="TotalHRModel.FK_Roles_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_User1" Association="TotalHRModel.FK_Roles_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Role" EntitySet="Roles" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetUserProfiles_Result">
@@ -2057,6 +2101,30 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="Profile">
+              <PropertyRef Name="LastModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.Role" Role="Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_User1">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.Role" Role="Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Role">
               <PropertyRef Name="LastModifiedBy" />
             </Dependent>
           </ReferentialConstraint>

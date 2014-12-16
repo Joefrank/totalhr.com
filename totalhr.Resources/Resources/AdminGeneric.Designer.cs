@@ -61,6 +61,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You need to select an item from the source list before moving it..
+        /// </summary>
+        public static string Error_No_Item_Selected {
+            get {
+                return ResourceManager.GetString("Error_No_Item_Selected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry but no user has been assigned this profile..
         /// </summary>
         public static string Error_No_User_Under_Profile {
@@ -84,6 +93,42 @@ namespace totalhr.Resources {
         public static string V_All_Profiles {
             get {
                 return ResourceManager.GetString("V_All_Profiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Roles.
+        /// </summary>
+        public static string V_All_Roles {
+            get {
+                return ResourceManager.GetString("V_All_Roles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assign.
+        /// </summary>
+        public static string V_Assign {
+            get {
+                return ResourceManager.GetString("V_Assign", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assign All.
+        /// </summary>
+        public static string V_Assign_All {
+            get {
+                return ResourceManager.GetString("V_Assign_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back To List.
+        /// </summary>
+        public static string V_Back_To_List {
+            get {
+                return ResourceManager.GetString("V_Back_To_List", resourceCulture);
             }
         }
         
@@ -124,6 +169,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string V_Home {
+            get {
+                return ResourceManager.GetString("V_Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Modified.
         /// </summary>
         public static string V_Last_Modified {
@@ -151,11 +205,38 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Viewing list of all available roles..
+        /// </summary>
+        public static string V_List_Of_Roles_Intro {
+            get {
+                return ResourceManager.GetString("V_List_Of_Roles_Intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See below a list of users for your company. Use the search to find specific users..
+        /// </summary>
+        public static string V_List_Of_Users_Intro {
+            get {
+                return ResourceManager.GetString("V_List_Of_Users_Intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manage User Profiles.
         /// </summary>
         public static string V_Manage_Profiles {
             get {
                 return ResourceManager.GetString("V_Manage_Profiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Roles.
+        /// </summary>
+        public static string V_Manage_Roles {
+            get {
+                return ResourceManager.GetString("V_Manage_Roles", resourceCulture);
             }
         }
         
@@ -178,6 +259,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile List.
+        /// </summary>
+        public static string V_Profile_List {
+            get {
+                return ResourceManager.GetString("V_Profile_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profile Management.
         /// </summary>
         public static string V_Profile_Management {
@@ -196,6 +286,33 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string V_Remove {
+            get {
+                return ResourceManager.GetString("V_Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove All.
+        /// </summary>
+        public static string V_Remove_All {
+            get {
+                return ResourceManager.GetString("V_Remove_All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of Roles.
+        /// </summary>
+        public static string V_Role_List {
+            get {
+                return ResourceManager.GetString("V_Role_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Role Management.
         /// </summary>
         public static string V_Role_Management {
@@ -205,11 +322,92 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User List By Role.
+        /// </summary>
+        public static string V_Role_Management_UserList {
+            get {
+                return ResourceManager.GetString("V_Role_Management_UserList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string V_Save {
+            get {
+                return ResourceManager.GetString("V_Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users in role &quot;{0}&quot;.
+        /// </summary>
+        public static string V_User_In_Role_X {
+            get {
+                return ResourceManager.GetString("V_User_In_Role_X", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User(s) List.
+        /// </summary>
+        public static string V_User_List {
+            get {
+                return ResourceManager.GetString("V_User_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Management.
+        /// </summary>
+        public static string V_User_Management {
+            get {
+                return ResourceManager.GetString("V_User_Management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Details.
+        /// </summary>
+        public static string V_User_Management_Details {
+            get {
+                return ResourceManager.GetString("V_User_Management_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Profile Management.
         /// </summary>
         public static string V_User_Profile_Management {
             get {
                 return ResourceManager.GetString("V_User_Profile_Management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Assigned Profiles.
+        /// </summary>
+        public static string V_User_Profiles {
+            get {
+                return ResourceManager.GetString("V_User_Profiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Role Management.
+        /// </summary>
+        public static string V_User_Role_Management {
+            get {
+                return ResourceManager.GetString("V_User_Role_Management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Assigned Roles.
+        /// </summary>
+        public static string V_User_Roles {
+            get {
+                return ResourceManager.GetString("V_User_Roles", resourceCulture);
             }
         }
         
@@ -246,6 +444,15 @@ namespace totalhr.Resources {
         public static string V_You_Viewing_USerProfile_X {
             get {
                 return ResourceManager.GetString("V_You_Viewing_USerProfile_X", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are view roles assigned to user &quot;{0}&quot;..
+        /// </summary>
+        public static string V_You_Viewing_USerRole_X {
+            get {
+                return ResourceManager.GetString("V_You_Viewing_USerRole_X", resourceCulture);
             }
         }
     }

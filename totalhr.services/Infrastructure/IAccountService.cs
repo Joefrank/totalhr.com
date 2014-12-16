@@ -56,5 +56,19 @@ namespace totalhr.services.Infrastructure
         IEnumerable<ListItemStruct> GetUserProfile(int userId);
 
         IEnumerable<ListItemStruct> GetUserProfileByGuid(Guid uniqueid);
+
+        void UpdateUserProfiles(int hdnUserId, string hdnSelectedProfileIds, int updatedByUserId);
+
+        IEnumerable<ListItemStruct> GetUserRoles(int userId);
+
+        IEnumerable<ListItemStruct> GetUserRoleByGuid(Guid uniqueid);
+
+        void UpdateUserRoles(int hdnUserId, string hdnSelectedRolesIds, int updatedByUserId);
+
+        IEnumerable<User> ListCompanyUsers(int companyId);
+
+        IEnumerable<User> SearchUsers(AdminUserSearchInfo searchInfo);
+
+        UserAdminStruct GetUserDetailsForAdmin(string uniqueid);
     }
 }

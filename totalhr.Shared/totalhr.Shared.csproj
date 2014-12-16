@@ -83,7 +83,9 @@
   <ItemGroup>
     <Compile Include="EnumExtensions.cs" />
     <Compile Include="Models\AdminProfileStruct.cs" />
+    <Compile Include="Models\AdminRoleStruct.cs" />
     <Compile Include="Models\AdminStruct.cs" />
+    <Compile Include="Models\AdminUserSearchInfo.cs" />
     <Compile Include="Models\CalendarEventCache.cs" />
     <Compile Include="Models\CalendarEventInfo.cs" />
     <Compile Include="Models\CalendarEventReminder.cs" />
@@ -99,6 +101,7 @@
     <Compile Include="Models\LoginStruct.cs" />
     <Compile Include="Models\NewUserInfo.cs" />
     <Compile Include="Models\SimpleUser.cs" />
+    <Compile Include="Models\UserAdminStruct.cs" />
     <Compile Include="Models\UserPersonalInfo.cs" />
     <Compile Include="Models\UserRegStruct.cs" />
     <Compile Include="Models\SMTPSettings.cs" />

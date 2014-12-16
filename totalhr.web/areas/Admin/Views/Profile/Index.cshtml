@@ -6,9 +6,12 @@
 @{
     ViewBag.Title = AdminGeneric.V_Profile_Management;
    
-    }
+ }
 
-
+@section breadcrumb{
+    <a href="/Admin/" title="Home">@AdminGeneric.V_Home</a> &gt;
+    <span class="last">@AdminGeneric.V_Profile_List</span>
+}
 
    <h1>@AdminGeneric.V_Profile_Management</h1>
  <div class="wide">

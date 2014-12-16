@@ -28,9 +28,10 @@ namespace totalhr.web.Areas.Admin.Controllers
             return View(_profileService.GetProfileList());
         }
 
-        public ActionResult ManageUserProfiles()
-        {            
-            User user = _accountService.GetUserByGuid(Request.QueryString["guid"]);
+        public ActionResult ManageUserProfiles(int userId =0)
+        {
+            User user = (userId > 0)? _accountService.GetUser(userId) : 
+                _accountService.GetUserByGuid(Request.QueryString["guid"]);
             if (user != null)
             {
                 var profileStruct = new AdminProfileStruct
@@ -40,6 +41,8 @@ namespace totalhr.web.Areas.Admin.Controllers
                     Allprofiles = _profileService.GetProfileListAgainstUserForListing(user.id)
                 };
                 ViewBag.UserName = user.firstname + " " + user.surname;
+                ViewBag.UserId = user.id;
+
                 return View(profileStruct);
             }
             else if (user.CompanyId != CurrentUser.CompanyId)
@@ -50,6 +53,12 @@ namespace totalhr.web.Areas.Admin.Controllers
             
             return View();
            
+        }
+
+        public ActionResult UpdateUserProfile(string hdnSelectedProfileIds, int hdnUserId)
+        {
+            _accountService.UpdateUserProfiles(hdnUserId, hdnSelectedProfileIds, CurrentUser.UserId);
+            return RedirectToAction("ManageUserProfiles", new { userId = hdnUserId });
         }
 
         public ActionResult ViewUsers(int id)

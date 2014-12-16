@@ -275,31 +275,35 @@ namespace totalhr.services.Implementation
         public UserPersonalInfo GetUserInfoByEmail(string email)
         {
             User user = GetUserByEmail(email);
-            UserPersonalInfo info = new UserPersonalInfo();
+            return GetUserPersonalInfo(user);
+        }
 
-            info.Address1 = user.Address1;
-            info.Address2 = user.Address2;
-            info.Address3 = user.Address3;
-            info.City = user.Town;
-            info.CompanyId = user.CompanyId;
-            info.CountryId = user.countryId;
-            info.Email = user.email;
-            info.FirstName = user.firstname;
-            info.GenderId = user.GenderId;
-            info.MiddleNames = user.othernames;
-            info.MobilePhone = user.Mobile;
-            info.OtherTitle = user.othertitle;
-            info.Password = CM.Security.Decrypt(user.password);
-            info.PersonalPhone = user.Phone;
-            info.PostCode = user.PostCode;
-            info.PreferedLanguageId = user.preferedlanguageid;
-            info.State = user.stateorcounty;
-            info.Surname = user.surname;
-            info.Title = user.title;
-            info.UserId = user.id;
-            info.UserName = user.username;
+        public UserPersonalInfo GetUserPersonalInfo(User user){
 
-            return info;
+            return new UserPersonalInfo(){
+                Address1 = user.Address1,
+                Address2 = user.Address2,
+                Address3 = user.Address3,
+                City = user.Town,
+                CompanyId = user.CompanyId,
+                CountryId = user.countryId,
+                Email = user.email,
+                FirstName = user.firstname,
+                GenderId = user.GenderId,
+                MiddleNames = user.othernames,
+                MobilePhone = user.Mobile,
+                OtherTitle = user.othertitle,
+                Password = CM.Security.Decrypt(user.password),
+                PersonalPhone = user.Phone,
+                PostCode = user.PostCode,
+                PreferedLanguageId = user.preferedlanguageid,
+                State = user.stateorcounty,
+                Surname = user.surname,
+                Title = user.title,
+                UserId = user.id,
+                UserName = user.username
+            };
+            
         }
 
         public int UpdateUserDetails(UserPersonalInfo info)
@@ -353,9 +357,46 @@ namespace totalhr.services.Implementation
             return _userRepos.GetUserProfileByGuid(uniqueid);
         }
 
-        //public List<Role> GetUserRole(int userId)
-        //{
+        public void UpdateUserProfiles(int hdnUserId, string hdnSelectedProfileIds, int updatedByUserId)
+        {
+            _userRepos.UpdateUserProfiles(hdnUserId, hdnSelectedProfileIds, updatedByUserId);
+        }
 
-        //}
+        public IEnumerable<ListItemStruct> GetUserRoles(int userId)
+        {
+            return _userRepos.GetUserRole(userId);
+        }
+
+        public IEnumerable<ListItemStruct> GetUserRoleByGuid(Guid uniqueid)
+        {
+            return _userRepos.GetUserRoleByGuid(uniqueid);
+        }
+
+        public void UpdateUserRoles(int hdnUserId, string hdnSelectedRolesIds, int updatedByUserId)
+        {
+            _userRepos.UpdateUserRoles(hdnUserId, hdnSelectedRolesIds, updatedByUserId);
+        }
+
+        public IEnumerable<User> ListCompanyUsers(int companyId)
+        {
+            return _userRepos.FindBy(x => x.CompanyId == companyId);
+        }
+
+        public UserAdminStruct GetUserDetailsForAdmin(string uniqueid)
+        {
+            User user = GetUserByGuid(uniqueid);
+
+            return new UserAdminStruct
+            {
+                PersonalInfo = GetUserPersonalInfo(user),
+                UserProfiles = GetUserProfile(user.id),
+                UserRoles = GetUserRoles(user.id)
+            };
+        }
+
+        public IEnumerable<User> SearchUsers(AdminUserSearchInfo searchInfo)
+        {
+            return null;
+        }
     }
 }

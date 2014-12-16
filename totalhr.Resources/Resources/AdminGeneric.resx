@@ -180,4 +180,73 @@
   <data name="V_You_Viewing_USerProfile_X" xml:space="preserve">
     <value>You are view profiles related to user "{0}".</value>
   </data>
+  <data name="Error_No_Item_Selected" xml:space="preserve">
+    <value>You need to select an item from the source list before moving it.</value>
+  </data>
+  <data name="V_Assign" xml:space="preserve">
+    <value>Assign</value>
+  </data>
+  <data name="V_Assign_All" xml:space="preserve">
+    <value>Assign All</value>
+  </data>
+  <data name="V_Back_To_List" xml:space="preserve">
+    <value>Back To List</value>
+  </data>
+  <data name="V_Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="V_Profile_List" xml:space="preserve">
+    <value>Profile List</value>
+  </data>
+  <data name="V_Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="V_Remove_All" xml:space="preserve">
+    <value>Remove All</value>
+  </data>
+  <data name="V_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="V_User_Profiles" xml:space="preserve">
+    <value>User Assigned Profiles</value>
+  </data>
+  <data name="V_All_Roles" xml:space="preserve">
+    <value>All Roles</value>
+  </data>
+  <data name="V_List_Of_Roles_Intro" xml:space="preserve">
+    <value>Viewing list of all available roles.</value>
+  </data>
+  <data name="V_Manage_Roles" xml:space="preserve">
+    <value>Manage Roles</value>
+  </data>
+  <data name="V_Role_List" xml:space="preserve">
+    <value>List of Roles</value>
+  </data>
+  <data name="V_Role_Management_UserList" xml:space="preserve">
+    <value>User List By Role</value>
+  </data>
+  <data name="V_User_In_Role_X" xml:space="preserve">
+    <value>Users in role "{0}"</value>
+  </data>
+  <data name="V_User_Roles" xml:space="preserve">
+    <value>User Assigned Roles</value>
+  </data>
+  <data name="V_User_Role_Management" xml:space="preserve">
+    <value>User Role Management</value>
+  </data>
+  <data name="V_You_Viewing_USerRole_X" xml:space="preserve">
+    <value>You are view roles assigned to user "{0}".</value>
+  </data>
+  <data name="V_User_Management" xml:space="preserve">
+    <value>User Management</value>
+  </data>
+  <data name="V_List_Of_Users_Intro" xml:space="preserve">
+    <value>See below a list of users for your company. Use the search to find specific users.</value>
+  </data>
+  <data name="V_User_List" xml:space="preserve">
+    <value>User(s) List</value>
+  </data>
+  <data name="V_User_Management_Details" xml:space="preserve">
+    <value>User Details</value>
+  </data>
 </root>

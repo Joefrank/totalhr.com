@@ -16,6 +16,9 @@
 <body>
    <div id="main">
         <div class="content">
+            <div class="breadcrumb">
+                @RenderSection("breadcrumb", required: false)
+            </div>
             @RenderBody()
         </div>
     </div>
