@@ -142,11 +142,38 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gender.
+        /// </summary>
+        public static string V_Gender {
+            get {
+                return ResourceManager.GetString("V_Gender", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Visit.
+        /// </summary>
+        public static string V_LastVisit {
+            get {
+                return ResourceManager.GetString("V_LastVisit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mobile.
         /// </summary>
         public static string V_Mobile {
             get {
                 return ResourceManager.GetString("V_Mobile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No of Visits.
+        /// </summary>
+        public static string V_No_Visits {
+            get {
+                return ResourceManager.GetString("V_No_Visits", resourceCulture);
             }
         }
         

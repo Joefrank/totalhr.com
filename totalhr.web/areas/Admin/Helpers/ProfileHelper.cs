@@ -35,8 +35,7 @@ namespace totalhr.web.Areas.Admin.Helpers
         }
 
         public static string GenerateDefaultListBox(string attrib)
-        {
-            
+        {            
             return string.Format(@"<select {0}></select>", attrib);
         }
     }

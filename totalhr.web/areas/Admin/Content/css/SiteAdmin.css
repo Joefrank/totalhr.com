@@ -363,3 +363,21 @@ table.tabsimple {
         padding:3px;
         text-align:left;
     }
+
+.assignbut, .ctabut {
+    min-width: 100px;
+    font-size: 8pt;
+    padding:2px;
+    margin:5px 10px;
+    text-align:center;
+    cursor:pointer;
+}
+
+.overhead {
+    font-weight:bold;
+}
+
+.rolemgt select, .profilemgt select {
+    min-height:300px;
+    min-width:250px;
+}

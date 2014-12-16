@@ -287,6 +287,7 @@
     <Compile Include="Repositories\Implementation\GenericRepository.cs" />
     <Compile Include="Repositories\Implementation\LanguageRepository.cs" />
     <Compile Include="Repositories\Implementation\ProfileRepository.cs" />
+    <Compile Include="Repositories\Implementation\RoleRepository.cs" />
     <Compile Include="Repositories\Implementation\UserRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICalendarEventRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICalendarRepository.cs" />
@@ -298,6 +299,7 @@
     <Compile Include="Repositories\Infrastructure\IGenericRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ILanguageRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IProfileRepository.cs" />
+    <Compile Include="Repositories\Infrastructure\IRoleRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IUserRepository.cs" />
   </ItemGroup>
   <ItemGroup>

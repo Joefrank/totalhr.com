@@ -171,4 +171,13 @@
   <data name="V_User_FullName" xml:space="preserve">
     <value>Full Name</value>
   </data>
+  <data name="V_Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="V_LastVisit" xml:space="preserve">
+    <value>Last Visit</value>
+  </data>
+  <data name="V_No_Visits" xml:space="preserve">
+    <value>No of Visits</value>
+  </data>
 </root>

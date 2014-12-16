@@ -32,12 +32,17 @@ namespace totalhr.data.Repositories.Implementation
 
         public IEnumerable<ListItemStruct> ListProfilesForSimple(int userId)
         {
-            return from profile in Context.Profiles
-                   join uprofile in Context.UserProfiles on profile.id equals uprofile.ProfileId into mylist
-                   from lst in mylist.DefaultIfEmpty()
-                   where lst.UserId != userId && lst.UserId == null
-                   select new ListItemStruct{ Id = profile.id, Name = profile.Name};
-                  
+            
+            return from p in Context.Profiles.Where(x =>  
+                         !(
+                            from up in Context.UserProfiles 
+                            where up.UserId == userId
+                            select up.ProfileId
+                         ).Contains(x.id)
+                     )
+                     select new ListItemStruct { Id = p.id, Name = p.Name };
+                         
         }
     }
 }
+ 

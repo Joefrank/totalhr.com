@@ -14,9 +14,6 @@ namespace totalhr.Shared.Models
 
         public IEnumerable<ListItemStruct> Allprofiles { get; set; }
 
-        public IEnumerable<ListItemStruct> UserRoles { get; set; }
-
-        public IEnumerable<ListItemStruct> AllUsers { get; set; }
     }
 
     
