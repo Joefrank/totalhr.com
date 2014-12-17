@@ -14,5 +14,9 @@ namespace totalhr.services.Infrastructure
         List<Glossary> GetGlossary(int languageid, Variables.GlossaryGroups group);
 
         void SetCacheHelper(ICacheHelper helper);
+
+        Glossary GetSpecificGlossary(int languageId, int glossaryRootId, Variables.GlossaryGroups group);
+
+        string GetSpecificGlossaryTerm(int languageId, int glossaryRootId, Variables.GlossaryGroups group);
     }
 }

@@ -249,4 +249,28 @@
   <data name="V_User_Management_Details" xml:space="preserve">
     <value>User Details</value>
   </data>
+  <data name="V_Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="V_Search_ByName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="V_Search_Partial_Address" xml:space="preserve">
+    <value>Partial Address</value>
+  </data>
+  <data name="V_State_or_County" xml:space="preserve">
+    <value>State/County</value>
+  </data>
+  <data name="V_Town" xml:space="preserve">
+    <value>City/Town</value>
+  </data>
+  <data name="V_User_Id" xml:space="preserve">
+    <value>User Id</value>
+  </data>
+  <data name="V_User_Search" xml:space="preserve">
+    <value>User Search</value>
+  </data>
+  <data name="V_User_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
 </root>

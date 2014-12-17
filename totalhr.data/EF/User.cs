@@ -79,5 +79,6 @@ namespace totalhr.data.EF
         public virtual ICollection<Profile> Profiles1 { get; set; }
         public virtual ICollection<Role> Roles { get; set; }
         public virtual ICollection<Role> Roles1 { get; set; }
+        public virtual Department Department { get; set; }
     }
 }

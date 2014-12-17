@@ -23,15 +23,16 @@ namespace totalhr.services.Implementation
         private IUserRepository _userRepos;
         private ICompanyRepository _companyRepos;
         private ILanguageRepository _langRepos;
-        
+        private IGlossaryService _glossaryService;
         
         private static readonly ILog log = LogManager.GetLogger(typeof(AccountService));
         
-        public AccountService(IUserRepository userRepos, ICompanyRepository companyRepos, ILanguageRepository langRepos)
+        public AccountService(IUserRepository userRepos, ICompanyRepository companyRepos, ILanguageRepository langRepos, IGlossaryService glossaryService)
         {
              _userRepos = userRepos;
             _companyRepos = companyRepos;
             _langRepos = langRepos;
+            _glossaryService = glossaryService;
         }
 
         public Company CreateCompany(NewUserInfo info)
@@ -209,6 +210,9 @@ namespace totalhr.services.Implementation
         public UserDetailsStruct GetUserDetailsForLogin(string UserName, string Password)
         {
             User user = this.GetActiveUser(UserName, Password);
+            user.lastvisit = DateTime.Now;
+            user.novisits++;
+            _userRepos.Save();
 
             if (user == null)
                 return null;
@@ -301,7 +305,9 @@ namespace totalhr.services.Implementation
                 Surname = user.surname,
                 Title = user.title,
                 UserId = user.id,
-                UserName = user.username
+                UserName = user.username,
+                TitleGlossary = _glossaryService.GetSpecificGlossaryTerm(user.preferedlanguageid, user.title, Variables.GlossaryGroups.Title),
+                GenderGlossary = _glossaryService.GetSpecificGlossaryTerm(user.preferedlanguageid, user.GenderId, Variables.GlossaryGroups.Gender)
             };
             
         }
@@ -382,6 +388,12 @@ namespace totalhr.services.Implementation
             return _userRepos.FindBy(x => x.CompanyId == companyId);
         }
 
+        public IEnumerable<ListItemStruct> ListCompanyUsersSimple(int companyId)
+        {
+            return _userRepos.FindBy(x => x.CompanyId == companyId).
+                Select(x => new ListItemStruct {Id = x.id, Name = x.firstname + " " + x.surname  });
+        }
+
         public UserAdminStruct GetUserDetailsForAdmin(string uniqueid)
         {
             User user = GetUserByGuid(uniqueid);
@@ -394,9 +406,16 @@ namespace totalhr.services.Implementation
             };
         }
 
-        public IEnumerable<User> SearchUsers(AdminUserSearchInfo searchInfo)
+        public IEnumerable<GetUserListForAdmin_Result> GetUserListForAdmin(bool? bShowActive, int languageId)
         {
-            return null;
+            return _userRepos.GetUserListForAdmin(bShowActive, languageId);
         }
+        
+        public IEnumerable<SearchUser_Result> SearchUsers(UserSearchInfo searchInfo)
+        {
+            return _userRepos.SearchUser(searchInfo);
+        }
+
+
     }
 }

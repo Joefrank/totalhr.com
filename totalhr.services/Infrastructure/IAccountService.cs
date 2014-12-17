@@ -67,8 +67,12 @@ namespace totalhr.services.Infrastructure
 
         IEnumerable<User> ListCompanyUsers(int companyId);
 
-        IEnumerable<User> SearchUsers(AdminUserSearchInfo searchInfo);
+        IEnumerable<ListItemStruct> ListCompanyUsersSimple(int companyId);
+
+        IEnumerable<SearchUser_Result> SearchUsers(UserSearchInfo searchInfo);
 
         UserAdminStruct GetUserDetailsForAdmin(string uniqueid);
+
+        IEnumerable<GetUserListForAdmin_Result> GetUserListForAdmin(bool? bShowActive, int languageId);
     }
 }
