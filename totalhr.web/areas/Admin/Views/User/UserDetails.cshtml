@@ -1,0 +1,158 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+
+@model totalhr.Shared.Models.UserAdminStruct
+
+@{
+    ViewBag.Title = AdminGeneric.V_User_Management + " - " + AdminGeneric.V_User_Management_Details;   
+ }
+
+@section breadcrumb{
+    <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
+    <a href="/Admin/User/" title="@AdminGeneric.V_User_List">@AdminGeneric.V_User_List</a>
+    <span class="last">@AdminGeneric.V_User_Management_Details</span>
+}
+
+   <h1>@(AdminGeneric.V_User_Management + " - (" + AdminGeneric.V_User_Management_Details + ")")</h1>
+ <div class="wide">
+     <p>
+         @AdminGeneric.V_List_Of_Users_Intro
+     </p>
+ </div>
+   <div class="wide">
+     
+       <div class="formdiv midform">
+            <div class="wrapper">
+
+                 <fieldset>
+               <legend>@FormMessages.Title_Personal_Details</legend>
+                
+                <div class="line">
+                    <label>@FormMessages.Label_Gender <b class="req">*</b></label>
+                     <span>Gender</span>                    
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_Title <b class="req">*</b></label>
+                     <span>Title
+                     </span>
+                    
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_First_Name <b class="req">*</b></label>
+                    <span>@Model.PersonalInfo.FirstName</span>
+                    
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_MiddleName <b class="req"></b></label>
+                     <span>@Model.PersonalInfo.MiddleNames</span>
+                    
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_Last_Name <b class="req">*</b></label>
+                    <span>@Model.PersonalInfo.Surname</span>
+                    
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_Email <b class="req">*</b></label>
+                    <span>@Model.PersonalInfo.Email</span>
+                    
+                </div>                
+                
+                <div class="line">
+                    <label>@FormMessages.Label_Address <b class="req">*</b></label>
+                    <span>@Model.PersonalInfo.Address1</span>
+                    
+                </div>
+                 <div class="line">
+                    <label>&nbsp;</label>
+                    <span>@Model.PersonalInfo.Address2</span>
+                    
+                </div>
+                 <div class="line">
+                    <label>&nbsp;</label>
+                    <span>@Model.PersonalInfo.Address3</span>
+                   
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_City <b class="req">*</b></label>
+                    <span>@Model.PersonalInfo.City</span>
+                    
+                </div>
+                <div class="line" >
+                    <label>@FormMessages.Label_State</label>
+                    <span>@Model.PersonalInfo.State</span>
+                   
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_PostCode</label>
+                    <span>@Model.PersonalInfo.PostCode</span>
+                   
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_Country <b class="req">*</b></label>
+                    <span>Country</span>
+                    
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_Phone <b class="req">*</b></label>
+                    <span>@Model.PersonalInfo.PersonalPhone</span>
+                    
+                </div>
+                 <div class="line">
+                    <label>@FormMessages.Label_Mobile</label>
+                    <span>@Model.PersonalInfo.MobilePhone</span>
+                    
+                </div>
+                
+                </fieldset>
+
+                 <fieldset>
+
+                <legend>@FormMessages.Title_Logon_Details</legend>
+
+                 <div class="line">
+                    <label>@FormMessages.Label_Username <b class="req">*</b></label>
+                    <span>
+                        @Model.PersonalInfo.UserName
+                     </span>
+                    
+                </div>
+                <div class="line">
+                    <label>@FormMessages.Label_Password <b class="req">*</b></label>
+                    <span>@Model.PersonalInfo.Password</span>
+                    <span id="spAction" class="actionlink" onclick="RevealPassToSpan('Password', 'spupss', this, 'spAlternate');">@Common.V_Show</span>
+                    <span id="spupss" class="passdisplay" style="display:none"></span>    
+                    <span id="spAlternate" style="display:none">@Common.V_Hide</span>                
+                </div>
+                                
+                 <div class="line">
+                    <label>@FormMessages.Label_Pref_Language</label>
+                    <span>Preferredlanguage</span>
+                    
+                </div>
+                
+                </fieldset>
+
+                <div class="line">
+                    &nbsp;
+                </div>
+                <div class="line">
+                    <label>&nbsp;</label>
+                    <span>
+                        <input type="button" value="@FormMessages.btn_Cancel" onclick="" /> &nbsp;
+                        <input type="button" value="??Edit??" /></span>
+                    <span class="req"></span>
+                </div>
+                <div class="line">&nbsp;</div>
+            </div>
+
+        </div>           
+     
+       <!-- add profiles -->
+       <!-- add roles -->
+       <!-- put popup to edit all sections on this page -->
+
+
+    </div>
+
+
