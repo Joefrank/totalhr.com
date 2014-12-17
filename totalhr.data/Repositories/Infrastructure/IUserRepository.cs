@@ -32,5 +32,9 @@ namespace totalhr.data.Repositories.Infrastructure
         IEnumerable<ListItemStruct> GetUserRoleByGuid(Guid uniqueid);
 
         void UpdateUserRoles(int hdnUserId, string hdnSelectedRoleIds, int updatedByUserId);
+
+        IEnumerable<GetUserListForAdmin_Result> GetUserListForAdmin(bool? bShowActive, int languageId);
+
+        IEnumerable<SearchUser_Result> SearchUser(UserSearchInfo searchInfo);
     }
 }

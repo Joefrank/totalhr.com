@@ -105,5 +105,16 @@ namespace totalhr.data.Repositories.Implementation
             }
             this.Context.SaveChanges();
         }
+
+        public IEnumerable<GetUserListForAdmin_Result> GetUserListForAdmin(bool? bShowActive, int languageId)
+        {
+            return this.Context.GetUserListForAdmin(bShowActive,languageId) as IEnumerable<GetUserListForAdmin_Result>;
+        }
+
+        public IEnumerable<SearchUser_Result> SearchUser(UserSearchInfo info)
+        {
+            return this.Context.SearchUser(info.Id, info.Name, info.UserTypeId, info.DepartmentId, info.Email,
+                info.PartialAddress, info.Town, info.County, info.PostCode, info.Phone, info.LanguageId);
+        }
     }
 }

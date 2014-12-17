@@ -151,6 +151,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Department.
+        /// </summary>
+        public static string V_Department {
+            get {
+                return ResourceManager.GetString("V_Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string V_Description {
@@ -340,6 +349,51 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string V_Search_ByName {
+            get {
+                return ResourceManager.GetString("V_Search_ByName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Partial Address.
+        /// </summary>
+        public static string V_Search_Partial_Address {
+            get {
+                return ResourceManager.GetString("V_Search_Partial_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State/County.
+        /// </summary>
+        public static string V_State_or_County {
+            get {
+                return ResourceManager.GetString("V_State_or_County", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City/Town.
+        /// </summary>
+        public static string V_Town {
+            get {
+                return ResourceManager.GetString("V_Town", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Id.
+        /// </summary>
+        public static string V_User_Id {
+            get {
+                return ResourceManager.GetString("V_User_Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Users in role &quot;{0}&quot;.
         /// </summary>
         public static string V_User_In_Role_X {
@@ -408,6 +462,24 @@ namespace totalhr.Resources {
         public static string V_User_Roles {
             get {
                 return ResourceManager.GetString("V_User_Roles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Search.
+        /// </summary>
+        public static string V_User_Search {
+            get {
+                return ResourceManager.GetString("V_User_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type.
+        /// </summary>
+        public static string V_User_Type {
+            get {
+                return ResourceManager.GetString("V_User_Type", resourceCulture);
             }
         }
         

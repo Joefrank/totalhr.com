@@ -224,6 +224,9 @@
     <Compile Include="EF\GetCompanyFoldersByUser_Result.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\GetUserListForAdmin_Result.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\GetUserProfiles_Result.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
@@ -252,6 +255,9 @@
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\ScheduledNotification.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SearchUser_Result.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\SplitCSV_Result.cs">

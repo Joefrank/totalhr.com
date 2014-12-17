@@ -47,5 +47,20 @@ namespace totalhr.services.Implementation
                 group.ToString().ToLower().Equals(x.GlossaryGroup.ToLower())).OrderBy(x => x.GroupOrder).ToList()
                 : new List<Glossary>();
         }
+
+        public Glossary GetSpecificGlossary(int languageId, int glossaryRootId, Variables.GlossaryGroups group)
+        {
+            var lstGlossary = GetGlossary(languageId, group);
+            return (lstGlossary != null)? lstGlossary.FirstOrDefault(x => x.RootId == glossaryRootId) : null;            
+        }
+
+        public string GetSpecificGlossaryTerm(int languageId, int glossaryRootId, Variables.GlossaryGroups group)
+        {
+            if (languageId < 1 || glossaryRootId < 1)
+                return "";
+
+            var lstGlossary = GetGlossary(languageId, group);
+            return (lstGlossary != null) ? lstGlossary.FirstOrDefault(x => x.RootId == glossaryRootId).Term : "";
+        }
     }
 }

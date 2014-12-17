@@ -70,10 +70,17 @@ namespace totalhr.Shared.Models
 
         #endregion
 
+        #region disaply_fields
+
+        public string TitleGlossary { get; set; }
+
+        public string GenderGlossary { get; set; }
+
+        #endregion
 
         #region logondetails
 
-       
+
         [MaxLength(100, ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_UserName_Too_long")]
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_Username_Rq")]
         public string UserName { get; set; }

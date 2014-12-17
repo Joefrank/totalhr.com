@@ -154,7 +154,10 @@
     <Compile Include="Areas\Admin\Controllers\ProfileController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Helpers\GenericHelper.cs" />
     <Compile Include="Areas\Admin\Helpers\ProfileHelper.cs" />
+    <Compile Include="Areas\Admin\Helpers\UserHelper.cs" />
+    <Compile Include="Areas\Admin\Models\UserSearchResult.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Admin\AdminBaseController.cs" />
     <Compile Include="Controllers\Admin\AdminHomeController.cs" />
@@ -297,19 +300,21 @@
     <Content Include="Content\themes\jquery-ui.theme.min.css" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Areas\Admin\Views\Web.config" />
-    <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
-    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
-    <Content Include="Areas\Admin\Views\Profile\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\Admin\Views\Profile\ManageUserProfiles.cshtml" />
-    <Content Include="Areas\Admin\Views\Profile\ViewUsers.cshtml" />
-    <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\Role\ManageUserRoles.cshtml" />
-    <Content Include="Areas\Admin\Views\Role\ViewUsers.cshtml" />
-    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\User\UserDetails.cshtml" />
+    <Content Include="Areas\Admin\Models\Views\Web.config" />
+    <Content Include="Areas\Admin\Models\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Admin\Models\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Models\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Areas\Admin\Models\Views\Profile\Index.cshtml" />
+    <Content Include="Areas\Admin\Models\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Models\Views\Profile\ManageUserProfiles.cshtml" />
+    <Content Include="Areas\Admin\Models\Views\Profile\ViewUsers.cshtml" />
+    <Content Include="Areas\Admin\Models\Views\Role\Index.cshtml" />
+    <Content Include="Areas\Admin\Models\Views\Role\ManageUserRoles.cshtml" />
+    <Content Include="Areas\Admin\Models\Views\Role\ViewUsers.cshtml" />
+    <Content Include="Areas\Admin\Models\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Models\Views\User\UserDetails.cshtml" />
+    <Content Include="Areas\Admin\Models\Views\Shared\_UserSearch.cshtml" />
+    <Content Include="Areas\Admin\Models\Views\User\SearchResult.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\date.js" />
     <Content Include="Scripts\jquery-1.11.0.min.js" />
@@ -404,7 +409,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
     <Folder Include="bin\Database\" />
     <Folder Include="CompanyDocuments\" />
     <Folder Include="Users\Profile\Images\" />

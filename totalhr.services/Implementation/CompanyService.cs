@@ -36,5 +36,10 @@ namespace totalhr.services.Implementation
         {
             return _companyRepos.GetCompanyDepartmentsByIds(ids);
         }
+
+        public IEnumerable<ListItemStruct> GetDepartmentSimple(int companyId)
+        {
+            return _companyRepos.GetDeparmentSimple(companyId);
+        }
     }
 }
