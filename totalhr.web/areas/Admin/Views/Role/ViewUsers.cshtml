@@ -1,0 +1,77 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+
+@model IEnumerable<totalhr.data.EF.User>
+
+@{
+    ViewBag.Title = AdminGeneric.V_Role_Management + " - (" + AdminGeneric.V_Role_Management_UserList + ")";
+    bool bShowList = Model != null && Model.Count() > 0;
+ }
+
+@section breadcrumb{
+    <a href="/Admin/" title="Home">@AdminGeneric.V_Home</a> &gt;
+    <a href="/Admin/Role/" title="@AdminGeneric.V_Role_List">@AdminGeneric.V_Role_List</a> &gt;
+    <span class="last">@ViewBag.RoleName</span>
+}
+
+    <h1>@AdminGeneric.V_Role_Management - (@AdminGeneric.V_Role_Management_UserList)</h1>
+
+    <div class="wide">
+        <p>
+            @Html.Raw(string.Format(AdminGeneric.V_User_In_Role_X, ViewBag.RoleName))
+        </p>
+    </div>
+
+    <div  class="wide">
+
+       @if(bShowList){
+        <table border="1" class="tabsimple">
+            <tr>
+                <th>@Account.V_UserId</th>
+                <th>@Account.V_User_FullName</th>
+                <th>@Account.V_Email</th>
+                <th>@Account.V_UserName</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
+            </tr>
+            @foreach(var user in Model){
+            <tr>
+                <td>
+                   @user.id
+                </td>
+                <td>
+                   @(user.firstname +  " " + user.surname)
+                </td>
+                
+                <td>
+                    @user.email               
+                </td>
+                <td>
+                    @user.username
+                </td>               
+                <td>
+                    <input type="button" class="edit" value="@AdminGeneric.V_More_Details" onclick="javascript:OpenEmployeeProfile('@user.userguid');" />
+                </td>
+                <td>
+                    <input style="display:none" type="button" class="edit" value="@AdminGeneric.V_Manage_Roles" onclick="javascript:NavigateTo('/Admin/Role/ManageUserRoles/@user.userguid');" />
+                    <a href="/Admin/Role/ManageUserRoles/?guid=@user.userguid" title="@AdminGeneric.V_Manage_Roles" >@AdminGeneric.V_Manage_Roles</a>
+                </td>
+            </tr>            
+            }
+        </table>
+       }else{
+           <p class="error">
+            @Error.Error_No_User_Under_Role
+               </p>   
+       }
+
+    </div>
+
+    <div class="wide">
+        <p>
+            <input type="button" value="Back To List" onclick="javascript:NavigateTo('/Admin/Role/')" />
+           </p>
+    </div>
+   
+
+
