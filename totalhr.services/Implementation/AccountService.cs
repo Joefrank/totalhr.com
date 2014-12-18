@@ -78,7 +78,7 @@ namespace totalhr.services.Implementation
             user.Address2 = info.Address2;
             user.Address3 = info.Address3;
             user.CompanyId = info.CompanyId;
-            user.countryId = info.CompanyCountryId;
+            user.countryId = (info.CompanyCountryId > 0)? info.CompanyCountryId : info.CountryId;
             user.createdby = -1;
             user.created = DateTime.Now;
             user.email = info.Email;
@@ -101,6 +101,7 @@ namespace totalhr.services.Implementation
             user.userguid = Guid.NewGuid();
             user.activationcode = CM.utils.random_code(20);
             user.username = info.UserName;
+            user.departmentid = info.DepartmentId;
             _userRepos.Add(user);
             _userRepos.Save();
 
@@ -410,8 +411,8 @@ namespace totalhr.services.Implementation
         {
             return _userRepos.GetUserListForAdmin(bShowActive, languageId);
         }
-        
-        public IEnumerable<SearchUser_Result> SearchUsers(UserSearchInfo searchInfo)
+
+        public IEnumerable<GetUserListForAdmin_Result> SearchUsers(UserSearchInfo searchInfo)
         {
             return _userRepos.SearchUser(searchInfo);
         }

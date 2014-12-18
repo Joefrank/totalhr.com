@@ -31,7 +31,9 @@ namespace totalhr.web.Areas.Admin.Controllers
             ViewBag.SearchInfo = new UserSearchInfo
             {
                 UserList = _accountService.ListCompanyUsersSimple(CurrentUser.CompanyId),
-                DepartmentList = _companyService.GetDepartmentSimple(CurrentUser.CompanyId)
+                DepartmentList = _companyService.GetDepartmentSimple(CurrentUser.CompanyId),
+                HrefLocation = "/Admin/User/",
+                LanguageId = CurrentUser.LanguageId
             };
 
             var test = _accountService.GetUserListForAdmin(null, CurrentUser.LanguageId);
@@ -45,6 +47,11 @@ namespace totalhr.web.Areas.Admin.Controllers
 
         public ActionResult SearchForUser(UserSearchInfo info)
         {
+            info.UserList = _accountService.ListCompanyUsersSimple(CurrentUser.CompanyId);
+            info.DepartmentList = _companyService.GetDepartmentSimple(CurrentUser.CompanyId);
+            info.HrefLocation = "/Admin/User/SearchForUser/";
+            info.LanguageId = CurrentUser.LanguageId;
+
             var result = new UserSearchResult
             {
                 FoundUsers = _accountService.SearchUsers(info),

@@ -249,6 +249,9 @@
   <data name="V_User_Management_Details" xml:space="preserve">
     <value>User Details</value>
   </data>
+  <data name="V_Add_User" xml:space="preserve">
+    <value>Add User</value>
+  </data>
   <data name="V_Department" xml:space="preserve">
     <value>Department</value>
   </data>
@@ -257,6 +260,9 @@
   </data>
   <data name="V_Search_Partial_Address" xml:space="preserve">
     <value>Partial Address</value>
+  </data>
+  <data name="V_Select" xml:space="preserve">
+    <value>Select</value>
   </data>
   <data name="V_State_or_County" xml:space="preserve">
     <value>State/County</value>
@@ -269,6 +275,9 @@
   </data>
   <data name="V_User_Search" xml:space="preserve">
     <value>User Search</value>
+  </data>
+  <data name="V_User_Search_Result_Intro" xml:space="preserve">
+    <value>See results for your search criteria below.</value>
   </data>
   <data name="V_User_Type" xml:space="preserve">
     <value>Type</value>

@@ -8,7 +8,8 @@ namespace totalhr.Shared.Models
 {
     public class UserSearchInfo
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
+        public int LanguageId { get; set; }
         public int UserTypeId { get; set; }
         public int DepartmentId { get; set; }
         public string Name { get; set; }
@@ -18,7 +19,7 @@ namespace totalhr.Shared.Models
         public string County { get; set; }
         public string PostCode { get; set; }
         public string Phone { get; set; }
-        public int LanguageId { get; set; }
+        public string HrefLocation { get; set; }
 
         public IEnumerable<ListItemStruct> UserList { get; set; }
         public IEnumerable<ListItemStruct> DepartmentList { get; set; }

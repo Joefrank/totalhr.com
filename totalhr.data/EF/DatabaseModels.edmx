@@ -1637,7 +1637,7 @@
             <Parameter Name="showactive" Mode="In" Type="Boolean" />
             <Parameter Name="viewinglanguageid" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="SearchUser" ReturnType="Collection(TotalHRModel.SearchUser_Result)">
+          <FunctionImport Name="SearchUser" ReturnType="Collection(TotalHRModel.GetUserListForAdmin_Result)">
             <Parameter Name="id" Mode="In" Type="Int32" />
             <Parameter Name="name" Mode="In" Type="String" />
             <Parameter Name="usertypeid" Mode="In" Type="Int32" />
@@ -2935,7 +2935,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SearchUser" FunctionName="TotalHRModel.Store.SearchUser">
             <ResultMapping>
-              <ComplexTypeMapping TypeName="TotalHRModel.SearchUser_Result">
+              <ComplexTypeMapping TypeName="TotalHRModel.GetUserListForAdmin_Result">
                 <ScalarProperty Name="GenderTerm" ColumnName="GenderTerm" />
                 <ScalarProperty Name="TitleTerm" ColumnName="TitleTerm" />
                 <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />

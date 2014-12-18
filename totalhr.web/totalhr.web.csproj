@@ -308,7 +308,8 @@
     <Content Include="Areas\Admin\Views\User\Index.cshtml" />
     <Content Include="Areas\Admin\Views\User\UserDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_UserSearch.cshtml" />
-    <Content Include="Areas\Admin\Models\Views\User\SearchResult.cshtml" />
+    <Content Include="Areas\Admin\Views\User\SearchResult.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_UserList.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\date.js" />
     <Content Include="Scripts\jquery-1.11.0.min.js" />

@@ -182,8 +182,8 @@ namespace totalhr.data.EF
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserListForAdmin_Result>("GetUserListForAdmin", showactiveParameter, viewinglanguageidParameter);
         }
-    
-        public virtual ObjectResult<SearchUser_Result> SearchUser(Nullable<int> id, string name, Nullable<int> usertypeid, Nullable<int> departmentid, string email, string partialaddress, string town, string county, string postcode, string phone, Nullable<int> viewinglanguageid)
+
+        public virtual ObjectResult<GetUserListForAdmin_Result> SearchUser(Nullable<int> id, string name, Nullable<int> usertypeid, Nullable<int> departmentid, string email, string partialaddress, string town, string county, string postcode, string phone, Nullable<int> viewinglanguageid)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("id", id) :
@@ -228,8 +228,8 @@ namespace totalhr.data.EF
             var viewinglanguageidParameter = viewinglanguageid.HasValue ?
                 new ObjectParameter("viewinglanguageid", viewinglanguageid) :
                 new ObjectParameter("viewinglanguageid", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchUser_Result>("SearchUser", idParameter, nameParameter, usertypeidParameter, departmentidParameter, emailParameter, partialaddressParameter, townParameter, countyParameter, postcodeParameter, phoneParameter, viewinglanguageidParameter);
+
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserListForAdmin_Result>("SearchUser", idParameter, nameParameter, usertypeidParameter, departmentidParameter, emailParameter, partialaddressParameter, townParameter, countyParameter, postcodeParameter, phoneParameter, viewinglanguageidParameter);
         }
     }
 }
