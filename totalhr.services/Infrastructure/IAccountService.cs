@@ -69,7 +69,7 @@ namespace totalhr.services.Infrastructure
 
         IEnumerable<ListItemStruct> ListCompanyUsersSimple(int companyId);
 
-        IEnumerable<SearchUser_Result> SearchUsers(UserSearchInfo searchInfo);
+        IEnumerable<GetUserListForAdmin_Result> SearchUsers(UserSearchInfo searchInfo);
 
         UserAdminStruct GetUserDetailsForAdmin(string uniqueid);
 

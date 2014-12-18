@@ -79,6 +79,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add User.
+        /// </summary>
+        public static string V_Add_User {
+            get {
+                return ResourceManager.GetString("V_Add_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Admin Home.
         /// </summary>
         public static string V_Admin_Home_Title {
@@ -367,6 +376,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select.
+        /// </summary>
+        public static string V_Select {
+            get {
+                return ResourceManager.GetString("V_Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to State/County.
         /// </summary>
         public static string V_State_or_County {
@@ -471,6 +489,15 @@ namespace totalhr.Resources {
         public static string V_User_Search {
             get {
                 return ResourceManager.GetString("V_User_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See results for your search criteria below..
+        /// </summary>
+        public static string V_User_Search_Result_Intro {
+            get {
+                return ResourceManager.GetString("V_User_Search_Result_Intro", resourceCulture);
             }
         }
         

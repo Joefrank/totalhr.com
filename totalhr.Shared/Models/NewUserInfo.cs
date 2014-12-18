@@ -159,6 +159,7 @@ namespace totalhr.Shared.Models
         [MaxLength(500, ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_Website_Too_Long")]
         public string Website { get; set; }
 
+        public int DepartmentId { get; set; }
         #endregion
 
 

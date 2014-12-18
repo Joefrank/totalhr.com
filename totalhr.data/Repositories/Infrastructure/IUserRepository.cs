@@ -35,6 +35,6 @@ namespace totalhr.data.Repositories.Infrastructure
 
         IEnumerable<GetUserListForAdmin_Result> GetUserListForAdmin(bool? bShowActive, int languageId);
 
-        IEnumerable<SearchUser_Result> SearchUser(UserSearchInfo searchInfo);
+        IEnumerable<GetUserListForAdmin_Result> SearchUser(UserSearchInfo searchInfo);
     }
 }

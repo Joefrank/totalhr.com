@@ -19,78 +19,19 @@
          @AdminGeneric.V_List_Of_Users_Intro
      </p>
  </div>
+
+
 <div class="wide">
     @Html.Partial("_UserSearch", searchInfo)
 </div>
-
-   <div class="wide">
-     
-        <table border="1" class="tabsimple">
-            <tr>
-                <th>@Account.V_UserId</th>
-                <th>@Account.V_Title</th>
-                <th>@Account.V_Firstname</th>
-                <th>@Account.V_Surname</th>
-                <th>@Account.V_Other_Names</th>
-                <th>@Account.V_Gender</th>
-                <th>@Account.V_UserName</th>
-                <th>@Account.V_Email</th>
-                <th>@Account.V_Department</th>
-                <th>@Account.V_Phone</th>
-                <th>@Account.V_Mobile</th>
-                <th>@Account.V_LastVisit</th>
-                <th>@Account.V_No_Visits</th>
-                <th>&nbsp;</th>
-            </tr>
-            @foreach(var user in Model){
-            <tr>
-                <td>
-                   @user.id
-                </td>
-                <td>
-                   @user.TitleTerm
-                </td>
-                <td>
-                    @user.firstname               
-                </td>
-                <td>
-                    @user.surname
-                </td>
-                <td>
-                    @user.othernames
-                </td>
-                <td>
-                    @user.GenderTerm
-                </td>
-                <td>
-                    @user.username
-                </td>
-                <td>
-                    @user.email
-                </td>
-                <td>
-                    @user.DepartmentName
-                </td>
-                <td>
-                    @user.Phone
-                </td>
-                 <td>
-                    @user.Mobile
-                </td>
-                 <td>
-                    @user.lastvisit
-                </td>
-                 <td>
-                    @user.novisits
-                </td>
-                <td>
-                    <input type="button" class="edit" value="@AdminGeneric.V_More_Details" onclick="NavigateTo('/Admin/User/UserDetails/@user.userguid');" />
-                </td>
-            </tr>            
-            }
-        </table>
-
-
+<div class="wide">
+    <hr />
+</div>
+   <div class="wide">     
+         @Html.Partial("_UserList")
     </div>
 
+<div class="wide">
+    <input type="button" value="@AdminGeneric.V_Add_User" onclick="document.location.href='/Admin/User/Create/'" />
+</div>
 

@@ -92,7 +92,7 @@
             <div class="line">  
                 <input type="submit" value="@Document.V_Search" />&nbsp;
 
-                <input type="button" value="@Document.V_Reset" onclick="document.location.href='/User/'" />
+                <input type="button" value="@Document.V_Reset" onclick="document.location.href='@Html.Raw(Model.HrefLocation)'" />
             </div>
        </div>
         

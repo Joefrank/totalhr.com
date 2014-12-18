@@ -30,7 +30,7 @@ namespace totalhr.web.Areas.Admin
 
             context.MapRoute(
                  "AdminSimpleRouteGuid",
-                 "Admin/{controller}/{action}/{uniqueid}",
+                 "Admin/{controller}/{action}/Guid/{uniqueid}",
                  new
                  {
                      controller = "Home",
