@@ -25,8 +25,11 @@ namespace totalhr.web.Areas.TimeRecording.ViewModels
         public TimeRecordingDetailsVM() { }
         public TimeRecordingDetailsVM(TRData.TimeRecording entity):base(entity)
         {
-            this.AddedByUser = entity.AddedByUser.firstname + " " + entity.AddedByUser.surname;
-            this.TimeRecordingType = entity.TimeRecordingType.Type;
+            if(entity != null)
+            {
+                this.AddedByUser = entity.AddedByUser.firstname + " " + entity.AddedByUser.surname;
+                this.TimeRecordingType = entity.TimeRecordingType.Type;
+            }
         }
 
         public static List<TimeRecordingDetailsVM> Build(List<TRData.TimeRecording> entities)

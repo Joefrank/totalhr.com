@@ -21,7 +21,7 @@ namespace totalhr.web.Areas.TimeRecording.ViewModels
         {
             this.StartDate = DateTime.Now;
             this.EndDate = DateTime.Now.Subtract(new TimeSpan(7, 0, 0, 0));
-            this.PageNumber = 1;
+            this.PageNumber = 0 ;
             this.ResultsPerPage = 20;
         }
     }

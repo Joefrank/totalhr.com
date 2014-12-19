@@ -1,0 +1,67 @@
+﻿@model totalhr.web.Areas.TimeRecording.ViewModels.TimeRecordingDetailsVM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+@if (string.IsNullOrEmpty(Model.ErrorMessage))
+{
+    <fieldset>
+        <legend>Time Recording Details</legend>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.AddedByUser)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.AddedByUser)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.TimeRecordingType)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.TimeRecordingType)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.RecordedDuration)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.RecordedDuration)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.UserId)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.UserId)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.StartTime)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.StartTime)
+        </div>
+
+        <div class="display-label">
+            @Html.DisplayNameFor(model => model.EndTime)
+        </div>
+        <div class="display-field">
+            @Html.DisplayFor(model => model.EndTime)
+        </div>
+    </fieldset>
+    <p>
+        @Html.ActionLink("Edit", "RecordTime", new {  id=Model.Id })
+    </p>
+}
+else
+{
+    <div class="error-message">
+        @Html.DisplayFor(model => model.ErrorMessage)
+    </div>
+}
+<p>
+    @Html.ActionLink("Back to List", "Search")
+</p>

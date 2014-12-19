@@ -25,13 +25,14 @@
                     Number of Results: @Html.EditorFor(x => x.ResultsPerPage)
                 </td>
                 <td>
-                    <input type="button" value="submit" />
+                    <input type="submit" value="Submit" />
                 </td>
             </tr>
         </table>
     </fieldset>
+}
     
-    if (@Model.Results != null)
+    @if (Model.Results != null)
     {
         <table>
             <tr>
@@ -47,6 +48,7 @@
                 <td>
                     Duration Recorded
                 </td>
+                <td></td>
             </tr>
             @foreach (var result in Model.Results)
             {
@@ -63,11 +65,11 @@
                     <td>
                         @Html.DisplayFor(x => result.RecordedDuration)
                     </td>
+                    <td>@Html.ActionLink("Details", "Details", new { id = result.Id }) </td>
                 </tr>
             }
         </table>
 
     <br />
-    @Html.ActionLink("Back to Time Recording Home", "Index");
-    }
+    @Html.ActionLink("Back to Time Recording Home", "Index")
 }

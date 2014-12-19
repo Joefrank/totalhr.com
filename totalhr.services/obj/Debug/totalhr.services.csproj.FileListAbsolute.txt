@@ -225,7 +225,6 @@ D:\Projects\MyGithub\totalhr.com\totalhr.services\obj\Debug\totalhr.services.pdb
 D:\Projects\MyGithub\totalhr.com\totalhr.services\bin\Debug\AutoMapper.Net4.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.services\bin\Debug\AutoMapper.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.services\bin\Debug\AutoMapper.xml
-R:\GitProjects\TotalHR\totalhr.services\bin\Debug\AutoMapper.Net4.dll
 R:\GitProjects\TotalHR\totalhr.services\bin\Debug\totalhr.services.dll.config
 R:\GitProjects\TotalHR\totalhr.services\bin\Debug\totalhr.services.dll
 R:\GitProjects\TotalHR\totalhr.services\bin\Debug\totalhr.services.pdb
