@@ -109,6 +109,17 @@ function ToggleExpandGeneric(ctrHeadId, ctrToExpandId, callback, expandIcon, col
     }
 }
 
+function ToggleClass(ctrId, class1, class2) {
+    var o = $('#' + ctrId);
+    if (o.hasClass(class1)) {
+        o.removeClass(class1);
+        o.addClass(class2);
+    } else {
+        o.addClass(class1);
+        o.removeClass(class2);
+    }
+}
+
 function OpenEmployeeProfile(empid) {
     
     OpenPopup('/Account/ProfilePreview/' + empid, 600, 600);

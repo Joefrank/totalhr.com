@@ -417,6 +417,10 @@ namespace totalhr.services.Implementation
             return _userRepos.SearchUser(searchInfo);
         }
 
+        public IEnumerable<SearchUserWithPaging_Result> SearchUserWithPaging(UserSearchInfo searchInfo)
+        {
+            return _userRepos.SearchUserWithPaging(searchInfo);
+        }
 
     }
 }

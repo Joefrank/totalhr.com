@@ -402,3 +402,27 @@ table.tabsimple {
         padding:20px 20px 0 0;
         background:transparent url('/Content/images/search.png') center center no-repeat;
     }
+
+.SortedTab {
+    border-collapse:collapse;
+}
+
+    .SortedTab th, .SortedTab td {
+        padding: 3px;
+    }
+
+    .SortedTab th {
+        background-color: #142155;
+        color:white;
+        padding-right:16px;
+        text-align:left;
+    }
+    .SortedTab th.asc {
+        background:#142155 url('/Content/images/sortasc.png') right center no-repeat;
+        cursor:pointer;
+    }
+
+    .SortedTab th.desc {
+        background:#142155 url('/Content/images/sortdesc.png') right center no-repeat;
+        cursor:pointer;
+    }
