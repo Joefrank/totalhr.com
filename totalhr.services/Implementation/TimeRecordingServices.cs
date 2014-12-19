@@ -21,14 +21,25 @@ namespace totalhr.services.Implementation
             _accountService = accountService;
         }
 
-        public bool RecordTimeForUser(int userId, int companyId, DateTime startTime, DateTime endTime, Audit audit)
+        public bool RecordTimeForUser(long id, int userId, DateTime startTime, DateTime endTime, Audit audit)
         {
             //find if user exists
             if (_accountService.GetUser(userId) != null)
             {
                 //record time
-                var timeRecording = new TimeRecording(userId, startTime, endTime, audit);
-                _timeRecordingRepository.Add(timeRecording);
+                if (id == 0)
+                {
+                    var timeRecording = new TimeRecording(userId, startTime, endTime, audit);
+                    _timeRecordingRepository.Add(timeRecording);
+                }
+                else
+                {
+                    var timeRecording = this.GetById(id);
+                    if (timeRecording != null)
+                    {
+                        timeRecording.Build(userId, startTime, endTime, audit);
+                    }
+                }
                 _timeRecordingRepository.Save();
                 return true;
             }
@@ -39,6 +50,12 @@ namespace totalhr.services.Implementation
         {
             return _timeRecordingRepository.Search(startDate, endDate, skip, take).ToList();
              
+        }
+
+        public TimeRecording GetById(Int64 id)
+        {
+            var entities= _timeRecordingRepository.FindBy(x => x.Id == id);
+            return entities.FirstOrDefault();
         }
     }
 }

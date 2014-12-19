@@ -12,19 +12,31 @@ namespace totalhr.data.TimeRecordingSystem.EF
         public TimeRecording() { }
         public TimeRecording(int userId, DateTime startTime, DateTime endTime, Audit audit)
         {
-           UserId = userId;
-                StartTime = startTime;
-                EndTime = endTime;
-                TypeId = 1;
-                FillAudit(audit);
+            this.Build(userId, startTime, endTime, audit);  
         }
+
+        public void Build(int userId, DateTime startTime, DateTime endTime, Audit audit)
+        {
+            UserId = userId;
+            StartTime = startTime;
+            EndTime = endTime;
+            TypeId = 1;
+            FillAudit(audit);
+        }
+
+
         public void FillAudit(Audit audit)
         {
-            AddedDate = audit.DateAdded;
+            if (Id == 0)
+            {
+                AddedDate = audit.DateAdded;
+                AddedById = audit.AddedByUserId;
+            }
             UpdatedDate = audit.DateUpdated;
-            AddedById = audit.AddedByUserId;
             UpdatedById = audit.UpdatedByUserId;
         
         }
+
+
     }
 }

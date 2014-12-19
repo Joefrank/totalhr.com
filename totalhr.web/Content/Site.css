@@ -111,7 +111,20 @@ div.line
         color:red;
         width:350px;    
     }
+    div.display-label
+    {
+        font-weight:bold;
+    }
+    div.display-field
+    {
+        font-size:14pt;
+    }
 
+    div.error-message
+    {
+        color:red;
+        font-size:16pt;
+    }
      div.line label
     {
         display:block;
