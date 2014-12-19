@@ -74,5 +74,7 @@ namespace totalhr.services.Infrastructure
         UserAdminStruct GetUserDetailsForAdmin(string uniqueid);
 
         IEnumerable<GetUserListForAdmin_Result> GetUserListForAdmin(bool? bShowActive, int languageId);
+
+        IEnumerable<SearchUserWithPaging_Result> SearchUserWithPaging(UserSearchInfo searchInfo);
     }
 }

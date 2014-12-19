@@ -54,7 +54,7 @@ namespace totalhr.web.Areas.Admin.Controllers
 
             var result = new UserSearchResult
             {
-                FoundUsers = _accountService.SearchUsers(info),
+                FoundUsers = _accountService.SearchUserWithPaging(info),
                 SearchInfo = info
             };
             return View("SearchResult", result);

@@ -11,6 +11,6 @@ namespace totalhr.web.Areas.Admin.Models
     {
         public UserSearchInfo SearchInfo { get; set; }
 
-        public IEnumerable<GetUserListForAdmin_Result> FoundUsers { get; set; }
+        public IEnumerable<SearchUserWithPaging_Result> FoundUsers { get; set; }
     }
 }

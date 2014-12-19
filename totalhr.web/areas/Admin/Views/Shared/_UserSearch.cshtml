@@ -13,7 +13,7 @@
        <legend>@AdminGeneric.V_User_Search<span class="icon">&nbsp;</span></legend>                  
                
           
-@using (Html.BeginForm("SearchForUser", "User"))
+@using (Html.BeginForm("SearchForUser", "User", FormMethod.Post, new { id="frmSearchForm" }))
 {
      
     @Html.ValidationSummary()
@@ -95,6 +95,12 @@
                 <input type="button" value="@Document.V_Reset" onclick="document.location.href='@Html.Raw(Model.HrefLocation)'" />
             </div>
        </div>
+    
+     <!-- sorting stuff -->          
+    @Html.HiddenFor(x => x.OrderColumn)
+    @Html.HiddenFor(x => x.OrderDirection)
+    @Html.HiddenFor(x => x.PageSize)
+    @Html.HiddenFor(x => x.PageNumber)
         
 }
 

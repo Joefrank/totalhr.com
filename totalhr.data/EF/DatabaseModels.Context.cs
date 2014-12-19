@@ -182,7 +182,7 @@ namespace totalhr.data.EF
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserListForAdmin_Result>("GetUserListForAdmin", showactiveParameter, viewinglanguageidParameter);
         }
-
+    
         public virtual ObjectResult<GetUserListForAdmin_Result> SearchUser(Nullable<int> id, string name, Nullable<int> usertypeid, Nullable<int> departmentid, string email, string partialaddress, string town, string county, string postcode, string phone, Nullable<int> viewinglanguageid)
         {
             var idParameter = id.HasValue ?
@@ -228,8 +228,73 @@ namespace totalhr.data.EF
             var viewinglanguageidParameter = viewinglanguageid.HasValue ?
                 new ObjectParameter("viewinglanguageid", viewinglanguageid) :
                 new ObjectParameter("viewinglanguageid", typeof(int));
-
+    
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserListForAdmin_Result>("SearchUser", idParameter, nameParameter, usertypeidParameter, departmentidParameter, emailParameter, partialaddressParameter, townParameter, countyParameter, postcodeParameter, phoneParameter, viewinglanguageidParameter);
+        }
+    
+        public virtual ObjectResult<SearchUserWithPaging_Result> SearchUserWithPaging(Nullable<int> id, string name, Nullable<int> usertypeid, Nullable<int> departmentid, string email, string partialaddress, string town, string county, string postcode, string phone, Nullable<int> pageSize, Nullable<int> pageNumber, string ordercolumn, string sortorder, Nullable<int> viewinglanguageid)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            var usertypeidParameter = usertypeid.HasValue ?
+                new ObjectParameter("usertypeid", usertypeid) :
+                new ObjectParameter("usertypeid", typeof(int));
+    
+            var departmentidParameter = departmentid.HasValue ?
+                new ObjectParameter("departmentid", departmentid) :
+                new ObjectParameter("departmentid", typeof(int));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("email", email) :
+                new ObjectParameter("email", typeof(string));
+    
+            var partialaddressParameter = partialaddress != null ?
+                new ObjectParameter("partialaddress", partialaddress) :
+                new ObjectParameter("partialaddress", typeof(string));
+    
+            var townParameter = town != null ?
+                new ObjectParameter("town", town) :
+                new ObjectParameter("town", typeof(string));
+    
+            var countyParameter = county != null ?
+                new ObjectParameter("county", county) :
+                new ObjectParameter("county", typeof(string));
+    
+            var postcodeParameter = postcode != null ?
+                new ObjectParameter("postcode", postcode) :
+                new ObjectParameter("postcode", typeof(string));
+    
+            var phoneParameter = phone != null ?
+                new ObjectParameter("phone", phone) :
+                new ObjectParameter("phone", typeof(string));
+    
+            var pageSizeParameter = pageSize.HasValue ?
+                new ObjectParameter("PageSize", pageSize) :
+                new ObjectParameter("PageSize", typeof(int));
+    
+            var pageNumberParameter = pageNumber.HasValue ?
+                new ObjectParameter("PageNumber", pageNumber) :
+                new ObjectParameter("PageNumber", typeof(int));
+    
+            var ordercolumnParameter = ordercolumn != null ?
+                new ObjectParameter("ordercolumn", ordercolumn) :
+                new ObjectParameter("ordercolumn", typeof(string));
+    
+            var sortorderParameter = sortorder != null ?
+                new ObjectParameter("sortorder", sortorder) :
+                new ObjectParameter("sortorder", typeof(string));
+    
+            var viewinglanguageidParameter = viewinglanguageid.HasValue ?
+                new ObjectParameter("viewinglanguageid", viewinglanguageid) :
+                new ObjectParameter("viewinglanguageid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchUserWithPaging_Result>("SearchUserWithPaging", idParameter, nameParameter, usertypeidParameter, departmentidParameter, emailParameter, partialaddressParameter, townParameter, countyParameter, postcodeParameter, phoneParameter, pageSizeParameter, pageNumberParameter, ordercolumnParameter, sortorderParameter, viewinglanguageidParameter);
         }
     }
 }

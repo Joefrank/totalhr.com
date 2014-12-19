@@ -1,7 +1,7 @@
 ﻿@using totalhr.Resources;
 @using totalhr.web.Areas.Admin.Helpers;
 
-@model IEnumerable<totalhr.data.EF.GetUserListForAdmin_Result>
+@model IEnumerable<totalhr.data.EF.SearchUserWithPaging_Result>
 
 @{
     ViewBag.Title = AdminGeneric.V_User_Management;  
@@ -28,7 +28,7 @@
     <hr />
 </div>
    <div class="wide">     
-         @Html.Partial("_UserList")
+         @Html.Partial("_UserList", new totalhr.web.Areas.Admin.Models.UserSearchResult {SearchInfo = searchInfo, FoundUsers = Model })
     </div>
 
 <div class="wide">
