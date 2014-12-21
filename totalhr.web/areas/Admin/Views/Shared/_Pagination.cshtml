@@ -1,0 +1,38 @@
+﻿@using totalhr.web.Areas.Admin.Models;
+@using totalhr.web.Helpers;
+@using totalhr.core;
+@using totalhr.Resources;
+
+@model Pagination
+
+@{
+    BuildPaginationUrl urlBuilder = UrlBuilder.BuildPaginationUrlNoExtention;
+
+    var pagination = PaginationHelper.BuildPagination(Model, urlBuilder);    
+    
+    int higherBound = pagination.PageSize * pagination.CurrentPage;
+    int lowerBound = higherBound - pagination.PageSize + 1;
+}
+<div class="pagination">
+
+    @if(pagination.TotalNoOfItems > 0){
+        <p class="intro">
+            @string.Format(Common.V_Showing_XtoY_OfZ, lowerBound, higherBound, pagination.TotalNoOfItems)
+        </p>
+    }
+
+    @if(!string.IsNullOrEmpty(pagination.PrevLink)){
+        <a href="@pagination.PrevLink">&lt;&lt;@Common.V_Prev</a>
+    }
+
+    @foreach (var page in pagination.AllPages)
+    {
+        var sel = page.Selected? @" class=""selected"" " : "";
+        <a @sel href="@page.Link">@page.PageNumber</a>
+    }
+
+    @if(!string.IsNullOrEmpty(pagination.NextLink)){
+        <a href="@pagination.NextLink">@Common.V_Next &gt;&gt;</a>
+    }
+
+</div>

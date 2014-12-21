@@ -120,8 +120,8 @@ namespace totalhr.data.Repositories.Implementation
         public IEnumerable<SearchUserWithPaging_Result> SearchUserWithPaging(UserSearchInfo info)
         {
             return this.Context.SearchUserWithPaging(info.Id, info.Name, info.UserTypeId, info.DepartmentId, info.Email,
-                info.PartialAddress, info.Town, info.County, info.PostCode, info.Phone, info.PageNumber, 
-                info.PageSize, info.OrderColumn, info.OrderDirection, info.LanguageId);
+                info.PartialAddress, info.Town, info.County, info.PostCode, info.Phone, info.PageSize, 
+                info.PageNumber, info.OrderColumn, info.OrderDirection, info.LanguageId);
         }
     }
 }

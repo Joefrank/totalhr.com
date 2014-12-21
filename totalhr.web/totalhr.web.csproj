@@ -161,6 +161,7 @@
     <Compile Include="Areas\Admin\Helpers\GenericHelper.cs" />
     <Compile Include="Areas\Admin\Helpers\ProfileHelper.cs" />
     <Compile Include="Areas\Admin\Helpers\UserHelper.cs" />
+    <Compile Include="Areas\Admin\Models\Pagination.cs" />
     <Compile Include="Areas\Admin\Models\UserSearchResult.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Admin\AdminBaseController.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Helpers\DocumentHelper.cs" />
     <Compile Include="Helpers\GenericHelper.cs" />
     <Compile Include="Helpers\GossaryHelper.cs" />
+    <Compile Include="Helpers\PaginationHelper.cs" />
     <Compile Include="Models\UserAccountStruct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -310,6 +312,8 @@
     <Content Include="Areas\Admin\Views\Shared\_UserSearch.cshtml" />
     <Content Include="Areas\Admin\Views\User\SearchResult.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_UserList.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Pagination.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\date.js" />
     <Content Include="Scripts\jquery-1.11.0.min.js" />

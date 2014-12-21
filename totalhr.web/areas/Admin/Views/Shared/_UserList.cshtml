@@ -3,10 +3,22 @@
 @model totalhr.web.Areas.Admin.Models.UserSearchResult 
 @*IEnumerable<totalhr.data.EF.GetUserListForAdmin_Result>*@
 @{
-    var foundUsers = Model.FoundUsers;
+    var foundUsers = Model.FoundUsers.ToList();
     var searchInfo = Model.SearchInfo;
+
+    int userCount = foundUsers.Count();
+
+    var pagination = new totalhr.web.Areas.Admin.Models.Pagination
+    {
+        CurrentPage = searchInfo.PageNumber.GetValueOrDefault(),
+        MainLink = "/Admin/User/",
+        PageSize = searchInfo.PageSize.GetValueOrDefault(),
+        TotalNoOfItems = (userCount > 0)? foundUsers.First().Total.GetValueOrDefault() : 0
+    };
+    
 }
 
+@if(userCount > 0){
     <table border="1" class="SortedTab">
         <tr>
             <th id="UserId" onclick="ToggleOrder(this)" class="@(searchInfo.OrderColumn == "UserId" ? "desc" :"asc")">@Account.V_UserId</th>
@@ -73,11 +85,15 @@
            
         }
     </table>
+}else{
+    <p class="error">
+        @Error.Error_No_User_Found
+    </p>
+}
     
-    
-<div>
-    Pagination here
-</div>
+
+@Html.Partial("_Pagination", pagination)
+ 
 
 <script type="text/javascript">
     function ToggleOrder(obj){

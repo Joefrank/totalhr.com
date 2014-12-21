@@ -198,4 +198,13 @@
   <data name="V_Until" xml:space="preserve">
     <value>Until</value>
   </data>
+  <data name="V_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="V_Prev" xml:space="preserve">
+    <value>Prev</value>
+  </data>
+  <data name="V_Showing_XtoY_OfZ" xml:space="preserve">
+    <value>Showing {0} to {1} of {2}</value>
+  </data>
 </root>
