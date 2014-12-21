@@ -132,6 +132,9 @@
   <data name="Error_NoAccess_ToUserRole" xml:space="preserve">
     <value>You do not have the right to edit this user profile.</value>
   </data>
+  <data name="Error_No_User_Found" xml:space="preserve">
+    <value>Sorry but no user found!</value>
+  </data>
   <data name="Error_No_User_Under_Role" xml:space="preserve">
     <value>Sorry but no user has this role!</value>
   </data>

@@ -10,10 +10,10 @@ namespace totalhr.Shared.Models
     {
         public int? Id { get; set; }
         public int LanguageId { get; set; }
-        public int UserTypeId { get; set; }
-        public int DepartmentId { get; set; }
-        public int PageSize { get; set; }
-        public int PageNumber { get; set; }
+        public int? UserTypeId { get; set; }
+        public int? DepartmentId { get; set; }
+        public int? PageSize { get; set; }
+        public int? PageNumber { get; set; }
 
         public string Name { get; set; }
         public string Email { get; set; }

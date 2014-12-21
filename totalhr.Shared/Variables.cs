@@ -176,6 +176,11 @@ namespace totalhr.Shared
             Attachment = 2
         }
 
+        public enum PaginationValues
+        {
+            DefaultPageSize = 5
+        }
+
         public static string AdminEmailSignature
         {
             get

@@ -88,6 +88,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry but no user found!.
+        /// </summary>
+        public static string Error_No_User_Found {
+            get {
+                return ResourceManager.GetString("Error_No_User_Found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry but no user has this role!.
         /// </summary>
         public static string Error_No_User_Under_Role {

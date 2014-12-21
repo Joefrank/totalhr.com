@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using totalhr.data.EF;
 using totalhr.services.Infrastructure;
+using totalhr.Shared;
 using totalhr.Shared.Models;
 using totalhr.web.Areas.Admin.Models;
 
@@ -28,17 +29,35 @@ namespace totalhr.web.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.SearchInfo = new UserSearchInfo
+            return View(DoSearch());
+        }
+
+        public ActionResult Page(int id)
+        {
+            return View("Index", DoSearch(id));
+        }
+
+        public UserSearchResult DoSearch(int pageNumber = 1)
+        {
+            var searchInfo = new UserSearchInfo
             {
+                PageNumber = pageNumber,
+                PageSize = DefaultPageSize,
                 UserList = _accountService.ListCompanyUsersSimple(CurrentUser.CompanyId),
                 DepartmentList = _companyService.GetDepartmentSimple(CurrentUser.CompanyId),
                 HrefLocation = "/Admin/User/",
                 LanguageId = CurrentUser.LanguageId
             };
 
-            var test = _accountService.GetUserListForAdmin(null, CurrentUser.LanguageId);
-            return View(test);
+            var searchResult = new UserSearchResult{
+                FoundUsers = _accountService.SearchUserWithPaging(searchInfo),
+                SearchInfo = searchInfo
+            };
+
+            return searchResult;
         }
+
+        
 
         public ActionResult UserDetails(string uniqueid)
         {
@@ -58,6 +77,11 @@ namespace totalhr.web.Areas.Admin.Controllers
                 SearchInfo = info
             };
             return View("SearchResult", result);
+        }
+
+        public ActionResult Create()
+        {
+            return View();
         }
     }
 }
