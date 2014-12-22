@@ -172,7 +172,7 @@
     <value>The TotalHR Team</value>
   </data>
   <data name="V_Password_Reminder" xml:space="preserve">
-    <value>Forgot Password</value>
+    <value>Forgot password?</value>
   </data>
   <data name="Page_TT_Calendar_Event_Add" xml:space="preserve">
     <value>Calendar Event Add</value>
@@ -206,5 +206,14 @@
   </data>
   <data name="V_Showing_XtoY_OfZ" xml:space="preserve">
     <value>Showing {0} to {1} of {2}</value>
+  </data>
+  <data name="V_Not_Registered" xml:space="preserve">
+    <value>Not registered?</value>
+  </data>
+  <data name="V_Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="V_Switch_Context" xml:space="preserve">
+    <value>Switch Context</value>
   </data>
 </root>

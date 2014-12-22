@@ -5,25 +5,17 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")    
+    @Styles.Render("~/content/css/default.css")    
     @RenderSection("extrastyles", required: false)
     
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
     @Scripts.Render("~/Scripts/Site/common.js")
-    @*Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")*@
 
     @RenderSection("scripts", required: false)
 </head>
-    <body>
-        
+   <body class="home">
         <div id="overhead">
             <div class="core">
-                
-                @if (ViewBag.UserIsAdmin != null && Convert.ToBoolean(ViewBag.UserIsAdmin))
-                {
-                    <a href="/Admin/" class="contextswitch">@Common.V_Switch_Context</a>
-                }
-
                 <div class="title" onclick="javascript:NavigateTo('/');">
                     TotalHR
                 </div>
@@ -36,22 +28,24 @@
         </div>
         
         @RenderSection("head", required: false)
-
-        @* Check user is admin *@
-        
-
-        @RenderBody()
-
-        <div id="overlay-mask" style="display:none"></div>
-
-        <div id="dvPopup" style="display:none;"> 
-            <iframe id="ipopup"></iframe>       
+  
+        <div id="main">
+            @RenderBody()
         </div>
+       
+       <div id="footer">
+           <ul>
+               <li><a href="/Account/ExpressLogAdmin">Log as Admin</a></li>
+               <li>-</li>
+               <li><a href="/Account/ExpressLogNonAdmin">Log as Simple User</a></li>
+           </ul>
+       </div>
 
-        <script>
+       <script>
             @Html.Raw(string.Format(@" window.jQuery || document.write('<script src=""{0}Scripts/jquery-1.11.0.min.js""><\/script>');", 
                                     totalhr.web.Helpers.GenericHelper.WebsiteRoot))
         </script>
-
-    </body>
+   </body>
+    
+   
 </html>
