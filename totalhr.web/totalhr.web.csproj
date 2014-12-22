@@ -241,8 +241,12 @@
     <Content Include="Content\calendar.css" />
     <Content Include="Content\css\calendar.css" />
     <Content Include="Content\css\companydocument.css" />
+    <Content Include="Content\css\default.css" />
     <Content Include="Content\css\popup.css" />
     <Content Include="Content\images\cal.gif" />
+    <Content Include="Content\images\design\calendar-icon.png" />
+    <Content Include="Content\images\design\device.jpg" />
+    <Content Include="Content\images\design\hero-bg-new.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -398,6 +402,7 @@
     <Content Include="Views\Document\Share.cshtml" />
     <Content Include="Views\Document\ShareComplete.cshtml" />
     <Content Include="Views\Account\ProfilePreview.cshtml" />
+    <Content Include="Views\Shared\_DefaultLayout.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

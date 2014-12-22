@@ -362,3 +362,9 @@ table.tabsimple {
     table.tabsimple tr td, table.tabsimple tr th {
         padding:3px;
     }
+
+ .contextswitch {
+     color: red;
+     background: transparent url('/Content/images/design/switch-context.png') left center no-repeat;
+     padding: 10px 0 10px 28px;
+ }

@@ -261,7 +261,7 @@ namespace totalhr.web.Controllers
                     DepartmentId = 2,
                     CookieDuration = new TimeSpan(0, 5, 0,0),
                     Culture = "en-GB",
-                    UserName = "joe_bolla@cyberminds.co.uk",
+                    UserName = "admin@cyberminds.co.uk",
                     LanguageId = 1,
                     Profiles = new List<string>{"1","4"},
                     Roles = new List<string>{"1","2","3"},
@@ -273,6 +273,28 @@ namespace totalhr.web.Controllers
             return View("Index", user);
         }
 
+        [AllowAnonymous]
+        public ActionResult ExpressLogNonAdmin()
+        {
+            var user = new ClientUser
+                {
+                    FullName = "Joe Tester Temp",
+                    CompanyId = 30,
+                    DepartmentId = 2,
+                    CookieDuration = new TimeSpan(0, 5, 0,0),
+                    Culture = "en-GB",
+                    UserName = "joseph.bolla@cyberminds.co.uk",
+                    LanguageId = 1,
+                    Profiles = new List<string>{"1","4"},
+                    Roles = new List<string>{"3"},
+                    UserId = 59
+                };
+
+            AuthService.PersistClientUser(user);
+
+            return View("Index", user);
+        }
+        
         [HttpPost]
         public ActionResult SaveUserDetails(UserPersonalInfo userinfo)
         {
