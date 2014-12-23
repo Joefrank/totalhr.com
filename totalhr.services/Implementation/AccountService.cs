@@ -67,10 +67,16 @@ namespace totalhr.services.Implementation
             _companyRepos.Add(company);
             _companyRepos.Save();
             log.Debug("CreateCompany - Company created");
-            return company;
-        }       
 
-        public User CreateUser(NewUserInfo info)
+            if (company.ID > 0)//create default department
+            {
+                _companyRepos.CreateDepartment(company.ID, -1, "HR", "");
+            }
+
+            return company;
+        }
+
+        public User CreateUser(NewEmployeeInfo info)
         {
             log.Debug("Create User - User creating");
             User user = new User();
@@ -78,7 +84,7 @@ namespace totalhr.services.Implementation
             user.Address2 = info.Address2;
             user.Address3 = info.Address3;
             user.CompanyId = info.CompanyId;
-            user.countryId = (info.CompanyCountryId > 0)? info.CompanyCountryId : info.CountryId;
+            user.countryId = info.CountryId;
             user.createdby = -1;
             user.created = DateTime.Now;
             user.email = info.Email;

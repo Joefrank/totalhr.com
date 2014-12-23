@@ -27,5 +27,19 @@ namespace totalhr.data.Repositories.Implementation
             return this.Context.Departments.Where(x => x.CompanyId == companyId).
                 Select(y => new ListItemStruct{ Id = y.id, Name = y.Name});
         }
+
+        public int CreateDepartment(int companyId, int userId, string departmentName, string description)
+        {
+            Department dept = new Department();
+            dept.Name = departmentName;
+            dept.Description = description;
+            dept.CreatedBy = userId;
+            dept.CompanyId = companyId;
+            dept.Created = DateTime.Now;
+
+            this.Context.Departments.Add(dept);
+            this.Context.SaveChanges();
+            return dept.id;
+        }
     }
 }

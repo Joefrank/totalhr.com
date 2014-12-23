@@ -99,6 +99,7 @@
     <Compile Include="Models\Attributes\AlwaysTrueAttribute.cs" />
     <Compile Include="Models\ListItemStruct.cs" />
     <Compile Include="Models\LoginStruct.cs" />
+    <Compile Include="Models\NewEmployeeInfo.cs" />
     <Compile Include="Models\NewUserInfo.cs" />
     <Compile Include="Models\SimpleUser.cs" />
     <Compile Include="Models\UserAdminStruct.cs" />

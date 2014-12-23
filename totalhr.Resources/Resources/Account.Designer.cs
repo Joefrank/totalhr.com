@@ -106,11 +106,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Calendars.
+        /// </summary>
+        public static string V_Calendars {
+            get {
+                return ResourceManager.GetString("V_Calendars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Department.
         /// </summary>
         public static string V_Department {
             get {
                 return ResourceManager.GetString("V_Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Documents.
+        /// </summary>
+        public static string V_Documents {
+            get {
+                return ResourceManager.GetString("V_Documents", resourceCulture);
             }
         }
         

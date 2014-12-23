@@ -11,50 +11,40 @@
 }
 
 @{Html.RenderPartial("_FormScripts");}
+    
+    <h1>@Common.Page_TT_Account_Home</h1>
 
+    <div id="dvAccount" class="container">
 
-<div id="main">
-    <div class="content">
-        <h1>@Common.Page_TT_Account_Home</h1>
-
-        <div id="dvAccount">
-                    
-        <p>
-            <a href="/account/Logout" >@Account.btn_Loggout</a>
-        </p>
-
-        <p>
+        <div class="wide">
             @Html.Raw(string.Format(Account.MSG_Welcome, Model.FullName))
-        </p>
-
-        <div>
+        </div>       
            
-            <div class="option" onclick="document.location.href='/Account/MyDetails'">
-                <h4>@Account.tt_Personal_Details</h4>
-                <div class="cont">
+        <div class="option shadowed" onclick="document.location.href='/Account/MyDetails'">
+            <h4>@Account.tt_Personal_Details</h4>
+            <div class="cont">
 
-                </div>
             </div>
-
-             @if (bDisplayCalendar)
-             {
-                <div class="option" onclick="document.location.href='/Calendar/'">
-                    <h4>@Account.tt_My_Calendars</h4>
-                    <div class="cont">
-
-                    </div>
-                </div>
-             }
-
-            <div class="option" onclick="document.location.href='/Document/'">
-                    <h4>@Account.tt_My_Documents</h4>
-                    <div class="cont">
-
-                    </div>
-                </div>
-
         </div>
 
+        @if (bDisplayCalendar)
+        {
+        <div class="option shadowed" onclick="document.location.href='/Calendar/'">
+            <h4>@Account.V_Calendars</h4>
+            <div class="cont">
+
+            </div>
         </div>
-      </div>
- </div>
+        }
+
+        <div class="option shadowed" onclick="document.location.href='/Document/'">
+            <h4>@Account.V_Documents</h4>
+            <div class="cont">
+
+            </div>
+        </div>
+
+    </div>    
+
+ 
+

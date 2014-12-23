@@ -180,4 +180,10 @@
   <data name="V_No_Visits" xml:space="preserve">
     <value>No of Visits</value>
   </data>
+  <data name="V_Calendars" xml:space="preserve">
+    <value>Calendars</value>
+  </data>
+  <data name="V_Documents" xml:space="preserve">
+    <value>Documents</value>
+  </data>
 </root>

@@ -69,7 +69,8 @@ namespace totalhr.web.Controllers
 
 
             ViewBag.UserIsAdmin = (CurrentUser != null) && UserIsAdmin;
-
+            ViewBag.IsUserLoggedIn = (CurrentUser != null);
+            ViewBag.UserName = (CurrentUser != null) ? CurrentUser.FullName : "";
         }
 
         //Duration is in minutes
