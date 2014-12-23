@@ -651,4 +651,7 @@
   <data name="MSG_Error_NoAttendee_Chosen" xml:space="preserve">
     <value>You cannot invite attendees without selecting any!</value>
   </data>
+  <data name="Label_Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
 </root>

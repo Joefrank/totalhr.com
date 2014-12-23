@@ -126,6 +126,12 @@
   <data name="Error_Cant_Remove_All_Roles" xml:space="preserve">
     <value>Sorry but you cannot remove all roles from user. User must have at least one role.</value>
   </data>
+  <data name="Error_Could_Not_CreateUser" xml:space="preserve">
+    <value>Sorry but could not create user.</value>
+  </data>
+  <data name="Error_Missing_Department" xml:space="preserve">
+    <value>You must select a department for the new user!</value>
+  </data>
   <data name="Error_NoAccess_ToUserProfile" xml:space="preserve">
     <value>You do not have the right to edit this user profile.</value>
   </data>
