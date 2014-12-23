@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Authentication.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,15 +7,16 @@ using System.Web.Mvc;
 using totalhr.data.TimeRecordingSystem.Models;
 using totalhr.services.Infrastructure;
 using totalhr.web.Areas.TimeRecording.ViewModels;
+using totalhr.web.Controllers;
 
 namespace totalhr.web.Areas.TimeRecording.Controllers
 {
-    public class TimeRecordingController : Controller
+    public class TimeRecordingController : BaseController
     {
         public ITimeRecordingServices _timeRecordingService { get; set; }
         public IAccountService _accountsService { get; set; }
 
-        public TimeRecordingController(ITimeRecordingServices timeRecordingService, IAccountService accountService)
+        public TimeRecordingController(ITimeRecordingServices timeRecordingService, IAccountService accountService, IOAuthService authService):base(authService)
         {
             _timeRecordingService = timeRecordingService;
             _accountsService = accountService;
@@ -33,11 +35,9 @@ namespace totalhr.web.Areas.TimeRecording.Controllers
             var vm = new TimeRecordingVM();
             if (id == 0)
             {
-                //Get User Id & Company Id
-                var user = _accountsService.GetUser(59);
                 vm = new TimeRecordingVM()
                 {
-                    UserId = user.id,
+                    UserId = CurrentUser.UserId,
                     StartTime = DateTime.Now,
                     EndTime = DateTime.Now
                 };

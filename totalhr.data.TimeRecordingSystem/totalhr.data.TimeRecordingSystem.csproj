@@ -104,7 +104,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TimeRecording.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\Implementation\TaskSchedulerRepository.cs" />
     <Compile Include="Repositories\Implementation\TimeRecordingRepository.cs" />
+    <Compile Include="Repositories\Infrastructure\ITaskSchedulerRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ITimeRecordingRepository.cs" />
   </ItemGroup>
   <ItemGroup>

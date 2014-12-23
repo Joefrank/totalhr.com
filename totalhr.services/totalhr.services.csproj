@@ -102,6 +102,7 @@
     <Compile Include="Infrastructure\ICompanyService.cs" />
     <Compile Include="Infrastructure\IAccountService.cs" />
     <Compile Include="Infrastructure\IGlossaryService.cs" />
+    <Compile Include="Infrastructure\ITaskSchedulerService.cs" />
     <Compile Include="Infrastructure\ITimeRecordingServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

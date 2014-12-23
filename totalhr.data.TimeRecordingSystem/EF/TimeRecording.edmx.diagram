@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="TimeRecordingModel.Language" Width="1.5" PointX="5.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeRecordingModel.Note" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeRecordingModel.Role" Width="1.5" PointX="7.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimeRecordingModel.ScheduledNotification" Width="1.5" PointX="7.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeRecordingModel.ScheduledNotification" Width="2" PointX="7.75" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeRecordingModel.TaskScheduler" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeRecordingModel.TimeRecording" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeRecordingModel.User" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
