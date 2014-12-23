@@ -318,6 +318,7 @@
     <Content Include="Areas\Admin\Views\Shared\_UserList.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Pagination.cshtml" />
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\User\UserCreated.cshtml" />
     <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\date.js" />
     <Content Include="Scripts\jquery-1.11.0.min.js" />

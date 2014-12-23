@@ -1,16 +1,17 @@
-﻿@model totalhr.Shared.Models.NewUserInfo
+﻿@model totalhr.Shared.Models.NewEmployeeInfo
 @using totalhr.Resources;
+@using totalhr.Shared.Models
 @using totalhr.data.EF;
 
 @{
     ViewBag.Title = Common.Page_TT_Header_Registration;
 
 
-    List<Glossary> languages = ViewBag.LanguageList as List<Glossary>;
-    List<Glossary> genders = ViewBag.GenderList as List<Glossary>;
-    List<Glossary> countries = ViewBag.CountryList as List<Glossary>;
-    List<Glossary> titles = ViewBag.TitleList as List<Glossary>;    
- 
+    var languages = ViewBag.LanguageList as List<Glossary>;
+    var genders = ViewBag.GenderList as List<Glossary>;
+    var countries = ViewBag.CountryList as List<Glossary>;
+    var titles = ViewBag.TitleList as List<Glossary>;
+    var departmentList = ViewBag.DepartmentList as List<ListItemStruct>;
 }
 
 @{Html.RenderPartial("_FormScripts");}
@@ -25,6 +26,7 @@
     {
 
          @Html.ValidationSummary()
+         @Html.HiddenFor(x => x.CompanyId)
 
         <div class="formdiv midform">
             <div class="wrapper">
@@ -112,7 +114,11 @@
                     <span>@Html.TextBoxFor(x => x.MobilePhone, new { size = "20", maxlength = "20" })</span>
                     <span class="req"></span>
                 </div>
-                
+                <div class="line">
+                    <label>@FormMessages.Label_Department</label>
+                    <span>@Html.DropDownListFor(x => x.DepartmentId,  new SelectList(departmentList, "Id", "Name"))</span>
+                    <span class="req">*</span>
+                </div>
                 </fieldset>
                 
                 <fieldset>

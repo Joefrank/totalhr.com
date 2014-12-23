@@ -1,0 +1,22 @@
+﻿@using totalhr.Resources;
+
+@model totalhr.Shared.Models.NewEmployeeInfo
+
+@{
+    ViewBag.Title = Account.V_User_Created;
+}
+
+<div class="container">
+
+    <h1>@Account.V_User_Created</h1>
+    
+    <div class="wide">
+        @Account.MSG_User_Created
+    </div>
+    <div class="wide">
+        <input type="button" class="btn blueb" value="@AdminGeneric.V_Manage_Profiles" onclick="OpenPopup('/Admin/Profile/ManageUserProfiles/@Model.UserId', 600, 500)" />
+        <input type="button" class="btn blueb" value="@AdminGeneric.V_Manage_User_Roles" onclick="OpenPopup('/Admin/Role/ManageUserProfiles/@Model.UserId', 600, 500)" />
+        <input type="button" class="btn blueb" value="@AdminGeneric.V_Notify_User_ByEmail" onclick="OpenPopup('/Admin/User/SendMessage/@Model.UserId', 600, 500)"/>
+        <input type="button" class="btn blueb" value="@AdminGeneric.V_Add_Profile_Picture" onclick="OpenPopup('/Admin/User/ProfilePicture/@Model.UserId', 600, 500)"/>
+    </div>
+</div>

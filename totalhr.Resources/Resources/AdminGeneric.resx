@@ -282,4 +282,13 @@
   <data name="V_User_Type" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="V_Add_Profile_Picture" xml:space="preserve">
+    <value>Add Profile Picture</value>
+  </data>
+  <data name="V_Manage_User_Roles" xml:space="preserve">
+    <value>Manage User Roles</value>
+  </data>
+  <data name="V_Notify_User_ByEmail" xml:space="preserve">
+    <value>Notify User by Email</value>
+  </data>
 </root>
