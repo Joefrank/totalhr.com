@@ -18,13 +18,15 @@ namespace totalhr.web.Areas.Admin.Controllers
         private readonly IAccountService _accountService;
         private readonly IProfileService _profileService;
         private readonly ICompanyService _companyService;
+        private readonly IGlossaryService _glossaryService;
 
-        public UserController(IAccountService accountService, IProfileService profileService, ICompanyService companyService, IOAuthService authService) :
+        public UserController(IGlossaryService glossaryService, IAccountService accountService, IProfileService profileService, ICompanyService companyService, IOAuthService authService) :
             base(authService)
         {
             _accountService = accountService;
             _profileService = profileService;
             _companyService = companyService;
+            _glossaryService = glossaryService;
         }
 
         public ActionResult Index()
@@ -79,9 +81,46 @@ namespace totalhr.web.Areas.Admin.Controllers
             return View("SearchResult", result);
         }
 
+        private void LoadGlossaries()
+        {
+            ViewBag.LanguageList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Language);
+            ViewBag.CountryList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Country);
+            ViewBag.GenderList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Gender);
+            ViewBag.TitleList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Title);
+        }
+
         public ActionResult Create()
         {
-            return View();
+            LoadGlossaries();
+            return View(new NewEmployeeInfo { CompanyId = CurrentUser.CompanyId, Password = "", PasswordConfirm = "", UserName = "" });
+        }
+
+        [HttpPost]
+        public ActionResult Create(NewEmployeeInfo info)
+        {
+            if (ModelState.IsValid)
+            {
+                //register user.
+                User user = _accountService.CreateUser(info);
+
+                if (structresult.UserId > 0 && structresult.CompanyId > 0)
+                {
+                    //Log.Debug("Notification/Messaging started");
+
+                    //send notifications to both admin and registrant.
+                    _messagingService.AcknowledgeNewUserRegistration(WebsiteKernel, structresult);
+                    //prepare and redirect to welcome screen.
+                    TempData["UserReg"] = structresult;
+                    return RedirectToAction("Welcome", "Account");
+                }
+                else
+                {
+                    ModelState.AddModelError("RegistrationFailed", structresult.RegError);
+                    Log.Debug("New User Registration failed " + structresult.RegError);
+                }
+            }
+
+            return RedirectToAction("Index");
         }
     }
 }

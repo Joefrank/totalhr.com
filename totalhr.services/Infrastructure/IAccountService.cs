@@ -15,7 +15,7 @@ namespace totalhr.services.Infrastructure
     {
         Company CreateCompany(NewUserInfo info);
 
-        User CreateUser(NewUserInfo info);
+        User CreateUser(NewEmployeeInfo info);
 
         string GenerateUserActivationLink(string email);
 
