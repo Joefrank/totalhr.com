@@ -19,5 +19,6 @@ namespace totalhr.web.Helpers
                 return System.Configuration.ConfigurationManager.AppSettings["RootURL"];
             }
         }
+
     }
 }

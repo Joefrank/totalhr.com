@@ -16,8 +16,8 @@
 @{Html.RenderPartial("_FormScripts");}
 
 
-<div id="main">
-    <div class="content">
+
+<div class="container">
 
 <h1>@Common.Page_TT_Registration</h1>
 
@@ -254,7 +254,7 @@
                 <div class="line">
                     <label>&nbsp;</label>
                     <span>
-                        <input type="button" value="@FormMessages.btn_Cancel" onclick="" /> &nbsp;
+                        <input type="button" value="@FormMessages.btn_Cancel" onclick="javascript: history.back(-1);" /> &nbsp;
                         <input type="submit" value="@FormMessages.btn_Register" /></span>
                     <span class="req"></span>
                 </div>
@@ -268,4 +268,4 @@
     }
 </div>
 
-</div>
+

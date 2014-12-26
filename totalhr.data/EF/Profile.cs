@@ -14,6 +14,11 @@ namespace totalhr.data.EF
     
     public partial class Profile
     {
+        public Profile()
+        {
+            this.UserProfiles = new HashSet<UserProfile>();
+        }
+    
         public int id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -22,5 +27,9 @@ namespace totalhr.data.EF
         public Nullable<System.DateTime> LastModified { get; set; }
         public Nullable<int> LastModifiedBy { get; set; }
         public string Identifier { get; set; }
+    
+        public virtual ICollection<UserProfile> UserProfiles { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace totalhr.web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
-
+            ViewEngines.Engines.Add(new totalhr.core.CustomViewEngine());
             log4net.Config.XmlConfigurator.Configure();
 
             ControllerBuilder.Current.SetControllerFactory(new totalhr.web.Controllers.Dependencies.Container());

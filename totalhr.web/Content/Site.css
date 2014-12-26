@@ -3,12 +3,120 @@
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     color: #232323;
     background-color: #fff;
+    margin:0;padding:0;
 }
 
-header, footer, nav, section {
-    display: block;
+#overhead{height:40px;width:100%;float:left;background-color:beige;}
+#head{float:left;color:white;height:300px;width:100%;}
+#overhead .title{float:left;margin-top:5px;cursor: pointer;font-weight:bold;font-size:20pt;color:#4488dd;width:800px;}
+#overhead .accountbox{float:right;text-align:right;width:200px;height:40px;}
+#overhead .accountbox a{display:block;float:right;text-decoration:none;color:white;background-color:#aaa;padding:0 5px 3px;margin:10px 5px 0;}
+    #overhead .accountbox a.logout {
+        background-color:red;
+    }
+
+    #overhead .accountbox .profile {
+        background: transparent url('/Content/images/design/male-icon.png') left center no-repeat;
+        padding-left:22px;  display:block;float:right;margin:11px 5px 0 10px;color:blue;cursor:pointer;
+    }
+#head p.statement{float:left;color:white;font-size:30px;font-weight:bold;width:500px;height:270px;}
+#head .core, #main .core, #overhead .core{margin:auto;width:1000px;}
+#head .core .imagecarousel{float:right;}
+    #main .core h1 {
+        font-size:16pt;font-weight:bold;background-color:#6ea778;color:white;padding:5px 0 10px 10px;
+        -webkit-box-shadow: -7px -1px 6px 0px rgba(50, 74, 71, 0.75);
+        -moz-box-shadow:    -7px -1px 6px 0px rgba(50, 74, 71, 0.75);
+        box-shadow:         -7px -1px 6px 0px rgba(50, 74, 71, 0.75);
+    }
+
+#main .core .container{
+   float:left;width:100%;min-height:700px;padding-right:5px;
+   -webkit-box-shadow: -7px -1px 6px 0px rgba(50, 74, 71, 0.75);
+    -moz-box-shadow:    -7px -1px 6px 0px rgba(50, 74, 71, 0.75);
+    box-shadow:         -7px -1px 6px 0px rgba(50, 74, 71, 0.75);
 }
 
+    #main .core .shadowed {
+        -webkit-box-shadow: -7px -1px 6px 0px rgba(50, 74, 71, 0.75);
+        -moz-box-shadow: -7px -1px 6px 0px rgba(50, 74, 71, 0.75);
+        box-shadow: -7px -1px 6px 0px rgba(50, 74, 71, 0.75);
+    }
+
+#overhead .contextswitch {
+     color: red;
+     background: transparent url('/Content/images/design/switch-context.png') left center no-repeat;
+     padding: 10px 0 10px 28px;
+     float:left;
+     font-size:8pt;
+     margin-left: -140px;
+ } 
+
+.btn {
+        border: none;
+		border-radius: 3px;
+        text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.19);
+		font-family: 'ProximaNova-SemiBold', arial, sans-serif;
+        font-weight: normal;
+		text-decoration: none;
+		text-align: center;
+    }
+
+	.orangeb {
+		background: #F67E33;
+		color: #ffffff !important;
+        padding: 9px 19px;
+		padding-top: 11px;
+		font-size: 20px;
+        width: 216px;
+	}
+
+    .blueb {
+		background: #2672ec;
+		color: #ffffff !important;
+		font-size: 10pt;
+        padding: 5px 10px;
+	}
+
+	#main{float:left;width:100%;min-height:400px;}
+	#main .core p{float:left;font-size:18pt;color:#777;width:60%;}
+	#main .core img.item{ float:left;}
+
+    #main .core .loginbox{background-color: #2672ec;margin:30px auto;text-align:center;width:400px;height:400px;padding:1px;}
+	#main .core .loginbox .form{width:400px;height:300px;background-color:white;}
+	#main .core .loginbox .links a{color:white;text-decoration:none;}
+
+    #footer{ float: left;text-align: center;width: 100%;height: 50px;background-color: #aaaaaa;margin: 0; position: fixed;bottom: 0;}
+     #footer ul{margin: 0 auto;padding: 0;list-style: none;}
+      #footer ul li{ float: left;margin: 5px;}
+    #footer ul li a{ text-decoration: none;color: #777777;font-size: 9pt;}
+
+.clickable{ cursor: pointer;}
+
+#main form{ color: #777777;}
+#main form .line span{ text-align: left;}
+#main form h1 {
+    font-weight: normal;font-size: 16pt;margin: 20px 0 10px;color: #4682b4;   
+}
+
+ #main form input[type='text'], #main form input[type='password'], #main form textarea {
+    font-weight: bold !important;
+    font-family: Century Gothic,Verdana,Arial,Helvetica,sans-serif !important;
+    font-size: 16px !important;
+    font-weight: bold !important;
+    color: #4e4e4e;
+    font: 12px Verdana,Arial,Helvetica,sans-serif !important;
+    padding: 0.6em 0.6em 0.6em 0.5em;
+    border: 1px solid #cccccc !important;
+    border-radius: 5px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    background-color: white;
+     margin: 5px 0 0;
+}
+
+#main form input.invalid, #main form textarea.invalid{ border: 1px solid red;color: red;background-color: #ffc0cb;}
+
+ #main form .req{ color:red;}
 
 /* Styles for basic forms
 -----------------------------------------------------------*/
@@ -194,25 +302,30 @@ div.line
 
 #dvAccount {
     text-align:left;
+    float:left;
 }
 
     #dvAccount h4 {
-        margin:5px 0;
-        padding:5px;
-        width:90px;
-        border-bottom:1px solid blue;
+        width:100%;        
+        margin:50px auto;
+        font-size:13pt;
+        text-align:center;
     }
     #dvAccount .option {
-        width:100px;
-        height:100px;
-        border:1px solid grey;
-        color:blue;
+        width:170px;
+        height:120px;
+        border:1px solid grey;        
         margin:10px;
         cursor:pointer;
+        float:left;
+        color:white;
+        background-color:#1e459a;
+        text-align:center;
     }
 
     #dvAccount .cont {
         width:100%;background-color:beige;
+        float:left;
     }
 
 #dvPopup {    
@@ -330,6 +443,7 @@ table.tab .user {
 
 div.wide {
     float: left;
+    clear:both;
     width: 98%;
     margin: 10px 0;
     text-align: left;
@@ -367,3 +481,20 @@ div.wide {
     width: 100% !important;
     min-height:800px;
 }
+
+table.tabsimple {
+    border-collapse:collapse;
+}
+
+    table.tabsimple tr td, table.tabsimple tr th {
+        padding:3px;
+    }
+
+
+ .contextswitch {
+     color: red;
+     background: transparent url('/Content/images/design/switch-context.png') left center no-repeat;
+     padding: 10px 0 10px 28px;
+ }
+
+

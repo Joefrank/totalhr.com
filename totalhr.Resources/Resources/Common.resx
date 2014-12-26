@@ -172,7 +172,7 @@
     <value>The TotalHR Team</value>
   </data>
   <data name="V_Password_Reminder" xml:space="preserve">
-    <value>Forgot Password</value>
+    <value>Forgot password?</value>
   </data>
   <data name="Page_TT_Calendar_Event_Add" xml:space="preserve">
     <value>Calendar Event Add</value>
@@ -197,5 +197,26 @@
   </data>
   <data name="V_Until" xml:space="preserve">
     <value>Until</value>
+  </data>
+  <data name="V_Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="V_Prev" xml:space="preserve">
+    <value>Prev</value>
+  </data>
+  <data name="V_Showing_XtoY_OfZ" xml:space="preserve">
+    <value>Showing {0} to {1} of {2}</value>
+  </data>
+  <data name="V_Not_Registered" xml:space="preserve">
+    <value>Not registered?</value>
+  </data>
+  <data name="V_Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="V_Switch_Context" xml:space="preserve">
+    <value>Switch Context</value>
+  </data>
+  <data name="V_Switch_Context_Admin_Tooltip" xml:space="preserve">
+    <value>Switch to admin context.</value>
   </data>
 </root>

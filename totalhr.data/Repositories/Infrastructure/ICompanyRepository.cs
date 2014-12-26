@@ -12,5 +12,9 @@ namespace totalhr.data.Repositories.Infrastructure
         List<Department> GetCompanyDepartments(int companyid);
 
         List<string> GetCompanyDepartmentsByIds(List<int> ids);
+
+        IEnumerable<Shared.Models.ListItemStruct> GetDeparmentSimple(int companyId);
+
+        int CreateDepartment(int companyId, int userId, string departmentName, string description);
     }
 }

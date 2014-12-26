@@ -1,48 +1,45 @@
 ﻿@using Authentication.Implementation;
 
 @{
-    ViewBag.Title = "Index";
-
-    var config = System.Configuration.ConfigurationManager.ConnectionStrings["TotalHREntities"].ToString();
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+    ViewBag.Title = "TotalHR - Your full employee management tool";
 }
 
-<h2>Index </h2>
+@section head{
+    <div id="head">
+        <div class="core">
+            <p class="statement">
+                Welcome to TotalHR!
+                The HR System that provides you with full control of your human resource.
+                Now all your HR functions combined into one system.<br/><br/>
+                <span class="btn-orange-small">Try it Free Now</span>
+            </p>
+            <div class="imagecarousel">
+		
+            </div>
+        </div>
+    </div>
+}
 
-@*<h1>UserId: @userid @config</h1>*@
-<p>
 
-    Welcome to TotalHR
-</p>
-
-<p>
-    <a href="/Account/register">Click here to register</a>
-
-    <br />
-
-    <a href="/Account/Login">Click here to Login</a>
-    <br />
-    
-    <a href="/Account/ExpressLogAdmin">Log Admin</a>
-    
-    <br/>
-    <a href="/calendar/createevent/1">Event cal 1 create</a>
-    @*    <br />
-
-    <a href="/calendar/DayView/2014/06/03">Calendar Day View</a>
-
-     <br />
-
-    <a href="/calendar/GetWeekView/2014/06/03">Calendar Week View</a>
-
-     <br />
-
-    <a href="/calendar/GetCalendarMonth/2014/07/1">Calendar Month View</a>*@
-    <br/>
-    <br/>
-    @Html.ActionLink("Time Recording Home Page","Index","TimeRecording")
-    
-</p>
-
-@*Password:
-
-@CM.Security.Decrypt("IE9S2hzVZEuv+v1D0Kcg+22xSXUb9fx40uIMnCtNn80=")*@
+<div class="core">
+        <p>
+            Supported by all devices.	
+            Our HR application works on all device as long as you have an internet connection.
+            <br/>
+            We may also set up the application on an intranet depending on the company requirements.
+            <br/>
+            In order to discuss your requirements, contact us by clicking here.
+        </p>
+        <img src="/Content/images/design/device.jpg"  alt="Supported by all devices" class="item" />
+	
+        <p>
+            TotalHR offers you an advanced event management system through our Calendar Feature.
+            This is a standard feature and can be configured by an admin user setting permissions
+            for users who are allowed to create event on a company calendar. User created calendars
+            are also secured in such a way that only those given access can view certain event.
+            Click here to read more...
+        </p>
+        <img src="/Content/images/design/calendar-icon.png"  alt="Calendar of Event" class="item" />
+	
+    </div>

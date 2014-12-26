@@ -1,0 +1,65 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+
+@model IEnumerable<totalhr.data.EF.Profile>
+
+@{
+    ViewBag.Title = AdminGeneric.V_Profile_Management;
+   
+ }
+
+@section breadcrumb{
+    <a href="/Admin/" title="Home">@AdminGeneric.V_Home</a> &gt;
+    <span class="last">@AdminGeneric.V_Profile_List</span>
+}
+
+   <h1>@AdminGeneric.V_Profile_Management</h1>
+ <div class="wide">
+     <p>
+         @AdminGeneric.V_List_Of_Profiles_Intro
+     </p>
+ </div>
+   <div class="wide">
+
+     
+        <table border="1" class="tabsimple">
+            <tr>
+                <th>@AdminGeneric.V_Name</th>
+                <th>@AdminGeneric.V_Description</th>
+                <th>@AdminGeneric.V_Created_On</th>
+                <th>@AdminGeneric.V_Created_By</th>
+                <th>@AdminGeneric.V_Last_Modified_By</th>
+                <th>@AdminGeneric.V_Last_Modified</th>
+                <th>@AdminGeneric.V_Users</th>
+            </tr>
+            @foreach(var profile in Model){
+            <tr>
+                <td>
+                   @profile.Name
+                </td>
+                <td>
+                   @profile.Description
+                </td>
+                <td>
+                    @profile.Created.ToShortDateString()               
+                </td>
+                <td>
+                    @(profile.User.firstname + " " + profile.User.surname)
+                </td>
+                <td>
+                    @profile.LastModified
+                </td>
+                <td>
+                    @((profile.LastModifiedBy != null)? profile.User1.firstname + " " + profile.User1.surname : "")
+                </td>
+                <td>
+                    <input type="button" class="edit" value="@AdminGeneric.V_View_Users" onclick="NavigateTo('/Admin/Profile/ViewUsers/@profile.id');" />
+                </td>
+            </tr>            
+            }
+        </table>
+
+
+    </div>
+
+

@@ -1,0 +1,95 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+
+
+@model totalhr.Shared.Models.AdminRoleStruct
+
+@{
+    ViewBag.Title = AdminGeneric.V_User_Role_Management;
+    string ddlSelectedRolesHtml = string.Empty;
+    string ddlAllRolesHtml =string.Empty ;
+  
+    if (Model != null && Model.UserRoles != null) 
+        {
+            ddlSelectedRolesHtml = ProfileHelper.GenerateListBox(Model.UserRoles, @" size=""10"" id=""SelectedRoles"" name=""SelectedRoles"" multiple=""multiple"" ");
+        }
+   
+    
+    if (Model != null && Model.AllRoles != null)
+    {
+        ddlAllRolesHtml = ProfileHelper.GenerateListBox(Model.AllRoles, @" size=""10"" id=""AllRoles"" name=""AllRoles"" multiple=""multiple"" ");
+    }
+
+    if(string.IsNullOrEmpty(ddlSelectedRolesHtml))
+    {
+        ddlSelectedRolesHtml = ProfileHelper.GenerateDefaultListBox(@" size=""10"" id=""SelectedRoles"" name=""SelectedRoles"" ");
+    }
+    
+    if(string.IsNullOrEmpty(ddlAllRolesHtml)){
+        ddlAllRolesHtml = ProfileHelper.GenerateDefaultListBox(@" size=""10"" id=""AllRoles"" name=""AllRoles"" ");
+    }
+    
+}
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/Site/profileandrole.js"></script>
+}
+
+@section breadcrumb{
+    <a href="/Admin/" title="Home">@AdminGeneric.V_Home</a> &gt;
+    <a href="/Admin/Role/" title="@AdminGeneric.V_Role_List">@AdminGeneric.V_Role_List</a> &gt;
+    <span class="last">@ViewBag.UserName</span>
+}
+
+    <h1>@AdminGeneric.V_User_Role_Management</h1>
+
+    <div class="wide">
+        @string.Format(AdminGeneric.V_You_Viewing_USerRole_X,  ViewBag.UserName)
+    </div>
+    
+ <div class="wid rolemgt">
+    
+    <table>
+        <tr>
+            <td class="overhead">@AdminGeneric.V_All_Roles</td>
+            <td>&nbsp;</td>
+            <td class="overhead">@AdminGeneric.V_User_Roles</td>
+        </tr>
+        <tr>
+            <td>
+                @Html.Raw(ddlAllRolesHtml)
+            </td>
+            <td>
+                <input type="button" class="assignbut" value="@AdminGeneric.V_Assign&gt;&gt;" onclick="MoveListBoxItem('AllRoles', 'SelectedRoles', false)" />
+                <br />
+                <input type="button" class="assignbut" value="&lt;&lt;@AdminGeneric.V_Remove" onclick="MoveListBoxItem('SelectedRoles', 'AllRoles', false)" />
+                <br />
+                <input type="button" class="assignbut" value="@AdminGeneric.V_Assign_All&gt;&gt;" onclick="MoveListBoxItem('AllRoles', 'SelectedRoles', true)" />
+                <br />
+                <input type="button" class="assignbut" value="&lt;&lt;@AdminGeneric.V_Remove_All" onclick="MoveListBoxItem('SelectedRoles', 'AllRoles', true)" />
+            </td>
+            <td>
+                @Html.Raw(ddlSelectedRolesHtml)                    
+            </td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td colspan="3">
+                @using (Html.BeginForm("UpdateUserRole", "Role", FormMethod.Post, new { id = "roleForm" }))
+                {  
+                    <input type="hidden" id="hdnUserId" name="hdnUserId" value="@ViewBag.UserId" />
+                    <input type="hidden" id="hdnSelectedRoleIds" name="hdnSelectedRoleIds" value="" />
+                    
+                    <input class="ctabut" type="button" value="&lt;&lt;@AdminGeneric.V_Back_To_List" onclick="javascript: history.back()" /> @:&nbsp;
+                    <input class="ctabut" type="button" value="@AdminGeneric.V_Save"  onclick="ValidateAndSaveUserRole();" />
+                }
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+<script type="text/javascript">   
+    var MSG_Error_NO_ITEM_SELECTED = '@HttpUtility.JavaScriptStringEncode(AdminGeneric.Error_No_Item_Selected)';
+    var MSG_Error_Cant_Save_Without_Role = '@HttpUtility.JavaScriptStringEncode(Error.Error_Cant_Remove_All_Roles)';
+    var MSG_Error_Could_Not_Save_Roles = '@HttpUtility.JavaScriptStringEncode(Error.MSG_Error_Could_Not_Save_Roles)';
+</script>

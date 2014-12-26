@@ -23,13 +23,16 @@ namespace totalhr.services.Implementation
         private IUserRepository _userRepos;
         private ICompanyRepository _companyRepos;
         private ILanguageRepository _langRepos;
+        private IGlossaryService _glossaryService;
+        
         private static readonly ILog log = LogManager.GetLogger(typeof(AccountService));
         
-        public AccountService(IUserRepository userRepos, ICompanyRepository companyRepos, ILanguageRepository langRepos)
+        public AccountService(IUserRepository userRepos, ICompanyRepository companyRepos, ILanguageRepository langRepos, IGlossaryService glossaryService)
         {
              _userRepos = userRepos;
             _companyRepos = companyRepos;
             _langRepos = langRepos;
+            _glossaryService = glossaryService;
         }
 
         public Company CreateCompany(NewUserInfo info)
@@ -64,10 +67,16 @@ namespace totalhr.services.Implementation
             _companyRepos.Add(company);
             _companyRepos.Save();
             log.Debug("CreateCompany - Company created");
-            return company;
-        }       
 
-        public User CreateUser(NewUserInfo info)
+            if (company.ID > 0)//create default department
+            {
+                _companyRepos.CreateDepartment(company.ID, -1, "HR", "");
+            }
+
+            return company;
+        }
+
+        public User CreateUser(NewEmployeeInfo info)
         {
             log.Debug("Create User - User creating");
             User user = new User();
@@ -75,7 +84,7 @@ namespace totalhr.services.Implementation
             user.Address2 = info.Address2;
             user.Address3 = info.Address3;
             user.CompanyId = info.CompanyId;
-            user.countryId = info.CompanyCountryId;
+            user.countryId = info.CountryId;
             user.createdby = -1;
             user.created = DateTime.Now;
             user.email = info.Email;
@@ -98,6 +107,7 @@ namespace totalhr.services.Implementation
             user.userguid = Guid.NewGuid();
             user.activationcode = CM.utils.random_code(20);
             user.username = info.UserName;
+            user.departmentid = info.DepartmentId;
             _userRepos.Add(user);
             _userRepos.Save();
 
@@ -207,6 +217,9 @@ namespace totalhr.services.Implementation
         public UserDetailsStruct GetUserDetailsForLogin(string UserName, string Password)
         {
             User user = this.GetActiveUser(UserName, Password);
+            user.lastvisit = DateTime.Now;
+            user.novisits++;
+            _userRepos.Save();
 
             if (user == null)
                 return null;
@@ -273,31 +286,37 @@ namespace totalhr.services.Implementation
         public UserPersonalInfo GetUserInfoByEmail(string email)
         {
             User user = GetUserByEmail(email);
-            UserPersonalInfo info = new UserPersonalInfo();
+            return GetUserPersonalInfo(user);
+        }
 
-            info.Address1 = user.Address1;
-            info.Address2 = user.Address2;
-            info.Address3 = user.Address3;
-            info.City = user.Town;
-            info.CompanyId = user.CompanyId;
-            info.CountryId = user.countryId;
-            info.Email = user.email;
-            info.FirstName = user.firstname;
-            info.GenderId = user.GenderId;
-            info.MiddleNames = user.othernames;
-            info.MobilePhone = user.Mobile;
-            info.OtherTitle = user.othertitle;
-            info.Password = CM.Security.Decrypt(user.password);
-            info.PersonalPhone = user.Phone;
-            info.PostCode = user.PostCode;
-            info.PreferedLanguageId = user.preferedlanguageid;
-            info.State = user.stateorcounty;
-            info.Surname = user.surname;
-            info.Title = user.title;
-            info.UserId = user.id;
-            info.UserName = user.username;
+        public UserPersonalInfo GetUserPersonalInfo(User user){
 
-            return info;
+            return new UserPersonalInfo(){
+                Address1 = user.Address1,
+                Address2 = user.Address2,
+                Address3 = user.Address3,
+                City = user.Town,
+                CompanyId = user.CompanyId,
+                CountryId = user.countryId,
+                Email = user.email,
+                FirstName = user.firstname,
+                GenderId = user.GenderId,
+                MiddleNames = user.othernames,
+                MobilePhone = user.Mobile,
+                OtherTitle = user.othertitle,
+                Password = CM.Security.Decrypt(user.password),
+                PersonalPhone = user.Phone,
+                PostCode = user.PostCode,
+                PreferedLanguageId = user.preferedlanguageid,
+                State = user.stateorcounty,
+                Surname = user.surname,
+                Title = user.title,
+                UserId = user.id,
+                UserName = user.username,
+                TitleGlossary = _glossaryService.GetSpecificGlossaryTerm(user.preferedlanguageid, user.title, Variables.GlossaryGroups.Title),
+                GenderGlossary = _glossaryService.GetSpecificGlossaryTerm(user.preferedlanguageid, user.GenderId, Variables.GlossaryGroups.Gender)
+            };
+            
         }
 
         public int UpdateUserDetails(UserPersonalInfo info)
@@ -340,5 +359,74 @@ namespace totalhr.services.Implementation
         {
             return _userRepos.GetUserNamesByIds(ids);
         }
+
+        public IEnumerable<ListItemStruct> GetUserProfile(int userId)
+        {
+            return _userRepos.GetUserProfile(userId);
+        }
+
+        public IEnumerable<ListItemStruct> GetUserProfileByGuid(Guid uniqueid)
+        {
+            return _userRepos.GetUserProfileByGuid(uniqueid);
+        }
+
+        public void UpdateUserProfiles(int hdnUserId, string hdnSelectedProfileIds, int updatedByUserId)
+        {
+            _userRepos.UpdateUserProfiles(hdnUserId, hdnSelectedProfileIds, updatedByUserId);
+        }
+
+        public IEnumerable<ListItemStruct> GetUserRoles(int userId)
+        {
+            return _userRepos.GetUserRole(userId);
+        }
+
+        public IEnumerable<ListItemStruct> GetUserRoleByGuid(Guid uniqueid)
+        {
+            return _userRepos.GetUserRoleByGuid(uniqueid);
+        }
+
+        public void UpdateUserRoles(int hdnUserId, string hdnSelectedRolesIds, int updatedByUserId)
+        {
+            _userRepos.UpdateUserRoles(hdnUserId, hdnSelectedRolesIds, updatedByUserId);
+        }
+
+        public IEnumerable<User> ListCompanyUsers(int companyId)
+        {
+            return _userRepos.FindBy(x => x.CompanyId == companyId);
+        }
+
+        public IEnumerable<ListItemStruct> ListCompanyUsersSimple(int companyId)
+        {
+            return _userRepos.FindBy(x => x.CompanyId == companyId).
+                Select(x => new ListItemStruct {Id = x.id, Name = x.firstname + " " + x.surname  });
+        }
+
+        public UserAdminStruct GetUserDetailsForAdmin(string uniqueid)
+        {
+            User user = GetUserByGuid(uniqueid);
+
+            return new UserAdminStruct
+            {
+                PersonalInfo = GetUserPersonalInfo(user),
+                UserProfiles = GetUserProfile(user.id),
+                UserRoles = GetUserRoles(user.id)
+            };
+        }
+
+        public IEnumerable<GetUserListForAdmin_Result> GetUserListForAdmin(bool? bShowActive, int languageId)
+        {
+            return _userRepos.GetUserListForAdmin(bShowActive, languageId);
+        }
+
+        public IEnumerable<GetUserListForAdmin_Result> SearchUsers(UserSearchInfo searchInfo)
+        {
+            return _userRepos.SearchUser(searchInfo);
+        }
+
+        public IEnumerable<SearchUserWithPaging_Result> SearchUserWithPaging(UserSearchInfo searchInfo)
+        {
+            return _userRepos.SearchUserWithPaging(searchInfo);
+        }
+
     }
 }

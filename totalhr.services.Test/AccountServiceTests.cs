@@ -22,11 +22,14 @@ namespace totalhr.services.Test
     {
        
         private NewUserInfo _dummyuserinfo;
+        private NewUserInfo _dummySimpleUser;
+        private readonly NewUserInfoGenerator _userinfoGenerator;
         private IAccountService _aservice;
-       
+        
         public AccountServiceTests()
         {
-            _dummyuserinfo = (new NewUserInfoGenerator()).GetDummy();
+            _userinfoGenerator = new NewUserInfoGenerator();
+            _dummyuserinfo = _userinfoGenerator.GetDummy();
             _aservice = ninjectKernel.Get<AccountService>();
             _aservice.ClearUserDataByEmail(_dummyuserinfo.Email);
         }
@@ -39,12 +42,23 @@ namespace totalhr.services.Test
             Assert.IsTrue(company.ID > 0);
         }
 
+        //make sure you clean up test data after creation
         [TestMethod]
         public void CanCreateUser()
-        {
-            User user = _aservice.CreateUser(_dummyuserinfo);
+        {            
+            User user = _aservice.CreateUser(_userinfoGenerator.GetDummyUser(2));
 
             Assert.IsTrue(user.id > 0);
+        }
+        //make sure you clean up test data after creation
+        [TestMethod]
+        public void CanCreateMultipleUsers()
+        {
+            for (int i = 2; i < 12; i++)
+            {
+                User user = _aservice.CreateUser(_userinfoGenerator.GetDummyUser(i));
+                Assert.IsTrue(user.id > 0);
+            }
         }
 
         [TestMethod]

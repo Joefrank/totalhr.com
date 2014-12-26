@@ -724,6 +724,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Profile_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Profile">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Profile">
+              <PropertyRef Name="LastModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Roles" Type="Self.Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="LastModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Template_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="ContractTemplate" Type="Self.ContractTemplate" Multiplicity="*" />
@@ -733,6 +781,18 @@
             </Principal>
             <Dependent Role="ContractTemplate">
               <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="departmentid" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -748,6 +808,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserProfile_Profile">
+          <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_Roles">
+          <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="BuildCalEventReminderRecipientList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="eventid" Type="int" Mode="In" />
           <Parameter Name="companyid" Type="int" Mode="In" />
@@ -758,6 +866,10 @@
         <Function Name="GetCompanyFoldersByUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="int" Mode="In" />
           <Parameter Name="departmentid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserListForAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="showactive" Type="bit" Mode="In" />
+          <Parameter Name="viewinglanguageid" Type="int" Mode="In" />
         </Function>
         <Function Name="GetUserProfileIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="int" Mode="In" />
@@ -775,6 +887,36 @@
           <Parameter Name="SenderName" Type="nvarchar" Mode="In" />
           <Parameter Name="SenderEmail" Type="nvarchar" Mode="In" />
           <Parameter Name="RecipientListId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SearchUser" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="usertypeid" Type="int" Mode="In" />
+          <Parameter Name="departmentid" Type="int" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="partialaddress" Type="nvarchar" Mode="In" />
+          <Parameter Name="town" Type="nvarchar" Mode="In" />
+          <Parameter Name="county" Type="nvarchar" Mode="In" />
+          <Parameter Name="postcode" Type="nvarchar" Mode="In" />
+          <Parameter Name="phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="viewinglanguageid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SearchUserWithPaging" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="name" Type="nvarchar" Mode="In" />
+          <Parameter Name="usertypeid" Type="int" Mode="In" />
+          <Parameter Name="departmentid" Type="int" Mode="In" />
+          <Parameter Name="email" Type="nvarchar" Mode="In" />
+          <Parameter Name="partialaddress" Type="nvarchar" Mode="In" />
+          <Parameter Name="town" Type="nvarchar" Mode="In" />
+          <Parameter Name="county" Type="nvarchar" Mode="In" />
+          <Parameter Name="postcode" Type="nvarchar" Mode="In" />
+          <Parameter Name="phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="PageSize" Type="int" Mode="In" />
+          <Parameter Name="PageNumber" Type="int" Mode="In" />
+          <Parameter Name="ordercolumn" Type="varchar" Mode="In" />
+          <Parameter Name="sortorder" Type="varchar" Mode="In" />
+          <Parameter Name="viewinglanguageid" Type="int" Mode="In" />
         </Function>
         <Function Name="SplitCSV" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="String" Type="varchar(max)" Mode="In" />
@@ -889,13 +1031,49 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="Department" EntitySet="Department" />
           </AssociationSet>
+          <AssociationSet Name="FK_Profile_User" Association="Self.FK_Profile_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Profile" EntitySet="Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_User1" Association="Self.FK_Profile_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Profile" EntitySet="Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_User" Association="Self.FK_Roles_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_User1" Association="Self.FK_Roles_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
           <AssociationSet Name="FK_Template_User" Association="Self.FK_Template_User">
             <End Role="User" EntitySet="User" />
             <End Role="ContractTemplate" EntitySet="ContractTemplate" />
           </AssociationSet>
+          <AssociationSet Name="FK_User_Department" Association="Self.FK_User_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
           <AssociationSet Name="FK_UserContract_User" Association="Self.FK_UserContract_User">
             <End Role="User" EntitySet="User" />
             <End Role="UserContract" EntitySet="UserContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_Profile" Association="Self.FK_UserProfile_Profile">
+            <End Role="Profile" EntitySet="Profile" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_User" Association="Self.FK_UserProfile_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_Roles" Association="Self.FK_UserRole_Roles">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_User" Association="Self.FK_UserRole_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRole" EntitySet="UserRole" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -1021,6 +1199,7 @@
           <Property Name="LastModified" Type="DateTime" Precision="3" />
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="Self.FK_Department_Company" FromRole="Department" ToRole="Company" />
+          <NavigationProperty Name="Users" Relationship="TotalHRModel.FK_User_Department" FromRole="Department" ToRole="User" />
         </EntityType>
         <EntityType Name="EmailTemplate">
           <Key>
@@ -1105,6 +1284,9 @@
           <Property Name="LastModified" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserProfiles" Relationship="TotalHRModel.FK_UserProfile_Profile" FromRole="Profile" ToRole="UserProfile" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_Profile_User" FromRole="Profile" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_Profile_User1" FromRole="Profile" ToRole="User" />
         </EntityType>
         <EntityType Name="Recipient">
           <Key>
@@ -1144,6 +1326,9 @@
           <Property Name="LastModified" Type="DateTime" Precision="3" />
           <Property Name="LastModifiedBy" Type="Int32" />
           <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="UserRoles" Relationship="TotalHRModel.FK_UserRole_Roles" FromRole="Role" ToRole="UserRole" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_Roles_User" FromRole="Role" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_Roles_User1" FromRole="Role" ToRole="User" />
         </EntityType>
         <EntityType Name="ScheduledNotification">
           <Key>
@@ -1207,6 +1392,13 @@
           <NavigationProperty Name="CTSectionFieldLinks" Relationship="TotalHRModel.FK_CTSectionFieldLink_User" FromRole="User" ToRole="CTSectionFieldLink" />
           <NavigationProperty Name="UserContracts" Relationship="TotalHRModel.FK_ContractTemplate_User" FromRole="User" ToRole="UserContract" />
           <NavigationProperty Name="UserContracts1" Relationship="TotalHRModel.FK_UserContract_User" FromRole="User" ToRole="UserContract" />
+          <NavigationProperty Name="UserProfiles" Relationship="TotalHRModel.FK_UserProfile_User" FromRole="User" ToRole="UserProfile" />
+          <NavigationProperty Name="UserRoles" Relationship="TotalHRModel.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
+          <NavigationProperty Name="Profiles" Relationship="TotalHRModel.FK_Profile_User" FromRole="User" ToRole="Profile" />
+          <NavigationProperty Name="Profiles1" Relationship="TotalHRModel.FK_Profile_User1" FromRole="User" ToRole="Profile" />
+          <NavigationProperty Name="Roles" Relationship="TotalHRModel.FK_Roles_User" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Roles1" Relationship="TotalHRModel.FK_Roles_User1" FromRole="User" ToRole="Role" />
+          <NavigationProperty Name="Department" Relationship="TotalHRModel.FK_User_Department" FromRole="User" ToRole="Department" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -1217,6 +1409,8 @@
           <Property Name="ProfileId" Type="Int32" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Profile" Relationship="TotalHRModel.FK_UserProfile_Profile" FromRole="UserProfile" ToRole="Profile" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_UserProfile_User" FromRole="UserProfile" ToRole="User" />
         </EntityType>
         <EntityType Name="UserRole">
           <Key>
@@ -1227,6 +1421,8 @@
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Role" Relationship="TotalHRModel.FK_UserRole_Roles" FromRole="UserRole" ToRole="Role" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_UserRole_User" FromRole="UserRole" ToRole="User" />
         </EntityType>
         <Association Name="FK_Calendar_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
@@ -1418,6 +1614,76 @@
             <End Role="File" EntitySet="Files" />
             <End Role="CompanyDocument" EntitySet="CompanyDocuments" />
           </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_Profile" Association="TotalHRModel.FK_UserProfile_Profile">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_Roles" Association="TotalHRModel.FK_UserRole_Roles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfile_User" Association="TotalHRModel.FK_UserProfile_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserProfile" EntitySet="UserProfiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_User" Association="TotalHRModel.FK_UserRole_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserRole" EntitySet="UserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_User" Association="TotalHRModel.FK_Profile_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Profile" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_User1" Association="TotalHRModel.FK_Profile_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Profile" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_User" Association="TotalHRModel.FK_Roles_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Roles_User1" Association="TotalHRModel.FK_Roles_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Department" Association="TotalHRModel.FK_User_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <FunctionImport Name="GetUserListForAdmin" ReturnType="Collection(TotalHRModel.GetUserListForAdmin_Result)">
+            <Parameter Name="showactive" Mode="In" Type="Boolean" />
+            <Parameter Name="viewinglanguageid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SearchUser" ReturnType="Collection(TotalHRModel.GetUserListForAdmin_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="usertypeid" Mode="In" Type="Int32" />
+            <Parameter Name="departmentid" Mode="In" Type="Int32" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="partialaddress" Mode="In" Type="String" />
+            <Parameter Name="town" Mode="In" Type="String" />
+            <Parameter Name="county" Mode="In" Type="String" />
+            <Parameter Name="postcode" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="viewinglanguageid" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SearchUserWithPaging" ReturnType="Collection(TotalHRModel.SearchUserWithPaging_Result)">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="usertypeid" Mode="In" Type="Int32" />
+            <Parameter Name="departmentid" Mode="In" Type="Int32" />
+            <Parameter Name="email" Mode="In" Type="String" />
+            <Parameter Name="partialaddress" Mode="In" Type="String" />
+            <Parameter Name="town" Mode="In" Type="String" />
+            <Parameter Name="county" Mode="In" Type="String" />
+            <Parameter Name="postcode" Mode="In" Type="String" />
+            <Parameter Name="phone" Mode="In" Type="String" />
+            <Parameter Name="PageSize" Mode="In" Type="Int32" />
+            <Parameter Name="PageNumber" Mode="In" Type="Int32" />
+            <Parameter Name="ordercolumn" Mode="In" Type="String" />
+            <Parameter Name="sortorder" Mode="In" Type="String" />
+            <Parameter Name="viewinglanguageid" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetUserProfiles_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1857,6 +2123,237 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserProfile_Profile">
+          <End Type="TotalHRModel.Profile" Role="Profile" Multiplicity="1" />
+          <End Type="TotalHRModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="ProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_Roles">
+          <End Type="TotalHRModel.Role" Role="Role" Multiplicity="1" />
+          <End Type="TotalHRModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfile_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.UserProfile" Role="UserProfile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfile">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.UserRole" Role="UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.Profile" Role="Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Profile">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_User1">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.Profile" Role="Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Profile">
+              <PropertyRef Name="LastModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.Role" Role="Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Roles_User1">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.Role" Role="Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="LastModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Department">
+          <End Type="TotalHRModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="departmentid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="GetUserListForAdmin_Result">
+          <Property Type="String" Name="GenderTerm" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TitleTerm" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="DepartmentName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PreferredLanguageTerm" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="GenderId" Nullable="false" />
+          <Property Type="String" Name="firstname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="othernames" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="surname" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="title" Nullable="false" />
+          <Property Type="String" Name="othertitle" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Address1" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address2" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address3" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Town" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="stateorcounty" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PostCode" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="countryId" Nullable="false" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="CompanyId" Nullable="false" />
+          <Property Type="DateTime" Name="created" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="createdby" Nullable="false" />
+          <Property Type="DateTime" Name="lastvisit" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="novisits" Nullable="false" />
+          <Property Type="Boolean" Name="active" Nullable="false" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="lastupdatedby" Nullable="true" />
+          <Property Type="DateTime" Name="lastupdated" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="typeid" Nullable="false" />
+          <Property Type="Guid" Name="userguid" Nullable="false" />
+          <Property Type="Int32" Name="preferedlanguageid" Nullable="false" />
+          <Property Type="Boolean" Name="tersmaccepted" Nullable="false" />
+          <Property Type="String" Name="activationcode" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="chosenculture" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="departmentid" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SearchUser_Result">
+          <Property Type="String" Name="GenderTerm" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="TitleTerm" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="DepartmentName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="PreferredLanguageTerm" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="GenderId" Nullable="false" />
+          <Property Type="String" Name="firstname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="othernames" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="surname" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="title" Nullable="false" />
+          <Property Type="String" Name="othertitle" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Address1" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address2" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address3" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Town" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="stateorcounty" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PostCode" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="countryId" Nullable="false" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="CompanyId" Nullable="false" />
+          <Property Type="DateTime" Name="created" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="createdby" Nullable="false" />
+          <Property Type="DateTime" Name="lastvisit" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="novisits" Nullable="false" />
+          <Property Type="Boolean" Name="active" Nullable="false" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="lastupdatedby" Nullable="true" />
+          <Property Type="DateTime" Name="lastupdated" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="typeid" Nullable="false" />
+          <Property Type="Guid" Name="userguid" Nullable="false" />
+          <Property Type="Int32" Name="preferedlanguageid" Nullable="false" />
+          <Property Type="Boolean" Name="tersmaccepted" Nullable="false" />
+          <Property Type="String" Name="activationcode" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="chosenculture" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="departmentid" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="SearchUserWithPaging_Result">
+          <Property Type="Int32" Name="RowNumber" Nullable="false" />
+          <Property Type="Int32" Name="Total" Nullable="true" />
+          <Property Type="Int32" Name="UserId" Nullable="true" />
+          <Property Type="String" Name="DepartmentName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="GenderTerm" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TitleTerm" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PreferredLanguageTerm" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="id" Nullable="false" />
+          <Property Type="Int32" Name="GenderId" Nullable="false" />
+          <Property Type="String" Name="firstname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="othernames" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="surname" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="title" Nullable="false" />
+          <Property Type="String" Name="othertitle" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="username" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Address1" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address2" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address3" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Town" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="stateorcounty" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PostCode" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="countryId" Nullable="false" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Mobile" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="CompanyId" Nullable="false" />
+          <Property Type="DateTime" Name="created" Nullable="false" Precision="23" />
+          <Property Type="Int32" Name="createdby" Nullable="false" />
+          <Property Type="DateTime" Name="lastvisit" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="novisits" Nullable="false" />
+          <Property Type="Boolean" Name="active" Nullable="false" />
+          <Property Type="String" Name="email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="password" Nullable="false" MaxLength="150" />
+          <Property Type="Int32" Name="lastupdatedby" Nullable="true" />
+          <Property Type="DateTime" Name="lastupdated" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="typeid" Nullable="false" />
+          <Property Type="Guid" Name="userguid" Nullable="false" />
+          <Property Type="Int32" Name="preferedlanguageid" Nullable="false" />
+          <Property Type="Boolean" Name="tersmaccepted" Nullable="false" />
+          <Property Type="String" Name="activationcode" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="chosenculture" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="departmentid" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2469,6 +2966,141 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetUserListForAdmin" FunctionName="TotalHRModel.Store.GetUserListForAdmin">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalHRModel.GetUserListForAdmin_Result">
+                <ScalarProperty Name="GenderTerm" ColumnName="GenderTerm" />
+                <ScalarProperty Name="TitleTerm" ColumnName="TitleTerm" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="PreferredLanguageTerm" ColumnName="PreferredLanguageTerm" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="othernames" ColumnName="othernames" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="othertitle" ColumnName="othertitle" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
+                <ScalarProperty Name="stateorcounty" ColumnName="stateorcounty" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="countryId" ColumnName="countryId" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="lastvisit" ColumnName="lastvisit" />
+                <ScalarProperty Name="novisits" ColumnName="novisits" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="lastupdatedby" ColumnName="lastupdatedby" />
+                <ScalarProperty Name="lastupdated" ColumnName="lastupdated" />
+                <ScalarProperty Name="typeid" ColumnName="typeid" />
+                <ScalarProperty Name="userguid" ColumnName="userguid" />
+                <ScalarProperty Name="preferedlanguageid" ColumnName="preferedlanguageid" />
+                <ScalarProperty Name="tersmaccepted" ColumnName="tersmaccepted" />
+                <ScalarProperty Name="activationcode" ColumnName="activationcode" />
+                <ScalarProperty Name="chosenculture" ColumnName="chosenculture" />
+                <ScalarProperty Name="departmentid" ColumnName="departmentid" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SearchUser" FunctionName="TotalHRModel.Store.SearchUser">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalHRModel.GetUserListForAdmin_Result">
+                <ScalarProperty Name="GenderTerm" ColumnName="GenderTerm" />
+                <ScalarProperty Name="TitleTerm" ColumnName="TitleTerm" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="PreferredLanguageTerm" ColumnName="PreferredLanguageTerm" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="othernames" ColumnName="othernames" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="othertitle" ColumnName="othertitle" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
+                <ScalarProperty Name="stateorcounty" ColumnName="stateorcounty" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="countryId" ColumnName="countryId" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="lastvisit" ColumnName="lastvisit" />
+                <ScalarProperty Name="novisits" ColumnName="novisits" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="lastupdatedby" ColumnName="lastupdatedby" />
+                <ScalarProperty Name="lastupdated" ColumnName="lastupdated" />
+                <ScalarProperty Name="typeid" ColumnName="typeid" />
+                <ScalarProperty Name="userguid" ColumnName="userguid" />
+                <ScalarProperty Name="preferedlanguageid" ColumnName="preferedlanguageid" />
+                <ScalarProperty Name="tersmaccepted" ColumnName="tersmaccepted" />
+                <ScalarProperty Name="activationcode" ColumnName="activationcode" />
+                <ScalarProperty Name="chosenculture" ColumnName="chosenculture" />
+                <ScalarProperty Name="departmentid" ColumnName="departmentid" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SearchUserWithPaging" FunctionName="TotalHRModel.Store.SearchUserWithPaging">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalHRModel.SearchUserWithPaging_Result">
+                <ScalarProperty Name="RowNumber" ColumnName="RowNumber" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DepartmentName" ColumnName="DepartmentName" />
+                <ScalarProperty Name="GenderTerm" ColumnName="GenderTerm" />
+                <ScalarProperty Name="TitleTerm" ColumnName="TitleTerm" />
+                <ScalarProperty Name="PreferredLanguageTerm" ColumnName="PreferredLanguageTerm" />
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="othernames" ColumnName="othernames" />
+                <ScalarProperty Name="surname" ColumnName="surname" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="othertitle" ColumnName="othertitle" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
+                <ScalarProperty Name="stateorcounty" ColumnName="stateorcounty" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="countryId" ColumnName="countryId" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="CompanyId" ColumnName="CompanyId" />
+                <ScalarProperty Name="created" ColumnName="created" />
+                <ScalarProperty Name="createdby" ColumnName="createdby" />
+                <ScalarProperty Name="lastvisit" ColumnName="lastvisit" />
+                <ScalarProperty Name="novisits" ColumnName="novisits" />
+                <ScalarProperty Name="active" ColumnName="active" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="lastupdatedby" ColumnName="lastupdatedby" />
+                <ScalarProperty Name="lastupdated" ColumnName="lastupdated" />
+                <ScalarProperty Name="typeid" ColumnName="typeid" />
+                <ScalarProperty Name="userguid" ColumnName="userguid" />
+                <ScalarProperty Name="preferedlanguageid" ColumnName="preferedlanguageid" />
+                <ScalarProperty Name="tersmaccepted" ColumnName="tersmaccepted" />
+                <ScalarProperty Name="activationcode" ColumnName="activationcode" />
+                <ScalarProperty Name="chosenculture" ColumnName="chosenculture" />
+                <ScalarProperty Name="departmentid" ColumnName="departmentid" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -268,11 +268,47 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Forgot Password.
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        public static string V_Next {
+            get {
+                return ResourceManager.GetString("V_Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not registered?.
+        /// </summary>
+        public static string V_Not_Registered {
+            get {
+                return ResourceManager.GetString("V_Not_Registered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forgot password?.
         /// </summary>
         public static string V_Password_Reminder {
             get {
                 return ResourceManager.GetString("V_Password_Reminder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prev.
+        /// </summary>
+        public static string V_Prev {
+            get {
+                return ResourceManager.GetString("V_Prev", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register.
+        /// </summary>
+        public static string V_Register {
+            get {
+                return ResourceManager.GetString("V_Register", resourceCulture);
             }
         }
         
@@ -291,6 +327,33 @@ namespace totalhr.Resources {
         public static string V_Show {
             get {
                 return ResourceManager.GetString("V_Show", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Showing {0} to {1} of {2}.
+        /// </summary>
+        public static string V_Showing_XtoY_OfZ {
+            get {
+                return ResourceManager.GetString("V_Showing_XtoY_OfZ", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Switch Context.
+        /// </summary>
+        public static string V_Switch_Context {
+            get {
+                return ResourceManager.GetString("V_Switch_Context", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Switch to admin context..
+        /// </summary>
+        public static string V_Switch_Context_Admin_Tooltip {
+            get {
+                return ResourceManager.GetString("V_Switch_Context_Admin_Tooltip", resourceCulture);
             }
         }
         

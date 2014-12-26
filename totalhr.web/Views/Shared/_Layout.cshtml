@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using totalhr.Resources
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -13,19 +14,60 @@
 
     @RenderSection("scripts", required: false)
 </head>
-<body>
-    @RenderBody()
+    <body>
+        
+        <div id="overhead">
+            <div class="core">
+                
+                @if (ViewBag.UserIsAdmin != null && Convert.ToBoolean(ViewBag.UserIsAdmin))
+                {
+                    <a href="/Admin/" class="contextswitch" title="@Common.V_Switch_Context_Admin_Tooltip">@Common.V_Switch_Context</a>
+                }
 
-    <div id="overlay-mask" style="display:none"></div>
+                <div class="title" onclick="javascript:NavigateTo('/');">
+                    TotalHR
+                </div>
+	
+                <div class="accountbox">
+                    <span class="profile">@ViewBag.UserName</span>
 
-    <div id="dvPopup" style="display:none;"> 
-        <iframe id="ipopup"></iframe>       
-    </div>
+                    @if (ViewBag.IsUserLoggedIn != null && Convert.ToBoolean(ViewBag.UserIsAdmin))
+                    {
+                        <a href="/account/Logout" class="logout" >@Account.btn_Loggout</a>
+                    }else{
+                        <a href="/Account/Login/">@Common.Page_TT_Login</a> 
+                    }
+                    
+                </div>
+            </div>
+        </div>
+        
+        @RenderSection("head", required: false)
 
-    <script>
-       @Html.Raw(string.Format(@" window.jQuery || document.write('<script src=""{0}Scripts/jquery-1.11.0.min.js""><\/script>');", 
-        totalhr.web.Helpers.GenericHelper.WebsiteRoot))
-    </script>
+       <div id="main">
+           <div class="core">
+                @RenderBody()
+           </div>
+       </div>
 
-</body>
+        <div id="footer">
+           <ul>
+               <li><a href="/Account/ExpressLogAdmin">Log as Admin</a></li>
+               <li>-</li>
+               <li><a href="/Account/ExpressLogNonAdmin">Log as Simple User</a></li>
+           </ul>
+       </div>
+
+        <!--popup stuff -->
+        <div id="overlay-mask" style="display:none"></div>
+        <div id="dvPopup" style="display:none;"> 
+            <iframe id="ipopup"></iframe>       
+        </div>
+
+        <script>
+            @Html.Raw(string.Format(@" window.jQuery || document.write('<script src=""{0}Scripts/jquery-1.11.0.min.js""><\/script>');", 
+                                    totalhr.web.Helpers.GenericHelper.WebsiteRoot))
+        </script>
+
+    </body>
 </html>
