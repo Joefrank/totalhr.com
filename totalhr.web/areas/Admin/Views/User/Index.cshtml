@@ -1,0 +1,37 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+
+@model totalhr.web.Areas.Admin.Models.UserSearchResult
+
+@{
+    ViewBag.Title = AdminGeneric.V_User_Management;
+   
+ }
+
+@section breadcrumb{
+    <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
+    <span class="last">@AdminGeneric.V_User_List</span>
+}
+
+   <h1>@AdminGeneric.V_User_Management</h1>
+ <div class="wide">
+     <p>
+         @AdminGeneric.V_List_Of_Users_Intro
+     </p>
+ </div>
+
+
+<div class="wide">
+    @Html.Partial("_UserSearch", Model.SearchInfo)
+</div>
+<div class="wide">
+    <hr />
+</div>
+   <div class="wide">     
+         @Html.Partial("_UserList", Model)
+    </div>
+   
+<div class="wide">
+    <input type="button" value="@AdminGeneric.V_Add_User" onclick="document.location.href='/Admin/User/Create/'" />
+</div>
+

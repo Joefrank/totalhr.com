@@ -14,6 +14,11 @@ namespace totalhr.data.EF
     
     public partial class Department
     {
+        public Department()
+        {
+            this.Users = new HashSet<User>();
+        }
+    
         public int id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -24,5 +29,6 @@ namespace totalhr.data.EF
         public int CompanyId { get; set; }
     
         public virtual Company Company { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

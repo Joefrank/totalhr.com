@@ -1,0 +1,34 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+
+@model totalhr.web.Areas.Admin.Models.UserSearchResult
+     
+
+@{
+    ViewBag.Title = AdminGeneric.V_User_Management;  
+    var searchInfo = ViewBag.SearchInfo as totalhr.Shared.Models.UserSearchInfo; 
+ }
+
+@section breadcrumb{
+    <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
+    <a href="/Admin/User/" title="@AdminGeneric.V_User_List">@AdminGeneric.V_User_List</a> &gt;
+    <span class="last">@AdminGeneric.V_User_Search</span>
+}
+
+ <h1>@AdminGeneric.V_User_Management - (@AdminGeneric.V_User_Search)</h1>
+
+<div class="wide">
+    @Html.Partial("_UserSearch", Model.SearchInfo)
+</div>
+<div class="wide">
+    <hr />
+</div>
+ <div class="wide">
+     <p>
+         @AdminGeneric.V_User_Search_Result_Intro
+     </p>
+ </div>
+
+<div class="wide">
+    @Html.Partial("_UserList", Model)
+</div>

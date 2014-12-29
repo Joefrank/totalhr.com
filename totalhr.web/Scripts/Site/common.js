@@ -1,4 +1,7 @@
-﻿function GetO(objId) {
+﻿var MSG_Error_NO_ITEM_SELECTED = '';
+var MSG_Error_Cant_Save_Without_Profile = '';
+
+function GetO(objId) {
     return document.getElementById(objId);
 }
 
@@ -106,6 +109,17 @@ function ToggleExpandGeneric(ctrHeadId, ctrToExpandId, callback, expandIcon, col
     }
 }
 
+function ToggleClass(ctrId, class1, class2) {
+    var o = $('#' + ctrId);
+    if (o.hasClass(class1)) {
+        o.removeClass(class1);
+        o.addClass(class2);
+    } else {
+        o.addClass(class1);
+        o.removeClass(class2);
+    }
+}
+
 function OpenEmployeeProfile(empid) {
     
     OpenPopup('/Account/ProfilePreview/' + empid, 600, 600);
@@ -117,4 +131,30 @@ function OpenPopup(url, width, height) {
     $('#dvPopup').css("height", height);
     $('#dvPopup').css("width", width);
     $('#overlay-mask').css("display", "");
+}
+
+function NavigateTo(url) {
+    document.location.href = url;
+}
+
+function MoveListBoxItem(leftListBoxID, rightListBoxID, isMoveAll, callback) {
+
+    if (!isMoveAll) {
+        var index = $('#' + leftListBoxID).get(0).selectedIndex;
+        if (index < 0) {
+            if (MSG_Error_NO_ITEM_SELECTED != '')
+                alert(MSG_Error_NO_ITEM_SELECTED);
+            return;
+        }
+    }
+
+    var leftOptions = isMoveAll? $('#' + leftListBoxID).children() : $('#' + leftListBoxID).children(':selected');
+
+    $.each(leftOptions, function (index, value) {
+        $('#' + rightListBoxID).append('<option value="' + $(this).val() + '">' + $(this).text() + '</option>');
+        $(this).remove();
+    });
+   
+    if (callback != null && typeof (callback) == "function")
+        callback();
 }

@@ -50,6 +50,8 @@ TestResult.xml
 *.pidb
 *.svclog
 *.scc
+*/log-file.txt
+log-file.txt
 
 # Chutzpah Test files
 _Chutzpah*

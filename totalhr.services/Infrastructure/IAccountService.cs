@@ -15,7 +15,7 @@ namespace totalhr.services.Infrastructure
     {
         Company CreateCompany(NewUserInfo info);
 
-        User CreateUser(NewUserInfo info);
+        User CreateUser(NewEmployeeInfo info);
 
         string GenerateUserActivationLink(string email);
 
@@ -52,5 +52,29 @@ namespace totalhr.services.Infrastructure
         int UpdateUserDetails(UserPersonalInfo info);
 
         List<string> GetUserNamesByIds(List<int> ids);
+
+        IEnumerable<ListItemStruct> GetUserProfile(int userId);
+
+        IEnumerable<ListItemStruct> GetUserProfileByGuid(Guid uniqueid);
+
+        void UpdateUserProfiles(int hdnUserId, string hdnSelectedProfileIds, int updatedByUserId);
+
+        IEnumerable<ListItemStruct> GetUserRoles(int userId);
+
+        IEnumerable<ListItemStruct> GetUserRoleByGuid(Guid uniqueid);
+
+        void UpdateUserRoles(int hdnUserId, string hdnSelectedRolesIds, int updatedByUserId);
+
+        IEnumerable<User> ListCompanyUsers(int companyId);
+
+        IEnumerable<ListItemStruct> ListCompanyUsersSimple(int companyId);
+
+        IEnumerable<GetUserListForAdmin_Result> SearchUsers(UserSearchInfo searchInfo);
+
+        UserAdminStruct GetUserDetailsForAdmin(string uniqueid);
+
+        IEnumerable<GetUserListForAdmin_Result> GetUserListForAdmin(bool? bShowActive, int languageId);
+
+        IEnumerable<SearchUserWithPaging_Result> SearchUserWithPaging(UserSearchInfo searchInfo);
     }
 }

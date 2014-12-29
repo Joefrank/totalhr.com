@@ -155,6 +155,14 @@
     <Compile Include="Areas\TimeRecording\ViewModels\SearchVM.cs" />
     <Compile Include="Areas\TimeRecording\ViewModels\TimeRecordingDetailsVM.cs" />
     <Compile Include="Areas\TimeRecording\ViewModels\TimeRecordingVM.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProfileController.cs" />
+    <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UserController.cs" />
+    <Compile Include="Areas\Admin\Helpers\GenericHelper.cs" />
+    <Compile Include="Areas\Admin\Helpers\ProfileHelper.cs" />
+    <Compile Include="Areas\Admin\Helpers\UserHelper.cs" />
+    <Compile Include="Areas\Admin\Models\Pagination.cs" />
+    <Compile Include="Areas\Admin\Models\UserSearchResult.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Admin\AdminBaseController.cs" />
     <Compile Include="Controllers\Admin\AdminHomeController.cs" />
@@ -174,10 +182,12 @@
     <Compile Include="Helpers\DocumentHelper.cs" />
     <Compile Include="Helpers\GenericHelper.cs" />
     <Compile Include="Helpers\GossaryHelper.cs" />
+    <Compile Include="Helpers\PaginationHelper.cs" />
     <Compile Include="Models\UserAccountStruct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\Content\css\SiteAdmin.css" />
     <Content Include="bin\Antlr3.Runtime.dll" />
     <Content Include="bin\Authentication.dll" />
     <Content Include="bin\Authentication.pdb" />
@@ -235,6 +245,7 @@
     <Content Include="Content\calendar.css" />
     <Content Include="Content\css\calendar.css" />
     <Content Include="Content\css\companydocument.css" />
+    <Content Include="Content\css\default.css" />
     <Content Include="Content\css\popup.css" />
     <Content Include="Content\images\cal.gif" />
     <Content Include="Content\themes\base\accordion.css" />
@@ -246,6 +257,9 @@
     <Content Include="Content\themes\base\datepicker.css" />
     <Content Include="Content\themes\base\dialog.css" />
     <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\images\design\calendar-icon.png" />
+    <Content Include="Content\images\design\device.jpg" />
+    <Content Include="Content\images\design\hero-bg-new.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -289,6 +303,23 @@
     <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Views\TimeRecording\RecordTime.cshtml" />
     <Content Include="Views\TimeRecording\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Areas\Admin\Views\Profile\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Admin\Views\Profile\ManageUserProfiles.cshtml" />
+    <Content Include="Areas\Admin\Views\Profile\ViewUsers.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\ManageUserRoles.cshtml" />
+    <Content Include="Areas\Admin\Views\Role\ViewUsers.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\User\UserDetails.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_UserSearch.cshtml" />
+    <Content Include="Areas\Admin\Views\User\SearchResult.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_UserList.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_Pagination.cshtml" />
+    <Content Include="Areas\Admin\Views\User\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\User\UserCreated.cshtml" />
+    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
     <Content Include="Scripts\date.js" />
     <Content Include="Scripts\jquery-1.11.0.min.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
@@ -310,6 +341,7 @@
     <Content Include="Scripts\Site\CompanyDocument.js" />
     <Content Include="Scripts\Site\DatePicker.js" />
     <Content Include="Scripts\Site\common.js" />
+    <Content Include="Scripts\Site\profileandrole.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -360,6 +392,7 @@
     <Content Include="Views\Document\Share.cshtml" />
     <Content Include="Views\Document\ShareComplete.cshtml" />
     <Content Include="Views\Account\ProfilePreview.cshtml" />
+    <Content Include="Views\Shared\_DefaultLayout.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -376,8 +409,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
     <Folder Include="bin\Database\" />
     <Folder Include="CompanyDocuments\" />
     <Folder Include="Users\Profile\Images\" />
@@ -405,6 +436,10 @@
     <ProjectReference Include="..\totalhr.data.TimeRecordingSystem\totalhr.data.TimeRecordingSystem.csproj">
       <Project>{aae8d583-9a4f-4e69-ab31-9a0cdceb4bcb}</Project>
       <Name>totalhr.data.TimeRecordingSystem</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\totalhr.core\totalhr.core.csproj">
+      <Project>{37a1ac80-4903-4855-9436-887dc8c3d5ad}</Project>
+      <Name>totalhr.core</Name>
     </ProjectReference>
     <ProjectReference Include="..\totalhr.data\totalhr.data.csproj">
       <Project>{f5a3d97a-a1b9-463a-850e-23cf6e1fc488}</Project>

@@ -16,6 +16,8 @@ namespace totalhr.web.Controllers
         public int ViewingLanguageId { get; set; }
         public AdminStruct WebsiteKernel {get; set;}
 
+        public bool UserIsAdmin { get { return CurrentUser.HasProfile((int) Variables.Roles.CompanyAdmin); } }
+
         protected IOAuthService AuthService;
 
         protected readonly ClientUser _currentUser;
@@ -64,6 +66,11 @@ namespace totalhr.web.Controllers
                 SMTPPassword = CM.Security.Decrypt(ConfigurationManager.AppSettings["SMTPPass"])
             
             };
+
+
+            ViewBag.UserIsAdmin = (CurrentUser != null) && UserIsAdmin;
+            ViewBag.IsUserLoggedIn = (CurrentUser != null);
+            ViewBag.UserName = (CurrentUser != null) ? CurrentUser.FullName : "";
         }
 
         //Duration is in minutes

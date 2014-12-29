@@ -1,0 +1,95 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+
+
+@model totalhr.Shared.Models.AdminProfileStruct
+
+@{
+    ViewBag.Title = AdminGeneric.V_User_Profile_Management;
+    string ddlSelectedProfilesHtml = string.Empty;
+    string ddlAllProfilesHtml =string.Empty ;
+  
+    if (Model != null && Model.UserProfiles != null) 
+        {
+            ddlSelectedProfilesHtml = ProfileHelper.GenerateListBox(Model.UserProfiles, @" size=""10"" id=""SelectedProfiles"" name=""SelectedProfiles"" multiple ");
+        }
+   
+    
+    if (Model != null && Model.Allprofiles != null)
+    {
+        ddlAllProfilesHtml = ProfileHelper.GenerateListBox(Model.Allprofiles, @" size=""10"" id=""AllProfiles"" name=""AllProfiles"" multiple ");
+    }
+        
+    if(string.IsNullOrEmpty(ddlSelectedProfilesHtml)){
+        ddlSelectedProfilesHtml = ProfileHelper.GenerateDefaultListBox(@" size=""10"" id=""SelectedProfiles"" name=""SelectedProfiles"" ");
+    }
+    
+    if(string.IsNullOrEmpty(ddlAllProfilesHtml))
+    {
+        ddlSelectedProfilesHtml = ProfileHelper.GenerateDefaultListBox(@" size=""10"" id=""AllProfiles"" name=""AllProfiles"" ");
+    }
+    
+}
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/Site/profileandrole.js"></script>
+}
+
+@section breadcrumb{
+    <a href="/Admin/" title="Home">@AdminGeneric.V_Home</a> &gt;
+    <a href="/Admin/Profile" title="@AdminGeneric.V_Profile_List">@AdminGeneric.V_Profile_List</a> &gt;
+    <span class="last">@ViewBag.UserName</span>
+}
+
+    <h1>@AdminGeneric.V_User_Profile_Management</h1>
+
+    <div class="wide">
+        @string.Format(AdminGeneric.V_You_Viewing_USerProfile_X,  ViewBag.UserName)
+    </div>
+    
+ <div class="wid profilemgt" >
+    
+    <table>
+        <tr>
+            <td class="overhead">@AdminGeneric.V_All_Profiles</td>
+            <td>&nbsp;</td>
+            <td class="overhead">@AdminGeneric.V_User_Profiles</td>
+        </tr>
+        <tr>
+            <td>
+                @Html.Raw(ddlAllProfilesHtml)
+            </td>
+            <td>
+                <input type="button" class="assignbut" value="@AdminGeneric.V_Assign&gt;&gt;" onclick="MoveListBoxItem('AllProfiles','SelectedProfiles' , false)" />
+                <br />
+                <input type="button" class="assignbut" value="&lt;&lt;@AdminGeneric.V_Remove" onclick="MoveListBoxItem('SelectedProfiles', 'AllProfiles', false)" />
+                <br />
+                <input type="button" class="assignbut" value="@AdminGeneric.V_Assign_All&gt;&gt;" onclick="MoveListBoxItem('AllProfiles','SelectedProfiles' , true)" />
+                <br />
+                <input type="button" class="assignbut" value="&lt;&lt;@AdminGeneric.V_Remove_All" onclick="MoveListBoxItem('SelectedProfiles', 'AllProfiles', true)" />
+            </td>
+            <td>
+                @Html.Raw(ddlSelectedProfilesHtml)                    
+            </td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td colspan="3">
+                @using (Html.BeginForm("UpdateUserProfile", "Profile", FormMethod.Post, new { id = "profileForm" }))
+                {  
+                    <input type="hidden" id="hdnUserId" name="hdnUserId" value="@ViewBag.UserId" />
+                    <input type="hidden" id="hdnSelectedProfileIds" name="hdnSelectedProfileIds" value="" />
+                    
+                    <input class="ctabut" type="button" value="&lt;&lt;@AdminGeneric.V_Back_To_List" onclick="javascript: history.back()" /> @:&nbsp;
+                    <input class="ctabut" type="button" value="@AdminGeneric.V_Save"  onclick="ValidateAndSaveUserProfile();" />
+                }
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+<script type="text/javascript">   
+    var MSG_Error_NO_ITEM_SELECTED = '@HttpUtility.JavaScriptStringEncode(AdminGeneric.Error_No_Item_Selected)';
+    var MSG_Error_Cant_Save_Without_Profile = '@HttpUtility.JavaScriptStringEncode(Error.Error_Cant_Remove_All_Profiles)';
+    var MSG_Error_Could_Not_Save_PRofiles = '@HttpUtility.JavaScriptStringEncode(Error.MSG_Error_Could_Not_Save_PRofiles)';
+</script>

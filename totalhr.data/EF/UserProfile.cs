@@ -18,5 +18,8 @@ namespace totalhr.data.EF
         public int ProfileId { get; set; }
         public System.DateTime Created { get; set; }
         public int CreatedBy { get; set; }
+    
+        public virtual Profile Profile { get; set; }
+        public virtual User User { get; set; }
     }
 }

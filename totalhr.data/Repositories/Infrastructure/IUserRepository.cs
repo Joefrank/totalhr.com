@@ -20,5 +20,23 @@ namespace totalhr.data.Repositories.Infrastructure
         IEnumerable<SimpleUser> GetCompanyUsers(int companyid, int excludedUserId);
 
         List<string> GetUserNamesByIds(List<int> ids);
+
+        IEnumerable<ListItemStruct> GetUserProfile(int userId);
+
+        IEnumerable<ListItemStruct> GetUserProfileByGuid(Guid uniqueid);
+
+        void UpdateUserProfiles(int hdnUserId, string hdnSelectedProfileIds, int updatedByUserId);
+
+        IEnumerable<ListItemStruct> GetUserRole(int userId);
+
+        IEnumerable<ListItemStruct> GetUserRoleByGuid(Guid uniqueid);
+
+        void UpdateUserRoles(int hdnUserId, string hdnSelectedRoleIds, int updatedByUserId);
+
+        IEnumerable<GetUserListForAdmin_Result> GetUserListForAdmin(bool? bShowActive, int languageId);
+
+        IEnumerable<GetUserListForAdmin_Result> SearchUser(UserSearchInfo searchInfo);
+
+        IEnumerable<SearchUserWithPaging_Result> SearchUserWithPaging(UserSearchInfo info);
     }
 }

@@ -141,6 +141,10 @@ namespace totalhr.web.Controllers
 
                 AuthService.PersistClientUser(clientUser);
 
+                ViewBag.UserIsAdmin = clientUser.HasRole((int)Variables.Roles.CompanyAdmin);
+                ViewBag.IsUserLoggedIn = (clientUser != null);
+                ViewBag.UserName = clientUser.FullName;
+
                 return View("Index", clientUser);
             }
             else
@@ -150,6 +154,61 @@ namespace totalhr.web.Controllers
                 ModelState.AddModelError("LoginFailed", Resources.FormMessages.Error_Login_Failed);
                 return View("Login");
             }
+        }
+
+
+        /// <summary>
+        /// this is for testing only do not go live with it.
+        /// </summary>
+        /// <returns></returns>
+        [AllowAnonymous]
+        public ActionResult ExpressLogAdmin()
+        {
+            var user = new ClientUser
+            {
+                FullName = "Joe Tester Temp",
+                CompanyId = 30,
+                DepartmentId = 2,
+                CookieDuration = new TimeSpan(0, 5, 0, 0),
+                Culture = "en-GB",
+                UserName = "admin@cyberminds.co.uk",
+                LanguageId = 1,
+                Profiles = new List<string> { "1", "4" },
+                Roles = new List<string> { "1", "2", "3" },
+                UserId = 59
+            };
+           
+            AuthService.PersistClientUser(user);
+            ViewBag.UserIsAdmin = true;
+            ViewBag.IsUserLoggedIn = true;
+            ViewBag.UserName = "Admin-Joe Tester";
+
+            return View("Index", user);
+        }
+
+        [AllowAnonymous]
+        public ActionResult ExpressLogNonAdmin()
+        {
+            var user = new ClientUser
+            {
+                FullName = "Joe Tester Temp",
+                CompanyId = 30,
+                DepartmentId = 2,
+                CookieDuration = new TimeSpan(0, 5, 0, 0),
+                Culture = "en-GB",
+                UserName = "joseph.bolla@cyberminds.co.uk",
+                LanguageId = 1,
+                Profiles = new List<string> { "1", "4" },
+                Roles = new List<string> { "3" },
+                UserId = 59
+            };
+
+            AuthService.PersistClientUser(user);
+            ViewBag.UserIsAdmin = false;
+            ViewBag.IsUserLoggedIn = true;
+            ViewBag.UserName = "Joe Tester";
+
+            return View("Index", user);
         }
 
         public ActionResult Logout()
@@ -247,32 +306,7 @@ namespace totalhr.web.Controllers
             return Json(qry, JsonRequestBehavior.AllowGet);
         }
 
-        /// <summary>
-        /// this is for testing only do not go live with it.
-        /// </summary>
-        /// <returns></returns>
-        [AllowAnonymous]
-        public ActionResult ExpressLogAdmin()
-        {
-            var user = new ClientUser
-                {
-                    FullName = "Joe Tester Temp",
-                    CompanyId = 30,
-                    DepartmentId = 2,
-                    CookieDuration = new TimeSpan(0, 5, 0,0),
-                    Culture = "en-GB",
-                    UserName = "joe_bolla@cyberminds.co.uk",
-                    LanguageId = 1,
-                    Profiles = new List<string>{"1","4"},
-                    Roles = new List<string>{"1","2","3"},
-                    UserId = 59
-                };
-
-            AuthService.PersistClientUser(user);
-
-            return View("Index", user);
-        }
-
+               
         [HttpPost]
         public ActionResult SaveUserDetails(UserPersonalInfo userinfo)
         {
