@@ -436,6 +436,7 @@
     <ProjectReference Include="..\totalhr.data.TimeRecordingSystem\totalhr.data.TimeRecordingSystem.csproj">
       <Project>{aae8d583-9a4f-4e69-ab31-9a0cdceb4bcb}</Project>
       <Name>totalhr.data.TimeRecordingSystem</Name>
+    </ProjectReference>
     <ProjectReference Include="..\totalhr.core\totalhr.core.csproj">
       <Project>{37a1ac80-4903-4855-9436-887dc8c3d5ad}</Project>
       <Name>totalhr.core</Name>
