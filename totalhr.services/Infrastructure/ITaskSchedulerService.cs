@@ -8,6 +8,6 @@ namespace totalhr.services.Infrastructure
 {
     interface ITaskSchedulerService
     {
-        
+        bool AddTask();
     }
 }
