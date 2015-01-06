@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using totalhr.core;
 
 namespace totalhr.web.Areas.Admin.Models
 {
@@ -22,6 +23,8 @@ namespace totalhr.web.Areas.Admin.Models
         public string NextLink { get; set; }
 
         public List<Page> AllPages { get; set; }
+
+        public BuildPaginationItem ItemBuilder { get; set; }
 
         public class Page
         {

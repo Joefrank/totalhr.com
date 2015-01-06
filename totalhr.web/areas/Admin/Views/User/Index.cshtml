@@ -20,6 +20,11 @@
      </p>
  </div>
 
+<form id="frmSortForm" method="post" action="/Admin/User/SortBy/">
+    <input type="hidden" id="SortColumn" name="SortColumn" value="@Model.SearchInfo.OrderColumn" />
+    <input type="hidden" id="SortDirection" name="SortDirection" value="@Model.SearchInfo.OrderDirection" />
+    <input type="hidden" id="hdnPageNumber" name="hdnPageNumber" value="@Model.SearchInfo.PageNumber" />
+</form>
 
 <div class="wide">
     @Html.Partial("_UserSearch", Model.SearchInfo)

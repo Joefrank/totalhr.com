@@ -17,6 +17,8 @@ namespace totalhr.data.EF
         public File()
         {
             this.CompanyDocuments = new HashSet<CompanyDocument>();
+            this.UserProfilePictures = new HashSet<UserProfilePicture>();
+            this.UserProfilePictures1 = new HashSet<UserProfilePicture>();
         }
     
         public int id { get; set; }
@@ -30,5 +32,7 @@ namespace totalhr.data.EF
         public Nullable<int> lastupdatedby { get; set; }
     
         public virtual ICollection<CompanyDocument> CompanyDocuments { get; set; }
+        public virtual ICollection<UserProfilePicture> UserProfilePictures { get; set; }
+        public virtual ICollection<UserProfilePicture> UserProfilePictures1 { get; set; }
     }
 }

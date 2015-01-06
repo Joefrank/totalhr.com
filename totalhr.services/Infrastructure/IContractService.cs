@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using totalhr.data.EF;
+
+namespace totalhr.services.Infrastructure
+{
+    public interface IContractService
+    {
+        IEnumerable<UserContract> ListContracts();
+
+        IEnumerable<ContractTemplate> ListContractTemplates();
+
+    }
+}

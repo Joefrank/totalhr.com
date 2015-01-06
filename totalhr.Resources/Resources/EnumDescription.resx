@@ -126,11 +126,20 @@
   <data name="Company" xml:space="preserve">
     <value>Whole company</value>
   </data>
+  <data name="CompanyCreator" xml:space="preserve">
+    <value>Company Registrant</value>
+  </data>
   <data name="DailyMonToFri" xml:space="preserve">
     <value>Daily (Mon - Fri)</value>
   </data>
   <data name="Department" xml:space="preserve">
     <value>Chosen department(s)</value>
+  </data>
+  <data name="Developer" xml:space="preserve">
+    <value>System Developer</value>
+  </data>
+  <data name="Employee2" xml:space="preserve">
+    <value>Simple Employee</value>
   </data>
   <data name="EveryXTime" xml:space="preserve">
     <value>Every</value>
@@ -161,6 +170,9 @@
   </data>
   <data name="OnDayOfTheWeek" xml:space="preserve">
     <value>On &lt;span class="repDay"&gt;{0}&lt;/span&gt; every week</value>
+  </data>
+  <data name="Promoters" xml:space="preserve">
+    <value>System Promoter</value>
   </data>
   <data name="R10MinsBefore" xml:space="preserve">
     <value>10 mins before</value>
@@ -209,6 +221,12 @@
   </data>
   <data name="SelectedUsers" xml:space="preserve">
     <value>Specific user(s)</value>
+  </data>
+  <data name="SystemAdmin" xml:space="preserve">
+    <value>System Administrator</value>
+  </data>
+  <data name="Tester" xml:space="preserve">
+    <value>System Tester</value>
   </data>
   <data name="TimeBefore" xml:space="preserve">
     <value>Before</value>

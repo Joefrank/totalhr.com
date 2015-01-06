@@ -1,0 +1,25 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Helpers;
+@using totalhr.Shared.Models;
+
+@model totalhr.Shared.Models.TemplateInfo
+
+@{
+    ViewBag.Title = Contract.V_Template_Create;   
+}
+
+
+<div class="container">
+      @section breadcrumb{
+            <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
+            <a href="/Admin/Contract/" title="@AdminGeneric.V_Contract_Management">@AdminGeneric.V_Contract_Management</a> &gt;
+          <a href="/Admin/Contract/Template/" title="@AdminGeneric.V_Contract_Template_Management">@AdminGeneric.V_Contract_Template_Management</a> &gt;
+            <span class="last">@Contract.V_Template_Create</span>
+        }
+
+    <h1>@Contract.V_Template_Create</h1>
+
+    <div class="wide">
+
+    </div>
+</div>

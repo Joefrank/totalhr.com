@@ -23,6 +23,8 @@ namespace totalhr.services.Infrastructure
 
         UserRegStruct RegisterUserCompany(NewUserInfo info, AdminStruct adminstruct);
 
+        UserRegStruct CreateEmployee(NewEmployeeInfo info, AdminStruct adminstruct);
+
         void ClearUserDataByEmail(string email);
 
         User GetUser(string UserName, string Password);
@@ -30,6 +32,8 @@ namespace totalhr.services.Infrastructure
         User GetUser(int userId);
 
         User GetUserByEmail(string email);
+
+        UserPersonalInfo GetUserInfoByGuid(string guid);
 
         User GetUserByUsername(string username);
 
@@ -71,10 +75,14 @@ namespace totalhr.services.Infrastructure
 
         IEnumerable<GetUserListForAdmin_Result> SearchUsers(UserSearchInfo searchInfo);
 
+        //UserAdminStruct GetUserDetailsForAdmin(string uniqueid);
+
         UserAdminStruct GetUserDetailsForAdmin(string uniqueid);
 
         IEnumerable<GetUserListForAdmin_Result> GetUserListForAdmin(bool? bShowActive, int languageId);
 
         IEnumerable<SearchUserWithPaging_Result> SearchUserWithPaging(UserSearchInfo searchInfo);
+
+        bool SaveProfilePicture(UserProfilePicture profilePicture);
     }
 }

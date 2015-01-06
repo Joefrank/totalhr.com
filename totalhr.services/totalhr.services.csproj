@@ -97,8 +97,10 @@
   <ItemGroup>
     <Compile Include="Implementation\AccountService.cs" />
     <Compile Include="Implementation\CompanyService.cs" />
+    <Compile Include="Implementation\ContractService.cs" />
     <Compile Include="Implementation\GlossaryService.cs" />
     <Compile Include="Implementation\TimeRecordingServices.cs" />
+    <Compile Include="Infrastructure\IContractService.cs" />
     <Compile Include="Infrastructure\ITimeRecordingServices.cs" />
     <Compile Include="Implementation\ProfileService.cs" />
     <Compile Include="Implementation\RoleService.cs" />

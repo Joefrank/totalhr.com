@@ -1,13 +1,15 @@
 ﻿@using totalhr.Resources;
-
+@using totalhr.web.Helpers;
+@using totalhr.core;
 @model totalhr.web.Areas.Admin.Models.UserSearchResult 
-@*IEnumerable<totalhr.data.EF.GetUserListForAdmin_Result>*@
+
 @{
     var foundUsers = Model.FoundUsers.ToList();
     var searchInfo = Model.SearchInfo;
 
     int userCount = foundUsers.Count();
-
+    
+    
     var pagination = new totalhr.web.Areas.Admin.Models.Pagination
     {
         CurrentPage = searchInfo.PageNumber.GetValueOrDefault(),
@@ -15,25 +17,23 @@
         PageSize = searchInfo.PageSize.GetValueOrDefault(),
         TotalNoOfItems = (userCount > 0)? foundUsers.First().Total.GetValueOrDefault() : 0
     };
-    
+     
 }
 
 @if(userCount > 0){
     <table border="1" class="SortedTab">
         <tr>
-            <th id="UserId" onclick="ToggleOrder(this)" class="@(searchInfo.OrderColumn == "UserId" ? "desc" :"asc")">@Account.V_UserId</th>
+            @Html.Raw(GenericHelper.MakeSortableTH("UserId", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_UserId))
             <th>@Account.V_Title</th>
-            <th id="FirstName" onclick="ToggleOrder(this)" class="@(searchInfo.OrderColumn == "FirstName" ? "desc" :"asc")">@Account.V_Firstname</th>
-            <th id="SurName" onclick="ToggleOrder(this)" class="@(searchInfo.OrderColumn == "SurName" ? "desc" :"asc")">@Account.V_Surname</th>
+            @Html.Raw(GenericHelper.MakeSortableTH("FirstName", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_Firstname))
+            @Html.Raw(GenericHelper.MakeSortableTH("SurName", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_Surname))
             <th>@Account.V_Other_Names</th>
-            <th id="Gender" onclick="ToggleOrder(this)" class="@(searchInfo.OrderColumn == "Gender" ? "desc" :"asc")">@Account.V_Gender</th>
-            <th id="Username" onclick="ToggleOrder(this)" class="@(searchInfo.OrderColumn == "Username" ? "desc" :"asc")">@Account.V_UserName</th>
-            <th id="Email" onclick="ToggleOrder(this)" class="@(searchInfo.OrderColumn == "Email" ? "desc" :"asc")">@Account.V_Email</th>
-            <th id="Department" onclick="ToggleOrder(this)" class="@(searchInfo.OrderColumn == "Department" ? "desc" :"asc")">@Account.V_Department</th>
+            @Html.Raw(GenericHelper.MakeSortableTH("Gender", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_Gender))
+            @Html.Raw(GenericHelper.MakeSortableTH("Username", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_UserName))
+            @Html.Raw(GenericHelper.MakeSortableTH("Email", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_Email))
+            @Html.Raw(GenericHelper.MakeSortableTH("Department", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_Department))
             <th>@Account.V_Phone</th>
-            <th>@Account.V_Mobile</th>
-            <th id="LastVisit" onclick="ToggleOrder(this)" class="@(searchInfo.OrderColumn == "LastVisit" ? "desc" :"asc")">@Account.V_LastVisit</th>
-            <th id="NoOfVisits" onclick="ToggleOrder(this)" class="@(searchInfo.OrderColumn == "NoOfVisits" ? "desc" :"asc")">@Account.V_No_Visits</th>
+            <th>@Account.V_Mobile</th>            
             <th>&nbsp;</th>
         </tr>
         @foreach (var user in foundUsers)
@@ -71,13 +71,7 @@
             </td>
                 <td>
                 @user.Mobile
-            </td>
-                <td>
-                @user.lastvisit
-            </td>
-                <td>
-                @user.novisits
-            </td>
+            </td>               
             <td>
                 <input type="button" class="edit" value="@AdminGeneric.V_More_Details" onclick="NavigateTo('/Admin/User/UserDetails/Guid/@user.userguid');" />
             </td>
@@ -97,13 +91,32 @@
 
 <script type="text/javascript">
     function ToggleOrder(obj){
-        var selClass = $('#' + obj.id).attr("class");        
-        if($('#frmSearchForm') != null)
+        var sortDirection = $('#' + obj.id).attr("class");  
+        var sortColumn = $('#' + obj.id).attr("data-sortcolumn");
+
+        if($('#frmSortForm') != null){
+            $('#SortColumn').val(sortColumn);
+            $('#SortDirection').val(sortDirection);
+            $('#frmSortForm').submit();
+        }
+        else if($('#frmSearchForm') != null)
         {
-            $('#OrderColumn').val(obj.id);
-            $('#OrderDirection').val(selClass);
-            ToggleClass(obj.id, "asc", "desc");
+            $('#OrderColumn').val(sortColumn);
+            $('#OrderDirection').val(sortDirection);
             $('#frmSearchForm').submit();
         }
     }
+
+    function Paginate(url){
+
+        if($('#frmSortForm') != null){
+            $('#frmSortForm').attr("action", url);
+            $('#frmSortForm').submit();
+        }
+        else if($('#frmSearchForm') != null)
+        {
+            $('#frmSearchForm').submit();
+        }
+    }
+
 </script>

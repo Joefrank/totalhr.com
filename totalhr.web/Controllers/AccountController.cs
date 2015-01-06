@@ -63,7 +63,7 @@ namespace totalhr.web.Controllers
 
         private void LoadGlossaries()
         {
-            ViewBag.LanguageList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Language);
+            ViewBag.LanguageList = _glossaryService.GetLanguageList(this.ViewingLanguageId);
             ViewBag.CountryList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Country);
             ViewBag.GenderList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Gender);
             ViewBag.TitleList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Title);
@@ -337,7 +337,7 @@ namespace totalhr.web.Controllers
 
         public ActionResult ProfilePreview(string id)
         {
-            User user = _accountService.GetUserByGuid(id);
+            UserPersonalInfo user = _accountService.GetUserInfoByGuid(id);
 
             if (user != null)
             {

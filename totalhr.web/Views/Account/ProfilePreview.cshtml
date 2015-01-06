@@ -1,6 +1,6 @@
 ﻿@using totalhr.Resources;
 
-@model totalhr.data.EF.User
+@model totalhr.Shared.Models.UserPersonalInfo
 
 @{
     Layout = "~/Views/Shared/_PopupLayout.cshtml";
@@ -16,37 +16,46 @@
 <div class="formwrapper">       
 
     <div class="line">
-        <div class="block">
-             <img src="/Users/Profile/Images/unknown.png" alt="@(Model.firstname + " " + Model.surname)" />
+        @if (!string.IsNullOrEmpty(Model.ProfilePicturePath))
+        {
+        <div class="block">                    
+                <span><img src="@totalhr.web.Helpers.GenericHelper.GetProfilePictureUrl(Model.ProfilePicturePath)" 
+                    alt="@(Model.FirstName + " " + Model.Surname)" /></span>                    
         </div>
+        }else{
+        
+            <div class="block">
+                 <img src="/Users/Profile/Images/unknown.png" alt="@(Model.FirstName + " " + Model.Surname)" />
+            </div>
+        }
 
         <div class="block">
 			<label class="fix200W">@Account.V_Title:</label>
-            <span>@Model.title</span>
+            <span>@Model.Title</span>
         </div>
         <div class="block">
 			<label class="fix200W">@Account.V_Firstname:</label>
-            <span>@Model.firstname</span>
+            <span>@Model.FirstName</span>
         </div>
         <div class="block">
 			<label class="fix200W">@Account.V_Other_Names:</label>
-            <span>@Model.othernames</span>
+            <span>@Model.MiddleNames</span>
         </div>
         <div class="block">
 			<label class="fix200W">@Account.V_Surname:</label>
-            <span>@Model.surname</span>
+            <span>@Model.Surname</span>
         </div>
         <div class="block">
 			<label class="fix200W">@Account.V_Email:</label>
-            <span>@Model.email</span>
+            <span>@Model.Email</span>
         </div>
         <div class="block">
 			<label class="fix200W">@Account.V_Phone:</label>
-            <span>@Model.Phone</span>
+            <span>@Model.PersonalPhone</span>
         </div>
         <div class="block">
 			<label class="fix200W">@Account.V_Mobile:</label>
-            <span>@Model.Mobile</span>
+            <span>@Model.MobilePhone</span>
         </div>
     </div>
 

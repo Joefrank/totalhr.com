@@ -88,6 +88,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company Registrant.
+        /// </summary>
+        public static string CompanyCreator {
+            get {
+                return ResourceManager.GetString("CompanyCreator", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Daily (Mon - Fri).
         /// </summary>
         public static string DailyMonToFri {
@@ -102,6 +111,24 @@ namespace totalhr.Resources {
         public static string Department {
             get {
                 return ResourceManager.GetString("Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System Developer.
+        /// </summary>
+        public static string Developer {
+            get {
+                return ResourceManager.GetString("Developer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Simple Employee.
+        /// </summary>
+        public static string Employee2 {
+            get {
+                return ResourceManager.GetString("Employee2", resourceCulture);
             }
         }
         
@@ -192,6 +219,15 @@ namespace totalhr.Resources {
         public static string OnDayOfTheWeek {
             get {
                 return ResourceManager.GetString("OnDayOfTheWeek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System Promoter.
+        /// </summary>
+        public static string Promoters {
+            get {
+                return ResourceManager.GetString("Promoters", resourceCulture);
             }
         }
         
@@ -336,6 +372,24 @@ namespace totalhr.Resources {
         public static string SelectedUsers {
             get {
                 return ResourceManager.GetString("SelectedUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System Administrator.
+        /// </summary>
+        public static string SystemAdmin {
+            get {
+                return ResourceManager.GetString("SystemAdmin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System Tester.
+        /// </summary>
+        public static string Tester {
+            get {
+                return ResourceManager.GetString("Tester", resourceCulture);
             }
         }
         

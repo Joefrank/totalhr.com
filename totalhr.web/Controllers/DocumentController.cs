@@ -25,9 +25,9 @@ namespace totalhr.web.Controllers
         private ICompanyService _companyService;
         private readonly IMessagingService _messagingService;
 
-        public string DocPath{
-            get{return Path.Combine(Server.MapPath("~/CompanyDocuments/") , CurrentUser.CompanyId.ToString());}
-        }
+        //public string DocPath{
+        //    get{return Path.Combine(Server.MapPath("~/CompanyDocuments/") , CurrentUser.CompanyId.ToString());}
+        //}
 
         public DocumentController(IOAuthService authservice, IDocumentManager docManager, IFileService fileService,
             IAccountService acctService, ICompanyService companyService, IMessagingService messageService)
@@ -162,7 +162,7 @@ namespace totalhr.web.Controllers
                 {
 
                     string fileExtension = Path.GetExtension(info.File.FileName).Replace(".", "");
-                    bool isValidFile = Enum.GetNames(typeof(Variables.AllowedFileExtension)).Contains(fileExtension);
+                    bool isValidFile = Enum.GetNames(typeof(Variables.AllowedFileExtension)).Contains(fileExtension, StringComparer.CurrentCultureIgnoreCase);
                     
 
                     if (!isValidFile)
@@ -175,7 +175,7 @@ namespace totalhr.web.Controllers
                         info.CreatedBy = CurrentUser.UserId;
                        
                         //upload the file
-                        int newFileId = _fileService.Create(info.File, DocPath, CurrentUser.UserId, 
+                        int newFileId = _fileService.Create(info.File, CompanyDocumentPath, CurrentUser.UserId, 
                             (int)Variables.FileType.CompanyDocument);
 
                         var fileName = Path.GetFileNameWithoutExtension(info.File.FileName);
@@ -248,8 +248,8 @@ namespace totalhr.web.Controllers
                     }
                     
                     //upload the file
-                    _fileService.UpdateWith(info.OldFileId, info.File, Server.MapPath("~/CompanyDocuments/") + 
-                        CurrentUser.CompanyId, CurrentUser.UserId, (int)Variables.FileType.CompanyDocument);
+                    _fileService.UpdateWith(info.OldFileId, info.File, CompanyDocumentPath, 
+                        CurrentUser.UserId, (int)Variables.FileType.CompanyDocument);
 
                     info.ReadableSize = _fileService.BytesToString(info.File.ContentLength);
                     info.ReadableType = Path.GetExtension(info.File.FileName).Replace(".", "");
@@ -281,7 +281,7 @@ namespace totalhr.web.Controllers
         public FileResult OpenFile(Guid id)
         {
             CompanyDocument doc = _docService.GetDocumentWithViewCountUpdate(id, CurrentUser.UserId);
-            FileResult fr =  File(DocPath + "\\" + doc.FileId + Path.GetExtension(doc.OriginalFileName), doc.FileMimeType);
+            FileResult fr =  File(CompanyDocumentPath + "\\" + doc.FileId + Path.GetExtension(doc.OriginalFileName), doc.FileMimeType);
             fr.FileDownloadName = doc.OriginalFileName;
             return fr;
         }
@@ -289,7 +289,7 @@ namespace totalhr.web.Controllers
         public FileResult Download(Guid id)
         {
             CompanyDocument doc = _docService.GetDocumentWithDownloadCountUpdate(id, CurrentUser.UserId);
-            byte[] fileBytes = _fileService.ReadFileBytes(DocPath + "\\" + doc.FileId + Path.GetExtension(doc.OriginalFileName));
+            byte[] fileBytes = _fileService.ReadFileBytes(CompanyDocumentPath + "\\" + doc.FileId + Path.GetExtension(doc.OriginalFileName));
             return File(fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, doc.OriginalFileName);
         }
 
@@ -390,7 +390,7 @@ namespace totalhr.web.Controllers
                     ReceiverName = "",
                     EmailBody = info.Message,
                     EmailTitle = string.Format(Document.V_Share_Doc_Email_Title, CurrentUser.FullName),
-                    AttachmentPath = DocPath + "\\" + info.DocumentId + Path.GetExtension(info.FileName),
+                    AttachmentPath = CompanyDocumentPath + "\\" + info.DocumentId + Path.GetExtension(info.FileName),
                     AttachmentName = info.FileName
                 };
                 

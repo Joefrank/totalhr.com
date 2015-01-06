@@ -13,5 +13,7 @@ namespace totalhr.data.Repositories.Infrastructure
         Glossary GetByLanguage(int languageid, int glossaryRootId);
 
         List<Glossary> GetAllByLanguageAndGroup(int languageid, Variables.GlossaryGroups group);
+
+        IEnumerable<Shared.Models.ListItemStruct> GetLanguageList(int viewingLanguageId);
     }
 }

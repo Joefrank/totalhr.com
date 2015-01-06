@@ -114,7 +114,9 @@
     </EntityDeploy>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.Config" />
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="EF\TimeRecording.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>

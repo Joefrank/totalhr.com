@@ -5,8 +5,12 @@
 @model totalhr.Shared.Models.UserSearchInfo
 
 @{
-   var userList = GenericHelper.GetListFromNumerable(Model.UserList);
+   //var userList = GenericHelper.GetListFromNumerable(Model.UserList);
    var departmentList = GenericHelper.GetListFromNumerable(Model.DepartmentList);
+
+   var userList = totalhr.web.Helpers.GenericHelper.GenerateSelectFromEnum<Variables.UserType>();
+
+   //var test = usertypeList;
 }
 <div id="searchbox">
      <fieldset>
@@ -19,12 +23,13 @@
     @Html.ValidationSummary()
 
     <div id="dvform" class="formwide">
+                @Html.HiddenFor(x => x.PageNumber)
 
             <div class="line"> 
                <table>  
                <tr>   
                    <td><b>@AdminGeneric.V_User_Id</b></td>
-                   <td>@Html.TextBoxFor(x => x.Id)</td>
+                   <td>@Html.TextBoxFor(x => x.UserId)</td>
                    <td>          
 			         <b>@AdminGeneric.V_Search_ByName</b>
                    </td>
@@ -89,18 +94,20 @@
              
              </div>
 
-            <div class="line">  
-                <input type="submit" value="@Document.V_Search" />&nbsp;
-
-                <input type="button" value="@Document.V_Reset" onclick="document.location.href='@Html.Raw(Model.HrefLocation)'" />
+            <div class="line"> 
+                <p>
+                    <input type="button" value="@Document.V_Reset" onclick="document.location.href='@Html.Raw(Model.HrefLocation)'" /> 
+                    &nbsp;
+                    <input type="submit" value="@Document.V_Search" />
+                </p>
             </div>
        </div>
     
-     <!-- sorting stuff -->          
-    @Html.HiddenFor(x => x.OrderColumn)
-    @Html.HiddenFor(x => x.OrderDirection)
-    @Html.HiddenFor(x => x.PageSize)
-    @Html.HiddenFor(x => x.PageNumber)
+         <!-- sorting stuff -->          
+        @Html.HiddenFor(x => x.OrderColumn)
+        @Html.HiddenFor(x => x.OrderDirection)
+        @Html.HiddenFor(x => x.PageSize)
+        @Html.HiddenFor(x => x.PageNumber)
         
 }
 

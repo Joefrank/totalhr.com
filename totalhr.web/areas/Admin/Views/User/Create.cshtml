@@ -2,16 +2,19 @@
 @using totalhr.Resources;
 @using totalhr.Shared.Models
 @using totalhr.data.EF;
+@using totalhr.web.Areas.Admin.Helpers;
 
 @{
-    ViewBag.Title = Common.Page_TT_Header_Registration;
+    ViewBag.Title = AdminGeneric.V_Employee_Registration;
 
 
-    var languages = ViewBag.LanguageList as List<Glossary>;
+    //var languages = Model.LanguageList as List<ListItemStruct>;
     var genders = ViewBag.GenderList as List<Glossary>;
     var countries = ViewBag.CountryList as List<Glossary>;
     var titles = ViewBag.TitleList as List<Glossary>;
-    var departmentList = ViewBag.DepartmentList as List<ListItemStruct>;
+    
+    var departmentList = GenericHelper.GetListFromNumerable(Model.DepartmentList);
+    
 }
 
 @{Html.RenderPartial("_FormScripts");}
@@ -19,14 +22,21 @@
 
 
 <div class="container">
+    @section breadcrumb{
+        <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
+        <a href="/Admin/User/" title="@AdminGeneric.V_User_Management">@AdminGeneric.V_User_List</a> &gt;
+        <span class="last">@AdminGeneric.V_User_Create</span>
+    }
 
-<h1>@Common.Page_TT_Registration</h1>
+<h1>@AdminGeneric.V_Employee_Registration</h1>
 
-@using (Html.BeginForm("Create", "User"))
+@using (Html.BeginForm("Create", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
 
          @Html.ValidationSummary()
          @Html.HiddenFor(x => x.CompanyId)
+         @Html.HiddenFor(x => x.CreatedBy)
+         @Html.HiddenFor(x => x.TermsAccepted)
 
         <div class="formdiv midform">
             <div class="wrapper">
@@ -34,6 +44,11 @@
                  <fieldset>
                <legend>@FormMessages.Title_Personal_Details</legend>
                 
+                <div class="line">
+                    <label>@AdminGeneric.V_Profile_Picture</label>
+                     <span><input type="file" id="PictureFile" name="PictureFile" /></span>
+                    <span class="req">*</span>
+                </div>
                 <div class="line">
                     <label>@FormMessages.Label_Gender</label>
                      <span>@Html.DropDownListFor(x => x.GenderId,  new SelectList(genders, "RootId", "Term"))</span>
@@ -116,7 +131,7 @@
                 </div>
                 <div class="line">
                     <label>@FormMessages.Label_Department</label>
-                    <span>@Html.DropDownListFor(x => x.DepartmentId,  new SelectList(departmentList, "Id", "Name"))</span>
+                    <span>@Html.DropDownListFor(x => x.DepartmentId,  departmentList)</span>
                     <span class="req">*</span>
                 </div>
                 </fieldset>
@@ -148,7 +163,7 @@
                 </div>                
                  <div class="line">
                     <label>@FormMessages.Label_Pref_Language</label>
-                    <span>@Html.DropDownListFor(x => x.PreferedLanguageId,  new SelectList(languages, "RootId", "Term"))</span>
+                    <span>@Html.DropDownListFor(x => x.PreferedLanguageId,  new SelectList(Model.LanguageList, "Id", "Name"))</span>
                     <span class="req"></span>
                 </div>
                 

@@ -29,6 +29,9 @@ namespace totalhr.data.EF
             this.Profiles1 = new HashSet<Profile>();
             this.Roles = new HashSet<Role>();
             this.Roles1 = new HashSet<Role>();
+            this.UserProfilePictures = new HashSet<UserProfilePicture>();
+            this.UserProfilePictures1 = new HashSet<UserProfilePicture>();
+            this.UserProfilePictures2 = new HashSet<UserProfilePicture>();
         }
     
         public int id { get; set; }
@@ -80,5 +83,8 @@ namespace totalhr.data.EF
         public virtual ICollection<Role> Roles { get; set; }
         public virtual ICollection<Role> Roles1 { get; set; }
         public virtual Department Department { get; set; }
+        public virtual ICollection<UserProfilePicture> UserProfilePictures { get; set; }
+        public virtual ICollection<UserProfilePicture> UserProfilePictures1 { get; set; }
+        public virtual ICollection<UserProfilePicture> UserProfilePictures2 { get; set; }
     }
 }
