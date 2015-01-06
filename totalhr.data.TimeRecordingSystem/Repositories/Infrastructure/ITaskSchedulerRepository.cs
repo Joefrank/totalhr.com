@@ -8,7 +8,7 @@ using TRS = totalhr.data.TimeRecordingSystem.EF;
 
 namespace totalhr.data.TimeRecordingSystem.Repositories.Infrastructure
 {
-    interface ITaskSchedulerRepository : IGenericRepository<TRS.TaskScheduler>
+    public interface ITaskSchedulerRepository : IGenericRepository<TRS.TaskScheduler>
     {
 
     }

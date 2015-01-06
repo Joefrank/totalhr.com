@@ -17,6 +17,7 @@ namespace totalhr.data.TimeRecordingSystem.EF
         public TaskScheduler()
         {
             this.TimeRecordings = new HashSet<TimeRecording>();
+            this.Audit = new Audit();
         }
     
         public int Id { get; set; }
@@ -29,17 +30,13 @@ namespace totalhr.data.TimeRecordingSystem.EF
         public int AssignedTo { get; set; }
         public Nullable<System.DateTime> ScheduledDateTime { get; set; }
         public string ScheduleLog { get; set; }
-        public int AddedBy { get; set; }
-        public Nullable<int> UpdatedBy { get; set; }
-        public System.DateTime AddedDate { get; set; }
-        public Nullable<System.DateTime> UpdatedDate { get; set; }
         public Nullable<int> ApprovedBy { get; set; }
+    
+        public Audit Audit { get; set; }
     
         public virtual Department Department { get; set; }
         public virtual User AssignedToUser { get; set; }
         public virtual User AssignedByUser { get; set; }
-        public virtual User AddedByUser { get; set; }
-        public virtual User UpdatedByUser { get; set; }
         public virtual User ApprovedByUser { get; set; }
         public virtual ICollection<TimeRecording> TimeRecordings { get; set; }
     }

@@ -112,7 +112,6 @@ D:\Projects\MyGithub\totalhr.com\totalhr.service.messaging\obj\Debug\totalhr.ser
 D:\Projects\MyGithub\totalhr.com\totalhr.service.messaging\bin\Debug\AutoMapper.Net4.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.service.messaging\bin\Debug\AutoMapper.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.service.messaging\bin\Debug\AutoMapper.xml
-R:\GitProjects\TotalHR\totalhr.service.messaging\bin\Debug\AutoMapper.Net4.dll
 R:\GitProjects\TotalHR\totalhr.service.messaging\bin\Debug\totalhr.service.messaging.dll.config
 R:\GitProjects\TotalHR\totalhr.service.messaging\bin\Debug\totalhr.service.messaging.dll
 R:\GitProjects\TotalHR\totalhr.service.messaging\bin\Debug\totalhr.service.messaging.pdb
@@ -134,3 +133,4 @@ R:\GitProjects\TotalHR\totalhr.service.messaging\bin\Debug\Resources.pdb
 R:\GitProjects\TotalHR\totalhr.service.messaging\obj\Debug\totalhr.services.messaging.csprojResolveAssemblyReference.cache
 R:\GitProjects\TotalHR\totalhr.service.messaging\obj\Debug\totalhr.service.messaging.dll
 R:\GitProjects\TotalHR\totalhr.service.messaging\obj\Debug\totalhr.service.messaging.pdb
+R:\GitProjects\TotalHR\totalhr.service.messaging\bin\Debug\AutoMapper.Net4.dll

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using totalhr.data.TimeRecordingSystem.EF;
-using totalhr.data.TimeRecordingSystem.Models;
 using totalhr.data.TimeRecordingSystem.Repositories.Infrastructure;
 using totalhr.services.Infrastructure;
 

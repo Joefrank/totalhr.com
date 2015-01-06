@@ -20,8 +20,6 @@ namespace totalhr.data.TimeRecordingSystem.EF
             this.TaskSchedulers = new HashSet<TaskScheduler>();
             this.TaskSchedulers1 = new HashSet<TaskScheduler>();
             this.TimeRecordings = new HashSet<TimeRecording>();
-            this.TimeRecordings1 = new HashSet<TimeRecording>();
-            this.TimeRecordings2 = new HashSet<TimeRecording>();
         }
     
         public int id { get; set; }
@@ -63,7 +61,5 @@ namespace totalhr.data.TimeRecordingSystem.EF
         public virtual ICollection<TaskScheduler> TaskSchedulers { get; set; }
         public virtual ICollection<TaskScheduler> TaskSchedulers1 { get; set; }
         public virtual ICollection<TimeRecording> TimeRecordings { get; set; }
-        public virtual ICollection<TimeRecording> TimeRecordings1 { get; set; }
-        public virtual ICollection<TimeRecording> TimeRecordings2 { get; set; }
     }
 }

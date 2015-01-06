@@ -27,7 +27,7 @@ namespace totalhr.web.Areas.TimeRecording.ViewModels
         {
             if(entity != null)
             {
-                this.AddedByUser = entity.AddedByUser.firstname + " " + entity.AddedByUser.surname;
+                this.AddedByUser = entity.Audit.AddedBy.ToString();
                 this.TimeRecordingType = entity.TimeRecordingType.Type;
             }
         }

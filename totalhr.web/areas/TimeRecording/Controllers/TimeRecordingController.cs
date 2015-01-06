@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using totalhr.data.TimeRecordingSystem.Models;
+using totalhr.data.TimeRecordingSystem.EF;
 using totalhr.services.Infrastructure;
 using totalhr.web.Areas.TimeRecording.ViewModels;
 using totalhr.web.Controllers;
@@ -13,8 +13,8 @@ namespace totalhr.web.Areas.TimeRecording.Controllers
 {
     public class TimeRecordingController : BaseController
     {
-        public ITimeRecordingServices _timeRecordingService { get; set; }
-        public IAccountService _accountsService { get; set; }
+        private ITimeRecordingServices _timeRecordingService;
+        private IAccountService _accountsService;
 
         public TimeRecordingController(ITimeRecordingServices timeRecordingService, IAccountService accountService, IOAuthService authService):base(authService)
         {
@@ -58,14 +58,14 @@ namespace totalhr.web.Areas.TimeRecording.Controllers
                 if (vm.Id == 0)
                 {
                     isSuccess = _timeRecordingService.RecordTimeForUser(vm.Id,vm.UserId, vm.StartTime, vm.EndTime,
-                       new Audit() { AddedByUserId = vm.UserId, DateAdded = DateTime.Now });
+                       new Audit() { AddedBy = vm.UserId, AddedDate = DateTime.Now });
                 if (isSuccess)
                     return RedirectToAction("Index", "TimeRecording");
                 }
                 else
                 {
                     isSuccess = _timeRecordingService.RecordTimeForUser(vm.Id,vm.UserId, vm.StartTime, vm.EndTime,
-                       new Audit() { UpdatedByUserId = vm.UserId, DateUpdated = DateTime.Now });
+                       new Audit().UpdateAudit( vm.UserId, DateTime.Now ));
                     if (isSuccess)
                         return RedirectToAction("Details", "TimeRecording", new { id = vm.Id });
                 }

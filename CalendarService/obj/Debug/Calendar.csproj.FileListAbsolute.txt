@@ -64,7 +64,6 @@ D:\Projects\MyGithub\totalhr.com\CalendarService\bin\Debug\log4net.dll
 D:\Projects\MyGithub\totalhr.com\CalendarService\bin\Debug\AutoMapper.dll
 D:\Projects\MyGithub\totalhr.com\CalendarService\bin\Debug\log4net.xml
 D:\Projects\MyGithub\totalhr.com\CalendarService\bin\Debug\AutoMapper.xml
-R:\GitProjects\TotalHR\CalendarService\bin\Debug\AutoMapper.Net4.dll
 R:\GitProjects\TotalHR\CalendarService\bin\Debug\CalendarService.dll
 R:\GitProjects\TotalHR\CalendarService\bin\Debug\CalendarService.pdb
 R:\GitProjects\TotalHR\CalendarService\bin\Debug\log4net.dll
@@ -84,3 +83,4 @@ R:\GitProjects\TotalHR\CalendarService\bin\Debug\Resources.pdb
 R:\GitProjects\TotalHR\CalendarService\obj\Debug\Calendar.csprojResolveAssemblyReference.cache
 R:\GitProjects\TotalHR\CalendarService\obj\Debug\CalendarService.dll
 R:\GitProjects\TotalHR\CalendarService\obj\Debug\CalendarService.pdb
+R:\GitProjects\TotalHR\CalendarService\bin\Debug\AutoMapper.Net4.dll

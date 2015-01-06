@@ -139,7 +139,6 @@ D:\Projects\MyGithub\totalhr.com\totalhr.dummydata\obj\Debug\totalhr.dummydata.p
 D:\Projects\MyGithub\totalhr.com\totalhr.dummydata\bin\Debug\AutoMapper.Net4.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.dummydata\bin\Debug\AutoMapper.dll
 D:\Projects\MyGithub\totalhr.com\totalhr.dummydata\bin\Debug\AutoMapper.xml
-R:\GitProjects\TotalHR\totalhr.dummydata\bin\Debug\AutoMapper.Net4.dll
 R:\GitProjects\TotalHR\totalhr.dummydata\bin\Debug\totalhr.dummydata.dll
 R:\GitProjects\TotalHR\totalhr.dummydata\bin\Debug\totalhr.dummydata.pdb
 R:\GitProjects\TotalHR\totalhr.dummydata\bin\Debug\Ninject.dll

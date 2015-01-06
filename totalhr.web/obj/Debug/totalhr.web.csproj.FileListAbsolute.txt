@@ -404,3 +404,5 @@ R:\GitProjects\TotalHR\totalhr.web\bin\AutoMapper.xml
 R:\GitProjects\TotalHR\totalhr.web\obj\Debug\totalhr.web.csprojResolveAssemblyReference.cache
 R:\GitProjects\TotalHR\totalhr.web\obj\Debug\totalhr.web.dll
 R:\GitProjects\TotalHR\totalhr.web\obj\Debug\totalhr.web.pdb
+R:\GitProjects\TotalHR\totalhr.web\bin\totalhr.core.dll
+R:\GitProjects\TotalHR\totalhr.web\bin\totalhr.core.pdb

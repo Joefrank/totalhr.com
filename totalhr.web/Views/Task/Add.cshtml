@@ -1,0 +1,96 @@
+﻿@model totalhr.web.ViewModels.TaskSchedulerVM
+
+@{
+    ViewBag.Title = "Add Task";
+}
+
+<h2>Add Task</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    if (string.IsNullOrEmpty(Model.ErrorMessage))
+    {
+        <fieldset>
+            <legend>TimeRecordingViewModel</legend>
+            @Html.HiddenFor(model => model.Id)
+
+
+            @Html.HiddenFor(model => model.UserId)
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Name)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Name)
+                @Html.ValidationMessageFor(model => model.Name)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.Description)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(model => model.Description)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ApprovalNeeded)
+            </div>
+            <div class="editor-field">
+                @Html.CheckBoxFor(model => model.ApprovalNeeded)
+            </div>
+
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.ScheduledDateTime)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ScheduledDateTime)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AssignedBy)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(x => x.AssignedBy, new SelectList(Model.Users,"Id","Name",Model.AssignedBy))
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.AssignedTo)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(x => x.AssignedTo, new SelectList(Model.Users, "Id", "Name", Model.AssignedTo))
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.DepartmentId)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownListFor(x => x.DepartmentId, new SelectList(Model.Departments, "Id", "Name", Model.DepartmentId))
+            </div>
+
+
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        </fieldset>
+
+
+        <div>
+            @Html.ActionLink("Back to Time Recording Home", "Index")
+
+        </div>
+
+        @*@section Scripts{
+            @Scripts.Render("~/bundles/jqueryval")
+
+            }*@
+    }
+    else
+    {
+        <div class="error-message">
+            @Html.DisplayFor(model => model.ErrorMessage)
+        </div>
+    }
+}

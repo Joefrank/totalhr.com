@@ -186,6 +186,7 @@
     <Compile Include="Helpers\PaginationHelper.cs" />
     <Compile Include="Models\UserAccountStruct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\TaskSchedulerVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Content\css\SiteAdmin.css" />
@@ -394,6 +395,7 @@
     <Content Include="Views\Document\ShareComplete.cshtml" />
     <Content Include="Views\Account\ProfilePreview.cshtml" />
     <Content Include="Views\Shared\_DefaultLayout.cshtml" />
+    <Content Include="Views\Task\Add.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
