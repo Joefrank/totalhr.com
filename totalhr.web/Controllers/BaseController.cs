@@ -7,6 +7,7 @@ using totalhr.Shared;
 using System.Configuration;
 using Authentication.Infrastructure;
 using Authentication.Models;
+using System.IO;
 
 namespace totalhr.web.Controllers
 {
@@ -21,6 +22,23 @@ namespace totalhr.web.Controllers
         protected IOAuthService AuthService;
 
         protected readonly ClientUser _currentUser;
+
+        public string CompanyDocumentPath
+        {
+            get { return Path.Combine(
+                    Server.MapPath(ConfigurationManager.AppSettings["CompanyDocumentPath"]), 
+                    CurrentUser.CompanyId.ToString()); 
+            }
+        }
+
+        public string ProfilePicturePath
+        {
+            get
+            {
+                return Path.Combine(
+                  Server.MapPath(ConfigurationManager.AppSettings["ProfilePicturePath"]));
+            }
+        }
 
         public SMTPSettings SiteMailSettings
         {

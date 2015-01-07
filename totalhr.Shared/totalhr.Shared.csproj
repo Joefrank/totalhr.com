@@ -102,6 +102,8 @@
     <Compile Include="Models\NewEmployeeInfo.cs" />
     <Compile Include="Models\NewUserInfo.cs" />
     <Compile Include="Models\SimpleUser.cs" />
+    <Compile Include="Models\SortingInfo.cs" />
+    <Compile Include="Models\TemplateInfo.cs" />
     <Compile Include="Models\UserAdminStruct.cs" />
     <Compile Include="Models\UserPersonalInfo.cs" />
     <Compile Include="Models\UserRegStruct.cs" />

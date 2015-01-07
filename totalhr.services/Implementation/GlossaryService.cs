@@ -8,6 +8,7 @@ using totalhr.data.Repositories.Infrastructure;
 using totalhr.data.EF;
 using totalhr.Shared;
 using totalhr.Shared.Infrastructure;
+using totalhr.Shared.Models;
 
 namespace totalhr.services.Implementation
 {
@@ -26,6 +27,11 @@ namespace totalhr.services.Implementation
         {
             _glossaryRepos = glossRepos;
             _cacheHelper = cacheHelper;
+        }
+
+        public IEnumerable<ListItemStruct> GetLanguageList(int viewingLanguageId)
+        {
+            return _glossaryRepos.GetLanguageList(viewingLanguageId);
         }
 
         public List<Glossary> GetGlossary(int languageid, Variables.GlossaryGroups group)

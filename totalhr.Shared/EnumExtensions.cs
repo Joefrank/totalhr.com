@@ -25,6 +25,16 @@ namespace totalhr.Shared
             return localizedDescription ?? enumerator.ToString();
         }
 
+        /// <summary>
+        /// Adds extension method to enum Description
+        /// </summary>
+        /// <param name="enumerator"></param>
+        /// <returns></returns>
+        public static string Description(Object enumerator)
+        {
+            var localizedDescription = DescriptionResources.GetString(enumerator.ToString());
+            return localizedDescription ?? enumerator.ToString();
+        }
 
         /// <summary>
         /// Returns further info for each enum if it exists

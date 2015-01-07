@@ -7,7 +7,8 @@
 
 @{
     BuildPaginationUrl urlBuilder = UrlBuilder.BuildPaginationUrlNoExtention;
-
+    BuildPaginationItem itemBuilder = PaginationItemBuilder.BuildPageButton;
+    
     var pagination = PaginationHelper.BuildPagination(Model, urlBuilder);    
     
     int higherBound = pagination.PageSize * pagination.CurrentPage;
@@ -22,17 +23,17 @@
     }
 
     @if(!string.IsNullOrEmpty(pagination.PrevLink)){
-        <a href="@pagination.PrevLink">&lt;&lt;@Common.V_Prev</a>
+        @Html.Raw(itemBuilder.Invoke(pagination.PrevLink, "&lt;&lt;" + Common.V_Prev, "", @" Paginate('" + pagination.PrevLink + "');"))        
     }
 
     @foreach (var page in pagination.AllPages)
     {
-        var sel = page.Selected? @" class=""selected"" " : "";
-        <a @sel href="@page.Link">@page.PageNumber</a>
+        var sel = page.Selected? "selected" : "";        
+        @Html.Raw(itemBuilder.Invoke(page.Link, page.PageNumber.ToString(), sel, @" Paginate('" + page.Link + "');"))
     }
 
-    @if(!string.IsNullOrEmpty(pagination.NextLink)){
-        <a href="@pagination.NextLink">@Common.V_Next &gt;&gt;</a>
+    @if(!string.IsNullOrEmpty(pagination.NextLink)){       
+        @Html.Raw(itemBuilder.Invoke(pagination.NextLink, Common.V_Next + "&gt;&gt;", "", @" Paginate('" + pagination.NextLink + "');"))
     }
 
 </div>

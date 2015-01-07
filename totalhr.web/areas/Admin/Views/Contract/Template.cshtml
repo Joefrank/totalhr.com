@@ -1,0 +1,79 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Helpers;
+@using totalhr.Shared.Models;
+
+@model IEnumerable<totalhr.data.EF.ContractTemplate>
+
+@{
+    ViewBag.Title = AdminGeneric.V_Contract_Template_Management;
+    SortingInfo info = ViewBag.SortInfo as SortingInfo; 
+    if(info == null)
+    {
+        info = new SortingInfo
+        {
+            SortColumn = "TemplateId",
+            SortOrder = "asc"
+        };
+    }   
+}
+
+
+<div class="container">
+      @section breadcrumb{
+            <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
+            <a href="/Admin/Contract/" title="@AdminGeneric.V_Contract_Management">@AdminGeneric.V_Contract_Management</a> &gt;
+            <span class="last">@AdminGeneric.V_Contract_Template_Management</span>
+        }
+
+    <h1>@AdminGeneric.V_Contract_Template_Management</h1>
+
+    <div class="wide">
+        @if (Model != null && Model.Count() > 0)
+        {
+            <table border="1" class="SortedTab">
+            <tr>
+                @Html.Raw(GenericHelper.MakeSortableTH("TemplateId",  info,Contract.V_Template_Id))              
+                @Html.Raw(GenericHelper.MakeSortableTH("ContractName", info,Contract.V_Template_Name))
+                @Html.Raw(GenericHelper.MakeSortableTH("Description", info,Contract.V_Description))               
+                @Html.Raw(GenericHelper.MakeSortableTH("Created", info,Contract.V_Created))
+                @Html.Raw(GenericHelper.MakeSortableTH("CreatedBy",info,Contract.V_Created_By))
+                                         
+                <th>&nbsp;</th>
+            </tr>
+            @foreach (var template in Model)
+            {
+                <tr>
+                    <td>
+                        @template.id
+                    </td>
+                    <td>
+                        @template.Name
+                    </td>
+                    <td>
+                        @template.Description
+                    </td>
+                    <td>
+                        @template.Created
+                    </td>
+                    <td>
+                        @template.CreatedBy
+                    </td>
+                    <td>
+                        <input type="button" class="edit" value="Edit Template" onclick="NavigateTo('/Admin/Contract/EditTemplate/@template.id');" />
+                    </td>
+                </tr>
+            }
+                </table>
+        }
+        else
+        {
+            <p class="error">
+               @Contract.Error_Template_Not_Found
+            </p>
+        }
+    </div>
+
+    <div class="wide">
+        <input type="button" value="Create Template" onclick="NavigateTo('/Admin/Contract/AddTemplate/');" />
+    </div>
+</div>

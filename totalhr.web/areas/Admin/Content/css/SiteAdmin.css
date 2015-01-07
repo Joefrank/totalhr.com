@@ -389,7 +389,7 @@ table.tabsimple {
 }
 
     #searchbox input[type='submit'], #searchbox select, #searchbox input[type='text'], #searchbox input[type='button'] {
-        float: left;font-size:8pt;
+        float: left;font-size:8pt;margin-right:5px;
     }
 
     #searchbox input[type='text'] {
@@ -435,14 +435,15 @@ table.tabsimple {
         color:#777;
     }
 
-    .pagination a {
+    .pagination a, .pagination span {
         border-radius: 50%;
         border: 3px solid #BADA55;
         padding:5px;
         text-decoration:none;
+        cursor:pointer;
     }
 
-        .pagination a.selected {
+        .pagination a.selected, .pagination span.selected {
             background-color:#BADA55;
             color:white;
         }

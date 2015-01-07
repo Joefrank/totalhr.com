@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using totalhr.data.EF;
 using totalhr.Shared;
 using totalhr.Shared.Infrastructure;
+using totalhr.Shared.Models;
 
 namespace totalhr.services.Infrastructure
 {
     public interface IGlossaryService
     {
         List<Glossary> GetGlossary(int languageid, Variables.GlossaryGroups group);
+
+        IEnumerable<ListItemStruct> GetLanguageList(int viewingLanguageId);
 
         void SetCacheHelper(ICacheHelper helper);
 

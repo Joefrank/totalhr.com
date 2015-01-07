@@ -33,7 +33,9 @@
         @using (Html.BeginForm("CreateDocument", "Document", FormMethod.Post, new { enctype = "multipart/form-data" }))
         { 
          @Html.ValidationSummary();
-         
+            
+            @Html.HiddenFor(x => x.CreatedBy)
+
             <div class="formdiv midform">
                 <div class="wrapper">
                     @Html.HiddenFor(x => x.DocId)

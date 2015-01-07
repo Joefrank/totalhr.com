@@ -522,6 +522,20 @@
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserProfilePicture">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="FileId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="Width" Type="int" Nullable="false" />
+          <Property Name="Height" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="UserRole">
           <Key>
             <PropertyRef Name="UserId" />
@@ -832,6 +846,54 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserProfilePicture_File">
+          <End Role="File" Type="Self.File" Multiplicity="1" />
+          <End Role="UserProfilePicture" Type="Self.UserProfilePicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfilePicture">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfilePicture_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserProfilePicture" Type="Self.UserProfilePicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfilePicture">
+              <PropertyRef Name="LastUpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfilePicture_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserProfilePicture" Type="Self.UserProfilePicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfilePicture">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfilePicture_UserProfilePicture">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserProfilePicture" Type="Self.UserProfilePicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfilePicture">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserRole_Roles">
           <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
           <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
@@ -966,6 +1028,7 @@
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserContract" EntityType="Self.UserContract" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserProfilePicture" EntityType="Self.UserProfilePicture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Calendar_Company" Association="Self.FK_Calendar_Company">
             <End Role="Company" EntitySet="Company" />
@@ -1066,6 +1129,22 @@
           <AssociationSet Name="FK_UserProfile_User" Association="Self.FK_UserProfile_User">
             <End Role="User" EntitySet="User" />
             <End Role="UserProfile" EntitySet="UserProfile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfilePicture_File" Association="Self.FK_UserProfilePicture_File">
+            <End Role="File" EntitySet="File" />
+            <End Role="UserProfilePicture" EntitySet="UserProfilePicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfilePicture_User" Association="Self.FK_UserProfilePicture_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserProfilePicture" EntitySet="UserProfilePicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfilePicture_User1" Association="Self.FK_UserProfilePicture_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserProfilePicture" EntitySet="UserProfilePicture" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfilePicture_UserProfilePicture" Association="Self.FK_UserProfilePicture_UserProfilePicture">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserProfilePicture" EntitySet="UserProfilePicture" />
           </AssociationSet>
           <AssociationSet Name="FK_UserRole_Roles" Association="Self.FK_UserRole_Roles">
             <End Role="Roles" EntitySet="Roles" />
@@ -1399,6 +1478,9 @@
           <NavigationProperty Name="Roles" Relationship="TotalHRModel.FK_Roles_User" FromRole="User" ToRole="Role" />
           <NavigationProperty Name="Roles1" Relationship="TotalHRModel.FK_Roles_User1" FromRole="User" ToRole="Role" />
           <NavigationProperty Name="Department" Relationship="TotalHRModel.FK_User_Department" FromRole="User" ToRole="Department" />
+          <NavigationProperty Name="UserProfilePictures" Relationship="TotalHRModel.FK_UserProfilePicture_User" FromRole="User" ToRole="UserProfilePicture" />
+          <NavigationProperty Name="UserProfilePictures1" Relationship="TotalHRModel.FK_UserProfilePicture_User1" FromRole="User" ToRole="UserProfilePicture" />
+          <NavigationProperty Name="UserProfilePictures2" Relationship="TotalHRModel.FK_UserProfilePicture_UserProfilePicture" FromRole="User" ToRole="UserProfilePicture" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -1684,6 +1766,27 @@
             <Parameter Name="sortorder" Mode="In" Type="String" />
             <Parameter Name="viewinglanguageid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="UserProfilePictures" EntityType="TotalHRModel.UserProfilePicture" />
+          <AssociationSet Name="FK_UserProfilePicture_File" Association="TotalHRModel.FK_UserProfilePicture_File">
+            <End Role="File" EntitySet="Files" />
+            <End Role="UserProfilePicture" EntitySet="UserProfilePictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfilePicture_User" Association="TotalHRModel.FK_UserProfilePicture_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserProfilePicture" EntitySet="UserProfilePictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfilePicture_User1" Association="TotalHRModel.FK_UserProfilePicture_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserProfilePicture" EntitySet="UserProfilePictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfilePicture_UserProfilePicture" Association="TotalHRModel.FK_UserProfilePicture_UserProfilePicture">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserProfilePicture" EntitySet="UserProfilePictures" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserProfilePicture_File1" Association="TotalHRModel.FK_UserProfilePicture_File1">
+            <End Role="File" EntitySet="Files" />
+            <End Role="UserProfilePicture" EntitySet="UserProfilePictures" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetUserProfiles_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -1820,6 +1923,8 @@
           <Property Name="lastupdated" Type="DateTime" Precision="3" />
           <Property Name="lastupdatedby" Type="Int32" />
           <NavigationProperty Name="CompanyDocuments" Relationship="TotalHRModel.FK_CompanyDocument_File" FromRole="File" ToRole="CompanyDocument" />
+          <NavigationProperty Name="UserProfilePictures" Relationship="TotalHRModel.FK_UserProfilePicture_File" FromRole="File" ToRole="UserProfilePicture" />
+          <NavigationProperty Name="UserProfilePictures1" Relationship="TotalHRModel.FK_UserProfilePicture_File1" FromRole="File" ToRole="UserProfilePicture" />
         </EntityType>
         <Association Name="FK_CompanyDocument_User">
           <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
@@ -2354,6 +2459,85 @@
           <Property Type="String" Name="chosenculture" Nullable="true" MaxLength="10" />
           <Property Type="Int32" Name="departmentid" Nullable="false" />
         </ComplexType>
+        <EntityType Name="UserProfilePicture">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="FileId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="FileId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="Width" Type="Int32" Nullable="false" />
+          <Property Name="Height" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="File" Relationship="TotalHRModel.FK_UserProfilePicture_File" FromRole="UserProfilePicture" ToRole="File" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_UserProfilePicture_User" FromRole="UserProfilePicture" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_UserProfilePicture_User1" FromRole="UserProfilePicture" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="TotalHRModel.FK_UserProfilePicture_UserProfilePicture" FromRole="UserProfilePicture" ToRole="User" />
+          <NavigationProperty Name="File1" Relationship="TotalHRModel.FK_UserProfilePicture_File1" FromRole="UserProfilePicture" ToRole="File" />
+        </EntityType>
+        <Association Name="FK_UserProfilePicture_File">
+          <End Type="TotalHRModel.File" Role="File" Multiplicity="1" />
+          <End Type="TotalHRModel.UserProfilePicture" Role="UserProfilePicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfilePicture">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfilePicture_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.UserProfilePicture" Role="UserProfilePicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfilePicture">
+              <PropertyRef Name="LastUpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfilePicture_User1">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.UserProfilePicture" Role="UserProfilePicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfilePicture">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfilePicture_UserProfilePicture">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.UserProfilePicture" Role="UserProfilePicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfilePicture">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserProfilePicture_File1">
+          <End Type="TotalHRModel.File" Role="File" Multiplicity="1" />
+          <End Type="TotalHRModel.UserProfilePicture" Role="UserProfilePicture" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserProfilePicture">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3101,6 +3285,20 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="UserProfilePictures">
+            <EntityTypeMapping TypeName="TotalHRModel.UserProfilePicture">
+              <MappingFragment StoreEntitySet="UserProfilePicture">
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Width" ColumnName="Width" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

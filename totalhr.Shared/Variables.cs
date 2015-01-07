@@ -139,7 +139,8 @@ namespace totalhr.Shared
 
         public enum FileType
         {
-            CompanyDocument = 1
+            CompanyDocument = 1,
+            ProfilePicture = 2
         }
 
         public enum AllowedFileExtension
@@ -170,10 +171,29 @@ namespace totalhr.Shared
 
         }
 
+        public enum AllowedImageExtensions
+        {
+            gif,
+            jpg,
+            jpeg,
+            png,
+            tif
+        }
+
         public enum DocumentShareType
         {
             Link = 1,
             Attachment = 2
+        }
+
+        public enum UserType
+        {
+            CompanyCreator = 1,
+            Employee2 = 2,
+            SystemAdmin = 3,
+            Developer = 4,
+            Tester = 5,
+            Promoters = 6
         }
 
         public enum PaginationValues

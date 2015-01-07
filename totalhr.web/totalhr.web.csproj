@@ -150,6 +150,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\AccountController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdminBaseController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ContractController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\TimeRecording\Controllers\TimeRecordingController.cs" />
     <Compile Include="Areas\TimeRecording\ViewModels\SearchVM.cs" />
@@ -294,6 +295,10 @@
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <Content Include="Views\TimeRecording\Search.cshtml" />
     <Content Include="Views\TimeRecording\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Contract\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Contract\Manage.cshtml" />
+    <Content Include="Areas\Admin\Views\Contract\Template.cshtml" />
+    <Content Include="Areas\Admin\Views\Contract\CreateTemplate.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

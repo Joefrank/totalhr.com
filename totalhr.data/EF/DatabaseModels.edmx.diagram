@@ -69,6 +69,12 @@
         <AssociationConnector Association="TotalHRModel.FK_Roles_User" />
         <AssociationConnector Association="TotalHRModel.FK_Roles_User1" />
         <AssociationConnector Association="TotalHRModel.FK_User_Department" />
+        <EntityTypeShape EntityType="TotalHRModel.UserProfilePicture" Width="1.5" PointX="17" PointY="10.125" />
+        <AssociationConnector Association="TotalHRModel.FK_UserProfilePicture_File" />
+        <AssociationConnector Association="TotalHRModel.FK_UserProfilePicture_User" />
+        <AssociationConnector Association="TotalHRModel.FK_UserProfilePicture_User1" />
+        <AssociationConnector Association="TotalHRModel.FK_UserProfilePicture_UserProfilePicture" />
+        <AssociationConnector Association="TotalHRModel.FK_UserProfilePicture_File1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

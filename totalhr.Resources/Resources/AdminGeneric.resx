@@ -291,4 +291,43 @@
   <data name="V_Notify_User_ByEmail" xml:space="preserve">
     <value>Notify User by Email</value>
   </data>
+  <data name="V_Employee_Registration" xml:space="preserve">
+    <value>Employee Registration</value>
+  </data>
+  <data name="V_Profile_Picture" xml:space="preserve">
+    <value>Profile Picture</value>
+  </data>
+  <data name="V_Absences" xml:space="preserve">
+    <value>Absences</value>
+  </data>
+  <data name="V_Absences_Management" xml:space="preserve">
+    <value>Absences Management</value>
+  </data>
+  <data name="V_Contracts" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
+  <data name="V_Contract_Management" xml:space="preserve">
+    <value>Contract Management</value>
+  </data>
+  <data name="V_Department_Management" xml:space="preserve">
+    <value>Departments Management</value>
+  </data>
+  <data name="V_Document_Folder_Managment" xml:space="preserve">
+    <value>Document &amp; Folders Management</value>
+  </data>
+  <data name="V_Choose_Option" xml:space="preserve">
+    <value>Please choose an option:</value>
+  </data>
+  <data name="V_Contract_Template_Management" xml:space="preserve">
+    <value>Template Management</value>
+  </data>
+  <data name="V_Manage_Contracts" xml:space="preserve">
+    <value>Manage Contracts</value>
+  </data>
+  <data name="V_Manage_Templates" xml:space="preserve">
+    <value>Manage Templates</value>
+  </data>
+  <data name="V_User_Create" xml:space="preserve">
+    <value>Create User</value>
+  </data>
 </root>
