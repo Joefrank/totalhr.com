@@ -97,6 +97,7 @@
     <Compile Include="HttpCacheHelper.cs" />
     <Compile Include="Infrastructure\ICacheHelper.cs" />
     <Compile Include="Models\Attributes\AlwaysTrueAttribute.cs" />
+    <Compile Include="Models\FormInfo.cs" />
     <Compile Include="Models\ListItemStruct.cs" />
     <Compile Include="Models\LoginStruct.cs" />
     <Compile Include="Models\NewEmployeeInfo.cs" />

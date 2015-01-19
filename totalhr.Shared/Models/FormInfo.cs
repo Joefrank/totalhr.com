@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace totalhr.Shared.Models
 {
-    public class TemplateInfo
+    public class FormInfo
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public int CreatedBy { get; set; }
-        public int FormId { get; set; }
+
+        public int FormTypeId { get; set; }
+
+        public string Schema { get; set; }
     }
 }

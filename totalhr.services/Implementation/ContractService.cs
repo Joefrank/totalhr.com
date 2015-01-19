@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using totalhr.data.EF;
 using totalhr.data.Repositories.Infrastructure;
 using totalhr.services.Infrastructure;
+using totalhr.Shared.Models;
 
 namespace totalhr.services.Implementation
 {
@@ -28,6 +29,40 @@ namespace totalhr.services.Implementation
         public IEnumerable<ContractTemplate> ListContractTemplates()
         {
             return _templateRepos.GetAll();
+        }
+
+        public FormInfo GetDefaultTemplate(int languageId)
+        {
+            return new FormInfo
+            {
+                Schema = @" {
+                  ""fields"": [
+                    {
+                      ""type"": ""text"",
+                      ""name"": ""startDate"",
+                      ""displayName"": ""Start Date"",
+                      ""validation"": {
+                        ""messages"": {},
+                        ""required"": true
+                      },
+                      ""placeholder"": ""Enter employee start date here"",
+                      ""tooltip"": ""Enter employee start date here""
+                    },
+                    {
+                      ""type"": ""text"",
+                      ""name"": ""jobType"",
+                      ""displayName"": ""Job Type"",
+                      ""validation"": {
+                        ""messages"": {},
+                        ""required"": true
+                      },
+                      ""placeholder"": ""Enter employee job type here"",
+                      ""tooltip"": ""Enter employee job type here""
+                    }
+                    ]
+                }"
+            };
+
         }
     }
 }

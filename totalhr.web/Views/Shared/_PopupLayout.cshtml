@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html>
+<html @RenderSection("htmlattrib", required: false) >
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -15,10 +15,8 @@
 <body>
    <div id="main">
     <div class="content">
-         <div class="popuphead">  
-            
-              @RenderSection("head2", required: true)             
-
+         <div class="popuphead">             
+              @RenderSection("head2", required: true)   
               <div id="toolbox">
                   <span class="spclose" onclick="parent.ClosePopup('dvPopup')">&nbsp;</span> 
               </div>
@@ -34,7 +32,7 @@
 
     @RenderSection("scripts", required: false)
 
-   <div id="dvPopupAjax" style="display:none;">
-   </div>
+   <div id="dvPopupAjax" style="display:none;"></div>
+
 </body>
 </html>
