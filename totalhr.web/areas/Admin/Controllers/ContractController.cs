@@ -13,6 +13,7 @@ using log4net;
 using Authentication.Infrastructure;
 using FormService.Infrastructure;
 using totalhr.Shared;
+using TemplateInfo = totalhr.Shared.Models.TemplateInfo;
 
 namespace totalhr.web.Areas.Admin.Controllers
 {
@@ -54,8 +55,14 @@ namespace totalhr.web.Areas.Admin.Controllers
 
         public ActionResult AddTemplate()
         {
-            ViewBag.FormList = _formService.ListFormsOfType((int)Variables.FormType.ContractTemplate);
+            ViewBag.FormList = _formService.ListFormsOfTypeSimple((int)Variables.FormType.ContractTemplate);
             return View("CreateTemplate", new totalhr.Shared.Models.TemplateInfo());
+        }
+
+        public ActionResult CreateTemplate(TemplateInfo info)
+        {
+            int templateId = _contractService.CreateContractTemplate(info);
+            return RedirectToAction("Template");
         }
     }
 }

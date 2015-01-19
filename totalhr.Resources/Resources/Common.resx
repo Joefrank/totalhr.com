@@ -219,4 +219,7 @@
   <data name="V_Switch_Context_Admin_Tooltip" xml:space="preserve">
     <value>Switch to admin context.</value>
   </data>
+  <data name="V_None" xml:space="preserve">
+    <value>None</value>
+  </data>
 </root>

@@ -5,7 +5,17 @@
 @model totalhr.Shared.Models.TemplateInfo
 
 @{
-    ViewBag.Title = Contract.V_Template_Create;   
+    ViewBag.Title = Contract.V_Template_Create;
+    List<SelectListItem> itemList = null;
+    
+    try
+    {
+        itemList = GenericHelper.GetListFromNumerable(ViewBag.FormList as IEnumerable<ListItemStruct>);
+    }
+    catch
+    {
+        itemList = new List<SelectListItem>{new SelectListItem{Value = "", Text = Common.V_None}};
+    }
 }
 
 
@@ -54,8 +64,7 @@
 
                     <div class="line">
                         <label>Form</label>
-                         <span>@Html.DropDownListFor(x => x.FormId, 
-                            new List<SelectListItem>{new SelectListItem{ Value = "", Text = "Select"}})</span>    
+                         <span>@Html.DropDownListFor(x => x.FormId, itemList)</span>    
                         <span><input type="button" value="New Form" onclick="OpenPopup('/Admin/FormEditor/CreateForm/1', 900, 600)" /></span>                    
                     </div>
 

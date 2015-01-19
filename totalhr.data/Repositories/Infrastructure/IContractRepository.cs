@@ -9,5 +9,6 @@ namespace totalhr.data.Repositories.Infrastructure
 {
     public interface IContractRepository : IGenericRepository<UserContract>
     {
+        int AddTemplate(ContractTemplate template);
     }
 }

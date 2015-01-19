@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using totalhr.Shared.Models;
 using totalhr.data.EF;
 
 namespace FormService.Infrastructure
@@ -13,5 +14,6 @@ namespace FormService.Infrastructure
 
         IEnumerable<Form> ListFormsOfType(int formTypeId);
 
+        IEnumerable<ListItemStruct> ListFormsOfTypeSimple(int formTypeId);
     }
 }

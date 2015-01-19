@@ -10,6 +10,10 @@ namespace totalhr.data.Repositories.Implementation
 {
     public class ContractRepository : GenericRepository<TotalHREntities, UserContract>, IContractRepository
     {
-
+        public int AddTemplate(ContractTemplate template)
+        {
+            Context.ContractTemplates.Add(template);
+            return Context.SaveChanges();
+        }
     }
 }

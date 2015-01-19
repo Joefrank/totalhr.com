@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using totalhr.Resources;
 using totalhr.data.EF;
 using totalhr.data.Repositories.Infrastructure;
 using totalhr.services.Infrastructure;
@@ -29,6 +30,19 @@ namespace totalhr.services.Implementation
         public IEnumerable<ContractTemplate> ListContractTemplates()
         {
             return _templateRepos.GetAll();
+        }
+
+        public int CreateContractTemplate(TemplateInfo info)
+        {
+            var contract = new ContractTemplate
+                {
+                   FormId =  info.FormId,
+                   Name = info.Name,
+                   Description = info.Description,
+                   Created = DateTime.Now,
+                   CreatedBy = info.CreatedBy
+                };
+            return _contractRepos.AddTemplate(contract);
         }
 
         public FormInfo GetDefaultTemplate(int languageId)
