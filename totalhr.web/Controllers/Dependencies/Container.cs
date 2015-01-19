@@ -26,6 +26,8 @@ using FileManagementService.Infrastructure;
 using FileManagementService.Implementation;
 using totalhr.data.TimeRecordingSystem.Repositories.Infrastructure;
 using totalhr.data.TimeRecordingSystem.Repositories.Implementation;
+using FormService.Infrastructure;
+using FormService.Implementation;
 
 namespace totalhr.web.Controllers.Dependencies
 {
@@ -76,6 +78,8 @@ namespace totalhr.web.Controllers.Dependencies
             ninjectKernel.Bind<IContractRepository>().To<ContractRepository>();
             ninjectKernel.Bind<IContractTemplateRepository>().To<ContractTemplateRepository>();
             ninjectKernel.Bind<IContractService>().To<ContractService>();
+            ninjectKernel.Bind<IFormEditorService>().To<FormEditorService>();
+            ninjectKernel.Bind<IFormRepository>().To<FormRepository>();
         }
 
     }

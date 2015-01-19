@@ -12,18 +12,22 @@ namespace totalhr.data.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class ContractTemplate
+    public partial class Form
     {
-        public int id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
+        public Form()
+        {
+            this.ContractTemplates = new HashSet<ContractTemplate>();
+        }
+    
+        public int Id { get; set; }
+        public string FormSchema { get; set; }
         public System.DateTime Created { get; set; }
         public int CreatedBy { get; set; }
-        public Nullable<System.DateTime> Lastupdated { get; set; }
+        public Nullable<System.DateTime> LastUpdated { get; set; }
         public Nullable<int> LastUpdatedBy { get; set; }
-        public int FormId { get; set; }
+        public int StatusId { get; set; }
+        public int FormTypeId { get; set; }
     
-        public virtual User User { get; set; }
-        public virtual Form Form { get; set; }
+        public virtual ICollection<ContractTemplate> ContractTemplates { get; set; }
     }
 }

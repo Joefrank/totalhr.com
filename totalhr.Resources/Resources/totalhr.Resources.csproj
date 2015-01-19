@@ -125,6 +125,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FileTypeNames.resx</DependentUpon>
     </Compile>
+    <Compile Include="FormGenerator.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FormGenerator.resx</DependentUpon>
+    </Compile>
     <Compile Include="FormMessages.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -173,6 +178,10 @@
     <EmbeddedResource Include="FileTypeNames.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FileTypeNames.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormGenerator.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FormGenerator.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="FormMessages.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -217,6 +217,7 @@
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="Lastupdated" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="FormId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ContractTemplateSection">
           <Key>
@@ -319,6 +320,19 @@
           <Property Name="extension" Type="nvarchar" MaxLength="10" />
           <Property Name="lastupdated" Type="datetime" />
           <Property Name="lastupdatedby" Type="int" />
+        </EntityType>
+        <EntityType Name="Form">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FormSchema" Type="nvarchar(max)" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="date" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="FormTypeId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="FormControl">
           <Key>
@@ -663,6 +677,18 @@
             </Principal>
             <Dependent Role="CompanyFolderDocument">
               <PropertyRef Name="FolderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ContractTemplate_Form">
+          <End Role="Form" Type="Self.Form" Multiplicity="1" />
+          <End Role="ContractTemplate" Type="Self.ContractTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractTemplate">
+              <PropertyRef Name="FormId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1015,6 +1041,7 @@
           <EntitySet Name="EventToSchedule" EntityType="Self.EventToSchedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="File" EntityType="Self.File" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Form" EntityType="Self.Form" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormControl" EntityType="Self.FormControl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormField" EntityType="Self.FormField" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Glossary" EntityType="Self.Glossary" Schema="dbo" store:Type="Tables" />
@@ -1069,6 +1096,10 @@
           <AssociationSet Name="FK_CompanyFolderDocument_CompanyFolder" Association="Self.FK_CompanyFolderDocument_CompanyFolder">
             <End Role="CompanyFolder" EntitySet="CompanyFolder" />
             <End Role="CompanyFolderDocument" EntitySet="CompanyFolderDocument" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ContractTemplate_Form" Association="Self.FK_ContractTemplate_Form">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="ContractTemplate" EntitySet="ContractTemplate" />
           </AssociationSet>
           <AssociationSet Name="FK_ContractTemplate_User" Association="Self.FK_ContractTemplate_User">
             <End Role="User" EntitySet="User" />
@@ -1787,6 +1818,11 @@
             <End Role="File" EntitySet="Files" />
             <End Role="UserProfilePicture" EntitySet="UserProfilePictures" />
           </AssociationSet>
+          <EntitySet Name="Forms" EntityType="TotalHRModel.Form" />
+          <AssociationSet Name="FK_ContractTemplate_Form" Association="TotalHRModel.FK_ContractTemplate_Form">
+            <End Role="Form" EntitySet="Forms" />
+            <End Role="ContractTemplate" EntitySet="ContractTemplates" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetUserProfiles_Result">
           <Property Type="Int32" Name="id" Nullable="false" />
@@ -2034,6 +2070,8 @@
           <Property Name="Lastupdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="Int32" />
           <NavigationProperty Name="User" Relationship="TotalHRModel.FK_Template_User" FromRole="ContractTemplate" ToRole="User" />
+          <Property Name="FormId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Form" Relationship="TotalHRModel.FK_ContractTemplate_Form" FromRole="ContractTemplate" ToRole="Form" />
         </EntityType>
         <EntityType Name="ContractTemplateSection">
           <Key>
@@ -2535,6 +2573,32 @@
             </Principal>
             <Dependent Role="UserProfilePicture">
               <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Form">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FormSchema" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="0" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="FormTypeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ContractTemplates" Relationship="TotalHRModel.FK_ContractTemplate_Form" FromRole="Form" ToRole="ContractTemplate" />
+        </EntityType>
+        <Association Name="FK_ContractTemplate_Form">
+          <End Type="TotalHRModel.Form" Role="Form" Multiplicity="1" />
+          <End Type="TotalHRModel.ContractTemplate" Role="ContractTemplate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ContractTemplate">
+              <PropertyRef Name="FormId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3047,6 +3111,7 @@
           <EntitySetMapping Name="ContractTemplates">
             <EntityTypeMapping TypeName="TotalHRModel.ContractTemplate">
               <MappingFragment StoreEntitySet="ContractTemplate">
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
                 <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
                 <ScalarProperty Name="Lastupdated" ColumnName="Lastupdated" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -3296,6 +3361,20 @@
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="FileId" ColumnName="FileId" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Forms">
+            <EntityTypeMapping TypeName="TotalHRModel.Form">
+              <MappingFragment StoreEntitySet="Form">
+                <ScalarProperty Name="FormTypeId" ColumnName="FormTypeId" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="FormSchema" ColumnName="FormSchema" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

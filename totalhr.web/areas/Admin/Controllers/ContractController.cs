@@ -11,21 +11,23 @@ using totalhr.services.Infrastructure;
 using totalhr.services.Implementation;
 using log4net;
 using Authentication.Infrastructure;
+using FormService.Infrastructure;
+using totalhr.Shared;
 
 namespace totalhr.web.Areas.Admin.Controllers
 {
     public class ContractController : AdminBaseController
     {
-        private readonly IAccountService _accountService;
+        private readonly IFormEditorService _formService;
         private readonly ICompanyService _companyService;
         private readonly IContractService _contractService;
 
         private static readonly ILog log = LogManager.GetLogger(typeof(AccountService));
 
-        public ContractController(IContractService contractService, IAccountService accountService, 
+        public ContractController(IContractService contractService, IFormEditorService formService, 
             ICompanyService companyService, IOAuthService authService) :         base(authService)
         {
-            _accountService = accountService;
+            _formService = formService;
             _companyService = companyService;
             _contractService = contractService;
         }
@@ -52,7 +54,7 @@ namespace totalhr.web.Areas.Admin.Controllers
 
         public ActionResult AddTemplate()
         {
-
+            ViewBag.FormList = _formService.ListFormsOfType((int)Variables.FormType.ContractTemplate);
             return View("CreateTemplate", new totalhr.Shared.Models.TemplateInfo());
         }
     }

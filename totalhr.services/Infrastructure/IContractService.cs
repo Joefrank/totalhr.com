@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using totalhr.data.EF;
+using totalhr.Shared.Models;
 
 namespace totalhr.services.Infrastructure
 {
@@ -12,5 +13,6 @@ namespace totalhr.services.Infrastructure
 
         IEnumerable<ContractTemplate> ListContractTemplates();
 
+        FormInfo GetDefaultTemplate(int languageId);
     }
 }

@@ -215,6 +215,9 @@
     <Compile Include="EF\File.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\Form.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\FormControl.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
@@ -297,6 +300,7 @@
     <Compile Include="Repositories\Implementation\ContractTemplateRepository.cs" />
     <Compile Include="Repositories\Implementation\EmailTemplateRepository.cs" />
     <Compile Include="Repositories\Implementation\FileRepository.cs" />
+    <Compile Include="Repositories\Implementation\FormRepository.cs" />
     <Compile Include="Repositories\Implementation\GlossaryRepository.cs" />
     <Compile Include="Repositories\Implementation\GenericRepository.cs" />
     <Compile Include="Repositories\Implementation\LanguageRepository.cs" />
@@ -311,6 +315,7 @@
     <Compile Include="Repositories\Infrastructure\IContractTemplateRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IEmailRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IFileRepository.cs" />
+    <Compile Include="Repositories\Infrastructure\IFormRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IGlossaryRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IGenericRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ILanguageRepository.cs" />

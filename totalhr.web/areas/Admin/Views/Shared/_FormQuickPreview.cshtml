@@ -1,0 +1,28 @@
+﻿@using totalhr.Resources;
+
+
+
+<form novalidate class="form-horizontal" name="previewForm" ng-init="myForm.$data = {}">
+
+  <fieldset>
+
+    <legend>
+      <div class="row">
+        <div class="col-sm-offset-3 col-sm-3">@FormGenerator.V_Form_Preview</div>
+      </div>
+    </legend>
+
+    <!-- Magic starts here -->
+
+    <div fg-form
+         fg-form-data="myForm.$data"
+         fg-schema="myForm.schema">
+    </div>
+
+    <!-- Magic ends here -->
+
+  </fieldset>
+
+  @Html.Partial("_FormStatus")
+
+</form>

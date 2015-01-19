@@ -196,9 +196,20 @@ namespace totalhr.Shared
             Promoters = 6
         }
 
+        public enum FormType
+        {
+            ContractTemplate = 1
+        }
+
         public enum PaginationValues
         {
             DefaultPageSize = 5
+        }
+
+        public enum FormStatus
+        {
+            Draft = 1,
+            Published = 2
         }
 
         public static string AdminEmailSignature
