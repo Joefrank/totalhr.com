@@ -21,7 +21,7 @@ namespace totalhr.data.Repositories.Implementation
         {
            return FindBy(x => x.LanguageId == languageid && group.ToString().ToLower().Equals(x.GlossaryGroup.ToLower())).ToList();
         }
-
+        /* doesn't return anything */
         public IEnumerable<ListItemStruct> GetLanguageList(int viewingLanguageId)
         {
             return from ll in Context.Languages

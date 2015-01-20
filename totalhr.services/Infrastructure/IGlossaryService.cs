@@ -21,5 +21,7 @@ namespace totalhr.services.Infrastructure
         Glossary GetSpecificGlossary(int languageId, int glossaryRootId, Variables.GlossaryGroups group);
 
         string GetSpecificGlossaryTerm(int languageId, int glossaryRootId, Variables.GlossaryGroups group);
+
+        IEnumerable<Language> GetAllLanguages();
     }
 }

@@ -42,7 +42,7 @@ namespace FormService.Implementation
 
         public IEnumerable<ListItemStruct> ListFormsOfTypeSimple(int formTypeId)
         {
-            return _formRepository.FindBy(x => x.FormTypeId == formTypeId).Select(y => new ListItemStruct{Id = y.Id, Name = y.Id.ToString()});
+            return _formRepository.FindBy(x => x.FormTypeId == formTypeId).Select(y => new ListItemStruct{Id = y.Id, Name = y.Name});
         }
     }
 }
