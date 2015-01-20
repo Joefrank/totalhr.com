@@ -14,5 +14,7 @@ namespace totalhr.services.Infrastructure
         IEnumerable<ContractTemplate> ListContractTemplates();
 
         FormInfo GetDefaultTemplate(int languageId);
+
+        int CreateContractTemplate(TemplateInfo info);
     }
 }

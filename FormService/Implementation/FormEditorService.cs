@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using totalhr.Shared.Models;
 using totalhr.data.Repositories.Infrastructure;
 using totalhr.data.EF;
 using totalhr.Shared;
@@ -37,6 +38,11 @@ namespace FormService.Implementation
         public IEnumerable<Form> ListFormsOfType(int formTypeId)
         {
             return _formRepository.FindBy(x => x.FormTypeId == formTypeId);
+        }
+
+        public IEnumerable<ListItemStruct> ListFormsOfTypeSimple(int formTypeId)
+        {
+            return _formRepository.FindBy(x => x.FormTypeId == formTypeId).Select(y => new ListItemStruct{Id = y.Id, Name = y.Name});
         }
     }
 }

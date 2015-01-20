@@ -27,6 +27,8 @@ namespace totalhr.data.EF
         public Nullable<int> LastUpdatedBy { get; set; }
         public int StatusId { get; set; }
         public int FormTypeId { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
     
         public virtual ICollection<ContractTemplate> ContractTemplates { get; set; }
     }

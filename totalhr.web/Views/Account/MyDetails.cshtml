@@ -1,14 +1,22 @@
 ﻿@model totalhr.Shared.Models.UserPersonalInfo
 @using totalhr.Resources
+@using totalhr.Shared.Models
 @using  totalhr.data.EF
+@using totalhr.web.Helpers
 
 @{
     ViewBag.Title = Account.tt_Personal_Details;
 
-    List<Glossary> languages = ViewBag.LanguageList as List<Glossary>;
-    List<Glossary> genders = ViewBag.GenderList as List<Glossary>;
-    List<Glossary> countries = ViewBag.CountryList as List<Glossary>;
-    List<Glossary> titles = ViewBag.TitleList as List<Glossary>;  
+    //var languages = ViewBag.LanguageList as List<ListItemStruct>;
+    var languages = totalhr.web.Helpers.GenericHelper.GetListFromNumerable(ViewBag.LanguageList as IEnumerable<ListItemStruct>);
+
+    var genders = ViewBag.GenderList as List<Glossary>;
+    var countries = ViewBag.CountryList as List<Glossary>;
+    var titles = ViewBag.TitleList as List<Glossary>;
+
+    List<SelectListItem> languagesSelect = null;
+
+    languagesSelect = GenericHelper.GetListFromNumerable(ViewBag.LanguageList as IEnumerable<ListItemStruct>) ?? new List<SelectListItem> { new SelectListItem { Value = "", Text = Common.V_None } };
 }
 
 <div id="main">
@@ -137,7 +145,7 @@
                                 
                  <div class="line">
                     <label>@FormMessages.Label_Pref_Language</label>
-                    <span>@Html.DropDownListFor(x => x.PreferedLanguageId,  new SelectList(languages, "RootId", "Term"))</span>
+                    <span>@Html.DropDownListFor(x => x.PreferedLanguageId,  new SelectList(languagesSelect, "Value", "Text"))</span>
                     
                 </div>
                 
