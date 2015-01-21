@@ -158,3 +158,14 @@ function MoveListBoxItem(leftListBoxID, rightListBoxID, isMoveAll, callback) {
     if (callback != null && typeof (callback) == "function")
         callback();
 }
+
+function ToggleOrder(obj) {
+    var sortDirection = $('#' + obj.id).attr("class");
+    var sortColumn = $('#' + obj.id).attr("data-sortcolumn");
+
+    if ($('#frmSortForm') != null) {
+        $('#SortColumn').val(sortColumn);
+        $('#SortOrder').val(sortDirection);
+        $('#frmSortForm').submit();
+    }
+}

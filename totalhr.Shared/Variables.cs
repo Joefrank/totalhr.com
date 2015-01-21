@@ -212,6 +212,11 @@ namespace totalhr.Shared
             Published = 2
         }
 
+        public enum StringMaxLength
+        {
+            TabDescription = 50
+        }
+
         public static string AdminEmailSignature
         {
             get

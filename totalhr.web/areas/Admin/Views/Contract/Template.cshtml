@@ -1,6 +1,7 @@
 ﻿@using totalhr.Resources;
 @using totalhr.web.Helpers;
 @using totalhr.Shared.Models;
+@using totalhr.Shared;
 
 @model IEnumerable<totalhr.data.EF.ContractTemplate>
 
@@ -34,10 +35,9 @@
             <tr>
                 @Html.Raw(GenericHelper.MakeSortableTH("TemplateId",  info,Contract.V_Template_Id))              
                 @Html.Raw(GenericHelper.MakeSortableTH("ContractName", info,Contract.V_Template_Name))
-                @Html.Raw(GenericHelper.MakeSortableTH("Description", info,Contract.V_Description))               
+                <th>@Contract.V_Description</th>               
                 @Html.Raw(GenericHelper.MakeSortableTH("Created", info,Contract.V_Created))
-                @Html.Raw(GenericHelper.MakeSortableTH("CreatedBy",info,Contract.V_Created_By))
-                                         
+                @Html.Raw(GenericHelper.MakeSortableTH("CreatedBy",info,Contract.V_Created_By))                                         
                 <th>&nbsp;</th>
             </tr>
             @foreach (var template in Model)
@@ -49,8 +49,8 @@
                     <td>
                         @template.Name
                     </td>
-                    <td>
-                        @template.Description
+                    <td title="@template.Description">
+                        @GenericHelper.ShortenString(template.Description, (int)Variables.StringMaxLength.TabDescription)
                     </td>
                     <td>
                         @template.Created
@@ -59,7 +59,7 @@
                         @template.CreatedBy
                     </td>
                     <td>
-                        <input type="button" class="edit" value="Edit Template" onclick="NavigateTo('/Admin/Contract/EditTemplate/@template.id');" />
+                        <input type="button" class="edit" value="@Contract.V_Edit_Template" onclick="NavigateTo('/Admin/Contract/EditTemplate/@template.id');" />
                     </td>
                 </tr>
             }
@@ -74,6 +74,15 @@
     </div>
 
     <div class="wide">
-        <input type="button" value="Create Template" onclick="NavigateTo('/Admin/Contract/AddTemplate/');" />
+        <input type="button" value="@Contract.V_Create_Template" onclick="NavigateTo('/Admin/Contract/AddTemplate/');" />
+        &nbsp;
+        <input type="button" value="@Contract.V_Create_Form" onclick="OpenPopup('/Admin/FormEditor/CreateForm/1', 900, 600);" />
     </div>
+
+    <form id="frmSortForm" method="post" action="/Admin/Contract/Template/">
+        <input type="hidden" id="SortColumn" name="SortColumn" value="@info.SortColumn" />
+        <input type="hidden" id="SortOrder" name="SortOrder" value="@info.SortOrder" />
+        @*<input type="hidden" id="hdnPageNumber" name="hdnPageNumber" value="@Model.SearchInfo.PageNumber" />*@
+    </form>
+
 </div>

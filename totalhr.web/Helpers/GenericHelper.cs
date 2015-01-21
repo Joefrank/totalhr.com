@@ -104,5 +104,13 @@ namespace totalhr.web.Helpers
             return string.Format(@"<th data-sortcolumn=""{0}"" id=""{1}{0}"" onclick=""ToggleOrder(this)"" 
                 class=""{2}"">{3}</th>", currentSortColumn, idPrefix, dir, label);
         }
+
+        public static string ShortenString(string mystring, int maxLength)
+        {
+            if (string.IsNullOrEmpty(mystring) || mystring.Length <= maxLength)
+                return mystring;
+
+            return mystring.Substring(0, maxLength) + "...";
+        }
     }
 }

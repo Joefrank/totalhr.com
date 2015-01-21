@@ -14,6 +14,7 @@ using Authentication.Infrastructure;
 using FormService.Infrastructure;
 using totalhr.Shared;
 using TemplateInfo = totalhr.Shared.Models.TemplateInfo;
+using totalhr.data.EF;
 
 namespace totalhr.web.Areas.Admin.Controllers
 {
@@ -43,14 +44,15 @@ namespace totalhr.web.Areas.Admin.Controllers
             return View();
         }
 
-        public ActionResult Template()
+        public ActionResult Template(SortingInfo info)
         {
-            ViewBag.SortInfo = new SortingInfo
-            {
-                SortColumn = "TemplateId",
-                SortOrder = "asc"
-            };
-            return View(_contractService.ListContractTemplates());
+            ViewBag.SortInfo = (info != null)? info :
+                new SortingInfo
+                {
+                    SortColumn = "TemplateId",
+                    SortOrder = "asc"
+                };
+            return View(_contractService.ListContractTemplates(info));
         }
 
         public ActionResult AddTemplate()
@@ -61,7 +63,22 @@ namespace totalhr.web.Areas.Admin.Controllers
 
         public ActionResult CreateTemplate(TemplateInfo info)
         {
+            info.CreatedBy = CurrentUser.UserId;
             int templateId = _contractService.CreateContractTemplate(info);
+            return RedirectToAction("Template");
+        }
+
+        public ActionResult EditTemplate(int id)
+        {
+            ViewBag.FormList = _formService.ListFormsOfTypeSimple((int)Variables.FormType.ContractTemplate);            
+            return View(_contractService.GetTemplate(id));
+        }
+
+        [HttpPost]
+        public ActionResult EditTemplate(TemplateInfo info)
+        {
+            info.LastUpdatedBy = CurrentUser.UserId;
+            _contractService.UpdateContractTemplate(info);
             return RedirectToAction("Template");
         }
     }

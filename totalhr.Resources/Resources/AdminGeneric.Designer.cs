@@ -340,6 +340,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Manage Forms.
+        /// </summary>
+        public static string V_Manage_Forms {
+            get {
+                return ResourceManager.GetString("V_Manage_Forms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manage User Profiles.
         /// </summary>
         public static string V_Manage_Profiles {

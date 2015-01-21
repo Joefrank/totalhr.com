@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using totalhr.data.EF;
 using totalhr.data.Repositories.Infrastructure;
+using totalhr.Shared.Models;
 
 namespace totalhr.data.Repositories.Implementation
 {
@@ -15,5 +16,7 @@ namespace totalhr.data.Repositories.Implementation
             Context.ContractTemplates.Add(template);
             return Context.SaveChanges();
         }
+
+        
     }
 }

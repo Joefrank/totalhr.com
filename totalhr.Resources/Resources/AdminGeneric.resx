@@ -330,4 +330,7 @@
   <data name="V_User_Create" xml:space="preserve">
     <value>Create User</value>
   </data>
+  <data name="V_Manage_Forms" xml:space="preserve">
+    <value>Manage Forms</value>
+  </data>
 </root>
