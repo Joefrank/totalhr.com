@@ -13,6 +13,8 @@ namespace totalhr.services.Infrastructure
 
         IEnumerable<ContractTemplate> ListContractTemplates(SortingInfo info);
 
+        IEnumerable<ListItemStruct> ListContractTemplates();
+
         FormInfo GetDefaultTemplate(int languageId);
 
         int CreateContractTemplate(TemplateInfo info);
@@ -20,5 +22,7 @@ namespace totalhr.services.Infrastructure
         ContractTemplate GetTemplate(int id);
 
         void UpdateContractTemplate(TemplateInfo info);
+
+        UserContract GetUserContract(int userId);
     }
 }

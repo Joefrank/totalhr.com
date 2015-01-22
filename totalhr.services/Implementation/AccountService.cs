@@ -109,7 +109,7 @@ namespace totalhr.services.Implementation
             user.tersmaccepted = info.TermsAccepted;
             user.title = info.Title;
             user.Town = info.City;
-            user.typeid = 1; //add glossary user type
+            user.typeid = (info.UserTypeId > 0)? info.UserTypeId.GetValueOrDefault() : 1; //add glossary user type
             user.userguid = Guid.NewGuid();
             user.activationcode = CM.utils.random_code(20);
             user.username = info.UserName;
@@ -364,11 +364,13 @@ namespace totalhr.services.Implementation
                 Surname = user.surname,
                 Title = user.title,
                 UserId = user.id,
+                UserTypeId = user.typeid,
                 UserName = user.username,
                 ProfilePictureAdded = !string.IsNullOrEmpty(profilePicture),
                 ProfilePicturePath = string.IsNullOrEmpty(profilePicture) ? "" : profilePicture,
                 TitleGlossary = _glossaryService.GetSpecificGlossaryTerm(user.preferedlanguageid, user.title, Variables.GlossaryGroups.Title),
                 GenderGlossary = _glossaryService.GetSpecificGlossaryTerm(user.preferedlanguageid, user.GenderId, Variables.GlossaryGroups.Gender)
+           
             };
             
         }

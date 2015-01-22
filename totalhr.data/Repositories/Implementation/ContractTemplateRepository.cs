@@ -17,5 +17,10 @@ namespace totalhr.data.Repositories.Implementation
             return (info.SortOrder == "asc") ? Context.ContractTemplates.OrderBy(x => x.id) :
                Context.ContractTemplates.OrderByDescending(x => x.id);
         }
+
+        public IEnumerable<ListItemStruct> ListTemplatesSimple()
+        {
+            return Context.ContractTemplates.Select(x => new ListItemStruct { Id = x.id, Name = x.Name });
+        }
     }
 }

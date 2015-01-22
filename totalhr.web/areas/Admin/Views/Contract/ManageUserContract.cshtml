@@ -1,0 +1,106 @@
+﻿@using totalhr.Resources;
+
+@model totalhr.web.Areas.Admin.Models.UserContractDetails
+
+@{
+    ViewBag.Title = Contract.V_User_Contract;
+
+    var itemList = totalhr.web.Helpers.GenericHelper.GetListFromNumerable(Model.TemplateList);
+    
+    if(itemList == null){
+        itemList = new List<SelectListItem> { new SelectListItem {Value="", Text= AdminGeneric.V_Select } };
+    }
+}
+
+<div class="container">
+    @section breadcrumb{
+            <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
+            <a href="/Admin/Contract/" title="@AdminGeneric.V_Contract_Management">@AdminGeneric.V_Contract_Management</a> &gt;
+            <a href="/Admin/Contract/Manage/" title="@Contract.V_Contract_Management_SelUser">@Contract.V_Contract_Management_SelUser</a> &gt;
+            <span class="last">@Contract.V_User_Contract</span>
+        }
+
+        <h1>@Contract.V_User_Contract</h1>
+
+        <div class="wide">
+
+             @using (Html.BeginForm("SaveUserContract", "Contract", FormMethod.Post, new { id = "frmContract" }))
+             {
+            
+                     @Html.ValidationSummary()
+
+                     @Html.HiddenFor(x => x.UserDetails.id)
+       
+                    <div class="formdiv midform">
+                        <div class="wrapper">
+
+                          <fieldset>
+                           <legend>User Contract Details</legend>
+                
+                             <div class="line">
+                                <label>@Contract.V_User_Name</label>
+                                 <span>@(Model.UserDetails.firstname + " " + Model.UserDetails.surname)</span>
+                            </div>
+
+                            <div class="line">
+                                <label>@Contract.V_Template_Name</label>
+                                 <span>@Html.DropDownListFor(x => x.Contract.TemplateId, itemList, new { onchange = "SubmitForm()" })</span>
+                                <span class="req">*</span>
+                            </div>
+
+                            @if (Model.Contract != null)
+                            {
+                                <div class="line">
+                                    <label>@Contract.V_Created_By</label>
+                                     <span></span>                        
+                                </div>
+
+                                <div class="line">
+                                    <label>@Contract.V_Created</label>
+                                     <span></span>    
+                                </div>
+
+                                 <div class="line">
+                                    <label>@Contract.V_Last_Updated</label>
+                                     <span></span>                        
+                                </div>
+
+                                 <div class="line">
+                                    <label>@Contract.V_Last_Updated_By</label>
+                                     <span></span>                        
+                                </div>
+                            }
+
+                            <div class="line">
+                                <label>&nbsp;</label>
+                                 <span><input type="submit" value="@Contract.V_Save_Contract" /></span>
+                            </div>
+                          </fieldset>
+
+                        </div>
+                    </div>
+             }
+
+        </div>
+
+
+    <div class="wide" id="formPreview">
+
+    </div>
+</div>
+
+<input type="hidden" id="hdnErrorTemplateNotSelected" value="@Contract.Error_Template_Not_Selected" />
+
+@section scripts{
+    <script type="text/javascript">
+        function SubmitForm() {
+            var val = $("#Contract_TemplateId option:selected").val();
+            if (val > 0) {
+                $("#formPreview").load("/Admin/FormEditor/Preview/");
+                //$('#frmContract').submit();
+            } else {
+                alert($('#hdnErrorTemplateNotSelected').val());
+            }
+        }
+    </script>
+}

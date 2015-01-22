@@ -32,6 +32,11 @@ namespace totalhr.services.Implementation
             return _templateRepos.ListTemplateWithSorting(info);
         }
 
+        public IEnumerable<ListItemStruct> ListContractTemplates()
+        {
+            return _templateRepos.ListTemplatesSimple();
+        }
+
         public int CreateContractTemplate(TemplateInfo info)
         {
             var contract = new ContractTemplate
@@ -63,6 +68,11 @@ namespace totalhr.services.Implementation
 
                 _templateRepos.Save();
             }
+        }
+
+        public UserContract GetUserContract(int userId)
+        {
+           return _contractRepos.FindBy(x => x.Userid == userId).FirstOrDefault();
         }
 
         public FormInfo GetDefaultTemplate(int languageId)

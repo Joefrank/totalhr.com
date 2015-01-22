@@ -15,6 +15,7 @@ using FormService.Infrastructure;
 using totalhr.Shared;
 using TemplateInfo = totalhr.Shared.Models.TemplateInfo;
 using totalhr.data.EF;
+using totalhr.web.Areas.Admin.Models;
 
 namespace totalhr.web.Areas.Admin.Controllers
 {
@@ -23,15 +24,18 @@ namespace totalhr.web.Areas.Admin.Controllers
         private readonly IFormEditorService _formService;
         private readonly ICompanyService _companyService;
         private readonly IContractService _contractService;
+        private readonly IAccountService _accountService;
 
         private static readonly ILog log = LogManager.GetLogger(typeof(AccountService));
 
         public ContractController(IContractService contractService, IFormEditorService formService, 
-            ICompanyService companyService, IOAuthService authService) :         base(authService)
+            ICompanyService companyService, IAccountService accountService, IOAuthService authService) :        
+            base(authService)
         {
             _formService = formService;
             _companyService = companyService;
             _contractService = contractService;
+            _accountService = accountService;
         }
 
         public ActionResult Index()
@@ -40,6 +44,23 @@ namespace totalhr.web.Areas.Admin.Controllers
         }
 
         public ActionResult Manage()
+        {
+            return View(_accountService.GetCompanyUsers(CurrentUser.CompanyId));
+        }
+
+        public ActionResult ManageUserContract(int slUserList)
+        {
+            var userContractDetails = new UserContractDetails
+            {
+                UserDetails = _accountService.GetUser(slUserList),
+                Contract =_contractService.GetUserContract(slUserList),
+                TemplateList = _contractService.ListContractTemplates()
+            };
+
+            return View(userContractDetails);
+        }
+
+        public ActionResult SaveUserContract()
         {
             return View();
         }

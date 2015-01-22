@@ -61,6 +61,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must select a user to proceed..
+        /// </summary>
+        public static string Error_Select_User {
+            get {
+                return ResourceManager.GetString("Error_Select_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No valid user for template creation..
         /// </summary>
         public static string Error_Template_Creator_Rq {
@@ -97,11 +106,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You need to select a template before proceeding..
+        /// </summary>
+        public static string Error_Template_Not_Selected {
+            get {
+                return ResourceManager.GetString("Error_Template_Not_Selected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Contract Management.
         /// </summary>
         public static string V_Contract_Management {
             get {
                 return ResourceManager.GetString("V_Contract_Management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contract Management (Select user).
+        /// </summary>
+        public static string V_Contract_Management_SelUser {
+            get {
+                return ResourceManager.GetString("V_Contract_Management_SelUser", resourceCulture);
             }
         }
         
@@ -196,6 +223,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save Contract.
+        /// </summary>
+        public static string V_Save_Contract {
+            get {
+                return ResourceManager.GetString("V_Save_Contract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save Template.
         /// </summary>
         public static string V_Save_Template {
@@ -241,11 +277,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
+        ///   Looks up a localized string similar to Template Name.
         /// </summary>
         public static string V_Template_Name {
             get {
                 return ResourceManager.GetString("V_Template_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Contract.
+        /// </summary>
+        public static string V_User_Contract {
+            get {
+                return ResourceManager.GetString("V_User_Contract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Name.
+        /// </summary>
+        public static string V_User_Name {
+            get {
+                return ResourceManager.GetString("V_User_Name", resourceCulture);
             }
         }
     }

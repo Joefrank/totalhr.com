@@ -529,6 +529,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select user.
+        /// </summary>
+        public static string V_Select_User {
+            get {
+                return ResourceManager.GetString("V_Select_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to State/County.
         /// </summary>
         public static string V_State_or_County {

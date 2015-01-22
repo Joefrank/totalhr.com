@@ -111,5 +111,7 @@ namespace totalhr.Shared.Models
         public IEnumerable<ListItemStruct> DepartmentList { get; set; }
 
         public IEnumerable<ListItemStruct> LanguageList { get; set; }
+
+        public int? UserTypeId { get; set; }
     }
 }

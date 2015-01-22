@@ -105,6 +105,8 @@ namespace totalhr.Shared.Models
 
         public string ProfilePicturePath { get; set; }
 
+        public int? UserTypeId { get; set; }
+
         #endregion
     }
 }

@@ -153,6 +153,7 @@
     <Compile Include="Areas\Admin\Controllers\ContractController.cs" />
     <Compile Include="Areas\Admin\Controllers\FormEditorController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Models\UserContractDetails.cs" />
     <Compile Include="Areas\TimeRecording\Controllers\TimeRecordingController.cs" />
     <Compile Include="Areas\TimeRecording\ViewModels\SearchVM.cs" />
     <Compile Include="Areas\TimeRecording\ViewModels\TimeRecordingDetailsVM.cs" />
@@ -307,6 +308,7 @@
     <Content Include="Areas\Admin\Views\Shared\_FormQuickPreview.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_FormStatus.cshtml" />
     <Content Include="Areas\Admin\Views\Contract\EditTemplate.cshtml" />
+    <Content Include="Areas\Admin\Views\Contract\ManageUserContract.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />

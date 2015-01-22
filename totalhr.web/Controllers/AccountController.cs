@@ -84,6 +84,7 @@ namespace totalhr.web.Controllers
             {
                 Log.Debug("New User Registration Started");
 
+                userinfo.UserTypeId = (int)Variables.UserType.CompanyCreator;
                 //register user.
                 UserRegStruct structresult = _accountService.RegisterUserCompany(userinfo, WebsiteKernel);
 

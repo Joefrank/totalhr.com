@@ -11,5 +11,7 @@ namespace totalhr.data.Repositories.Infrastructure
     public interface IContractTemplateRepository : IGenericRepository<ContractTemplate>
     {
         IQueryable<ContractTemplate> ListTemplateWithSorting(SortingInfo info);
+
+        IEnumerable<ListItemStruct> ListTemplatesSimple();
     }
 }

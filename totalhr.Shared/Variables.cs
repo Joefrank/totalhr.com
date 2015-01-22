@@ -188,8 +188,8 @@ namespace totalhr.Shared
 
         public enum UserType
         {
-            CompanyCreator = 1,
-            Employee2 = 2,
+            CompanyCreator = 1,//user who registers the company - Admin
+            Employee2 = 2,//employees created by first registering user
             SystemAdmin = 3,
             Developer = 4,
             Tester = 5,

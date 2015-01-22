@@ -129,6 +129,8 @@ namespace totalhr.web.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
+                info.UserTypeId = (int)Variables.UserType.Employee2;
+
                 var userstruct = _accountService.CreateEmployee(info, WebsiteKernel);
 
                 if (userstruct == null || userstruct.UserId < 1)

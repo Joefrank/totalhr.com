@@ -178,6 +178,24 @@
     <value>Template Id</value>
   </data>
   <data name="V_Template_Name" xml:space="preserve">
-    <value>Name</value>
+    <value>Template Name</value>
+  </data>
+  <data name="Error_Select_User" xml:space="preserve">
+    <value>You must select a user to proceed.</value>
+  </data>
+  <data name="Error_Template_Not_Selected" xml:space="preserve">
+    <value>You need to select a template before proceeding.</value>
+  </data>
+  <data name="V_Contract_Management_SelUser" xml:space="preserve">
+    <value>Contract Management (Select user)</value>
+  </data>
+  <data name="V_Save_Contract" xml:space="preserve">
+    <value>Save Contract</value>
+  </data>
+  <data name="V_User_Contract" xml:space="preserve">
+    <value>User Contract</value>
+  </data>
+  <data name="V_User_Name" xml:space="preserve">
+    <value>User Name</value>
   </data>
 </root>
