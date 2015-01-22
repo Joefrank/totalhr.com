@@ -6,7 +6,11 @@
     [CreatedBy]     INT             NOT NULL,
     [Lastupdated]   DATETIME        NULL,
     [LastUpdatedBy] INT             NULL,
+    [FormId]        INT             NOT NULL,
     CONSTRAINT [PK_Template] PRIMARY KEY CLUSTERED ([id] ASC),
+    CONSTRAINT [FK_ContractTemplate_Form] FOREIGN KEY ([FormId]) REFERENCES [dbo].[Form] ([Id]),
     CONSTRAINT [FK_Template_User] FOREIGN KEY ([CreatedBy]) REFERENCES [dbo].[User] ([id])
 );
+
+
 

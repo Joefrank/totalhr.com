@@ -115,5 +115,10 @@
     <Build Include="dbo\Tables\TaskScheduler.sql" />
     <Build Include="dbo\Tables\Notes.sql" />
     <Build Include="dbo\Tables\TimeRecordingType.sql" />
+    <Build Include="dbo\Tables\UserProfilePicture.sql" />
+    <Build Include="dbo\Tables\Form.sql" />
+    <Build Include="dbo\Stored Procedures\SearchUserWithPaging.sql" />
+    <Build Include="dbo\Stored Procedures\SearchUser.sql" />
+    <Build Include="dbo\Stored Procedures\GetUserListForAdmin.sql" />
   </ItemGroup>
 </Project>
