@@ -27,9 +27,14 @@ namespace totalhr.services.Implementation
             return _contractRepos.GetAll();
         }
 
-        public IEnumerable<ContractTemplate> ListContractTemplates()
+        public IEnumerable<ContractTemplate> ListContractTemplates(SortingInfo info)
         {
-            return _templateRepos.GetAll();
+            return _templateRepos.ListTemplateWithSorting(info);
+        }
+
+        public IEnumerable<ListItemStruct> ListContractTemplates()
+        {
+            return _templateRepos.ListTemplatesSimple();
         }
 
         public int CreateContractTemplate(TemplateInfo info)
@@ -43,6 +48,31 @@ namespace totalhr.services.Implementation
                    CreatedBy = info.CreatedBy
                 };
             return _contractRepos.AddTemplate(contract);
+        }
+
+        public ContractTemplate GetTemplate(int id)
+        {
+            return _templateRepos.FindBy(x => x.id == id).FirstOrDefault();
+        }
+
+        public void UpdateContractTemplate(TemplateInfo info)
+        {
+            ContractTemplate template = _templateRepos.FindBy(x => x.id == info.Id).FirstOrDefault();
+            if (template != null)
+            {
+                template.Name = info.Name;
+                template.Description = info.Description;
+                template.FormId = info.FormId;
+                template.Lastupdated = DateTime.Now;
+                template.LastUpdatedBy = info.LastUpdatedBy;
+
+                _templateRepos.Save();
+            }
+        }
+
+        public UserContract GetUserContract(int userId)
+        {
+           return _contractRepos.FindBy(x => x.Userid == userId).FirstOrDefault();
         }
 
         public FormInfo GetDefaultTemplate(int languageId)

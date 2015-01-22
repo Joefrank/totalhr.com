@@ -61,11 +61,92 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must select a user to proceed..
+        /// </summary>
+        public static string Error_Select_User {
+            get {
+                return ResourceManager.GetString("Error_Select_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No valid user for template creation..
+        /// </summary>
+        public static string Error_Template_Creator_Rq {
+            get {
+                return ResourceManager.GetString("Error_Template_Creator_Rq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to select a form for a template..
+        /// </summary>
+        public static string Error_Template_Form_Rq {
+            get {
+                return ResourceManager.GetString("Error_Template_Form_Rq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Template name is required..
+        /// </summary>
+        public static string Error_Template_Name_Rq {
+            get {
+                return ResourceManager.GetString("Error_Template_Name_Rq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry but no template has been found..
         /// </summary>
         public static string Error_Template_Not_Found {
             get {
                 return ResourceManager.GetString("Error_Template_Not_Found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to select a template before proceeding..
+        /// </summary>
+        public static string Error_Template_Not_Selected {
+            get {
+                return ResourceManager.GetString("Error_Template_Not_Selected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contract Management.
+        /// </summary>
+        public static string V_Contract_Management {
+            get {
+                return ResourceManager.GetString("V_Contract_Management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contract Management (Select user).
+        /// </summary>
+        public static string V_Contract_Management_SelUser {
+            get {
+                return ResourceManager.GetString("V_Contract_Management_SelUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Form.
+        /// </summary>
+        public static string V_Create_Form {
+            get {
+                return ResourceManager.GetString("V_Create_Form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Template.
+        /// </summary>
+        public static string V_Create_Template {
+            get {
+                return ResourceManager.GetString("V_Create_Template", resourceCulture);
             }
         }
         
@@ -106,11 +187,83 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Form.
+        /// </summary>
+        public static string V_Form {
+            get {
+                return ResourceManager.GetString("V_Form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Updated.
+        /// </summary>
+        public static string V_Last_Updated {
+            get {
+                return ResourceManager.GetString("V_Last_Updated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Updated By.
+        /// </summary>
+        public static string V_Last_Updated_By {
+            get {
+                return ResourceManager.GetString("V_Last_Updated_By", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Form.
+        /// </summary>
+        public static string V_New_Form {
+            get {
+                return ResourceManager.GetString("V_New_Form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Contract.
+        /// </summary>
+        public static string V_Save_Contract {
+            get {
+                return ResourceManager.GetString("V_Save_Contract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Template.
+        /// </summary>
+        public static string V_Save_Template {
+            get {
+                return ResourceManager.GetString("V_Save_Template", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Template Create.
         /// </summary>
         public static string V_Template_Create {
             get {
                 return ResourceManager.GetString("V_Template_Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Template Details.
+        /// </summary>
+        public static string V_Template_Details {
+            get {
+                return ResourceManager.GetString("V_Template_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A contract template is a form that needs to be filled by an admin user. The employee can only see a completed form as his/her contract once the template has been attached to the contract. &lt;br/&gt;If you want to attach an existing form to your contract as template, please go back to the contract and select an existing form template then attach it accordingly.&lt;br/&gt; Click on the button below to open the form editor and create your form. This will launch a popup window..
+        /// </summary>
+        public static string V_Template_Details_Intro {
+            get {
+                return ResourceManager.GetString("V_Template_Details_Intro", resourceCulture);
             }
         }
         
@@ -124,11 +277,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name.
+        ///   Looks up a localized string similar to Template Name.
         /// </summary>
         public static string V_Template_Name {
             get {
                 return ResourceManager.GetString("V_Template_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Contract.
+        /// </summary>
+        public static string V_User_Contract {
+            get {
+                return ResourceManager.GetString("V_User_Contract", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Name.
+        /// </summary>
+        public static string V_User_Name {
+            get {
+                return ResourceManager.GetString("V_User_Name", resourceCulture);
             }
         }
     }

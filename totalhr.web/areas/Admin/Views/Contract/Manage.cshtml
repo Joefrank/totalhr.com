@@ -1,5 +1,62 @@
-﻿@{
-    ViewBag.Title = "Manage";
+﻿@using totalhr.Resources;
+
+@model List<totalhr.data.EF.User>
+
+@{
+    ViewBag.Title = Contract.V_Contract_Management;
 }
 
-<h2>Manage</h2>
+<div class="container">
+      @section breadcrumb{
+            <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
+            <a href="/Admin/Contract/" title="@AdminGeneric.V_Contract_Management">@AdminGeneric.V_Contract_Management</a> &gt;
+            <span class="last">@Contract.V_Contract_Management_SelUser</span>
+        }
+
+    <h1>@Contract.V_Contract_Management</h1>
+
+    <div class="wide">
+
+        <p>
+            In order to create a contract for a user, you need to select a user from the list below or search for a user.<br />
+            Once a user is found, you can edit or create a contract for this user.
+        </p>
+
+        <div class="wide">
+
+          <form name="frmUser" id="frmUser" action="/Admin/Contract/ManageUserContract">
+              <b>@AdminGeneric.V_Select_User</b> &nbsp;
+              <select name="slUserList" id="slUserList" onchange="SubmitForm()">
+                  <option>@AdminGeneric.V_Select</option>
+                  @foreach (var user in Model)
+                  {
+                      <option value="@user.id">@(user.firstname + " " + user.surname)</option>
+                  }
+              </select>
+
+          </form>
+        </div>
+        <div class="wide">
+
+           @* @Html.Partial("_UserList", Model)*@
+
+        </div>
+        
+    </div>
+</div>
+
+<input type="hidden" id="hdnErrorUserNotSelected" value="@Contract.Error_Select_User" />
+
+@section scripts{
+    <script type="text/javascript">
+        function SubmitForm() {
+            var val = $("#slUserList option:selected").val();
+            if (val > 0) {
+                $('#frmUser').submit();
+            } else {
+                alert($('#hdnErrorUserNotSelected').val());
+            }
+        }
+
+    </script>
+}
