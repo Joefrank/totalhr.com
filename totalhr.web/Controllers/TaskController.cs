@@ -26,13 +26,14 @@ namespace totalhr.web.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            var vm = new TaskSchedulerSearchVm();
+            return View(vm);
         }
 
         [HttpGet]
         public ActionResult Add()
         {
-            var vm = new TaskSchedulerVM();
+            var vm = new TaskSchedulerDetailsVM();
             BuildTaskSchedulerVM(vm);
             return View(vm);
 
@@ -41,7 +42,7 @@ namespace totalhr.web.Controllers
 
 
         [HttpPost]
-        public ActionResult Add(TaskSchedulerVM vm)
+        public ActionResult Add(TaskSchedulerDetailsVM vm)
         {
             try
             {
@@ -62,14 +63,16 @@ namespace totalhr.web.Controllers
         }
 
 
-        private void BuildTaskSchedulerVM(TaskSchedulerVM vm)
+        private void BuildTaskSchedulerVM(TaskSchedulerDetailsVM vm)
         {
             var users = _accountsService.GetCompanyUsers(this.CurrentUser.CompanyId);
-            var departments = _accountsService.GetCompanyDepartments(this.CurrentUser.DepartmentId);
+            var departments = _accountsService.GetCompanyDepartments(this.CurrentUser.CompanyId);
             var usersVM = UserVM.ConvertUsersToList(users);
             var departmentsVM = DepartmentVM.ConvertDepartmentsToList(departments);
             vm.SetupTaskScheduler(this.CurrentUser.UserId, this.CurrentUser.DepartmentId, usersVM, departmentsVM);
             //return vm;
         }
+
+
     }
 }

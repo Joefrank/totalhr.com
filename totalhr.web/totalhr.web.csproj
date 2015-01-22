@@ -186,6 +186,8 @@
     <Compile Include="Helpers\PaginationHelper.cs" />
     <Compile Include="Models\UserAccountStruct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\TaskSchedulerSearchVm.cs" />
+    <Compile Include="ViewModels\TaskSchedulerDetailsVM.cs" />
     <Compile Include="ViewModels\TaskSchedulerVM.cs" />
   </ItemGroup>
   <ItemGroup>
