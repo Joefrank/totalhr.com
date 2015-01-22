@@ -15,5 +15,7 @@ namespace FormService.Infrastructure
         IEnumerable<Form> ListFormsOfType(int formTypeId);
 
         IEnumerable<ListItemStruct> ListFormsOfTypeSimple(int formTypeId);
+
+        Form GetForm(int id);
     }
 }

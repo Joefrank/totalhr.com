@@ -102,5 +102,19 @@ namespace totalhr.web.Areas.Admin.Controllers
             _contractService.UpdateContractTemplate(info);
             return RedirectToAction("Template");
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">this is template id</param>
+        /// <returns></returns>
+        public ActionResult FillContract(int id)
+        {
+            var template = _contractService.GetTemplate(id);
+            var form = _formService.GetForm(template.FormId);
+
+            ViewBag.TemplateName = template.Name;
+            return View(form);
+        }
     }
 }

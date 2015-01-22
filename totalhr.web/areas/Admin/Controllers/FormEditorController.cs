@@ -74,9 +74,12 @@ namespace totalhr.web.Areas.Admin.Controllers
                      
         }
 
-        public ActionResult Preview()
+
+        public ActionResult Preview([Bind(Prefix = "id")] int templateid)
         {
-            return View();
+            var contract = _contractService.GetTemplate(templateid);
+            var form = _formService.GetForm(contract.FormId);
+            return View(form);
         }
 
         public class FormViewModel

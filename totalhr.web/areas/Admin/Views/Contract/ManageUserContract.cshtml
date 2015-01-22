@@ -74,6 +74,7 @@
                             <div class="line">
                                 <label>&nbsp;</label>
                                  <span><input type="submit" value="@Contract.V_Save_Contract" /></span>
+                                <span><input type="button" value="Fill Contract Form" onclick="OpenContract()" /></span>
                             </div>
                           </fieldset>
 
@@ -84,8 +85,8 @@
         </div>
 
 
-    <div class="wide" id="formPreview">
-
+    <div class="wide" id="formPreview" style="display:none;">
+        <iframe id="frmForm" class="inlineframe" style="margin:auto;width:1000px;min-height:400px;border:1px solid grey;background-color:beige;"></iframe>
     </div>
 </div>
 
@@ -96,8 +97,18 @@
         function SubmitForm() {
             var val = $("#Contract_TemplateId option:selected").val();
             if (val > 0) {
-                $("#formPreview").load("/Admin/FormEditor/Preview/");
-                //$('#frmContract').submit();
+                $("#frmForm").attr("src", "/Admin/FormEditor/Preview/" + val);
+                $('#formPreview').show();
+            } else {
+                alert($('#hdnErrorTemplateNotSelected').val());
+            }
+        }
+
+        function OpenContract() {
+            var val = $("#Contract_TemplateId option:selected").val();
+            if (val > 0) {
+                var url = '/Admin/Contract/FillContract/';
+                NavigateTo(url + val);
             } else {
                 alert($('#hdnErrorTemplateNotSelected').val());
             }
