@@ -398,6 +398,7 @@
     <Content Include="Views\Account\ProfilePreview.cshtml" />
     <Content Include="Views\Shared\_DefaultLayout.cshtml" />
     <Content Include="Views\Task\Add.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
