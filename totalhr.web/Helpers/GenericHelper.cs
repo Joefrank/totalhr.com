@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -38,17 +39,34 @@ namespace totalhr.web.Helpers
             return System.Web.VirtualPathUtility.ToAbsolute(ProfileUrlPath + imageSrc);
         }
 
+        public static string GenerateSelectHtmlFromNumerable(IEnumerable<ListItemStruct> lst, string selectNameandId, string callBack = "", string selectedVal = "")
+        {
+            var sbTemp = new StringBuilder();
+
+            sbTemp.Append(string.Format(@"<option value=""0"">{0}</option>", AdminGeneric.V_Select));
+
+            foreach (var item in lst)
+            {
+                string selected = (!string.IsNullOrEmpty(selectedVal) && selectedVal.Equals(item.Id.ToString(CultureInfo.InvariantCulture)))
+                                      ? @" selected=""selected"" "
+                                      : "";
+
+                sbTemp.Append(string.Format(@"<option value=""{0}"" {1}>{2}</option>", item.Id.ToString(CultureInfo.InvariantCulture), selected, item.Name));
+            }
+
+            return string.Format(@"<select id=""{0}"" name=""{1}"" {2}>
+                                        {3}
+                                    </select>", selectNameandId, selectNameandId, callBack, sbTemp.ToString());
+        }
+
         public static List<SelectListItem> GetListFromNumerable(IEnumerable<ListItemStruct> lst)
         {
             if (lst == null)
                 return null;
 
             var newList = new List<SelectListItem> { new SelectListItem { Value = "0", Text = AdminGeneric.V_Select } };
+            newList.AddRange(lst.Select(item => new SelectListItem {Value = item.Id.ToString(CultureInfo.InvariantCulture), Text = item.Name}));
 
-            foreach (ListItemStruct item in lst)
-            {
-                newList.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.Name });
-            }
             return newList;
         }
 
@@ -59,12 +77,8 @@ namespace totalhr.web.Helpers
                 throw new ArgumentException("T must be an enumerated type");
             }
 
-            var newList = new List<SelectListItem> { new SelectListItem { Value = "0", Text = AdminGeneric.V_Select } };                        
-
-            foreach (var num in (T[])Enum.GetValues(typeof(T)))
-            {
-                newList.Add(new SelectListItem { Value = Convert.ToInt32(num).ToString(), Text = EnumExtensions.Description(num) });
-            }
+            var newList = new List<SelectListItem> { new SelectListItem { Value = "0", Text = AdminGeneric.V_Select } };
+            newList.AddRange(from num in (T[]) Enum.GetValues(typeof (T)) select new SelectListItem {Value = Convert.ToInt32(num).ToString(CultureInfo.InvariantCulture), Text = EnumExtensions.Description(num)});
 
             return newList;
         }

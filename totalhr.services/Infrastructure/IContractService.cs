@@ -24,5 +24,15 @@ namespace totalhr.services.Infrastructure
         void UpdateContractTemplate(TemplateInfo info);
 
         UserContract GetUserContract(int userId);
+
+        UserContract CreateUserContract(UserContractInfo info);
+
+        UserContract UpdateUserContract(UserContractInfo info);
+
+        UserContract GetContract(int contractId);
+
+        Form GetTemplateForm(int templateId);
+
+        UserContractData SaveUserContractData(ContractFillViewInfo model);
     }
 }

@@ -12,5 +12,6 @@ namespace totalhr.data.Repositories.Infrastructure
     {
         int AddTemplate(ContractTemplate template);
 
+        UserContractData SaveContractData(ContractFillViewInfo model);
     }
 }

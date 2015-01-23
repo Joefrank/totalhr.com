@@ -66,6 +66,7 @@ namespace totalhr.data.EF
         public virtual DbSet<UserContract> UserContracts { get; set; }
         public virtual DbSet<UserProfilePicture> UserProfilePictures { get; set; }
         public virtual DbSet<Form> Forms { get; set; }
+        public virtual DbSet<UserContractData> UserContractDatas { get; set; }
     
         [DbFunction("TotalHREntities", "SplitCSV")]
         public virtual IQueryable<SplitCSV_Result> SplitCSV(string @string, string delimiter)

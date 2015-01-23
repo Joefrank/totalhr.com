@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -127,23 +128,24 @@ namespace totalhr.web.Controllers
 
             if (userstruct != null && userstruct.IsValid())
             {
-                var clientUser = new ClientUser();
-
-                clientUser.LanguageId = userstruct.UserBasicDetails.preferedlanguageid;
-                clientUser.UserName = userstruct.UserBasicDetails.email;
-                clientUser.UserId = userstruct.UserBasicDetails.id;
-                clientUser.Profiles = userstruct.UserProfiles.ConvertAll(x => x.id.ToString());
-                clientUser.Roles = userstruct.UserRoles.ConvertAll(x => x.id.ToString());
-                clientUser.FullName = userstruct.UserBasicDetails.firstname + " " + userstruct.UserBasicDetails.surname;
-                clientUser.CookieDuration = new TimeSpan(0, 0, LoginDuration, 0);
-                clientUser.Culture = userstruct.UserBasicDetails.chosenculture;
-                clientUser.CompanyId = userstruct.UserBasicDetails.CompanyId;
-                clientUser.DepartmentId = userstruct.UserBasicDetails.departmentid;
+                var clientUser = new ClientUser
+                    {
+                        LanguageId = userstruct.UserBasicDetails.preferedlanguageid,
+                        UserName = userstruct.UserBasicDetails.email,
+                        UserId = userstruct.UserBasicDetails.id,
+                        Profiles = userstruct.UserProfiles.ConvertAll(x => x.id.ToString(CultureInfo.InvariantCulture)),
+                        Roles = userstruct.UserRoles.ConvertAll(x => x.id.ToString(CultureInfo.InvariantCulture)),
+                        FullName = userstruct.UserBasicDetails.firstname + " " + userstruct.UserBasicDetails.surname,
+                        CookieDuration = new TimeSpan(0, 0, LoginDuration, 0),
+                        Culture = userstruct.UserBasicDetails.chosenculture,
+                        CompanyId = userstruct.UserBasicDetails.CompanyId,
+                        DepartmentId = userstruct.UserBasicDetails.departmentid
+                    };
 
                 AuthService.PersistClientUser(clientUser);
 
                 ViewBag.UserIsAdmin = clientUser.HasRole((int)Variables.Roles.CompanyAdmin);
-                ViewBag.IsUserLoggedIn = (clientUser != null);
+                ViewBag.IsUserLoggedIn = true;
                 ViewBag.UserName = clientUser.FullName;
 
                 return View("Index", clientUser);
@@ -226,15 +228,15 @@ namespace totalhr.web.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public ActionResult PasswordRemind(string Email)
+        public ActionResult PasswordRemind(string email)
         {
-            if (string.IsNullOrEmpty(Email))
+            if (string.IsNullOrEmpty(email))
             {
                 ModelState.AddModelError("MissingEmail", Resources.FormMessages.Error_Invalid_Email);
                 return View("ForgotPassword");
             }
 
-            totalhr.data.EF.User user = _accountService.GetUserByEmail(Email.Trim());
+            totalhr.data.EF.User user = _accountService.GetUserByEmail(email.Trim());
 
             if (user != null)
             {

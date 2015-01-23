@@ -75,6 +75,54 @@ namespace totalhr.services.Implementation
            return _contractRepos.FindBy(x => x.Userid == userId).FirstOrDefault();
         }
 
+        public UserContract CreateUserContract(UserContractInfo info)
+        {
+            var contract = new UserContract
+                {
+                    TemplateId = info.TemplateId,
+                    Userid = info.UserId,
+                    Created = DateTime.Now,
+                    CreatedBy = info.CreatedBy,
+                    Views = 0
+                };
+
+            _contractRepos.Add(contract);
+            _contractRepos.Save();
+            return contract;
+        }
+
+        public UserContract UpdateUserContract(UserContractInfo info)
+        {
+            var contract = _contractRepos.FindBy(x => x.id == info.ContractId).FirstOrDefault();
+
+            if (contract != null)
+            {
+                contract.TemplateId = info.TemplateId;
+                contract.LastUpdatedBy = info.CreatedBy;
+                contract.Lastupdated = DateTime.Now;
+
+                _contractRepos.Save();
+               
+            }
+
+            return contract;
+        }
+
+        public UserContract GetContract(int contractId)
+        {
+            return _contractRepos.FindBy(x => x.id == contractId).FirstOrDefault();
+        }
+
+        public Form GetTemplateForm(int templateId)
+        {
+            return _templateRepos.GetTemplateForm(templateId);
+        }
+
+        public UserContractData SaveUserContractData(ContractFillViewInfo model)
+        {
+            return _contractRepos.SaveContractData(model);
+        }
+
         public FormInfo GetDefaultTemplate(int languageId)
         {
             return new FormInfo

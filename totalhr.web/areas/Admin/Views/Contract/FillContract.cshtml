@@ -1,11 +1,11 @@
 ﻿@using totalhr.Resources;
 @using totalhr.data.EF;
 
-@model Form
+@model totalhr.web.Areas.Admin.Models.UserContractFormDetails
 
 @{
     Layout = null;
-    var schema = string.IsNullOrEmpty(Model.FormSchema) ? "''" : Model.FormSchema;
+    var schema = string.IsNullOrEmpty(Model.Form.FormSchema) ? "''" : Model.Form.FormSchema;
 }
 
 <!DOCTYPE html>
@@ -19,8 +19,7 @@
         <script data-require="angular-form-gen@0.0.1" data-semver="0.0.1" src="https://cdn.rawgit.com/McNull/angular-form-gen/v0.0.1/dist/angular-form-gen.min.js"></script>
         <script data-require="showdown@0.3.*" data-semver="0.3.1" src="http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
         <script data-require="angular-markdown-text@0.0.2" data-semver="0.0.2" src="https://cdn.rawgit.com/McNull/angular-markdown-text/v0.0.2/dist/angular-markdown-text.min.js"></script>
-        <link href="/Content/style.css" rel="stylesheet" />
-        <script src="/Scripts/script.js"></script>
+       
     </head>
 
     <script type="text/javascript">
@@ -30,32 +29,36 @@
 
             $scope.errorMessage = '';
 
-            //$scope.FormTypeId = @Model.FormTypeId;
+            $scope.mySchema = @Html.Raw(schema);
+            $scope.FormId = @Model.Form.Id;
+            $scope.ContractId = @Model.Contract.id;
+            $scope.UserId = @Model.UserDetails.id;
+            $scope.FormTypeId = @Model.Form.FormTypeId;
 
-                $scope.mySchema = @Html.Raw(schema);
-                
-                $scope.myForm = {
-                    schema: $scope.mySchema
-                };
+            $scope.myForm = {
+                schema: $scope.mySchema
+            };
               
 
-                $scope.SaveForm = function () {
+                $scope.SubmitFormInput = function () {
                    
                     var formData = $scope.myForm;
+                    
                     schemaService.addSchema(
                         {
-                            Id: formData.id,
+                            FormId: $scope.FormId,
+                            ContractId : $scope.ContractId,
+                            UserId :  $scope.UserId,
                             FormTypeId : $scope.FormTypeId,
-                            Schema: JSON.stringify(formData.schema)
+                            Schema: JSON.stringify(formData.data)
                         },
                         function(msg) {
                             var message = msg.Message;                            
-                            alert(msg.Message);
+                           // alert(msg.Message);
                             $scope.errorMessage = '';
-                            // window.location.href = '/admin/Contract/Template/';
                         },
                         function(data, response) {
-                            alert('Error' + msg + ' ' + data.Message);
+                            alert('Error ' + data.Message);
                             $scope.errorMessage = data.Message;
                         }
                     );
@@ -78,7 +81,7 @@
 
                         $http({
                             method: 'POST',
-                            url: "/Admin/FormEditor/CreateForm",
+                            url: "/Admin/Contract/SaveUserContractData",
                             data: data,
                             async: false,
                             dataType: "json"
@@ -93,6 +96,11 @@
      
     <body>
         <div ng-controller="MyController" class="container">
+            
+            
+            <div class="error-message">
+                
+            </div>
 
             <form novalidate class="form-horizontal" name="previewForm" ng-init="myForm.$data = {}">
 
@@ -100,7 +108,7 @@
 
                     <legend>
                         <div class="row">
-                            <div class="col-sm-offset-3">@FormGenerator.V_Form_Preview - @Model.Name</div>
+                            <div class="col-sm-offset-3">@Contract.V_Contract_Edit - <span class="uname">(@(Model.UserDetails.firstname + " " + Model.UserDetails.surname))</span></div>
                         </div>
                     </legend>
 
@@ -138,7 +146,7 @@
                     <label class="control-label col-sm-3">&nbsp;</label>
 
                     <div class="col-sm-9">
-                        <input type="button" value="Submit" ng-click="SubmitFormInput()"/>
+                        <input type="button" value="@Contract.V_Submit" ng-click="SubmitFormInput()"/>
                     </div>
                 </div>
 

@@ -16,6 +16,7 @@ using totalhr.Shared;
 using TemplateInfo = totalhr.Shared.Models.TemplateInfo;
 using totalhr.data.EF;
 using totalhr.web.Areas.Admin.Models;
+using totalhr.Resources;
 
 namespace totalhr.web.Areas.Admin.Controllers
 {
@@ -48,27 +49,49 @@ namespace totalhr.web.Areas.Admin.Controllers
             return View(_accountService.GetCompanyUsers(CurrentUser.CompanyId));
         }
 
-        public ActionResult ManageUserContract(int slUserList)
+        private UserContractDetails GetUserContractDetails(int userId)
         {
-            var userContractDetails = new UserContractDetails
+            return new UserContractDetails
             {
-                UserDetails = _accountService.GetUser(slUserList),
-                Contract =_contractService.GetUserContract(slUserList),
+                UserDetails = _accountService.GetUser(userId),
+                Contract = _contractService.GetUserContract(userId),
                 TemplateList = _contractService.ListContractTemplates()
             };
-
-            return View(userContractDetails);
         }
 
-        public ActionResult SaveUserContract()
+        public ActionResult ManageUserContract(int slUserList)
         {
-            return View();
+            return View(GetUserContractDetails(slUserList));
+        }
+
+        [HttpPost]
+        public ActionResult SaveUserContract(UserContractInfo info)
+        {
+            info.CreatedBy = CurrentUser.UserId;
+
+            if (info.UserId < 1)
+            {
+                ModelState.AddModelError("Error_User_Req", Contract.Error_User_Req);
+            }
+
+            if (info.TemplateId < 1)
+            {
+                ModelState.AddModelError("Error_Template_Rq", Contract.Error_Template_Rq);
+            }
+
+            if (ModelState.IsValid)
+            {
+                var contract = info.ContractId > 0 ? _contractService.UpdateUserContract(info) :
+                _contractService.CreateUserContract(info);
+                ViewBag.ModelSaved = true;
+            }
+
+            return View("ManageUserContract", GetUserContractDetails(info.UserId));
         }
 
         public ActionResult Template(SortingInfo info)
         {
-            ViewBag.SortInfo = (info != null)? info :
-                new SortingInfo
+            ViewBag.SortInfo = info ?? new SortingInfo
                 {
                     SortColumn = "TemplateId",
                     SortOrder = "asc"
@@ -110,11 +133,46 @@ namespace totalhr.web.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult FillContract(int id)
         {
-            var template = _contractService.GetTemplate(id);
-            var form = _formService.GetForm(template.FormId);
+            var contract = _contractService.GetContract(id);
 
-            ViewBag.TemplateName = template.Name;
-            return View(form);
+            var contractDetails = new UserContractFormDetails
+                {
+                    Contract = contract,
+                    Form = _contractService.GetTemplateForm(contract.TemplateId),
+                    UserDetails = _accountService.GetUser(contract.Userid)
+                };
+
+            return View(contractDetails);
+        }
+
+        [HttpPost]
+        public ActionResult SaveUserContractData(ContractFillViewInfo model)
+        {
+            if (IsValid(model))
+            {
+                model.CreatedBy = CurrentUser.UserId;
+                var data = _contractService.SaveUserContractData(model);
+                return View("ManageUserContract", GetUserContractDetails(model.UserId));
+            }
+            else
+            {
+                var contract = _contractService.GetContract(model.ContractId);
+                var contractDetails = new UserContractFormDetails
+                {
+                    Contract = contract,
+                    Form = _contractService.GetTemplateForm(contract.TemplateId),
+                    UserDetails = _accountService.GetUser(contract.Userid)
+                };
+
+                return View("FillContract", contractDetails);
+            }
+
+        }
+
+        bool IsValid(ContractFillViewInfo model)
+        {
+            return (model.ContractId > 0 && model.UserId > 0 && model.FormId > 0  && !string.IsNullOrEmpty(model.Data));
+
         }
     }
 }
