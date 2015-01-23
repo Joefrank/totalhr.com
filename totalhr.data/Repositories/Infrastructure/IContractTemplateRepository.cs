@@ -13,5 +13,7 @@ namespace totalhr.data.Repositories.Infrastructure
         IQueryable<ContractTemplate> ListTemplateWithSorting(SortingInfo info);
 
         IEnumerable<ListItemStruct> ListTemplatesSimple();
+
+        Form GetTemplateForm(int templateId);
     }
 }

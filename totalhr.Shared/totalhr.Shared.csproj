@@ -89,6 +89,7 @@
     <Compile Include="Models\CalendarEventCache.cs" />
     <Compile Include="Models\CalendarEventInfo.cs" />
     <Compile Include="Models\CalendarEventReminder.cs" />
+    <Compile Include="Models\ContractFillViewInfo.cs" />
     <Compile Include="Models\DocumentInfo.cs" />
     <Compile Include="Models\DocumentSearchInfo.cs" />
     <Compile Include="Models\DocumentShareInfo.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Models\SortingInfo.cs" />
     <Compile Include="Models\TemplateInfo.cs" />
     <Compile Include="Models\UserAdminStruct.cs" />
+    <Compile Include="Models\UserContractInfo.cs" />
     <Compile Include="Models\UserPersonalInfo.cs" />
     <Compile Include="Models\UserRegStruct.cs" />
     <Compile Include="Models\SMTPSettings.cs" />

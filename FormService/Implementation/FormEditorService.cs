@@ -44,5 +44,10 @@ namespace FormService.Implementation
         {
             return _formRepository.FindBy(x => x.FormTypeId == formTypeId).Select(y => new ListItemStruct{Id = y.Id, Name = y.Name});
         }
+
+        public Form GetForm(int id)
+        {
+            return _formRepository.FindBy(x => x.Id == id).FirstOrDefault();
+        }
     }
 }

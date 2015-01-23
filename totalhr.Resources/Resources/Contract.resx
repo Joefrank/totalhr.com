@@ -198,4 +198,22 @@
   <data name="V_User_Name" xml:space="preserve">
     <value>User Name</value>
   </data>
+  <data name="Error_Admin_UserId_Rq" xml:space="preserve">
+    <value>You must be a valid admin user to create contract.</value>
+  </data>
+  <data name="Error_Template_Rq" xml:space="preserve">
+    <value>Template is required.</value>
+  </data>
+  <data name="Error_User_Req" xml:space="preserve">
+    <value>User is required.</value>
+  </data>
+  <data name="V_Contract_Edit" xml:space="preserve">
+    <value>Contract Edit </value>
+  </data>
+  <data name="V_Contract_Saved" xml:space="preserve">
+    <value>Contract details saved successfully!</value>
+  </data>
+  <data name="V_Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
 </root>

@@ -22,5 +22,15 @@ namespace totalhr.data.Repositories.Implementation
         {
             return Context.ContractTemplates.Select(x => new ListItemStruct { Id = x.id, Name = x.Name });
         }
+
+        public Form GetTemplateForm(int templateId)
+        {
+            var form = from f in Context.Forms
+                       join t in Context.ContractTemplates on templateId equals t.id
+                       where t.FormId == f.Id
+                       select f;
+
+            return form.FirstOrDefault();
+        }
     }
 }

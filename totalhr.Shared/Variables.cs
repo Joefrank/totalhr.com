@@ -217,6 +217,11 @@ namespace totalhr.Shared
             TabDescription = 50
         }
 
+        public enum UserContractDataStatus
+        {
+            New = 1    
+        }
+
         public static string AdminEmailSignature
         {
             get

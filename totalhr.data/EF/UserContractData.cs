@@ -12,26 +12,20 @@ namespace totalhr.data.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class UserContract
+    public partial class UserContractData
     {
-        public UserContract()
-        {
-            this.UserContractDatas = new HashSet<UserContractData>();
-        }
-    
-        public int id { get; set; }
-        public int Userid { get; set; }
-        public int TemplateId { get; set; }
+        public int UserId { get; set; }
+        public int ContractId { get; set; }
+        public string Data { get; set; }
         public System.DateTime Created { get; set; }
         public int CreatedBy { get; set; }
-        public Nullable<System.DateTime> Lastupdated { get; set; }
+        public Nullable<System.DateTime> LastUpdated { get; set; }
         public Nullable<int> LastUpdatedBy { get; set; }
-        public int Views { get; set; }
-        public Nullable<System.DateTime> LastViewed { get; set; }
+        public int StatusId { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         public virtual User User2 { get; set; }
-        public virtual ICollection<UserContractData> UserContractDatas { get; set; }
+        public virtual UserContract UserContract { get; set; }
     }
 }

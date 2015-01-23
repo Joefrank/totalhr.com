@@ -77,6 +77,12 @@
         <AssociationConnector Association="TotalHRModel.FK_UserProfilePicture_File1" />
         <EntityTypeShape EntityType="TotalHRModel.Form" Width="1.5" PointX="16.375" PointY="14.75" />
         <AssociationConnector Association="TotalHRModel.FK_ContractTemplate_Form" />
+        <AssociationConnector Association="TotalHRModel.FK_UserContract_User1" />
+        <EntityTypeShape EntityType="TotalHRModel.UserContractData" Width="1.5" PointX="19.625" PointY="9.75" />
+        <AssociationConnector Association="TotalHRModel.FK_UserContractData_User" />
+        <AssociationConnector Association="TotalHRModel.FK_UserContractData_User1" />
+        <AssociationConnector Association="TotalHRModel.FK_UserContractData_User2" />
+        <AssociationConnector Association="TotalHRModel.FK_UserContractData_UserContract" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

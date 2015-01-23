@@ -528,6 +528,20 @@
           <Property Name="Views" Type="int" Nullable="false" />
           <Property Name="LastViewed" Type="datetime" />
         </EntityType>
+        <EntityType Name="UserContractData">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ContractId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ContractId" Type="int" Nullable="false" />
+          <Property Name="Data" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="UserProfile">
           <Key>
             <PropertyRef Name="UserId" />
@@ -850,6 +864,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_UserContract_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserContract" Type="Self.UserContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserContract">
+              <PropertyRef Name="LastUpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContractData_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserContractData" Type="Self.UserContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserContractData">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContractData_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserContractData" Type="Self.UserContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserContractData">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContractData_User2">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserContractData" Type="Self.UserContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserContractData">
+              <PropertyRef Name="LastUpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContractData_UserContract">
+          <End Role="UserContract" Type="Self.UserContract" Multiplicity="1" />
+          <End Role="UserContractData" Type="Self.UserContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserContract">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserContractData">
+              <PropertyRef Name="ContractId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_UserProfile_Profile">
           <End Role="Profile" Type="Self.Profile" Multiplicity="1" />
           <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
@@ -1056,6 +1130,7 @@
           <EntitySet Name="ScheduledNotifications" EntityType="Self.ScheduledNotifications" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserContract" EntityType="Self.UserContract" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserContractData" EntityType="Self.UserContractData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfilePicture" EntityType="Self.UserProfilePicture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
@@ -1154,6 +1229,26 @@
           <AssociationSet Name="FK_UserContract_User" Association="Self.FK_UserContract_User">
             <End Role="User" EntitySet="User" />
             <End Role="UserContract" EntitySet="UserContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContract_User1" Association="Self.FK_UserContract_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserContract" EntitySet="UserContract" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContractData_User" Association="Self.FK_UserContractData_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserContractData" EntitySet="UserContractData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContractData_User1" Association="Self.FK_UserContractData_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserContractData" EntitySet="UserContractData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContractData_User2" Association="Self.FK_UserContractData_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserContractData" EntitySet="UserContractData" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContractData_UserContract" Association="Self.FK_UserContractData_UserContract">
+            <End Role="UserContract" EntitySet="UserContract" />
+            <End Role="UserContractData" EntitySet="UserContractData" />
           </AssociationSet>
           <AssociationSet Name="FK_UserProfile_Profile" Association="Self.FK_UserProfile_Profile">
             <End Role="Profile" EntitySet="Profile" />
@@ -1514,6 +1609,10 @@
           <NavigationProperty Name="UserProfilePictures" Relationship="TotalHRModel.FK_UserProfilePicture_User" FromRole="User" ToRole="UserProfilePicture" />
           <NavigationProperty Name="UserProfilePictures1" Relationship="TotalHRModel.FK_UserProfilePicture_User1" FromRole="User" ToRole="UserProfilePicture" />
           <NavigationProperty Name="UserProfilePictures2" Relationship="TotalHRModel.FK_UserProfilePicture_UserProfilePicture" FromRole="User" ToRole="UserProfilePicture" />
+          <NavigationProperty Name="UserContracts2" Relationship="TotalHRModel.FK_UserContract_User1" FromRole="User" ToRole="UserContract" />
+          <NavigationProperty Name="UserContractDatas" Relationship="TotalHRModel.FK_UserContractData_User" FromRole="User" ToRole="UserContractData" />
+          <NavigationProperty Name="UserContractDatas1" Relationship="TotalHRModel.FK_UserContractData_User1" FromRole="User" ToRole="UserContractData" />
+          <NavigationProperty Name="UserContractDatas2" Relationship="TotalHRModel.FK_UserContractData_User2" FromRole="User" ToRole="UserContractData" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -1824,6 +1923,27 @@
           <AssociationSet Name="FK_ContractTemplate_Form" Association="TotalHRModel.FK_ContractTemplate_Form">
             <End Role="Form" EntitySet="Forms" />
             <End Role="ContractTemplate" EntitySet="ContractTemplates" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContract_User1" Association="TotalHRModel.FK_UserContract_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserContract" EntitySet="UserContracts" />
+          </AssociationSet>
+          <EntitySet Name="UserContractDatas" EntityType="TotalHRModel.UserContractData" />
+          <AssociationSet Name="FK_UserContractData_User" Association="TotalHRModel.FK_UserContractData_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserContractData" EntitySet="UserContractDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContractData_User1" Association="TotalHRModel.FK_UserContractData_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserContractData" EntitySet="UserContractDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContractData_User2" Association="TotalHRModel.FK_UserContractData_User2">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserContractData" EntitySet="UserContractDatas" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserContractData_UserContract" Association="TotalHRModel.FK_UserContractData_UserContract">
+            <End Role="UserContract" EntitySet="UserContracts" />
+            <End Role="UserContractData" EntitySet="UserContractDatas" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetUserProfiles_Result">
@@ -2171,6 +2291,8 @@
           <Property Name="LastViewed" Type="DateTime" Precision="3" />
           <NavigationProperty Name="User" Relationship="TotalHRModel.FK_ContractTemplate_User" FromRole="UserContract" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_UserContract_User" FromRole="UserContract" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="TotalHRModel.FK_UserContract_User1" FromRole="UserContract" ToRole="User" />
+          <NavigationProperty Name="UserContractDatas" Relationship="TotalHRModel.FK_UserContractData_UserContract" FromRole="UserContract" ToRole="UserContractData" />
         </EntityType>
         <Association Name="FK_Template_User">
           <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
@@ -2603,6 +2725,84 @@
             </Principal>
             <Dependent Role="ContractTemplate">
               <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContract_User1">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.UserContract" Role="UserContract" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserContract">
+              <PropertyRef Name="LastUpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserContractData">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ContractId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ContractId" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_UserContractData_User" FromRole="UserContractData" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_UserContractData_User1" FromRole="UserContractData" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="TotalHRModel.FK_UserContractData_User2" FromRole="UserContractData" ToRole="User" />
+          <NavigationProperty Name="UserContract" Relationship="TotalHRModel.FK_UserContractData_UserContract" FromRole="UserContractData" ToRole="UserContract" />
+        </EntityType>
+        <Association Name="FK_UserContractData_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.UserContractData" Role="UserContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserContractData">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContractData_User1">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.UserContractData" Role="UserContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserContractData">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContractData_User2">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.UserContractData" Role="UserContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserContractData">
+              <PropertyRef Name="LastUpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserContractData_UserContract">
+          <End Type="TotalHRModel.UserContract" Role="UserContract" Multiplicity="1" />
+          <End Type="TotalHRModel.UserContractData" Role="UserContractData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserContract">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="UserContractData">
+              <PropertyRef Name="ContractId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3381,6 +3581,20 @@
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="FormSchema" ColumnName="FormSchema" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserContractDatas">
+            <EntityTypeMapping TypeName="TotalHRModel.UserContractData">
+              <MappingFragment StoreEntitySet="UserContractData">
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="ContractId" ColumnName="ContractId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

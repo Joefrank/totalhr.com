@@ -32,6 +32,10 @@ namespace totalhr.data.EF
             this.UserProfilePictures = new HashSet<UserProfilePicture>();
             this.UserProfilePictures1 = new HashSet<UserProfilePicture>();
             this.UserProfilePictures2 = new HashSet<UserProfilePicture>();
+            this.UserContracts2 = new HashSet<UserContract>();
+            this.UserContractDatas = new HashSet<UserContractData>();
+            this.UserContractDatas1 = new HashSet<UserContractData>();
+            this.UserContractDatas2 = new HashSet<UserContractData>();
         }
     
         public int id { get; set; }
@@ -86,5 +90,9 @@ namespace totalhr.data.EF
         public virtual ICollection<UserProfilePicture> UserProfilePictures { get; set; }
         public virtual ICollection<UserProfilePicture> UserProfilePictures1 { get; set; }
         public virtual ICollection<UserProfilePicture> UserProfilePictures2 { get; set; }
+        public virtual ICollection<UserContract> UserContracts2 { get; set; }
+        public virtual ICollection<UserContractData> UserContractDatas { get; set; }
+        public virtual ICollection<UserContractData> UserContractDatas1 { get; set; }
+        public virtual ICollection<UserContractData> UserContractDatas2 { get; set; }
     }
 }
