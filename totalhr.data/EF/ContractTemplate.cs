@@ -23,7 +23,7 @@ namespace totalhr.data.EF
         public Nullable<int> LastUpdatedBy { get; set; }
         public int FormId { get; set; }
     
-        public virtual User User { get; set; }
         public virtual Form Form { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -21,7 +21,6 @@ namespace totalhr.data.EF
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> LastUpdated { get; set; }
         public Nullable<int> LastUpdatedBy { get; set; }
-        public int StatusId { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

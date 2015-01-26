@@ -70,6 +70,24 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter all required form data!.
+        /// </summary>
+        public static string Error_Form_Data {
+            get {
+                return ResourceManager.GetString("Error_Form_Data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Form is required.
+        /// </summary>
+        public static string Error_Form_Req {
+            get {
+                return ResourceManager.GetString("Error_Form_Req", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must select a user to proceed..
         /// </summary>
         public static string Error_Select_User {
@@ -264,6 +282,24 @@ namespace totalhr.Resources {
         public static string V_New_Form {
             get {
                 return ResourceManager.GetString("V_New_Form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Publish Contract.
+        /// </summary>
+        public static string V_Publish {
+            get {
+                return ResourceManager.GetString("V_Publish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you publish this contract then the user will be able to view its details..
+        /// </summary>
+        public static string V_Publish_Info {
+            get {
+                return ResourceManager.GetString("V_Publish_Info", resourceCulture);
             }
         }
         

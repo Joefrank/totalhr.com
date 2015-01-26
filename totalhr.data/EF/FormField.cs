@@ -14,6 +14,7 @@ namespace totalhr.data.EF
     
     public partial class FormField
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public FormField()
         {
             this.CTSectionFieldLinks = new HashSet<CTSectionFieldLink>();
@@ -29,6 +30,7 @@ namespace totalhr.data.EF
         public Nullable<int> LastUpdatedBy { get; set; }
         public bool obsolete { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTSectionFieldLink> CTSectionFieldLinks { get; set; }
     }
 }

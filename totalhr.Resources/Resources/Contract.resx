@@ -216,4 +216,16 @@
   <data name="V_Submit" xml:space="preserve">
     <value>Submit</value>
   </data>
+  <data name="Error_Form_Data" xml:space="preserve">
+    <value>Please enter all required form data!</value>
+  </data>
+  <data name="Error_Form_Req" xml:space="preserve">
+    <value>Form is required</value>
+  </data>
+  <data name="V_Publish" xml:space="preserve">
+    <value>Publish Contract</value>
+  </data>
+  <data name="V_Publish_Info" xml:space="preserve">
+    <value>If you publish this contract then the user will be able to view its details.</value>
+  </data>
 </root>

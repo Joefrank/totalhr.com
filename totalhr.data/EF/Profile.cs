@@ -14,6 +14,7 @@ namespace totalhr.data.EF
     
     public partial class Profile
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Profile()
         {
             this.UserProfiles = new HashSet<UserProfile>();
@@ -28,8 +29,9 @@ namespace totalhr.data.EF
         public Nullable<int> LastModifiedBy { get; set; }
         public string Identifier { get; set; }
     
-        public virtual ICollection<UserProfile> UserProfiles { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserProfile> UserProfiles { get; set; }
     }
 }

@@ -14,6 +14,7 @@ namespace totalhr.data.EF
     
     public partial class CalendarEvent
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CalendarEvent()
         {
             this.CalendarAssociations = new HashSet<CalendarAssociation>();
@@ -32,6 +33,7 @@ namespace totalhr.data.EF
         public int CalendarId { get; set; }
     
         public virtual Calendar Calendar { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CalendarAssociation> CalendarAssociations { get; set; }
     }
 }

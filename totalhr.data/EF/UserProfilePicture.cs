@@ -27,6 +27,5 @@ namespace totalhr.data.EF
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         public virtual User User2 { get; set; }
-        public virtual File File1 { get; set; }
     }
 }

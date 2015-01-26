@@ -14,6 +14,7 @@ namespace totalhr.data.EF
     
     public partial class UserContract
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public UserContract()
         {
             this.UserContractDatas = new HashSet<UserContractData>();
@@ -28,10 +29,12 @@ namespace totalhr.data.EF
         public Nullable<int> LastUpdatedBy { get; set; }
         public int Views { get; set; }
         public Nullable<System.DateTime> LastViewed { get; set; }
+        public int StatusId { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
         public virtual User User2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserContractData> UserContractDatas { get; set; }
     }
 }

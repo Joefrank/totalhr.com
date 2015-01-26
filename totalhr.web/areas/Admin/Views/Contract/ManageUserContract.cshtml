@@ -141,7 +141,7 @@
         function OpenContract() {
             var val = $("#templateId option:selected").val();
             if (val > 0) {
-                var url = '/Admin/Contract/FillContract/' + $('#ContractId').val();
+                var url = '/Admin/Contract/FillContract/' + $('#UserId').val();
                 NavigateTo(url);
             } else {
                 alert($('#hdnErrorTemplateNotSelected').val());

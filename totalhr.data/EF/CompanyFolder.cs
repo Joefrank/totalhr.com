@@ -14,6 +14,7 @@ namespace totalhr.data.EF
     
     public partial class CompanyFolder
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CompanyFolder()
         {
             this.CompanyFolderDocuments = new HashSet<CompanyFolderDocument>();
@@ -30,6 +31,7 @@ namespace totalhr.data.EF
         public bool OpenedPublic { get; set; }
     
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompanyFolderDocument> CompanyFolderDocuments { get; set; }
     }
 }

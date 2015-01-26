@@ -20,20 +20,41 @@ namespace totalhr.data.Repositories.Implementation
 
         public UserContractData SaveContractData(ContractFillViewInfo model)
         {
-            var data = new UserContractData
-                {
-                   UserId = model.UserId,
-                   ContractId = model.ContractId,
-                   Created = DateTime.Now,
-                   CreatedBy = model.CreatedBy,
-                   Data = model.Data,
-                   StatusId = (int)Variables.UserContractDataStatus.New
-                };
+            UserContractData contractData = null;
 
-            Context.UserContractDatas.Add(data);
+            if (model.ContractId > 0)
+            {
+                contractData = Context.UserContractDatas.FirstOrDefault(x => x.ContractId == model.ContractId && x.UserId == model.UserId);
+            }
+
+            //if contract data not found or contract not existent.
+            if (contractData == null)
+            {
+                contractData = new UserContractData
+                    {
+                        UserId = model.UserId,
+                        ContractId = model.ContractId,
+                        Created = DateTime.Now,
+                        CreatedBy = model.CreatedBy,
+                        Data = model.Data
+                    }; 
+                Context.UserContractDatas.Add(contractData);
+            }
+            else
+            {
+                contractData.LastUpdated = DateTime.Now;
+                contractData.LastUpdatedBy = model.CreatedBy;
+                contractData.Data = model.Data;
+            }
+           
             Context.SaveChanges();
 
-            return data;
+            return contractData;
+        }
+
+        public IEnumerable<GetUserContractDetails_Result> GetUserContractDetails(int userId, int? contractId = null)
+        {
+            return this.Context.GetUserContractDetails(userId, contractId);
         }
     }
 }
