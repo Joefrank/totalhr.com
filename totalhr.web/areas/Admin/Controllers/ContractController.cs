@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using totalhr.Shared.Models;
@@ -26,6 +27,7 @@ namespace totalhr.web.Areas.Admin.Controllers
         private readonly ICompanyService _companyService;
         private readonly IContractService _contractService;
         private readonly IAccountService _accountService;
+        private StringBuilder _sbContractErrors = new StringBuilder();
 
         private static readonly ILog log = LogManager.GetLogger(typeof(AccountService));
 
@@ -133,46 +135,51 @@ namespace totalhr.web.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult FillContract(int id)
         {
-            var contract = _contractService.GetContract(id);
-
-            var contractDetails = new UserContractFormDetails
-                {
-                    Contract = contract,
-                    Form = _contractService.GetTemplateForm(contract.TemplateId),
-                    UserDetails = _accountService.GetUser(contract.Userid)
-                };
-
+            var contractDetails = _contractService.GetUserContractDetails(id);
             return View(contractDetails);
         }
 
         [HttpPost]
-        public ActionResult SaveUserContractData(ContractFillViewInfo model)
+        public JsonResult SaveUserContractData(ContractFillViewInfo model)
         {
             if (IsValid(model))
             {
                 model.CreatedBy = CurrentUser.UserId;
                 var data = _contractService.SaveUserContractData(model);
-                return View("ManageUserContract", GetUserContractDetails(model.UserId));
+                return Json(new { Id = data.ContractId, Message = HttpUtility.HtmlEncode(Contract.V_Contract_Saved) });
             }
             else
             {
-                var contract = _contractService.GetContract(model.ContractId);
-                var contractDetails = new UserContractFormDetails
-                {
-                    Contract = contract,
-                    Form = _contractService.GetTemplateForm(contract.TemplateId),
-                    UserDetails = _accountService.GetUser(contract.Userid)
-                };
-
-                return View("FillContract", contractDetails);
+                return Json(new { Id = -1, Message = HttpUtility.HtmlEncode(_sbContractErrors .ToString())});
             }
 
         }
 
         bool IsValid(ContractFillViewInfo model)
         {
-            return (model.ContractId > 0 && model.UserId > 0 && model.FormId > 0  && !string.IsNullOrEmpty(model.Data));
+            bool bValid = true;
+
+            if (model.ContractId < 1){
+                _sbContractErrors.Append("<br/>" + Contract.Error_Template_Name_Rq);
+                bValid = false;
+            }
+
+            if (model.UserId < 1)
+            {
+                _sbContractErrors.Append("<br/>" + Contract.Error_User_Req);
+                bValid = false;
+            }
+
+            if (string.IsNullOrEmpty(model.Data))
+            {
+                _sbContractErrors.Append("<br/>" + Contract.Error_Form_Data);
+                bValid = false;
+            }
+
+            return bValid;
 
         }
+
+
     }
 }

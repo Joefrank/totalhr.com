@@ -34,5 +34,7 @@ namespace totalhr.services.Infrastructure
         Form GetTemplateForm(int templateId);
 
         UserContractData SaveUserContractData(ContractFillViewInfo model);
+
+        GetUserContractDetails_Result GetUserContractDetails(int userId, int? contractId = null);
     }
 }

@@ -14,6 +14,7 @@ namespace totalhr.data.EF
     
     public partial class ContractTemplateSection
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public ContractTemplateSection()
         {
             this.CTemplateSectionLinks = new HashSet<CTemplateSectionLink>();
@@ -29,7 +30,9 @@ namespace totalhr.data.EF
         public Nullable<System.DateTime> LastUpdated { get; set; }
         public Nullable<int> LastUpdatedBy { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTemplateSectionLink> CTemplateSectionLinks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTSectionFieldLink> CTSectionFieldLinks { get; set; }
     }
 }

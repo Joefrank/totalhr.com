@@ -13,5 +13,7 @@ namespace totalhr.data.Repositories.Infrastructure
         int AddTemplate(ContractTemplate template);
 
         UserContractData SaveContractData(ContractFillViewInfo model);
+
+        IEnumerable<GetUserContractDetails_Result> GetUserContractDetails(int userId, int? contractId = null);
     }
 }

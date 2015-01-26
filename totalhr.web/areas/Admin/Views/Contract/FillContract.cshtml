@@ -1,11 +1,11 @@
 ﻿@using totalhr.Resources;
 @using totalhr.data.EF;
 
-@model totalhr.web.Areas.Admin.Models.UserContractFormDetails
+@model GetUserContractDetails_Result
 
 @{
     Layout = null;
-    var schema = string.IsNullOrEmpty(Model.Form.FormSchema) ? "''" : Model.Form.FormSchema;
+    var schema = string.IsNullOrEmpty(Model.FormSchema) ? "''" : Model.FormSchema;
 }
 
 <!DOCTYPE html>
@@ -30,16 +30,19 @@
             $scope.errorMessage = '';
 
             $scope.mySchema = @Html.Raw(schema);
-            $scope.FormId = @Model.Form.Id;
-            $scope.ContractId = @Model.Contract.id;
-            $scope.UserId = @Model.UserDetails.id;
-            $scope.FormTypeId = @Model.Form.FormTypeId;
-
+            $scope.FormId = @Model.FormId;
+            $scope.ContractId = @Model.ContractId;
+            $scope.UserId = @Model.CTUserId;
+            $scope.FormTypeId = @Model.FormTypeId;
+                
             $scope.myForm = {
                 schema: $scope.mySchema
             };
-              
 
+            $scope.ShowAlert = function() {
+                alert($scope.Publish);
+            };
+            
                 $scope.SubmitFormInput = function () {
                    
                     var formData = $scope.myForm;
@@ -50,15 +53,15 @@
                             ContractId : $scope.ContractId,
                             UserId :  $scope.UserId,
                             FormTypeId : $scope.FormTypeId,
-                            Schema: JSON.stringify(formData.data)
+                            Data: JSON.stringify(formData.data)
                         },
                         function(msg) {
-                            var message = msg.Message;                            
-                           // alert(msg.Message);
+                            var message = msg.Message;
+                            alert(msg.Message);
                             $scope.errorMessage = '';
                         },
                         function(data, response) {
-                            alert('Error ' + data.Message);
+                            alert(data.Message);
                             $scope.errorMessage = data.Message;
                         }
                     );
@@ -108,7 +111,7 @@
 
                     <legend>
                         <div class="row">
-                            <div class="col-sm-offset-3">@Contract.V_Contract_Edit - <span class="uname">(@(Model.UserDetails.firstname + " " + Model.UserDetails.surname))</span></div>
+                            <div class="col-sm-offset-3">@Contract.V_Contract_Edit - <span class="uname">(@Model.CTUser)</span></div>
                         </div>
                     </legend>
 
@@ -133,27 +136,20 @@
                         </div>
                     </div>
                 </div>
-
-             @*   <div class="form-group">
-                    <label class="control-label col-sm-3">@FormGenerator.V_Form_Data</label>
-
-                    <div class="col-sm-9">
-                        <div jsonify="myForm.data"></div>
-                    </div>
-                </div>*@
                 
                 <div class="form-group">
                     <label class="control-label col-sm-3">&nbsp;</label>
 
                     <div class="col-sm-9">
-                        <input type="button" value="@Contract.V_Submit" ng-click="SubmitFormInput()"/>
+                        <input type="button" ng-disabled="previewForm.$invalid" value="@Contract.V_Submit" ng-click="SubmitFormInput()"/>
                     </div>
                 </div>
 
             </form>
             
         </div>
-
+        
+        <input type="hidden" id="hdnError" value="@HttpUtility.HtmlEncode(Error.Error_Error)"/>
     </body>
 
 </html>

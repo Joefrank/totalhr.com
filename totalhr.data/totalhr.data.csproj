@@ -227,6 +227,9 @@
     <Compile Include="EF\GetCompanyFoldersByUser_Result.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\GetUserContractDetails_Result.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\GetUserListForAdmin_Result.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>

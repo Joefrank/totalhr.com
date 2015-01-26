@@ -123,6 +123,11 @@ namespace totalhr.services.Implementation
             return _contractRepos.SaveContractData(model);
         }
 
+        public GetUserContractDetails_Result GetUserContractDetails(int userId, int? contractId = null)
+        {
+            return _contractRepos.GetUserContractDetails(userId, contractId).FirstOrDefault();
+        }
+
         public FormInfo GetDefaultTemplate(int languageId)
         {
             return new FormInfo
