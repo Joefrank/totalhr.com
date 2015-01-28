@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 using Entities= totalhr.data.EF;
 
 namespace totalhr.web.ViewModels
@@ -15,7 +16,8 @@ namespace totalhr.web.ViewModels
         public bool ApprovalNeeded { get; set; }
         
         public Nullable<bool> Approved { get; set; }
-       [DisplayName("Task Dead line")]
+        
+        [DisplayName("Task Dead line")]
         public Nullable<System.DateTime> ScheduledDateTime { get; set; }
 
         public string ScheduleLog { get; set; }
@@ -27,10 +29,7 @@ namespace totalhr.web.ViewModels
         public List<UserVM> Users { get; set; }
         public List<DepartmentVM> Departments { get; set; }
 
-        public TaskSchedulerDetailsVM()
-        {
-            
-        }
+        public TaskSchedulerDetailsVM() : base() { }
 
         public void SetupTaskScheduler(int userId, int departmentId, List<UserVM> users, List<DepartmentVM> departments )
         {
@@ -46,10 +45,12 @@ namespace totalhr.web.ViewModels
 
     }
 
-    public class UserVM
+    public class UserVM:SelectListItem
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
+
+        public UserVM() { }
 
         public UserVM(Entities.User user)
         {
@@ -62,10 +63,12 @@ namespace totalhr.web.ViewModels
         }
     }
 
-    public class DepartmentVM
+    public class DepartmentVM: SelectListItem
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Name { get; set; }
+
+        public DepartmentVM() { }
         public DepartmentVM(Entities.Department department)
         {
             Id = department.id;

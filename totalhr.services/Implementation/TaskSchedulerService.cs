@@ -23,14 +23,14 @@ namespace totalhr.services.Implementation
             _accountService = accountService;
         }
 
-        public IList<TRS.TaskScheduler> ListBySearch(int id, string name, int assignedTo, int assignedBy)
+        public List<TRS.TaskScheduler> ListBySearch(int? id, string name, int? assignedTo, int? assignedBy, int skip, int take)
         {
             var tasks = _taskSchedulerRepository.GetAll();
-            if (id > 0) tasks = tasks.Where(x => x.Id == id);
+            if (id != null) tasks = tasks.Where(x => x.Id == id);
             if (!string.IsNullOrEmpty(name)) tasks = tasks.Where(x => x.Name.Contains(name));
-            if (assignedTo > 0) tasks = tasks.Where(x => x.AssignedTo == assignedTo);
-            if (assignedBy > 0) tasks = tasks.Where(x => x.AssignedBy == assignedBy);
-            return tasks.Any()? tasks.ToList(): new List<TRS.TaskScheduler>();
+            if (assignedTo != null) tasks = tasks.Where(x => x.AssignedTo == assignedTo);
+            if (assignedBy != null) tasks = tasks.Where(x => x.AssignedBy == assignedBy);
+            return tasks.Any()? tasks.OrderBy(x => x.Id).Skip(skip).Take(take).ToList(): new List<TRS.TaskScheduler>();
         }
 
         public bool AddTask(string name, string description, int departmentId, bool needsApproval, int assignedBy, int assignedTo, DateTime? completeBy, Audit audit)

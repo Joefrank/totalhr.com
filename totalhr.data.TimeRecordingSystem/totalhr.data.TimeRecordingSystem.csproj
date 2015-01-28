@@ -65,6 +65,7 @@
     <Compile Include="EF\Note.cs">
       <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\Partials\User.cs" />
     <Compile Include="EF\Role.cs">
       <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>

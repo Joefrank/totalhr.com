@@ -10,7 +10,7 @@ namespace totalhr.services.Infrastructure
 {
     public interface ITaskSchedulerService
     {
-        IList<TRS.TaskScheduler> ListBySearch(int id, string name, int assignedTo, int assignedBy);
+        List<TRS.TaskScheduler> ListBySearch(int? id, string name, int? assignedTo, int? assignedBy, int skip, int take);
         bool AddTask(string name, string description, int departmentId, bool needsApproval, int assignedBy, int assignedTo, DateTime? completeBy, Audit audit);
     }
 }

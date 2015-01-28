@@ -1,7 +1,92 @@
-﻿@model totalhr.data.TimeRecordingSystem.EF.TaskScheduler
+﻿@model totalhr.web.ViewModels.TaskSchedulerSearchVm
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Search Tasks</h2>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>
+            Search Task Recordings
+        </legend>
+        <table>
+            <tr>
+                <td>
+                    Id: @Html.TextBoxFor(x => x.Id)
+                </td>
+                <td>
+                    Name: @Html.TextBoxFor(x => x.Name)
+                </td>
+                <td>
+                    AssignedBy: @Html.DropDownListFor(x => x.AssignedBy, new SelectList(Model.Users, "Id", "Name", Model.AssignedBy))
+                </td>
+                <td>
+                    AssignedTo: @Html.DropDownListFor(x => x.AssignedTo, new SelectList(Model.Users, "Id", "Name", Model.AssignedTo))
+                </td>
+                <td>
+                    Number of Results: @Html.TextBoxFor(x => x.PageSize)
+                </td>
+                <td>
+                    <input type="submit" value="Submit" />
+                </td>
+            </tr>
+        </table>
+    </fieldset>
+}
+
+@if (Model.Results != null)
+{
+    <table>
+        <tr>
+            <td>
+                ID
+            </td>
+            <td>
+                Name
+            </td>
+            <td>
+                Description
+            </td>
+            <td>
+                Assigned By
+            </td>
+            <td>
+                Assigned To
+            </td>
+            <td>
+                Department
+            </td>
+        </tr>
+        @foreach (var result in Model.Results)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(x => result.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => result.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => result.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => result.AssignedByUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => result.AssignedToUser)
+                </td>
+                <td>
+                    @Html.DisplayFor(x => result.Department)
+                </td>
+                <td>@Html.ActionLink("Details", "Details", new { id = result.Id }) </td>
+            </tr>
+        }
+    </table>
+
+    <br />
+    @Html.ActionLink("Back to Home", "Index","Home")
+}

@@ -165,4 +165,3 @@ R:\GitProjects\TotalHR\totalhr.dummydata\bin\Debug\System.Web.Mvc.xml
 R:\GitProjects\TotalHR\totalhr.dummydata\obj\Debug\totalhr.dummydata.csprojResolveAssemblyReference.cache
 R:\GitProjects\TotalHR\totalhr.dummydata\obj\Debug\totalhr.dummydata.dll
 R:\GitProjects\TotalHR\totalhr.dummydata\obj\Debug\totalhr.dummydata.pdb
-R:\GitProjects\TotalHR\totalhr.dummydata\bin\Debug\AutoMapper.Net4.dll

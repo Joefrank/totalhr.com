@@ -23,11 +23,27 @@ namespace totalhr.web.Controllers
         }
         //
         // GET: /Task/
-
+        [HttpGet]
         public ActionResult Index()
         {
             var vm = new TaskSchedulerSearchVm();
+            vm.SetDefaults();
+            this.SearchTasks(vm);
             return View(vm);
+        }
+        [HttpPost]
+        public ActionResult Index(TaskSchedulerSearchVm vm)
+        {
+            this.SearchTasks(vm);
+            return View(vm);
+        }
+
+        private void SearchTasks(TaskSchedulerSearchVm vm)
+        {
+            vm.Users = this.GetUserVMList();
+            vm.Departments = this.GetDepartmentVMList();
+            var results = _taskSchedulerService.ListBySearch(vm.Id, vm.Name, vm.AssignedTo, vm.AssignedBy, vm.Skip, vm.PageSize);
+            vm.BuildResults(results);
         }
 
         [HttpGet]
@@ -38,7 +54,6 @@ namespace totalhr.web.Controllers
             return View(vm);
 
         }
-
 
 
         [HttpPost]
@@ -65,12 +80,26 @@ namespace totalhr.web.Controllers
 
         private void BuildTaskSchedulerVM(TaskSchedulerDetailsVM vm)
         {
-            var users = _accountsService.GetCompanyUsers(this.CurrentUser.CompanyId);
-            var departments = _accountsService.GetCompanyDepartments(this.CurrentUser.CompanyId);
-            var usersVM = UserVM.ConvertUsersToList(users);
-            var departmentsVM = DepartmentVM.ConvertDepartmentsToList(departments);
+            var usersVM = GetUserVMList();
+            var departmentsVM = GetDepartmentVMList();
             vm.SetupTaskScheduler(this.CurrentUser.UserId, this.CurrentUser.DepartmentId, usersVM, departmentsVM);
             //return vm;
+        }
+
+        private List<DepartmentVM> GetDepartmentVMList()
+        {
+            var departments = _accountsService.GetCompanyDepartments(this.CurrentUser.CompanyId);
+            var departmentsVM = DepartmentVM.ConvertDepartmentsToList(departments);
+
+            return departmentsVM;
+        }
+
+        private List<UserVM> GetUserVMList()
+        {
+            var users = _accountsService.GetCompanyUsers(this.CurrentUser.CompanyId);
+            var usersVM = UserVM.ConvertUsersToList(users);
+
+            return usersVM;
         }
 
 
