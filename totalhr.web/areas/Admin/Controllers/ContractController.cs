@@ -146,6 +146,9 @@ namespace totalhr.web.Areas.Admin.Controllers
             {
                 model.CreatedBy = CurrentUser.UserId;
                 var data = _contractService.SaveUserContractData(model);
+                //implement the saving of form data and also of form fields.
+                var result = _formService.SaveData(model);
+
                 return Json(new { Id = data.ContractId, Message = HttpUtility.HtmlEncode(Contract.V_Contract_Saved) });
             }
             else

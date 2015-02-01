@@ -8,6 +8,7 @@ using totalhr.data.Repositories.Infrastructure;
 using totalhr.data.EF;
 using totalhr.Shared;
 using FormService.Infrastructure;
+using Newtonsoft.Json;
 
 
 namespace FormService.Implementation
@@ -48,6 +49,19 @@ namespace FormService.Implementation
         public Form GetForm(int id)
         {
             return _formRepository.FindBy(x => x.Id == id).FirstOrDefault();
+        }
+
+        public ResultInfo SaveFormFields(int formId, string data)
+        {
+            var jObject = Newtonsoft.Json.Linq.JObject.Parse(data);
+            var temp = jObject["fields"];
+            return null;
+        }
+
+        public ResultInfo SaveData(ContractFillViewInfo model)
+        {
+            var jObject = Newtonsoft.Json.Linq.JObject.Parse(model.Data);
+            return null;
         }
     }
 }
