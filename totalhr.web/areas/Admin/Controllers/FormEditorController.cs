@@ -65,6 +65,7 @@ namespace totalhr.web.Areas.Admin.Controllers
 
             if (result > 0)
             {
+                _formService.SaveFormFields(result, data.Schema);
                 return Json(new { Id = 1, Message = "" });
             }
             else
