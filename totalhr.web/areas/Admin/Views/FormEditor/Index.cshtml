@@ -1,3 +1,78 @@
-﻿@using totalhr.Resources
+﻿@using totalhr.Resources;
+@using totalhr.web.Helpers;
 
-Provide list of forms
+@model IEnumerable<totalhr.data.EF.Form>
+
+@{
+    ViewBag.Title = AdminGeneric.V_Manage_Forms;
+
+    var allForms = Model.ToList();  
+    
+    // var pagination = new totalhr.web.Areas.Admin.Models.Pagination
+    //{
+    //    CurrentPage = searchInfo.PageNumber.GetValueOrDefault(),
+    //    MainLink = "/Admin/User/",
+    //    PageSize = searchInfo.PageSize.GetValueOrDefault(),
+    //    TotalNoOfItems = (userCount > 0)? foundUsers.First().Total.GetValueOrDefault() : 0
+    //};
+
+    var searchInfo = new totalhr.Shared.Models.UserSearchInfo
+    {
+        OrderColumn = "FormId",
+        OrderDirection = "Asc"
+    };
+     
+}
+
+<div class="container">
+@section breadcrumb{
+            <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
+            <span class="last">@AdminGeneric.V_Manage_Forms</span>
+        }
+
+<h1>@AdminGeneric.V_Manage_Forms</h1>
+
+<div class="wide">
+    <p>
+        Please select the form you would like to manage below.
+    </p>
+   
+    @if (allForms.Count > 0)
+    {
+    <table border="1" class="SortedTab">
+        <tr>
+            @Html.Raw(GenericHelper.MakeSortableTH("FormId", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,FormGenerator.V_Form_Id))
+           
+            @Html.Raw(GenericHelper.MakeSortableTH("FormName", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,FormGenerator.V_Form_Name))
+                  
+            <th>&nbsp;</th>
+        </tr>
+        @foreach (var form in allForms)
+        {
+        <tr>
+            <td>
+                @form.Id
+            </td>
+            <td>
+                @form.Name
+            </td>
+               
+            <td>
+                <input type="button" class="edit" value="@AdminGeneric.V_More_Details" onclick="NavigateTo('/Admin/FormEditor/EditForm/@form.Id');" />
+            </td>
+        </tr>  
+           
+        }
+    </table>
+}else{
+    <p class="error">
+        No form was found. Please create a new form
+    </p>
+}
+    
+
+@*@Html.Partial("_Pagination", pagination)*@
+
+</div>
+
+</div>

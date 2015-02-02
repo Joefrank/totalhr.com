@@ -27,14 +27,15 @@ namespace totalhr.web.Areas.Admin.Controllers
         //make this display a list of exising forms
         public ActionResult Index()
         {
-            return View();
+            var formList = _formService.ListFormsOfType((int)Variables.FormType.ContractTemplate);
+            return View(formList);
             //return View(new totalhr.Shared.Models.FormInfo { Schema = DummySchema });
         }
                 
         public ActionResult EditForm(int id)
         {
             // make form write protected. only selected users should edit
-            return View();
+            return View( _formService.GetForm(id));
         }
        
         public ActionResult CreateForm([Bind(Prefix="id")] int formType)
@@ -65,7 +66,7 @@ namespace totalhr.web.Areas.Admin.Controllers
 
             if (result > 0)
             {
-                _formService.SaveFormFields(result, data.Schema);
+                _formService.SaveFormFields(result, CurrentUser.UserId, data.Schema);
                 return Json(new { Id = 1, Message = "" });
             }
             else
@@ -80,6 +81,7 @@ namespace totalhr.web.Areas.Admin.Controllers
         {
             var contract = _contractService.GetTemplate(templateid);
             var form = _formService.GetForm(contract.FormId);
+
             return View(form);
         }
 

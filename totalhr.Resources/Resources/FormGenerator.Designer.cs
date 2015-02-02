@@ -79,11 +79,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Id.
+        /// </summary>
+        public static string V_Form_Id {
+            get {
+                return ResourceManager.GetString("V_Form_Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please edit your form by adding fields and save it..
         /// </summary>
         public static string V_Form_Intro {
             get {
                 return ResourceManager.GetString("V_Form_Intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string V_Form_Name {
+            get {
+                return ResourceManager.GetString("V_Form_Name", resourceCulture);
             }
         }
         

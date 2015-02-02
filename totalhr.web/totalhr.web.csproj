@@ -298,6 +298,7 @@
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
     <Content Include="Scripts\Site\angular-form-gen.js" />
+    <Content Include="Scripts\Site\fr-FR\angular-form-gen.js" />
     <Content Include="Views\TimeRecording\Search.cshtml" />
     <Content Include="Views\TimeRecording\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Contract\Index.cshtml" />

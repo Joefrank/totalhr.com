@@ -18,6 +18,7 @@ using TemplateInfo = totalhr.Shared.Models.TemplateInfo;
 using totalhr.data.EF;
 using totalhr.web.Areas.Admin.Models;
 using totalhr.Resources;
+using Newtonsoft.Json;
 
 namespace totalhr.web.Areas.Admin.Controllers
 {
@@ -135,7 +136,7 @@ namespace totalhr.web.Areas.Admin.Controllers
         /// <returns></returns>
         public ActionResult FillContract(int id)
         {
-            var contractDetails = _contractService.GetUserContractDetails(id);
+            var contractDetails = _contractService.GetUserContractDetails(id);           
             return View(contractDetails);
         }
 
