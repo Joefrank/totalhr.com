@@ -224,6 +224,12 @@
     <Compile Include="EF\FormField.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\FormFieldJSon.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\FormFieldValidationRule.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\GetCompanyFoldersByUser_Result.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>

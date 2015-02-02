@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TotalHRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TotalHRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Calendar">
           <Key>
             <PropertyRef Name="id" />
@@ -362,6 +362,33 @@
           <Property Name="LastUpdated" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="int" />
           <Property Name="obsolete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormFieldJSon">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DisplayName" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="PlaceHolderText" Type="nvarchar" MaxLength="255" />
+          <Property Name="ToolTip" Type="nvarchar" MaxLength="255" />
+          <Property Name="InitialValue" Type="nvarchar" MaxLength="255" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="obsolete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FormFieldValidationRule">
+          <Key>
+            <PropertyRef Name="FormFieldId" />
+            <PropertyRef Name="ValidationRuleId" />
+          </Key>
+          <Property Name="FormFieldId" Type="int" Nullable="false" />
+          <Property Name="ValidationRuleId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Glossary">
           <Key>
@@ -780,6 +807,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FormFieldValidationRule_FormFieldJSon">
+          <End Role="FormFieldJSon" Type="Self.FormFieldJSon" Multiplicity="1" />
+          <End Role="FormFieldValidationRule" Type="Self.FormFieldValidationRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormFieldJSon">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FormFieldValidationRule">
+              <PropertyRef Name="FormFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormFieldValidationRule_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="FormFieldValidationRule" Type="Self.FormFieldValidationRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FormFieldValidationRule">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Profile_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
@@ -1124,6 +1175,8 @@
           <EntitySet Name="Form" EntityType="Self.Form" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormControl" EntityType="Self.FormControl" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormField" EntityType="Self.FormField" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormFieldJSon" EntityType="Self.FormFieldJSon" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormFieldValidationRule" EntityType="Self.FormFieldValidationRule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Glossary" EntityType="Self.Glossary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Label" EntityType="Self.Label" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
@@ -1206,6 +1259,14 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="Department" EntitySet="Department" />
           </AssociationSet>
+          <AssociationSet Name="FK_FormFieldValidationRule_FormFieldJSon" Association="Self.FK_FormFieldValidationRule_FormFieldJSon">
+            <End Role="FormFieldJSon" EntitySet="FormFieldJSon" />
+            <End Role="FormFieldValidationRule" EntitySet="FormFieldValidationRule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormFieldValidationRule_User" Association="Self.FK_FormFieldValidationRule_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="FormFieldValidationRule" EntitySet="FormFieldValidationRule" />
+          </AssociationSet>
           <AssociationSet Name="FK_Profile_User" Association="Self.FK_Profile_User">
             <End Role="User" EntitySet="User" />
             <End Role="Profile" EntitySet="Profile" />
@@ -1287,8 +1348,7 @@
             <End Role="UserRole" EntitySet="UserRole" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TotalHRModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -1861,6 +1921,7 @@
           <NavigationProperty Name="UserProfilePictures1" Relationship="Self.FK_UserProfilePicture_User1" FromRole="User" ToRole="UserProfilePicture" />
           <NavigationProperty Name="UserProfilePictures2" Relationship="Self.FK_UserProfilePicture_UserProfilePicture" FromRole="User" ToRole="UserProfilePicture" />
           <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
+          <NavigationProperty Name="FormFieldValidationRules" Relationship="TotalHRModel.FK_FormFieldValidationRule_User" FromRole="User" ToRole="FormFieldValidationRule" />
         </EntityType>
         <EntityType Name="UserContract">
           <Key>
@@ -2597,16 +2658,16 @@
             <Parameter Name="viewinglanguageid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserProfileIds" ReturnType="Collection(Int32)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserProfiles" ReturnType="Collection(TotalHRModel.GetUserProfiles_Result)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserRoleIds" ReturnType="Collection(Int32)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserRoles" ReturnType="Collection(TotalHRModel.GetUserRoles_Result)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PrepareCalendarEventScheduledReminder">
             <Parameter Name="SenderName" Mode="In" Type="String" />
@@ -2643,6 +2704,16 @@
             <Parameter Name="sortorder" Mode="In" Type="String" />
             <Parameter Name="viewinglanguageid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="FormFieldJSons" EntityType="TotalHRModel.FormFieldJSon" />
+          <EntitySet Name="FormFieldValidationRules" EntityType="TotalHRModel.FormFieldValidationRule" />
+          <AssociationSet Name="FK_FormFieldValidationRule_FormFieldJSon" Association="TotalHRModel.FK_FormFieldValidationRule_FormFieldJSon">
+            <End Role="FormFieldJSon" EntitySet="FormFieldJSons" />
+            <End Role="FormFieldValidationRule" EntitySet="FormFieldValidationRules" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormFieldValidationRule_User" Association="TotalHRModel.FK_FormFieldValidationRule_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="FormFieldValidationRule" EntitySet="FormFieldValidationRules" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetCompanyFoldersByUser_Result">
           <Property Type="Int32" Name="documentId" Nullable="false" />
@@ -2817,6 +2888,60 @@
           <Property Type="String" Name="chosenculture" Nullable="true" MaxLength="10" />
           <Property Type="Int32" Name="departmentid" Nullable="false" />
         </ComplexType>
+        <EntityType Name="FormFieldJSon">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DisplayName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="PlaceHolderText" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ToolTip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InitialValue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="obsolete" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="FormFieldValidationRules" Relationship="TotalHRModel.FK_FormFieldValidationRule_FormFieldJSon" FromRole="FormFieldJSon" ToRole="FormFieldValidationRule" />
+        </EntityType>
+        <EntityType Name="FormFieldValidationRule">
+          <Key>
+            <PropertyRef Name="FormFieldId" />
+            <PropertyRef Name="ValidationRuleId" />
+          </Key>
+          <Property Name="FormFieldId" Type="Int32" Nullable="false" />
+          <Property Name="ValidationRuleId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="FormFieldJSon" Relationship="TotalHRModel.FK_FormFieldValidationRule_FormFieldJSon" FromRole="FormFieldValidationRule" ToRole="FormFieldJSon" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_FormFieldValidationRule_User" FromRole="FormFieldValidationRule" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_FormFieldValidationRule_FormFieldJSon">
+          <End Type="TotalHRModel.FormFieldJSon" Role="FormFieldJSon" Multiplicity="1" />
+          <End Type="TotalHRModel.FormFieldValidationRule" Role="FormFieldValidationRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormFieldJSon">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FormFieldValidationRule">
+              <PropertyRef Name="FormFieldId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormFieldValidationRule_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.FormFieldValidationRule" Role="FormFieldValidationRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FormFieldValidationRule">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3633,6 +3758,34 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="FormFieldJSons">
+            <EntityTypeMapping TypeName="TotalHRModel.FormFieldJSon">
+              <MappingFragment StoreEntitySet="FormFieldJSon">
+                <ScalarProperty Name="obsolete" ColumnName="obsolete" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="InitialValue" ColumnName="InitialValue" />
+                <ScalarProperty Name="ToolTip" ColumnName="ToolTip" />
+                <ScalarProperty Name="PlaceHolderText" ColumnName="PlaceHolderText" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormFieldValidationRules">
+            <EntityTypeMapping TypeName="TotalHRModel.FormFieldValidationRule">
+              <MappingFragment StoreEntitySet="FormFieldValidationRule">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ValidationRuleId" ColumnName="ValidationRuleId" />
+                <ScalarProperty Name="FormFieldId" ColumnName="FormFieldId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

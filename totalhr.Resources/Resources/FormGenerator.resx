@@ -123,8 +123,14 @@
   <data name="V_Form_Data" xml:space="preserve">
     <value>Form Data</value>
   </data>
+  <data name="V_Form_Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
   <data name="V_Form_Intro" xml:space="preserve">
     <value>Please edit your form by adding fields and save it.</value>
+  </data>
+  <data name="V_Form_Name" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="V_Form_Preview" xml:space="preserve">
     <value>Form Preview</value>

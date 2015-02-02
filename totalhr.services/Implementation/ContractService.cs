@@ -136,25 +136,25 @@ namespace totalhr.services.Implementation
                   ""fields"": [
                     {
                       ""type"": ""text"",
-                      ""name"": ""startDate"",
-                      ""displayName"": ""Start Date"",
+                      ""name"": ""field1"",
+                      ""displayName"": ""Field 1"",
                       ""validation"": {
                         ""messages"": {},
                         ""required"": true
                       },
-                      ""placeholder"": ""Enter employee start date here"",
-                      ""tooltip"": ""Enter employee start date here""
+                      ""placeholder"": ""Enter field1 details here"",
+                      ""tooltip"": ""Enter field1 details here""
                     },
                     {
                       ""type"": ""text"",
-                      ""name"": ""jobType"",
-                      ""displayName"": ""Job Type"",
+                      ""name"": ""field2"",
+                      ""displayName"": ""Field 2"",
                       ""validation"": {
                         ""messages"": {},
                         ""required"": true
                       },
-                      ""placeholder"": ""Enter employee job type here"",
-                      ""tooltip"": ""Enter employee job type here""
+                      ""placeholder"": ""Enter field1 details here"",
+                      ""tooltip"": ""Enter field1 details here""
                     }
                     ]
                 }"

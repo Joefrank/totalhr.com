@@ -82,6 +82,10 @@
         <AssociationConnector Association="TotalHRModel.FK_UserProfilePicture_UserProfilePicture" ManuallyRouted="false" />
         <AssociationConnector Association="TotalHRModel.FK_UserRole_User" ManuallyRouted="false" />
         <AssociationConnector Association="TotalHRModel.FK_UserContractData_UserContract" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TotalHRModel.FormFieldJSon" Width="1.5" PointX="8.25" PointY="48.125" />
+        <EntityTypeShape EntityType="TotalHRModel.FormFieldValidationRule" Width="1.5" PointX="10.5" PointY="17.75" />
+        <AssociationConnector Association="TotalHRModel.FK_FormFieldValidationRule_FormFieldJSon" />
+        <AssociationConnector Association="TotalHRModel.FK_FormFieldValidationRule_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
