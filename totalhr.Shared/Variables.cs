@@ -224,6 +224,14 @@ namespace totalhr.Shared
             Published = 3
         }
 
+        public enum FormValidationRules
+        {
+            TxtMinLen = 1,
+            TxtMaxLen = 2,
+            Required = 3,
+            MatchPattern = 4
+        }
+
         public static string AdminEmailSignature
         {
             get

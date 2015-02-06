@@ -18,8 +18,11 @@ namespace totalhr.data.EF
         public int ValidationRuleId { get; set; }
         public System.DateTime Created { get; set; }
         public int CreatedBy { get; set; }
+        public string ErrorMessage { get; set; }
+        public string SetValue { get; set; }
+        public int FormId { get; set; }
     
-        public virtual FormFieldJSon FormFieldJSon { get; set; }
         public virtual User User { get; set; }
+        public virtual FormFieldJSon FormFieldJSon { get; set; }
     }
 }

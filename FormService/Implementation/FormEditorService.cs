@@ -51,11 +51,102 @@ namespace FormService.Implementation
             return _formRepository.FindBy(x => x.Id == id).FirstOrDefault();
         }
 
-        public ResultInfo SaveFormFields(int formId, string data)
+        public ResultInfo SaveFormFields(FormInfo info)
         {
-            var jObject = Newtonsoft.Json.Linq.JObject.Parse(data);
-            var temp = jObject["fields"];
-            return null;
+            var lstFormFields = new List<FormFieldJSon>();
+            
+
+            var dicFields = new Dictionary<int, FormFieldJSon>();
+            var dicValidations = new Dictionary<int, List<FormFieldValidationRule>>();
+
+            int identifier = 0;
+
+
+            dynamic dynJson = JsonConvert.DeserializeObject(info.Schema);
+            
+            foreach (var item in dynJson.fields)
+            {
+                identifier++;
+
+                var field =new FormFieldJSon
+                {
+                    FormId = info.Id,
+                    Created = DateTime.Now,
+                    CreatedBy = info.UserId,
+                    Name = item.name.Value,
+                    TypeName = item.type.Value,
+                    DisplayName = (item.displayName != null)? item.displayName.Value : "",
+                    PlaceHolderText = (item.placeholder != null)? item.placeholder.Value : "",
+                    InitialValue = (item.value != null)? item.value.Value : "",
+                    ToolTip = (item.tooltip != null)? item.tooltip.Value : ""
+                };
+
+                dicFields.Add(identifier, field);
+
+                var validationMessages = new Dictionary<string, string>();
+                var lstRules = new List<FormFieldValidationRule>();
+
+                foreach (var val in item.validation)
+                {
+                    if (validationMessages.Count == 0)
+                    {
+                        foreach (var message in val.Value)
+                        {
+                            var temp = message.ToString().Split(':');
+                            validationMessages.Add(temp[0], temp[1]);
+                        }
+                    }
+                    else if (validationMessages.Count > 0)
+                    {
+                        var temp = val.ToString().Split(':');
+                        var tempMessage = string.Empty;
+
+                        if (validationMessages[temp[0]] != null)
+                        {
+                            tempMessage = validationMessages[temp[0]];
+                        }
+
+                        lstRules.Add(new FormFieldValidationRule
+                        {
+                            Created = DateTime.Now,
+                            CreatedBy = info.UserId,
+                            ErrorMessage = tempMessage,
+                            SetValue = temp[1],
+                            ValidationRuleId = GetValidationRule(temp[0].Trim('"')),//remove double quotes
+                            FormId = info.Id
+                        });
+                    }
+                }
+
+                if (lstRules.Count > 0)
+                {
+                    dicValidations.Add(identifier, lstRules);
+                    lstRules = new List<FormFieldValidationRule>();
+                }                              
+            }
+
+           _formRepository.DeleteFormFields(info.Id);
+           return _formRepository.SaveFields(dicFields, dicValidations);
+        }
+
+        private int GetValidationRule(string rulename)
+        {
+            switch (rulename)
+            {
+                case "required": return (int)Variables.FormValidationRules.Required;
+                 case "minlength": return (int)Variables.FormValidationRules.TxtMinLen;
+                 case "maxlength": return (int)Variables.FormValidationRules.TxtMaxLen; 
+                 case "pattern": return (int)Variables.FormValidationRules.MatchPattern;
+                 default: return -1;
+            }
+        }
+
+
+        private List<FormFieldValidationRule> GetValidationRule(string validation, int userId)
+        {
+            var lstValidations = new List<FormFieldValidationRule>();
+            lstValidations.Add(new FormFieldValidationRule{ Created = DateTime.Now, CreatedBy = userId, ValidationRuleId = 1});
+            return lstValidations;
         }
 
         public ResultInfo SaveData(ContractFillViewInfo model)

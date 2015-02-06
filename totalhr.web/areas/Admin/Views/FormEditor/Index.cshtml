@@ -1,5 +1,5 @@
-﻿@using totalhr.Resources;
-@using totalhr.web.Helpers;
+﻿@using totalhr.web.Helpers;
+@using totalhr.Resources;
 
 @model IEnumerable<totalhr.data.EF.Form>
 
@@ -73,6 +73,9 @@
 
 @*@Html.Partial("_Pagination", pagination)*@
 
+    <p>
+        <input type="button" value="@Contract.V_Create_Form" onclick="OpenPopup('/Admin/FormEditor/CreateForm/1', 900, 600);" />
+    </p>
 </div>
 
 </div>

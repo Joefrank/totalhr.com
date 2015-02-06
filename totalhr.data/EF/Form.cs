@@ -18,6 +18,7 @@ namespace totalhr.data.EF
         public Form()
         {
             this.ContractTemplates = new HashSet<ContractTemplate>();
+            this.FormFieldJSons = new HashSet<FormFieldJSon>();
         }
     
         public int Id { get; set; }
@@ -33,5 +34,7 @@ namespace totalhr.data.EF
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ContractTemplate> ContractTemplates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FormFieldJSon> FormFieldJSons { get; set; }
     }
 }

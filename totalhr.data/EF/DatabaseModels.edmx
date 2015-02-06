@@ -373,12 +373,13 @@
           <Property Name="PlaceHolderText" Type="nvarchar" MaxLength="255" />
           <Property Name="ToolTip" Type="nvarchar" MaxLength="255" />
           <Property Name="InitialValue" Type="nvarchar" MaxLength="255" />
-          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="TypeName" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="LastUpdated" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="int" />
           <Property Name="obsolete" Type="bit" Nullable="false" />
+          <Property Name="FormId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="FormFieldValidationRule">
           <Key>
@@ -389,6 +390,9 @@
           <Property Name="ValidationRuleId" Type="int" Nullable="false" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="ErrorMessage" Type="nvarchar" MaxLength="500" />
+          <Property Name="SetValue" Type="nvarchar" MaxLength="150" />
+          <Property Name="FormId" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="Glossary">
           <Key>
@@ -804,6 +808,18 @@
             </Principal>
             <Dependent Role="Department">
               <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormFieldJSon_Form">
+          <End Role="Form" Type="Self.Form" Multiplicity="1" />
+          <End Role="FormFieldJSon" Type="Self.FormFieldJSon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FormFieldJSon">
+              <PropertyRef Name="FormId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1258,6 +1274,10 @@
           <AssociationSet Name="FK_Department_Company" Association="Self.FK_Department_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormFieldJSon_Form" Association="Self.FK_FormFieldJSon_Form">
+            <End Role="Form" EntitySet="Form" />
+            <End Role="FormFieldJSon" EntitySet="FormFieldJSon" />
           </AssociationSet>
           <AssociationSet Name="FK_FormFieldValidationRule_FormFieldJSon" Association="Self.FK_FormFieldValidationRule_FormFieldJSon">
             <End Role="FormFieldJSon" EntitySet="FormFieldJSon" />
@@ -1715,6 +1735,7 @@
           <Property Name="Name" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ContractTemplates" Relationship="Self.FK_ContractTemplate_Form" FromRole="Form" ToRole="ContractTemplate" />
+          <NavigationProperty Name="FormFieldJSons" Relationship="TotalHRModel.FK_FormFieldJSon_Form" FromRole="Form" ToRole="FormFieldJSon" />
         </EntityType>
         <EntityType Name="FormControl">
           <Key>
@@ -2704,15 +2725,19 @@
             <Parameter Name="sortorder" Mode="In" Type="String" />
             <Parameter Name="viewinglanguageid" Mode="In" Type="Int32" />
           </FunctionImport>
-          <EntitySet Name="FormFieldJSons" EntityType="TotalHRModel.FormFieldJSon" />
           <EntitySet Name="FormFieldValidationRules" EntityType="TotalHRModel.FormFieldValidationRule" />
+          <AssociationSet Name="FK_FormFieldValidationRule_User" Association="TotalHRModel.FK_FormFieldValidationRule_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="FormFieldValidationRule" EntitySet="FormFieldValidationRules" />
+          </AssociationSet>
+          <EntitySet Name="FormFieldJSons" EntityType="TotalHRModel.FormFieldJSon" />
           <AssociationSet Name="FK_FormFieldValidationRule_FormFieldJSon" Association="TotalHRModel.FK_FormFieldValidationRule_FormFieldJSon">
             <End Role="FormFieldJSon" EntitySet="FormFieldJSons" />
             <End Role="FormFieldValidationRule" EntitySet="FormFieldValidationRules" />
           </AssociationSet>
-          <AssociationSet Name="FK_FormFieldValidationRule_User" Association="TotalHRModel.FK_FormFieldValidationRule_User">
-            <End Role="User" EntitySet="Users" />
-            <End Role="FormFieldValidationRule" EntitySet="FormFieldValidationRules" />
+          <AssociationSet Name="FK_FormFieldJSon_Form" Association="TotalHRModel.FK_FormFieldJSon_Form">
+            <End Role="Form" EntitySet="Forms" />
+            <End Role="FormFieldJSon" EntitySet="FormFieldJSons" />
           </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetCompanyFoldersByUser_Result">
@@ -2888,6 +2913,33 @@
           <Property Type="String" Name="chosenculture" Nullable="true" MaxLength="10" />
           <Property Type="Int32" Name="departmentid" Nullable="false" />
         </ComplexType>
+        <EntityType Name="FormFieldValidationRule">
+          <Key>
+            <PropertyRef Name="FormFieldId" />
+            <PropertyRef Name="ValidationRuleId" />
+          </Key>
+          <Property Name="FormFieldId" Type="Int32" Nullable="false" />
+          <Property Name="ValidationRuleId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_FormFieldValidationRule_User" FromRole="FormFieldValidationRule" ToRole="User" />
+          <Property Name="ErrorMessage" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="SetValue" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="FormFieldJSon" Relationship="TotalHRModel.FK_FormFieldValidationRule_FormFieldJSon" FromRole="FormFieldValidationRule" ToRole="FormFieldJSon" />
+          <Property Name="FormId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_FormFieldValidationRule_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.FormFieldValidationRule" Role="FormFieldValidationRule" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="FormFieldValidationRule">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="FormFieldJSon">
           <Key>
             <PropertyRef Name="id" />
@@ -2898,25 +2950,15 @@
           <Property Name="PlaceHolderText" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ToolTip" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="InitialValue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="TypeName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="Int32" />
           <Property Name="obsolete" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="FormFieldValidationRules" Relationship="TotalHRModel.FK_FormFieldValidationRule_FormFieldJSon" FromRole="FormFieldJSon" ToRole="FormFieldValidationRule" />
-        </EntityType>
-        <EntityType Name="FormFieldValidationRule">
-          <Key>
-            <PropertyRef Name="FormFieldId" />
-            <PropertyRef Name="ValidationRuleId" />
-          </Key>
-          <Property Name="FormFieldId" Type="Int32" Nullable="false" />
-          <Property Name="ValidationRuleId" Type="Int32" Nullable="false" />
-          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="FormFieldJSon" Relationship="TotalHRModel.FK_FormFieldValidationRule_FormFieldJSon" FromRole="FormFieldValidationRule" ToRole="FormFieldJSon" />
-          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_FormFieldValidationRule_User" FromRole="FormFieldValidationRule" ToRole="User" />
+          <Property Name="FormId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Form" Relationship="TotalHRModel.FK_FormFieldJSon_Form" FromRole="FormFieldJSon" ToRole="Form" />
         </EntityType>
         <Association Name="FK_FormFieldValidationRule_FormFieldJSon">
           <End Type="TotalHRModel.FormFieldJSon" Role="FormFieldJSon" Multiplicity="1" />
@@ -2930,15 +2972,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_FormFieldValidationRule_User">
-          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
-          <End Type="TotalHRModel.FormFieldValidationRule" Role="FormFieldValidationRule" Multiplicity="*" />
+        <Association Name="FK_FormFieldJSon_Form">
+          <End Type="TotalHRModel.Form" Role="Form" Multiplicity="1" />
+          <End Type="TotalHRModel.FormFieldJSon" Role="FormFieldJSon" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="User">
-              <PropertyRef Name="id" />
+            <Principal Role="Form">
+              <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="FormFieldValidationRule">
-              <PropertyRef Name="CreatedBy" />
+            <Dependent Role="FormFieldJSon">
+              <PropertyRef Name="FormId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3758,31 +3800,35 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="FormFieldValidationRules">
+            <EntityTypeMapping TypeName="TotalHRModel.FormFieldValidationRule">
+              <MappingFragment StoreEntitySet="FormFieldValidationRule">
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="SetValue" ColumnName="SetValue" />
+                <ScalarProperty Name="ErrorMessage" ColumnName="ErrorMessage" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ValidationRuleId" ColumnName="ValidationRuleId" />
+                <ScalarProperty Name="FormFieldId" ColumnName="FormFieldId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="FormFieldJSons">
             <EntityTypeMapping TypeName="TotalHRModel.FormFieldJSon">
               <MappingFragment StoreEntitySet="FormFieldJSon">
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
                 <ScalarProperty Name="obsolete" ColumnName="obsolete" />
                 <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
                 <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="TypeName" ColumnName="TypeName" />
                 <ScalarProperty Name="InitialValue" ColumnName="InitialValue" />
                 <ScalarProperty Name="ToolTip" ColumnName="ToolTip" />
                 <ScalarProperty Name="PlaceHolderText" ColumnName="PlaceHolderText" />
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="FormFieldValidationRules">
-            <EntityTypeMapping TypeName="TotalHRModel.FormFieldValidationRule">
-              <MappingFragment StoreEntitySet="FormFieldValidationRule">
-                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
-                <ScalarProperty Name="Created" ColumnName="Created" />
-                <ScalarProperty Name="ValidationRuleId" ColumnName="ValidationRuleId" />
-                <ScalarProperty Name="FormFieldId" ColumnName="FormFieldId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
