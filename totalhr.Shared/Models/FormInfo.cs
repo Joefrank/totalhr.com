@@ -13,5 +13,7 @@ namespace totalhr.Shared.Models
         public int FormTypeId { get; set; }
 
         public string Schema { get; set; }
+
+        public int UserId { get; set; }
     }
 }

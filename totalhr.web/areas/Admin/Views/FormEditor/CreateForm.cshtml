@@ -1,4 +1,4 @@
-﻿@using totalhr.Resources
+﻿@using totalhr.Resources;
 
 @model totalhr.Shared.Models.FormInfo
 
@@ -105,6 +105,9 @@
                 @FormGenerator.V_Form_Intro
             </p>
 
+            <p>
+                Form Name: <input type="text" id="Name" name="Name" />
+            </p>
             <div class="alert alert-danger" ng-if="errorMessage != ''" role="alert">
                 <strong>Error could not save form!</strong>
                 <br />

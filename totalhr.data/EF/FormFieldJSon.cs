@@ -26,14 +26,16 @@ namespace totalhr.data.EF
         public string PlaceHolderText { get; set; }
         public string ToolTip { get; set; }
         public string InitialValue { get; set; }
-        public int TypeId { get; set; }
+        public string TypeName { get; set; }
         public System.DateTime Created { get; set; }
         public int CreatedBy { get; set; }
         public Nullable<System.DateTime> LastUpdated { get; set; }
         public Nullable<int> LastUpdatedBy { get; set; }
         public bool obsolete { get; set; }
+        public int FormId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FormFieldValidationRule> FormFieldValidationRules { get; set; }
+        public virtual Form Form { get; set; }
     }
 }
