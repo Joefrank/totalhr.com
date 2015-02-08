@@ -1,0 +1,132 @@
+﻿ @using totalhr.Resources;
+
+<ul class="sidebar-menu">
+
+    <li>
+        <a class="" href="/Admin">
+            <span class="icon-box"><i class="icon-dashboard"></i></span> @AdminGeneric.V_Dashboard
+        </a>
+    </li>
+     
+    <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"> <i class="icon-book"></i></span> @AdminGeneric.V_Employee
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">            
+            <li><a href="/Admin/User/SearchForUser">@AdminGeneric.V_Employee_Search</a></li>
+            <li><a href="/Admin/User/">@AdminGeneric.V_Manage_Employees</a></li>
+            <li><a href="/Admin/User/Create">@AdminGeneric.V_Employee_Add</a></li>
+        </ul>
+    </li>
+    <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class="icon-cogs"></i></span> @AdminGeneric.V_Profiles
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="/Admin/Profile/">@AdminGeneric.V_Profile_Management</a></li>
+            <li><a class="" href="return alert('implement')">@AdminGeneric.V_Users_By_Profile</a></li>
+            <li><a class="" href="return alert('implement me');">@AdminGeneric.V_Create_Profile</a></li>
+        </ul>
+    </li>
+    <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class="icon-cogs"></i></span> Roles
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="calendar.html">List All Roles</a></li>
+            <li><a class="" href="grids.html">View Roles By User</a></li>
+            <li><a class="" href="charts.html">Create New Role</a></li>
+        </ul>
+    </li>
+    <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class="icon-tasks"></i></span> Departments
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="/Admin/Department/">List All</a></li>
+            <li><a class="" href="/Admin/Department/">Create New</a></li>
+        </ul>
+    </li>
+    <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class="icon-th"></i></span> Documents
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="basic_table.html">View In Folders</a></li>
+            <li><a class="" href="managed_table.html">View as Table</a></li>
+            <li><a class="" href="editable_table.html">Search For Document</a></li>
+            <li><a class="" href="editable_table.html">Search For Folder</a></li>
+        </ul>
+    </li>
+    <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class=" icon-qrcode"></i></span> Contracts
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="general_portlet.html">General Portlets</a></li>
+            <li><a class="" href="draggable_portlet.html">Draggable Portlets</a></li>
+        </ul>
+    </li>
+
+     <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class=" icon-qrcode"></i></span> Calendar
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="general_portlet.html">General Portlets</a></li>
+            <li><a class="" href="draggable_portlet.html">Draggable Portlets</a></li>
+        </ul>
+    </li>
+
+     <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class=" icon-qrcode"></i></span> Communications
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="general_portlet.html">General Portlets</a></li>
+            <li><a class="" href="draggable_portlet.html">Draggable Portlets</a></li>
+        </ul>
+    </li>
+
+    <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class="icon-fire"></i></span> Absences
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="font_awesome.html">Font Awesome</a></li>
+            <li><a class="" href="glyphicons.html">Glyphicons</a></li>
+        </ul>
+    </li>
+    <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class="icon-map-marker"></i></span> Forms
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="maps_google.html"> Google Maps</a></li>
+            <li><a class="" href="maps_vector.html"> Vector Maps</a></li>
+        </ul>
+    </li>    
+   
+    <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class="icon-map-marker"></i></span> Time Recording
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="maps_google.html"> Google Maps</a></li>
+            <li><a class="" href="maps_vector.html"> Vector Maps</a></li>
+        </ul>
+    </li> 
+
+    <li><a class="" href="/Admin/Account/Loggout"><span class="icon-box"><i class="icon-user"></i></span> Loggout</a></li>
+</ul>

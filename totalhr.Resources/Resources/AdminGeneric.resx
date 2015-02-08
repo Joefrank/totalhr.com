@@ -336,4 +336,37 @@
   <data name="V_Select_User" xml:space="preserve">
     <value>Select user</value>
   </data>
+  <data name="V_Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="V_Employee" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="V_Employee_Add" xml:space="preserve">
+    <value>Add Employee</value>
+  </data>
+  <data name="V_Employee_Search" xml:space="preserve">
+    <value>Employee Search</value>
+  </data>
+  <data name="V_Manage_Employees" xml:space="preserve">
+    <value>Manage Employees</value>
+  </data>
+  <data name="V_Admin_Dashboard" xml:space="preserve">
+    <value>Admin Dashboard</value>
+  </data>
+  <data name="V_Employee_List" xml:space="preserve">
+    <value>Employee List</value>
+  </data>
+  <data name="V_Create_Profile" xml:space="preserve">
+    <value>Create Profile</value>
+  </data>
+  <data name="V_Employee_Management" xml:space="preserve">
+    <value>Employee Management</value>
+  </data>
+  <data name="V_Profiles" xml:space="preserve">
+    <value>Profiles</value>
+  </data>
+  <data name="V_Users_By_Profile" xml:space="preserve">
+    <value>Users in Profile</value>
+  </data>
 </root>

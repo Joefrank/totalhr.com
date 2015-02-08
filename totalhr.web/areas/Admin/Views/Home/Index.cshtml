@@ -1,13 +1,24 @@
 ﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
 
 @{
-    ViewBag.Title = AdminGeneric.V_Admin_Home_Title;    
+    ViewBag.Title = AdminGeneric.V_Admin_Home_Title;
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "", Text = AdminGeneric.V_Dashboard, Title= AdminGeneric.V_Dashboard}
+    };  
 }
-        @section pagetitle{
-            @AdminGeneric.V_Admin_Home_Title
-        } 
+
+@section pagetitle{
+    @AdminGeneric.V_Admin_Dashboard
+} 
 
 
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+    
 <div class="square-state">
     <div class="row-fluid">
         <a class="icon-btn span2" href="#">
@@ -29,7 +40,11 @@
         <a class="icon-btn span2" href="#">
             <i class="icon-calendar"></i>
             <div>Calendar</div>
-        </a>                
+        </a>  
+         <a class="icon-btn span2" href="#">
+            <i class="icon-calendar"></i>
+            <div>Time Recording</div>
+        </a>              
     </div>
 
     <div class="row-fluid">
@@ -53,15 +68,14 @@
             <i class="icon-tasks"></i>
             <div>Task</div>
             <span class="badge badge-important">3</span>
-        </a>
-    </div>
-
-    <div class="row-fluid">
+        </a> 
         <a class="icon-btn span2" href="#">
             <i class="icon-bar-chart"></i>
             <div>Forms</div>
         </a>
     </div>
+
+   
 </div>
 
 <div class="row-fluid">

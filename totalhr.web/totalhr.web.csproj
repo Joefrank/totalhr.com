@@ -154,6 +154,7 @@
     <Compile Include="Areas\Admin\Controllers\ContractController.cs" />
     <Compile Include="Areas\Admin\Controllers\FormEditorController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Models\BreadCrumbItem.cs" />
     <Compile Include="Areas\Admin\Models\UserContractDetails.cs" />
     <Compile Include="Areas\Admin\Models\UserContractFormDetails.cs" />
     <Compile Include="Areas\TimeRecording\Controllers\TimeRecordingController.cs" />

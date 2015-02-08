@@ -21,64 +21,79 @@
 }
 
 @if(userCount > 0){
-    <table border="1" class="SortedTab">
-        <tr>
-            @Html.Raw(GenericHelper.MakeSortableTH("UserId", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_UserId))
-            <th>@Account.V_Title</th>
-            @Html.Raw(GenericHelper.MakeSortableTH("FirstName", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_Firstname))
-            @Html.Raw(GenericHelper.MakeSortableTH("SurName", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_Surname))
-            <th>@Account.V_Other_Names</th>
-            @Html.Raw(GenericHelper.MakeSortableTH("Gender", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_Gender))
-            @Html.Raw(GenericHelper.MakeSortableTH("Username", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_UserName))
-            @Html.Raw(GenericHelper.MakeSortableTH("Email", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_Email))
-            @Html.Raw(GenericHelper.MakeSortableTH("Department", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_Department))
-            <th>@Account.V_Phone</th>
-            <th>@Account.V_Mobile</th>            
-            <th>&nbsp;</th>
-        </tr>
-        @foreach (var user in foundUsers)
-        {
-        <tr>
-            <td>
-                @user.id
-            </td>
-            <td>
-                @user.TitleTerm
-            </td>
-            <td>
-                @user.firstname               
-            </td>
-            <td>
-                @user.surname
-            </td>
-            <td>
-                @user.othernames
-            </td>
-            <td>
-                @user.GenderTerm
-            </td>
-            <td>
-                @user.username
-            </td>
-            <td>
-                @user.email
-            </td>
-            <td>
-                @user.DepartmentName
-            </td>
-            <td>
-                @user.Phone
-            </td>
-                <td>
-                @user.Mobile
-            </td>               
-            <td>
-                <input type="button" class="edit" value="@AdminGeneric.V_More_Details" onclick="NavigateTo('/Admin/User/UserDetails/Guid/@user.userguid');" />
-            </td>
-        </tr>  
+    
+  <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i>@AdminGeneric.V_Employee_List</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+                <a href="javascript:;" class="icon-remove"></a>
+            </span>
+        </div>
+        <div class="widget-body">            
+            <table class="table table-striped table-bordered" id="sample_1">
+                <thead>
+                    <tr>
+                        <th>&nbsp;</th>
+                        @Html.Raw(GenericHelper.MakeSortableTH("UserId", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_UserId))
+                        <th>@Account.V_Title</th>
+                        @Html.Raw(GenericHelper.MakeSortableTH("FirstName", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_Firstname))
+                        @Html.Raw(GenericHelper.MakeSortableTH("SurName", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_Surname))
+                       
+                        @Html.Raw(GenericHelper.MakeSortableTH("Gender", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_Gender))
+                        @Html.Raw(GenericHelper.MakeSortableTH("Username", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_UserName))
+                        @Html.Raw(GenericHelper.MakeSortableTH("Email", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_Email))
+                        @Html.Raw(GenericHelper.MakeSortableTH("Department", "th", searchInfo.OrderColumn, searchInfo.OrderDirection,Account.V_Department))
+                        <th>@Account.V_Phone</th>                                
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in foundUsers)
+                    {
+                    <tr class="odd gradeX">
+                        <td><input id="ck_@user.id" type="checkbox" class="checkboxes" value="1" /></td>
+                        <td>
+                            @user.id
+                        </td>
+                        <td>
+                            @user.TitleTerm
+                        </td>
+                        <td>
+                            @user.firstname               
+                        </td>
+                        <td>
+                            @user.surname
+                        </td>
+                       
+                        <td>
+                            @user.GenderTerm
+                        </td>
+                        <td>
+                            @user.username
+                        </td>
+                        <td>
+                            @user.email
+                        </td>
+                        <td>
+                            @user.DepartmentName
+                        </td>
+                        <td>
+                            @user.Phone
+                        </td>
+                                        
+                        <td>
+                            <input type="button" class="edit" value="@AdminGeneric.V_More_Details" onclick="NavigateTo('/Admin/User/UserDetails/Guid/@user.userguid');" />
+                        </td>
+                    </tr> 
            
-        }
-    </table>
+                    }
+                </tbody>
+            </table>
+
+        </div>
+  </div>
+    
 }else{
     <p class="error">
         @Error.Error_No_User_Found
