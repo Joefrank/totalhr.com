@@ -192,4 +192,25 @@
   <data name="V_User_Created" xml:space="preserve">
     <value>User Created</value>
   </data>
+  <data name="V_Admin_Login" xml:space="preserve">
+    <value>Admin Login</value>
+  </data>
+  <data name="V_Forgot_Password" xml:space="preserve">
+    <value>Forgot Password?</value>
+  </data>
+  <data name="V_Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="V_PasswordReset_Intro" xml:space="preserve">
+    <value>Enter your e-mail address below to reset your password.</value>
+  </data>
+  <data name="V_Remember_Me" xml:space="preserve">
+    <value>Remember Me</value>
+  </data>
+  <data name="V_Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="V_User_Login" xml:space="preserve">
+    <value>User Login</value>
+  </data>
 </root>
