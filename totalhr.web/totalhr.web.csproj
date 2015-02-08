@@ -1240,6 +1240,7 @@
     <Content Include="Areas\Admin\Content\assets\bootstrap\css\.DS_Store" />
     <Content Include="Areas\Admin\Content\assets\bootstrap\img\.DS_Store" />
     <Content Include="Areas\Admin\Content\assets\bootstrap\js\.DS_Store" />
+    <Content Include="Areas\Admin\Views\Shared\_BlankLayout.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
