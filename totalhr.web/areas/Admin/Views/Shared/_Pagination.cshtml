@@ -11,9 +11,11 @@
     
     var pagination = PaginationHelper.BuildPagination(Model, urlBuilder);    
     
-    int higherBound = pagination.PageSize * pagination.CurrentPage;
-    int lowerBound = higherBound - pagination.PageSize + 1;
+    int higherBound = (pagination == null)? 0 : pagination.PageSize * pagination.CurrentPage;
+    int lowerBound = (pagination == null) ? 0 : higherBound - pagination.PageSize + 1;
 }
+
+@if(pagination != null && higherBound > 0){
 <div class="pagination">
 
     @if(pagination.TotalNoOfItems > 0){
@@ -37,3 +39,4 @@
     }
 
 </div>
+}

@@ -3,6 +3,7 @@
 @using totalhr.Shared.Models
 @using totalhr.data.EF;
 @using totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
 
 @{
     ViewBag.Title = AdminGeneric.V_Employee_Registration;
@@ -15,22 +16,37 @@
     
     var departmentList = GenericHelper.GetListFromNumerable(Model.DepartmentList);
     
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Admin/User/", Text = AdminGeneric.V_Employee_Management, Title= AdminGeneric.V_Employee_Management},
+        new BreadCrumbItem{Url = "", Text = AdminGeneric.V_Employee_Add, Title= AdminGeneric.V_Employee_Add}
+    };  
 }
 
 @{Html.RenderPartial("_FormScripts");}
 
+@section pagetitle{
+    @AdminGeneric.V_Employee_Registration
+} 
+
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
 
 
-<div class="container">
-    @section breadcrumb{
-        <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
-        <a href="/Admin/User/" title="@AdminGeneric.V_User_Management">@AdminGeneric.V_User_List</a> &gt;
-        <span class="last">@AdminGeneric.V_User_Create</span>
-    }
 
-<h1>@AdminGeneric.V_Employee_Registration</h1>
+<div class="row-fluid">
+    <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i>@AdminGeneric.V_Employee_Add</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+                <a href="javascript:;" class="icon-remove"></a>
+            </span>
+        </div>
+        <div class="widget-body"> 
 
-@using (Html.BeginForm("Create", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Create", "User", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
 
          @Html.ValidationSummary()
@@ -181,5 +197,6 @@
             </div>
         </div>
 }
-
+      </div>
+    </div>
 </div>

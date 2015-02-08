@@ -11,6 +11,9 @@ namespace totalhr.web.Helpers
     {
         public static Pagination BuildPagination(Pagination pagination, BuildPaginationUrl urlHandler)
         {
+            if (pagination == null || pagination.TotalNoOfItems == 0 || pagination.PageSize == 0)
+                return null;
+
             pagination.NumberOfPages = (int)(pagination.TotalNoOfItems / pagination.PageSize) + (pagination.TotalNoOfItems % pagination.PageSize > 0 ? 1 : 0);
 
             for (int x = 1; x <= pagination.NumberOfPages; x++)

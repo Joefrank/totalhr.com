@@ -258,17 +258,13 @@
                    <h3 class="page-title">
                        @RenderSection("pagetitle", required: false)
                   </h3>
-                   @RenderSection("breadcrumb", required: false)
-
-                   <ul class="breadcrumb">
-                       <li>
-                           <a href="#"><i class="icon-home"></i></a><span class="divider">&nbsp;</span>
-                       </li>
-                       <li>
-                           <a href="#">Sample Pages</a> <span class="divider">&nbsp;</span>
-                       </li>
-                       <li><a href="#">Blank Page</a><span class="divider-last">&nbsp;</span></li>
-                   </ul>
+                   
+                   <div class="row-fluid">
+                     <div class="span12">
+                        @RenderSection("breadcrumb", required: false)
+                     </div>
+                  </div>                   
+                   
                    <!-- END PAGE TITLE & BREADCRUMB-->
                </div>
             </div>
