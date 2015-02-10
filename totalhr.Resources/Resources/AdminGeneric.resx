@@ -423,4 +423,10 @@
   <data name="V_View_Forms" xml:space="preserve">
     <value>View All</value>
   </data>
+  <data name="V_Theme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="V_TotalHR_Signature" xml:space="preserve">
+    <value>TotalHR Admin</value>
+  </data>
 </root>

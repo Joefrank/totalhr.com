@@ -1255,6 +1255,10 @@
     <Content Include="Areas\Admin\Views\Communication\MyMessages.cshtml" />
     <Content Include="Areas\Admin\Views\Communication\OtherMessages.cshtml" />
     <Content Include="Areas\Admin\Views\Communication\Chat.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_PartialHeader.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_MyMessagePreview.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_MyNotificationPreview.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\_MyProfilePreview.cshtml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />
     <Content Include="Scripts\jquery-2.1.1.min.js" />
