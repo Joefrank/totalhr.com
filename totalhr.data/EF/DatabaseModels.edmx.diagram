@@ -87,6 +87,7 @@
         <EntityTypeShape EntityType="TotalHRModel.FormFieldJSon" Width="1.5" PointX="12.375" PointY="13" />
         <AssociationConnector Association="TotalHRModel.FK_FormFieldValidationRule_FormFieldJSon" />
         <AssociationConnector Association="TotalHRModel.FK_FormFieldJSon_Form" />
+        <AssociationConnector Association="TotalHRModel.FK_Department_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

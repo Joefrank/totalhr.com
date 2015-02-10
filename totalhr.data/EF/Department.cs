@@ -28,9 +28,11 @@ namespace totalhr.data.EF
         public Nullable<int> LastModifiedBy { get; set; }
         public Nullable<System.DateTime> LastModified { get; set; }
         public int CompanyId { get; set; }
+        public Nullable<int> LineManagerId { get; set; }
     
         public virtual Company Company { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }
+        public virtual User User { get; set; }
     }
 }

@@ -1,0 +1,13 @@
+﻿@model IEnumerable<totalhr.data.EF.Profile>
+
+@{
+    ViewBag.Title = "SelectProfile";
+    Layout = null;
+}
+
+<select id="selProfile" name="selProfile">
+@foreach (var profile in Model)
+{
+    <option value="@profile.id">@profile.Name</option>
+}
+</select>

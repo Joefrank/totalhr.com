@@ -1,32 +1,49 @@
 ﻿
 @using totalhr.Resources;
 @using totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
 
 @model IEnumerable<totalhr.data.EF.User>
 
 @{
     ViewBag.Title = AdminGeneric.V_Profile_Management + " - (" +AdminGeneric.V_Profile_Management_UserList + ")";
     bool bShowList = Model != null && Model.Count() > 0;
+
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Admin/Profile/", Text = AdminGeneric.V_Profile_Management, Title= AdminGeneric.V_Profile_Management},
+        new BreadCrumbItem{Url = "", Text = AdminGeneric.V_Profile_Management_UserList, Title= AdminGeneric.V_Profile_Management_UserList}
+    }; 
  }
 
+@section pagetitle{
+    @(AdminGeneric.V_Profile_Management + " - (" + AdminGeneric.V_Profile_Management_UserList + ")")
+} 
+
 @section breadcrumb{
-    <a href="/Admin/" title="Home">@AdminGeneric.V_Home</a> &gt;
-    <a href="/Admin/Profile/" title="@AdminGeneric.V_Profile_List">@AdminGeneric.V_Profile_List</a> &gt;
-    <span class="last">@ViewBag.ProfileName</span>
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
 }
 
-    <h1>@AdminGeneric.V_Profile_Management - (@AdminGeneric.V_Profile_Management_UserList)</h1>
 
-    <div class="wide">
+    
+    <div class="row-fluid">
         <p>
             @Html.Raw(string.Format(AdminGeneric.V_Users_In_Profile_X, ViewBag.ProfileName))
         </p>
     </div>
 
-    <div  class="wide">
+    <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i>@AdminGeneric.V_Profile_List</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+                <a href="javascript:;" class="icon-remove"></a>
+            </span>
+        </div>
+        <div class="widget-body">
 
        @if(bShowList){
-        <table border="1" class="tabsimple">
+        <table class="table table-striped table-bordered">
             <tr>
                 <th>@Account.V_UserId</th>
                 <th>@Account.V_User_FullName</th>
@@ -55,7 +72,7 @@
                 </td>
                 <td>
                     <input style="display:none" type="button" class="edit" value="@AdminGeneric.V_Manage_Profiles" onclick="javascript:NavigateTo('/Admin/Profile/ManageUserProfiles/@user.userguid');" />
-                    <a href="/Admin/Profile/ManageUserProfiles/?guid=@user.userguid" title="@AdminGeneric.V_Manage_Profiles" >@AdminGeneric.V_Manage_Profiles</a>
+                    <a href="/Admin/Profile/ManageUserProfiles/?@("profileid=" + ViewBag.ProfileId + "&guid=" + user.userguid)" title="@AdminGeneric.V_Manage_Profiles" >@AdminGeneric.V_Manage_Profiles</a>
                 </td>
             </tr>            
             }
@@ -67,10 +84,11 @@
        }
 
     </div>
+</div>
 
-    <div class="wide">
+    <div class="row-fluid">
         <p>
-            <input type="button" value="Back To List" onclick="javascript:NavigateTo('/Admin/Profile')" />
+            <input type="button" value="@AdminGeneric.V_Back_To_List" onclick="javascript:NavigateTo('/Admin/Profile')" />
            </p>
     </div>
    

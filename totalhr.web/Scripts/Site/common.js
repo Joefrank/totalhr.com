@@ -131,10 +131,19 @@ function OpenPopup(url, width, height) {
     $('#dvPopup').css("height", height);
     $('#dvPopup').css("width", width);
     $('#overlay-mask').css("display", "");
+    return false;
 }
 
 function NavigateTo(url) {
     document.location.href = url;
+}
+
+function NavigateOnInput(partialUrl, hdnMessage, hdnTitle) {
+    var input = prompt($('#' + hdnMessage).val(), $('#' + hdnTitle).val());
+
+    if (input != null) {
+        NavigateTo(input + input);
+    }
 }
 
 function MoveListBoxItem(leftListBoxID, rightListBoxID, isMoveAll, callback) {

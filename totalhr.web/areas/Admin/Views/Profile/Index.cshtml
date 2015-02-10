@@ -13,10 +13,14 @@
     }; 
  }
 
+
 @section pagetitle{
    @AdminGeneric.V_Profile_Management
 }
 
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
 
  <div class="row-fluid">
      <p>
