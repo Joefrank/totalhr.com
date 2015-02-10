@@ -264,6 +264,7 @@
           <Property Name="LastModifiedBy" Type="int" />
           <Property Name="LastModified" Type="datetime" />
           <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="LineManagerId" Type="int" />
         </EntityType>
         <EntityType Name="EmailTemplate">
           <Key>
@@ -811,6 +812,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Department_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Department" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="LineManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FormFieldJSon_Form">
           <End Role="Form" Type="Self.Form" Multiplicity="1" />
           <End Role="FormFieldJSon" Type="Self.FormFieldJSon" Multiplicity="*" />
@@ -1275,6 +1288,10 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="Department" EntitySet="Department" />
           </AssociationSet>
+          <AssociationSet Name="FK_Department_User" Association="Self.FK_Department_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
           <AssociationSet Name="FK_FormFieldJSon_Form" Association="Self.FK_FormFieldJSon_Form">
             <End Role="Form" EntitySet="Form" />
             <End Role="FormFieldJSon" EntitySet="FormFieldJSon" />
@@ -1661,6 +1678,8 @@
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="Self.FK_Department_Company" FromRole="Department" ToRole="Company" />
           <NavigationProperty Name="Users" Relationship="Self.FK_User_Department" FromRole="Department" ToRole="User" />
+          <Property Name="LineManagerId" Type="Int32" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_Department_User" FromRole="Department" ToRole="User" />
         </EntityType>
         <EntityType Name="EmailTemplate">
           <Key>
@@ -1943,6 +1962,7 @@
           <NavigationProperty Name="UserProfilePictures2" Relationship="Self.FK_UserProfilePicture_UserProfilePicture" FromRole="User" ToRole="UserProfilePicture" />
           <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
           <NavigationProperty Name="FormFieldValidationRules" Relationship="TotalHRModel.FK_FormFieldValidationRule_User" FromRole="User" ToRole="FormFieldValidationRule" />
+          <NavigationProperty Name="Departments" Relationship="TotalHRModel.FK_Department_User" FromRole="User" ToRole="Department" />
         </EntityType>
         <EntityType Name="UserContract">
           <Key>
@@ -2739,6 +2759,10 @@
             <End Role="Form" EntitySet="Forms" />
             <End Role="FormFieldJSon" EntitySet="FormFieldJSons" />
           </AssociationSet>
+          <AssociationSet Name="FK_Department_User" Association="TotalHRModel.FK_Department_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Department" EntitySet="Departments" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetCompanyFoldersByUser_Result">
           <Property Type="Int32" Name="documentId" Nullable="false" />
@@ -2981,6 +3005,18 @@
             </Principal>
             <Dependent Role="FormFieldJSon">
               <PropertyRef Name="FormId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.Department" Role="Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="LineManagerId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3249,6 +3285,7 @@
           <EntitySetMapping Name="Departments">
             <EntityTypeMapping TypeName="TotalHRModel.Department">
               <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="LineManagerId" ColumnName="LineManagerId" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Description" ColumnName="Description" />

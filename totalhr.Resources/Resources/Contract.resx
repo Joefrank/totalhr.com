@@ -228,4 +228,7 @@
   <data name="V_Publish_Info" xml:space="preserve">
     <value>If you publish this contract then the user will be able to view its details.</value>
   </data>
+  <data name="V_Contracts" xml:space="preserve">
+    <value>Contracts</value>
+  </data>
 </root>

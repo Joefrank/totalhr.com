@@ -43,5 +43,20 @@ namespace totalhr.services.Implementation
         {
             return _profileRepos.FindBy(x => x.id == id).FirstOrDefault();
         }
+
+        public ResultInfo CreateProfile(ProfileInfo info)
+        {
+            var profile = new Profile();
+            profile.Name = info.Name;
+            profile.Description = info.Description;
+            profile.Created = DateTime.Now;
+            profile.CreatedBy = info.CreatedBy;
+            profile.Identifier = info.Identifier;
+
+            _profileRepos.Add(profile);
+            _profileRepos.Save();
+
+            return new ResultInfo { Itemid = profile.id, ErrorMessage = "" };
+        }
     }
 }

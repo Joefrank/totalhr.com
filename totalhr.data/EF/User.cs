@@ -38,6 +38,7 @@ namespace totalhr.data.EF
             this.UserProfilePictures2 = new HashSet<UserProfilePicture>();
             this.UserRoles = new HashSet<UserRole>();
             this.FormFieldValidationRules = new HashSet<FormFieldValidationRule>();
+            this.Departments = new HashSet<Department>();
         }
     
         public int id { get; set; }
@@ -118,5 +119,7 @@ namespace totalhr.data.EF
         public virtual ICollection<UserRole> UserRoles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FormFieldValidationRule> FormFieldValidationRules { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Department> Departments { get; set; }
     }
 }

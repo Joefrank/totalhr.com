@@ -14,9 +14,9 @@
             <span class="arrow"></span>
         </a>
         <ul class="sub">            
-            <li><a href="/Admin/User/SearchForUser">@AdminGeneric.V_Employee_Search</a></li>
-            <li><a href="/Admin/User/">@AdminGeneric.V_Manage_Employees</a></li>
-            <li><a href="/Admin/User/Create">@AdminGeneric.V_Employee_Add</a></li>
+            <li><a href="/Admin/User/SearchForUser"> @AdminGeneric.V_Employee_Search</a></li>
+            <li><a href="/Admin/User/"> @AdminGeneric.V_Manage_Employees</a></li>
+            <li><a href="/Admin/User/Create"> @AdminGeneric.V_Employee_Add</a></li>
         </ul>
     </li>
     <li class="has-sub">
@@ -25,108 +25,109 @@
             <span class="arrow"></span>
         </a>
         <ul class="sub">
-            <li><a class="" href="/Admin/Profile/">@AdminGeneric.V_Profile_Management</a></li>
-            <li><a class="" href="return alert('implement')">@AdminGeneric.V_Users_By_Profile</a></li>
-            <li><a class="" href="return alert('implement me');">@AdminGeneric.V_Create_Profile</a></li>
+            <li><a class="" href="/Admin/Profile/"> @AdminGeneric.V_Profile_Management</a></li>
+            <li><a class="" href="#" onclick="OpenPopup('/Admin/Profile/SelectProfile', 400, 400);"> @AdminGeneric.V_Users_By_Profile</a></li>
+            <li><a class="" href="#" onclick="OpenPopup('/Admin/Profile/CreateProfile/', 500, 500);"> @AdminGeneric.V_Create_Profile</a></li>
         </ul>
     </li>
     <li class="has-sub">
         <a href="javascript:;" class="">
-            <span class="icon-box"><i class="icon-cogs"></i></span> Roles
+            <span class="icon-box"><i class="icon-cogs"></i></span> @AdminGeneric.V_Roles
             <span class="arrow"></span>
         </a>
         <ul class="sub">
-            <li><a class="" href="calendar.html">List All Roles</a></li>
-            <li><a class="" href="grids.html">View Roles By User</a></li>
-            <li><a class="" href="charts.html">Create New Role</a></li>
+            <li><a class="" href="/Admin/Role/"> @AdminGeneric.V_Role_Management</a></li>
+            <li><a class="" href="#" onclick="OpenPopup('/Admin/Role/SelectRole', 400, 400);"> @AdminGeneric.V_User_Roles</a></li>
         </ul>
     </li>
     <li class="has-sub">
         <a href="javascript:;" class="">
-            <span class="icon-box"><i class="icon-tasks"></i></span> Departments
+            <span class="icon-box"><i class="icon-tasks"></i></span> @AdminGeneric.V_Departments
             <span class="arrow"></span>
         </a>
         <ul class="sub">
-            <li><a class="" href="/Admin/Department/">List All</a></li>
-            <li><a class="" href="/Admin/Department/">Create New</a></li>
+            <li><a class="" href="/Admin/Department/"> @AdminGeneric.V_Department_Management</a></li>
+            <li><a class="" href="/Admin/Department/CreateDepartment/"> @AdminGeneric.V_Create_Department</a></li>
         </ul>
     </li>
     <li class="has-sub">
         <a href="javascript:;" class="">
-            <span class="icon-box"><i class="icon-th"></i></span> Documents
+            <span class="icon-box"><i class="icon-th"></i></span> @Document.V_Documents
             <span class="arrow"></span>
         </a>
         <ul class="sub">
-            <li><a class="" href="basic_table.html">View In Folders</a></li>
-            <li><a class="" href="managed_table.html">View as Table</a></li>
-            <li><a class="" href="editable_table.html">Search For Document</a></li>
-            <li><a class="" href="editable_table.html">Search For Folder</a></li>
+            <li><a class="" href="/Admin/Document/ViewWithFolders/"> @Document.V_View_In_Folder</a></li>
+            <li><a class="" href="/Admin/Document/ViewAsTable/"> @Document.V_View_As_Table</a></li>
+            <li><a class="" href="/Admin/Document/SearchForDocument/">@Document.V_Search_For_Document</a></li>
+            <li><a class="" href="/Admin/Document/SearchForFolder/"> @Document.V_Search_For_Folder</a></li>
         </ul>
     </li>
     <li class="has-sub">
         <a href="javascript:;" class="">
-            <span class="icon-box"><i class=" icon-qrcode"></i></span> Contracts
+            <span class="icon-box"><i class=" icon-qrcode"></i></span> @Contract.V_Contracts
             <span class="arrow"></span>
         </a>
         <ul class="sub">
-            <li><a class="" href="general_portlet.html">General Portlets</a></li>
-            <li><a class="" href="draggable_portlet.html">Draggable Portlets</a></li>
+            <li><a class="" href="/Admin/Contract/">@AdminGeneric.V_Manage_Contracts</a></li>
+            <li><a class="" href="/Admin/Contract/Template/"> @AdminGeneric.V_Manage_Templates</a></li>
         </ul>
     </li>
 
      <li class="has-sub">
         <a href="javascript:;" class="">
-            <span class="icon-box"><i class=" icon-qrcode"></i></span> Calendar
+            <span class="icon-box"><i class=" icon-qrcode"></i></span> @AdminGeneric.V_Calendar
             <span class="arrow"></span>
         </a>
         <ul class="sub">
-            <li><a class="" href="general_portlet.html">General Portlets</a></li>
-            <li><a class="" href="draggable_portlet.html">Draggable Portlets</a></li>
+            <li><a class="" href="/Admin/Calendar/"> @AdminGeneric.V_View_All_Calendars</a></li>
+            <li><a class="" href="/Admin/Calendar/"> @AdminGeneric.V_Create_Calendar</a></li>
         </ul>
     </li>
 
      <li class="has-sub">
         <a href="javascript:;" class="">
-            <span class="icon-box"><i class=" icon-qrcode"></i></span> Communications
+            <span class="icon-box"><i class=" icon-qrcode"></i></span> @AdminGeneric.V_Communications
             <span class="arrow"></span>
         </a>
         <ul class="sub">
-            <li><a class="" href="general_portlet.html">General Portlets</a></li>
-            <li><a class="" href="draggable_portlet.html">Draggable Portlets</a></li>
+            <li><a class="" href="/Admin/Communication/MyMessages/"> @AdminGeneric.V_My_Messages</a></li>
+            <li><a class="" href="/Admin/Communication/OtherMessages/"> @AdminGeneric.V_Other_Messages</a></li>
+            <li><a class="" href="/Admin/Communication/Chat/"> @AdminGeneric.V_Chat</a></li>
         </ul>
     </li>
 
     <li class="has-sub">
         <a href="javascript:;" class="">
-            <span class="icon-box"><i class="icon-fire"></i></span> Absences
+            <span class="icon-box"><i class="icon-fire"></i></span> @AdminGeneric.V_Absences
             <span class="arrow"></span>
         </a>
         <ul class="sub">
-            <li><a class="" href="font_awesome.html">Font Awesome</a></li>
-            <li><a class="" href="glyphicons.html">Glyphicons</a></li>
+            <li><a class="" href="/Admin/Absence/ByUser"> @AdminGeneric.V_User_Absences</a></li>
+            <li><a class="" href="/Admin/Absence/CreateAbsence/"> @AdminGeneric.V_Create_Absences</a></li>
+            <li><a class="" href="/Admin/Absence/Statistics/"> @AdminGeneric.V_Absence_Statistics</a></li>
         </ul>
     </li>
     <li class="has-sub">
         <a href="javascript:;" class="">
-            <span class="icon-box"><i class="icon-map-marker"></i></span> Forms
+            <span class="icon-box"><i class="icon-map-marker"></i></span> @AdminGeneric.V_Forms
             <span class="arrow"></span>
         </a>
         <ul class="sub">
-            <li><a class="" href="maps_google.html"> Google Maps</a></li>
-            <li><a class="" href="maps_vector.html"> Vector Maps</a></li>
+            <li><a class="" href="/Admin/FormEditor/"> @AdminGeneric.V_View_Forms</a></li>
+            <li><a class="" href="/Admin/FormEditor/CreateForm/"> @AdminGeneric.V_Create_Form</a></li>
         </ul>
     </li>    
    
     <li class="has-sub">
         <a href="javascript:;" class="">
-            <span class="icon-box"><i class="icon-map-marker"></i></span> Time Recording
+            <span class="icon-box"><i class="icon-map-marker"></i></span> @AdminGeneric.V_Time_Recording
             <span class="arrow"></span>
         </a>
         <ul class="sub">
-            <li><a class="" href="maps_google.html"> Google Maps</a></li>
-            <li><a class="" href="maps_vector.html"> Vector Maps</a></li>
+            <li><a class="" href="maps_google.html"> Option 1</a></li>
+            <li><a class="" href="maps_vector.html"> Option 2</a></li>
         </ul>
     </li> 
 
-    <li><a class="" href="/Admin/Account/Loggout"><span class="icon-box"><i class="icon-user"></i></span> Loggout</a></li>
+    <li><a class="" href="/Admin/Account/Loggout"><span class="icon-box"><i class="icon-user"></i></span> @AdminGeneric.V_Loggout</a></li>
 </ul>
