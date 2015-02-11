@@ -142,6 +142,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This nickname already exists.
+        /// </summary>
+        public static string Error_Nickname_Exists {
+            get {
+                return ResourceManager.GetString("Error_Nickname_Exists", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry but no user found!.
         /// </summary>
         public static string Error_No_User_Found {

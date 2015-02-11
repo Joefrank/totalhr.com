@@ -89,6 +89,7 @@
     <Compile Include="Models\CalendarEventCache.cs" />
     <Compile Include="Models\CalendarEventInfo.cs" />
     <Compile Include="Models\CalendarEventReminder.cs" />
+    <Compile Include="Models\ChatModel.cs" />
     <Compile Include="Models\ContractFillViewInfo.cs" />
     <Compile Include="Models\DocumentInfo.cs" />
     <Compile Include="Models\DocumentSearchInfo.cs" />

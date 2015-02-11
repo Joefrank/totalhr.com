@@ -259,6 +259,33 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The chat server started at {0}.
+        /// </summary>
+        public static string V_Chat_Server_Started_At {
+            get {
+                return ResourceManager.GetString("V_Chat_Server_Started_At", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User &apos;{0}&apos; logged off..
+        /// </summary>
+        public static string V_Chat_User_X_LoggedOff {
+            get {
+                return ResourceManager.GetString("V_Chat_User_X_LoggedOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User &apos;{0}&apos; logged on..
+        /// </summary>
+        public static string V_Chat_User_X_LoggedOn {
+            get {
+                return ResourceManager.GetString("V_Chat_User_X_LoggedOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hide.
         /// </summary>
         public static string V_Hide {

@@ -144,6 +144,9 @@
   <data name="Error_Missing_Department" xml:space="preserve">
     <value>You must select a department for the new user!</value>
   </data>
+  <data name="Error_Nickname_Exists" xml:space="preserve">
+    <value>This nickname already exists</value>
+  </data>
   <data name="Error_NoAccess_ToUserProfile" xml:space="preserve">
     <value>You do not have the right to edit this user profile.</value>
   </data>

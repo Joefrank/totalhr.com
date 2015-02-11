@@ -179,6 +179,7 @@
     <Compile Include="Controllers\Admin\AdminHomeController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\Dependencies\Container.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
@@ -1123,6 +1124,7 @@
     <Content Include="Scripts\Site\assets\uniform\images\sprite.png" />
     <Content Include="Scripts\Site\assets\uniform\jquery.uniform.js" />
     <Content Include="Scripts\Site\assets\uniform\jquery.uniform.min.js" />
+    <Content Include="Scripts\Site\Chat.js" />
     <Content Include="Scripts\Site\fr-FR\angular-form-gen.js" />
     <Content Include="Scripts\Site\js\demo.gmaps.js" />
     <Content Include="Scripts\Site\js\excanvas.js" />
@@ -1583,6 +1585,9 @@
     <Content Include="Scripts\Site\assets\uniform\.DS_Store" />
     <Content Include="Scripts\Site\assets\uniform\README.textile" />
     <Content Include="Scripts\Site\js\.DS_Store" />
+    <Content Include="Views\Chat\Index.cshtml" />
+    <Content Include="Views\Chat\ChatHistory.cshtml" />
+    <Content Include="Views\Chat\Lobby.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -1,0 +1,34 @@
+﻿@model totalhr.Shared.Models.ChatModel
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<div id="Lobby">
+    <p>
+        <b>@Model.Users.Count online users</b>
+    </p>
+
+    @foreach (var user in Model.Users)
+    {
+        @user.NickName<br />
+    }
+</div>
+<div id="ChatHistory">
+    @foreach (var msg in Model.ChatHistory)
+    {
+        <p>
+            <i>@msg.When</i><br />
+            @if (msg.ByUser != null)
+            {
+                <b>@(msg.ByUser.NickName + ":")</b> @msg.Message
+            }
+            else
+            {
+                <span style="color: Red">@msg.Message</span>
+            }
+        </p>
+    }
+</div>
+

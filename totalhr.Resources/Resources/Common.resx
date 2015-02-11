@@ -222,4 +222,13 @@
   <data name="V_None" xml:space="preserve">
     <value>None</value>
   </data>
+  <data name="V_Chat_Server_Started_At" xml:space="preserve">
+    <value>The chat server started at {0}</value>
+  </data>
+  <data name="V_Chat_User_X_LoggedOff" xml:space="preserve">
+    <value>User '{0}' logged off.</value>
+  </data>
+  <data name="V_Chat_User_X_LoggedOn" xml:space="preserve">
+    <value>User '{0}' logged on.</value>
+  </data>
 </root>
