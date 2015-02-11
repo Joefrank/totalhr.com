@@ -1,0 +1,78 @@
+﻿@model totalhr.web.ViewModels.TaskSchedulerDetailsVM
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>TaskSchedulerDetailsVM</legend>
+
+    @Html.HiddenFor(model => model.Id)
+
+
+    @Html.HiddenFor(model => model.UserId)
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Name)
+    </div>
+    <div class="editor-field">
+        @Html.DisplayFor(model => model.Name)
+        @Html.ValidationMessageFor(model => model.Name)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Description)
+    </div>
+    <div class="editor-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.ApprovalNeeded)
+    </div>
+    <div class="editor-field">
+        @Html.DisplayFor(model => model.ApprovalNeeded)
+    </div>
+
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.ScheduledDateTime)
+    </div>
+    <div class="editor-field">
+        @Html.DisplayFor(model => model.ScheduledDateTime)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.AssignedBy)
+    </div>
+    <div class="editor-field">
+        @Html.DisplayFor(x => x.AssignedBy)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.AssignedTo)
+    </div>
+    <div class="editor-field">
+        @Html.DisplayFor(x => x.AssignedTo)
+    </div>
+
+    <div class="editor-label">
+        @Html.LabelFor(model => model.Department)
+    </div>
+    <div class="editor-field">
+        @Html.DisplayFor(x => x.Department)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Record", new { id=Model.Id }) |
+    @Html.ActionLink("Back to List", "Search")
+</p>
+<div>
+    <br/>
+    <br/>
+    <br />
+    <br />
+</div>
+

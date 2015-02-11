@@ -23,8 +23,14 @@ namespace totalhr.web.Controllers
         }
         //
         // GET: /Task/
-        [HttpGet]
+        
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Search()
         {
             var vm = new TaskSchedulerSearchVm();
             vm.SetDefaults();
@@ -32,7 +38,7 @@ namespace totalhr.web.Controllers
             return View(vm);
         }
         [HttpPost]
-        public ActionResult Index(TaskSchedulerSearchVm vm)
+        public ActionResult Search(TaskSchedulerSearchVm vm)
         {
             this.SearchTasks(vm);
             return View(vm);
@@ -40,16 +46,23 @@ namespace totalhr.web.Controllers
 
         private void SearchTasks(TaskSchedulerSearchVm vm)
         {
-            vm.Users = this.GetUserVMList();
-            vm.Departments = this.GetDepartmentVMList();
             var results = _taskSchedulerService.ListBySearch(vm.Id, vm.Name, vm.AssignedTo, vm.AssignedBy, vm.Skip, vm.PageSize);
-            vm.BuildResults(results);
+            vm.BuildResults(results,this.GetUserVMList(),this.GetDepartmentVMList());
         }
 
         [HttpGet]
-        public ActionResult Add()
+        public ActionResult Record(int id=0)
         {
             var vm = new TaskSchedulerDetailsVM();
+
+            if (id > 0)
+            {
+                var task = _taskSchedulerService.GetById(id);
+                if (task != null)
+                {
+                    vm = new TaskSchedulerDetailsVM(task);
+                }
+            }
             BuildTaskSchedulerVM(vm);
             return View(vm);
 
@@ -57,14 +70,15 @@ namespace totalhr.web.Controllers
 
 
         [HttpPost]
-        public ActionResult Add(TaskSchedulerDetailsVM vm)
+        public ActionResult Record(TaskSchedulerDetailsVM vm)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    var success = _taskSchedulerService.AddTask(vm.Name, vm.Description, vm.DepartmentId, vm.ApprovalNeeded, vm.AssignedBy, vm.AssignedTo, vm.ScheduledDateTime,
+                    var success = _taskSchedulerService.RecordTask(vm.Id,vm.Name, vm.Description, vm.DepartmentId, vm.ApprovalNeeded, vm.AssignedBy, vm.AssignedTo, vm.ScheduledDateTime,
                       new Audit(CurrentUser.UserId, DateTime.Now));
+                    if (success) return RedirectToAction("index");
                 }
 
             }
@@ -77,6 +91,13 @@ namespace totalhr.web.Controllers
             return View(vm);
         }
 
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            var task = _taskSchedulerService.GetById(id);
+            var vm = new TaskSchedulerDetailsVM(task);
+            return View(vm);
+        }
 
         private void BuildTaskSchedulerVM(TaskSchedulerDetailsVM vm)
         {

@@ -33,23 +33,32 @@ namespace totalhr.services.Implementation
             return tasks.Any()? tasks.OrderBy(x => x.Id).Skip(skip).Take(take).ToList(): new List<TRS.TaskScheduler>();
         }
 
-        public bool AddTask(string name, string description, int departmentId, bool needsApproval, int assignedBy, int assignedTo, DateTime? completeBy, Audit audit)
+        public bool RecordTask(int id, string name, string description, int departmentId, bool needsApproval, int assignedBy, int assignedTo, DateTime? completeBy, Audit audit)
         {
-            var task = new TRS.TaskScheduler()
+            var task = new TRS.TaskScheduler();
+            
+            if (id > 0)
             {
-                Name = name,
-                Description = description,
-                DepartmentId = departmentId,
-                ApprovalNeeded = needsApproval,
-                AssignedBy = assignedBy,
-                AssignedTo = assignedTo,
-                ScheduledDateTime = completeBy,
-                Audit = audit
-            };
+               var taskEntity = this.GetById(id);
+               if (taskEntity != null)
+               {
+                   task = taskEntity;
+                   taskEntity.Audit.UpdateAudit(audit.AddedBy, audit.AddedDate);
+                   audit = taskEntity.Audit;
+               }
+            }
+            task.Build(name, description, departmentId, needsApproval, assignedBy, assignedTo, completeBy, audit);
 
-            _taskSchedulerRepository.Add(task);
+            if(id==0) _taskSchedulerRepository.Add(task);
             _taskSchedulerRepository.Save();
             return task.Id > 0;
         }
+        
+        public  TRS.TaskScheduler GetById(int id)
+        {
+            var trs = _taskSchedulerRepository.FindBy(x => x.Id == id);
+            return trs.Any() ? trs.FirstOrDefault() : null;
+        }
+
     }
 }

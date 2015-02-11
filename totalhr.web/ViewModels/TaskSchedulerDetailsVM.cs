@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Entities= totalhr.data.EF;
+using TRS = totalhr.data.TimeRecordingSystem.EF;
 
 namespace totalhr.web.ViewModels
 {
@@ -31,10 +32,17 @@ namespace totalhr.web.ViewModels
 
         public TaskSchedulerDetailsVM() : base() { }
 
+        public TaskSchedulerDetailsVM(TRS.TaskScheduler task):base(task)
+        {
+            this.ApprovalNeeded = task.ApprovalNeeded;
+            this.Approved = task.Approved;
+            this.ScheduledDateTime = task.ScheduledDateTime;
+            this.ApprovedBy = task.ApprovedBy;
+        }
+
         public void SetupTaskScheduler(int userId, int departmentId, List<UserVM> users, List<DepartmentVM> departments )
         {
-            this.DepartmentId = departmentId;
-            this.ApprovalNeeded = false;
+            if(this.DepartmentId ==0) DepartmentId = departmentId;
             if(this.AssignedBy == 0) AssignedBy = userId;
             if(this.AssignedTo ==0) AssignedTo = userId;
             this.UserId = userId;
@@ -45,9 +53,9 @@ namespace totalhr.web.ViewModels
 
     }
 
-    public class UserVM:SelectListItem
+    public class UserVM
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public UserVM() { }
@@ -63,9 +71,9 @@ namespace totalhr.web.ViewModels
         }
     }
 
-    public class DepartmentVM: SelectListItem
+    public class DepartmentVM
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public DepartmentVM() { }
