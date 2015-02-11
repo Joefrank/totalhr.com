@@ -19,5 +19,7 @@ namespace totalhr.services.Infrastructure
         IEnumerable<User> ListUsers(int profileId, int currentUserId);
 
         Profile GetProfile(int id);
+
+        ResultInfo CreateProfile(ProfileInfo info);
     }
 }

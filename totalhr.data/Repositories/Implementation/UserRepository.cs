@@ -113,15 +113,35 @@ namespace totalhr.data.Repositories.Implementation
 
         public IEnumerable<GetUserListForAdmin_Result> SearchUser(UserSearchInfo info)
         {
-            return this.Context.SearchUser(info.Id, info.Name, info.UserTypeId, info.DepartmentId, info.Email,
-                info.PartialAddress, info.Town, info.County, info.PostCode, info.Phone, info.LanguageId);
+            return this.Context.SearchUser(info.UserId, info.Name, info.UserTypeId, info.DepartmentId, info.Email,
+                info.PartialAddress, info.Town, info.County, info.PostCode, info.Phone, info.LanguageId) as IEnumerable<GetUserListForAdmin_Result>;
         }
 
         public IEnumerable<SearchUserWithPaging_Result> SearchUserWithPaging(UserSearchInfo info)
         {
-            return this.Context.SearchUserWithPaging(info.Id, info.Name, info.UserTypeId, info.DepartmentId, info.Email,
+            return this.Context.SearchUserWithPaging(info.UserId, info.Name, info.UserTypeId, info.DepartmentId, info.Email,
                 info.PartialAddress, info.Town, info.County, info.PostCode, info.Phone, info.PageSize, 
                 info.PageNumber, info.OrderColumn, info.OrderDirection, info.LanguageId);
+        }
+
+        public bool SaveProfilePicture(UserProfilePicture profilePicture){
+            this.Context.UserProfilePictures.Add(profilePicture);
+            this.Context.SaveChanges();
+            return true;
+        }
+
+        public UserProfilePicture GetProfilePicture(int userid)
+        {
+            return this.Context.UserProfilePictures.FirstOrDefault(x => x.UserId == userid);
+        }
+
+        public string GetProfilePicturePath(int userid)
+        {
+            var result = from upp in Context.UserProfilePictures
+                         join ff in Context.Files on upp.FileId equals ff.id
+                         where upp.UserId == userid
+                         select new {Path = upp.FileId + ff.extension};
+            return (result.FirstOrDefault() != null)? result.FirstOrDefault().Path : "";
         }
     }
 }

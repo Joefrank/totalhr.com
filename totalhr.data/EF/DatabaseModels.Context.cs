@@ -32,12 +32,29 @@ namespace totalhr.data.EF
         public virtual DbSet<CalendarEvent> CalendarEvents { get; set; }
         public virtual DbSet<CalEventReminderType> CalEventReminderTypes { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
+        public virtual DbSet<CompanyDocument> CompanyDocuments { get; set; }
+        public virtual DbSet<CompanyDocumentDownload> CompanyDocumentDownloads { get; set; }
+        public virtual DbSet<CompanyDocumentPermission> CompanyDocumentPermissions { get; set; }
+        public virtual DbSet<CompanyDocumentShare> CompanyDocumentShares { get; set; }
+        public virtual DbSet<CompanyDocumentView> CompanyDocumentViews { get; set; }
         public virtual DbSet<CompanyFeature> CompanyFeatures { get; set; }
+        public virtual DbSet<CompanyFolder> CompanyFolders { get; set; }
+        public virtual DbSet<CompanyFolderDocument> CompanyFolderDocuments { get; set; }
+        public virtual DbSet<ContractFormFieldValue> ContractFormFieldValues { get; set; }
+        public virtual DbSet<ContractTemplate> ContractTemplates { get; set; }
+        public virtual DbSet<ContractTemplateSection> ContractTemplateSections { get; set; }
+        public virtual DbSet<CTemplateSectionLink> CTemplateSectionLinks { get; set; }
+        public virtual DbSet<CTSectionFieldLink> CTSectionFieldLinks { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
         public virtual DbSet<EventToSchedule> EventToSchedules { get; set; }
         public virtual DbSet<Feature> Features { get; set; }
+        public virtual DbSet<File> Files { get; set; }
+        public virtual DbSet<Form> Forms { get; set; }
+        public virtual DbSet<FormControl> FormControls { get; set; }
+        public virtual DbSet<FormField> FormFields { get; set; }
         public virtual DbSet<Glossary> Glossaries { get; set; }
+        public virtual DbSet<Label> Labels { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
         public virtual DbSet<Recipient> Recipients { get; set; }
@@ -45,25 +62,13 @@ namespace totalhr.data.EF
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<ScheduledNotification> ScheduledNotifications { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<UserProfile> UserProfiles { get; set; }
-        public virtual DbSet<UserRole> UserRoles { get; set; }
-        public virtual DbSet<CompanyDocument> CompanyDocuments { get; set; }
-        public virtual DbSet<CompanyDocumentDownload> CompanyDocumentDownloads { get; set; }
-        public virtual DbSet<CompanyDocumentPermission> CompanyDocumentPermissions { get; set; }
-        public virtual DbSet<CompanyDocumentShare> CompanyDocumentShares { get; set; }
-        public virtual DbSet<CompanyDocumentView> CompanyDocumentViews { get; set; }
-        public virtual DbSet<CompanyFolder> CompanyFolders { get; set; }
-        public virtual DbSet<CompanyFolderDocument> CompanyFolderDocuments { get; set; }
-        public virtual DbSet<File> Files { get; set; }
-        public virtual DbSet<ContractFormFieldValue> ContractFormFieldValues { get; set; }
-        public virtual DbSet<ContractTemplate> ContractTemplates { get; set; }
-        public virtual DbSet<ContractTemplateSection> ContractTemplateSections { get; set; }
-        public virtual DbSet<CTemplateSectionLink> CTemplateSectionLinks { get; set; }
-        public virtual DbSet<CTSectionFieldLink> CTSectionFieldLinks { get; set; }
-        public virtual DbSet<FormControl> FormControls { get; set; }
-        public virtual DbSet<FormField> FormFields { get; set; }
-        public virtual DbSet<Label> Labels { get; set; }
         public virtual DbSet<UserContract> UserContracts { get; set; }
+        public virtual DbSet<UserContractData> UserContractDatas { get; set; }
+        public virtual DbSet<UserProfile> UserProfiles { get; set; }
+        public virtual DbSet<UserProfilePicture> UserProfilePictures { get; set; }
+        public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<FormFieldValidationRule> FormFieldValidationRules { get; set; }
+        public virtual DbSet<FormFieldJSon> FormFieldJSons { get; set; }
     
         [DbFunction("TotalHREntities", "SplitCSV")]
         public virtual IQueryable<SplitCSV_Result> SplitCSV(string @string, string delimiter)
@@ -102,6 +107,45 @@ namespace totalhr.data.EF
                 new ObjectParameter("CreatedBy", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("BuildCalEventReminderRecipientList", eventidParameter, companyidParameter, recipientListNameParameter, descriptionParameter, createdByParameter);
+        }
+    
+        public virtual ObjectResult<GetCompanyFoldersByUser_Result> GetCompanyFoldersByUser(Nullable<int> userid, Nullable<int> departmentid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(int));
+    
+            var departmentidParameter = departmentid.HasValue ?
+                new ObjectParameter("departmentid", departmentid) :
+                new ObjectParameter("departmentid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCompanyFoldersByUser_Result>("GetCompanyFoldersByUser", useridParameter, departmentidParameter);
+        }
+    
+        public virtual ObjectResult<GetUserContractDetails_Result> GetUserContractDetails(Nullable<int> userid, Nullable<int> contractid)
+        {
+            var useridParameter = userid.HasValue ?
+                new ObjectParameter("userid", userid) :
+                new ObjectParameter("userid", typeof(int));
+    
+            var contractidParameter = contractid.HasValue ?
+                new ObjectParameter("contractid", contractid) :
+                new ObjectParameter("contractid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserContractDetails_Result>("GetUserContractDetails", useridParameter, contractidParameter);
+        }
+    
+        public virtual ObjectResult<GetUserListForAdmin_Result> GetUserListForAdmin(Nullable<bool> showactive, Nullable<int> viewinglanguageid)
+        {
+            var showactiveParameter = showactive.HasValue ?
+                new ObjectParameter("showactive", showactive) :
+                new ObjectParameter("showactive", typeof(bool));
+    
+            var viewinglanguageidParameter = viewinglanguageid.HasValue ?
+                new ObjectParameter("viewinglanguageid", viewinglanguageid) :
+                new ObjectParameter("viewinglanguageid", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserListForAdmin_Result>("GetUserListForAdmin", showactiveParameter, viewinglanguageidParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> GetUserProfileIds(Nullable<int> userid)
@@ -157,33 +201,7 @@ namespace totalhr.data.EF
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("PrepareCalendarEventScheduledReminder", senderNameParameter, senderEmailParameter, recipientListIdParameter);
         }
     
-        public virtual ObjectResult<GetCompanyFoldersByUser_Result> GetCompanyFoldersByUser(Nullable<int> userid, Nullable<int> departmentid)
-        {
-            var useridParameter = userid.HasValue ?
-                new ObjectParameter("userid", userid) :
-                new ObjectParameter("userid", typeof(int));
-    
-            var departmentidParameter = departmentid.HasValue ?
-                new ObjectParameter("departmentid", departmentid) :
-                new ObjectParameter("departmentid", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetCompanyFoldersByUser_Result>("GetCompanyFoldersByUser", useridParameter, departmentidParameter);
-        }
-    
-        public virtual ObjectResult<GetUserListForAdmin_Result> GetUserListForAdmin(Nullable<bool> showactive, Nullable<int> viewinglanguageid)
-        {
-            var showactiveParameter = showactive.HasValue ?
-                new ObjectParameter("showactive", showactive) :
-                new ObjectParameter("showactive", typeof(bool));
-    
-            var viewinglanguageidParameter = viewinglanguageid.HasValue ?
-                new ObjectParameter("viewinglanguageid", viewinglanguageid) :
-                new ObjectParameter("viewinglanguageid", typeof(int));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserListForAdmin_Result>("GetUserListForAdmin", showactiveParameter, viewinglanguageidParameter);
-        }
-    
-        public virtual ObjectResult<GetUserListForAdmin_Result> SearchUser(Nullable<int> id, string name, Nullable<int> usertypeid, Nullable<int> departmentid, string email, string partialaddress, string town, string county, string postcode, string phone, Nullable<int> viewinglanguageid)
+        public virtual ObjectResult<SearchUser_Result> SearchUser(Nullable<int> id, string name, Nullable<int> usertypeid, Nullable<int> departmentid, string email, string partialaddress, string town, string county, string postcode, string phone, Nullable<int> viewinglanguageid)
         {
             var idParameter = id.HasValue ?
                 new ObjectParameter("id", id) :
@@ -229,7 +247,7 @@ namespace totalhr.data.EF
                 new ObjectParameter("viewinglanguageid", viewinglanguageid) :
                 new ObjectParameter("viewinglanguageid", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserListForAdmin_Result>("SearchUser", idParameter, nameParameter, usertypeidParameter, departmentidParameter, emailParameter, partialaddressParameter, townParameter, countyParameter, postcodeParameter, phoneParameter, viewinglanguageidParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchUser_Result>("SearchUser", idParameter, nameParameter, usertypeidParameter, departmentidParameter, emailParameter, partialaddressParameter, townParameter, countyParameter, postcodeParameter, phoneParameter, viewinglanguageidParameter);
         }
     
         public virtual ObjectResult<SearchUserWithPaging_Result> SearchUserWithPaging(Nullable<int> id, string name, Nullable<int> usertypeid, Nullable<int> departmentid, string email, string partialaddress, string town, string county, string postcode, string phone, Nullable<int> pageSize, Nullable<int> pageNumber, string ordercolumn, string sortorder, Nullable<int> viewinglanguageid)

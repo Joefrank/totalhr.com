@@ -215,13 +215,25 @@
     <Compile Include="EF\File.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\Form.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\FormControl.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\FormField.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\FormFieldJSon.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\FormFieldValidationRule.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\GetCompanyFoldersByUser_Result.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\GetUserContractDetails_Result.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\GetUserListForAdmin_Result.cs">
@@ -272,7 +284,13 @@
     <Compile Include="EF\UserContract.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\UserContractData.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\UserProfile.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\UserProfilePicture.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\UserRole.cs">
@@ -290,8 +308,11 @@
     <Compile Include="Repositories\Implementation\CalendarRepository.cs" />
     <Compile Include="Repositories\Implementation\CompanyDocumentRepository.cs" />
     <Compile Include="Repositories\Implementation\CompanyRepository.cs" />
+    <Compile Include="Repositories\Implementation\ContractRepository.cs" />
+    <Compile Include="Repositories\Implementation\ContractTemplateRepository.cs" />
     <Compile Include="Repositories\Implementation\EmailTemplateRepository.cs" />
     <Compile Include="Repositories\Implementation\FileRepository.cs" />
+    <Compile Include="Repositories\Implementation\FormRepository.cs" />
     <Compile Include="Repositories\Implementation\GlossaryRepository.cs" />
     <Compile Include="Repositories\Implementation\GenericRepository.cs" />
     <Compile Include="Repositories\Implementation\LanguageRepository.cs" />
@@ -302,8 +323,11 @@
     <Compile Include="Repositories\Infrastructure\ICalendarRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICompanyDocumentRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICompanyRepository.cs" />
+    <Compile Include="Repositories\Infrastructure\IContractRepository.cs" />
+    <Compile Include="Repositories\Infrastructure\IContractTemplateRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IEmailRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IFileRepository.cs" />
+    <Compile Include="Repositories\Infrastructure\IFormRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IGlossaryRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IGenericRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ILanguageRepository.cs" />

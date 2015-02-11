@@ -5,12 +5,13 @@
 @using Authentication.Models;
 @{
     ViewBag.Title = Common.Page_TT_Header_Login;
+    Layout = "~/Areas/Admin/Views/Shared/_BlankLayout.cshtml";
 }
 
 @{Html.RenderPartial("_FormScripts");}
 
 
-<div id="main">
+@*<div id="main">
     <div class="content">
         <h1>@Common.Page_TT_Login</h1>
 
@@ -50,6 +51,61 @@
             <a href="/Account/Register" >@FormMessages.btn_Register</a>
         </p>
     </div>
-</div>
+</div>*@
 
 
+  <!-- BEGIN LOGIN -->
+  <div id="login">
+    <!-- BEGIN LOGIN FORM -->
+    <form id="loginform" class="form-vertical no-padding no-margin" action="/Admin/Account/LoginAdminUser/">
+      <div class="lock">
+          <i class="icon-lock"></i>
+      </div>
+      <div class="control-wrap">
+          <h4>@Account.V_Admin_Login</h4>
+          <div class="control-group">
+              <div class="controls">
+                  <div class="input-prepend">
+                      <span class="add-on"><i class="icon-user"></i></span><input id="input-username" name="UserName" type="text" placeholder="Username" />
+                  </div>
+              </div>
+          </div>
+          <div class="control-group">
+              <div class="controls">
+                  <div class="input-prepend">
+                      <span class="add-on"><i class="icon-key"></i></span><input id="input-password" name="Password" type="password" placeholder="Password" />
+                  </div>
+                  <div class="mtop10">
+                      <div class="block-hint pull-left small">
+                          <input type="checkbox" id=""> @Account.V_Remember_Me
+                      </div>
+                      <div class="block-hint pull-right">
+                          <a href="javascript:;" class="" id="forget-password">@Account.V_Forgot_Password</a>
+                      </div>
+                  </div>
+
+                  <div class="clearfix space5"></div>
+              </div>
+
+          </div>
+      </div>
+
+      <input type="submit" id="login-btn" class="btn btn-block login-btn" value="@FormMessages.btn_Login" />
+    </form>
+    <!-- END LOGIN FORM -->        
+    <!-- BEGIN FORGOT PASSWORD FORM -->
+    <form id="forgotform" class="form-vertical no-padding no-margin hide" action="/Admin/Account/ResetPassword/">
+      <p class="center">@Account.V_PasswordReset_Intro</p>
+      <div class="control-group">
+        <div class="controls">
+          <div class="input-prepend">
+            <span class="add-on"><i class="icon-envelope"></i></span><input id="input-email" type="text" placeholder="@Account.V_Email"  />
+          </div>
+        </div>
+        <div class="space20"></div>
+      </div>
+      <input type="button" id="forget-btn" class="btn btn-block login-btn" value="@Account.V_Submit" />
+    </form>
+    <!-- END FORGOT PASSWORD FORM -->
+  </div>
+  <!-- END LOGIN -->

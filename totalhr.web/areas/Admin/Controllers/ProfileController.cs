@@ -65,7 +65,31 @@ namespace totalhr.web.Areas.Admin.Controllers
         {
             Profile profile = _profileService.GetProfile(id);
             ViewBag.ProfileName = profile.Name;
+            ViewBag.ProfileId = id;
             return View(_profileService.ListUsers(id, CurrentUser.UserId));
+        }
+
+        public ActionResult SelectProfile()
+        {
+            return View(_profileService.GetProfileList());
+        }
+
+        public ActionResult CreateProfile()
+        {
+            return View(new ProfileInfo());
+        }
+
+        public ActionResult CreateProfile(ProfileInfo info)
+        {
+            ResultInfo result = _profileService.CreateProfile(info);
+
+            if (result.Itemid > 0)
+            {
+                info.Id = result.Itemid;
+                info.NewlyCreated = true;               
+            }           
+            
+            return View(info);            
         }
     }
 }

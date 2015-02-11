@@ -45,6 +45,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomViewEngine.cs" />
+    <Compile Include="PaginationItemBuilder.cs" />
+    <Compile Include="ParamAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UrlBuilder.cs" />
   </ItemGroup>

@@ -38,5 +38,11 @@ namespace totalhr.data.Repositories.Infrastructure
         IEnumerable<GetUserListForAdmin_Result> SearchUser(UserSearchInfo searchInfo);
 
         IEnumerable<SearchUserWithPaging_Result> SearchUserWithPaging(UserSearchInfo info);
+
+        bool SaveProfilePicture(UserProfilePicture profilePicture);
+
+        UserProfilePicture GetProfilePicture(int userid);
+
+        string GetProfilePicturePath(int userid);
     }
 }

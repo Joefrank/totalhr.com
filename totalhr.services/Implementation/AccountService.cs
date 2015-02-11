@@ -15,6 +15,7 @@ using CM;
 using log4net;
 using totalhr.data.Models;
 using System.Collections;
+using totalhr.Resources;
 
 namespace totalhr.services.Implementation
 {
@@ -79,6 +80,11 @@ namespace totalhr.services.Implementation
         public User CreateUser(NewEmployeeInfo info)
         {
             log.Debug("Create User - User creating");
+
+            var result = IsInfoValidForRegistration(info);
+            if (result != null)
+                return null;
+
             User user = new User();
             user.Address1 = info.Address1;
             user.Address2 = info.Address2;
@@ -103,7 +109,7 @@ namespace totalhr.services.Implementation
             user.tersmaccepted = info.TermsAccepted;
             user.title = info.Title;
             user.Town = info.City;
-            user.typeid = 1; //add glossary user type
+            user.typeid = (info.UserTypeId > 0)? info.UserTypeId.GetValueOrDefault() : 1; //add glossary user type
             user.userguid = Guid.NewGuid();
             user.activationcode = CM.utils.random_code(20);
             user.username = info.UserName;
@@ -113,6 +119,36 @@ namespace totalhr.services.Implementation
 
             log.Debug("Create user - user created");
             return user;
+        }
+
+        public UserRegStruct CreateEmployee(NewEmployeeInfo info, AdminStruct adminstruct)
+        {
+            var result = IsInfoValidForRegistration(info);
+            if (result != null)
+                return result;
+
+            User user = CreateUser(info);
+
+            if (user != null && user.id > 0)
+            {
+                log.Debug("CreateEmployee - user created");
+                string activationlink = adminstruct.SiteRootURL + "Account/Activate/" + user.userguid;
+                return new UserRegStruct
+                {
+                    UserId = user.id,
+                    CompanyId = user.CompanyId,
+                    Email = info.Email,
+                    Name = info.FirstName,
+                    Surname = info.Surname,
+                    ActivationLink = activationlink
+                };
+            }
+            return new UserRegStruct
+                {
+                    UserId = -1,
+                    CompanyId = -1,
+                    RegError = Error.Error_Could_Not_Register_Employee
+                };
         }
 
         public string GenerateUserActivationLink(string email)
@@ -133,10 +169,10 @@ namespace totalhr.services.Implementation
             return _userRepos.FindBy(x => x.email.ToLower().Trim().Equals(email.ToLower().Trim())).FirstOrDefault();
         }
 
-        public UserRegStruct RegisterUserCompany(NewUserInfo info, AdminStruct adminstruct)
+        public UserRegStruct IsInfoValidForRegistration(NewEmployeeInfo info)
         {
             UserRegStruct userstruct = new UserRegStruct();
-            
+
             //validate user email.
             if (UserExistByEmail(info.Email))
             {
@@ -157,8 +193,17 @@ namespace totalhr.services.Implementation
                 return userstruct;
             }
 
+            return null;
+        }
+
+        public UserRegStruct RegisterUserCompany(NewUserInfo info, AdminStruct adminstruct)
+        {
+            var result = IsInfoValidForRegistration(info);
+            if (result != null)
+                return result;
+
             //*** create the default department which is HR and set user to that also create default calendar.
-            //*** give user some default roles and profiles when they are activated.
+            //*** give user some default roles and profiles when they are activated. (this is not nec)
 
             Company company = CreateCompany(info);
 
@@ -289,7 +334,14 @@ namespace totalhr.services.Implementation
             return GetUserPersonalInfo(user);
         }
 
+        public UserPersonalInfo GetUserInfoByGuid(string guid)
+        {
+            User user =  GetUserByGuid(guid);
+            return GetUserPersonalInfo(user);
+        }
+
         public UserPersonalInfo GetUserPersonalInfo(User user){
+            var profilePicture = _userRepos.GetProfilePicturePath(user.id); 
 
             return new UserPersonalInfo(){
                 Address1 = user.Address1,
@@ -312,9 +364,13 @@ namespace totalhr.services.Implementation
                 Surname = user.surname,
                 Title = user.title,
                 UserId = user.id,
+                UserTypeId = user.typeid,
                 UserName = user.username,
+                ProfilePictureAdded = !string.IsNullOrEmpty(profilePicture),
+                ProfilePicturePath = string.IsNullOrEmpty(profilePicture) ? "" : profilePicture,
                 TitleGlossary = _glossaryService.GetSpecificGlossaryTerm(user.preferedlanguageid, user.title, Variables.GlossaryGroups.Title),
                 GenderGlossary = _glossaryService.GetSpecificGlossaryTerm(user.preferedlanguageid, user.GenderId, Variables.GlossaryGroups.Gender)
+           
             };
             
         }
@@ -428,5 +484,9 @@ namespace totalhr.services.Implementation
             return _userRepos.SearchUserWithPaging(searchInfo);
         }
 
+        public bool SaveProfilePicture(UserProfilePicture profilePicture)
+        {
+            return _userRepos.SaveProfilePicture(profilePicture);
+        }
     }
 }

@@ -5,104 +5,133 @@
 @model totalhr.Shared.Models.UserSearchInfo
 
 @{
-   var userList = GenericHelper.GetListFromNumerable(Model.UserList);
+   //var userList = GenericHelper.GetListFromNumerable(Model.UserList);
    var departmentList = GenericHelper.GetListFromNumerable(Model.DepartmentList);
+
+   var userList = totalhr.web.Helpers.GenericHelper.GenerateSelectFromEnum<Variables.UserType>();
+
+   //var test = usertypeList;
 }
-<div id="searchbox">
-     <fieldset>
-       <legend>@AdminGeneric.V_User_Search<span class="icon">&nbsp;</span></legend>                  
-               
-          
+
+<div class="row-fluid">
+
+    
+                    
+            
+
+                
 @using (Html.BeginForm("SearchForUser", "User", FormMethod.Post, new { id="frmSearchForm" }))
 {
      
     @Html.ValidationSummary()
 
-    <div id="dvform" class="formwide">
+<div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i>@AdminGeneric.V_User_Search</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+                <a href="javascript:;" class="icon-remove"></a>
+            </span>
+        </div>
+
+    <div class="widget-body">
+    <table class="table table-striped table-bordered" id="sample_1">
+        <thead><tr><td>&nbsp;</td></tr></thead>
+   
+        @Html.HiddenFor(x => x.PageNumber)
+        <tbody>
+          
+            <tr>   
+                <td><b>@AdminGeneric.V_User_Id</b></td>
+                <td>@Html.TextBoxFor(x => x.UserId)</td>
+                <td>          
+			        <b>@AdminGeneric.V_Search_ByName</b>
+                </td>
+                <td>
+                    @Html.TextBoxFor(x => x.Name)
+                </td>                   
+                <td>                       
+                    <b>@Account.V_Email</b>
+                </td>
+                <td> 
+                    @Html.TextBoxFor(x => x.Email)
+                </td>
+                </tr>
+            <tr>
+                    <td>
+                        <b>@AdminGeneric.V_User_Type</b>
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(x => x.UserTypeId, userList)
+                    </td>
+                    <td>
+                        <b>@AdminGeneric.V_Department</b>
+                    </td>
+                    <td>
+                        @Html.DropDownListFor(x => x.DepartmentId, departmentList)
+                    </td>
+                   
+                   
+                       </tr>
+            <tr> 
+                       <td>
+                        <b>@AdminGeneric.V_Town</b>
+                       </td>
+                       <td>
+                            @Html.TextBoxFor(x => x.Town)               
+                       </td>
+                       <td>
+                         <b>@AdminGeneric.V_State_or_County</b>
+                       </td>
+                       <td>                      
+                           @Html.TextBoxFor(x => x.County) 
+                       </td>
+                        <td>
+                            <b>@FormMessages.Label_PostCode</b>
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(x => x.PostCode)
+                        </td> 
+                </tr>
+            <tr>                  
+                        <td>
+                            <b>@FormMessages.Label_Phone</b>
+                        </td>
+                       <td>
+                           @Html.TextBoxFor(x => x.Phone)
+                       </td> 
+                         <td>
+                            <b>@AdminGeneric.V_Search_Partial_Address</b> 
+                        </td>
+                        <td>
+                            @Html.TextBoxFor(x => x.PartialAddress)
+                        </td>
+                    </tr>
+
+        </tbody>
+    
+    </table>
+             
+        </div>
+    </div>
+      
+        <!-- sorting stuff -->          
+        @Html.HiddenFor(x => x.OrderColumn)
+        @Html.HiddenFor(x => x.OrderDirection)
+        @Html.HiddenFor(x => x.PageSize)
+        @Html.HiddenFor(x => x.PageNumber)
 
             <div class="line"> 
-               <table>  
-               <tr>   
-                   <td><b>@AdminGeneric.V_User_Id</b></td>
-                   <td>@Html.TextBoxFor(x => x.Id)</td>
-                   <td>          
-			         <b>@AdminGeneric.V_Search_ByName</b>
-                   </td>
-                   <td>
-                        @Html.TextBoxFor(x => x.Name)
-                   </td>                   
-                    <td>                       
-                        <b>@Account.V_Email</b>
-                    </td>
-                    <td> 
-                        @Html.TextBoxFor(x => x.Email)
-                    </td>
-                   <td>
-                       <b>@AdminGeneric.V_User_Type</b>
-                   </td>
-                   <td>
-                       @Html.DropDownListFor(x => x.UserTypeId, userList)
-                   </td>
-                   <td>
-                       <b>@AdminGeneric.V_Department</b>
-                   </td>
-                   <td>
-                        @Html.DropDownListFor(x => x.DepartmentId, departmentList)
-                   </td>
-                   
-                   
-               </tr>
-                <tr> 
-                   <td>
-                    <b>@AdminGeneric.V_Town</b>
-                   </td>
-                   <td>
-                        @Html.TextBoxFor(x => x.Town)               
-                   </td>
-                   <td>
-                     <b>@AdminGeneric.V_State_or_County</b>
-                   </td>
-                   <td>                      
-                       @Html.TextBoxFor(x => x.County) 
-                   </td>
-                    <td>
-                        <b>@FormMessages.Label_PostCode</b>
-                    </td>
-                    <td>
-                        @Html.TextBoxFor(x => x.PostCode)
-                    </td>                   
-                    <td>
-                        <b>@FormMessages.Label_Phone</b>
-                    </td>
-                   <td>
-                       @Html.TextBoxFor(x => x.Phone)
-                   </td> 
-                     <td>
-                        <b>@AdminGeneric.V_Search_Partial_Address</b> 
-                    </td>
-                    <td>
-                        @Html.TextBoxFor(x => x.PartialAddress)
-                    </td>
-                </tr>
-                </table>
-             
-             
-             </div>
-
-            <div class="line">  
-                <input type="submit" value="@Document.V_Search" />&nbsp;
-
-                <input type="button" value="@Document.V_Reset" onclick="document.location.href='@Html.Raw(Model.HrefLocation)'" />
-            </div>
-       </div>
+                <p>
+                    <input type="button" value="@Document.V_Reset" onclick="document.location.href='@Html.Raw(Model.HrefLocation)'" /> 
+                    &nbsp;
+                    <input type="submit" value="@Document.V_Search" />
+                </p>
+            </div>    
     
-     <!-- sorting stuff -->          
-    @Html.HiddenFor(x => x.OrderColumn)
-    @Html.HiddenFor(x => x.OrderDirection)
-    @Html.HiddenFor(x => x.PageSize)
-    @Html.HiddenFor(x => x.PageNumber)
+       
         
 }
 
-         </fieldset>
+        
       </div>

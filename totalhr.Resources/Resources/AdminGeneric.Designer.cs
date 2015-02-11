@@ -79,6 +79,33 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Statistics.
+        /// </summary>
+        public static string V_Absence_Statistics {
+            get {
+                return ResourceManager.GetString("V_Absence_Statistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Absences.
+        /// </summary>
+        public static string V_Absences {
+            get {
+                return ResourceManager.GetString("V_Absences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Absences Management.
+        /// </summary>
+        public static string V_Absences_Management {
+            get {
+                return ResourceManager.GetString("V_Absences_Management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Profile Picture.
         /// </summary>
         public static string V_Add_Profile_Picture {
@@ -93,6 +120,15 @@ namespace totalhr.Resources {
         public static string V_Add_User {
             get {
                 return ResourceManager.GetString("V_Add_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Admin Dashboard.
+        /// </summary>
+        public static string V_Admin_Dashboard {
+            get {
+                return ResourceManager.GetString("V_Admin_Dashboard", resourceCulture);
             }
         }
         
@@ -151,6 +187,114 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Calendars.
+        /// </summary>
+        public static string V_Calendar {
+            get {
+                return ResourceManager.GetString("V_Calendar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat.
+        /// </summary>
+        public static string V_Chat {
+            get {
+                return ResourceManager.GetString("V_Chat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please choose an option:.
+        /// </summary>
+        public static string V_Choose_Option {
+            get {
+                return ResourceManager.GetString("V_Choose_Option", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Communications.
+        /// </summary>
+        public static string V_Communications {
+            get {
+                return ResourceManager.GetString("V_Communications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contract Management.
+        /// </summary>
+        public static string V_Contract_Management {
+            get {
+                return ResourceManager.GetString("V_Contract_Management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Template Management.
+        /// </summary>
+        public static string V_Contract_Template_Management {
+            get {
+                return ResourceManager.GetString("V_Contract_Template_Management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contracts.
+        /// </summary>
+        public static string V_Contracts {
+            get {
+                return ResourceManager.GetString("V_Contracts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Absence.
+        /// </summary>
+        public static string V_Create_Absences {
+            get {
+                return ResourceManager.GetString("V_Create_Absences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Calendar.
+        /// </summary>
+        public static string V_Create_Calendar {
+            get {
+                return ResourceManager.GetString("V_Create_Calendar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Department.
+        /// </summary>
+        public static string V_Create_Department {
+            get {
+                return ResourceManager.GetString("V_Create_Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Form.
+        /// </summary>
+        public static string V_Create_Form {
+            get {
+                return ResourceManager.GetString("V_Create_Form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Profile.
+        /// </summary>
+        public static string V_Create_Profile {
+            get {
+                return ResourceManager.GetString("V_Create_Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Created By.
         /// </summary>
         public static string V_Created_By {
@@ -169,11 +313,38 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dashboard.
+        /// </summary>
+        public static string V_Dashboard {
+            get {
+                return ResourceManager.GetString("V_Dashboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Department.
         /// </summary>
         public static string V_Department {
             get {
                 return ResourceManager.GetString("V_Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Departments Management.
+        /// </summary>
+        public static string V_Department_Management {
+            get {
+                return ResourceManager.GetString("V_Department_Management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Departments.
+        /// </summary>
+        public static string V_Departments {
+            get {
+                return ResourceManager.GetString("V_Departments", resourceCulture);
             }
         }
         
@@ -187,11 +358,83 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Document &amp; Folders Management.
+        /// </summary>
+        public static string V_Document_Folder_Managment {
+            get {
+                return ResourceManager.GetString("V_Document_Folder_Managment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employees.
+        /// </summary>
+        public static string V_Employee {
+            get {
+                return ResourceManager.GetString("V_Employee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Employee.
+        /// </summary>
+        public static string V_Employee_Add {
+            get {
+                return ResourceManager.GetString("V_Employee_Add", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee List.
+        /// </summary>
+        public static string V_Employee_List {
+            get {
+                return ResourceManager.GetString("V_Employee_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee Management.
+        /// </summary>
+        public static string V_Employee_Management {
+            get {
+                return ResourceManager.GetString("V_Employee_Management", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee Registration.
+        /// </summary>
+        public static string V_Employee_Registration {
+            get {
+                return ResourceManager.GetString("V_Employee_Registration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee Search.
+        /// </summary>
+        public static string V_Employee_Search {
+            get {
+                return ResourceManager.GetString("V_Employee_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Existing Profiles.
         /// </summary>
         public static string V_Existing_Profiles {
             get {
                 return ResourceManager.GetString("V_Existing_Profiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forms.
+        /// </summary>
+        public static string V_Forms {
+            get {
+                return ResourceManager.GetString("V_Forms", resourceCulture);
             }
         }
         
@@ -250,6 +493,42 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log Out.
+        /// </summary>
+        public static string V_Loggout {
+            get {
+                return ResourceManager.GetString("V_Loggout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Contracts.
+        /// </summary>
+        public static string V_Manage_Contracts {
+            get {
+                return ResourceManager.GetString("V_Manage_Contracts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Employees.
+        /// </summary>
+        public static string V_Manage_Employees {
+            get {
+                return ResourceManager.GetString("V_Manage_Employees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Forms.
+        /// </summary>
+        public static string V_Manage_Forms {
+            get {
+                return ResourceManager.GetString("V_Manage_Forms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Manage User Profiles.
         /// </summary>
         public static string V_Manage_Profiles {
@@ -264,6 +543,15 @@ namespace totalhr.Resources {
         public static string V_Manage_Roles {
             get {
                 return ResourceManager.GetString("V_Manage_Roles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Templates.
+        /// </summary>
+        public static string V_Manage_Templates {
+            get {
+                return ResourceManager.GetString("V_Manage_Templates", resourceCulture);
             }
         }
         
@@ -286,6 +574,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My Messages.
+        /// </summary>
+        public static string V_My_Messages {
+            get {
+                return ResourceManager.GetString("V_My_Messages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         public static string V_Name {
@@ -300,6 +597,15 @@ namespace totalhr.Resources {
         public static string V_Notify_User_ByEmail {
             get {
                 return ResourceManager.GetString("V_Notify_User_ByEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Messages.
+        /// </summary>
+        public static string V_Other_Messages {
+            get {
+                return ResourceManager.GetString("V_Other_Messages", resourceCulture);
             }
         }
         
@@ -327,6 +633,24 @@ namespace totalhr.Resources {
         public static string V_Profile_Management_UserList {
             get {
                 return ResourceManager.GetString("V_Profile_Management_UserList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profile Picture.
+        /// </summary>
+        public static string V_Profile_Picture {
+            get {
+                return ResourceManager.GetString("V_Profile_Picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Profiles.
+        /// </summary>
+        public static string V_Profiles {
+            get {
+                return ResourceManager.GetString("V_Profiles", resourceCulture);
             }
         }
         
@@ -376,6 +700,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Roles.
+        /// </summary>
+        public static string V_Roles {
+            get {
+                return ResourceManager.GetString("V_Roles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string V_Save {
@@ -412,6 +745,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select user.
+        /// </summary>
+        public static string V_Select_User {
+            get {
+                return ResourceManager.GetString("V_Select_User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to State/County.
         /// </summary>
         public static string V_State_or_County {
@@ -421,11 +763,56 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Theme.
+        /// </summary>
+        public static string V_Theme {
+            get {
+                return ResourceManager.GetString("V_Theme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time Recording.
+        /// </summary>
+        public static string V_Time_Recording {
+            get {
+                return ResourceManager.GetString("V_Time_Recording", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TotalHR Admin.
+        /// </summary>
+        public static string V_TotalHR_Signature {
+            get {
+                return ResourceManager.GetString("V_TotalHR_Signature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City/Town.
         /// </summary>
         public static string V_Town {
             get {
                 return ResourceManager.GetString("V_Town", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Absences.
+        /// </summary>
+        public static string V_User_Absences {
+            get {
+                return ResourceManager.GetString("V_User_Absences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create User.
+        /// </summary>
+        public static string V_User_Create {
+            get {
+                return ResourceManager.GetString("V_User_Create", resourceCulture);
             }
         }
         
@@ -547,11 +934,38 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Users in Profile.
+        /// </summary>
+        public static string V_Users_By_Profile {
+            get {
+                return ResourceManager.GetString("V_Users_By_Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Users who have been assigned profile: {0}.
         /// </summary>
         public static string V_Users_In_Profile_X {
             get {
                 return ResourceManager.GetString("V_Users_In_Profile_X", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View All.
+        /// </summary>
+        public static string V_View_All_Calendars {
+            get {
+                return ResourceManager.GetString("V_View_All_Calendars", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View All.
+        /// </summary>
+        public static string V_View_Forms {
+            get {
+                return ResourceManager.GetString("V_View_Forms", resourceCulture);
             }
         }
         

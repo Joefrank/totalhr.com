@@ -97,6 +97,42 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Could not register employee!.
+        /// </summary>
+        public static string Error_Could_Not_Register_Employee {
+            get {
+                return ResourceManager.GetString("Error_Could_Not_Register_Employee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not save profile picture..
+        /// </summary>
+        public static string Error_Could_Not_Save_Picture {
+            get {
+                return ResourceManager.GetString("Error_Could_Not_Save_Picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error_Error {
+            get {
+                return ResourceManager.GetString("Error_Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only files with the following extensions are allowed:.
+        /// </summary>
+        public static string Error_File_Type {
+            get {
+                return ResourceManager.GetString("Error_File_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must select a department for the new user!.
         /// </summary>
         public static string Error_Missing_Department {
@@ -142,11 +178,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile picture is required..
+        /// </summary>
+        public static string Error_Picture_File_Required {
+            get {
+                return ResourceManager.GetString("Error_Picture_File_Required", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry but the user you searched for cannot be found..
         /// </summary>
         public static string Error_Profile_NoUserDetails {
             get {
                 return ResourceManager.GetString("Error_Profile_NoUserDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to add user profile picture..
+        /// </summary>
+        public static string Error_Profile_Picture_Missing {
+            get {
+                return ResourceManager.GetString("Error_Profile_Picture_Missing", resourceCulture);
             }
         }
         

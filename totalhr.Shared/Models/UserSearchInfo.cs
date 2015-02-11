@@ -8,7 +8,7 @@ namespace totalhr.Shared.Models
 {
     public class UserSearchInfo
     {
-        public int? Id { get; set; }
+        public int? UserId { get; set; }
         public int LanguageId { get; set; }
         public int? UserTypeId { get; set; }
         public int? DepartmentId { get; set; }

@@ -14,9 +14,11 @@ namespace totalhr.data.EF
     
     public partial class File
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public File()
         {
             this.CompanyDocuments = new HashSet<CompanyDocument>();
+            this.UserProfilePictures = new HashSet<UserProfilePicture>();
         }
     
         public int id { get; set; }
@@ -29,6 +31,9 @@ namespace totalhr.data.EF
         public Nullable<System.DateTime> lastupdated { get; set; }
         public Nullable<int> lastupdatedby { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompanyDocument> CompanyDocuments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserProfilePicture> UserProfilePictures { get; set; }
     }
 }

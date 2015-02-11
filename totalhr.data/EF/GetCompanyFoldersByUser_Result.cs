@@ -13,13 +13,15 @@ namespace totalhr.data.EF
     
     public partial class GetCompanyFoldersByUser_Result
     {
-        public int Id { get; set; }
+        public int documentId { get; set; }
         public string DisplayName { get; set; }
+        public string OriginalFileName { get; set; }
         public System.DateTime Created { get; set; }
         public int CreatedBy { get; set; }
-        public Nullable<System.DateTime> LastUpdated { get; set; }
-        public Nullable<int> LastUpdatedBy { get; set; }
-        public int NoOfFiles { get; set; }
-        public int NoOfOpenings { get; set; }
+        public int FileId { get; set; }
+        public int NoOfViews { get; set; }
+        public int NoOfDownloads { get; set; }
+        public Nullable<int> folderid { get; set; }
+        public string FolderDisplayName { get; set; }
     }
 }

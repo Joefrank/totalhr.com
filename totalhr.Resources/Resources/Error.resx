@@ -129,6 +129,18 @@
   <data name="Error_Could_Not_CreateUser" xml:space="preserve">
     <value>Sorry but could not create user.</value>
   </data>
+  <data name="Error_Could_Not_Register_Employee" xml:space="preserve">
+    <value>Could not register employee!</value>
+  </data>
+  <data name="Error_Could_Not_Save_Picture" xml:space="preserve">
+    <value>Could not save profile picture.</value>
+  </data>
+  <data name="Error_Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Error_File_Type" xml:space="preserve">
+    <value>Only files with the following extensions are allowed:</value>
+  </data>
   <data name="Error_Missing_Department" xml:space="preserve">
     <value>You must select a department for the new user!</value>
   </data>
@@ -144,8 +156,14 @@
   <data name="Error_No_User_Under_Role" xml:space="preserve">
     <value>Sorry but no user has this role!</value>
   </data>
+  <data name="Error_Picture_File_Required" xml:space="preserve">
+    <value>Profile picture is required.</value>
+  </data>
   <data name="Error_Profile_NoUserDetails" xml:space="preserve">
     <value>Sorry but the user you searched for cannot be found.</value>
+  </data>
+  <data name="Error_Profile_Picture_Missing" xml:space="preserve">
+    <value>You need to add user profile picture.</value>
   </data>
   <data name="MSG_Error_Could_Not_Save_PRofiles" xml:space="preserve">
     <value>Sorry could not save user profiles!</value>

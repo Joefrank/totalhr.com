@@ -1,12 +1,13 @@
 ﻿@model totalhr.Shared.Models.NewUserInfo
 @using totalhr.Resources;
 @using totalhr.data.EF;
+@using totalhr.Shared.Models;
 
 @{
     ViewBag.Title = Common.Page_TT_Header_Registration;
 
 
-    List<Glossary> languages = ViewBag.LanguageList as List<Glossary>;
+    var languages = ViewBag.LanguageList as IEnumerable<ListItemStruct>;
     List<Glossary> genders = ViewBag.GenderList as List<Glossary>;
     List<Glossary> countries = ViewBag.CountryList as List<Glossary>;
     List<Glossary> titles = ViewBag.TitleList as List<Glossary>;    
@@ -142,7 +143,7 @@
                 </div>                
                  <div class="line">
                     <label>@FormMessages.Label_Pref_Language</label>
-                    <span>@Html.DropDownListFor(x => x.PreferedLanguageId,  new SelectList(languages, "RootId", "Term"))</span>
+                    <span>@Html.DropDownListFor(x => x.PreferedLanguageId,  new SelectList(languages, "Id", "Name"))</span>
                     <span class="req"></span>
                 </div>
                 

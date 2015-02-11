@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/Content/css/SiteAdmin.css" />   
+    @RenderSection("extrastyles", required: false)
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    @Scripts.Render("~/Scripts/Site/common.js")
+    @*Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")*@
+
+    @RenderSection("scripts", required: false)
+</head>
+<body>
+   <div id="main">
+        <div class="content">
+            <div class="breadcrumb">
+                @RenderSection("breadcrumb", required: false)
+            </div>
+            @RenderBody()
+        </div>
+    </div>
+
+    <div id="overlay-mask" style="display:none"></div>
+
+    <div id="dvPopup" style="display:none;"> 
+        <iframe id="ipopup"></iframe>       
+    </div>
+
+    <script>
+       @Html.Raw(string.Format(@" window.jQuery || document.write('<script src=""{0}Scripts/jquery-1.11.0.min.js""><\/script>');", 
+        totalhr.web.Helpers.GenericHelper.WebsiteRoot))
+    </script>
+
+</body>
+</html>

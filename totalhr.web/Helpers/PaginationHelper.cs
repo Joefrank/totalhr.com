@@ -11,6 +11,9 @@ namespace totalhr.web.Helpers
     {
         public static Pagination BuildPagination(Pagination pagination, BuildPaginationUrl urlHandler)
         {
+            if (pagination == null || pagination.TotalNoOfItems == 0 || pagination.PageSize == 0)
+                return null;
+
             pagination.NumberOfPages = (int)(pagination.TotalNoOfItems / pagination.PageSize) + (pagination.TotalNoOfItems % pagination.PageSize > 0 ? 1 : 0);
 
             for (int x = 1; x <= pagination.NumberOfPages; x++)
@@ -26,6 +29,14 @@ namespace totalhr.web.Helpers
             pagination.NextLink = (pagination.CurrentPage < pagination.NumberOfPages) ? urlHandler(pagination.MainLink, pagination.CurrentPage + 1) : "";
 
             return pagination;
+        }
+
+        public static string BuildPageButton(string label, string classCSS, string callbackJS)
+        {
+            var sClass = string.Format(@" class=""{0}"" ", classCSS);
+
+            return string.Format(@"<span {0} {1}>{2}</span>", (!string.IsNullOrEmpty(classCSS) ? sClass : ""),
+                @" onclick=""" + callbackJS + @""" ", label);
         }
         
     }

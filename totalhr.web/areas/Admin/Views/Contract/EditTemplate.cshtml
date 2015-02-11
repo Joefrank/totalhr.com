@@ -1,0 +1,94 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Helpers;
+@using totalhr.Shared.Models;
+
+@model totalhr.data.EF.ContractTemplate
+
+@{
+    ViewBag.Title = Contract.V_Edit_Template;
+    List<SelectListItem> itemList = null;
+    
+    try
+    {
+        itemList = GenericHelper.GetListFromNumerable(ViewBag.FormList as IEnumerable<ListItemStruct>);
+    }
+    catch
+    {
+        itemList = new List<SelectListItem>{new SelectListItem{Value = "", Text = Common.V_None}};
+    }
+}
+
+
+<div class="container">
+      @section breadcrumb{
+            <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
+            <a href="/Admin/Contract/" title="@AdminGeneric.V_Contract_Management">@AdminGeneric.V_Contract_Management</a> &gt;
+          <a href="/Admin/Contract/Template/" title="@AdminGeneric.V_Contract_Template_Management">@AdminGeneric.V_Contract_Template_Management</a> &gt;
+            <span class="last">@Contract.V_Edit_Template - (@Model.Name)</span>
+        }
+
+    <h1>@Contract.V_Edit_Template</h1>
+
+    <div class="wide">
+        <p>
+           @Html.Raw(Contract.V_Template_Details_Intro)
+        </p>
+
+        @using (Html.BeginForm("EditTemplate", "Contract", FormMethod.Post))
+        {
+            
+             @Html.ValidationSummary()
+             @Html.HiddenFor(x => x.id)
+       
+            <div class="formdiv midform">
+                <div class="wrapper">
+
+                  <fieldset>
+                   <legend>@Contract.V_Template_Details</legend>
+                
+                     <div class="line">
+                        <label>@Contract.V_Template_Id</label>
+                         <span>@Model.id</span>
+                    </div>
+
+                    <div class="line">
+                        <label>@Contract.V_Template_Name</label>
+                         <span>@Html.TextBoxFor(x => x.Name)</span>
+                        <span class="req">*</span>
+                    </div>
+
+                    <div class="line">
+                        <label>@Contract.V_Description</label>
+                         <span>@Html.TextAreaFor(x => x.Description)</span>                        
+                    </div>
+
+                    <div class="line">
+                        <label>@Contract.V_Form</label>
+                         <span>@Html.DropDownListFor(x => x.FormId, itemList)</span>    
+                        <span><input type="button" value="@Contract.V_New_Form" onclick="OpenPopup('/Admin/FormEditor/CreateForm/1', 900, 600)" /></span>                    
+                    </div>
+
+                     <div class="line">
+                        <label>@Contract.V_Last_Updated</label>
+                         <span>@Model.Lastupdated</span>                        
+                    </div>
+
+                     <div class="line">
+                        <label>@Contract.V_Last_Updated_By</label>
+                         <span>@Model.LastUpdatedBy</span>                        
+                    </div>
+
+                    <div class="line">
+                        <label>&nbsp;</label>
+                         <span><input type="submit" value="@Contract.V_Save_Template" /></span>
+                    </div>
+                  </fieldset>
+
+                </div>
+            </div>
+        }
+
+       
+    </div>
+</div>
+

@@ -5,6 +5,7 @@ using System.Text;
 using totalhr.Resources;
 using System.ComponentModel.DataAnnotations;
 using totalhr.Shared.Models.Attributes;
+using System.Web;
 
 namespace totalhr.Shared.Models
 {
@@ -71,6 +72,10 @@ namespace totalhr.Shared.Models
         [AlwaysTrue(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_Terms_Not_Accepted_Rq")]
         public bool TermsAccepted { get; set; }
 
+        [Required(ErrorMessageResourceType = typeof(Error), ErrorMessageResourceName = "Error_Picture_File_Required")]
+        public HttpPostedFileBase PictureFile { get; set; }
+
+        public int CreatedBy { get; set; }
 
         #endregion
 
@@ -102,5 +107,11 @@ namespace totalhr.Shared.Models
         public int UserId { get; set; }
 
         public int DepartmentId { get; set; }
+
+        public IEnumerable<ListItemStruct> DepartmentList { get; set; }
+
+        public IEnumerable<ListItemStruct> LanguageList { get; set; }
+
+        public int? UserTypeId { get; set; }
     }
 }

@@ -7,6 +7,10 @@
     [LastModified]   DATETIME      NULL,
     [LastModifiedBy] INT           NULL,
     [Identifier]     VARCHAR (50)  NULL,
-    CONSTRAINT [PK_Profile] PRIMARY KEY CLUSTERED ([id] ASC)
+    CONSTRAINT [PK_Profile] PRIMARY KEY CLUSTERED ([id] ASC),
+    CONSTRAINT [FK_Profile_User] FOREIGN KEY ([CreatedBy]) REFERENCES [dbo].[User] ([id]),
+    CONSTRAINT [FK_Profile_User1] FOREIGN KEY ([LastModifiedBy]) REFERENCES [dbo].[User] ([id])
 );
+
+
 

@@ -1,6 +1,6 @@
 ﻿@using totalhr.Resources;
 @using totalhr.web.Areas.Admin.Helpers;
-
+@using totalhr.web.Areas.Admin.Models;
 
 @model totalhr.Shared.Models.AdminProfileStruct
 
@@ -28,19 +28,30 @@
     {
         ddlSelectedProfilesHtml = ProfileHelper.GenerateDefaultListBox(@" size=""10"" id=""AllProfiles"" name=""AllProfiles"" ");
     }
+
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Admin/Profile/", Text = AdminGeneric.V_Profile_Management, Title= AdminGeneric.V_Profile_Management},
+        new BreadCrumbItem{Url = string.Format("/Admin/Profile/ViewUsers/{0}",Request.QueryString["ProfileId"]), 
+            Text = AdminGeneric.V_Profile_Management_UserList, Title= AdminGeneric.V_Profile_Management_UserList},
+        new BreadCrumbItem{Url = "", Text = ViewBag.UserName, Title=ViewBag.UserName}
+    }; 
     
 }
 @section scripts{
     <script type="text/javascript" src="~/Scripts/Site/profileandrole.js"></script>
 }
 
+
+@section pagetitle{
+    @AdminGeneric.V_User_Profile_Management
+} 
+
 @section breadcrumb{
-    <a href="/Admin/" title="Home">@AdminGeneric.V_Home</a> &gt;
-    <a href="/Admin/Profile" title="@AdminGeneric.V_Profile_List">@AdminGeneric.V_Profile_List</a> &gt;
-    <span class="last">@ViewBag.UserName</span>
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
 }
 
-    <h1>@AdminGeneric.V_User_Profile_Management</h1>
+
 
     <div class="wide">
         @string.Format(AdminGeneric.V_You_Viewing_USerProfile_X,  ViewBag.UserName)

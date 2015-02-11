@@ -1,15 +1,280 @@
 ﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
 
 @{
-    ViewBag.Title = AdminGeneric.V_Admin_Home_Title;    
+    ViewBag.Title = AdminGeneric.V_Admin_Home_Title;
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "", Text = AdminGeneric.V_Dashboard, Title= AdminGeneric.V_Dashboard}
+    };  
 }
 
-<div id="main">
-    <div class="content">
+@section pagetitle{
+    @AdminGeneric.V_Admin_Dashboard
+} 
 
-        <h1>@AdminGeneric.V_Admin_Home_Title</h1>
 
-        <div id="dvAccount" class="itemlist">
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+    
+<div class="square-state">
+    <div class="row-fluid">
+        <a class="icon-btn span2" href="#">
+            <i class="icon-group"></i>
+            <div>Users</div>
+        </a>
+        <a class="icon-btn span2" href="#">
+            <i class="icon-barcode"></i>
+            <div>Roles</div>
+        </a>
+        <a class="icon-btn span2" href="#">
+            <i class="icon-barcode"></i>
+            <div>Profiles</div>
+        </a>      
+       <a class="icon-btn span2" href="#">
+            <i class="icon-sitemap"></i>
+            <div>Contracts</div>
+        </a>
+        <a class="icon-btn span2" href="#">
+            <i class="icon-calendar"></i>
+            <div>Calendar</div>
+        </a>  
+         <a class="icon-btn span2" href="#">
+            <i class="icon-calendar"></i>
+            <div>Time Recording</div>
+        </a>              
+    </div>
+
+    <div class="row-fluid">
+        <a class="icon-btn span2" href="#">
+            <i class="icon-bar-chart"></i>
+            <div>Departments</div>
+        </a>
+        <a class="icon-btn span2" href="#">
+            <i class="icon-bar-chart"></i>
+            <div>Documents</div>
+        </a>
+        <a class="icon-btn span2" href="#">
+            <i class="icon-bar-chart"></i>
+            <div>Absences</div>
+        </a>
+         <a class="icon-btn span2" href="#">
+            <i class="icon-bar-chart"></i>
+            <div>Reports</div>
+        </a>
+        <a class="icon-btn span2" href="#">
+            <i class="icon-tasks"></i>
+            <div>Task</div>
+            <span class="badge badge-important">3</span>
+        </a> 
+        <a class="icon-btn span2" href="#">
+            <i class="icon-bar-chart"></i>
+            <div>Forms</div>
+        </a>
+    </div>
+
+   
+</div>
+
+<div class="row-fluid">
+     <div class="span5">
+        <!-- BEGIN NOTIFICATIONS PORTLET-->
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-bell"></i> Notifications</h4>
+				<span class="tools">
+				<a href="javascript:;" class="icon-chevron-down"></a>
+				<a href="javascript:;" class="icon-remove"></a>
+				</span>
+            </div>
+            <div class="widget-body">
+                <ul class="item-list scroller padding" data-height="365" data-always-visible="1">
+                    <li>
+                        <span class="label label-success"><i class="icon-bell"></i></span>
+                        <span>New user registered.</span>
+                        <span class="small italic">Just now</span>
+                    </li>
+                    <li>
+                        <span class="label label-success"><i class="icon-bell"></i></span>
+                        <span>New order received.</span>
+                        <span class="small italic">15 mins ago</span>
+                    </li>
+                    <li>
+                        <span class="label label-warning"><i class="icon-bullhorn"></i></span>
+                        <span>Alerting a user account balance.</span>
+                        <span class="small italic">2 hrs ago</span>
+                    </li>
+                    <li>
+                        <span class="label label-important"><i class="icon-bolt"></i></span>
+                        <span>Alerting administrators staff.</span>
+                        <span class="small italic">11 hrs ago</span>
+                    </li>
+                    <li>
+                        <span class="label label-important"><i class="icon-bolt"></i></span>
+                        <span>Messages are not sent to users.</span>
+                        <span class="small italic">14 hrs ago</span>
+                    </li>
+                    <li>
+                        <span class="label label-warning"><i class="icon-bullhorn"></i></span>
+                        <span>Web server #12 failed to relosd.</span>
+                        <span class="small italic">2 days ago</span>
+                    </li>                
+                   
+                </ul>
+                <div class="space5"></div>
+                <a href="#" class="pull-right">View all notifications</a>
+                <div class="clearfix no-top-space no-bottom-space"></div>
+            </div>
+        </div>
+        <!-- END NOTIFICATIONS PORTLET-->
+    </div>
+
+
+    <div class="span4 responsive" data-tablet="span4 fix-margin" data-desktop="span4">
+        <!-- BEGIN TODO_LIST PORTLET-->
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-check"></i> To Do List</h4>
+                    <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                    <a href="javascript:;" class="icon-remove"></a>
+                    </span>
+            </div>
+            <div class="widget-body">
+                <ul class="todo-list">
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <a href=""> Weekly Meeting.</a>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <span class="label label-success"><i class="icon-bell"></i>Today</span>
+                                <span class="actions">
+                                    <a href="#" class="icon"><i class="icon-ok"></i></a>
+                                    <a href="#" class="icon"><i class="icon-remove"></i></a>
+                                </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <a href="">Monthly Status Update.</a>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <span class="label label-default"><i class="icon-bell"></i>12.00PM</span>
+                                <span class="actions">
+                                    <a href="#" class="icon"><i class="icon-ok"></i></a>
+                                    <a href="#" class="icon"><i class="icon-remove"></i></a>
+                                </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <a href="">Upgrage server OS.</a>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <span class="label label-success"><i class="icon-bell"></i>4 March</span>
+                            <span class="actions">
+                                <a href="#" class="icon"><i class="icon-ok"></i></a>
+                                <a href="#" class="icon"><i class="icon-remove"></i></a>
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <a href="">Weekly technical support report.</a>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <span class="label label-success"><i class="icon-bell"></i>2 Jan</span>
+                                <span class="actions">
+                                    <a href="#" class="icon"><i class="icon-ok"></i></a>
+                                    <a href="#" class="icon"><i class="icon-remove"></i></a>
+                                </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <a href=""> Project materials.</a>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <span class="label label-warning"><i class="icon-bell"></i>09 Feb</span>
+                            <span class="actions">
+                                <a href="#" class="icon"><i class="icon-ok"></i></a>
+                                <a href="#" class="icon"><i class="icon-remove"></i></a>
+                            </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <a href="">Project Status Update.</a>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <span class="label label-important"><i class="icon-bell"></i>4.30PM</span>
+                                <span class="actions">
+                                    <a href="#" class="icon"><i class="icon-ok"></i></a>
+                                    <a href="#" class="icon"><i class="icon-remove"></i></a>
+                                </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <a href=""> Anual Project Meeting.</a>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <span class="label label-important"><i class="icon-bell"></i>Today</span>
+                                <span class="actions">
+                                    <a href="#" class="icon"><i class="icon-ok"></i></a>
+                                    <a href="#" class="icon"><i class="icon-remove"></i></a>
+                                </span>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="col1">
+                            <div class="cont">
+                                <a href="">Prepare project materials.</a>
+                            </div>
+                        </div>
+                        <div class="col2">
+                            <span class="label label-warning"><i class="icon-bell"></i>3 May</span>
+                            <span class="actions">
+                                <a href="#" class="icon"><i class="icon-ok"></i></a>
+                                <a href="#" class="icon"><i class="icon-remove"></i></a>
+                            </span>
+                        </div>
+                    </li>
+               
+                                   
+                 
+                </ul>
+                <a href="#" class="pull-right">View all todo list</a>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- END TODO_LIST PORTLET-->
+    </div>
+
+
+   
+
+
+                   
+</div>
+
+      @*  <div id="dvAccount" class="itemlist">
 
             <div class="option" onclick="document.location.href='/Admin/Profile/'">
                 <h4>@AdminGeneric.V_Profile_Management</h4>
@@ -31,7 +296,38 @@
 
                 </div>
             </div>
+            <div class="option" onclick="document.location.href='/Admin/Company/Department/'">
+                <h4>@AdminGeneric.V_Department_Management</h4>
+                <div class="cont">
 
-        </div>
-    </div>
-</div>
+                </div>
+            </div>
+             <div class="option" onclick="document.location.href='/Admin/Company/Document/'">
+                <h4>@AdminGeneric.V_Document_Folder_Managment</h4>
+                <div class="cont">
+
+                </div>
+            </div>
+             <div class="option" onclick="document.location.href='/Admin/Contract/'">
+                <h4>@AdminGeneric.V_Contract_Management</h4>
+                <div class="cont">
+
+                </div>
+            </div>
+
+            <div class="option" onclick="document.location.href='/Admin/Absences/'">
+                <h4>@AdminGeneric.V_Absences_Management</h4>
+                <div class="cont">
+
+                </div>
+            </div>
+
+             <div class="option" onclick="document.location.href='/Admin/FormEditor/'">
+                <h4>@AdminGeneric.V_Manage_Forms</h4>
+                <div class="cont">
+
+                </div>
+            </div>
+
+        </div>*@
+ 

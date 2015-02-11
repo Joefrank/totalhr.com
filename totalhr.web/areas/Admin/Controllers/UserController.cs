@@ -11,6 +11,8 @@ using totalhr.Shared;
 using totalhr.Shared.Models;
 using totalhr.web.Areas.Admin.Models;
 using totalhr.Resources;
+using System.IO;
+using FileManagementService.Infrastructure;
 
 
 namespace totalhr.web.Areas.Admin.Controllers
@@ -21,16 +23,19 @@ namespace totalhr.web.Areas.Admin.Controllers
         private readonly IProfileService _profileService;
         private readonly ICompanyService _companyService;
         private readonly IGlossaryService _glossaryService;
+        private IFileService _fileService;
 
         private static readonly ILog Log = LogManager.GetLogger(typeof(AccountController));
 
-        public UserController(IGlossaryService glossaryService, IAccountService accountService, IProfileService profileService, ICompanyService companyService, IOAuthService authService) :
+        public UserController(IGlossaryService glossaryService, IAccountService accountService, IProfileService profileService,
+            ICompanyService companyService, IFileService fileService, IOAuthService authService) :
             base(authService)
         {
             _accountService = accountService;
             _profileService = profileService;
             _companyService = companyService;
             _glossaryService = glossaryService;
+            _fileService = fileService;
         }
 
         public ActionResult Index()
@@ -40,10 +45,10 @@ namespace totalhr.web.Areas.Admin.Controllers
 
         public ActionResult Page(int id)
         {
-            return View("Index", DoSearch(id));
+            return View("Index", DoSearch(id, Request.Form["SortColumn"], Request.Form["SortDirection"]));
         }
 
-        public UserSearchResult DoSearch(int pageNumber = 1)
+        public UserSearchResult DoSearch(int pageNumber = 1, string SearchColumn = "", string SearchDirection = "")
         {
             var searchInfo = new UserSearchInfo
             {
@@ -52,7 +57,9 @@ namespace totalhr.web.Areas.Admin.Controllers
                 UserList = _accountService.ListCompanyUsersSimple(CurrentUser.CompanyId),
                 DepartmentList = _companyService.GetDepartmentSimple(CurrentUser.CompanyId),
                 HrefLocation = "/Admin/User/",
-                LanguageId = CurrentUser.LanguageId
+                LanguageId = CurrentUser.LanguageId,
+                OrderColumn = SearchColumn,
+                OrderDirection = SearchDirection
             };
 
             var searchResult = new UserSearchResult{
@@ -63,11 +70,17 @@ namespace totalhr.web.Areas.Admin.Controllers
             return searchResult;
         }
 
-        
+        public ActionResult SortBy(int hdnPageNumber, string SortColumn, string SortDirection)
+        {
+            hdnPageNumber = hdnPageNumber < 1 ? 1 : hdnPageNumber;
+            return View("Index", DoSearch(hdnPageNumber, SortColumn, SortDirection));
+        }
 
         public ActionResult UserDetails(string uniqueid)
         {
-            return View(_accountService.GetUserDetailsForAdmin(uniqueid));
+            var uadminstruct = _accountService.GetUserDetailsForAdmin(uniqueid);
+
+            return View(uadminstruct);
         }
 
         public ActionResult SearchForUser(UserSearchInfo info)
@@ -86,18 +99,24 @@ namespace totalhr.web.Areas.Admin.Controllers
         }
 
         private void LoadGlossaries()
-        {
-            ViewBag.LanguageList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Language);
+        {            
             ViewBag.CountryList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Country);
             ViewBag.GenderList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Gender);
-            ViewBag.TitleList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Title);
-            ViewBag.DepartmentList = _companyService.GetDepartmentSimple(CurrentUser.CompanyId);
+            ViewBag.TitleList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Title);           
         }
 
         public ActionResult Create()
         {
             LoadGlossaries();
-            return View(new NewEmployeeInfo { CompanyId = CurrentUser.CompanyId, Password = "", PasswordConfirm = "", UserName = "" });
+            var languageList = _glossaryService.GetLanguageList(CurrentUser.LanguageId);
+            var deptList = _companyService.GetDepartmentSimple(CurrentUser.CompanyId);
+            return View(new NewEmployeeInfo { 
+                CompanyId = CurrentUser.CompanyId, 
+                Password = "", PasswordConfirm = "", UserName = "",
+                DepartmentList = deptList, TermsAccepted = true,
+                CreatedBy = CurrentUser.UserId,
+                LanguageList = languageList
+            });
         }
 
         [HttpPost]
@@ -110,23 +129,93 @@ namespace totalhr.web.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-                //create user. *** set some admin tasks for profiles, roles and picture.
-                //*** review profile, permissions and roles
-                var user = _accountService.CreateUser(info);
+                info.UserTypeId = (int)Variables.UserType.Employee2;
 
-                if (user != null && user.id > 0)
-                {
-                    return View("UserCreated", info);
+                var userstruct = _accountService.CreateEmployee(info, WebsiteKernel);
+
+                if (userstruct == null || userstruct.UserId < 1)
+                {                   
+                    ModelState.AddModelError("RegistrationFailed", userstruct.RegError);
+                    Log.Debug("Employee Registration failed " + userstruct.RegError);
                 }
-                else
+                
+                if (info.PictureFile == null)
                 {
-                    ModelState.AddModelError("RegistrationFailed", Error.Error_Could_Not_CreateUser);
-                    Log.Debug("Employee Registration failed ");
+                    ModelState.AddModelError("PictureFile", Error.Error_Profile_Picture_Missing);
+                }
+                else if (info.PictureFile.ContentLength > 0 && userstruct != null && userstruct.UserId > 0)
+                {
+
+                    string fileExtension = Path.GetExtension(info.PictureFile.FileName).Replace(".", "");
+                    bool isValidFile = Enum.GetNames(typeof(Variables.AllowedImageExtensions)).Contains(fileExtension, StringComparer.CurrentCultureIgnoreCase);
+
+                    if (!isValidFile)
+                    {
+                        string allValidExtensions = string.Join(",", Enum.GetNames(typeof(Variables.AllowedImageExtensions)));
+                        ModelState.AddModelError("PictureFile", Error.Error_File_Type + allValidExtensions);
+                    }
+                    else
+                    {
+                        info.CreatedBy = CurrentUser.UserId;
+
+                        //upload picture the file
+                        int newFileId = _fileService.Create(info.PictureFile, ProfilePicturePath, 
+                                CurrentUser.UserId, (int)Variables.FileType.ProfilePicture);
+
+                        var fileName = Path.GetFileNameWithoutExtension(info.PictureFile.FileName);
+
+                        //if success then create document
+                        if (newFileId > 0)
+                        {
+                            UserProfilePicture profilePicture = new UserProfilePicture();
+
+                            profilePicture.Created = DateTime.Now;
+                            profilePicture.CreatedBy = CurrentUser.UserId;
+                            profilePicture.FileId = newFileId;
+                            profilePicture.UserId = userstruct.UserId;                           
+
+                            string picturePath = Path.Combine(ProfilePicturePath, newFileId + Path.GetExtension(info.PictureFile.FileName));
+
+                            using (FileStream fs = new FileStream(picturePath, FileMode.Open, FileAccess.Read))
+                            {
+                                using (var original = System.Drawing.Image.FromStream(fs))
+                                {
+                                    profilePicture.Width = original.Width;
+                                    profilePicture.Height = original.Height;
+                                }
+                            }
+                                                     
+
+                            bool result = _accountService.SaveProfilePicture(profilePicture);
+
+
+                            if (!result)
+                            {
+                                ModelState.AddModelError("Unable_To_save_profile_picture", Error.Error_Could_Not_Save_Picture);
+                            }
+                            else
+                            {
+                                return View("UserCreated", info);
+                            }
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("Unable_To_save_profile_picture", Error.Error_Could_Not_Save_Picture);
+                        }
+                    }
                 }
             }
 
             LoadGlossaries();
-            return View();
+            var deptList = _companyService.GetDepartmentSimple(CurrentUser.CompanyId);
+            var languageList = _glossaryService.GetLanguageList(CurrentUser.LanguageId);
+            return View(new NewEmployeeInfo
+            {
+                CompanyId = CurrentUser.CompanyId,               
+                DepartmentList = deptList,
+                CreatedBy = CurrentUser.UserId,
+                LanguageList = languageList
+            });
         }
     }
 }

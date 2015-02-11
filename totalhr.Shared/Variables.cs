@@ -139,7 +139,8 @@ namespace totalhr.Shared
 
         public enum FileType
         {
-            CompanyDocument = 1
+            CompanyDocument = 1,
+            ProfilePicture = 2
         }
 
         public enum AllowedFileExtension
@@ -170,15 +171,65 @@ namespace totalhr.Shared
 
         }
 
+        public enum AllowedImageExtensions
+        {
+            gif,
+            jpg,
+            jpeg,
+            png,
+            tif
+        }
+
         public enum DocumentShareType
         {
             Link = 1,
             Attachment = 2
         }
 
+        public enum UserType
+        {
+            CompanyCreator = 1,//user who registers the company - Admin
+            Employee2 = 2,//employees created by first registering user
+            SystemAdmin = 3,
+            Developer = 4,
+            Tester = 5,
+            Promoters = 6
+        }
+
+        public enum FormType
+        {
+            ContractTemplate = 1
+        }
+
         public enum PaginationValues
         {
             DefaultPageSize = 5
+        }
+
+        public enum FormStatus
+        {
+            Draft = 1,
+            Published = 2
+        }
+
+        public enum StringMaxLength
+        {
+            TabDescription = 50
+        }
+
+        public enum UserContractStatus
+        {
+            New = 1,
+            Draft = 2,
+            Published = 3
+        }
+
+        public enum FormValidationRules
+        {
+            TxtMinLen = 1,
+            TxtMaxLen = 2,
+            Required = 3,
+            MatchPattern = 4
         }
 
         public static string AdminEmailSignature

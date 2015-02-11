@@ -1,27 +1,132 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@using totalhr.Resources
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
+<!-- BEGIN HEAD -->
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
-    <link rel="stylesheet" type="text/css" href="~/Areas/Admin/Content/css/SiteAdmin.css" />   
-    @RenderSection("extrastyles", required: false)
-    
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    @Scripts.Render("~/Scripts/Site/common.js")
-    @*Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.min.js")*@
+   <meta charset="utf-8" />
+   <title>@ViewBag.Title</title>
+   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+   <meta content="" name="description" />
+   <meta content="" name="author" />
+   <link href="/Content/assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+   <link href="/Content/assets/bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" />
+   <link href="/Content/assets/bootstrap/css/bootstrap-fileupload.css" rel="stylesheet" />
+   <link href="/Content/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+   <link href="/Content/css/style.css" rel="stylesheet" />
+   <link href="/Content/css/style_responsive.css" rel="stylesheet" />
+   <link href="/Content/css/style_default.css" rel="stylesheet" id="style_color" />
 
-    @RenderSection("scripts", required: false)
+   <link href="/Content/assets/fancybox/source/jquery.fancybox.css" rel="stylesheet" />
+   <link rel="stylesheet" type="text/css" href="/Content/assets/uniform/css/uniform.default.css" />
+
+    @RenderSection("extrastyles", required: false)
 </head>
-<body>
-   <div id="main">
-        <div class="content">
-            <div class="breadcrumb">
-                @RenderSection("breadcrumb", required: false)
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<body class="fixed-top">
+   <!-- BEGIN HEADER -->
+   @Html.Partial("_PartialHeader")
+   <!-- END HEADER -->
+   <!-- BEGIN CONTAINER -->
+   <div id="container" class="row-fluid">
+      <!-- BEGIN SIDEBAR -->
+      <div id="sidebar" class="nav-collapse collapse">
+
+         <div class="sidebar-toggler hidden-phone"></div>   
+
+         <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+         <div class="navbar-inverse">
+            <form class="navbar-search visible-phone">
+               <input type="text" class="search-query" placeholder="Search" />
+            </form>
+         </div>
+         <!-- END RESPONSIVE QUICK SEARCH FORM -->
+         <!-- BEGIN SIDEBAR MENU -->
+         @Html.Partial("_SideBarMenu")
+         <!-- END SIDEBAR MENU -->
+      </div>
+      <!-- END SIDEBAR -->
+      <!-- BEGIN PAGE -->  
+      <div id="main-content">
+         <!-- BEGIN PAGE CONTAINER-->
+         <div class="container-fluid">
+            <!-- BEGIN PAGE HEADER-->   
+            <div class="row-fluid">
+               <div class="span12">
+                   <!-- BEGIN THEME CUSTOMIZER-->
+                   <div id="theme-change" class="hidden-phone">
+                       <i class="icon-cogs"></i>
+                        <span class="settings">
+                            <span class="text">@AdminGeneric.V_Theme:</span>
+                            <span class="colors">
+                                <span class="color-default" data-style="default"></span>
+                                <span class="color-gray" data-style="gray"></span>
+                                <span class="color-purple" data-style="purple"></span>
+                                <span class="color-navy-blue" data-style="navy-blue"></span>
+                            </span>
+                        </span>
+                   </div>
+                   <!-- END THEME CUSTOMIZER-->
+                  
+                   <!--** my code-->
+                   <!-- BEGIN PAGE TITLE & BREADCRUMB-->
+                   <h3 class="page-title">
+                       @RenderSection("pagetitle", required: false)
+                  </h3>
+                   
+                   <div class="row-fluid">
+                     <div class="span12">
+                        @RenderSection("breadcrumb", required: false)
+                     </div>
+                  </div>                   
+                   
+                   <!-- END PAGE TITLE & BREADCRUMB-->
+               </div>
             </div>
-            @RenderBody()
-        </div>
-    </div>
+            <!-- END PAGE HEADER-->
+            <!-- BEGIN PAGE CONTENT-->
+
+             @RenderBody()
+             
+            <!-- END PAGE CONTENT-->         
+         </div>
+         <!-- END PAGE CONTAINER-->
+      </div>
+      <!-- END PAGE -->  
+   </div>
+   <!-- END CONTAINER -->
+   <!-- BEGIN FOOTER -->
+   <div id="footer">
+       2015 &copy; @AdminGeneric.V_TotalHR_Signature .
+      <div class="span pull-right">
+         <span class="go-top"><i class="icon-arrow-up"></i></span>
+      </div>
+   </div>
+   <!-- END FOOTER -->
+   <!-- BEGIN JAVASCRIPTS -->    
+   <!-- Load javascripts at bottom, this will reduce page load time -->
+   <script src="/Scripts/Site/js/jquery-1.8.3.min.js"></script>
+   <script src="/Scripts/Site/assets/bootstrap/js/bootstrap.min.js"></script>
+   <script src="/Scripts/Site/js/jquery.blockui.js"></script>
+   <!-- ie8 fixes -->
+   <!--[if lt IE 9]>
+   <script src="/Scripts/Site/js/excanvas.js"></script>
+   <script src="/Scripts//Sitejs/respond.js"></script>
+   <![endif]-->
+   <script type="text/javascript" src="/Scripts/Site/assets/chosen-bootstrap/chosen/chosen.jquery.min.js"></script>
+   <script type="text/javascript" src="/Scripts/Site/assets/uniform/jquery.uniform.min.js"></script>
+   <script src="/Scripts/Site/js/scripts.js"></script>
+   <script>
+       jQuery(document).ready(function () {
+           // initiate layout and plugins
+           App.init();
+       });
+   </script>
+    
+    @Scripts.Render("~/Scripts/Site/common.js")
+    @RenderSection("scripts", required: false)
 
     <div id="overlay-mask" style="display:none"></div>
 
@@ -30,9 +135,11 @@
     </div>
 
     <script>
-       @Html.Raw(string.Format(@" window.jQuery || document.write('<script src=""{0}Scripts/jquery-1.11.0.min.js""><\/script>');", 
+        @Html.Raw(string.Format(@" window.jQuery || document.write('<script src=""{0}Scripts/jquery-1.11.0.min.js""><\/script>');", 
         totalhr.web.Helpers.GenericHelper.WebsiteRoot))
     </script>
 
+   <!-- END JAVASCRIPTS -->   
 </body>
+<!-- END BODY -->
 </html>

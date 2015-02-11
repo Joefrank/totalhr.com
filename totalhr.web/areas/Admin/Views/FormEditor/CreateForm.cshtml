@@ -1,0 +1,138 @@
+﻿@using totalhr.Resources;
+
+@model totalhr.Shared.Models.FormInfo
+
+@{
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";    
+    ViewBag.Title = "Form Editor";
+    var schema = string.IsNullOrEmpty(Model.Schema) ? "''" : Model.Schema;
+}
+
+@section htmlattrib{ng-app="myApp"}
+
+@section headerScripts{
+    <link data-require="bootstrap-css@3.*" data-semver="3.2.0" rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <script data-require="angular.js@1.2.*" data-semver="1.2.25" src="https://code.angularjs.org/1.2.25/angular.js"></script>
+    <script data-require="angular-sanitize@1.2.25" data-semver="1.2.25" src="https://code.angularjs.org/1.2.25/angular-sanitize.js"></script>
+    <link data-require="angular-form-gen@0.0.1" data-semver="0.0.1" rel="stylesheet" href="https://cdn.rawgit.com/McNull/angular-form-gen/v0.0.1/dist/angular-form-gen.min.css" />
+    <script data-require="angular-form-gen@0.0.1" data-semver="0.0.1" src="https://cdn.rawgit.com/McNull/angular-form-gen/v0.0.1/dist/angular-form-gen.min.js"></script>
+    <script data-require="showdown@0.3.*" data-semver="0.3.1" src="http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
+    <script data-require="angular-markdown-text@0.0.2" data-semver="0.0.2" src="https://cdn.rawgit.com/McNull/angular-markdown-text/v0.0.2/dist/angular-markdown-text.min.js"></script>
+   
+        <script type="text/javascript">
+            var myApp = angular.module('myApp', ['fg', 'ngSanitize', 'markdown']);           
+
+            myApp.controller('MyController', function ($scope, schemaService) {
+
+                $scope.errorMessage = '';
+
+                $scope.FormTypeId = @Model.FormTypeId;
+
+                $scope.mySchema = @Html.Raw(schema);
+                
+                $scope.myForm = {
+                    schema: $scope.mySchema
+                };
+
+                $scope.ShowPreview = function () {
+                    window.open("/FormEditor/Preview/");
+                };
+
+                $scope.SaveForm = function () {
+                    //alert(JSON.stringify($scope.myForm.schema));
+
+                    var formData = $scope.myForm;
+                    schemaService.addSchema(
+                        {
+                            Id: formData.id,
+                            FormTypeId : $scope.FormTypeId,
+                            Schema: JSON.stringify(formData.schema)
+                        },
+                        function(msg) {
+                            var message = msg.Message;                            
+                            alert(msg.Message);
+                            $scope.errorMessage = '';
+                           // window.location.href = '/admin/Contract/Template/';
+                        },
+                        function(data, response) {
+                            alert('Error' + msg + ' ' + data.Message);
+                            $scope.errorMessage = data.Message;
+                        }
+                    );
+
+                };
+
+                //$scope.SubmitFormInput = function () {
+                //    alert(JSON.stringify($scope.myForm.data));
+                //};
+              
+            });
+
+            // I act a repository for the remote friend collection.
+            myApp.service(
+                "schemaService",
+                function($http, $q) {
+
+                    // Return public API.
+                    return ({
+                        addSchema: addSchema
+                    });
+
+                    function addSchema(data, success, fail) {
+
+                        $http({
+                            method: 'POST',
+                            url: "/Admin/FormEditor/CreateForm",
+                            data: data,
+                            async: false,
+                            dataType: "json"
+                        })
+                            .success(success)
+                            .error(fail);
+                    }
+                }
+            );
+
+        </script>       
+}
+
+@section head2{"Form Editor - Create form"}      
+       
+       
+        <div ng-controller="MyController" class="container">
+           
+            <p>
+                @FormGenerator.V_Form_Intro
+            </p>
+
+            <p>
+                Form Name: <input type="text" id="Name" name="Name" />
+            </p>
+            <div class="alert alert-danger" ng-if="errorMessage != ''" role="alert">
+                <strong>Error could not save form!</strong>
+                <br />
+                <span ng-bind="errorMessage"></span>
+            </div>
+
+            <div fg-tabs class="needs-some-more-space">                
+
+                <div fg-tabs-pane="Schema Editor">
+                    <form id="0" class="form-horizontal" name="myForm.$state">
+                        <div fg-edit
+                             fg-schema="mySchema">
+                        </div>
+                    </form>
+                    <input type="button" value="Preview" ng-click="ShowPreview()" />
+
+                    <input type="button" value="Save" ng-click="SaveForm()" />
+                </div>
+
+                 <div fg-tabs-pane="Quick Preview" disabled="myForm.$state.$invalid">
+                    @Html.Partial("_FormQuickPreview")
+                </div>
+
+            </div>
+
+        </div>
+       
+   

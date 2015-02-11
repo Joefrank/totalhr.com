@@ -101,6 +101,12 @@ namespace totalhr.Shared.Models
 
         public bool DetailsSaveSuccess { get; set; }
 
+        public bool? ProfilePictureAdded { get; set; }
+
+        public string ProfilePicturePath { get; set; }
+
+        public int? UserTypeId { get; set; }
+
         #endregion
     }
 }

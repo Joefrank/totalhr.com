@@ -9,14 +9,14 @@
 
 @section breadcrumb{
     <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
-    <a href="/Admin/User/" title="@AdminGeneric.V_User_List">@AdminGeneric.V_User_List</a>
+    <a href="/Admin/User/" title="@AdminGeneric.V_User_List">@AdminGeneric.V_User_List</a> &gt;
     <span class="last">@AdminGeneric.V_User_Management_Details</span>
 }
 
    <h1>@(AdminGeneric.V_User_Management + " - (" + AdminGeneric.V_User_Management_Details + ")")</h1>
  <div class="wide">
      <p>
-         @AdminGeneric.V_List_Of_Users_Intro
+         
      </p>
  </div>
    <div class="wide">
@@ -24,9 +24,17 @@
        <div class="formdiv midform">
             <div class="wrapper">
 
-                 <fieldset>
+               <fieldset>
                <legend>@FormMessages.Title_Personal_Details</legend>
                 
+                   @if(!string.IsNullOrEmpty(Model.PersonalInfo.ProfilePicturePath))
+                   {
+                    <div class="line">
+                    
+                         <span><img src="@totalhr.web.Helpers.GenericHelper.GetProfilePictureUrl(Model.PersonalInfo.ProfilePicturePath)" 
+                             alt="@(Model.PersonalInfo.FirstName + " " + Model.PersonalInfo.Surname)" /></span>                    
+                    </div>
+                   }
                 <div class="line">
                     <label>@FormMessages.Label_Gender <b class="req">*</b></label>
                      <span>Gender</span>                    

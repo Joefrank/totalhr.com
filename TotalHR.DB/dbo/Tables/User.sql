@@ -13,7 +13,7 @@
     [Town]               NVARCHAR (50)    NULL,
     [stateorcounty]      NVARCHAR (50)    NULL,
     [PostCode]           NVARCHAR (30)    NULL,
-    [countryId]          INT              NULL,
+    [countryId]          INT              NOT NULL,
     [Phone]              NVARCHAR (30)    NULL,
     [Mobile]             NVARCHAR (30)    NULL,
     [CompanyId]          INT              NOT NULL,
@@ -32,9 +32,12 @@
     [tersmaccepted]      BIT              CONSTRAINT [DF_User_tersmaccepted] DEFAULT ((0)) NOT NULL,
     [activationcode]     NVARCHAR (150)   NULL,
     [chosenculture]      VARCHAR (10)     NULL,
-    [departmentid]       INT              NULL,
-    CONSTRAINT [PK_user] PRIMARY KEY CLUSTERED ([id] ASC)
+    [departmentid]       INT              CONSTRAINT [DF_User_departmentid] DEFAULT ((0)) NOT NULL,
+    CONSTRAINT [PK_user] PRIMARY KEY CLUSTERED ([id] ASC),
+    CONSTRAINT [FK_User_Department] FOREIGN KEY ([departmentid]) REFERENCES [dbo].[Department] ([id])
 );
+
+
 
 
 

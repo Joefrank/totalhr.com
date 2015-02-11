@@ -1,0 +1,31 @@
+﻿@using totalhr.Resources;
+
+@{
+    ViewBag.Title = AdminGeneric.V_Contract_Management;    
+}
+
+<div class="container">
+@section breadcrumb{
+            <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
+            <span class="last">@AdminGeneric.V_Contract_Management</span>
+        }
+
+<h1>@AdminGeneric.V_Contract_Management</h1>
+
+<div class="wide">
+    <p>
+        @AdminGeneric.V_Choose_Option
+    </p>
+    <p>
+        <a href="/Admin/Contract/Manage/" title="@Contract.V_Contract_Management_SelUser">
+            @Contract.V_Contract_Management_SelUser
+        </a>
+    </p>
+    <p>
+        <a href="/Admin/Contract/Template/" title="@AdminGeneric.V_Manage_Templates">
+            @AdminGeneric.V_Manage_Templates
+        </a>
+    </p>
+</div>
+
+</div>

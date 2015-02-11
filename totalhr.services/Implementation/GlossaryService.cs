@@ -8,13 +8,18 @@ using totalhr.data.Repositories.Infrastructure;
 using totalhr.data.EF;
 using totalhr.Shared;
 using totalhr.Shared.Infrastructure;
+using totalhr.Shared.Models;
 
 namespace totalhr.services.Implementation
 {
     public class GlossaryService : IGlossaryService
     {
-        IGlossaryRepository _glossaryRepos;
+        private readonly IGlossaryRepository _glossaryRepos;
+        private readonly ILanguageRepository _languageRepository;
+
         ICacheHelper _cacheHelper;
+
+
 
         public void SetCacheHelper(ICacheHelper helper) {
             _cacheHelper = helper; 
@@ -22,11 +27,45 @@ namespace totalhr.services.Implementation
 
         //use a cache handler to store glossaries in memory.
 
-        public GlossaryService(IGlossaryRepository glossRepos, ICacheHelper cacheHelper)
+        public GlossaryService(IGlossaryRepository glossRepos, ILanguageRepository languageRepository, ICacheHelper cacheHelper)
         {
             _glossaryRepos = glossRepos;
+            _languageRepository = languageRepository;
             _cacheHelper = cacheHelper;
         }
+
+        public IEnumerable<ListItemStruct> GetLanguageList(int viewingLanguageId)
+        {
+            var languageGlossaries = GetGlossary(viewingLanguageId, Variables.GlossaryGroups.Language);
+            var allLanguages = GetAllLanguages();
+
+            var result = allLanguages.Select(x =>
+                {
+                    var firstOrDefault = languageGlossaries.FirstOrDefault(y => y.RootId == x.RelatedGlossaryId && y.LanguageId == viewingLanguageId);
+                    return firstOrDefault != null ? new ListItemStruct {
+                                                          Id = x.Id, 
+                                                          Name = firstOrDefault.Term} : null;
+                });
+
+            return result;
+        }
+
+        public IEnumerable<Language> GetAllLanguages()
+        {
+            IEnumerable<Language> allLanguages;
+
+            if (_cacheHelper.Exists("AllLanguages"))
+            {
+                allLanguages = _cacheHelper.Get<IEnumerable<Language>>("AllLanguages");
+            }
+            else
+            {
+                allLanguages = _languageRepository.GetAll().ToList();
+                _cacheHelper.Add<IEnumerable<Language>>(allLanguages, "AllLanguages");
+            }
+
+            return allLanguages;
+        } 
 
         public List<Glossary> GetGlossary(int languageid, Variables.GlossaryGroups group)
         {
@@ -60,7 +99,12 @@ namespace totalhr.services.Implementation
                 return "";
 
             var lstGlossary = GetGlossary(languageId, group);
-            return (lstGlossary != null) ? lstGlossary.FirstOrDefault(x => x.RootId == glossaryRootId).Term : "";
+            var el = lstGlossary.FirstOrDefault(x => x.RootId == glossaryRootId);
+
+            if (el != null)
+                return (lstGlossary != null) ? el.Term : "";
+            else
+                return "";
         }
     }
 }
