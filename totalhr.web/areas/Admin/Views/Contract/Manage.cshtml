@@ -1,49 +1,59 @@
 ﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
 
 @model List<totalhr.data.EF.User>
 
 @{
     ViewBag.Title = Contract.V_Contract_Management;
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Admin/Contract", Text = AdminGeneric.V_Contract_Management, Title= AdminGeneric.V_Contract_Management},
+        new BreadCrumbItem{Url = "", Text = Contract.V_Contract_Management_SelUser, Title= Contract.V_Contract_Management_SelUser}
+    };   
 }
 
-<div class="container">
-      @section breadcrumb{
-            <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
-            <a href="/Admin/Contract/" title="@AdminGeneric.V_Contract_Management">@AdminGeneric.V_Contract_Management</a> &gt;
-            <span class="last">@Contract.V_Contract_Management_SelUser</span>
-        }
+@section pagetitle{
+   @AdminGeneric.V_Contract_Management
+}
 
-    <h1>@Contract.V_Contract_Management</h1>
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
 
-    <div class="wide">
 
-        <p>
-            In order to create a contract for a user, you need to select a user from the list below or search for a user.<br />
-            Once a user is found, you can edit or create a contract for this user.
-        </p>
+    <div class="row-fluid">
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i>@Contract.V_Contract_Select_User</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                </span>
+            </div>
+            <div class="widget-body">
+                <p>
+                    @Html.Raw(Contract.V_Contract_Choose_User_Intro)
+                </p>
 
-        <div class="wide">
+                <div class="wide">
 
-          <form name="frmUser" id="frmUser" action="/Admin/Contract/ManageUserContract">
-              <b>@AdminGeneric.V_Select_User</b> &nbsp;
-              <select name="slUserList" id="slUserList" onchange="SubmitForm()">
-                  <option>@AdminGeneric.V_Select</option>
-                  @foreach (var user in Model)
-                  {
-                      <option value="@user.id">@(user.firstname + " " + user.surname)</option>
-                  }
-              </select>
+                  <form name="frmUser" id="frmUser" action="/Admin/Contract/ManageUserContract">
+                      <b>@AdminGeneric.V_Select_User</b> &nbsp;
+                      <select name="slUserList" id="slUserList" onchange="SubmitForm()">
+                          <option>@AdminGeneric.V_Select</option>
+                          @foreach (var user in Model)
+                          {
+                              <option value="@user.id">@(user.firstname + " " + user.surname)</option>
+                          }
+                      </select>
 
-          </form>
-        </div>
-        <div class="wide">
-
-           @* @Html.Partial("_UserList", Model)*@
-
+                  </form>
+                </div>
+           </div>
         </div>
         
-    </div>
-</div>
+  </div>
+
 
 <input type="hidden" id="hdnErrorUserNotSelected" value="@Contract.Error_Select_User" />
 

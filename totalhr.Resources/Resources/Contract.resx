@@ -231,4 +231,14 @@
   <data name="V_Contracts" xml:space="preserve">
     <value>Contracts</value>
   </data>
+  <data name="V_Contract_Choose_User_Intro" xml:space="preserve">
+    <value>In order to create a contract for a user, you need to select a user from the list below or search for a user.&lt;br /&gt;
+                    Once a user is found, you can edit or create a contract for this user.</value>
+  </data>
+  <data name="V_Contract_Select_User" xml:space="preserve">
+    <value>Select User</value>
+  </data>
+  <data name="V_User_Contract_Details" xml:space="preserve">
+    <value>Contract Details for '{0}'</value>
+  </data>
 </root>

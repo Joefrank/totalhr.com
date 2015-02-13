@@ -15,5 +15,7 @@ namespace totalhr.data.Repositories.Infrastructure
         UserContractData SaveContractData(ContractFillViewInfo model);
 
         IEnumerable<GetUserContractDetails_Result> GetUserContractDetails(int userId, int? contractId = null);
+
+        void SaveContractFieldData(List<UserContractFieldData> lstFieldData);
     }
 }

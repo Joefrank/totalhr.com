@@ -151,8 +151,51 @@ namespace FormService.Implementation
 
         public ResultInfo SaveData(ContractFillViewInfo model)
         {
-            var jObject = Newtonsoft.Json.Linq.JObject.Parse(model.Data);
-            return null;
+            dynamic dynJson = JsonConvert.DeserializeObject(model.Data);
+            var lstFieldData = new List<UserContractFieldData>();
+
+            //grab hold of all form fields for validation
+            var lstFormFields = _formRepository.GetFormFields(model.FormId);
+
+            foreach (var item in dynJson)
+            {
+                var tempArr = item.ToString().Split(':');
+
+                if (tempArr != null && tempArr.length == 2)
+                {
+                    //find related field
+                    var field = lstFormFields.FirstOrDefault(x => x.Name == tempArr[0].Trim());
+
+                    //validate input agains field
+                    var result = ValidateInputForField(field, tempArr[1]);
+
+                    if (string.IsNullOrEmpty(result))
+                    {
+                        lstFieldData.Add(new UserContractFieldData
+                        {
+                            Contractid = model.ContractId,
+                            Created = DateTime.Now,
+                            CreatedBy = model.CreatedBy,
+                            Data = tempArr[1],
+                            FormId = model.FormId,
+                            FieldId = field.id
+                        });
+                    }
+                    else
+                    {
+                        return new ResultInfo { Itemid = -1, ErrorMessage = "" };
+                    }
+                }               
+            }
+
+
+            return new ResultInfo { Itemid =1, ErrorMessage="" };
+        }
+
+        private string ValidateInputForField(FormFieldJSon field, string input)
+        {
+            //define validation rules
+            return "";
         }
     }
 }

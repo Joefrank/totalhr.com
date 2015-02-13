@@ -52,6 +52,12 @@ namespace totalhr.data.Repositories.Implementation
             return contractData;
         }
 
+        public void SaveContractFieldData(List<UserContractFieldData> lstFieldData)
+        {
+            Context.UserContractFieldDatas.AddRange(lstFieldData);
+            Context.SaveChanges();
+        }
+
         public IEnumerable<GetUserContractDetails_Result> GetUserContractDetails(int userId, int? contractId = null)
         {
             return this.Context.GetUserContractDetails(userId, contractId);

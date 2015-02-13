@@ -37,14 +37,8 @@ namespace totalhr.web.Controllers
         }
         
         public ActionResult Index()
-        {
-            var user = AuthService.GetClientUser();
-
-            if (user == null)
-            {
-                return View("Login");
-            }
-            return View(user);
+        {            
+            return View(CurrentUser);
         }
         
         public ActionResult MyDetails()
@@ -57,8 +51,7 @@ namespace totalhr.web.Controllers
 
         [AllowAnonymous]
         public ActionResult Login()
-        {
-            ViewBag.Currentuser = CurrentUser;            
+        {           
             return View();
         }
 
@@ -185,8 +178,7 @@ namespace totalhr.web.Controllers
             ViewBag.UserIsAdmin = true;
             ViewBag.IsUserLoggedIn = true;
             ViewBag.UserName = "Admin-Joe Tester";
-
-            return View("Index", user);
+            return RedirectToAction("Index", "Home", new { area = "Admin" });
         }
 
         [AllowAnonymous]

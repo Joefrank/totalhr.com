@@ -1,45 +1,66 @@
 ﻿@using System.Globalization
 @using totalhr.Resources;
-@using totalhr.web.Helpers;
+@using H = totalhr.web.Helpers;
+
+@using AH = totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
 
 @model totalhr.web.Areas.Admin.Models.UserContractDetails
 
 @{
-    ViewBag.Title = Contract.V_User_Contract;
-
-    
+    ViewBag.Title = Contract.V_User_Contract;    
 
     var contractId = 0;
     var templateId = 0;
     var userId = Model.UserDetails.id;
     var source = string.Empty;
     var selTemplate = "";
+    var templateName = string.Empty;
     
-        if (Model.Contract != null)
-        {
-            contractId = Model.Contract.id;
-            templateId = Model.Contract.TemplateId;
-            source = string.Format(@" src=""/Admin/FormEditor/Preview/{0}"" ", Model.Contract.TemplateId);
-            selTemplate = templateId.ToString(CultureInfo.InvariantCulture);
+    if (Model.Contract != null)
+    {
+        contractId = Model.Contract.id;
+        templateId = Model.Contract.TemplateId;
+        source = System.Web.VirtualPathUtility.ToAbsolute(@"~/Admin/Contract/FillContract/60"); //string.Format(@" src=""~/Admin/Contract/FillContract/{0}"" ", Model.UserDetails.id));
+        selTemplate = templateId.ToString(CultureInfo.InvariantCulture);        
+        
+        if(Model.TemplateList != null){
+            templateName = Model.TemplateList.FirstOrDefault(x => x.Id == templateId).Name;    
         }
+    }
 
       
-        var templateListHtml = GenericHelper.GenerateSelectHtmlFromNumerable(Model.TemplateList, "templateId", @" onchange=""SubmitForm()"" ", selTemplate);  
+    var templateListHtml = H.GenericHelper.GenerateSelectHtmlFromNumerable(Model.TemplateList, "templateId", @" onchange=""SubmitForm()"" ", selTemplate);
+
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Admin/Contract", Text = AdminGeneric.V_Contract_Management, Title= AdminGeneric.V_Contract_Management},
+        new BreadCrumbItem{Url = "/Admin/Contract/Manage/", Text = Contract.V_Contract_Management_SelUser, Title= Contract.V_Contract_Management_SelUser},
+        new BreadCrumbItem{Url = "", Text = Contract.V_User_Contract, Title= Contract.V_User_Contract}
+    }; 
 }
 
-<div class="container">
+      
+    @section pagetitle{
+       @Contract.V_User_Contract
+    }
+
     @section breadcrumb{
-            <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
-            <a href="/Admin/Contract/" title="@AdminGeneric.V_Contract_Management">@AdminGeneric.V_Contract_Management</a> &gt;
-            <a href="/Admin/Contract/Manage/" title="@Contract.V_Contract_Management_SelUser">@Contract.V_Contract_Management_SelUser</a> &gt;
-            <span class="last">@Contract.V_User_Contract</span>
-        }
+        @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+    }
 
-        <h1>@Contract.V_User_Contract</h1>
-    
+    <div class="row-fluid">        
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i>@string.Format(Contract.V_User_Contract_Details,
+                    Model.UserDetails.firstname + " " + Model.UserDetails.surname)</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                    <a href="javascript:;" class="icon-remove"></a>
+                </span>
+            </div>
+            <div class="widget-body"> 
 
-    <div class="wide">
-        
         @if (ViewBag.ModelSaved != null && Convert.ToBoolean(ViewBag.ModelSaved))
         {
             <div class="savesuccess">
@@ -57,19 +78,16 @@
        
                     <div class="formdiv midform">
                         <div class="wrapper">
-                            <fieldset>
-                                <legend>User Contract Details</legend>
-                
+                                           
                                 <div class="line">
-                                    <label>@Contract.V_User_Name</label>
+                                    <b>@Contract.V_User_Name:</b>
                                     <span>@(Model.UserDetails.firstname + " " + Model.UserDetails.surname)</span>
                                 </div>
 
                                 <div class="line">
-                                    <label>@Contract.V_Template_Name</label>
+                                    <b>@Contract.V_Template_Name</b>
                                     <span>
-                                        @Html.Raw(templateListHtml)
-                                        @*Html.DropDownListFor(x => templateId, itemList, new { onchange = "SubmitForm()" })*@
+                                        @templateName  <input type="button" value="Change" onclick="ModifyTemplate()" />
                                     </span>
                                     <span class="req">*</span>
                                 </div>
@@ -77,22 +95,22 @@
                                 @if (Model.Contract != null)
                                 {
                                     <div class="line">
-                                        <label>@Contract.V_Created_By</label>
+                                        <b>@Contract.V_Created_By</b>
                                         <span>@(Model.Contract.User.firstname + " " + Model.Contract.User.surname)</span>                        
                                     </div>
 
                                     <div class="line">
-                                        <label>@Contract.V_Created</label>
+                                        <b>@Contract.V_Created</b>
                                         <span>@Model.Contract.Created</span>    
                                     </div>
 
                                     <div class="line">
-                                        <label>@Contract.V_Last_Updated</label>
+                                        <b>@Contract.V_Last_Updated</b>
                                         <span>@((Model.Contract.User2 != null)? Model.Contract.Lastupdated.ToString() : "")</span>                        
                                     </div>
 
                                     <div class="line">
-                                        <label>@Contract.V_Last_Updated_By</label>
+                                        <b>@Contract.V_Last_Updated_By</b>
                                         <span>@((Model.Contract.User2 != null)? Model.Contract.User2.firstname + " " + Model.Contract.User2.surname : "")</span>                        
                                     </div>
                                 }
@@ -103,66 +121,74 @@
 
                                 <div class="line">
                                     <label>&nbsp;</label>
-                                    <span><input type="submit" onclick="return ValidateForm()" value="@Contract.V_Save_Contract" /></span>
+                                    @*<span><input type="submit" onclick="return ValidateForm()" value="@Contract.V_Save_Contract" /></span>*@
                                     @if (contractId > 0)
                                     {
                                         <span><input type="button" value="Fill Contract Form" onclick=" OpenContract() " /></span>
                                     }
                                 </div>
-                            </fieldset>
-
+                           
                         </div>
                     </div>
              }
-
+            </div>
         </div>
-
-
-    <div class="wide" id="formPreview" style="display:none;">
-        <iframe id="frmForm" @source class="inlineframe" style="margin:auto;width:1000px;min-height:400px;border:1px solid grey;background-color:beige;"></iframe>
     </div>
-</div>
+
+    <div class="row-fluid" id="formPreview">
+        <iframe id="frmForm"  class="inlineframe"  style="margin:auto;width:1000px;min-height:500px;border:1px solid grey;background-color:beige;"></iframe>
+    </div>
+
 
 <input type="hidden" id="hdnErrorTemplateNotSelected" value="@Contract.Error_Template_Not_Selected" />
 
 @section scripts{
     <script type="text/javascript">
-        function SubmitForm() {
-            var val = $("#templateId option:selected").val();
-            if (val > 0) {
-                $("#frmForm").attr("src", "/Admin/FormEditor/Preview/" + val);
-                $('#formPreview').show();
-                $('#TemplateId').val(val);
-            } else {
-                alert($('#hdnErrorTemplateNotSelected').val());
-            }
+
+        function ModifyTemplate() {
+            alert('implement me');
         }
 
         function OpenContract() {
-            var val = $("#templateId option:selected").val();
-            if (val > 0) {
-                var url = '/Admin/Contract/FillContract/' + $('#UserId').val();
-                NavigateTo(url);
-            } else {
-                alert($('#hdnErrorTemplateNotSelected').val());
-            }
+            $("#frmForm").attr("src", "@source");
         }
-        
-        function ValidateForm() {
-            var valTemplate = $("#templateId option:selected").val();
-            var userid = $('#UserId').val();
-            
-            if (valTemplate < 1 || valTemplate == "" || valTemplate == null) {
-                alert('You must select a template before saving contract!');
-                return false;
-            }
-            
-            if (userid == 0 || userid < 1 || userid == null) {
-                alert("No user was specified. Please specify a user!");
-                return false;
-            }
 
-            return true;
-        }
+        //function SubmitForm() {
+        //    var val = $("#templateId option:selected").val();
+        //    if (val > 0) {
+        //        $("#frmForm").attr("src", "/Admin/FormEditor/Preview/" + val);
+        //        $('#formPreview').show();
+        //        $('#TemplateId').val(val);
+        //    } else {
+        //        alert($('#hdnErrorTemplateNotSelected').val());
+        //    }
+        //}
+
+        //function OpenContract() {
+        //    var val = $("#templateId option:selected").val();
+        //    if (val > 0) {
+        //        var url = '/Admin/Contract/FillContract/' + $('#UserId').val();
+        //        NavigateTo(url);
+        //    } else {
+        //        alert($('#hdnErrorTemplateNotSelected').val());
+        //    }
+        //}
+        
+        //function ValidateForm() {
+        //    var valTemplate = $("#templateId option:selected").val();
+        //    var userid = $('#UserId').val();
+            
+        //    if (valTemplate < 1 || valTemplate == "" || valTemplate == null) {
+        //        alert('You must select a template before saving contract!');
+        //        return false;
+        //    }
+            
+        //    if (userid == 0 || userid < 1 || userid == null) {
+        //        alert("No user was specified. Please specify a user!");
+        //        return false;
+        //    }
+
+        //    return true;
+        //}
     </script>
 }

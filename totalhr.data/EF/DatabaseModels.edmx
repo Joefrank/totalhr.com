@@ -574,6 +574,18 @@
           <Property Name="LastUpdated" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="int" />
         </EntityType>
+        <EntityType Name="UserContractFieldData">
+          <Key>
+            <PropertyRef Name="FieldId" />
+            <PropertyRef Name="Contractid" />
+          </Key>
+          <Property Name="FieldId" Type="int" Nullable="false" />
+          <Property Name="Contractid" Type="int" Nullable="false" />
+          <Property Name="FormId" Type="int" Nullable="false" />
+          <Property Name="Data" Type="nvarchar" MaxLength="1500" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="UserProfile">
           <Key>
             <PropertyRef Name="UserId" />
@@ -1217,6 +1229,7 @@
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserContract" EntityType="Self.UserContract" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserContractData" EntityType="Self.UserContractData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserContractFieldData" EntityType="Self.UserContractFieldData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfilePicture" EntityType="Self.UserProfilePicture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
@@ -2763,6 +2776,7 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Department" EntitySet="Departments" />
           </AssociationSet>
+          <EntitySet Name="UserContractFieldDatas" EntityType="TotalHRModel.UserContractFieldData" />
         </EntityContainer>
         <ComplexType Name="GetCompanyFoldersByUser_Result">
           <Property Type="Int32" Name="documentId" Nullable="false" />
@@ -3020,6 +3034,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="UserContractFieldData">
+          <Key>
+            <PropertyRef Name="FieldId" />
+            <PropertyRef Name="Contractid" />
+          </Key>
+          <Property Name="FieldId" Type="Int32" Nullable="false" />
+          <Property Name="Contractid" Type="Int32" Nullable="false" />
+          <Property Name="FormId" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="String" Nullable="false" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3866,6 +3892,18 @@
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserContractFieldDatas">
+            <EntityTypeMapping TypeName="TotalHRModel.UserContractFieldData">
+              <MappingFragment StoreEntitySet="UserContractFieldData">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="Contractid" ColumnName="Contractid" />
+                <ScalarProperty Name="FieldId" ColumnName="FieldId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -57,5 +57,10 @@ namespace totalhr.data.Repositories.Implementation
             this.Context.FormFieldJSons.RemoveRange(Context.FormFieldJSons.Where(x => x.FormId == formId));
             this.Context.FormFieldValidationRules.RemoveRange(Context.FormFieldValidationRules.Where(x => x.FormId == formId));
         }
+
+        public List<EF.FormFieldJSon> GetFormFields(int formId)
+        {
+            return Context.FormFieldJSons.Where(x => x.FormId == formId).ToList();
+        }
     }
 }

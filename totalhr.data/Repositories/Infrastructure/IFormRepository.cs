@@ -14,5 +14,7 @@ namespace totalhr.data.Repositories.Infrastructure
         ResultInfo SaveFields(Dictionary<int, EF.FormFieldJSon> dicFields, Dictionary<int, List<EF.FormFieldValidationRule>> dicValidations);
 
         void DeleteFormFields(int formId);
+
+        List<EF.FormFieldJSon> GetFormFields(int formId);
     }
 }
