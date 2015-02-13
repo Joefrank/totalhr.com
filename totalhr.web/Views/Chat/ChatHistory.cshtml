@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "title";
-    Layout = "_Layout";
+    Layout = null;
 }
 
 <div id="Lobby">
@@ -32,3 +32,63 @@
     }
 </div>
 
+
+<div class="row-fluid">
+    <div class="span6">
+        <!-- BEGIN CHAT PORTLET-->
+        <div class="widget" id="">
+            <div class="widget-title">
+                <h4><i class="icon-comments-alt"></i> Conversation 3</h4>
+				<span class="tools">
+				<a href="javascript:;" class="icon-chevron-down"></a>
+				<a href="javascript:;" class="icon-remove"></a>
+				</span>
+            </div>
+            <div class="widget-body">
+                <ul class="chats normal-chat">
+                        <li class="in">
+                            <img class="avatar" alt="" src="img/avatar1.jpg" />
+                            <div class="message ">
+                                <span class="arrow"></span>
+                                <a href="#" class="name">Mosaddek</a>
+                                <span class="datetime">at Apr 14, 2013 3:23</span>
+								<span class="body">
+									Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. dolore magna aliquam erat volutpat. dolore magna aliquam erat volutpat.
+								</span>
+                            </div>
+                        </li>
+                        <li class="out">
+                            <img class="avatar" alt="" src="img/avatar2.jpg" />
+                            <div class="message">
+                                <span class="arrow"></span>
+                                <a href="#" class="name">Dulal Khan</a>
+                                <span class="datetime">at Apr 14, 2013 3:29</span>
+								<span class="body">
+								Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.
+								</span>
+                            </div>
+                        </li>
+                        <li class="in">
+                            <img class="avatar" alt="" src="img/avatar3.jpg" />
+                            <div class="message">
+                                <span class="arrow"></span>
+                                <a href="#" class="name">Munshi Kamal</a>
+                                <span class="datetime">at Apr 14, 2013 3:31</span>
+								<span class="body">
+									Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat.													</span>
+                            </div>
+                        </li>
+                    </ul>
+                <div class="chat-form">
+                    <div class="input-cont">
+                        <input type="text" placeholder="Type a message here..." />
+                    </div>
+                    <div class="btn-cont">
+                        <a href="javascript:;" class="btn btn-primary">Send</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END CHAT PORTLET-->
+    </div>
+</div>

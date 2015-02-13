@@ -129,6 +129,9 @@
   <data name="V_Form_Intro" xml:space="preserve">
     <value>Please edit your form by adding fields and save it.</value>
   </data>
+  <data name="V_Form_List" xml:space="preserve">
+    <value>Form List</value>
+  </data>
   <data name="V_Form_Name" xml:space="preserve">
     <value>Name</value>
   </data>

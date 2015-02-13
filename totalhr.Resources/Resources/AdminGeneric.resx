@@ -429,4 +429,10 @@
   <data name="V_TotalHR_Signature" xml:space="preserve">
     <value>TotalHR Admin</value>
   </data>
+  <data name="V_No_FormFound" xml:space="preserve">
+    <value>No form was found. Please create a new form</value>
+  </data>
+  <data name="V_Select_Form_Intro" xml:space="preserve">
+    <value>Please select the form you would like to manage below.</value>
+  </data>
 </root>

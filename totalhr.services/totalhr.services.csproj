@@ -112,6 +112,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\FormService\FormService.csproj">
+      <Project>{F75D380A-86C8-4876-9A32-650AA08FD2FF}</Project>
+      <Name>FormService</Name>
+    </ProjectReference>
     <ProjectReference Include="..\totalhr.data.TimeRecordingSystem\totalhr.data.TimeRecordingSystem.csproj">
       <Project>{aae8d583-9a4f-4e69-ab31-9a0cdceb4bcb}</Project>
       <Name>totalhr.data.TimeRecordingSystem</Name>

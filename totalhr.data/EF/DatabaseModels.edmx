@@ -61,6 +61,42 @@
           <Property Name="lastmodifiedby" Type="int" />
           <Property Name="obsolete" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="ChatMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChatUserid" Type="int" Nullable="false" />
+          <Property Name="ChatRoomId" Type="int" Nullable="false" />
+          <Property Name="MessageDate" Type="datetime" Nullable="false" />
+          <Property Name="MessageContent" Type="nvarchar" MaxLength="2000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChatRoom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Private" Type="bit" Nullable="false" />
+          <Property Name="InvitedUsers" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ChatRoomUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ChatRoomId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ChatRoomId" Type="int" Nullable="false" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LoggedOnTime" Type="datetime" Nullable="false" />
+          <Property Name="LastPing" Type="datetime" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+        </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="ID" />
@@ -656,6 +692,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ChatMessage_ChatMessage">
+          <End Role="ChatMessage" Type="Self.ChatMessage" Multiplicity="1" />
+          <End Role="ChatMessage1" Type="Self.ChatMessage" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ChatMessage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatMessage1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoom_ChatRoom">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ChatRoom" Type="Self.ChatRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ChatRoom">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoomUser_ChatRoom">
+          <End Role="ChatRoom" Type="Self.ChatRoom" Multiplicity="1" />
+          <End Role="ChatRoomUser" Type="Self.ChatRoomUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChatRoom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatRoomUser">
+              <PropertyRef Name="ChatRoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoomUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ChatRoomUser" Type="Self.ChatRoomUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ChatRoomUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoomUser_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="ChatRoomUser" Type="Self.ChatRoomUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ChatRoomUser">
+              <PropertyRef Name="LastUpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CompanyDocument_File">
           <End Role="File" Type="Self.File" Multiplicity="1" />
           <End Role="CompanyDocument" Type="Self.CompanyDocument" Multiplicity="*" />
@@ -1194,6 +1290,9 @@
           <EntitySet Name="CalendarAssociation" EntityType="Self.CalendarAssociation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CalendarEvent" EntityType="Self.CalendarEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CalEventReminderType" EntityType="Self.CalEventReminderType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChatMessage" EntityType="Self.ChatMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChatRoom" EntityType="Self.ChatRoom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChatRoomUser" EntityType="Self.ChatRoomUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyDocument" EntityType="Self.CompanyDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyDocumentDownloads" EntityType="Self.CompanyDocumentDownloads" Schema="dbo" store:Type="Tables" />
@@ -1244,6 +1343,26 @@
           <AssociationSet Name="FK_CalendarEvent_Calendar" Association="Self.FK_CalendarEvent_Calendar">
             <End Role="Calendar" EntitySet="Calendar" />
             <End Role="CalendarEvent" EntitySet="CalendarEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatMessage_ChatMessage" Association="Self.FK_ChatMessage_ChatMessage">
+            <End Role="ChatMessage" EntitySet="ChatMessage" />
+            <End Role="ChatMessage1" EntitySet="ChatMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoom_ChatRoom" Association="Self.FK_ChatRoom_ChatRoom">
+            <End Role="User" EntitySet="User" />
+            <End Role="ChatRoom" EntitySet="ChatRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoomUser_ChatRoom" Association="Self.FK_ChatRoomUser_ChatRoom">
+            <End Role="ChatRoom" EntitySet="ChatRoom" />
+            <End Role="ChatRoomUser" EntitySet="ChatRoomUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoomUser_User" Association="Self.FK_ChatRoomUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ChatRoomUser" EntitySet="ChatRoomUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoomUser_User1" Association="Self.FK_ChatRoomUser_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="ChatRoomUser" EntitySet="ChatRoomUser" />
           </AssociationSet>
           <AssociationSet Name="FK_CompanyDocument_File" Association="Self.FK_CompanyDocument_File">
             <End Role="File" EntitySet="File" />
@@ -1976,6 +2095,9 @@
           <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
           <NavigationProperty Name="FormFieldValidationRules" Relationship="TotalHRModel.FK_FormFieldValidationRule_User" FromRole="User" ToRole="FormFieldValidationRule" />
           <NavigationProperty Name="Departments" Relationship="TotalHRModel.FK_Department_User" FromRole="User" ToRole="Department" />
+          <NavigationProperty Name="ChatRooms" Relationship="TotalHRModel.FK_ChatRoom_ChatRoom" FromRole="User" ToRole="ChatRoom" />
+          <NavigationProperty Name="ChatRoomUsers" Relationship="TotalHRModel.FK_ChatRoomUser_User" FromRole="User" ToRole="ChatRoomUser" />
+          <NavigationProperty Name="ChatRoomUsers1" Relationship="TotalHRModel.FK_ChatRoomUser_User1" FromRole="User" ToRole="ChatRoomUser" />
         </EntityType>
         <EntityType Name="UserContract">
           <Key>
@@ -2777,6 +2899,29 @@
             <End Role="Department" EntitySet="Departments" />
           </AssociationSet>
           <EntitySet Name="UserContractFieldDatas" EntityType="TotalHRModel.UserContractFieldData" />
+          <EntitySet Name="ChatMessages" EntityType="TotalHRModel.ChatMessage" />
+          <EntitySet Name="ChatRooms" EntityType="TotalHRModel.ChatRoom" />
+          <EntitySet Name="ChatRoomUsers" EntityType="TotalHRModel.ChatRoomUser" />
+          <AssociationSet Name="FK_ChatMessage_ChatMessage" Association="TotalHRModel.FK_ChatMessage_ChatMessage">
+            <End Role="ChatMessage" EntitySet="ChatMessages" />
+            <End Role="ChatMessage1" EntitySet="ChatMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoom_ChatRoom" Association="TotalHRModel.FK_ChatRoom_ChatRoom">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ChatRoom" EntitySet="ChatRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoomUser_ChatRoom" Association="TotalHRModel.FK_ChatRoomUser_ChatRoom">
+            <End Role="ChatRoom" EntitySet="ChatRooms" />
+            <End Role="ChatRoomUser" EntitySet="ChatRoomUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoomUser_User" Association="TotalHRModel.FK_ChatRoomUser_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ChatRoomUser" EntitySet="ChatRoomUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoomUser_User1" Association="TotalHRModel.FK_ChatRoomUser_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ChatRoomUser" EntitySet="ChatRoomUsers" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetCompanyFoldersByUser_Result">
           <Property Type="Int32" Name="documentId" Nullable="false" />
@@ -3046,6 +3191,109 @@
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="ChatMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChatUserid" Type="Int32" Nullable="false" />
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
+          <Property Name="MessageDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MessageContent" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ChatMessage1" Relationship="TotalHRModel.FK_ChatMessage_ChatMessage" FromRole="ChatMessage" ToRole="ChatMessage1" />
+          <NavigationProperty Name="ChatMessage2" Relationship="TotalHRModel.FK_ChatMessage_ChatMessage" FromRole="ChatMessage1" ToRole="ChatMessage" />
+        </EntityType>
+        <EntityType Name="ChatRoom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Private" Type="Boolean" Nullable="false" />
+          <Property Name="InvitedUsers" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_ChatRoom_ChatRoom" FromRole="ChatRoom" ToRole="User" />
+          <NavigationProperty Name="ChatRoomUsers" Relationship="TotalHRModel.FK_ChatRoomUser_ChatRoom" FromRole="ChatRoom" ToRole="ChatRoomUser" />
+        </EntityType>
+        <EntityType Name="ChatRoomUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ChatRoomId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
+          <Property Name="NickName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LoggedOnTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastPing" Type="DateTime" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <NavigationProperty Name="ChatRoom" Relationship="TotalHRModel.FK_ChatRoomUser_ChatRoom" FromRole="ChatRoomUser" ToRole="ChatRoom" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_ChatRoomUser_User" FromRole="ChatRoomUser" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_ChatRoomUser_User1" FromRole="ChatRoomUser" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_ChatMessage_ChatMessage">
+          <End Type="TotalHRModel.ChatMessage" Role="ChatMessage" Multiplicity="1" />
+          <End Type="TotalHRModel.ChatMessage" Role="ChatMessage1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ChatMessage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatMessage1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoom_ChatRoom">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.ChatRoom" Role="ChatRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ChatRoom">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoomUser_ChatRoom">
+          <End Type="TotalHRModel.ChatRoom" Role="ChatRoom" Multiplicity="1" />
+          <End Type="TotalHRModel.ChatRoomUser" Role="ChatRoomUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChatRoom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatRoomUser">
+              <PropertyRef Name="ChatRoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoomUser_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.ChatRoomUser" Role="ChatRoomUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ChatRoomUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoomUser_User1">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.ChatRoomUser" Role="ChatRoomUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ChatRoomUser">
+              <PropertyRef Name="LastUpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -3904,6 +4152,44 @@
                 <ScalarProperty Name="FormId" ColumnName="FormId" />
                 <ScalarProperty Name="Contractid" ColumnName="Contractid" />
                 <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatMessages">
+            <EntityTypeMapping TypeName="TotalHRModel.ChatMessage">
+              <MappingFragment StoreEntitySet="ChatMessage">
+                <ScalarProperty Name="MessageContent" ColumnName="MessageContent" />
+                <ScalarProperty Name="MessageDate" ColumnName="MessageDate" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+                <ScalarProperty Name="ChatUserid" ColumnName="ChatUserid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatRooms">
+            <EntityTypeMapping TypeName="TotalHRModel.ChatRoom">
+              <MappingFragment StoreEntitySet="ChatRoom">
+                <ScalarProperty Name="InvitedUsers" ColumnName="InvitedUsers" />
+                <ScalarProperty Name="Private" ColumnName="Private" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatRoomUsers">
+            <EntityTypeMapping TypeName="TotalHRModel.ChatRoomUser">
+              <MappingFragment StoreEntitySet="ChatRoomUser">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="LastPing" ColumnName="LastPing" />
+                <ScalarProperty Name="LoggedOnTime" ColumnName="LoggedOnTime" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

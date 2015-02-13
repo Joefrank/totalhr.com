@@ -1,19 +1,18 @@
 ﻿@model totalhr.Shared.Models.ChatModel
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8" />
-    <title>MVC / JQuery Chat</title>
-    <meta name="HandheldFriendly" content="True" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes" />
+
+
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/jqueryui")
     
+@section scripts
+{
     <script src="/Scripts/Site/Chat.js"></script>
+}
 
-    <style type="text/css">
+
+    @*<style type="text/css">
         body, html
         {
             height: 100%;
@@ -88,9 +87,9 @@
             left: 10%;
             width: 50%;
         }
-    </style>
-</head>
-<body>
+    </style>*@
+
+
     <div id="YourNickname">
     </div>
     <div id="LastRefresh">
@@ -106,5 +105,5 @@
     <div id="Error">
     </div>
     @Ajax.ActionLink("Login", "Index", new { thisUserLoggedOn = "" }, new AjaxOptions { UpdateTargetId = "container", OnFailure = "LoginOnFailure", OnSuccess = "LoginOnSuccess" }, new { @id = "LoginButton", @style = "visibility:hidden;" })
-</body>
-</html>
+
+

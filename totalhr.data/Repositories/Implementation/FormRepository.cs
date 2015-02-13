@@ -62,5 +62,11 @@ namespace totalhr.data.Repositories.Implementation
         {
             return Context.FormFieldJSons.Where(x => x.FormId == formId).ToList();
         }
+
+        public void SaveUserContractFieldData(List<UserContractFieldData> lstFieldData)
+        {
+            Context.UserContractFieldDatas.AddRange(lstFieldData);
+            Context.SaveChanges();
+        }
     }
 }

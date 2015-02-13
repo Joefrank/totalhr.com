@@ -592,6 +592,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No form was found. Please create a new form.
+        /// </summary>
+        public static string V_No_FormFound {
+            get {
+                return ResourceManager.GetString("V_No_FormFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notify User by Email.
         /// </summary>
         public static string V_Notify_User_ByEmail {
@@ -741,6 +750,15 @@ namespace totalhr.Resources {
         public static string V_Select {
             get {
                 return ResourceManager.GetString("V_Select", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select the form you would like to manage below..
+        /// </summary>
+        public static string V_Select_Form_Intro {
+            get {
+                return ResourceManager.GetString("V_Select_Form_Intro", resourceCulture);
             }
         }
         

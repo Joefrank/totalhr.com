@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using totalhr.Shared.Models;
+using totalhr.data.EF;
 
 namespace totalhr.data.Repositories.Infrastructure
 {
@@ -16,5 +17,7 @@ namespace totalhr.data.Repositories.Infrastructure
         void DeleteFormFields(int formId);
 
         List<EF.FormFieldJSon> GetFormFields(int formId);
+
+        void SaveUserContractFieldData(List<UserContractFieldData> lstFieldData);
     }
 }

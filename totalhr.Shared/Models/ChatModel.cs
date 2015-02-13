@@ -22,17 +22,34 @@ namespace totalhr.Shared.Models
         public ChatModel()
         {
             Users = new List<ChatUser>();
-            ChatHistory = new List<ChatMessage>();
+            ChatHistory = new List<ChatMessage>
+                {
+                    new ChatMessage()
+                        {
+                            Message = string.Format(Common.V_Chat_Server_Started_At, DateTime.Now)
+                        }
+                };
+        }
 
-            ChatHistory.Add(new ChatMessage()
-            {
-                Message = string.Format(Common.V_Chat_Server_Started_At, DateTime.Now) 
-            });
+        public class ChatRoom
+        {
+            public string Name { get; set; }
+
+            public string Creator { get; set; }
+
+            public int CreatorId { get; set; }
+
+            public DateTime CreatedOn { get; set; }
+
+            public bool Private { get { return InvitedUserIds != null && InvitedUserIds.Count > 0; } }
+
+            public List<int> InvitedUserIds { get; set; } 
         }
 
         public class ChatUser
         {
             public string NickName;
+            public int Userid;
             public DateTime LoggedOnTime;
             public DateTime LastPing;
         }
@@ -46,7 +63,7 @@ namespace totalhr.Shared.Models
 
             public DateTime When = DateTime.Now;
 
-            public string Message = "";
+            public string Message ="";
 
         }
     }

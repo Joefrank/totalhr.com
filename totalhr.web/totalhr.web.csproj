@@ -1588,6 +1588,12 @@
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Chat\ChatHistory.cshtml" />
     <Content Include="Views\Chat\Lobby.cshtml" />
+    <Content Include="Views\Shared\Copy of _Layout.cshtml" />
+    <Content Include="Views\Shared\_SideBarMenu.cshtml" />
+    <Content Include="Views\Shared\_PartialHeader.cshtml" />
+    <Content Include="Views\Shared\_MyNotificationPreview.cshtml" />
+    <Content Include="Views\Shared\_MyMessagePreview.cshtml" />
+    <Content Include="Views\Shared\_MyProfilePreview.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

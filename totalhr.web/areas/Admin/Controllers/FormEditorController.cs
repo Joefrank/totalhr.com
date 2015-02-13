@@ -51,7 +51,7 @@ namespace totalhr.web.Areas.Admin.Controllers
         public ActionResult EditForm(int id)
         {
             // make form write protected. only selected users should edit
-            return View( _formService.GetForm(id));
+            return View(_formService.GetForm(id));
         }
        
         public ActionResult CreateForm([Bind(Prefix="id")] int formType)

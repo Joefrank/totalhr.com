@@ -39,6 +39,9 @@ namespace totalhr.data.EF
             this.UserRoles = new HashSet<UserRole>();
             this.FormFieldValidationRules = new HashSet<FormFieldValidationRule>();
             this.Departments = new HashSet<Department>();
+            this.ChatRooms = new HashSet<ChatRoom>();
+            this.ChatRoomUsers = new HashSet<ChatRoomUser>();
+            this.ChatRoomUsers1 = new HashSet<ChatRoomUser>();
         }
     
         public int id { get; set; }
@@ -121,5 +124,11 @@ namespace totalhr.data.EF
         public virtual ICollection<FormFieldValidationRule> FormFieldValidationRules { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Department> Departments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChatRoom> ChatRooms { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChatRoomUser> ChatRoomUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChatRoomUser> ChatRoomUsers1 { get; set; }
     }
 }

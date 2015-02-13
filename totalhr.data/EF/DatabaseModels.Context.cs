@@ -70,6 +70,9 @@ namespace totalhr.data.EF
         public virtual DbSet<FormFieldValidationRule> FormFieldValidationRules { get; set; }
         public virtual DbSet<FormFieldJSon> FormFieldJSons { get; set; }
         public virtual DbSet<UserContractFieldData> UserContractFieldDatas { get; set; }
+        public virtual DbSet<ChatMessage> ChatMessages { get; set; }
+        public virtual DbSet<ChatRoom> ChatRooms { get; set; }
+        public virtual DbSet<ChatRoomUser> ChatRoomUsers { get; set; }
     
         [DbFunction("TotalHREntities", "SplitCSV")]
         public virtual IQueryable<SplitCSV_Result> SplitCSV(string @string, string delimiter)

@@ -45,10 +45,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomViewEngine.cs" />
+    <Compile Include="FormInputValidation.cs" />
     <Compile Include="PaginationItemBuilder.cs" />
     <Compile Include="ParamAdapter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UrlBuilder.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\totalhr.Resources\Resources\totalhr.Resources.csproj">
+      <Project>{9c706121-a522-4f91-970a-5d0d3929eaee}</Project>
+      <Name>totalhr.Resources</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

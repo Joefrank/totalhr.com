@@ -16,18 +16,18 @@
     });
 
     //auto click when enter is pressed
-    $('#txtNickName').keydown(function (e) {
+    $('#txtNickName').keydown(function(e) {
         if (e.keyCode == 13) {
             e.preventDefault();
             $("#btnLogin").click();
         }
-    })
+    });
 
 });
 
 //the login was successful. Setup events for the lobby and prepare other UI items
 function LoginOnSuccess(result) {
-
+    alert('success');
     ScrollChat();
     ShowLastRefresh();
 
@@ -74,9 +74,10 @@ function LoginOnSuccess(result) {
 
 //briefly show login error message
 function LoginOnFailure(result) {
+    alert('failure');
     $("#YourNickname").val("");
     $("#Error").text(result.responseText);
-    setTimeout("$('#Error').empty();", 2000);
+    //setTimeout("$('#Error').empty();", 2000);
 }
 
 //called every 5 seconds

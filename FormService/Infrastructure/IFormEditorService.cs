@@ -17,9 +17,9 @@ namespace FormService.Infrastructure
         IEnumerable<ListItemStruct> ListFormsOfTypeSimple(int formTypeId);
 
         Form GetForm(int id);
-
-        ResultInfo SaveData(ContractFillViewInfo model);
-
+       
         ResultInfo SaveFormFields(FormInfo info);
+
+        ResultInfo SaveFieldData(ContractFillViewInfo model);
     }
 }

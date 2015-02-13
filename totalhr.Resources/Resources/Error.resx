@@ -168,6 +168,15 @@
   <data name="Error_Profile_Picture_Missing" xml:space="preserve">
     <value>You need to add user profile picture.</value>
   </data>
+  <data name="Error_Validation_Field_X_IsRequired" xml:space="preserve">
+    <value>The field '{0}' is mandatory!</value>
+  </data>
+  <data name="Error_Validation_Field_X_MinReq" xml:space="preserve">
+    <value>A minimum of '{0}' characters is required for the field {1}!</value>
+  </data>
+  <data name="Error_Validation_Pattern_Not_Matched" xml:space="preserve">
+    <value>The input for the field '{0}' is invalid!</value>
+  </data>
   <data name="MSG_Error_Could_Not_Save_PRofiles" xml:space="preserve">
     <value>Sorry could not save user profiles!</value>
   </data>

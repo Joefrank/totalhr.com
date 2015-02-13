@@ -13,8 +13,8 @@ namespace totalhr.services.Implementation
 {
     public class ContractService : IContractService
     {
-        private IContractRepository _contractRepos;
-        private IContractTemplateRepository _templateRepos;
+        private readonly IContractRepository _contractRepos;
+        private readonly IContractTemplateRepository _templateRepos;
 
         public ContractService(IContractRepository contractRepos, IContractTemplateRepository templateRepos)
         {
