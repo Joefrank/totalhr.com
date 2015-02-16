@@ -9,6 +9,7 @@ using totalhr.data.EF;
 using totalhr.Shared;
 using FormService.Infrastructure;
 using Newtonsoft.Json;
+using totalhr.core;
 
 
 namespace FormService.Implementation
@@ -149,7 +150,7 @@ namespace FormService.Implementation
             return lstValidations;
         }
 
-        public ResultInfo SaveData(ContractFillViewInfo model)
+        public ResultInfo SaveFieldData(ContractFillViewInfo model)
         {
             dynamic dynJson = JsonConvert.DeserializeObject(model.Data);
             var lstFieldData = new List<UserContractFieldData>();
@@ -169,7 +170,8 @@ namespace FormService.Implementation
                     //validate input agains field
                     var result = ValidateInputForField(field, tempArr[1]);
 
-                    if (string.IsNullOrEmpty(result))
+                    //
+                    if (result.StateIsValid)
                     {
                         lstFieldData.Add(new UserContractFieldData
                         {
@@ -181,21 +183,64 @@ namespace FormService.Implementation
                             FieldId = field.id
                         });
                     }
-                    else
+                    else //if there is any error, let's stop validation and return
                     {
-                        return new ResultInfo { Itemid = -1, ErrorMessage = "" };
+                        return new ResultInfo { Itemid = -1, ErrorMessage = result.ErrorMessage };
                     }
                 }               
             }
 
+            //if we get here, then validation has passed
 
-            return new ResultInfo { Itemid =1, ErrorMessage="" };
+            int saveResult = _formRepository.SaveUserContractFieldData(lstFieldData);
+
+            return new ResultInfo { Itemid = saveResult, ErrorMessage = (saveResult > 0)? "" : "Failed to save Field data." };
         }
 
-        private string ValidateInputForField(FormFieldJSon field, string input)
+        private ValidationResult ValidateInputForField(FormFieldJSon field, string input)
         {
             //define validation rules
-            return "";
+            var lstRules = field.FormFieldValidationRules;
+            FormInputValidation validator = null;
+
+            foreach (var rule in lstRules)
+            {
+                switch (rule.ValidationRuleId)
+                {
+                    case (int)Variables.FormValidationRules.Required:
+                        validator = new RequiredFormInputValidator();
+                        break;
+                    case (int)Variables.FormValidationRules.TxtMinLen:
+                        validator = new MinLengthFormInputValidator(Convert.ToInt32(rule.SetValue));
+                        break;
+                    case (int)Variables.FormValidationRules.TxtMaxLen:
+                        validator = new MaxLengthFormInputValidator(Convert.ToInt32(rule.SetValue));
+                        break;
+                    case (int)Variables.FormValidationRules.MatchPattern:
+                        validator = new PatternFormInputValidator(rule.SetValue);
+                        break;
+                    default: validator = null; break;
+                }
+
+                if (validator == null)
+                {
+                    return new ValidationResult { StateIsValid = false, ErrorMessage = "No validator found for rule {0}" };
+                }
+                else
+                {
+                    var result = validator.Validate(input, field.Name);
+                    if (!result.StateIsValid)
+                    {
+                        return new ValidationResult
+                        {
+                            ErrorMessage = string.Format("Validation Failed for field {0} on rule {1}", field.Name, rule.ValidationRuleId),
+                            StateIsValid = false
+                        };
+                    }
+                }
+            }
+
+            return new ValidationResult { StateIsValid = true };
         }
     }
 }

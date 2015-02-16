@@ -18,6 +18,6 @@ namespace totalhr.data.Repositories.Infrastructure
 
         List<EF.FormFieldJSon> GetFormFields(int formId);
 
-        void SaveUserContractFieldData(List<UserContractFieldData> lstFieldData);
+        int SaveUserContractFieldData(List<UserContractFieldData> lstFieldData);
     }
 }

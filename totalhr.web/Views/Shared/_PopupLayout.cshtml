@@ -13,21 +13,22 @@
     @RenderSection("headerScripts", required:false)
 </head>
 <body>
-   <div id="main">
-    <div class="content">
-         <div class="popuphead">             
-              @RenderSection("head2", required: true)   
-              <div id="toolbox">
-                  <span class="spclose" onclick="parent.ClosePopup('dvPopup')">&nbsp;</span> 
-              </div>
+   <div id="main" style="background:red;height:70%;overflow:hidden;">        
+        <div class="popuphead">             
+            @RenderSection("head2", required: true)   
+            <div id="toolbox">
+                <span class="spclose" onclick="parent.ClosePopup('dvPopup')">&nbsp;</span> 
+            </div>
         </div> 
         
-        <div id="popupBody">
+        <div id="popupBody" style="height:70%;overflow:hidden;">
             @RenderBody()
-         </div>
-            
         </div>
-    </div>
+        
+       <div id="popupfooter">
+           footer
+       </div>
+ </div>
 
 
     @RenderSection("scripts", required: false)

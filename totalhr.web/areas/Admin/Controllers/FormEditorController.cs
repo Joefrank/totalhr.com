@@ -53,7 +53,8 @@ namespace totalhr.web.Areas.Admin.Controllers
             // make form write protected. only selected users should edit
             return View(_formService.GetForm(id));
         }
-       
+              
+
         public ActionResult CreateForm([Bind(Prefix="id")] int formType)
         {
             var form = new totalhr.Shared.Models.FormInfo();
