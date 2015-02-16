@@ -318,6 +318,7 @@
     </Compile>
     <Compile Include="Repositories\Implementation\CalendarEventRepository.cs" />
     <Compile Include="Repositories\Implementation\CalendarRepository.cs" />
+    <Compile Include="Repositories\Implementation\ChatRepository.cs" />
     <Compile Include="Repositories\Implementation\CompanyDocumentRepository.cs" />
     <Compile Include="Repositories\Implementation\CompanyRepository.cs" />
     <Compile Include="Repositories\Implementation\ContractRepository.cs" />
@@ -333,6 +334,7 @@
     <Compile Include="Repositories\Implementation\UserRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICalendarEventRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICalendarRepository.cs" />
+    <Compile Include="Repositories\Infrastructure\IChatRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICompanyDocumentRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICompanyRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IContractRepository.cs" />

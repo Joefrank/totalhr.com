@@ -231,4 +231,43 @@
   <data name="V_Chat_User_X_LoggedOn" xml:space="preserve">
     <value>User '{0}' logged on.</value>
   </data>
+  <data name="V_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="V_ChatRoom_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="V_ChatRoom_Details" xml:space="preserve">
+    <value>Chat Room Details</value>
+  </data>
+  <data name="V_ChatRoom_Invited_Users" xml:space="preserve">
+    <value>Invited Users</value>
+  </data>
+  <data name="V_ChatRoom_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="V_ChatRoom_Private" xml:space="preserve">
+    <value>Private</value>
+  </data>
+  <data name="V_ChatRoom_Public" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="V_ChatRoom_Target" xml:space="preserve">
+    <value>Target</value>
+  </data>
+  <data name="V_Chat_NoRooms" xml:space="preserve">
+    <value>Sorry but there is no chat room available. You can create one by using the button below.</value>
+  </data>
+  <data name="V_Chat_Rooms" xml:space="preserve">
+    <value>Chat Rooms</value>
+  </data>
+  <data name="V_Chat_Room_Create" xml:space="preserve">
+    <value>Chat Room Creation</value>
+  </data>
+  <data name="V_Chat_Room_List" xml:space="preserve">
+    <value>List of chat rooms</value>
+  </data>
+  <data name="V_Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
 </root>

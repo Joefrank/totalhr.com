@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Configuration;
+using ChatService.Implementation;
+using ChatService.Infrastructure;
 using Ninject;
 using totalhr.data.EF;
 using totalhr.data.Repositories.Infrastructure;
@@ -33,7 +35,7 @@ namespace totalhr.web.Controllers.Dependencies
 {
     public class Container : DefaultControllerFactory
     {
-        private IKernel ninjectKernel;
+        private readonly IKernel ninjectKernel;
 
         public Container()
         {
@@ -80,6 +82,8 @@ namespace totalhr.web.Controllers.Dependencies
             ninjectKernel.Bind<IContractService>().To<ContractService>();
             ninjectKernel.Bind<IFormEditorService>().To<FormEditorService>();
             ninjectKernel.Bind<IFormRepository>().To<FormRepository>();
+            ninjectKernel.Bind<IChatRepository>().To<ChatRepository>();
+            ninjectKernel.Bind<IChatManagerService>().To<ChatManagerService>();
         }
 
     }

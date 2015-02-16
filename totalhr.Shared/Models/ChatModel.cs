@@ -18,7 +18,7 @@ namespace totalhr.Shared.Models
         /// Messages by the users
         /// </summary>
         public List<ChatMessage> ChatHistory;
-
+        
         public ChatModel()
         {
             Users = new List<ChatUser>();
@@ -34,6 +34,8 @@ namespace totalhr.Shared.Models
         public class ChatRoom
         {
             public string Name { get; set; }
+
+            public string Description { get; set; }
 
             public string Creator { get; set; }
 

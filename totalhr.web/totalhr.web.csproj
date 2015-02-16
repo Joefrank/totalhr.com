@@ -179,6 +179,7 @@
     <Compile Include="Controllers\Admin\AdminHomeController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\ChatApiController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
     <Compile Include="Controllers\Dependencies\Container.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Helpers\GenericHelper.cs" />
     <Compile Include="Helpers\GossaryHelper.cs" />
     <Compile Include="Helpers\PaginationHelper.cs" />
+    <Compile Include="Models\ChatRoomViewModel.cs" />
     <Compile Include="Models\UserAccountStruct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -1595,6 +1597,7 @@
     <Content Include="Views\Shared\_MyNotificationPreview.cshtml" />
     <Content Include="Views\Shared\_MyMessagePreview.cshtml" />
     <Content Include="Views\Shared\_MyProfilePreview.cshtml" />
+    <Content Include="Views\Chat\CreateRoom.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1627,6 +1630,10 @@
     <ProjectReference Include="..\CalendarService\Calendar.csproj">
       <Project>{67516845-fb4c-4820-954d-3382a86ba6e1}</Project>
       <Name>Calendar</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ChatService\ChatService.csproj">
+      <Project>{e90c004e-c63b-44e1-89b0-12465f578974}</Project>
+      <Name>ChatService</Name>
     </ProjectReference>
     <ProjectReference Include="..\CompanyDocumentService\CompanyDocumentService.csproj">
       <Project>{44b7bfe7-5325-47eb-91b0-e08d0bbaa170}</Project>

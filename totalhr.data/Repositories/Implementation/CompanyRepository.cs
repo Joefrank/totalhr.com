@@ -30,12 +30,14 @@ namespace totalhr.data.Repositories.Implementation
 
         public int CreateDepartment(int companyId, int userId, string departmentName, string description)
         {
-            Department dept = new Department();
-            dept.Name = departmentName;
-            dept.Description = description;
-            dept.CreatedBy = userId;
-            dept.CompanyId = companyId;
-            dept.Created = DateTime.Now;
+            var dept = new Department
+                {
+                    Name = departmentName,
+                    Description = description,
+                    CreatedBy = userId,
+                    CompanyId = companyId,
+                    Created = DateTime.Now
+                };
 
             this.Context.Departments.Add(dept);
             this.Context.SaveChanges();

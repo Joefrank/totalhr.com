@@ -142,14 +142,6 @@ namespace FormService.Implementation
             }
         }
 
-
-        private List<FormFieldValidationRule> GetValidationRule(string validation, int userId)
-        {
-            var lstValidations = new List<FormFieldValidationRule>();
-            lstValidations.Add(new FormFieldValidationRule{ Created = DateTime.Now, CreatedBy = userId, ValidationRuleId = 1});
-            return lstValidations;
-        }
-
         public ResultInfo SaveFieldData(ContractFillViewInfo model)
         {
             dynamic dynJson = JsonConvert.DeserializeObject(model.Data);
@@ -167,32 +159,37 @@ namespace FormService.Implementation
                     //find related field
                     var field = lstFormFields.FirstOrDefault(x => x.Name == tempArr[0].Trim());
 
-                    //validate input agains field
-                    var result = ValidateInputForField(field, tempArr[1]);
+                    if (field != null)
+                    {
+                        //validate input agains field
+                        var result = ValidateInputForField(field, tempArr[1]);
 
-                    //
-                    if (result.StateIsValid)
-                    {
-                        lstFieldData.Add(new UserContractFieldData
+                        if (result.StateIsValid)
                         {
-                            Contractid = model.ContractId,
-                            Created = DateTime.Now,
-                            CreatedBy = model.CreatedBy,
-                            Data = tempArr[1],
-                            FormId = model.FormId,
-                            FieldId = field.id
-                        });
+                            lstFieldData.Add(new UserContractFieldData
+                                {
+                                    Contractid = model.ContractId,
+                                    Created = DateTime.Now,
+                                    CreatedBy = model.CreatedBy,
+                                    Data = tempArr[1],
+                                    FormId = model.FormId,
+                                    FieldId = field.id
+                                });
+                        }
+                        else //if there is any error, let's stop validation and return
+                        {
+                            return new ResultInfo {Itemid = -1, ErrorMessage = result.ErrorMessage};
+                        }
                     }
-                    else //if there is any error, let's stop validation and return
+                    else
                     {
-                        return new ResultInfo { Itemid = -1, ErrorMessage = result.ErrorMessage };
+                        return new ResultInfo { Itemid = -1, ErrorMessage = string.Format("Field '{0}' is null in form {1}", tempArr[0], model.FormId) };
                     }
                 }               
             }
 
             //if we get here, then validation has passed
-
-            int saveResult = _formRepository.SaveUserContractFieldData(lstFieldData);
+            var saveResult = _formRepository.SaveUserContractFieldData(lstFieldData);
 
             return new ResultInfo { Itemid = saveResult, ErrorMessage = (saveResult > 0)? "" : "Failed to save Field data." };
         }

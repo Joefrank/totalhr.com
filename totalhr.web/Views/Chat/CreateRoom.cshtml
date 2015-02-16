@@ -1,0 +1,85 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
+
+@model totalhr.web.Models.ChatRoomViewModel
+
+@{
+    ViewBag.Title = Common.V_Chat_Room_Create;
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Chat/", Text = Common.V_Chat_Rooms, Title= Common.V_Chat_Rooms},
+        new BreadCrumbItem{Url = "", Text = Common.V_Chat_Room_Create, Title= Common.V_Chat_Room_Create}
+    };
+
+}
+
+@section pagetitle{
+   @Common.V_Chat_Room_Create
+}
+
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+
+    <div class="row-fluid">
+        <div class="span12 sortable">
+            <!-- BEGIN SAMPLE FORMPORTLET-->
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i>@Common.V_ChatRoom_Details</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                    <a href="javascript:;" class="icon-remove"></a>
+                </span>
+            </div>
+            <div class="widget-body">
+                <!-- BEGIN FORM-->
+                
+                @using (Html.BeginForm("CreateRoom", "Chat", FormMethod.Post, new { @class="form-horizontal"}))
+                {
+                     @Html.ValidationSummary()
+                     @Html.HiddenFor(x => x.Target) 
+                    
+                    <div class="control-group">
+                        <label class="control-label">@Common.V_ChatRoom_Name</label>
+                        <div class="controls">
+                            <input type="text" name="RoomName" placeholder=".input-large" class="input-large" />
+                            <span class="help-inline">&nbsp;</span>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label">@Common.V_ChatRoom_Description</label>
+                        <div class="controls">
+                            <textarea name="Description" class="input-large" rows="3"></textarea>
+                        </div>
+                    </div>      
+                    
+                    <div class="control-group">
+                        <label class="control-label">@Common.V_ChatRoom_Target</label>
+                        <div class="controls">
+                            <label class="radio line">
+                                <input type="radio" name="optionsRadios2" value="1" onclick="SetCtrlValue(this)" />
+                                @Common.V_ChatRoom_Private
+                            </label>
+                            <label id="lbInvitedUsers" class="control-label" style="display:none">
+                                @Common.V_ChatRoom_Invited_Users
+                                <span id="spInvitedUsers"></span>
+                            </label>
+                            <label class="radio line">
+                                <input type="radio" name="optionsRadios2" value="2" checked="checked" onclick="SetCtrlValue(this)" />
+                                @Common.V_ChatRoom_Public
+                            </label>
+                        </div>
+                    </div>
+       
+                    <div class="form-actions">
+                        <button type="submit" class="btn blue"><i class="icon-ok"></i> @Common.V_Save</button>
+                        <button type="button" class="btn red"><i class=" icon-remove"></i> @Common.V_Cancel</button>
+                    </div>
+                }
+                <!-- END FORM-->
+            </div>
+        </div>        </div>    </div>

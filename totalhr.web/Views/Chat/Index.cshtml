@@ -1,96 +1,67 @@
-﻿@model totalhr.Shared.Models.ChatModel
+﻿@using totalhr.Resources
+@using totalhr.web.Areas.Admin.Helpers
+@using totalhr.web.Areas.Admin.Models
 
+@model IEnumerable<totalhr.data.EF.ChatRoom>
 
-
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/jqueryui")
+@{
+    ViewBag.Title = Common.V_Chat_Rooms;
     
-@section scripts
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "", Text = Common.V_Chat_Rooms, Title= Common.V_Chat_Rooms}
+    };
+
+    bool bRoomsAvailable = false;   
+}
+
+@section pagetitle{
+   @Common.V_Chat_Rooms
+}
+
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+
+
+
+<div class="row-fluid">
+    <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i>@Common.V_Chat_Room_List</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+            </span>
+        </div>
+        <div class="widget-body"> 
+
+            @foreach (var room in Model)
+            {
+                bRoomsAvailable = true;
+                @room.Name <br/>
+            }
+
+            @if (!bRoomsAvailable)
+            {
+                <p class="error">@Common.V_Chat_NoRooms</p>
+            }
+            
+            <p>
+                <input type="button" value="Create Chatroom" onclick="NavigateTo('/Chat/CreateRoom/');"/>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+     @section scripts
 {
     <script src="/Scripts/Site/Chat.js"></script>
 }
 
 
-    @*<style type="text/css">
-        body, html
-        {
-            height: 100%;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            overflow:hidden;
-        }
-        
-        div, body, table, p
-        {
-            font-family: Verdana;
-            font-size: medium;
-        }
-        
-        #container
-        {
-            height: 80%;
-            width: 80%;
-            position: absolute;
-            top: 10%;
-            left: 10%;
-            min-width: 320px;
-            background-color: Silver;
-            box-shadow: 0 8px 4px -4px rgba(0,0,0,0.4);
-        }
-        
-        .box
-        {
-            display: inline-block;
-            margin: 10px;
-            padding: 8px 15px;
-            background: #B8ED01;
-            border: 1px solid rgba(0,0,0,0.15);
-            border-radius: 4px;
-            transition: all 0.3s ease-out;
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0,0,0,0.3), 0 0 4px 1px rgba(0,0,0,0.2); /* Font styles */
-            text-decoration: none;
-            text-shadow: 0 1px rgba(255,255,255,0.7);
-        }
-        
-        #Error
-        {
-            width: 80%;
-            left: 10%;
-            position: absolute;
-            height: 10%;
-            top: 91%;
-            color: Red;
-            font-weight: bold;
-            text-align: center;
-        }
-        
-        #LastRefresh
-        {
-            display: inline;
-            position: absolute;
-            font-size: xx-small;
-            text-align: right;
-            top: 7%;
-            left: 10%;
-            width: 80%;
-        }
-        #YourNickname
-        {
-            display: inline;
-            position: absolute;
-            font-size: medium;
-            font-weight: bold;
-            text-align: left;
-            top: 7%;
-            left: 10%;
-            width: 50%;
-        }
-    </style>*@
-
-
-    <div id="YourNickname">
+@* <div id="YourNickname">
     </div>
     <div id="LastRefresh">
     </div>
@@ -105,5 +76,5 @@
     <div id="Error">
     </div>
     @Ajax.ActionLink("Login", "Index", new { thisUserLoggedOn = "" }, new AjaxOptions { UpdateTargetId = "container", OnFailure = "LoginOnFailure", OnSuccess = "LoginOnSuccess" }, new { @id = "LoginButton", @style = "visibility:hidden;" })
-
+*@
 

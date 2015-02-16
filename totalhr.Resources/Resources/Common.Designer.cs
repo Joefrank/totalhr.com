@@ -259,6 +259,51 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string V_Cancel {
+            get {
+                return ResourceManager.GetString("V_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry but there is no chat room available. You can create one by using the button below..
+        /// </summary>
+        public static string V_Chat_NoRooms {
+            get {
+                return ResourceManager.GetString("V_Chat_NoRooms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat Room Creation.
+        /// </summary>
+        public static string V_Chat_Room_Create {
+            get {
+                return ResourceManager.GetString("V_Chat_Room_Create", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of chat rooms.
+        /// </summary>
+        public static string V_Chat_Room_List {
+            get {
+                return ResourceManager.GetString("V_Chat_Room_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat Rooms.
+        /// </summary>
+        public static string V_Chat_Rooms {
+            get {
+                return ResourceManager.GetString("V_Chat_Rooms", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The chat server started at {0}.
         /// </summary>
         public static string V_Chat_Server_Started_At {
@@ -282,6 +327,69 @@ namespace totalhr.Resources {
         public static string V_Chat_User_X_LoggedOn {
             get {
                 return ResourceManager.GetString("V_Chat_User_X_LoggedOn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string V_ChatRoom_Description {
+            get {
+                return ResourceManager.GetString("V_ChatRoom_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat Room Details.
+        /// </summary>
+        public static string V_ChatRoom_Details {
+            get {
+                return ResourceManager.GetString("V_ChatRoom_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invited Users.
+        /// </summary>
+        public static string V_ChatRoom_Invited_Users {
+            get {
+                return ResourceManager.GetString("V_ChatRoom_Invited_Users", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string V_ChatRoom_Name {
+            get {
+                return ResourceManager.GetString("V_ChatRoom_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Private.
+        /// </summary>
+        public static string V_ChatRoom_Private {
+            get {
+                return ResourceManager.GetString("V_ChatRoom_Private", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Public.
+        /// </summary>
+        public static string V_ChatRoom_Public {
+            get {
+                return ResourceManager.GetString("V_ChatRoom_Public", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Target.
+        /// </summary>
+        public static string V_ChatRoom_Target {
+            get {
+                return ResourceManager.GetString("V_ChatRoom_Target", resourceCulture);
             }
         }
         
@@ -345,6 +453,15 @@ namespace totalhr.Resources {
         public static string V_Register {
             get {
                 return ResourceManager.GetString("V_Register", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string V_Save {
+            get {
+                return ResourceManager.GetString("V_Save", resourceCulture);
             }
         }
         
