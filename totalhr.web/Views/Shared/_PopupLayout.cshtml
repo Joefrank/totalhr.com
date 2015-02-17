@@ -13,7 +13,7 @@
     @RenderSection("headerScripts", required:false)
 </head>
 <body>
-   <div id="main" style="background:red;height:70%;overflow:hidden;">        
+   <div id="main">        
         <div class="popuphead">             
             @RenderSection("head2", required: true)   
             <div id="toolbox">
@@ -21,12 +21,12 @@
             </div>
         </div> 
         
-        <div id="popupBody" style="height:70%;overflow:hidden;">
+        <div id="popupBody">
             @RenderBody()
         </div>
         
        <div id="popupfooter">
-           footer
+           @RenderSection("footer", required: false) 
        </div>
  </div>
 

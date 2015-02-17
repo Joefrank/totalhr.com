@@ -72,7 +72,9 @@
                             </td>
                
                             <td>
-                                <input type="button" class="edit" value="@AdminGeneric.V_More_Details" onclick="NavigateTo('/Admin/FormEditor/EditForm/@form.Id');" />
+                                <button class="btn btn-primary" onclick="OpenPopup('/Admin/FormEditor/EditForm/@form.Id', 1000, 700);">
+                                    <i class="icon-pencil icon-white"></i> @AdminGeneric.V_More_Details
+                                </button>                                
                             </td>
                         </tr>  
            
@@ -88,8 +90,11 @@
     }
 
 
-    <p>
-        <input type="button" value="@Contract.V_Create_Form" onclick="OpenPopup('/Admin/FormEditor/CreateForm/1', 900, 600);" />
-    </p>
+    <div class="row-fluid">
+         <button class="btn btn-warning" onclick="OpenPopup('/Admin/FormEditor/CreateForm/1', 1000, 700);">
+            <i class="icon-plus icon-white"></i> @Contract.V_Create_Form
+        </button>
+        
+    </div>
 </div>
 

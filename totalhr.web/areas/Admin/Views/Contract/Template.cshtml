@@ -2,6 +2,8 @@
 @using totalhr.web.Helpers;
 @using totalhr.Shared.Models;
 @using totalhr.Shared;
+@using GA = totalhr.web.Areas.Admin.Helpers;
+@using  totalhr.web.Areas.Admin.Models;
 
 @model IEnumerable<totalhr.data.EF.ContractTemplate>
 
@@ -16,54 +18,79 @@
             SortOrder = "asc"
         };
     }   
+
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Admin/Contract/", Text = AdminGeneric.V_Contract_Management, Title= AdminGeneric.V_Contract_Management},
+        new BreadCrumbItem{Url = "", Text = AdminGeneric.V_Contract_Template_Management, Title= AdminGeneric.V_Contract_Template_Management}        
+    };   
+}
+
+@section pagetitle{
+   @AdminGeneric.V_Contract_Template_Management
+}
+
+@section breadcrumb{
+    @Html.Raw(GA.GenericHelper.MakeBreadCrumb(breadCrumbItems))
 }
 
 
-<div class="container">
-      @section breadcrumb{
-            <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
-            <a href="/Admin/Contract/" title="@AdminGeneric.V_Contract_Management">@AdminGeneric.V_Contract_Management</a> &gt;
-            <span class="last">@AdminGeneric.V_Contract_Template_Management</span>
-        }
+<div class="row-fluid">
 
-    <h1>@AdminGeneric.V_Contract_Template_Management</h1>
-
-    <div class="wide">
+     <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i>@FormGenerator.V_Template_List</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+                <a href="javascript:;" class="icon-remove"></a>
+            </span>
+        </div>
+        <div class="widget-body"> 
+                   
         @if (Model != null && Model.Count() > 0)
         {
-            <table border="1" class="SortedTab">
-            <tr>
-                @Html.Raw(GenericHelper.MakeSortableTH("TemplateId",  info,Contract.V_Template_Id))              
-                @Html.Raw(GenericHelper.MakeSortableTH("ContractName", info,Contract.V_Template_Name))
-                <th>@Contract.V_Description</th>               
-                @Html.Raw(GenericHelper.MakeSortableTH("Created", info,Contract.V_Created))
-                @Html.Raw(GenericHelper.MakeSortableTH("CreatedBy",info,Contract.V_Created_By))                                         
-                <th>&nbsp;</th>
-            </tr>
-            @foreach (var template in Model)
-            {
-                <tr>
-                    <td>
-                        @template.id
-                    </td>
-                    <td>
-                        @template.Name
-                    </td>
-                    <td title="@template.Description">
-                        @GenericHelper.ShortenString(template.Description, (int)Variables.StringMaxLength.TabDescription)
-                    </td>
-                    <td>
-                        @template.Created
-                    </td>
-                    <td>
-                        @template.CreatedBy
-                    </td>
-                    <td>
-                        <input type="button" class="edit" value="@Contract.V_Edit_Template" onclick="NavigateTo('/Admin/Contract/EditTemplate/@template.id');" />
-                    </td>
-                </tr>
-            }
-                </table>
+           <table class="table table-striped table-bordered" id="sample_1">
+                <thead>    
+                    <tr>
+                        @Html.Raw(GenericHelper.MakeSortableTH("TemplateId",  info,Contract.V_Template_Id))              
+                        @Html.Raw(GenericHelper.MakeSortableTH("ContractName", info,Contract.V_Template_Name))
+                        <th>@Contract.V_Description</th>               
+                        @Html.Raw(GenericHelper.MakeSortableTH("Created", info,Contract.V_Created))
+                        @Html.Raw(GenericHelper.MakeSortableTH("CreatedBy",info,Contract.V_Created_By))                                         
+                        <th>&nbsp;</th>
+                    </tr>
+               </thead>
+               <tbody>
+                @foreach (var template in Model)
+                {
+                    <tr>
+                        <td>
+                            @template.id
+                        </td>
+                        <td>
+                            @template.Name
+                        </td>
+                        <td title="@template.Description">
+                            @GenericHelper.ShortenString(template.Description, (int)Variables.StringMaxLength.TabDescription)
+                        </td>
+                        <td>
+                            @template.Created
+                        </td>
+                        <td>
+                            @template.CreatedBy
+                        </td>
+                        <td>
+                            <button class="btn btn-primary" onclick="NavigateTo('/Admin/Contract/EditTemplate/@template.id');">
+                                <i class="icon-pencil icon-white"></i> @Contract.V_Edit_Template
+                            </button>
+                        
+                        </td>
+                    </tr>
+                }
+
+               </tbody>
+             </table>
+            
         }
         else
         {
@@ -71,12 +98,23 @@
                @Contract.Error_Template_Not_Found
             </p>
         }
+       </div>
+    </div>
     </div>
 
-    <div class="wide">
-        <input type="button" value="@Contract.V_Create_Template" onclick="NavigateTo('/Admin/Contract/AddTemplate/');" />
+    <div class="row-fluid">
+        
+         <button class="btn btn-success" onclick="NavigateTo('/Admin/Contract/AddTemplate/');">
+            <i class="icon-plus icon-white"></i> @Contract.V_Create_Template
+        </button>
         &nbsp;
-        <input type="button" value="@Contract.V_Create_Form" onclick="OpenPopup('/Admin/FormEditor/CreateForm/1', 900, 600);" />
+         <button class="btn btn-warning" onclick="OpenPopup('/Admin/FormEditor/CreateForm/1', 900, 600);">
+            <i class="icon-plus icon-white"></i> @Contract.V_Create_Form
+        </button>
+
+      @*  <input type="button" value="@Contract.V_Create_Template" onclick="NavigateTo('/Admin/Contract/AddTemplate/');" />
+       
+        <input type="button" value="@Contract.V_Create_Form" onclick="OpenPopup('/Admin/FormEditor/CreateForm/1', 900, 600);" />*@
     </div>
 
     <form id="frmSortForm" method="post" action="/Admin/Contract/Template/">
@@ -85,4 +123,3 @@
         @*<input type="hidden" id="hdnPageNumber" name="hdnPageNumber" value="@Model.SearchInfo.PageNumber" />*@
     </form>
 
-</div>
