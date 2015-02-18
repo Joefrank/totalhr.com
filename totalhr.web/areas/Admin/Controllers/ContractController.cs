@@ -155,7 +155,19 @@ namespace totalhr.web.Areas.Admin.Controllers
             {
                 return Json(new { Id = -1, Message = HttpUtility.HtmlEncode(_sbContractErrors .ToString())});
             }
+        }
 
+        public JsonResult UpdateFormFields(int id)
+        {
+            var form = _formService.GetForm(id);
+            var info = new FormInfo
+                {
+                    Id = form.Id,
+                    FormTypeId = form.FormTypeId,
+                    Schema = form.FormSchema,
+                    UserId = CurrentUser.UserId
+                };
+            return Json(_formService.SaveFormFields(info));
         }
 
         bool IsValid(ContractFillViewInfo model)
