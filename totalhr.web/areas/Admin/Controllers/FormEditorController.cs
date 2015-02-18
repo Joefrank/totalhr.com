@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using totalhr.services.Infrastructure;
 using totalhr.Shared;
 using totalhr.Shared.Models;
+using totalhr.Resources;
 
 namespace totalhr.web.Areas.Admin.Controllers
 {
@@ -74,24 +75,37 @@ namespace totalhr.web.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult CreateForm(FormInfo info)
         {
+           
             if (string.IsNullOrEmpty(info.Schema))
             {
-                return Json(new { Id = -1, Message = "Empty form provided" });
+                return Json(new { Id = -1, Message = FormGenerator.Error_Form_Editor_Empty });
+            }
+            else if (string.IsNullOrEmpty(info.FormName))
+            {
+                return Json(new { Id = -1, Message = FormGenerator.Error_Provide_Form_Name });
             }
 
-            int result = _formService.CreateForm(info.Schema, info.FormTypeId, CurrentUser.UserId);
-
-            if (result > 0)
+            try
             {
-                info.Id = result;
                 info.UserId = CurrentUser.UserId;
+                int result = _formService.CreateForm(info);
 
-                _formService.SaveFormFields(info);
-                return Json(new { Id = 1, Message = "" });
+                if (result > 0)
+                {
+                    info.Id = result;
+                    info.UserId = CurrentUser.UserId;
+
+                    _formService.SaveFormFields(info);
+                    return Json(new { Id = 1, Message = FormGenerator.V_Form_Saved_Success });
+                }
+                else
+                {
+                    return Json(new { Id = -1, Message = FormGenerator.Error_Couldn_Save_Form });
+                }
             }
-            else
+            catch (Exception ex)
             {
-                return Json(new { Id = -1, Message = "Error" });
+                return Json(new { Id = -1, Message = FormGenerator.Error_Couldn_Save_Form });
             }
                      
         }

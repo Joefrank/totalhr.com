@@ -23,7 +23,7 @@ namespace FormService.Implementation
             _formRepository = formRepository;
         }
 
-        public int CreateForm(string schema, int formTypeId, int userId)
+        public int CreateForm(string schema, string name, int formTypeId, int userId)
         {
             var form = new Form();
             form.CreatedBy = userId;
@@ -31,6 +31,22 @@ namespace FormService.Implementation
             form.StatusId = (int)Variables.FormStatus.Draft;
             form.FormSchema = schema;
             form.FormTypeId = formTypeId;
+            form.Name = name;
+            _formRepository.Add(form);
+            _formRepository.Save();
+
+            return form.Id;
+        }
+
+        public int CreateForm(FormInfo info)
+        {
+            var form = new Form();
+            form.CreatedBy = info.UserId;
+            form.Created = DateTime.Now;
+            form.StatusId = (int)Variables.FormStatus.Draft;
+            form.FormSchema = info.Schema;
+            form.FormTypeId = info.FormTypeId;
+            form.Name = info.FormName;
             _formRepository.Add(form);
             _formRepository.Save();
 
@@ -91,6 +107,7 @@ namespace FormService.Implementation
                 {
                     if (validationMessages.Count == 0)
                     {
+                        //check if collection
                         foreach (var message in val.Value)
                         {
                             var temp = message.ToString().Split(':');

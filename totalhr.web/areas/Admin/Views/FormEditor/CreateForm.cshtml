@@ -25,6 +25,10 @@
             myApp.controller('MyController', function ($scope, schemaService) {
 
                 $scope.errorMessage = '';
+                
+                $scope.formId = 0;
+
+                $scope.formName = '';
 
                 $scope.FormTypeId = @Model.FormTypeId;
 
@@ -39,23 +43,30 @@
                 };
 
                 $scope.SaveForm = function () {
-                    //alert(JSON.stringify($scope.myForm.schema));
-
+                    
                     var formData = $scope.myForm;
                     schemaService.addSchema(
                         {
-                            Id: formData.id,
+                            Id: $scope.formId,
                             FormTypeId : $scope.FormTypeId,
-                            Schema: JSON.stringify(formData.schema)
+                            Schema: JSON.stringify(formData.schema),
+                            FormName: $scope.formName
                         },
-                        function(msg) {
-                            var message = msg.Message;                            
-                            alert(msg.Message);
-                            $scope.errorMessage = '';
+                        function(data) {
+                            //alert(data.Id + ' ' + data.Message);
+                            if(data.Id === -1){//failure
+                                alert(data.Message);
+                                $scope.errorMessage = data.Message;
+                            }else {//success
+                                $scope.formId = data.Id;
+                                alert('Form saved successfully!');
+                                NavigateTo('/FormEditor/EditForm/' + data.Id);
+                            }
+                            
                            // window.location.href = '/admin/Contract/Template/';
                         },
                         function(data, response) {
-                            alert('Error' + msg + ' ' + data.Message);
+                            alert(data.Message);
                             $scope.errorMessage = data.Message;
                         }
                     );
@@ -105,7 +116,7 @@
             </p>
 
             <p>
-                @FormGenerator.V_Form_Name: <input type="text" id="Name" name="Name" />
+                @FormGenerator.V_Form_Name: <input type="text" id="Name" name="Name" ng-model="formName" />
             </p>
             <div class="alert alert-danger" ng-if="errorMessage != ''" role="alert">
                 <strong>@FormGenerator.Error_Could_Not_Save_Data</strong>
@@ -121,8 +132,7 @@
                              fg-schema="mySchema">
                         </div>
                     </form>
-                    <input type="button" value="Preview" ng-click="ShowPreview()" />
-
+                   
                     <input type="button" value="Save" ng-click="SaveForm()" />
                 </div>
 

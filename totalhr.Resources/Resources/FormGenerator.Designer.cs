@@ -70,6 +70,33 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry but could not save form..
+        /// </summary>
+        public static string Error_Couldn_Save_Form {
+            get {
+                return ResourceManager.GetString("Error_Couldn_Save_Form", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Empty form provided!.
+        /// </summary>
+        public static string Error_Form_Editor_Empty {
+            get {
+                return ResourceManager.GetString("Error_Form_Editor_Empty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must provide a form&apos;s name!.
+        /// </summary>
+        public static string Error_Provide_Form_Name {
+            get {
+                return ResourceManager.GetString("Error_Provide_Form_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Angular Form Generator.
         /// </summary>
         public static string V_Angular_Form_Header {
@@ -93,6 +120,15 @@ namespace totalhr.Resources {
         public static string V_Form_Data {
             get {
                 return ResourceManager.GetString("V_Form_Data", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Form Edit.
+        /// </summary>
+        public static string V_Form_Edit {
+            get {
+                return ResourceManager.GetString("V_Form_Edit", resourceCulture);
             }
         }
         
@@ -147,6 +183,15 @@ namespace totalhr.Resources {
         public static string V_Form_Preview {
             get {
                 return ResourceManager.GetString("V_Form_Preview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Form saved successfully!.
+        /// </summary>
+        public static string V_Form_Saved_Success {
+            get {
+                return ResourceManager.GetString("V_Form_Saved_Success", resourceCulture);
             }
         }
         

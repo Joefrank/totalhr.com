@@ -10,6 +10,8 @@ namespace totalhr.Shared.Models
     {
         public int Id { get; set; }
 
+        public string FormName { get; set; }
+
         public int FormTypeId { get; set; }
 
         public string Schema { get; set; }
