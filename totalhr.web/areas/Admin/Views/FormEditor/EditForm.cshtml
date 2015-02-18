@@ -1,16 +1,17 @@
-﻿@using totalhr.Resources
+﻿@using totalhr.Resources;
 
 @model totalhr.data.EF.Form
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+    ViewBag.Title = FormGenerator.V_Form_Edit;
+    var schema = string.IsNullOrEmpty(Model.FormSchema) ? "''" : Model.FormSchema;
 }
 
-<!DOCTYPE html>
-<html ng-app="myApp">
+@section htmlattrib{ng-app="myApp"}
 
-    <head>
-        <title>Form Editor</title>
+@section headerScripts{
+
         <link data-require="bootstrap-css@3.*" data-semver="3.2.0" rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
         <script data-require="angular.js@1.2.*" data-semver="1.2.25" src="https://code.angularjs.org/1.2.25/angular.js"></script>
         <script data-require="angular-sanitize@1.2.25" data-semver="1.2.25" src="https://code.angularjs.org/1.2.25/angular-sanitize.js"></script>
@@ -25,55 +26,50 @@
 
             myApp.controller('MyController', function ($scope) {
                 
-                $scope.mySchema = @Html.Raw(Model.FormSchema);               
+                $scope.errorMessage = '';
 
-                $scope.ShowPreview = function () {
-                    window.open("/FormEditor/Preview/");
+                $scope.formName = '@Model.Name';
+
+                $scope.FormTypeId = @Model.FormTypeId;
+
+                $scope.mySchema = @Html.Raw(schema);               
+
+                $scope.myForm = {
+                    schema: $scope.mySchema
                 };
 
                 $scope.SaveForm = function () {
-
-                    alert(JSON.stringify($scope.myForm.schema));
+                    alert('saving');
+                    //alert(JSON.stringify($scope.myForm.schema));
                 };
 
                 $scope.SubmitFormInput = function () {
                     alert(JSON.stringify($scope.myForm.data));
                 };
 
-                $scope.ChangeSchema = function () {
-                    alert(myApp.value('DBSchema'));
-                    $scope.myForm.schema = myApp.value('DBSchema');
-                    alert(JSON.stringify($scope.myForm.schema));
-                };
             });
         </script>
        
-         
-    </head>
-
-    <body>
-      
-        <header class="container">
-            <div class="jumbotron text-center">
-                <h1>@FormGenerator.V_Angular_Form_Header</h1>
-                <p>@FormGenerator.V_Used_By_TotalHR</p>
-            </div>
-        </header>
+   }  
+  
+@section head2{
+    <h1>@FormGenerator.V_Form_Edit</h1>
+}      
+     
        
         <div ng-controller="MyController" class="container">
 
-            <h1>
-                @FormGenerator.V_Form_Title
-            </h1>
-            <p>
-                @FormGenerator.V_Form_Intro
+            <div class="alert alert-danger" ng-if="errorMessage != ''" role="alert">
+                <strong>@FormGenerator.Error_Could_Not_Save_Data</strong>
+                <br />
+                <span ng-bind="errorMessage"></span>
+            </div>
+
+             <p>
+                @FormGenerator.V_Form_Name: <input type="text" id="Name" name="Name" ng-model="formName" />
             </p>
 
             <div fg-tabs class="needs-some-more-space">
-                <input type="button" value="Preview" ng-click="ShowPreview()" />
-                <input type="button" value="Save" ng-click="SaveForm()" />
-                <input type="button" value="Change Schema" ng-click="ChangeSchema()" />
-                
 
                 <div fg-tabs-pane="Schema Editor">
                     <form class="form-horizontal" name="myForm.$state">
@@ -83,14 +79,15 @@
                     </form>
                 </div>
 
-                <div fg-tabs-pane="Form Schema">
-                    <div jsonify="myForm.schema"></div>
+                <div fg-tabs-pane="Quick Preview" disabled="myForm.$state.$invalid">
+                    @Html.Partial("_FormQuickPreview")
                 </div>
 
             </div>
 
         </div>
        
-    </body>
-
-</html>
+       @section footer{
+           <input type="button" value="Save" ng-click="SaveForm()" />
+                
+       }

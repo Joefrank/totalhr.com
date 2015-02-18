@@ -117,8 +117,17 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Error_Couldn_Save_Form" xml:space="preserve">
+    <value>Sorry but could not save form.</value>
+  </data>
   <data name="Error_Could_Not_Save_Data" xml:space="preserve">
     <value>Error could not save form!</value>
+  </data>
+  <data name="Error_Form_Editor_Empty" xml:space="preserve">
+    <value>Empty form provided!</value>
+  </data>
+  <data name="Error_Provide_Form_Name" xml:space="preserve">
+    <value>You must provide a form's name!</value>
   </data>
   <data name="V_Angular_Form_Header" xml:space="preserve">
     <value>Angular Form Generator</value>
@@ -128,6 +137,9 @@
   </data>
   <data name="V_Form_Data" xml:space="preserve">
     <value>Form Data</value>
+  </data>
+  <data name="V_Form_Edit" xml:space="preserve">
+    <value>Form Edit</value>
   </data>
   <data name="V_Form_Editor" xml:space="preserve">
     <value>Form Editor</value>
@@ -146,6 +158,9 @@
   </data>
   <data name="V_Form_Preview" xml:space="preserve">
     <value>Form Preview</value>
+  </data>
+  <data name="V_Form_Saved_Success" xml:space="preserve">
+    <value>Form saved successfully!</value>
   </data>
   <data name="V_Form_Status" xml:space="preserve">
     <value>Form Status</value>
