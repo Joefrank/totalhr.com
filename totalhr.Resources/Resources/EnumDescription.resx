@@ -138,6 +138,9 @@
   <data name="Developer" xml:space="preserve">
     <value>System Developer</value>
   </data>
+  <data name="Draft" xml:space="preserve">
+    <value>Draft</value>
+  </data>
   <data name="Employee2" xml:space="preserve">
     <value>Simple Employee</value>
   </data>
@@ -173,6 +176,9 @@
   </data>
   <data name="Promoters" xml:space="preserve">
     <value>System Promoter</value>
+  </data>
+  <data name="Published" xml:space="preserve">
+    <value>Published</value>
   </data>
   <data name="R10MinsBefore" xml:space="preserve">
     <value>10 mins before</value>

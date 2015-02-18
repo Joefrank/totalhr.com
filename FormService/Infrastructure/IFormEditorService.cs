@@ -23,5 +23,7 @@ namespace FormService.Infrastructure
         ResultInfo SaveFormFields(FormInfo info);
 
         ResultInfo SaveFieldData(ContractFillViewInfo model);
+
+        int UpdateForm(FormInfo info);
     }
 }

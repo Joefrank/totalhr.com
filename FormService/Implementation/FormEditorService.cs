@@ -16,7 +16,7 @@ namespace FormService.Implementation
 {
     public class FormEditorService : IFormEditorService
     {
-        private IFormRepository _formRepository;
+        private readonly IFormRepository _formRepository;
 
         public FormEditorService(IFormRepository formRepository)
         {
@@ -25,13 +25,15 @@ namespace FormService.Implementation
 
         public int CreateForm(string schema, string name, int formTypeId, int userId)
         {
-            var form = new Form();
-            form.CreatedBy = userId;
-            form.Created = DateTime.Now;
-            form.StatusId = (int)Variables.FormStatus.Draft;
-            form.FormSchema = schema;
-            form.FormTypeId = formTypeId;
-            form.Name = name;
+            var form = new Form
+                {
+                    CreatedBy = userId,
+                    Created = DateTime.Now,
+                    StatusId = (int) Variables.FormStatus.Draft,
+                    FormSchema = schema,
+                    FormTypeId = formTypeId,
+                    Name = name
+                };
             _formRepository.Add(form);
             _formRepository.Save();
 
@@ -40,17 +42,51 @@ namespace FormService.Implementation
 
         public int CreateForm(FormInfo info)
         {
-            var form = new Form();
-            form.CreatedBy = info.UserId;
-            form.Created = DateTime.Now;
-            form.StatusId = (int)Variables.FormStatus.Draft;
-            form.FormSchema = info.Schema;
-            form.FormTypeId = info.FormTypeId;
-            form.Name = info.FormName;
+            var form = new Form
+                {
+                    CreatedBy = info.UserId,
+                    Created = DateTime.Now,
+                    StatusId = (int) Variables.FormStatus.Draft,
+                    FormSchema = info.Schema,
+                    FormTypeId = info.FormTypeId,
+                    Name = info.FormName
+                };
             _formRepository.Add(form);
             _formRepository.Save();
 
+            if (form.Id > 0)
+            {
+                info.Id = form.Id;
+                this.SaveFormFields(info);
+            }
+
             return form.Id;
+        }
+        /// <summary>
+        /// When updating a form, we need to check its status. Only update draft forms. 
+        /// if form is published, then we need to create a new version of form instead
+        /// </summary>
+        /// <param name="info"></param>
+        /// <returns></returns>
+        public int UpdateForm(FormInfo info)
+        {
+            var form = _formRepository.FindBy(x => x.Id == info.Id).FirstOrDefault();
+            if (form != null)
+            {
+                form.LastUpdatedBy = info.UserId;
+                form.LastUpdated = DateTime.Now;
+                form.StatusId = (int)Variables.FormStatus.Draft;
+                form.FormSchema = info.Schema;
+                form.Name = info.FormName;
+
+                _formRepository.Save();
+
+                this.SaveFormFields(info);
+
+                return form.Id;
+            }
+
+            return -1;
         }
 
         public IEnumerable<Form> ListFormsOfType(int formTypeId)
@@ -103,25 +139,27 @@ namespace FormService.Implementation
                 var validationMessages = new Dictionary<string, string>();
                 var lstRules = new List<FormFieldValidationRule>();
 
-                foreach (var val in item.validation)
+                foreach (var valItem in item.validation)
                 {
-                    if (validationMessages.Count == 0)
+                    //check first if it is a collection
+                    string valItemName = valItem.Name.ToString().Trim('"');
+                    var valItemValue = valItem.Value;
+
+                    if (valItemName.Trim().Equals("messages"))
                     {
-                        //check if collection
-                        foreach (var message in val.Value)
+                        foreach (var message in valItemValue)
                         {
                             var temp = message.ToString().Split(':');
-                            validationMessages.Add(temp[0], temp[1]);
+                            validationMessages.Add(temp[0].Trim('"'), temp[1]);
                         }
                     }
-                    else if (validationMessages.Count > 0)
+                    else
                     {
-                        var temp = val.ToString().Split(':');
-                        var tempMessage = string.Empty;
+                        var tempMessage = "";
 
-                        if (validationMessages[temp[0]] != null)
+                        if (validationMessages.Keys.Any() && validationMessages.Keys.Contains(valItemName))
                         {
-                            tempMessage = validationMessages[temp[0]];
+                            tempMessage = validationMessages[valItemName];
                         }
 
                         lstRules.Add(new FormFieldValidationRule
@@ -129,11 +167,12 @@ namespace FormService.Implementation
                             Created = DateTime.Now,
                             CreatedBy = info.UserId,
                             ErrorMessage = tempMessage,
-                            SetValue = temp[1],
-                            ValidationRuleId = GetValidationRule(temp[0].Trim('"')),//remove double quotes
+                            SetValue = valItemValue,
+                            ValidationRuleId = GetValidationRule(valItemName),//remove double quotes
                             FormId = info.Id
                         });
                     }
+
                 }
 
                 if (lstRules.Count > 0)
@@ -143,11 +182,11 @@ namespace FormService.Implementation
                 }                              
             }
 
-           _formRepository.DeleteFormFields(info.Id);
-           return _formRepository.SaveFields(dicFields, dicValidations);
+            _formRepository.DeleteFormFields(info.Id);
+            return _formRepository.SaveFields(dicFields, dicValidations);
         }
 
-        private int GetValidationRule(string rulename)
+        public static int GetValidationRule(string rulename)
         {
             switch (rulename)
             {
@@ -171,7 +210,11 @@ namespace FormService.Implementation
             {
                 var tempArr = item.ToString().Split(':');
 
-                if (tempArr != null && tempArr.length == 2)
+                if (tempArr == null || tempArr.length != 2)
+                {
+                    throw new Exception("Failed to save data. Error occured!");
+                }
+                else
                 {
                     //find related field
                     var field = lstFormFields.FirstOrDefault(x => x.Name == tempArr[0].Trim());
@@ -200,9 +243,14 @@ namespace FormService.Implementation
                     }
                     else
                     {
-                        return new ResultInfo { Itemid = -1, ErrorMessage = string.Format("Field '{0}' is null in form {1}", tempArr[0], model.FormId) };
+                        return new ResultInfo
+                            {
+                                Itemid = -1,
+                                ErrorMessage =
+                                    string.Format("Field '{0}' is null in form {1}", tempArr[0], model.FormId)
+                            };
                     }
-                }               
+                }
             }
 
             //if we get here, then validation has passed

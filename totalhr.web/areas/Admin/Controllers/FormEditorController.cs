@@ -30,7 +30,8 @@ namespace totalhr.web.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var formList = _formService.ListFormsOfType((int)Variables.FormType.ContractTemplate);
-            //***Test(@"{""fields"":[{""type"":""text"",""name"":""field1"",""displayName"":""Field 1"",""validation"":{""messages"":{""minlength"":""Minimum 3 characters"",""maxlength"":""Maximum 50 characters"",""required"":""This is a test message""},""required"":true,""minlength"":3,""maxlength"":50},""placeholder"":""Place holder field 1"",""tooltip"":""Tooltip for Field 1"",""$$hashKey"":""00F"",""$_invalid"":false,""$_displayProperties"":true,""value"":""Initial value"",""$_redraw"":false},{""type"":""text"",""name"":""Email"",""displayName"":""Email"",""validation"":{""messages"":{""required"":""You need to enter a valid email address"",""maxlength"":""Do not exceed 100 characters""},""required"":true,""maxlength"":100},""placeholder"":""Enter field1 details here"",""tooltip"":""Enter your email address"",""$$hashKey"":""00G"",""$_invalid"":false,""$_displayProperties"":true,""value"":""Your email address"",""$_redraw"":false}],""$_invalid"":true}");
+            //Test(@"{""fields"":[{""type"":""text"",""name"":""field1"",""displayName"":""Field 1"",""validation"":{""messages"":{""minlength"":""Minimum 3 characters"",""maxlength"":""Maximum 50 characters"",""required"":""This is a test message""},""required"":true,""minlength"":3,""maxlength"":50},""placeholder"":""Place holder field 1"",""tooltip"":""Tooltip for Field 1"",""$$hashKey"":""00F"",""$_invalid"":false,""$_displayProperties"":true,""value"":""Initial value"",""$_redraw"":false},{""type"":""text"",""name"":""Email"",""displayName"":""Email"",""validation"":{""messages"":{""required"":""You need to enter a valid email address"",""maxlength"":""Do not exceed 100 characters""},""required"":true,""maxlength"":100},""placeholder"":""Enter field1 details here"",""tooltip"":""Enter your email address"",""$$hashKey"":""00G"",""$_invalid"":false,""$_displayProperties"":true,""value"":""Your email address"",""$_redraw"":false}],""$_invalid"":true}");
+           //Test(@"{""fields"":[{""type"":""text"",""name"":""field1"",""displayName"":""Field 1"",""validation"":{""messages"":{""required"":""dsfdfdf"",""minlength"":""min""},""required"":true,""minlength"":3},""placeholder"":""Enter field1 details here"",""tooltip"":""Enter field1 details here"",""$$hashKey"":""00F"",""$_invalid"":false,""$_displayProperties"":false,""$_redraw"":false},{""type"":""text"",""name"":""field2"",""displayName"":""Field 2"",""validation"":{""messages"":{""required"":""sdfdf""},""required"":true,""maxlength"":45},""placeholder"":""Enter field1 details here"",""tooltip"":""Enter field1 details here"",""$$hashKey"":""00G"",""$_invalid"":false,""$_displayProperties"":true,""$_redraw"":false}],""$_invalid"":false}");
             return View(formList);
         }
 
@@ -73,9 +74,8 @@ namespace totalhr.web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult CreateForm(FormInfo info)
+        public JsonResult SaveForm(FormInfo info)
         {
-           
             if (string.IsNullOrEmpty(info.Schema))
             {
                 return Json(new { Id = -1, Message = FormGenerator.Error_Form_Editor_Empty });
@@ -88,20 +88,15 @@ namespace totalhr.web.Areas.Admin.Controllers
             try
             {
                 info.UserId = CurrentUser.UserId;
-                int result = _formService.CreateForm(info);
+                var result = 0;
 
-                if (result > 0)
-                {
-                    info.Id = result;
-                    info.UserId = CurrentUser.UserId;
+                result = info.Id > 0 ? _formService.UpdateForm(info) : _formService.CreateForm(info);
 
-                    _formService.SaveFormFields(info);
-                    return Json(new { Id = 1, Message = FormGenerator.V_Form_Saved_Success });
-                }
-                else
-                {
-                    return Json(new { Id = -1, Message = FormGenerator.Error_Couldn_Save_Form });
-                }
+                return Json(result <= 0 ? 
+                    new {Id = -1, Message = FormGenerator.Error_Couldn_Save_Form}
+                    : 
+                    new { Id = result, Message = FormGenerator.V_Form_Saved_Success }
+                    );
             }
             catch (Exception ex)
             {
@@ -110,7 +105,7 @@ namespace totalhr.web.Areas.Admin.Controllers
                      
         }
 
-
+       
         public ActionResult Preview([Bind(Prefix = "id")] int templateid)
         {
             var contract = _contractService.GetTemplate(templateid);

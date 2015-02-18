@@ -24,10 +24,12 @@
         <script type="text/javascript">
             var myApp = angular.module('myApp', ['fg', 'ngSanitize', 'markdown']);
 
-            myApp.controller('MyController', function ($scope) {
+            myApp.controller('MyController', function ($scope, schemaService) {
                 
                 $scope.errorMessage = '';
 
+                $scope.formId = @Model.Id;
+                
                 $scope.formName = '@Model.Name';
 
                 $scope.FormTypeId = @Model.FormTypeId;
@@ -39,8 +41,30 @@
                 };
 
                 $scope.SaveForm = function () {
-                    alert('saving');
-                    //alert(JSON.stringify($scope.myForm.schema));
+                   var formData = $scope.myForm;
+                    schemaService.addSchema(
+                        {
+                            Id: $scope.formId,
+                            FormTypeId : $scope.FormTypeId,
+                            Schema: JSON.stringify(formData.schema),
+                            FormName: $scope.formName
+                        },
+                        function(data) {
+                            //alert(data.Id + ' ' + data.Message);
+                            if(data.Id === -1){//failure
+                                alert(data.Message);
+                                $scope.errorMessage = data.Message;
+                            }else {//success
+                                $scope.formId = data.Id;
+                                $scope.errorMessage = '';
+                                alert('Form saved successfully!');
+                            }
+                        },
+                        function(data, response) {
+                            alert(data.Message);
+                            $scope.errorMessage = data.Message;
+                        }
+                    );
                 };
 
                 $scope.SubmitFormInput = function () {
@@ -48,6 +72,33 @@
                 };
 
             });
+            
+
+            // I act a repository for the remote friend collection.
+            myApp.service(
+                "schemaService",
+                function($http, $q) {
+
+                    // Return public API.
+                    return ({
+                        addSchema: addSchema
+                    });
+
+                    function addSchema(data, success, fail) {
+
+                        $http({
+                            method: 'POST',
+                            url: "/Admin/FormEditor/SaveForm",
+                            data: data,
+                            async: false,
+                            dataType: "json"
+                        })
+                            .success(success)
+                            .error(fail);
+                    }
+                }
+            );
+            
         </script>
        
    }  
@@ -85,9 +136,10 @@
 
             </div>
 
+             <input type="button" value="Save" ng-click="SaveForm()" />
         </div>
        
        @section footer{
-           <input type="button" value="Save" ng-click="SaveForm()" />
+           
                 
        }
