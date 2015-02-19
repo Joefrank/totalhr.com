@@ -128,7 +128,7 @@
     @Scripts.Render("~/Scripts/Site/common.js")
     @RenderSection("scripts", required: false)
 
-    <div id="overlay-mask" style="display:none;"></div>
+    <div id="overlay-mask" style="display:none;" onclick="ClosePopup('dvPopup');"></div>
 
     <div id="dvPopup" style="display:none;"> 
         <iframe id="ipopup"></iframe>       

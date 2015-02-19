@@ -76,9 +76,12 @@ function isDate(txtDate)
 }
 
 
-function ClosePopup(objid) {   
+function ClosePopup(objid, bRefresh) {   
     document.getElementById(objid).style.display = "none";
     $('#overlay-mask').css("display", "none");
+    if (bRefresh) {
+        window.location.reload(true);
+    }
 }
 
 function CancelDivPopup(objid) {

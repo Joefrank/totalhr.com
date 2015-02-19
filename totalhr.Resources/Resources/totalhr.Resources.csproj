@@ -136,6 +136,11 @@
       <DependentUpon>FormMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TimeRecording.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TimeRecording.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Account.resx">
@@ -187,6 +192,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FormMessages.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TimeRecording.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TimeRecording.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

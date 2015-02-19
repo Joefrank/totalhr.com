@@ -175,6 +175,7 @@
     <Compile Include="Areas\Admin\Controllers\DocumentController.cs" />
     <Compile Include="Areas\Admin\Controllers\FormEditorController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TimeRecordingController.cs" />
     <Compile Include="Areas\Admin\Models\BreadCrumbItem.cs" />
     <Compile Include="Areas\Admin\Models\UserContractDetails.cs" />
     <Compile Include="Areas\Admin\Models\UserContractFormDetails.cs" />
@@ -411,6 +412,10 @@
     <Content Include="Areas\Admin\Views\Web.config" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Account\Login.cshtml" />
+    <Content Include="Areas\Admin\Views\TimeRecording\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\TimeRecording\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TimeRecording\RecordTime.cshtml" />
+    <Content Include="Areas\Admin\Views\TimeRecording\Search.cshtml" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
@@ -1615,6 +1620,7 @@
     <Content Include="Views\Shared\_MyMessagePreview.cshtml" />
     <Content Include="Views\Shared\_MyProfilePreview.cshtml" />
     <Content Include="Views\Chat\CreateRoom.cshtml" />
+    <Content Include="Views\Account\UserListSelector.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

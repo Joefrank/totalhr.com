@@ -232,6 +232,12 @@ namespace totalhr.Shared
             MatchPattern = 4
         }
 
+        public enum ChatRoomTarget
+        {
+            Private = 1,
+            Public = 2
+        }
+
         public static string AdminEmailSignature
         {
             get

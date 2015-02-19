@@ -1,0 +1,112 @@
+﻿@model totalhr.web.Areas.TimeRecording.ViewModels.SearchVM
+@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
+
+@{
+    ViewBag.Title = TimeRecording.V_Time_Recording_Search;
+
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Admin/TimeRecording/", Text = TimeRecording.V_Time_Recording_Home, Title= TimeRecording.V_Time_Recording_Home},
+        new BreadCrumbItem{Url = "", Text = TimeRecording.V_Time_Recording_Search, Title= TimeRecording.V_Time_Recording_Search}        
+    }; 
+ }
+
+
+@section pagetitle{
+   @TimeRecording.V_Time_Recording_Search
+}
+
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+<div class="row-fluid">
+
+     <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i>@TimeRecording.V_Time_Recording_Search_Criteria</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+                <a href="javascript:;" class="icon-remove"></a>
+            </span>
+        </div>
+        <div class="widget-body"> 
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+   
+                    <table>
+                        <tr>
+                            <td>
+                                @TimeRecording.V_Start_Date: @Html.EditorFor(x => x.StartDate)
+                            </td>
+                            <td>
+                                @TimeRecording.V_End_Date: @Html.EditorFor(x => x.EndDate)
+                            </td>
+                            <td>
+                                @TimeRecording.V_Result_Count: @Html.EditorFor(x => x.ResultsPerPage)
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                 <button type="submit" class="btn btn-success" onclick="$('#btnSubmit').click()">
+                                    <i class="icon-ok icon-white"></i> @TimeRecording.V_Submit
+                                </button>
+
+                                <input id="btnSubmit" type="submit" style="display:none;" value="@TimeRecording.V_Submit" />
+                            </td>
+                        </tr>
+                    </table>
+    
+            }
+    
+            @if (Model.Results != null && Model.Results.Count > 0)
+            {
+                <table>
+                    <tr>
+                        <td>
+                            @TimeRecording.V_Start_Time
+                        </td>
+                        <td>
+                            @TimeRecording.V_End_Time
+                        </td>
+                        <td>
+                            @TimeRecording.V_Recorded_By
+                        </td>
+                        <td>
+                            @TimeRecording.V_Duration_Recorded
+                        </td>
+                        <td></td>
+                    </tr>
+                    @foreach (var result in Model.Results)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(x => result.StartTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(x => result.EndTime)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(x => result.AddedByUser)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(x => result.RecordedDuration)
+                            </td>
+                            <td>@Html.ActionLink(TimeRecording.V_Details, "Details", new { id = result.Id }) </td>
+                        </tr>
+                    }
+                </table>
+
+                <br />
+                @Html.ActionLink(TimeRecording.V_Back_To_Recording_Home, "Index")
+            }
+        </div>
+
+    </div>
+
+</div>

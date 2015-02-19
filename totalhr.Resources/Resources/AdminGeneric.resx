@@ -435,4 +435,10 @@
   <data name="V_Select_Form_Intro" xml:space="preserve">
     <value>Please select the form you would like to manage below.</value>
   </data>
+  <data name="V_Time_Recording_Record" xml:space="preserve">
+    <value>Record Time</value>
+  </data>
+  <data name="V_Time_Recording_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
 </root>

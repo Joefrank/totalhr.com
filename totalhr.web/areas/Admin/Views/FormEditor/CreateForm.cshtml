@@ -60,7 +60,8 @@
                             }else {//success
                                 $scope.formId = data.Id;
                                 alert('Form saved successfully!');
-                                NavigateTo('/FormEditor/EditForm/' + data.Id);
+                                ClosePopup();
+                                ///NavigateTo('/FormEditor/EditForm/' + data.Id);
                             }
                             
                            // window.location.href = '/admin/Contract/Template/';
@@ -101,6 +102,12 @@
                 }
             );
 
+
+            function ClosePopup(){
+                if(parent != null){
+                    parent.ClosePopup('dvPopup', true);
+                }
+            }
         </script>       
 }
 

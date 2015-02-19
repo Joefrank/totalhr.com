@@ -290,6 +290,12 @@ namespace totalhr.web.Controllers
             return Json(qry, JsonRequestBehavior.AllowGet);
         }
 
+        public ActionResult GetCompanyUserSimple()
+        {
+            var lstUsers = _accountService.GetCompanyUsersSimple(CurrentUser.CompanyId, CurrentUser.UserId);
+            return View("UserListSelector", lstUsers);
+        }
+
         public JsonResult GetCompanyDepartmentsJson()
         {
             List<Department> lstDepartments = _accountService.GetCompanyDepartments(CurrentUser.CompanyId);

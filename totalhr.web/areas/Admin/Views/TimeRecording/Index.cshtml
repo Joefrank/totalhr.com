@@ -1,0 +1,30 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
+
+@{
+    ViewBag.Title = TimeRecording.V_Time_Recording_Home;
+   
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "", Text = TimeRecording.V_Time_Recording_Home, Title= TimeRecording.V_Time_Recording_Home}
+    }; 
+ }
+
+
+@section pagetitle{
+   @TimeRecording.V_Time_Recording_Home
+}
+
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+<div class="row-fluid">
+<p>
+    @Html.ActionLink(TimeRecording.V_Record_Time, "RecordTime")
+</p>
+<p>
+    @Html.ActionLink(TimeRecording.V_Search_Edit_Recording, "Search")
+</p>
+</div>
