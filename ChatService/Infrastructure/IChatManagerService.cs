@@ -11,5 +11,7 @@ namespace ChatService.Infrastructure
     public interface IChatManagerService
     {
         IEnumerable<ChatRoom> ListChatRooms();
+
+        int CreateRoom(ChatRoomInfo room);
     }
 }

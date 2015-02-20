@@ -19,5 +19,10 @@ namespace ChatService.Implementation
         {
             return _chatRepository.GetAll();
         }
+
+        public int CreateRoom(ChatRoomInfo room)
+        {
+           return _chatRepository.CreateRoom(room);
+        }
     }
 }

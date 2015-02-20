@@ -88,6 +88,24 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chat room&apos;s name is required!.
+        /// </summary>
+        public static string Error_ChatRoomName_Rq {
+            get {
+                return ResourceManager.GetString("Error_ChatRoomName_Rq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat room&apos;s target is required!.
+        /// </summary>
+        public static string Error_ChatRoomTarget_Rq {
+            get {
+                return ResourceManager.GetString("Error_ChatRoomTarget_Rq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry but could not create user..
         /// </summary>
         public static string Error_Could_Not_CreateUser {

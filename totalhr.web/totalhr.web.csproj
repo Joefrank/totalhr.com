@@ -213,7 +213,6 @@
     <Compile Include="Helpers\GenericHelper.cs" />
     <Compile Include="Helpers\GossaryHelper.cs" />
     <Compile Include="Helpers\PaginationHelper.cs" />
-    <Compile Include="Models\ChatRoomViewModel.cs" />
     <Compile Include="Models\UserAccountStruct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

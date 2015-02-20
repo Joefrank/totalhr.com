@@ -11,26 +11,12 @@
     User List
 }
 
+<div class="grid">
 @foreach(var user in Model)
 {
-    var temp = string.Empty;
-    
-    if (index % 4 == 0)
-    {
-        if(index > 0){temp += "</tr>";}
-
-        temp += "<tr>";
-    }
-    
-    temp = string.Format(@"<td><input type='checkbox' id='ckuser_{0}' value='{0}' onclick='PickUser(this);' /> {1} </td>",
-        user.Id, user.FullName);
-
-     index++;
-     tableHtml.Append(temp);
+   <div class="cell4"><input type='checkbox' id='ckuser_@user.Id' value='@user.Id' onclick='PickUser(this);' /> <span id="spName_@user.Id">@user.FullName</span> </div>
 }
-<table>
-    @Html.Raw(tableHtml.ToString() + "</tr>")
-</table>
+</div>
 
 <div>
     <input type="button" value="PersistValues" onclick="ReturnSelected();" />
@@ -42,22 +28,25 @@
     function PickUser(objck) {
         if (objck.checked) {
             ckSelectedTargetUsers['ckuser_' + objck.value] = objck.value;
+            $('#spName_' + objck.value).css("color", "blue");
         } else {
             ckSelectedTargetUsers['ckuser_' + objck.value] = null;
+            $('#spName_' + objck.value).css("color", "grey");
         }
     }
 
     function ReturnSelected() {
         var allinvitees = '';
+        var allinviteeNames = '';
 
         for (var key in ckSelectedTargetUsers) {
             if (ckSelectedTargetUsers[key] != null) {
-                allinvitees += (allinvitees == '') ? ckSelectedTargetUsers[key] : ',' + ckSelectedTargetUsers[key];               
+                allinvitees += (allinvitees == '') ? ckSelectedTargetUsers[key] : ',' + ckSelectedTargetUsers[key];
+                allinviteeNames += ((allinviteeNames == '') ? '' : ',') + $('#spName_' + ckSelectedTargetUsers[key]).html().replace(/[^-,'A-Za-z0-9]+/g, '');
             }
         }
-
         if (parent != null) {
-            parent.PickUsers(allinvitees);
+            parent.PickUsers(allinvitees, allinviteeNames);
         }
     }
 </script>

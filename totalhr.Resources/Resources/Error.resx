@@ -126,6 +126,12 @@
   <data name="Error_Cant_Remove_All_Roles" xml:space="preserve">
     <value>Sorry but you cannot remove all roles from user. User must have at least one role.</value>
   </data>
+  <data name="Error_ChatRoomName_Rq" xml:space="preserve">
+    <value>Chat room's name is required!</value>
+  </data>
+  <data name="Error_ChatRoomTarget_Rq" xml:space="preserve">
+    <value>Chat room's target is required!</value>
+  </data>
   <data name="Error_Could_Not_CreateUser" xml:space="preserve">
     <value>Sorry but could not create user.</value>
   </data>

@@ -93,6 +93,8 @@
 
         if (selval == target) {
             LaunchUserSelectDialog();
+        } else {
+            UnselectUsers();
         }
     }
 
@@ -100,7 +102,15 @@
         OpenPopup('/Account/GetCompanyUserSimple/', 700, 600);
     }
 
-    function PickUsers(lst) {
-        alert(lst);
+    function PickUsers(lst, lstUserNames) {
+        $('#InvitedUserIds').val(lst);
+        $('#lbInvitedUsers').fadeIn("slow");
+        $('#spInvitedUsers').html(lstUserNames);
+    }
+    
+    function UnselectUsers() {
+        $('#InvitedUserIds').val('');
+        $('#lbInvitedUsers').fadeOut("slow");
+        $('#spInvitedUsers').html('');
     }
 </script>

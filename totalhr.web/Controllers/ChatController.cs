@@ -53,12 +53,14 @@ namespace totalhr.web.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateRoom(ChatRoomViewModel room)
+        public ActionResult CreateRoom(ChatRoomInfo room)
         {
             if (ModelState.IsValid)
             {
                 //check if user has correct profile for this
+
                 //check if name doesn't exist as we can't have 2 rooms with same name
+                _chatService.CreateRoom(room);
 
                 return RedirectToAction("Index");
             }

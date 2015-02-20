@@ -312,3 +312,14 @@ html, body {
     -webkit-font-smoothing: antialiased !important;
 }
 
+.grid {
+    float: left;
+}
+
+.grid .cell4 {
+    float: left;
+    width: 23%;
+    margin: 1%;
+    text-align: left;
+    color: grey;
+}
