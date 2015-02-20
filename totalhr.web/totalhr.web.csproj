@@ -1620,6 +1620,7 @@
     <Content Include="Views\Shared\_MyProfilePreview.cshtml" />
     <Content Include="Views\Chat\CreateRoom.cshtml" />
     <Content Include="Views\Account\UserListSelector.cshtml" />
+    <Content Include="Views\Chat\ChatRegistration.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -9,7 +9,6 @@ namespace totalhr.data.Repositories.Infrastructure
 {
     public interface IChatRepository : IGenericRepository<ChatRoom>
     {
-
         int CreateRoom(Shared.Models.ChatRoomInfo room);
     }
 }

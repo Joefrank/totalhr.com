@@ -31,7 +31,6 @@ namespace totalhr.data.Repositories.Implementation
 
         public IQueryable<T> FindBy(System.Linq.Expressions.Expression<Func<T, bool>> predicate)
         {
-
             IQueryable<T> query = _entities.Set<T>().Where(predicate);
             return query;
         }

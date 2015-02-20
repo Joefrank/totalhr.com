@@ -1,0 +1,4 @@
+
+Chat Room:
+ - User selector should remember previous selections
+ - Create chatroom edit page and remember all selections

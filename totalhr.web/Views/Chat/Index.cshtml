@@ -39,26 +39,34 @@
             @foreach (var room in Model)
             {
                 bRoomsAvailable = true;
-                @room.Name <br/>
+                <p>
+                        @room.Name  
+                        
+                        @if(room.Private){
+                            <button type="submit" class="btn btn-success" onclick="NavigateTo('/Chat/EnterRoom/@room.Id');"><i class="icon-ok icon-white"></i> @Common.V_Enter</button>
+                        }else{
+                            <span class="label label-important">@Common.V_ChatRoom_Private</span>
+                        }
+                       <br />
+                </p>
             }
 
             @if (!bRoomsAvailable)
             {
-                <p class="error">@Common.V_Chat_NoRooms</p>
+                
+                <div class="alert alert-block alert-error fade in">@Common.V_Chat_NoRooms</div>
             }
             
-            <p>
-                <input type="button" value="Create Chatroom" onclick="NavigateTo('/Chat/CreateRoom/');"/>
-            </p>
+           
         </div>
     </div>
 </div>
 
-
-     @section scripts
-{
-    <script src="/Scripts/Site/Chat.js"></script>
-}
+ <div class="row-fluid">
+    <button type="submit" class="btn btn-warning" onclick="NavigateTo('/Chat/CreateRoom/');">
+        <i class="icon-plus icon-white"></i> @Common.V_Chat_Room_New
+    </button>
+</div>
 
 
 @* <div id="YourNickname">

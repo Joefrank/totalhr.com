@@ -13,5 +13,7 @@ namespace ChatService.Infrastructure
         IEnumerable<ChatRoom> ListChatRooms();
 
         int CreateRoom(ChatRoomInfo room);
+
+        ChatRoom GetRoom(int id);
     }
 }

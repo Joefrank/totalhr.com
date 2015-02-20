@@ -270,4 +270,25 @@
   <data name="V_Save" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="V_Chat_Entering_Room" xml:space="preserve">
+    <value>Entering chat room '{0}'</value>
+  </data>
+  <data name="V_Chat_Nickname" xml:space="preserve">
+    <value>Your chat nickname</value>
+  </data>
+  <data name="V_Chat_Nickname_Intro" xml:space="preserve">
+    <value>Please enter a nickname or simply click enter in this case your username will appear in chatroom.</value>
+  </data>
+  <data name="V_Chat_Registration" xml:space="preserve">
+    <value>Chat Registration</value>
+  </data>
+  <data name="V_Chat_Room_New" xml:space="preserve">
+    <value>Create Chatroom</value>
+  </data>
+  <data name="V_Chat_Your_Nickname" xml:space="preserve">
+    <value>Your nickname</value>
+  </data>
+  <data name="V_Enter" xml:space="preserve">
+    <value>Enter</value>
+  </data>
 </root>

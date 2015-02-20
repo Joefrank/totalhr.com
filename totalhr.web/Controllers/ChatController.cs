@@ -8,6 +8,7 @@ using ChatService.Infrastructure;
 using totalhr.Shared.Models;
 using totalhr.Resources;
 using totalhr.web.Models;
+using totalhr.Shared;
 
 namespace totalhr.web.Controllers
 {
@@ -24,8 +25,9 @@ namespace totalhr.web.Controllers
             _chatService = chatService;
         }
 
-        public ActionResult Logon()
+        public ActionResult LogUserIntoRoom(int roomId, string nickname)
         {
+            
             return View("Index");
         }
 
@@ -49,7 +51,7 @@ namespace totalhr.web.Controllers
 
         public ActionResult CreateRoom()
         {
-            return View();
+            return View(new ChatRoomInfo { Target = (int)Variables.ChatRoomTarget.Public });
         }
 
         [HttpPost]
@@ -60,6 +62,8 @@ namespace totalhr.web.Controllers
                 //check if user has correct profile for this
 
                 //check if name doesn't exist as we can't have 2 rooms with same name
+                room.UserId = CurrentUser.UserId;
+
                 _chatService.CreateRoom(room);
 
                 return RedirectToAction("Index");
@@ -68,6 +72,20 @@ namespace totalhr.web.Controllers
             {
                 return View();
             }
+        }
+
+        public ActionResult EnterRoom(int id)
+        {
+            var chatRoom = _chatService.GetRoom(id);
+            return View("ChatRegistration", chatRoom);
+        }
+
+        public ActionResult Register(int roomId, string nickName)
+        {
+            //register user in chat model
+
+            //redirect to chat lobby
+            return View("Lobby");
         }
 
         /* <summary>
