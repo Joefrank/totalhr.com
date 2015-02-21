@@ -8,8 +8,12 @@
     [LastUpdatedBy] INT      NULL,
     [Views]         INT      CONSTRAINT [DF_UserContract_Views] DEFAULT ((0)) NOT NULL,
     [LastViewed]    DATETIME NULL,
+    [StatusId]      INT      CONSTRAINT [DF_UserContract_StatusId] DEFAULT ((1)) NOT NULL,
     CONSTRAINT [PK_ContractTemplate] PRIMARY KEY CLUSTERED ([id] ASC),
     CONSTRAINT [FK_ContractTemplate_User] FOREIGN KEY ([CreatedBy]) REFERENCES [dbo].[User] ([id]),
-    CONSTRAINT [FK_UserContract_User] FOREIGN KEY ([Userid]) REFERENCES [dbo].[User] ([id])
+    CONSTRAINT [FK_UserContract_User] FOREIGN KEY ([Userid]) REFERENCES [dbo].[User] ([id]),
+    CONSTRAINT [FK_UserContract_User1] FOREIGN KEY ([LastUpdatedBy]) REFERENCES [dbo].[User] ([id])
 );
+
+
 

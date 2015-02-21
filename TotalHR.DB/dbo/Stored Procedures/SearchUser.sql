@@ -1,5 +1,5 @@
 ﻿	
-CREATE proc SearchUser
+CREATE proc [dbo].[SearchUser]
 	@id int = null,
 	@name nvarchar(100) = null,
 	@usertypeid int= null,

@@ -7,7 +7,11 @@
     [LastModifiedBy] INT            NULL,
     [LastModified]   DATETIME       NULL,
     [CompanyId]      INT            NOT NULL,
+    [LineManagerId]  INT            NULL,
     CONSTRAINT [PK_Department] PRIMARY KEY CLUSTERED ([id] ASC),
-    CONSTRAINT [FK_Department_Company] FOREIGN KEY ([CompanyId]) REFERENCES [dbo].[Company] ([ID])
+    CONSTRAINT [FK_Department_Company] FOREIGN KEY ([CompanyId]) REFERENCES [dbo].[Company] ([ID]),
+    CONSTRAINT [FK_Department_User] FOREIGN KEY ([LineManagerId]) REFERENCES [dbo].[User] ([id])
 );
+
+
 
