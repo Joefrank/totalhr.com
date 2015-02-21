@@ -36,7 +36,7 @@ namespace totalhr.services.Implementation
                     var timeRecording = this.GetById(id);
                     if (timeRecording != null)
                     {
-                        timeRecording.Build(userId, startTime, endTime, audit);
+                        timeRecording.Build(userId, startTime, endTime, timeRecording.Audit.UpdateAudit(audit.UpdatedBy, audit.UpdatedDate));
                     }
                 }
                 _timeRecordingRepository.Save();

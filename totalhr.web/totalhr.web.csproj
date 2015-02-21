@@ -162,10 +162,10 @@
     <Compile Include="Areas\Admin\Models\BreadCrumbItem.cs" />
     <Compile Include="Areas\Admin\Models\UserContractDetails.cs" />
     <Compile Include="Areas\Admin\Models\UserContractFormDetails.cs" />
-    <Compile Include="Areas\TimeRecording\Controllers\TimeRecordingController.cs" />
-    <Compile Include="Areas\TimeRecording\ViewModels\SearchVM.cs" />
-    <Compile Include="Areas\TimeRecording\ViewModels\TimeRecordingDetailsVM.cs" />
-    <Compile Include="Areas\TimeRecording\ViewModels\TimeRecordingVM.cs" />
+    <Compile Include="Controllers\TimeRecordingController.cs" />
+    <Compile Include="ViewModels\SearchVM.cs" />
+    <Compile Include="ViewModels\TimeRecordingDetailsVM.cs" />
+    <Compile Include="ViewModels\TimeRecordingVM.cs" />
     <Compile Include="Areas\Admin\Controllers\ProfileController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
