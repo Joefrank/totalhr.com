@@ -10,12 +10,12 @@ namespace totalhr.web.Controllers
 {
     public class ChatApiController : ApiController
     {
-        private static ChatModel _chatModel;
+        private static ChatRoom _chatModel;
 
         [HttpGet]
-        public ChatModel.ChatUser FindUser()
+        public ChatRoom.ChatUser FindUser()
         {
-            return new ChatModel.ChatUser
+            return new ChatRoom.ChatUser
                 {
                     NickName = "Joe", 
                     Userid = 59, 

@@ -56,6 +56,10 @@
       <Project>{f5a3d97a-a1b9-463a-850e-23cf6e1fc488}</Project>
       <Name>totalhr.data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\totalhr.Resources\Resources\totalhr.Resources.csproj">
+      <Project>{9c706121-a522-4f91-970a-5d0d3929eaee}</Project>
+      <Name>totalhr.Resources</Name>
+    </ProjectReference>
     <ProjectReference Include="..\totalhr.Shared\totalhr.Shared.csproj">
       <Project>{1AF1ABB5-66B8-4E3F-A5AA-12025159514F}</Project>
       <Name>totalhr.Shared</Name>

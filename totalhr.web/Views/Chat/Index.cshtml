@@ -1,6 +1,7 @@
 ﻿@using totalhr.Resources
-@using totalhr.web.Areas.Admin.Helpers
+@using AH = totalhr.web.Areas.Admin.Helpers
 @using totalhr.web.Areas.Admin.Models
+@using totalhr.web.Helpers;
 
 @model IEnumerable<totalhr.data.EF.ChatRoom>
 
@@ -12,7 +13,13 @@
         new BreadCrumbItem{Url = "", Text = Common.V_Chat_Rooms, Title= Common.V_Chat_Rooms}
     };
 
-    bool bRoomsAvailable = false;   
+    bool bRoomsAvailable = false;
+    int currentUserId = 0;
+    
+    if(ViewBag.CurrentUserId != null){
+        currentUserId = Convert.ToInt32(ViewBag.CurrentUserId);
+    }
+     
 }
 
 @section pagetitle{
@@ -20,11 +27,8 @@
 }
 
 @section breadcrumb{
-    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+    @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
 }
-
-
-
 
 <div class="row-fluid">
     <div class="widget">
@@ -42,8 +46,11 @@
                 <p>
                         @room.Name  
                         
-                        @if(room.Private){
-                            <button type="submit" class="btn btn-success" onclick="NavigateTo('/Chat/EnterRoom/@room.Id');"><i class="icon-ok icon-white"></i> @Common.V_Enter</button>
+                        @if (ChatHelper.UserCanAccessChatRoom(currentUserId, room))
+                        {
+                            <button type="submit" class="btn btn-success" onclick="NavigateTo('/Chat/EnterRoom/@room.Id');">
+                                <i class="icon-ok icon-white"></i> @Common.V_Enter
+                            </button>
                         }else{
                             <span class="label label-important">@Common.V_ChatRoom_Private</span>
                         }
@@ -52,8 +59,7 @@
             }
 
             @if (!bRoomsAvailable)
-            {
-                
+            {                
                 <div class="alert alert-block alert-error fade in">@Common.V_Chat_NoRooms</div>
             }
             

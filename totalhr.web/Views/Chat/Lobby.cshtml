@@ -1,55 +1,108 @@
-﻿@model totalhr.Shared.Models.ChatModel
+﻿@using totalhr.Resources
+@using totalhr.web.Areas.Admin.Helpers
+@using totalhr.web.Areas.Admin.Models
+
+@model totalhr.Shared.Models.ChatRoom
+
+@{
+    ViewBag.Title = Common.V_Chat_Registration;
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Chat/", Text = Common.V_Chat_Rooms, Title= Common.V_Chat_Rooms},
+        new BreadCrumbItem{Url = "", Text = Common.V_Chat_Registration, Title= Common.V_Chat_Registration}
+    };
+   
+  
+}
+
+@section pagetitle{
+   @Common.V_Chat_Registration
+}
+
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+
+<div class="row-fluid">
+    <div class="span6">
+        <!-- BEGIN CHAT PORTLET-->
+        <div class="widget" id="">
+            <div class="widget-title">
+                <h4><i class="icon-comments-alt"></i> @Model.Name</h4>
+				<span class="tools">
+				<a href="javascript:;" class="icon-chevron-down"></a>
+				<a href="javascript:;" class="icon-remove"></a>
+				</span>
+            </div>
+            <div class="widget-body">
+                <div id="RefreshArea">
+                   @Html.Partial("ChatHistory")
+                </div>
+                <div class="chat-form">
+                    <div class="input-cont">
+                        <input type="text" placeholder="@Common.V_Chat_Type_Message" />
+                    </div>
+                    <div class="btn-cont">
+                        <a href="javascript:;" class="btn btn-primary">@Common.V_Chat_Send</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END CHAT PORTLET-->
+    </div>
+</div>
+
+@Ajax.ActionLink("ActionLink", "RefreshMessages", new { user = "", logOn="",logOff="",chatMessage = "" }, 
+    new AjaxOptions { UpdateTargetId = "RefreshArea", OnSuccess = "ChatOnSuccess", OnFailure = "ChatOnFailure" }, 
+    new { @id = "ActionLink", @style = "visibility:hidden;" })
+
+
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/Site/Chat.js"></script>
+}
+
+<script type="text/javascript">
+(function($)
+{
+    $(document).ready(function()
+    {
+        $.ajaxSetup(
+        {
+            cache: false,
+            beforeSend: function() {
+                $('#RefreshArea').hide();
+                //$('#loading').show();
+            },
+            complete: function() {
+               // $('#loading').hide();
+                $('#RefreshArea').show();
+            },
+            success: function() {
+               // $('#loading').hide();
+                $('#RefreshArea').show();
+            }
+        });
+        var $container = $("#RefreshArea");
+        $container.load("/Chat/RefreshMessages/3");
+        var refreshId = setInterval(function()
+        {
+            $container.load('/RefreshMessages/3');
+        }, 3000);
+    });
+})(jQuery);
+</script>
+
+
+@*@model totalhr.Shared.Models.ChatModel
 
 @{
     ViewBag.Title = "lobby";
     
-}
+}*@
 
-@*<style type="text/css">
-    #Lobby
-    {
-        position: absolute;
-        width: 25%;
-        left: 1%;
-        height: 98%;
-        top: 1%;
-        background-color: #D8D8D8;
-        text-align: left;
-    }
-    
-    #ChatHistory
-    {
-        position: absolute;
-        width: 72%;
-        left: 27%;
-        height: 87%;
-        top: 1%;
-        background-color: #D8D8D8;
-        text-align: left;
-        font-size: x-small;
-        overflow-y: scroll;
-    }
-    
-    #Speak
-    {
-        position: absolute;
-        width: 72%;
-        left: 27%;
-        height: 10%;
-        top: 89%;
-        min-height: 60px;
-        background: #B8ED01;
-        border: 1px solid rgba(0,0,0,0.15);
-        border-radius: 4px;
-        transition: all 0.3s ease-out;
-        box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 2px 2px rgba(0,0,0,0.3), 0 0 4px 1px rgba(0,0,0,0.2); /* Font styles */
-        text-decoration: none;
-        text-shadow: 0 1px rgba(255,255,255,0.7);
-        vertical-align: middle;
-    }
-</style>*@
-
-<div id="RefreshArea">
+@*<div id="RefreshArea">
     @{
         Html.RenderPartial("ChatHistory", Model);
     }
@@ -74,7 +127,7 @@
             </td>
         </tr>
     </table>
-</div>
+</div>*@
 
 
 

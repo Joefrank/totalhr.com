@@ -14,7 +14,7 @@ namespace totalhr.web.Controllers
 {
     public class ChatController : BaseController
     {
-        private static ChatModel _chatModel;
+        private static ChatRoom _chatModel;
         private IOAuthService _authService;
         private readonly IChatManagerService _chatService;
 
@@ -26,8 +26,7 @@ namespace totalhr.web.Controllers
         }
 
         public ActionResult LogUserIntoRoom(int roomId, string nickname)
-        {
-            
+        {            
             return View("Index");
         }
 
@@ -39,13 +38,13 @@ namespace totalhr.web.Controllers
         public ActionResult AddMessage(string chatMessage)
         {
             //get nickname from current chatmodel and userid
-
             return View("Index");
 
         }
 
         public ActionResult Index()
         {
+            ViewBag.CurrentUserId = CurrentUser.UserId;
             return View(_chatService.ListChatRooms());
         }
 
@@ -76,17 +75,36 @@ namespace totalhr.web.Controllers
 
         public ActionResult EnterRoom(int id)
         {
-            var chatRoom = _chatService.GetRoom(id);
+            var chatRoom = _chatService.LoadChatRoom(id);
             return View("ChatRegistration", chatRoom);
         }
 
         public ActionResult Register(int roomId, string nickName)
         {
             //register user in chat model
+            if (string.IsNullOrEmpty(nickName))
+                nickName = CurrentUser.FullName;
 
-            //redirect to chat lobby
-            return View("Lobby");
+            var result = _chatService.LogUserIntoRoom(roomId, CurrentUser.UserId, nickName);
+            var room = result.ItemObject as ChatRoom;
+
+            if (result.Itemid > 0)
+            {                
+                return View("Lobby", room);
+            }
+            else
+            {
+                ViewBag.Error = result.ErrorMessage;
+                return View("ChatRegistration", room);
+            } 
         }
+
+        public ActionResult RefreshMessages(int roomId)
+        {
+            var chatRoom = _chatService.LoadChatRoom(roomId);
+            return View("ChatHistory", chatRoom);
+        }
+        
 
         /* <summary>
         /// When the method is called with no arguments, just return the view
@@ -94,11 +112,11 @@ namespace totalhr.web.Controllers
         /// When argument logOff is true, a user closed their browser or navigated away (log off)
         /// When argument chatMessage is specified, the user typed something in the chat
         /// </summary>*/
-        //public ActionResult Index(string user, bool? logOn, bool? logOff, string chatMessage)
+        //public ActionResult PostAction(int roomId, string user, bool? logOn, bool? logOff, string chatMessage)
         //{
         //    try
         //    {
-        //        if (_chatModel == null) _chatModel = new ChatModel();
+        //        _chatModel = GetChatModel(roomId);
 
         //        //trim chat history if needed
         //        if (_chatModel.ChatHistory.Count > 100)
@@ -189,9 +207,9 @@ namespace totalhr.web.Controllers
         //}
 
         /* <summary>
-        /// Remove this user from the lobby and inform others that he logged off
-        /// </summary>
-        /// <param name="user"></param>*/
+         Remove this user from the lobby and inform others that he logged off
+         </summary>
+         <param name="user"></param>*/
         //public void LogOffUser(ChatModel.ChatUser user)
         //{
         //    _chatModel.Users.Remove(user);

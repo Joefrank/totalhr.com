@@ -291,4 +291,10 @@
   <data name="V_Enter" xml:space="preserve">
     <value>Enter</value>
   </data>
+  <data name="V_Chat_Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="V_Chat_Type_Message" xml:space="preserve">
+    <value>Type a message here...</value>
+  </data>
 </root>

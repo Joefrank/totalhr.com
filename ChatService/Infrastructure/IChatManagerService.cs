@@ -4,16 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using totalhr.Shared.Models;
-using totalhr.data.EF;
+using TEF = totalhr.data.EF;
 
 namespace ChatService.Infrastructure
 {
     public interface IChatManagerService
     {
-        IEnumerable<ChatRoom> ListChatRooms();
+        IEnumerable<TEF.ChatRoom> ListChatRooms();
 
         int CreateRoom(ChatRoomInfo room);
 
-        ChatRoom GetRoom(int id);
+        TEF.ChatRoom GetRoom(int id);
+
+        ChatRoom LoadChatRoom(int roomId);
+
+        ResultInfo LogUserIntoRoom(int roomId, int userid, string nickname);
     }
 }

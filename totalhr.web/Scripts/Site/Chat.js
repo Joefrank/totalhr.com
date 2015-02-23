@@ -1,28 +1,29 @@
 ﻿$(document).ready(function () {
 
-    $("#txtNickName").val("").focus();
+    //$("#txtNickName").val("").focus();
 
-    $("#btnLogin").click(function () {
-        var nickName = $("#txtNickName").val();
-        if (nickName) {
-            //call the Index method of the controller and pass the attribute "logOn"
-            var href = "/Chat?user=" + encodeURIComponent(nickName);
-            href = href + "&logOn=true";
-            $("#LoginButton").attr("href", href).click();
+    //$("#btnLogin").click(function () {
+    //    var nickName = $("#txtNickName").val();
+    //    if (nickName) {
+    //        //call the Index method of the controller and pass the attribute "logOn"
+    //        var href = "/Chat?user=" + encodeURIComponent(nickName);
+    //        href = href + "&logOn=true";
+    //        $("#LoginButton").attr("href", href).click();
 
-            //the nickname is persisted here
-            $("#YourNickname").text(nickName);
-        }
-    });
+    //        //the nickname is persisted here
+    //        $("#YourNickname").text(nickName);
+    //    }
+    //});
 
-    //auto click when enter is pressed
-    $('#txtNickName').keydown(function(e) {
-        if (e.keyCode == 13) {
-            e.preventDefault();
-            $("#btnLogin").click();
-        }
-    });
+    ////auto click when enter is pressed
+    //$('#txtNickName').keydown(function(e) {
+    //    if (e.keyCode == 13) {
+    //        e.preventDefault();
+    //        $("#btnLogin").click();
+    //    }
+    //});
 
+    Refresh();
 });
 
 //the login was successful. Setup events for the lobby and prepare other UI items
@@ -82,7 +83,7 @@ function LoginOnFailure(result) {
 
 //called every 5 seconds
 function Refresh() {
-    var href = "/Chat?user=" + encodeURIComponent($("#YourNickname").text());
+    var href = "/RefreshMessages/3"; // + encodeURIComponent($("#YourNickname").text());
 
     //call the Index method of the controller
     $("#ActionLink").attr("href", href).click();

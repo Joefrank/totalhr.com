@@ -349,11 +349,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Send.
+        /// </summary>
+        public static string V_Chat_Send {
+            get {
+                return ResourceManager.GetString("V_Chat_Send", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The chat server started at {0}.
         /// </summary>
         public static string V_Chat_Server_Started_At {
             get {
                 return ResourceManager.GetString("V_Chat_Server_Started_At", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type a message here....
+        /// </summary>
+        public static string V_Chat_Type_Message {
+            get {
+                return ResourceManager.GetString("V_Chat_Type_Message", resourceCulture);
             }
         }
         

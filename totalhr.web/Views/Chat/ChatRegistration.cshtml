@@ -2,7 +2,7 @@
 @using totalhr.web.Areas.Admin.Helpers
 @using totalhr.web.Areas.Admin.Models
 
-@model totalhr.data.EF.ChatRoom
+@model totalhr.Shared.Models.ChatRoom
 
 @{
     ViewBag.Title = Common.V_Chat_Registration;
@@ -40,8 +40,15 @@
            </p>
             
             <div>
+
+                @if(ViewBag.Error != null){
+                <p class="alert alert-block alert-error fade in">
+                    @ViewBag.Error   
+                </p>
+                }
+
                 <form id="frmReg" action="/Chat/Register/" method="post">
-                    <input type="hidden" name="roomId" value="@Model.Id" />
+                    <input type="hidden" name="roomId" value="@Model.DBid" />
 
                     <div class="control-group">
                         <label class="control-label">@Common.V_Chat_Nickname</label>

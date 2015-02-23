@@ -7,7 +7,7 @@ using totalhr.Resources;
 
 namespace totalhr.Shared.Models
 {
-    public class ChatModel
+    public class ChatRoom
     {
         /// <summary>
         /// Users that have connected to the chat
@@ -18,8 +18,24 @@ namespace totalhr.Shared.Models
         /// Messages by the users
         /// </summary>
         public List<ChatMessage> ChatHistory;
-        
-        public ChatModel()
+
+        public int DBid { get; set; }
+
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public string Creator { get; set; }
+
+        public int CreatorId { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public bool Private { get { return InvitedUserIds != null && InvitedUserIds.Count > 0; } }
+
+        public List<int> InvitedUserIds { get; set; } 
+
+        public ChatRoom()
         {
             Users = new List<ChatUser>();
             ChatHistory = new List<ChatMessage>
@@ -31,21 +47,9 @@ namespace totalhr.Shared.Models
                 };
         }
 
-        public class ChatRoom
+        public static string GetCacheKey(int id)
         {
-            public string Name { get; set; }
-
-            public string Description { get; set; }
-
-            public string Creator { get; set; }
-
-            public int CreatorId { get; set; }
-
-            public DateTime CreatedOn { get; set; }
-
-            public bool Private { get { return InvitedUserIds != null && InvitedUserIds.Count > 0; } }
-
-            public List<int> InvitedUserIds { get; set; } 
+            return string.Format("ChatRoom_{0}", id);
         }
 
         public class ChatUser
@@ -69,4 +73,5 @@ namespace totalhr.Shared.Models
 
         }
     }
+
 }

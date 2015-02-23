@@ -208,6 +208,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CalendarHelper.cs" />
+    <Compile Include="Helpers\ChatHelper.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\DocumentHelper.cs" />
     <Compile Include="Helpers\GenericHelper.cs" />
@@ -1621,6 +1622,7 @@
     <Content Include="Views\Chat\CreateRoom.cshtml" />
     <Content Include="Views\Account\UserListSelector.cshtml" />
     <Content Include="Views\Chat\ChatRegistration.cshtml" />
+    <Content Include="Views\Shared\_BlankLayout.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -22,6 +22,17 @@ namespace totalhr.tests.libs
             hash.Add(key, o);
         }
 
+        public void Update<T>(T o, string key)
+        {
+            if (!Exists(key))
+            {
+                Add<T>(o, key);
+            }
+            else
+            {
+                hash[key] = o;
+            }
+        }
         /// <summary>
         /// Remove item from cache
         /// </summary>

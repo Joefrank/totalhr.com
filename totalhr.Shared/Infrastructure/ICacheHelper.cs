@@ -17,5 +17,7 @@ namespace totalhr.Shared.Infrastructure
         bool Get<T>(string key, out T value);
 
         T Get<T>(string key);
+
+        void Update<T>(T o, string key);
     }
 }
