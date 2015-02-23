@@ -5,18 +5,18 @@ var App = function () {
     var isIE8 = false;
 
 
-    var handleJQVMAP = function () {
+    var handleJQVMAP = function() {
 
         if (!sample_data) {
             return;
         }
 
-        var showMap = function (name) {
+        var showMap = function(name) {
             jQuery('.vmaps').hide();
             jQuery('#vmap_' + name).show();
-        }
+        };
 
-        var setMap = function (name) {
+        var setMap = function(name) {
             var data = {
                 map: 'world_en',
                 backgroundColor: null,
@@ -33,15 +33,15 @@ var App = function () {
                 selectedColor: '#3daced',
                 selectedRegion: null,
                 showTooltip: true,
-                onLabelShow: function (event, label, code) {
+                onLabelShow: function(event, label, code) {
 
                 },
-                onRegionOver: function (event, code) {
+                onRegionOver: function(event, code) {
                     if (code == 'ca') {
                         event.preventDefault();
                     }
                 },
-                onRegionClick: function (element, code, region) {
+                onRegionClick: function(element, code, region) {
                     var message = 'You clicked "' + region + '" which has the code: ' + code.toUpperCase();
                     alert(message);
                 }
@@ -53,7 +53,7 @@ var App = function () {
             map.show();
             map.vectorMap(data);
             map.hide();
-        }
+        };
 
         setMap("world");
         setMap("usa");
@@ -63,35 +63,35 @@ var App = function () {
 
         showMap("world");
 
-        jQuery('#regional_stat_world').click(function () {
+        jQuery('#regional_stat_world').click(function() {
             showMap("world");
         });
 
-        jQuery('#regional_stat_usa').click(function () {
+        jQuery('#regional_stat_usa').click(function() {
             showMap("usa");
         });
 
-        jQuery('#regional_stat_europe').click(function () {
+        jQuery('#regional_stat_europe').click(function() {
             showMap("europe");
         });
-        jQuery('#regional_stat_russia').click(function () {
+        jQuery('#regional_stat_russia').click(function() {
             showMap("russia");
         });
-        jQuery('#regional_stat_germany').click(function () {
+        jQuery('#regional_stat_germany').click(function() {
             showMap("germany");
         });
 
         $('#region_statistics_loading').hide();
         $('#region_statistics_content').show();
-    }
+    };
 
-    var handleAllJQVMAP = function () {
+    var handleAllJQVMAP = function() {
 
         if (!sample_data) {
             return;
         }
 
-        var setMap = function (name) {
+        var setMap = function(name) {
             var data = {
                 map: 'world_en',
                 backgroundColor: null,
@@ -108,13 +108,13 @@ var App = function () {
                 selectedColor: '#3daced',
                 selectedRegion: null,
                 showTooltip: true,
-                onRegionOver: function (event, code) {
+                onRegionOver: function(event, code) {
                     //sample to interact with map
                     if (code == 'ca') {
                         event.preventDefault();
                     }
                 },
-                onRegionClick: function (element, code, region) {
+                onRegionClick: function(element, code, region) {
                     //sample to interact with map
                     var message = 'You clicked "' + region + '" which has the code: ' + code.toUpperCase();
                     alert(message);
@@ -124,18 +124,17 @@ var App = function () {
             var map = jQuery('#vmap_' + name);
             map.width(map.parent().width());
             map.vectorMap(data);
-        }
+        };
 
         setMap("world");
         setMap("usa");
         setMap("europe");
         setMap("russia");
         setMap("germany");
-    }
+    };
 
 
-
-    var handleDashboardCalendar = function () {
+    var handleDashboardCalendar = function() {
 
         if (!jQuery().fullCalendar) {
             return;
@@ -167,53 +166,53 @@ var App = function () {
             header: h,
             editable: true,
             events: [{
-                title: 'All Day Event',
-                start: new Date(y, m, 1),
-                className: 'label label-default',
-            }, {
-                title: 'Long Event',
-                start: new Date(y, m, d - 5),
-                end: new Date(y, m, d - 2),
-                className: 'label label-success',
-            }, {
-                title: 'Repeating Event',
-                start: new Date(y, m, d - 3, 16, 0),
-                allDay: false,
-                className: 'label label-default',
-            }, {
-                title: 'Repeating Event',
-                start: new Date(y, m, d + 4, 16, 0),
-                allDay: false,
-                className: 'label label-important',
-            }, {
-                title: 'Meeting',
-                start: new Date(y, m, d, 10, 30),
-                allDay: false,
-                className: 'label label-info',
-            }, {
-                title: 'Lunch',
-                start: new Date(y, m, d, 12, 0),
-                end: new Date(y, m, d, 14, 0),
-                allDay: false,
-                className: 'label label-warning',
-            }, {
-                title: 'Birthday Party',
-                start: new Date(y, m, d + 1, 19, 0),
-                end: new Date(y, m, d + 1, 22, 30),
-                allDay: false,
-                className: 'label label-success',
-            }, {
-                title: 'Click for Google',
-                start: new Date(y, m, 28),
-                end: new Date(y, m, 29),
-                url: 'http://google.com/',
-                className: 'label label-warning',
-            }]
+                    title: 'All Day Event',
+                    start: new Date(y, m, 1),
+                    className: 'label label-default',
+                }, {
+                    title: 'Long Event',
+                    start: new Date(y, m, d - 5),
+                    end: new Date(y, m, d - 2),
+                    className: 'label label-success',
+                }, {
+                    title: 'Repeating Event',
+                    start: new Date(y, m, d - 3, 16, 0),
+                    allDay: false,
+                    className: 'label label-default',
+                }, {
+                    title: 'Repeating Event',
+                    start: new Date(y, m, d + 4, 16, 0),
+                    allDay: false,
+                    className: 'label label-important',
+                }, {
+                    title: 'Meeting',
+                    start: new Date(y, m, d, 10, 30),
+                    allDay: false,
+                    className: 'label label-info',
+                }, {
+                    title: 'Lunch',
+                    start: new Date(y, m, d, 12, 0),
+                    end: new Date(y, m, d, 14, 0),
+                    allDay: false,
+                    className: 'label label-warning',
+                }, {
+                    title: 'Birthday Party',
+                    start: new Date(y, m, d + 1, 19, 0),
+                    end: new Date(y, m, d + 1, 22, 30),
+                    allDay: false,
+                    className: 'label label-success',
+                }, {
+                    title: 'Click for Google',
+                    start: new Date(y, m, 28),
+                    end: new Date(y, m, 29),
+                    url: 'http://google.com/',
+                    className: 'label label-warning',
+                }]
         });
 
-    }
+    };
 
-    var handleCalendar = function () {
+    var handleCalendar = function() {
 
         if (!jQuery().fullCalendar) {
             return;
@@ -240,7 +239,7 @@ var App = function () {
             };
         }
 
-        var initDrag = function (el) {
+        var initDrag = function(el) {
             // create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
             // it doesn't need to have a start or end
             var eventObject = {
@@ -254,36 +253,36 @@ var App = function () {
                 revert: true, // will cause the event to go back to its
                 revertDuration: 0 //  original position after the drag
             });
-        }
+        };
 
-        var addEvent = function (title, priority) {
+        var addEvent = function(title, priority) {
             title = title.length == 0 ? "Untitled Event" : title;
             priority = priority.length == 0 ? "default" : priority;
 
             var html = $('<div data-class="label label-' + priority + '" class="external-event label label-' + priority + '">' + title + '</div>');
             jQuery('#event_box').append(html);
             initDrag(html);
-        }
+        };
 
-        $('#external-events div.external-event').each(function () {
-            initDrag($(this))
+        $('#external-events div.external-event').each(function() {
+            initDrag($(this));
         });
 
-        $('#event_add').click(function () {
+        $('#event_add').click(function() {
             var title = $('#event_title').val();
             var priority = $('#event_priority').val();
             addEvent(title, priority);
         });
 
         //modify chosen options
-        var handleDropdown = function () {
+        var handleDropdown = function() {
             $('#event_priority_chzn .chzn-search').hide(); //hide search box
             $('#event_priority_chzn_o_1').html('<span class="label label-default">' + $('#event_priority_chzn_o_1').text() + '</span>');
             $('#event_priority_chzn_o_2').html('<span class="label label-success">' + $('#event_priority_chzn_o_2').text() + '</span>');
             $('#event_priority_chzn_o_3').html('<span class="label label-info">' + $('#event_priority_chzn_o_3').text() + '</span>');
             $('#event_priority_chzn_o_4').html('<span class="label label-warning">' + $('#event_priority_chzn_o_4').text() + '</span>');
             $('#event_priority_chzn_o_5').html('<span class="label label-important">' + $('#event_priority_chzn_o_5').text() + '</span>');
-        }
+        };
 
         $('#event_priority_chzn').click(handleDropdown);
 
@@ -303,7 +302,7 @@ var App = function () {
             header: h,
             editable: true,
             droppable: true, // this allows things to be dropped onto the calendar !!!
-            drop: function (date, allDay) { // this function is called when something is dropped
+            drop: function(date, allDay) { // this function is called when something is dropped
 
                 // retrieve the dropped element's stored Event Object
                 var originalEventObject = $(this).data('eventObject');
@@ -326,62 +325,62 @@ var App = function () {
                 }
             },
             events: [{
-                title: 'All Day Event',
-                start: new Date(y, m, 1),
-                className: 'label label-default',
-            }, {
-                title: 'Long Event',
-                start: new Date(y, m, d - 5),
-                end: new Date(y, m, d - 2),
-                className: 'label label-success',
-            }, {
-                id: 999,
-                title: 'Repeating Event',
-                start: new Date(y, m, d - 3, 16, 0),
-                allDay: false,
-                className: 'label label-default',
-            }, {
-                id: 999,
-                title: 'Repeating Event',
-                start: new Date(y, m, d + 4, 16, 0),
-                allDay: false,
-                className: 'label label-important',
-            }, {
-                title: 'Meeting',
-                start: new Date(y, m, d, 10, 30),
-                allDay: false,
-                className: 'label label-info',
-            }, {
-                title: 'Lunch',
-                start: new Date(y, m, d, 12, 0),
-                end: new Date(y, m, d, 14, 0),
-                allDay: false,
-                className: 'label label-warning',
-            }, {
-                title: 'Birthday Party',
-                start: new Date(y, m, d + 1, 19, 0),
-                end: new Date(y, m, d + 1, 22, 30),
-                allDay: false,
-                className: 'label label-success',
-            }, {
-                title: 'Click for Google',
-                start: new Date(y, m, 28),
-                end: new Date(y, m, 29),
-                url: 'http://google.com/',
-                className: 'label label-warning',
-            }]
+                    title: 'All Day Event',
+                    start: new Date(y, m, 1),
+                    className: 'label label-default',
+                }, {
+                    title: 'Long Event',
+                    start: new Date(y, m, d - 5),
+                    end: new Date(y, m, d - 2),
+                    className: 'label label-success',
+                }, {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: new Date(y, m, d - 3, 16, 0),
+                    allDay: false,
+                    className: 'label label-default',
+                }, {
+                    id: 999,
+                    title: 'Repeating Event',
+                    start: new Date(y, m, d + 4, 16, 0),
+                    allDay: false,
+                    className: 'label label-important',
+                }, {
+                    title: 'Meeting',
+                    start: new Date(y, m, d, 10, 30),
+                    allDay: false,
+                    className: 'label label-info',
+                }, {
+                    title: 'Lunch',
+                    start: new Date(y, m, d, 12, 0),
+                    end: new Date(y, m, d, 14, 0),
+                    allDay: false,
+                    className: 'label label-warning',
+                }, {
+                    title: 'Birthday Party',
+                    start: new Date(y, m, d + 1, 19, 0),
+                    end: new Date(y, m, d + 1, 22, 30),
+                    allDay: false,
+                    className: 'label label-success',
+                }, {
+                    title: 'Click for Google',
+                    start: new Date(y, m, 28),
+                    end: new Date(y, m, 29),
+                    url: 'http://google.com/',
+                    className: 'label label-warning',
+                }]
         });
 
-    }
+    };
 
-    var handleChat = function () {
+    var handleChat = function() {
         var cont = $('#chats');
         var list = $('.chats', cont);
         var form = $('.chat-form', cont);
         var input = $('input', form);
         var btn = $('.btn', form);
 
-        var handleClick = function () {
+        var handleClick = function() {
             var text = input.val();
             if (text.length == 0) {
                 return;
@@ -407,18 +406,18 @@ var App = function () {
             $('.scroller', cont).slimScroll({
                 scrollTo: list.height()
             });
-        }
+        };
 
         btn.click(handleClick);
-        input.keypress(function (e) {
+        input.keypress(function(e) {
             if (e.which == 13) {
                 handleClick();
                 return false; //<---- Add this line
             }
         });
-    }
+    };
 
-    var handleClockfaceTimePickers = function () {
+    var handleClockfaceTimePickers = function() {
 
         if (!jQuery().clockface) {
             return;
@@ -431,7 +430,7 @@ var App = function () {
             trigger: 'manual'
         });
 
-        $('#clockface_2_toggle-btn').click(function (e) {
+        $('#clockface_2_toggle-btn').click(function(e) {
             e.stopPropagation();
             $('#clockface_2').clockface('toggle');
         });
@@ -439,9 +438,9 @@ var App = function () {
         $('#clockface_3').clockface({
             format: 'H:mm'
         }).clockface('show', '14:30');
-    }
+    };
 
-    var handlePortletSortable = function () {
+    var handlePortletSortable = function() {
         if (!jQuery().sortable) {
             return;
         }
@@ -458,10 +457,10 @@ var App = function () {
             tolerance: 'pointer'
         });
 
-    }
+    };
 
-    var handleMainMenu = function () {
-        jQuery('#sidebar .has-sub > a').click(function () {
+    var handleMainMenu = function() {
+        jQuery('#sidebar .has-sub > a').click(function() {
             var last = jQuery('.has-sub.open', $('#sidebar'));
             last.removeClass("open");
             jQuery('.arrow', last).removeClass("open");
@@ -477,22 +476,22 @@ var App = function () {
                 sub.slideDown(200);
             }
         });
-    }
+    };
 
-    var handleWidgetTools = function () {
-        jQuery('.widget .tools .icon-remove').click(function () {
+    var handleWidgetTools = function() {
+        jQuery('.widget .tools .icon-remove').click(function() {
             jQuery(this).parents(".widget").parent().remove();
         });
 
-        jQuery('.widget .tools .icon-refresh').click(function () {
+        jQuery('.widget .tools .icon-refresh').click(function() {
             var el = jQuery(this).parents(".widget");
             App.blockUI(el);
-            window.setTimeout(function () {
+            window.setTimeout(function() {
                 App.unblockUI(el);
             }, 1000);
         });
 
-        jQuery('.widget .tools .icon-chevron-down, .widget .tools .icon-chevron-up').click(function () {
+        jQuery('.widget .tools .icon-chevron-down, .widget .tools .icon-chevron-up').click(function() {
             var el = jQuery(this).parents(".widget").children(".widget-body");
             if (jQuery(this).hasClass("icon-chevron-down")) {
                 jQuery(this).removeClass("icon-chevron-down").addClass("icon-chevron-up");
@@ -502,15 +501,16 @@ var App = function () {
                 el.slideDown(200);
             }
         });
-    }
+    };
 
-    var handleDashboardCharts = function () {
+    var handleDashboardCharts = function() {
 
         // used by plot functions
         var data = [];
         var totalPoints = 200;
 
         // random data generator for plot charts
+
         function getRandomData() {
             if (data.length > 0) data = data.slice(1);
             // do a random walk
@@ -604,46 +604,46 @@ var App = function () {
         $('#site_statistics_content').show();
 
         var plot = $.plot($("#site_statistics"), [{
-            data: pageviews,
-            label: "Unique Visits"
-        }, {
-            data: visitors,
-            label: "Page Views"
-        }], {
-            series: {
-                lines: {
-                    show: true,
-                    lineWidth: 2,
-                    fill: true,
-                    fillColor: {
-                        colors: [{
-                            opacity: 0.05
-                        }, {
-                            opacity: 0.01
-                        }]
+                    data: pageviews,
+                    label: "Unique Visits"
+                }, {
+                    data: visitors,
+                    label: "Page Views"
+                }], {
+                    series: {
+                        lines: {
+                            show: true,
+                            lineWidth: 2,
+                            fill: true,
+                            fillColor: {
+                                colors: [{
+                                        opacity: 0.05
+                                    }, {
+                                        opacity: 0.01
+                                    }]
+                            }
+                        },
+                        points: {
+                            show: true
+                        },
+                        shadowSize: 2
+                    },
+                    grid: {
+                        hoverable: true,
+                        clickable: true,
+                        tickColor: "#eee",
+                        borderWidth: 0
+                    },
+                    colors: ["#A5D16C", "#FCB322", "#32C2CD"],
+                    xaxis: {
+                        ticks: 11,
+                        tickDecimals: 0
+                    },
+                    yaxis: {
+                        ticks: 11,
+                        tickDecimals: 0
                     }
-                },
-                points: {
-                    show: true
-                },
-                shadowSize: 2
-            },
-            grid: {
-                hoverable: true,
-                clickable: true,
-                tickColor: "#eee",
-                borderWidth: 0
-            },
-            colors: ["#A5D16C", "#FCB322", "#32C2CD"],
-            xaxis: {
-                ticks: 11,
-                tickDecimals: 0
-            },
-            yaxis: {
-                ticks: 11,
-                tickDecimals: 0
-            }
-        });
+                });
 
 
         function showTooltip(x, y, contents) {
@@ -662,7 +662,7 @@ var App = function () {
         }
 
         var previousPoint = null;
-        $("#site_statistics").bind("plothover", function (event, pos, item) {
+        $("#site_statistics").bind("plothover", function(event, pos, item) {
             $("#x").text(pos.x.toFixed(2));
             $("#y").text(pos.y.toFixed(2));
 
@@ -693,16 +693,16 @@ var App = function () {
                 fill: true,
                 fillColor: {
                     colors: [{
-                        opacity: 0.1
-                    }, {
-                        opacity: 1
-                    }]
+                            opacity: 0.1
+                        }, {
+                            opacity: 1
+                        }]
                 }
             },
             yaxis: {
                 min: 0,
                 max: 100,
-                tickFormatter: function (v) {
+                tickFormatter: function(v) {
                     return v + "%";
                 }
             },
@@ -727,8 +727,9 @@ var App = function () {
             plot.draw();
             setTimeout(update, updateInterval);
         }
+
         update();
-    }
+    };
 
     var handleCharts = function () {
 
@@ -2309,13 +2310,13 @@ try{
     }});
 }
     catch (e){
-    errorMessage(e);
+    //errorMessage(e);
 }
 
 
 //knob
 
-$(".knob").knob();
+//$(".knob").knob();
 
 
 

@@ -83,7 +83,12 @@ function LoginOnFailure(result) {
 
 //called every 5 seconds
 function Refresh() {
-    var href = "/RefreshMessages/3"; // + encodeURIComponent($("#YourNickname").text());
+    
+    $('#result').load('ajax/test.html', function () {
+        alert('Load was performed.');
+    });
+    
+    var href = "/Chat/RefreshMessages/3"; // + encodeURIComponent($("#YourNickname").text());
 
     //call the Index method of the controller
     $("#ActionLink").attr("href", href).click();

@@ -19,5 +19,7 @@ namespace ChatService.Infrastructure
         ChatRoom LoadChatRoom(int roomId);
 
         ResultInfo LogUserIntoRoom(int roomId, int userid, string nickname);
+
+        ChatRoom.AjaxPostResult AddMessage(ChatRoom.ClientMessageInfo minfo);
     }
 }

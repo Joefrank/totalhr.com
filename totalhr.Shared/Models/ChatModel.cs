@@ -72,6 +72,24 @@ namespace totalhr.Shared.Models
             public string Message ="";
 
         }
+
+        public class AjaxPostResult
+        {
+            public int MessageId { get; set; }
+
+            public string ResultMessage { get; set; }
+        }
+
+        public class ClientMessageInfo
+        {
+            public int RoomId { get; set; }
+
+            public int UserId { get; set; }
+
+            public string Nickname { get; set; }
+
+            public string Message { get; set; }
+        }
     }
 
 }

@@ -42,10 +42,10 @@
                 </div>
                 <div class="chat-form">
                     <div class="input-cont">
-                        <input type="text" placeholder="@Common.V_Chat_Type_Message" />
+                        <input id="txtMessage" type="text" placeholder="@Common.V_Chat_Type_Message" />
                     </div>
                     <div class="btn-cont">
-                        <a href="javascript:;" class="btn btn-primary">@Common.V_Chat_Send</a>
+                        <a href="javascript:SendMessage();" class="btn btn-primary">@Common.V_Chat_Send</a>
                     </div>
                 </div>
             </div>
@@ -54,46 +54,49 @@
     </div>
 </div>
 
-@Ajax.ActionLink("ActionLink", "RefreshMessages", new { user = "", logOn="",logOff="",chatMessage = "" }, 
-    new AjaxOptions { UpdateTargetId = "RefreshArea", OnSuccess = "ChatOnSuccess", OnFailure = "ChatOnFailure" }, 
-    new { @id = "ActionLink", @style = "visibility:hidden;" })
-
 
 @section scripts{
-    <script type="text/javascript" src="~/Scripts/Site/Chat.js"></script>
-}
+    @*<script type="text/javascript" src="~/Scripts/Site/Chat.js"></script>*@
+
 
 <script type="text/javascript">
-(function($)
-{
-    $(document).ready(function()
-    {
-        $.ajaxSetup(
-        {
-            cache: false,
-            beforeSend: function() {
-                $('#RefreshArea').hide();
-                //$('#loading').show();
+    var chatRoomId = @Model.DBid;
+    
+    function Refresh() {
+        $('#RefreshArea').load('/Chat/RefreshMessages/@Model.DBid', function () {
+            //alert('Load was performed.');
+        });
+
+        setTimeout("Refresh();", 5000);
+    }
+    
+    function SendMessage() {
+        var message = encodeURIComponent($('#txtMessage').val());
+
+        if (message === '')
+            return;
+        
+        var formData = {RoomId : chatRoomId, UserId: 59,  Nickname: "ravi", Message: message }; //Array
+
+        $.ajax({
+            url: "/Chat/PostMessage/",
+            type: "POST",
+            data: formData,
+            success: function (data, textStatus, jqXHR) {
+                alert(data);
             },
-            complete: function() {
-               // $('#loading').hide();
-                $('#RefreshArea').show();
-            },
-            success: function() {
-               // $('#loading').hide();
-                $('#RefreshArea').show();
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert(textStatus);
             }
         });
-        var $container = $("#RefreshArea");
-        $container.load("/Chat/RefreshMessages/3");
-        var refreshId = setInterval(function()
-        {
-            $container.load('/RefreshMessages/3');
-        }, 3000);
+    }
+    
+    $(document).ready(function () {
+        Refresh();
     });
-})(jQuery);
+    
 </script>
-
+}
 
 @*@model totalhr.Shared.Models.ChatModel
 

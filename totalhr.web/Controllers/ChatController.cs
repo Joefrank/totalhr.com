@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Script.Serialization;
 using Authentication.Infrastructure;
 using ChatService.Infrastructure;
 using totalhr.Shared.Models;
@@ -99,12 +100,18 @@ namespace totalhr.web.Controllers
             } 
         }
 
-        public ActionResult RefreshMessages(int roomId)
+        public ActionResult RefreshMessages(int id)
         {
-            var chatRoom = _chatService.LoadChatRoom(roomId);
+            var chatRoom = _chatService.LoadChatRoom(id);
             return View("ChatHistory", chatRoom);
         }
-        
+
+        [HttpPost]
+        public JsonResult PostMessage(ChatRoom.ClientMessageInfo minfo)
+        {
+            var result = _chatService.AddMessage(minfo);
+            return Json(result);
+        } 
 
         /* <summary>
         /// When the method is called with no arguments, just return the view

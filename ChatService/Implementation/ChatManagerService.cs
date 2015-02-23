@@ -54,7 +54,7 @@ namespace ChatService.Implementation
                     InvitedUserIds = chatRoom.Private? chatRoom.InvitedUsers.Split(',').Select(Int32.Parse).ToList(): null
                 };
 
-                _cacheHelper.Add<ChatRoom>(room, ChatRoom.GetCacheKey(roomId));
+                _cacheHelper.Add(room, ChatRoom.GetCacheKey(roomId));
             }
 
             return room;
@@ -89,11 +89,40 @@ namespace ChatService.Implementation
                     When = DateTime.Now,
                     ByUser = user
                 });
-
-                _cacheHelper.Update<ChatRoom>(chatRoom, ChatRoom.GetCacheKey(roomId));
+                
+                _cacheHelper.Update(chatRoom, ChatRoom.GetCacheKey(roomId));
             }
 
             return new ResultInfo { Itemid = chatRoom.DBid, ItemObject = chatRoom };
+        }
+
+        public ChatRoom.AjaxPostResult AddMessage(ChatRoom.ClientMessageInfo minfo)
+        {
+            var chatRoom = LoadChatRoom(minfo.RoomId);
+
+            var searchedForUser = chatRoom.Users.FirstOrDefault(u => u.Userid == minfo.UserId ||
+                u.NickName.ToLower().Trim() == minfo.Nickname.ToLower().Trim());
+
+            if (searchedForUser != null)
+            {
+                chatRoom.ChatHistory.Add(new ChatRoom.ChatMessage()
+                    {
+                        Message = minfo.Message,
+                        When = DateTime.Now,
+                        ByUser = searchedForUser
+                    });
+
+                return new ChatRoom.AjaxPostResult {MessageId = 1, ResultMessage = ""};
+            }
+            else
+            {
+                return new ChatRoom.AjaxPostResult
+                    {
+                        MessageId = -1,
+                        ResultMessage = Common.V_Chat_Cant_Add_Message
+                    };
+            }
+
         }
     }
 }

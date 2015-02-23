@@ -297,4 +297,7 @@
   <data name="V_Chat_Type_Message" xml:space="preserve">
     <value>Type a message here...</value>
   </data>
+  <data name="V_Chat_Cant_Add_Message" xml:space="preserve">
+    <value>Sorry could not find your details!</value>
+  </data>
 </root>
