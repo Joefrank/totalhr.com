@@ -30,7 +30,7 @@
         <!-- BEGIN CHAT PORTLET-->
         <div class="widget" id="">
             <div class="widget-title">
-                <h4><i class="icon-comments-alt"></i> @Model.Name</h4>
+                <h4><i class="icon-comments-alt"></i> @Model.Name <span id="spLastRefresh"></span></h4>
 				<span class="tools">
 				<a href="javascript:;" class="icon-chevron-down"></a>
 				<a href="javascript:;" class="icon-remove"></a>
@@ -59,43 +59,75 @@
     @*<script type="text/javascript" src="~/Scripts/Site/Chat.js"></script>*@
 
 
-<script type="text/javascript">
-    var chatRoomId = @Model.DBid;
-    
-    function Refresh() {
-        $('#RefreshArea').load('/Chat/RefreshMessages/@Model.DBid', function () {
-            //alert('Load was performed.');
-        });
+    <script type="text/javascript">
+        var chatRoomId = @Model.DBid;
+        var LogoutCountDown = 10;
+        var MSG_LastRefreshAt = '@HttpUtility.HtmlDecode(Common.V_Chat_Refreshed_At)';
 
-        setTimeout("Refresh();", 5000);
-    }
-    
-    function SendMessage() {
-        var message = encodeURIComponent($('#txtMessage').val());
-
-        if (message === '')
-            return;
+        function GetCurrentTime() {
+            var time = new Date();
+            return (time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds());
+        }
         
-        var formData = {RoomId : chatRoomId, UserId: 59,  Nickname: "ravi", Message: message }; //Array
+        function Refresh() {
+            $('#RefreshArea').load('/Chat/RefreshMessages/@Model.DBid', function() {
+                //alert('Load was performed.');
+            });
 
-        $.ajax({
-            url: "/Chat/PostMessage/",
-            type: "POST",
-            data: formData,
-            success: function (data, textStatus, jqXHR) {
-                alert(data);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                alert(textStatus);
+            LogoutCountDown--;
+            if (LogoutCountDown < 1) {
+                Loggout();
+                return;
             }
+            setTimeout("Refresh();", 5000);
+            $('#spLastRefresh').html(MSG_LastRefreshAt.replace('{0}', GetCurrentTime()));
+        }
+
+        function SendMessage() {
+            var message = encodeURIComponent($('#txtMessage').val());
+
+            if (message === '')
+                return;
+
+            var formData = { RoomId: chatRoomId, UserId: 0, Nickname: "", Message: message }; //Array
+
+            $.ajax({
+                url: "/Chat/PostMessage/",
+                type: "POST",
+                data: formData,
+                success: function(data, textStatus, jqXHR) {
+                    alert(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    alert(textStatus);
+                }
+            });
+
+            //reset logout count
+            LogoutCountDown = 10;
+        }
+
+        function Loggout() {
+            var formData = { RoomId: chatRoomId, UserId: 0, Nickname: "", Message="" }; //Array
+
+            $.ajax({
+                url: "/Chat/LogoutUser/",
+                type: "POST",
+                data: formData,
+                success: function(data, textStatus, jqXHR) {
+                    //alert(data);
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    //alert(textStatus);
+                }
+            });
+        }
+
+        $(document).ready(function() {
+            Refresh();
         });
-    }
-    
-    $(document).ready(function () {
-        Refresh();
-    });
-    
-</script>
+
+    </script>
 }
 
 @*@model totalhr.Shared.Models.ChatModel

@@ -31,10 +31,7 @@ namespace totalhr.web.Controllers
             return View("Index");
         }
 
-        public ActionResult LogOff()
-        {
-            return View("Index");
-        }
+       
 
         public ActionResult AddMessage(string chatMessage)
         {
@@ -109,9 +106,17 @@ namespace totalhr.web.Controllers
         [HttpPost]
         public JsonResult PostMessage(ChatRoom.ClientMessageInfo minfo)
         {
+            minfo.UserId = CurrentUser.UserId;
             var result = _chatService.AddMessage(minfo);
             return Json(result);
         } 
+
+        [HttpPost]
+        public void LogoutUser(ChatRoom.ClientMessageInfo minfo)
+        {
+            minfo.UserId = CurrentUser.UserId;
+            _chatService.LogUserOutOfRoom(minfo);
+        }
 
         /* <summary>
         /// When the method is called with no arguments, just return the view

@@ -100,8 +100,7 @@ namespace ChatService.Implementation
         {
             var chatRoom = LoadChatRoom(minfo.RoomId);
 
-            var searchedForUser = chatRoom.Users.FirstOrDefault(u => u.Userid == minfo.UserId ||
-                u.NickName.ToLower().Trim() == minfo.Nickname.ToLower().Trim());
+            var searchedForUser = chatRoom.Users.FirstOrDefault(u => u.Userid == minfo.UserId);
 
             if (searchedForUser != null)
             {
@@ -123,6 +122,24 @@ namespace ChatService.Implementation
                     };
             }
 
+        }
+
+        public void LogUserOutOfRoom(ChatRoom.ClientMessageInfo minfo)
+        {
+            var chatRoom = LoadChatRoom(minfo.RoomId);
+            
+            var userToSearch = chatRoom.Users.FirstOrDefault(x => x.Userid == minfo.UserId);
+
+            if (userToSearch != null)
+            {
+                chatRoom.ChatHistory.Add(new ChatRoom.ChatMessage()
+                    {
+                        Message = string.Format(Common.V_Chat_User_X_LoggedOff, userToSearch.NickName),
+                        When = DateTime.Now
+                    });
+                
+                chatRoom.Users.Remove(userToSearch);
+            }
         }
     }
 }

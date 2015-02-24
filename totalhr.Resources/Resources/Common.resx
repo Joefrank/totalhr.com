@@ -300,4 +300,7 @@
   <data name="V_Chat_Cant_Add_Message" xml:space="preserve">
     <value>Sorry could not find your details!</value>
   </data>
+  <data name="V_Chat_Refreshed_At" xml:space="preserve">
+    <value>Last refreshed at {0}</value>
+  </data>
 </root>

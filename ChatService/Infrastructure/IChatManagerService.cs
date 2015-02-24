@@ -21,5 +21,7 @@ namespace ChatService.Infrastructure
         ResultInfo LogUserIntoRoom(int roomId, int userid, string nickname);
 
         ChatRoom.AjaxPostResult AddMessage(ChatRoom.ClientMessageInfo minfo);
+
+        void LogUserOutOfRoom(ChatRoom.ClientMessageInfo minfo);
     }
 }

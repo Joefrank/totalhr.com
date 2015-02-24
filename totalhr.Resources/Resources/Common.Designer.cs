@@ -313,6 +313,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last refreshed at {0}.
+        /// </summary>
+        public static string V_Chat_Refreshed_At {
+            get {
+                return ResourceManager.GetString("V_Chat_Refreshed_At", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chat Registration.
         /// </summary>
         public static string V_Chat_Registration {
