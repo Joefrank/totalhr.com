@@ -30,7 +30,7 @@
         <!-- BEGIN CHAT PORTLET-->
         <div class="widget" id="">
             <div class="widget-title">
-                <h4><i class="icon-comments-alt"></i> @Model.Name <span id="spLastRefresh"></span></h4>
+                <h4><i class="icon-comments-alt"></i> @Model.Name - <span id="spLastRefresh"></span></h4>
 				<span class="tools">
 				<a href="javascript:;" class="icon-chevron-down"></a>
 				<a href="javascript:;" class="icon-remove"></a>
@@ -61,7 +61,8 @@
 
     <script type="text/javascript">
         var chatRoomId = @Model.DBid;
-        var LogoutCountDown = 10;
+        var LOGOUT_MAX = 100;
+        var LogoutCountDown = LOGOUT_MAX;
         var MSG_LastRefreshAt = '@HttpUtility.HtmlDecode(Common.V_Chat_Refreshed_At)';
 
         function GetCurrentTime() {
@@ -96,7 +97,7 @@
                 type: "POST",
                 data: formData,
                 success: function(data, textStatus, jqXHR) {
-                    alert(data);
+                    $('#txtMessage').val('');
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     alert(textStatus);
@@ -104,11 +105,11 @@
             });
 
             //reset logout count
-            LogoutCountDown = 10;
+            LogoutCountDown = LOGOUT_MAX;
         }
 
         function Loggout() {
-            var formData = { RoomId: chatRoomId, UserId: 0, Nickname: "", Message="" }; //Array
+            var formData = { RoomId: chatRoomId, UserId: 0, Nickname: "", Message:"" }; //Array
 
             $.ajax({
                 url: "/Chat/LogoutUser/",
@@ -125,6 +126,14 @@
 
         $(document).ready(function() {
             Refresh();
+
+            $('#txtMessage').keydown(function (e) {
+                if (e.keyCode == 13) {
+                    e.preventDefault();
+                    SendMessage();
+                }
+            });
+
         });
 
     </script>

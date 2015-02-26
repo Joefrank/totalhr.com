@@ -226,10 +226,10 @@
     <value>The chat server started at {0}</value>
   </data>
   <data name="V_Chat_User_X_LoggedOff" xml:space="preserve">
-    <value>User '{0}' logged off.</value>
+    <value>User '{0}' left the room.</value>
   </data>
   <data name="V_Chat_User_X_LoggedOn" xml:space="preserve">
-    <value>User '{0}' logged on.</value>
+    <value>User '{0}' joined the chat.</value>
   </data>
   <data name="V_Cancel" xml:space="preserve">
     <value>Cancel</value>

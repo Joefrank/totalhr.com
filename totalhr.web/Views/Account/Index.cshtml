@@ -1,50 +1,64 @@
 ﻿@model Authentication.Models.ClientUser
 
-@using totalhr.Resources;
 @using totalhr.Shared;
+@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
 
 @{
-    ViewBag.Title = Common.Page_TT_Header_Account_Home;
-    
+    ViewBag.Title = Account.V_Dashboard;
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "", Text = Account.V_Dashboard, Title= Account.V_Dashboard}
+    };
     //Add Kernel restriction for feature (calendar)
-    bool bDisplayCalendar = true;
+    bool bDisplayCalendar = true; 
 }
 
+@section pagetitle{
+    @Account.V_Dashboard
+} 
+
+
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+
+
 @{Html.RenderPartial("_FormScripts");}
-    
-    <h1>@Common.Page_TT_Account_Home</h1>
-
-    <div id="dvAccount" class="container">
-
-        <div class="wide">
+   
+<div class="row-fluid">
+    <div class="alert">
             @Html.Raw(string.Format(Account.MSG_Welcome, Model.FullName))
-        </div>       
-           
-        <div class="option shadowed" onclick="document.location.href='/Account/MyDetails'">
-            <h4>@Account.tt_Personal_Details</h4>
-            <div class="cont">
-
-            </div>
         </div>
+</div>
+<div class="square-state">
+    <div class="row-fluid">
+        <a class="icon-btn span2" href="/Account/MyDetails">
+            <i class="icon-group"></i>
+            <div>@Account.V_My_Profile</div>
+        </a>
 
-        @if (bDisplayCalendar)
+         @if (bDisplayCalendar)
         {
-        <div class="option shadowed" onclick="document.location.href='/Calendar/'">
-            <h4>@Account.V_Calendars</h4>
-            <div class="cont">
+             <a class="icon-btn span2" href="/Calendar/">
+                <i class="icon-group"></i>
+                <div>@Account.V_Calendars</div>
+            </a>
+         }
 
-            </div>
-        </div>
-        }
+         <a class="icon-btn span2" href="/Document/">
+            <i class="icon-group"></i>
+            <div>@Account.V_Documents</div>
+        </a>
+    </div>
+ </div>
 
-        <div class="option shadowed" onclick="document.location.href='/Document/'">
-            <h4>@Account.V_Documents</h4>
-            <div class="cont">
+ 
+  
 
-            </div>
-        </div>
-
-    </div>    
+    
 
  
 

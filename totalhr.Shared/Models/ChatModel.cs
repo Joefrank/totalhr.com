@@ -88,6 +88,8 @@ namespace totalhr.Shared.Models
 
             public string Nickname { get; set; }
 
+            public string UserName { get; set; }
+
             public string Message { get; set; }
         }
     }

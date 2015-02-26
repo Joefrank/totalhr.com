@@ -87,14 +87,26 @@ namespace totalhr.web.Controllers
             var room = result.ItemObject as ChatRoom;
 
             if (result.Itemid > 0)
-            {                
-                return View("Lobby", room);
+            {
+                TempData["Room"] = room;
+                return RedirectToAction("Lobby", new { id = roomId });
             }
             else
             {
                 ViewBag.Error = result.ErrorMessage;
                 return View("ChatRegistration", room);
             } 
+        }
+
+        public ActionResult Lobby(int id)
+        {
+            var myroom = (ChatRoom)TempData["Room"];
+
+            if (myroom == null)
+            {
+                myroom = _chatService.LoadChatRoom(id);
+            }
+            return View(myroom);
         }
 
         public ActionResult RefreshMessages(int id)
@@ -107,6 +119,8 @@ namespace totalhr.web.Controllers
         public JsonResult PostMessage(ChatRoom.ClientMessageInfo minfo)
         {
             minfo.UserId = CurrentUser.UserId;
+            minfo.UserName = CurrentUser.FullName;
+
             var result = _chatService.AddMessage(minfo);
             return Json(result);
         } 

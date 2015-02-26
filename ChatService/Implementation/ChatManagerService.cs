@@ -7,6 +7,7 @@ using System.Linq;
 using totalhr.Shared.Infrastructure;
 using System;
 using totalhr.Resources;
+using Microsoft.JScript;
 
 namespace ChatService.Implementation
 {
@@ -102,25 +103,27 @@ namespace ChatService.Implementation
 
             var searchedForUser = chatRoom.Users.FirstOrDefault(u => u.Userid == minfo.UserId);
 
-            if (searchedForUser != null)
+            if (searchedForUser == null)            
             {
-                chatRoom.ChatHistory.Add(new ChatRoom.ChatMessage()
-                    {
-                        Message = minfo.Message,
-                        When = DateTime.Now,
-                        ByUser = searchedForUser
-                    });
+                searchedForUser = new ChatRoom.ChatUser()
+                {
+                    NickName = GlobalObject.decodeURIComponent(minfo.UserName),//get this from database 
+                    Userid = minfo.UserId,
+                    LoggedOnTime = DateTime.Now,
+                    LastPing = DateTime.Now
+                };
 
-                return new ChatRoom.AjaxPostResult {MessageId = 1, ResultMessage = ""};
+                chatRoom.Users.Add(searchedForUser);               
             }
-            else
+
+            chatRoom.ChatHistory.Add(new ChatRoom.ChatMessage()
             {
-                return new ChatRoom.AjaxPostResult
-                    {
-                        MessageId = -1,
-                        ResultMessage = Common.V_Chat_Cant_Add_Message
-                    };
-            }
+                Message =  minfo.Message,
+                When = DateTime.Now,
+                ByUser = searchedForUser
+            });
+
+            return new ChatRoom.AjaxPostResult { MessageId = 1, ResultMessage = "" };
 
         }
 

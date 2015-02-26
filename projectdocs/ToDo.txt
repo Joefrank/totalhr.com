@@ -1,4 +1,6 @@
 
 Chat Room:
- - User selector should remember previous selections
+ - User selector (when creating room) should remember previous selections
+ - Invite external users for chat.
  - Create chatroom edit page and remember all selections
+ - We need to persist chat messages and users to DB.
