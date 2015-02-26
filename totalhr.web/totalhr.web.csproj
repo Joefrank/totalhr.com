@@ -187,6 +187,7 @@
     <Compile Include="Areas\Admin\Helpers\UserHelper.cs" />
     <Compile Include="Areas\Admin\Models\Pagination.cs" />
     <Compile Include="Areas\Admin\Models\UserSearchResult.cs" />
+    <Compile Include="Controllers\AbsenceController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Admin\AdminBaseController.cs" />
     <Compile Include="Controllers\Admin\AdminHomeController.cs" />
@@ -201,6 +202,7 @@
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\GalleryController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PayrollController.cs" />
     <Compile Include="Controllers\StructureController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -1623,6 +1625,8 @@
     <Content Include="Views\Shared\_BlankLayout.cshtml" />
     <Content Include="Views\Gallery\Index.cshtml" />
     <Content Include="Views\Structure\Index.cshtml" />
+    <Content Include="Views\Payroll\Index.cshtml" />
+    <Content Include="Views\Absence\Index.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

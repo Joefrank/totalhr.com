@@ -276,4 +276,7 @@
   <data name="V_View_All_Absences" xml:space="preserve">
     <value>View All</value>
   </data>
+  <data name="V_Employee_Directory" xml:space="preserve">
+    <value>Employee Directory</value>
+  </data>
 </root>
