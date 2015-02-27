@@ -3,9 +3,11 @@
 @using totalhr.Shared.Models
 @using  totalhr.data.EF
 @using totalhr.web.Helpers
+@using AH = totalhr.web.Areas.Admin.Helpers
+@using totalhr.web.Areas.Admin.Models
 
 @{
-    ViewBag.Title = Account.tt_Personal_Details;
+    ViewBag.Title = Account.V_My_Profile;
 
     //var languages = ViewBag.LanguageList as List<ListItemStruct>;
     var languages = totalhr.web.Helpers.GenericHelper.GetListFromNumerable(ViewBag.LanguageList as IEnumerable<ListItemStruct>);
@@ -17,12 +19,153 @@
     List<SelectListItem> languagesSelect = null;
 
     languagesSelect = GenericHelper.GetListFromNumerable(ViewBag.LanguageList as IEnumerable<ListItemStruct>) ?? new List<SelectListItem> { new SelectListItem { Value = "", Text = Common.V_None } };
+
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "", Text = Account.V_My_Profile, Title= Account.V_My_Profile}
+    };
+    
+    }
+
+
+@section pagetitle{
+   @Account.V_My_Profile
 }
 
-<div id="main">
-    <div class="content">
+@section breadcrumb{
+    @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
 
-        <h1>@Account.tt_Personal_Details</h1>
+<div class="row-fluid">
+
+<div class="span12">
+    <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i>@Account.V_Profile</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+            </span>
+        </div>
+        <div id="widgetDetails" class="widget-body"> 
+             <div class="span3">
+                <div class="text-center profile-pic">
+                    <img src="img/profile-pic.jpg" alt="">
+                </div>
+                <ul class="nav nav-tabs nav-stacked">
+                    <li><a href="javascript:void(0)"><i class="icon-coffee"></i> Portfolio</a></li>
+                    <li><a href="javascript:void(0)"><i class="icon-paper-clip"></i> Projects</a></li>
+                    <li><a href="javascript:void(0)"><i class="icon-picture"></i> Gallery</a></li>
+                </ul>
+                <ul class="nav nav-tabs nav-stacked">
+                    <li><a href="javascript:void(0)"><i class="icon-facebook"></i> Facebook</a></li>
+                    <li><a href="javascript:void(0)"><i class="icon-twitter"></i> Twitter</a></li>
+                    <li><a href="javascript:void(0)"><i class="icon-linkedin"></i> LinkedIn</a></li>
+                    <li><a href="javascript:void(0)"><i class="icon-pinterest"></i> Pinterest</a></li>
+                    <li><a href="javascript:void(0)"><i class="icon-github"></i> Github</a></li>
+                </ul>
+            </div>
+
+            <div class="span6">
+                                <h4>@(Model.FirstName + " " + Model.Surname)
+                                     <br/><small>Frontend Developer</small>**contract**</h4>
+                                <table class="table table-borderless">
+                                    <tbody>
+                                    <tr>
+                                        <td class="span2">First Name :</td>
+                                        <td>
+                                            @Model.FirstName
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="span2">Last Name :</td>
+                                        <td>
+                                            @Model.Surname
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="span2">Country :</td>
+                                        <td>
+                                            @(countries.FirstOrDefault(x => x.Id == Model.CountryId).Term)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="span2">Birthday :</td>**contract**
+                                        <td>
+                                            13 july 1983
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="span2">Occupation :</td>**contract**
+                                        <td>
+                                            Web Developer
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="span2"> Email :</td>
+                                        <td>
+                                            @Model.Email
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="span2"> Mobile :</td>
+                                        <td>
+                                            @Model.MobilePhone
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <h4>About</h4>
+
+                                **add about to employe **<p class="push">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate. Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque? Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum. Donec vitae ultrices dolor?</p>
+                               
+
+                               
+                                <h4>Address</h4>
+                                <div class="well">
+                                    <address>
+                                        <strong>@Model.Address1</strong><br/>
+                                        @Model.Address2<br/>
+                                        @(countries.FirstOrDefault(x => x.Id == Model.CountryId).Term), @Model.PostCode<br/>
+                                        <abbr title="Phone">P:</abbr> @Model.PersonalPhone
+                                    </address>
+                                    <address>
+                                        <strong>@(Model.FirstName + " " + Model.Surname)</strong><br/>
+                                        <a href="mailto:@Model.Email">@Model.Email</a>
+                                    </address>
+                                </div>
+                            </div>
+
+            <div class="span3">
+                <h4>Experience</h4>
+                <ul class="icons push">
+                    <li><i class="icon-hand-right"></i> <strong>ABC Company</strong><br/><em>Duration: 4 years</em><br/><em>Description of the company..</em><br><a href="javascript:void(0)">abc-company.com</a></li>
+                    <li><i class="icon-hand-right"></i> <strong>DEF Company</strong><br/><em>Duration: 3 years</em><br/><em>Description of the company..</em><br><a href="javascript:void(0)">def-company.com</a></li>
+                    <li><i class="icon-hand-right"></i> <strong>GHI Company</strong><br/><em>Duration: 1.7 years</em><br/><em>Description of the company..</em><br><a href="javascript:void(0)">ghi-company.com</a></li>
+                </ul>
+                <h4>Current Status</h4>
+                <div class="alert alert-success"><i class="icon-ok-sign"></i> Working in ABC Company</div>
+                <h4>Some Projects</h4>
+                <ul class="unstyled">
+                    <li> <strong>Project 1</strong>: <a href="javascript:void(0)">exampleproject1.com</a></li>
+                    <li> <strong>Project 2</strong>: <a href="javascript:void(0)">exampleproject2.com</a></li>
+                    <li> <strong>Project 3</strong>: <a href="javascript:void(0)">exampleproject3.com</a></li>
+                    <li> <strong>Project 4</strong>: <a href="javascript:void(0)">exampleproject4.com</a></li>
+                    <li> <strong>Project 5</strong>: <a href="javascript:void(0)">exampleproject5.com</a></li>
+                    <li> <strong>Project 6</strong>: <a href="javascript:void(0)">exampleproject6.com</a></li>
+                    <li> <strong>Project 7</strong>: <a href="javascript:void(0)">exampleproject7.com</a></li>
+                    <li> <strong>Project 8</strong>: <a href="javascript:void(0)">exampleproject8.com</a></li>
+                    <li> <strong>Project 9</strong>: <a href="javascript:void(0)">exampleproject9.com</a></li>
+                    <li> <strong>Project 10</strong>: <a href="javascript:void(0)">exampleproject10.com</a></li>
+                </ul>
+            </div>
+
+            <div class="space5"></div>
+       
+        </div>
+
+        <div id="widgetEditDetails" class="widget-body">
+
+        <div class="formdiv midform" style="display:none">
 
         @using (Html.BeginForm("SaveUserDetails", "Account"))
         {
@@ -35,7 +178,7 @@
             
         @Html.ValidationSummary()
 
-        <div class="formdiv midform">
+        
             <div class="wrapper">
 
                  <fieldset>
@@ -164,12 +307,16 @@
                 <div class="line">&nbsp;</div>
             </div>
 
-        </div>
+        
             @Html.HiddenFor(x => x.UserId)
             @Html.HiddenFor(x => x.CompanyId)
         }
+        </div>
+
+      </div>
+
     </div>
 </div>
 
-
+</div>
 

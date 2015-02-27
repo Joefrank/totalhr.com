@@ -4,18 +4,18 @@
 @using AM = totalhr.web.Areas.Admin.Models;
 
 @{
-    ViewBag.Title = Payroll.V_Payroll;
+    ViewBag.Title = Task.V_Task_Scheduler;
 
     var breadCrumbItems = new List<AM.BreadCrumbItem>
     {
-        new AM.BreadCrumbItem{Url = "", Text = Payroll.V_Payroll, Title= Payroll.V_Payroll}
+        new AM.BreadCrumbItem{Url = "", Text = Task.V_Task_Scheduler, Title= Task.V_Task_Scheduler}
     };
 
   
 }
 
 @section pagetitle{
-   @Payroll.V_Payroll
+   @Task.V_Task_Scheduler
 }
 
 @section breadcrumb{

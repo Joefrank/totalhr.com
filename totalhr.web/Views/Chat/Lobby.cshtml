@@ -56,122 +56,19 @@
 
 
 @section scripts{
-    @*<script type="text/javascript" src="~/Scripts/Site/Chat.js"></script>*@
-
-
+   
     <script type="text/javascript">
+
         var chatRoomId = @Model.DBid;
         var LOGOUT_MAX = 100;
         var LogoutCountDown = LOGOUT_MAX;
         var MSG_LastRefreshAt = '@HttpUtility.HtmlDecode(Common.V_Chat_Refreshed_At)';
 
-        function GetCurrentTime() {
-            var time = new Date();
-            return (time.getHours() + ":" + time.getMinutes() + ":" + time.getSeconds());
-        }
-        
-        function Refresh() {
-            $('#RefreshArea').load('/Chat/RefreshMessages/@Model.DBid', function() {
-                //alert('Load was performed.');
-            });
-
-            LogoutCountDown--;
-            if (LogoutCountDown < 1) {
-                Loggout();
-                return;
-            }
-            setTimeout("Refresh();", 5000);
-            $('#spLastRefresh').html(MSG_LastRefreshAt.replace('{0}', GetCurrentTime()));
-        }
-
-        function SendMessage() {
-            var message = encodeURIComponent($('#txtMessage').val());
-
-            if (message === '')
-                return;
-
-            var formData = { RoomId: chatRoomId, UserId: 0, Nickname: "", Message: message }; //Array
-
-            $.ajax({
-                url: "/Chat/PostMessage/",
-                type: "POST",
-                data: formData,
-                success: function(data, textStatus, jqXHR) {
-                    $('#txtMessage').val('');
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    alert(textStatus);
-                }
-            });
-
-            //reset logout count
-            LogoutCountDown = LOGOUT_MAX;
-        }
-
-        function Loggout() {
-            var formData = { RoomId: chatRoomId, UserId: 0, Nickname: "", Message:"" }; //Array
-
-            $.ajax({
-                url: "/Chat/LogoutUser/",
-                type: "POST",
-                data: formData,
-                success: function(data, textStatus, jqXHR) {
-                    //alert(data);
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    //alert(textStatus);
-                }
-            });
-        }
-
-        $(document).ready(function() {
-            Refresh();
-
-            $('#txtMessage').keydown(function (e) {
-                if (e.keyCode == 13) {
-                    e.preventDefault();
-                    SendMessage();
-                }
-            });
-
-        });
-
     </script>
+    
+    <script type="text/javascript" src="~/Scripts/Site/Chat.js"></script>
 }
 
-@*@model totalhr.Shared.Models.ChatModel
-
-@{
-    ViewBag.Title = "lobby";
-    
-}*@
-
-@*<div id="RefreshArea">
-    @{
-        Html.RenderPartial("ChatHistory", Model);
-    }
-</div>
-@Ajax.ActionLink("ActionLink", "Index", new { user = "", logOn="",logOff="",chatMessage = "" }, new AjaxOptions { UpdateTargetId = "RefreshArea", OnSuccess = "ChatOnSuccess", OnFailure = "ChatOnFailure" }, new { @id = "ActionLink", @style = "visibility:hidden;" })
-
-<div id="Speak">
-    <table border="0" width="100%">
-        <tr>
-            <td rowspan="2">
-                <textarea id="txtSpeak" style="width: 100%" rows="3"></textarea>
-            </td>
-            <td>
-                <button id="btnSpeak" value="Speak" style="font-weight: bold; width: 80px">
-                    Speak</button>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <button id="btnLogOff" value="LogOff" style="width: 80px">
-                    LogOff</button>
-            </td>
-        </tr>
-    </table>
-</div>*@
 
 
 

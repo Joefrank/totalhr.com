@@ -204,6 +204,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PayrollController.cs" />
     <Compile Include="Controllers\StructureController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1627,6 +1628,7 @@
     <Content Include="Views\Structure\Index.cshtml" />
     <Content Include="Views\Payroll\Index.cshtml" />
     <Content Include="Views\Absence\Index.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
