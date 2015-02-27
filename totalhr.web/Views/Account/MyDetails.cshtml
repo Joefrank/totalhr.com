@@ -49,7 +49,7 @@
         <div id="widgetDetails" class="widget-body"> 
              <div class="span3">
                 <div class="text-center profile-pic">
-                    <img src="img/profile-pic.jpg" alt="">
+                    <img src="/Employee/Profile/Picture/@(Model.ProfilePictureAdded.HasValue? Model.ProfilePicturePath : "profile-pic.jpg")" alt="">
                 </div>
                 <ul class="nav nav-tabs nav-stacked">
                     <li><a href="javascript:void(0)"><i class="icon-coffee"></i> Portfolio</a></li>
