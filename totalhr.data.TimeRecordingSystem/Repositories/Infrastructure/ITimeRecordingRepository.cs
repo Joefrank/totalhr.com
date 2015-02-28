@@ -15,7 +15,7 @@ namespace totalhr.data.TimeRecordingSystem.Repositories.Infrastructure
 
         IList<TimeRecording> GetAllTRs();
 
-        IList<TimeRecording> Search(DateTime startDate, DateTime endDate, int skip, int take);
+        IList<TimeRecording> Search(DateTime startDate, DateTime endDate, int userId, int skip, int take);
 
     }
 }

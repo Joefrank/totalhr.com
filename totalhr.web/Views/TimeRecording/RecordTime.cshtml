@@ -17,7 +17,7 @@
     if (string.IsNullOrEmpty(Model.ErrorMessage))
     {
         <fieldset>
-            <legend>TimeRecordingViewModel</legend>
+            <legend>Time Recording</legend>
             @Html.HiddenFor(model => model.Id)
             @Html.HiddenFor(model => model.TypeId)
             @Html.HiddenFor(model => model.TaskRef)
@@ -58,14 +58,15 @@
         }
         else
         {
-            <div>
+            <p>
                 @if (Model.Id > 0)
                 {
-                    @Html.ActionLink("Back to Details", "Details", new { id = Model.Id })
+                    @Html.ActionLink("Back to Details", "Details", new { id = Model.Id }) 
+                    @Html.Raw("|")
 
                 }
                 @Html.ActionLink("Back to Time Recording Home", "Index")
-            </div>
+            </p>
 
         }
 
@@ -79,7 +80,7 @@
     {
         <div class="error-message">
             @Html.DisplayFor(model => model.ErrorMessage)
-            @Html.ActionLink("Back to Time Recording Home", "Index")
+           <p> @Html.ActionLink("Back to Time Recording Home", "Index")</p>
         </div>
     }
 }

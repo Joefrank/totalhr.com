@@ -48,14 +48,14 @@
         @Html.LabelFor(model => model.AssignedBy)
     </div>
     <div class="editor-field">
-        @Html.DisplayFor(x => x.AssignedBy)
+        @Html.DisplayFor(x => x.AssignedByUser)
     </div>
 
     <div class="editor-label">
         @Html.LabelFor(model => model.AssignedTo)
     </div>
     <div class="editor-field">
-        @Html.DisplayFor(x => x.AssignedTo)
+        @Html.DisplayFor(x => x.AssignedToUser)
     </div>
 
     <div class="editor-label">
@@ -77,9 +77,6 @@
                         End Time
                     </td>
                     <td>
-                        Recorded by
-                    </td>
-                    <td>
                         Duration Recorded
                     </td>
                     <td></td>
@@ -92,9 +89,6 @@
                         </td>
                         <td>
                             @Html.DisplayFor(x => result.EndTime)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(x => result.AddedByUser)
                         </td>
                         <td>
                             @Html.DisplayFor(x => result.RecordedDuration)

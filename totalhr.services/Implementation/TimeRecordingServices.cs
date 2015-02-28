@@ -45,16 +45,19 @@ namespace totalhr.services.Implementation
             return false;
         }
 
-        public List<TimeRecording> Search(DateTime startDate, DateTime endDate, int skip, int take )
+
+        public List<TimeRecording> Search(DateTime startDate, DateTime endDate, int userId, int skip, int take)
         {
-            return _timeRecordingRepository.Search(startDate, endDate, skip, take).ToList();
-             
+            return _timeRecordingRepository.Search(startDate, endDate,userId, skip, take).ToList();
         }
 
         public TimeRecording GetById(Int64 id)
         {
             var entities= _timeRecordingRepository.FindBy(x => x.Id == id);
-            return entities.FirstOrDefault();
+            var tr= entities.FirstOrDefault();
+            var user = _accountService.GetUser(tr.Audit.AddedBy);
+            tr.Audit.AddedByUserName = user.firstname + " " + user.surname;
+            return tr;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace totalhr.data.TimeRecordingSystem.EF
 
     public partial class Audit
     {
-
+        public string AddedByUserName { get; set; }
         public Audit() { }
         public Audit(int addedByUserId, DateTime dateAdded)
         {

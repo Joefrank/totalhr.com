@@ -13,6 +13,8 @@ namespace totalhr.web.ViewModels
 
         [Required(ErrorMessage="Please login to record time")]
         public int UserId { get; set; }
+
+        public string UserName { get; set; }
         
         [Required(ErrorMessage="Please Enter Start Date Time")]
         public DateTime StartTime { get; set; }
@@ -31,6 +33,7 @@ namespace totalhr.web.ViewModels
             if (entity != null)
             {
                 this.Id = entity.Id;
+                this.UserName = entity.User.FullName;
                 this.StartTime = entity.StartTime;
                 this.EndTime = entity.EndTime.Value;
                 this.UserId = entity.UserId;

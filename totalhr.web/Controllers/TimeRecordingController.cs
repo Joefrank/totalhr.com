@@ -86,7 +86,7 @@ namespace totalhr.web.Areas.TimeRecording.Controllers
         {
             var vm = new SearchVM();
             vm.SetUpInitialSearch();
-            var searchResults = _timeRecordingService.Search(vm.StartDate, vm.EndDate, 0, vm.ResultsPerPage);
+            var searchResults = _timeRecordingService.Search(vm.StartDate, vm.EndDate,base.CurrentUser.UserId,0, vm.ResultsPerPage);
             vm.Results = TimeRecordingDetailsVM.Build(searchResults);
             return View(vm);
         }
@@ -94,7 +94,7 @@ namespace totalhr.web.Areas.TimeRecording.Controllers
         [HttpPost]
         public ActionResult Search(SearchVM vm)
         {
-            var searchResults = _timeRecordingService.Search(vm.StartDate, vm.EndDate, vm.PageNumber * vm.ResultsPerPage, vm.ResultsPerPage);
+            var searchResults = _timeRecordingService.Search(vm.StartDate, vm.EndDate,base.CurrentUser.UserId, vm.PageNumber * vm.ResultsPerPage, vm.ResultsPerPage);
             vm.Results = TimeRecordingDetailsVM.Build(searchResults);
             return View(vm);
         }
