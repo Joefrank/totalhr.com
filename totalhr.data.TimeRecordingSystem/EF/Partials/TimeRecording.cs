@@ -8,17 +8,18 @@ namespace totalhr.data.TimeRecordingSystem.EF
 {
     public partial class TimeRecording
     {
-        public TimeRecording(int userId, DateTime startTime, DateTime endTime, Audit audit)
+        public TimeRecording(int userId, DateTime startTime, DateTime endTime, Int16 typeId, Int32? taskRef, Audit audit)
         {
-            this.Build(userId, startTime, endTime, audit);  
+            this.Build(userId, startTime, endTime,typeId,taskRef, audit);  
         }
 
-        public void Build(int userId, DateTime startTime, DateTime endTime, Audit audit)
+        public void Build(int userId, DateTime startTime, DateTime endTime, Int16 typeId, Int32? taskRef, Audit audit)
         {
             UserId = userId;
             StartTime = startTime;
             EndTime = endTime;
-            TypeId = 1;
+            TypeId = typeId;
+            TaskRefId = taskRef;
             this.Audit = audit;
         }
 

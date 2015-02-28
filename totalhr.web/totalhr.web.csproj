@@ -1591,6 +1591,7 @@
     <Content Include="Scripts\Site\assets\uniform\.DS_Store" />
     <Content Include="Scripts\Site\assets\uniform\README.textile" />
     <Content Include="Scripts\Site\js\.DS_Store" />
+    <Content Include="Views\Shared\RecordTime.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

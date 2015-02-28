@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using totalhr.data.TimeRecordingSystem.EF;
 using totalhr.services.Infrastructure;
-using totalhr.web.Areas.TimeRecording.ViewModels;
+using totalhr.web.ViewModels;
 using totalhr.web.Controllers;
 
 namespace totalhr.web.Areas.TimeRecording.Controllers
@@ -30,7 +30,7 @@ namespace totalhr.web.Areas.TimeRecording.Controllers
         }
 
         [HttpGet]
-        public ActionResult RecordTime(long id = 0)
+        public ActionResult RecordTime(long id = 0, Int16 typeId = 1, Int32? taskRef = null)
         {
             var vm = new TimeRecordingVM();
             if (id == 0)
@@ -46,6 +46,8 @@ namespace totalhr.web.Areas.TimeRecording.Controllers
             {
                 vm = new TimeRecordingVM(_timeRecordingService.GetById(id));
             }
+            vm.TaskRef = taskRef;
+            vm.TypeId = typeId;
             return View(vm);
         }
 
@@ -57,17 +59,23 @@ namespace totalhr.web.Areas.TimeRecording.Controllers
                 var isSuccess = false;
                 if (vm.Id == 0)
                 {
-                    isSuccess = _timeRecordingService.RecordTimeForUser(vm.Id,vm.UserId, vm.StartTime, vm.EndTime,
+                    isSuccess = _timeRecordingService.RecordTimeForUser(vm.Id,vm.UserId, vm.StartTime, vm.EndTime, vm.TypeId, vm.TaskRef,
                        new Audit() { AddedBy = vm.UserId, AddedDate = DateTime.Now });
-                if (isSuccess)
-                    return RedirectToAction("Index", "TimeRecording");
+                    if (isSuccess)
+                    {
+                        if (vm.TaskRef != null) return RedirectToAction("Details", "Task", new {id=vm.TaskRef });
+                        return RedirectToAction("Index", "TimeRecording");
+                    }
                 }
                 else
                 {
-                    isSuccess = _timeRecordingService.RecordTimeForUser(vm.Id,vm.UserId, vm.StartTime, vm.EndTime,
+                    isSuccess = _timeRecordingService.RecordTimeForUser(vm.Id,vm.UserId, vm.StartTime, vm.EndTime, vm.TypeId, vm.TaskRef,
                        new Audit().UpdateAudit( vm.UserId, DateTime.Now ));
                     if (isSuccess)
+                    {
+                        if (vm.TaskRef != null) return RedirectToAction("Details", "Task", new { id = vm.TaskRef });
                         return RedirectToAction("Details", "TimeRecording", new { id = vm.Id });
+                    }
                 }
             }
             return View(vm);

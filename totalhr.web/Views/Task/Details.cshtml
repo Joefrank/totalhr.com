@@ -7,7 +7,7 @@
 <h2>Details</h2>
 
 <fieldset>
-    <legend>TaskSchedulerDetailsVM</legend>
+    <legend>Task Scheduler</legend>
 
     @Html.HiddenFor(model => model.Id)
 
@@ -64,14 +64,58 @@
     <div class="editor-field">
         @Html.DisplayFor(x => x.Department)
     </div>
-</fieldset>
+    @if (Model.TimeRecordings != null && Model.TimeRecordings.Any())
+    {
+        <fieldset>
+            <legend>Time Recordings</legend>
+            <table>
+                <tr>
+                    <td>
+                        Start Time
+                    </td>
+                    <td>
+                        End Time
+                    </td>
+                    <td>
+                        Recorded by
+                    </td>
+                    <td>
+                        Duration Recorded
+                    </td>
+                    <td></td>
+                </tr>
+                @foreach (var result in Model.TimeRecordings)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(x => result.StartTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => result.EndTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => result.AddedByUser)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(x => result.RecordedDuration)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "RecordTime", "TimeRecording", new { id = result.Id, typeId = 2, taskRef = Model.Id }, null)  
+                        </td>
+                    </tr>
+                }
+            </table>
+        </fieldset>
+    }
 <p>
-    @Html.ActionLink("Edit", "Record", new { id=Model.Id }) |
+    @Html.ActionLink("Edit", "Record", new { id = Model.Id }) |
+    @Html.ActionLink("Add Time", "RecordTime", "TimeRecording", new { id = 0, typeId = 2, taskRef = Model.Id }, null) |
     @Html.ActionLink("Back to List", "Search")
 </p>
+</fieldset>
 <div>
-    <br/>
-    <br/>
+    <br />
+    <br />
     <br />
     <br />
 </div>

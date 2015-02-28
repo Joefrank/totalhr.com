@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace totalhr.web.Areas.TimeRecording.ViewModels
+namespace totalhr.web.ViewModels
 {
     public class SearchVM
     {

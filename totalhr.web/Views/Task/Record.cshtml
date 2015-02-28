@@ -13,7 +13,7 @@
     if (string.IsNullOrEmpty(Model.ErrorMessage))
     {
         <fieldset>
-            <legend>TimeRecordingViewModel</legend>
+            <legend>Task Scheduler</legend>
             @Html.HiddenFor(model => model.Id)
 
 
@@ -53,7 +53,7 @@
                 @Html.LabelFor(model => model.AssignedBy)
             </div>
             <div class="editor-field">
-                @Html.DropDownListFor(x => x.AssignedBy, new SelectList(Model.Users,"Id","Name",Model.AssignedBy))
+                @Html.DropDownListFor(x => x.AssignedBy, new SelectList(Model.Users, "Id", "Name", Model.AssignedBy))
             </div>
 
             <div class="editor-label">
@@ -69,15 +69,9 @@
             <div class="editor-field">
                 @Html.DropDownListFor(x => x.DepartmentId, new SelectList(Model.Departments, "Id", "Name", Model.DepartmentId))
             </div>
+            <p><input type="submit" value="Save" /></p>
+            <p>@Html.ActionLink("Back to Home", "Index")</p>
 
-
-            <p>
-                <input type="submit" value="Save" />
-            </p>
-            <div>
-                @Html.ActionLink("Back to Home", "Index")
-
-            </div>
         </fieldset>
 
 

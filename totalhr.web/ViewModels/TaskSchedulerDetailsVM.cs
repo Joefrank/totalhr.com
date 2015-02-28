@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Entities= totalhr.data.EF;
+using Entities = totalhr.data.EF;
 using TRS = totalhr.data.TimeRecordingSystem.EF;
 
 namespace totalhr.web.ViewModels
@@ -30,6 +30,8 @@ namespace totalhr.web.ViewModels
         public List<UserVM> Users { get; set; }
         public List<DepartmentVM> Departments { get; set; }
 
+        public List<TimeRecordingDetailsVM> TimeRecordings { get; set; }
+
         public TaskSchedulerDetailsVM() : base() { }
 
         public TaskSchedulerDetailsVM(TRS.TaskScheduler task):base(task)
@@ -38,6 +40,7 @@ namespace totalhr.web.ViewModels
             this.Approved = task.Approved;
             this.ScheduledDateTime = task.ScheduledDateTime;
             this.ApprovedBy = task.ApprovedBy;
+            if (task.TimeRecordings != null && task.TimeRecordings.Any()) this.TimeRecordings = TimeRecordingDetailsVM.Build(task.TimeRecordings.ToList());
         }
 
         public void SetupTaskScheduler(int userId, int departmentId, List<UserVM> users, List<DepartmentVM> departments )

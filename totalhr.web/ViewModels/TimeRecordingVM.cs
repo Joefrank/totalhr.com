@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using TRData = totalhr.data.TimeRecordingSystem.EF;
 
-namespace totalhr.web.Areas.TimeRecording.ViewModels
+namespace totalhr.web.ViewModels
 {
     public class TimeRecordingVM
     {
@@ -20,6 +20,9 @@ namespace totalhr.web.Areas.TimeRecording.ViewModels
         [Required(ErrorMessage = "Please Enter End Date Time")]
         public DateTime EndTime { get; set; }
 
+        public Int16 TypeId { get; set; }
+        public Int32? TaskRef { get; set; }
+
         public string ErrorMessage { get; private set; }
 
         public TimeRecordingVM() { }
@@ -31,6 +34,8 @@ namespace totalhr.web.Areas.TimeRecording.ViewModels
                 this.StartTime = entity.StartTime;
                 this.EndTime = entity.EndTime.Value;
                 this.UserId = entity.UserId;
+                this.TypeId = entity.TypeId;
+                this.TaskRef = entity.TaskRefId;
             }
             else this.ErrorMessage = "No Records found";
         }
