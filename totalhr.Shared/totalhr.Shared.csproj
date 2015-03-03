@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnumExtensions.cs" />
+    <Compile Include="Models\AbsenceInfo.cs" />
     <Compile Include="Models\AdminProfileStruct.cs" />
     <Compile Include="Models\AdminRoleStruct.cs" />
     <Compile Include="Models\AdminStruct.cs" />

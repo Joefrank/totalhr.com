@@ -73,6 +73,15 @@ namespace totalhr.data.EF
         public virtual DbSet<ChatMessage> ChatMessages { get; set; }
         public virtual DbSet<ChatRoom> ChatRooms { get; set; }
         public virtual DbSet<ChatRoomUser> ChatRoomUsers { get; set; }
+        public virtual DbSet<Absence> Absences { get; set; }
+        public virtual DbSet<AbsenceReply> AbsenceReplies { get; set; }
+        public virtual DbSet<Note> Notes { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
+        public virtual DbSet<TaskScheduler> TaskSchedulers { get; set; }
+        public virtual DbSet<TimeRecording> TimeRecordings { get; set; }
+        public virtual DbSet<TimeRecordingType> TimeRecordingTypes { get; set; }
+        public virtual DbSet<AbsenceSettingField> AbsenceSettingFields { get; set; }
+        public virtual DbSet<UserAbsenceFieldData> UserAbsenceFieldDatas { get; set; }
     
         [DbFunction("TotalHREntities", "SplitCSV")]
         public virtual IQueryable<SplitCSV_Result> SplitCSV(string @string, string delimiter)

@@ -42,6 +42,22 @@ namespace totalhr.data.EF
             this.ChatRooms = new HashSet<ChatRoom>();
             this.ChatRoomUsers = new HashSet<ChatRoomUser>();
             this.ChatRoomUsers1 = new HashSet<ChatRoomUser>();
+            this.Absences = new HashSet<Absence>();
+            this.Absences1 = new HashSet<Absence>();
+            this.AbsenceReplies = new HashSet<AbsenceReply>();
+            this.Notes = new HashSet<Note>();
+            this.Notes1 = new HashSet<Note>();
+            this.Notes2 = new HashSet<Note>();
+            this.Notifications = new HashSet<Notification>();
+            this.Notifications1 = new HashSet<Notification>();
+            this.TaskSchedulers = new HashSet<TaskScheduler>();
+            this.TaskSchedulers1 = new HashSet<TaskScheduler>();
+            this.TaskSchedulers2 = new HashSet<TaskScheduler>();
+            this.TaskSchedulers3 = new HashSet<TaskScheduler>();
+            this.TaskSchedulers4 = new HashSet<TaskScheduler>();
+            this.TimeRecordings = new HashSet<TimeRecording>();
+            this.TimeRecordings1 = new HashSet<TimeRecording>();
+            this.TimeRecordings2 = new HashSet<TimeRecording>();
         }
     
         public int id { get; set; }
@@ -130,5 +146,37 @@ namespace totalhr.data.EF
         public virtual ICollection<ChatRoomUser> ChatRoomUsers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChatRoomUser> ChatRoomUsers1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Absence> Absences { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Absence> Absences1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AbsenceReply> AbsenceReplies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Note> Notes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Note> Notes1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Note> Notes2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Notification> Notifications { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Notification> Notifications1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskScheduler> TaskSchedulers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskScheduler> TaskSchedulers1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskScheduler> TaskSchedulers2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskScheduler> TaskSchedulers3 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskScheduler> TaskSchedulers4 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TimeRecording> TimeRecordings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TimeRecording> TimeRecordings1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TimeRecording> TimeRecordings2 { get; set; }
     }
 }

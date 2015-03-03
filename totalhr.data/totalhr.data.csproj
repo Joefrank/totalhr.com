@@ -131,6 +131,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EF\Absence.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\AbsenceReply.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\AbsenceSettingField.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\Calendar.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
@@ -263,6 +272,12 @@
     <Compile Include="EF\Language.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\Note.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Notification.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\Profile.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
@@ -287,7 +302,19 @@
     <Compile Include="EF\SplitCSV_Result.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\TaskScheduler.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TimeRecording.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TimeRecordingType.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\User.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\UserAbsenceFieldData.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\UserContract.cs">
@@ -316,6 +343,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\Implementation\AbsencesRepository.cs" />
     <Compile Include="Repositories\Implementation\CalendarEventRepository.cs" />
     <Compile Include="Repositories\Implementation\CalendarRepository.cs" />
     <Compile Include="Repositories\Implementation\ChatRepository.cs" />
@@ -332,6 +360,7 @@
     <Compile Include="Repositories\Implementation\ProfileRepository.cs" />
     <Compile Include="Repositories\Implementation\RoleRepository.cs" />
     <Compile Include="Repositories\Implementation\UserRepository.cs" />
+    <Compile Include="Repositories\Infrastructure\IAbsencesRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICalendarEventRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICalendarRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IChatRepository.cs" />

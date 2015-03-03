@@ -79,7 +79,7 @@ namespace totalhr.services.Implementation
             {
                 allGlossaries = _glossaryRepos.GetAll().ToList();
                 _cacheHelper.Add<List<Glossary>>(allGlossaries, "AllGlossaries");
-            }
+             }
             
 
             return (allGlossaries != null)? allGlossaries.Where(x => x.LanguageId == languageid && 

@@ -30,6 +30,8 @@ using totalhr.data.TimeRecordingSystem.Repositories.Infrastructure;
 using totalhr.data.TimeRecordingSystem.Repositories.Implementation;
 using FormService.Infrastructure;
 using FormService.Implementation;
+using AbsencesService.Infrastructure;
+using Absences.Implementation;
 
 namespace totalhr.web.Controllers.Dependencies
 {
@@ -84,6 +86,9 @@ namespace totalhr.web.Controllers.Dependencies
             ninjectKernel.Bind<IFormRepository>().To<FormRepository>();
             ninjectKernel.Bind<IChatRepository>().To<ChatRepository>();
             ninjectKernel.Bind<IChatManagerService>().To<ChatManagerService>();
+            ninjectKernel.Bind<IAbsencesManager>().To<AbsencesManager>();
+            ninjectKernel.Bind<IAbsencesRepository>().To<AbsencesRepository>();
+
         }
 
     }

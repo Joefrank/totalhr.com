@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApprovedAbsence" xml:space="preserve">
+    <value>Approved</value>
+  </data>
   <data name="ByEmail" xml:space="preserve">
     <value>By Mail</value>
   </data>
@@ -144,6 +147,9 @@
   <data name="Employee2" xml:space="preserve">
     <value>Simple Employee</value>
   </data>
+  <data name="EndFiscalYear" xml:space="preserve">
+    <value>End Fiscal Year</value>
+  </data>
   <data name="EveryXTime" xml:space="preserve">
     <value>Every</value>
   </data>
@@ -162,11 +168,20 @@
   <data name="EvtWeek" xml:space="preserve">
     <value>Week</value>
   </data>
+  <data name="MaxCarryOver" xml:space="preserve">
+    <value>Maximum Carry Over</value>
+  </data>
+  <data name="MaxDayPerRequest" xml:space="preserve">
+    <value>Maximum Day Per Request</value>
+  </data>
   <data name="MonthlyOnDates" xml:space="preserve">
     <value>Monthly (on chosen dates)</value>
   </data>
   <data name="MyselfOnly" xml:space="preserve">
     <value>Myself Only (private)</value>
+  </data>
+  <data name="NewAbsence" xml:space="preserve">
+    <value>Pending</value>
   </data>
   <data name="OnDates" xml:space="preserve">
     <value>On specific date(s)</value>
@@ -225,8 +240,14 @@
   <data name="R5MinsBefore" xml:space="preserve">
     <value>5 mins before</value>
   </data>
+  <data name="RejectedAbsence" xml:space="preserve">
+    <value>Rejected</value>
+  </data>
   <data name="SelectedUsers" xml:space="preserve">
     <value>Specific user(s)</value>
+  </data>
+  <data name="StartFiscalYear" xml:space="preserve">
+    <value>Start Fiscal Year</value>
   </data>
   <data name="SystemAdmin" xml:space="preserve">
     <value>System Administrator</value>
@@ -242,6 +263,9 @@
   </data>
   <data name="WholeCompany" xml:space="preserve">
     <value>Whole Company</value>
+  </data>
+  <data name="YearlyEntitlement" xml:space="preserve">
+    <value>Yearly Entitlement</value>
   </data>
   <data name="YearlyOnSameDate" xml:space="preserve">
     <value>Yearly (on chosen years)</value>

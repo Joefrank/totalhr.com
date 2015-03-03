@@ -1,0 +1,120 @@
+﻿@using totalhr.Resources
+@using AH = totalhr.web.Areas.Admin.Helpers
+@using totalhr.web.Areas.Admin.Models
+@using totalhr.web.Helpers;
+@using totalhr.Shared;
+@using EF = totalhr.data.EF;
+
+@model totalhr.Shared.Models.AbsenceInfo
+
+@{
+    ViewBag.Title = Absence.V_Absence_Creation;
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Absence/", Text = Absence.V_Absences, Title= Absence.V_Absences},
+        new BreadCrumbItem{Url = "", Text = Absence.V_Absence_Creation, Title= Absence.V_Absence_Creation}
+    };
+
+    List<EF.Glossary> absenceTypeList = ViewBag.AbsenceTypeList as List<EF.Glossary>;
+    
+    if(absenceTypeList == null){
+        absenceTypeList = new List<EF.Glossary>{};   
+    }
+
+    absenceTypeList.Insert(0, new EF.Glossary { Term = Absence.V_Select });
+}
+
+@section pagetitle{
+   @Absence.V_Absences
+}
+
+@section breadcrumb{
+    @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+
+<div class="row-fluid">
+        <div class="span12 sortable">
+            <!-- BEGIN SAMPLE FORMPORTLET-->
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i>@Absence.V_Absence_Details</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                    <a href="javascript:;" class="icon-remove"></a>
+                </span>
+            </div>
+            <div class="widget-body">
+                <!-- BEGIN FORM-->
+                
+                @using (Html.BeginForm("CreateAbsence", "Absence", FormMethod.Post, new { @class = "form-horizontal" }))
+                {
+                    <div class="danger"> 
+                    @Html.ValidationSummary()
+                   </div>
+
+                    <div class="control-group">
+                        <label class="control-label">@Absence.V_StartDate</label>
+                        
+                       @* <div class="controls">
+                            @Html.TextBoxFor(x => x.StartDate, new {@class="m-wrap medium hasDatepicker", @placeholder=Absence.V_StartDate})
+                            <span class="help-inline">&nbsp;</span>
+                        </div>*@
+
+                        <div class="controls">
+                            <div class="input-append" id="ui_date_picker_trigger">
+                                 @Html.TextBoxFor(x => x.StartDate, new {@class="m-wrap medium", @placeholder=Absence.V_StartDate})
+                                <span class="add-on"><i class="icon-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label class="control-label">@Absence.V_End_Date</label>
+
+                        <div class="controls">
+                            <div class="input-append" id="ui_date_picker_trigger">
+                                @Html.TextBoxFor(x => x.EndDate, new {@class="m-wrap medium", @placeholder=Absence.V_End_Date})
+                                <span class="add-on"><i class="icon-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>      
+                     <div class="control-group">
+                        <label class="control-label">@Absence.V_Absence_Type</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(x => x.TypeId, new SelectList(absenceTypeList, "RootId", "Term"), 
+                                new {@class="input-large", @placeholder=Absence.V_End_Date})
+                        </div>
+                    </div> 
+                   
+                     <div class="control-group">
+                        <label class="control-label">@Absence.V_Include_Saturday</label>
+                        <div class="controls">
+                           @Html.CheckBoxFor(x => x.IncludeSaturday)
+                        </div>
+                    </div> 
+                    
+                     <div class="control-group">
+                        <label class="control-label">@Absence.V_Include_Sunday</label>
+                        <div class="controls">
+                            @Html.CheckBoxFor(x => x.IncludeSunday)
+                        </div>
+                    </div> 
+                    
+                     <div class="control-group">
+                        <label class="control-label">@Absence.V_Reason</label>
+                        <div class="controls">
+                            @Html.TextAreaFor(x => x.Reason, new {@class="input-large", @rows ="5" })
+                        </div>
+                    </div> 
+       
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @Absence.V_Create</button>
+                        <button type="button" class="btn btn-danger" onclick="CancelCreation();"><i class="icon-remove icon-white"></i> @Common.V_Cancel</button>
+                    </div>
+                }
+                <!-- END FORM-->
+            </div>
+        </div>        </div>    </div>@section scripts{    <script type="text/javascript" src="~/Scripts/Site/Absence.js"></script>
+}

@@ -75,6 +75,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Absence.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Absence.resx</DependentUpon>
+    </Compile>
     <Compile Include="Account.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -153,6 +158,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Absence.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Absence.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Account.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Account.Designer.cs</LastGenOutput>
