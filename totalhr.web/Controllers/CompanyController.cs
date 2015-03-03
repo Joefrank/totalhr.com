@@ -17,5 +17,9 @@ namespace totalhr.web.Controllers
             return View();
         }
 
+        public ActionResult Structure()
+        {
+            return View();
+        }
     }
 }

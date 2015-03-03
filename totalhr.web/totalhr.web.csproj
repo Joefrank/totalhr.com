@@ -378,6 +378,8 @@
     <Content Include="Content\assets\css\bootstrap-responsive.min.css" />
     <Content Include="Content\assets\css\bootstrap.css" />
     <Content Include="Content\assets\css\bootstrap.min.css" />
+    <Content Include="Content\assets\css\goSamples.css" />
+    <Content Include="Content\assets\css\highlight.css" />
     <Content Include="Content\assets\fancybox\.gitattributes" />
     <Content Include="Content\assets\fancybox\demo\1_b.jpg" />
     <Content Include="Content\assets\fancybox\demo\1_s.jpg" />
@@ -1356,6 +1358,10 @@
     <Content Include="Scripts\Site\assets\uniform\jquery.uniform.min.js" />
     <Content Include="Scripts\Site\Chat.js" />
     <Content Include="Scripts\Site\fr-FR\angular-form-gen.js" />
+    <Content Include="Scripts\Site\GoJS\go.js" />
+    <Content Include="Scripts\Site\GoJS\release\go.js" />
+    <Content Include="Scripts\Site\goSamples.js" />
+    <Content Include="Scripts\Site\js\highlight.js" />
     <Content Include="Scripts\Site\js\demo.gmaps.js" />
     <Content Include="Scripts\Site\js\excanvas.js" />
     <Content Include="Scripts\Site\js\gmaps.js" />
@@ -1821,6 +1827,8 @@
     <Content Include="Views\Absence\Index.cshtml" />
     <Content Include="Views\Task\Index.cshtml" />
     <Content Include="Views\Absence\CreateAbsence.cshtml" />
+    <Content Include="Views\Company\Index.cshtml" />
+    <Content Include="Views\Company\Structure.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
