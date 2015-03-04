@@ -520,6 +520,10 @@
     <Content Include="Content\themes\jquery-ui.min.css" />
     <Content Include="Content\themes\jquery-ui.structure.min.css" />
     <Content Include="Content\themes\jquery-ui.theme.min.css" />
+    <Content Include="Employee\Profile\Picture\13.JPG" />
+    <Content Include="Employee\Profile\Picture\14.JPG" />
+    <Content Include="Employee\Profile\Picture\15.JPG" />
+    <Content Include="Employee\Profile\Picture\profile-pic.jpg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Areas\Admin\Views\Web.config" />
@@ -1847,6 +1851,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="bin\Database\" />
     <Folder Include="CompanyDocuments\" />
+    <Folder Include="Employee\Profile\avatar\" />
     <Folder Include="Scripts\Site\assets\jquery-file-upload\server\php\files\thumbnail\" />
     <Folder Include="Users\Profile\Images\" />
   </ItemGroup>

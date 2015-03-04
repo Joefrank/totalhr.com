@@ -1,4 +1,7 @@
-﻿@{
+﻿
+@model totalhr.Shared.Models.CompanyOrganigram
+
+@{
     Layout = null;
        
 }
@@ -78,6 +81,8 @@
 
     // when a node is double-clicked, add a child to it
     function nodeDoubleClick(e, obj) {
+        //** not to be used at the moment
+        return;
       var clicked = obj.part;
       if (clicked !== null) {
         var thisemp = clicked.data;
@@ -105,7 +110,7 @@
 
     // This converter is used by the Picture.
     function findHeadShot(key) {
-      return "images/HS" + key + ".png"
+      return "/Employee/Profile/avatar/HS" + key + ".png"
     };
 
 
@@ -229,6 +234,8 @@
 
   // Update the HTML elements for editing the properties of the currently selected node, if any
   function updateProperties(data) {
+      //*** not used at the moment
+      return;
     if (data === null) {
       document.getElementById("propertiesPanel").style.display = "none";
       document.getElementById("name").value = "";
@@ -282,48 +289,29 @@
 </script>
 </head>
 <body onload="init()">
-<div id="sample">
-  <div id="myDiagram" style="background-color: #696969; border: solid 1px black; height: 500px"></div>
+<div id="sample" style="margin:0">
+  <div id="myDiagram" style="background-color: #696969; border: solid 1px black;width:1000px; height: 600px"></div>
   <div>
-    <div id="propertiesPanel" style="display: none; background-color: aliceblue; border: solid 1px black">
+    @*<div id="propertiesPanel" style="display: none; background-color: aliceblue; border: solid 1px black">
       <b>Properties</b><br />
       Name: <input type="text" id="name" value="" onchange="updateData(this.value, 'name')" /><br />
       Title: <input type="text" id="title" value="" onchange="updateData(this.value, 'title')" /><br />
       Comments: <input type="text" id="comments" value="" onchange="updateData(this.value, 'comments')" /><br />
-    </div>
+    </div>*@
   </div>
-  <p>
+  @*<p>
     Double click on a node in order to add a person.
     Drag a node onto another in order to change relationships.
     You can also draw a link from a node's background to other nodes that have no "boss".
-  </p>
+  </p>*@
   <div>
-    <div>
+    @*<div>
       <button id="SaveButton" onclick="save()">Write</button>
       <button onclick="load()">Read</button>
       Diagram Model saved in JSON format:
-    </div>
-    <textarea id="mySavedModel" style="width:100%;height:250px">
-{ "class": "go.TreeModel",
-  "nodeDataArray": [
-{"key":"1", "name":"Stella Payne Diaz", "title":"CEO"},
-{"key":"2", "name":"Luke Warm", "title":"VP Marketing/Sales", "parent":"1"},
-{"key":"3", "name":"Meg Meehan Hoffa", "title":"Sales", "parent":"2"},
-{"key":"4", "name":"Peggy Flaming", "title":"VP Engineering", "parent":"1"},
-{"key":"5", "name":"Saul Wellingood", "title":"Manufacturing", "parent":"4"},
-{"key":"6", "name":"Al Ligori", "title":"Marketing", "parent":"2"},
-{"key":"7", "name":"Dot Stubadd", "title":"Sales Rep", "parent":"3"},
-{"key":"8", "name":"Les Ismore", "title":"Project Mgr", "parent":"5"},
-{"key":"9", "name":"April Lynn Parris", "title":"Events Mgr", "parent":"6"},
-{"key":"10", "name":"Xavier Breath", "title":"Engineering", "parent":"4"},
-{"key":"11", "name":"Anita Hammer", "title":"Process", "parent":"5"},
-{"key":"12", "name":"Billy Aiken", "title":"Software", "parent":"10"},
-{"key":"13", "name":"Stan Wellback", "title":"Testing", "parent":"10"},
-{"key":"14", "name":"Marge Innovera", "title":"Hardware", "parent":"10"},
-{"key":"15", "name":"Evan Elpus", "title":"Quality", "parent":"5"},
-{"key":"16", "name":"Lotta B. Essen", "title":"Sales Rep", "parent":"3"}
- ]
-}
+    </div>*@
+    <textarea id="mySavedModel" style="width:100%;height:250px;display:none;">
+        @Html.Raw(Model.EmployeeHierarchy)
     </textarea>
   </div>
 </div>
