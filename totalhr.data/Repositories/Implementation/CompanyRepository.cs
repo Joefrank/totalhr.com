@@ -43,5 +43,10 @@ namespace totalhr.data.Repositories.Implementation
             this.Context.SaveChanges();
             return dept.id;
         }
+
+        public IEnumerable<User> ListEmployees(int companyId)
+        {
+           return this.Context.Users.Where(x => x.CompanyId == companyId);
+        }
     }
 }

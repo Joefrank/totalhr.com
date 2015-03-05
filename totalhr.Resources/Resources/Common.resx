@@ -303,4 +303,55 @@
   <data name="V_Chat_Refreshed_At" xml:space="preserve">
     <value>Last refreshed at {0}</value>
   </data>
+  <data name="V_Company" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="V_Company_Departments" xml:space="preserve">
+    <value>Company Departments</value>
+  </data>
+  <data name="V_Company_Employees" xml:space="preserve">
+    <value>Employees</value>
+  </data>
+  <data name="V_Company_Intro" xml:space="preserve">
+    <value>Please choose an option below to view.</value>
+  </data>
+  <data name="V_Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="V_Departments" xml:space="preserve">
+    <value>Company Departments</value>
+  </data>
+  <data name="V_Department_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="V_Department_List" xml:space="preserve">
+    <value>Departments List</value>
+  </data>
+  <data name="V_Department_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="V_Employee_Directory" xml:space="preserve">
+    <value>Employees Directory</value>
+  </data>
+  <data name="V_Employee_List" xml:space="preserve">
+    <value>Employee List</value>
+  </data>
+  <data name="V_Employee_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="V_Line_Manager" xml:space="preserve">
+    <value>Line Manager</value>
+  </data>
+  <data name="V_No_User_Found" xml:space="preserve">
+    <value>No employee found in the directory.</value>
+  </data>
+  <data name="V_Office_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="V_Office_Phone" xml:space="preserve">
+    <value>Office Phone</value>
+  </data>
+  <data name="V_Organization_Chart" xml:space="preserve">
+    <value>Organization Chart</value>
+  </data>
 </root>

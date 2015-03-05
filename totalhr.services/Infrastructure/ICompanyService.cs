@@ -20,5 +20,7 @@ namespace totalhr.services.Infrastructure
         IEnumerable<ListItemStruct> GetDepartmentSimple(int companyId);
 
         CompanyOrganigram GetOrganigram(int companyId);
+
+        IEnumerable<User> ListEmployees(int companyId);
     }
 }

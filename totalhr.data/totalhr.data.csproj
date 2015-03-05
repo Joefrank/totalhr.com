@@ -248,6 +248,12 @@
     <Compile Include="EF\FormFieldValidationRule.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\GalleryAlbum.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\GalleryPhoto.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\GetCompanyFoldersByUser_Result.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
@@ -354,6 +360,7 @@
     <Compile Include="Repositories\Implementation\EmailTemplateRepository.cs" />
     <Compile Include="Repositories\Implementation\FileRepository.cs" />
     <Compile Include="Repositories\Implementation\FormRepository.cs" />
+    <Compile Include="Repositories\Implementation\GalleryRepository.cs" />
     <Compile Include="Repositories\Implementation\GlossaryRepository.cs" />
     <Compile Include="Repositories\Implementation\GenericRepository.cs" />
     <Compile Include="Repositories\Implementation\LanguageRepository.cs" />
@@ -371,6 +378,7 @@
     <Compile Include="Repositories\Infrastructure\IEmailRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IFileRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IFormRepository.cs" />
+    <Compile Include="Repositories\Infrastructure\IGalleryRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IGlossaryRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IGenericRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ILanguageRepository.cs" />

@@ -24,9 +24,25 @@ namespace totalhr.web.Controllers
         }
 
         public ActionResult Structure()
+        {            
+            return View();
+        }
+
+        public ActionResult Organigram()
         {
             var organigram = _companyService.GetOrganigram(CurrentUser.CompanyId);
             return View(organigram);
         }
+
+        public ActionResult EmployeeDirectory()
+        {
+            return View(_companyService.ListEmployees(CurrentUser.CompanyId));
+        }
+
+        public ActionResult Departments()
+        {
+            return View(_companyService.GetCompanyDepartments(CurrentUser.CompanyId));
+        }
+       
     }
 }

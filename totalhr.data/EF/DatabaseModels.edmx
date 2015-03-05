@@ -473,6 +473,29 @@
           <Property Name="SetValue" Type="nvarchar" MaxLength="150" />
           <Property Name="FormId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="GalleryAlbum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="NoPhotos" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GalleryPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlbumId" Type="int" Nullable="false" />
+          <Property Name="FileId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Glossary">
           <Key>
             <PropertyRef Name="Id" />
@@ -1145,6 +1168,66 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GalleryAlbum_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="GalleryAlbum" Type="Self.GalleryAlbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryAlbum">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryAlbum_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="GalleryAlbum" Type="Self.GalleryAlbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryAlbum">
+              <PropertyRef Name="LastUpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryPhoto_File">
+          <End Role="File" Type="Self.File" Multiplicity="1" />
+          <End Role="GalleryPhoto" Type="Self.GalleryPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryPhoto">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryPhoto_GalleryAlbum">
+          <End Role="GalleryAlbum" Type="Self.GalleryAlbum" Multiplicity="1" />
+          <End Role="GalleryPhoto" Type="Self.GalleryPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GalleryAlbum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GalleryPhoto">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryPhoto_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="GalleryPhoto" Type="Self.GalleryPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryPhoto">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Notes_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
@@ -1701,6 +1784,8 @@
           <EntitySet Name="FormField" EntityType="Self.FormField" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormFieldJSon" EntityType="Self.FormFieldJSon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormFieldValidationRule" EntityType="Self.FormFieldValidationRule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GalleryAlbum" EntityType="Self.GalleryAlbum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GalleryPhoto" EntityType="Self.GalleryPhoto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Glossary" EntityType="Self.Glossary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Label" EntityType="Self.Label" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
@@ -1841,6 +1926,26 @@
           <AssociationSet Name="FK_FormFieldValidationRule_User" Association="Self.FK_FormFieldValidationRule_User">
             <End Role="User" EntitySet="User" />
             <End Role="FormFieldValidationRule" EntitySet="FormFieldValidationRule" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryAlbum_User" Association="Self.FK_GalleryAlbum_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="GalleryAlbum" EntitySet="GalleryAlbum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryAlbum_User1" Association="Self.FK_GalleryAlbum_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="GalleryAlbum" EntitySet="GalleryAlbum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryPhoto_File" Association="Self.FK_GalleryPhoto_File">
+            <End Role="File" EntitySet="File" />
+            <End Role="GalleryPhoto" EntitySet="GalleryPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryPhoto_GalleryAlbum" Association="Self.FK_GalleryPhoto_GalleryAlbum">
+            <End Role="GalleryAlbum" EntitySet="GalleryAlbum" />
+            <End Role="GalleryPhoto" EntitySet="GalleryPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryPhoto_User" Association="Self.FK_GalleryPhoto_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="GalleryPhoto" EntitySet="GalleryPhoto" />
           </AssociationSet>
           <AssociationSet Name="FK_Notes_User" Association="Self.FK_Notes_User">
             <End Role="User" EntitySet="User" />
@@ -2345,6 +2450,7 @@
           <Property Name="lastupdatedby" Type="Int32" />
           <NavigationProperty Name="CompanyDocuments" Relationship="Self.FK_CompanyDocument_File" FromRole="File" ToRole="CompanyDocument" />
           <NavigationProperty Name="UserProfilePictures" Relationship="Self.FK_UserProfilePicture_File" FromRole="File" ToRole="UserProfilePicture" />
+          <NavigationProperty Name="GalleryPhotoes" Relationship="TotalHRModel.FK_GalleryPhoto_File" FromRole="File" ToRole="GalleryPhoto" />
         </EntityType>
         <EntityType Name="Form">
           <Key>
@@ -2589,6 +2695,9 @@
           <NavigationProperty Name="TimeRecordings" Relationship="TotalHRModel.FK_TimeRecording_User" FromRole="User" ToRole="TimeRecording" />
           <NavigationProperty Name="TimeRecordings1" Relationship="TotalHRModel.FK_TimeRecording_User1" FromRole="User" ToRole="TimeRecording" />
           <NavigationProperty Name="TimeRecordings2" Relationship="TotalHRModel.FK_TimeRecording_User2" FromRole="User" ToRole="TimeRecording" />
+          <NavigationProperty Name="GalleryAlbums" Relationship="TotalHRModel.FK_GalleryAlbum_User" FromRole="User" ToRole="GalleryAlbum" />
+          <NavigationProperty Name="GalleryAlbums1" Relationship="TotalHRModel.FK_GalleryAlbum_User1" FromRole="User" ToRole="GalleryAlbum" />
+          <NavigationProperty Name="GalleryPhotoes" Relationship="TotalHRModel.FK_GalleryPhoto_User" FromRole="User" ToRole="GalleryPhoto" />
         </EntityType>
         <EntityType Name="UserContract">
           <Key>
@@ -3506,6 +3615,28 @@
           </AssociationSet>
           <EntitySet Name="AbsenceSettingFields" EntityType="TotalHRModel.AbsenceSettingField" />
           <EntitySet Name="UserAbsenceFieldDatas" EntityType="TotalHRModel.UserAbsenceFieldData" />
+          <EntitySet Name="GalleryAlbums" EntityType="TotalHRModel.GalleryAlbum" />
+          <EntitySet Name="GalleryPhotoes" EntityType="TotalHRModel.GalleryPhoto" />
+          <AssociationSet Name="FK_GalleryPhoto_File" Association="TotalHRModel.FK_GalleryPhoto_File">
+            <End Role="File" EntitySet="Files" />
+            <End Role="GalleryPhoto" EntitySet="GalleryPhotoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryAlbum_User" Association="TotalHRModel.FK_GalleryAlbum_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="GalleryAlbum" EntitySet="GalleryAlbums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryAlbum_User1" Association="TotalHRModel.FK_GalleryAlbum_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="GalleryAlbum" EntitySet="GalleryAlbums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryPhoto_GalleryAlbum" Association="TotalHRModel.FK_GalleryPhoto_GalleryAlbum">
+            <End Role="GalleryAlbum" EntitySet="GalleryAlbums" />
+            <End Role="GalleryPhoto" EntitySet="GalleryPhotoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryPhoto_User" Association="TotalHRModel.FK_GalleryPhoto_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="GalleryPhoto" EntitySet="GalleryPhotoes" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetCompanyFoldersByUser_Result">
           <Property Type="Int32" Name="documentId" Nullable="false" />
@@ -4284,6 +4415,95 @@
           <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatedBy" Type="Int32" Nullable="false" />
         </EntityType>
+        <EntityType Name="GalleryAlbum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="NoPhotos" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_GalleryAlbum_User" FromRole="GalleryAlbum" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_GalleryAlbum_User1" FromRole="GalleryAlbum" ToRole="User" />
+          <NavigationProperty Name="GalleryPhotoes" Relationship="TotalHRModel.FK_GalleryPhoto_GalleryAlbum" FromRole="GalleryAlbum" ToRole="GalleryPhoto" />
+        </EntityType>
+        <EntityType Name="GalleryPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlbumId" Type="Int32" Nullable="false" />
+          <Property Name="FileId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="File" Relationship="TotalHRModel.FK_GalleryPhoto_File" FromRole="GalleryPhoto" ToRole="File" />
+          <NavigationProperty Name="GalleryAlbum" Relationship="TotalHRModel.FK_GalleryPhoto_GalleryAlbum" FromRole="GalleryPhoto" ToRole="GalleryAlbum" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_GalleryPhoto_User" FromRole="GalleryPhoto" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_GalleryPhoto_File">
+          <End Type="TotalHRModel.File" Role="File" Multiplicity="1" />
+          <End Type="TotalHRModel.GalleryPhoto" Role="GalleryPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryPhoto">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryAlbum_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.GalleryAlbum" Role="GalleryAlbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryAlbum">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryAlbum_User1">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.GalleryAlbum" Role="GalleryAlbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryAlbum">
+              <PropertyRef Name="LastUpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryPhoto_GalleryAlbum">
+          <End Type="TotalHRModel.GalleryAlbum" Role="GalleryAlbum" Multiplicity="1" />
+          <End Type="TotalHRModel.GalleryPhoto" Role="GalleryPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GalleryAlbum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GalleryPhoto">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryPhoto_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.GalleryPhoto" Role="GalleryPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryPhoto">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5317,6 +5537,31 @@
                 <ScalarProperty Name="Value" ColumnName="Value" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
                 <ScalarProperty Name="AbsenceFieldId" ColumnName="AbsenceFieldId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GalleryAlbums">
+            <EntityTypeMapping TypeName="TotalHRModel.GalleryAlbum">
+              <MappingFragment StoreEntitySet="GalleryAlbum">
+                <ScalarProperty Name="NoPhotos" ColumnName="NoPhotos" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GalleryPhotoes">
+            <EntityTypeMapping TypeName="TotalHRModel.GalleryPhoto">
+              <MappingFragment StoreEntitySet="GalleryPhoto">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

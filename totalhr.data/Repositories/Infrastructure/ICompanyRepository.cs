@@ -16,5 +16,7 @@ namespace totalhr.data.Repositories.Infrastructure
         IEnumerable<Shared.Models.ListItemStruct> GetDeparmentSimple(int companyId);
 
         int CreateDepartment(int companyId, int userId, string departmentName, string description);
+
+        IEnumerable<User> ListEmployees(int companyId);
     }
 }

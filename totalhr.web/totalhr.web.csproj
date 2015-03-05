@@ -363,6 +363,19 @@
     <Content Include="bin\totalhr.web.pdb" />
     <Content Include="bin\WebActivatorEx.dll" />
     <Content Include="bin\WebGrease.dll" />
+    <Content Include="CompanyDocuments\30\1.txt" />
+    <Content Include="CompanyDocuments\30\11.jpg" />
+    <Content Include="CompanyDocuments\30\1_bak.txt" />
+    <Content Include="CompanyDocuments\30\2_bak.txt" />
+    <Content Include="CompanyDocuments\30\3.jpg" />
+    <Content Include="CompanyDocuments\30\3_bak.png" />
+    <Content Include="CompanyDocuments\30\3_bak.txt" />
+    <Content Include="CompanyDocuments\30\4.txt" />
+    <Content Include="CompanyDocuments\30\5.png" />
+    <Content Include="CompanyDocuments\30\8.txt" />
+    <Content Include="CompanyDocuments\30\8_bak.txt" />
+    <Content Include="CompanyDocuments\30\9.txt" />
+    <Content Include="CompanyDocuments\30\9_bak.txt" />
     <Content Include="Content\assets\bootstrap\css\bootstrap-fileupload.css" />
     <Content Include="Content\assets\bootstrap\css\bootstrap-responsive.css" />
     <Content Include="Content\assets\bootstrap\css\bootstrap-responsive.min.css" />
@@ -613,6 +626,15 @@
     <Content Include="Content\assets\font-awesome\sass\font-awesome.scss" />
     <Content Include="Content\assets\uniform\.DS_Store" />
     <Content Include="Content\assets\uniform\README.textile" />
+    <Content Include="CompanyDocuments\30\10.pdf" />
+    <Content Include="CompanyDocuments\30\10_bak.pdf" />
+    <Content Include="CompanyDocuments\30\1_bak.docx" />
+    <Content Include="CompanyDocuments\30\2.pdf" />
+    <Content Include="CompanyDocuments\30\2_bak.pdf" />
+    <Content Include="CompanyDocuments\30\6.docx" />
+    <Content Include="CompanyDocuments\30\7.docx" />
+    <Content Include="CompanyDocuments\30\7_bak.docx" />
+    <Content Include="CompanyDocuments\30\9.xls" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
@@ -1825,7 +1847,6 @@
     <Content Include="Views\Account\UserListSelector.cshtml" />
     <Content Include="Views\Chat\ChatRegistration.cshtml" />
     <Content Include="Views\Shared\_BlankLayout.cshtml" />
-    <Content Include="Views\Gallery\Index.cshtml" />
     <Content Include="Views\Structure\Index.cshtml" />
     <Content Include="Views\Payroll\Index.cshtml" />
     <Content Include="Views\Absence\Index.cshtml" />
@@ -1833,6 +1854,13 @@
     <Content Include="Views\Absence\CreateAbsence.cshtml" />
     <Content Include="Views\Company\Index.cshtml" />
     <Content Include="Views\Company\Structure.cshtml" />
+    <Content Include="Views\Company\Organigram.cshtml" />
+    <Content Include="Views\Company\EmployeeDirectory.cshtml" />
+    <Content Include="Views\Company\Departments.cshtml" />
+    <Content Include="Views\Gallery\Index.cshtml" />
+    <Content Include="Views\Gallery\CreateAlbum.cshtml" />
+    <Content Include="Views\Gallery\EditAlbum.cshtml" />
+    <Content Include="Views\Gallery\ViewAlbum.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1850,8 +1878,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\Database\" />
-    <Folder Include="CompanyDocuments\" />
     <Folder Include="Employee\Profile\avatar\" />
+    <Folder Include="PhotoGallery\Large\" />
+    <Folder Include="PhotoGallery\Original\" />
+    <Folder Include="PhotoGallery\Thumbnail\" />
     <Folder Include="Scripts\Site\assets\jquery-file-upload\server\php\files\thumbnail\" />
     <Folder Include="Users\Profile\Images\" />
   </ItemGroup>
@@ -1886,6 +1916,10 @@
     <ProjectReference Include="..\FormService\FormService.csproj">
       <Project>{f75d380a-86c8-4876-9a32-650aa08fd2ff}</Project>
       <Name>FormService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ImageGallery\ImageGallery.csproj">
+      <Project>{c8b9dc65-cf22-47cb-81e2-50f5771435e4}</Project>
+      <Name>ImageGallery</Name>
     </ProjectReference>
     <ProjectReference Include="..\totalhr.data.TimeRecordingSystem\totalhr.data.TimeRecordingSystem.csproj">
       <Project>{aae8d583-9a4f-4e69-ab31-9a0cdceb4bcb}</Project>

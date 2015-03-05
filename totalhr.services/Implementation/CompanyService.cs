@@ -69,5 +69,10 @@ namespace totalhr.services.Implementation
                 }";
             return organigram;
         }
+
+        public IEnumerable<User> ListEmployees(int companyId)
+        {
+            return _companyRepos.ListEmployees(companyId);
+        }
     }
 }

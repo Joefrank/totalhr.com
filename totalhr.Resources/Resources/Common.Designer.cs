@@ -484,6 +484,114 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company.
+        /// </summary>
+        public static string V_Company {
+            get {
+                return ResourceManager.GetString("V_Company", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company Departments.
+        /// </summary>
+        public static string V_Company_Departments {
+            get {
+                return ResourceManager.GetString("V_Company_Departments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employees.
+        /// </summary>
+        public static string V_Company_Employees {
+            get {
+                return ResourceManager.GetString("V_Company_Employees", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please choose an option below to view..
+        /// </summary>
+        public static string V_Company_Intro {
+            get {
+                return ResourceManager.GetString("V_Company_Intro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Department.
+        /// </summary>
+        public static string V_Department {
+            get {
+                return ResourceManager.GetString("V_Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string V_Department_Description {
+            get {
+                return ResourceManager.GetString("V_Department_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Departments List.
+        /// </summary>
+        public static string V_Department_List {
+            get {
+                return ResourceManager.GetString("V_Department_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string V_Department_Name {
+            get {
+                return ResourceManager.GetString("V_Department_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company Departments.
+        /// </summary>
+        public static string V_Departments {
+            get {
+                return ResourceManager.GetString("V_Departments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employees Directory.
+        /// </summary>
+        public static string V_Employee_Directory {
+            get {
+                return ResourceManager.GetString("V_Employee_Directory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Employee List.
+        /// </summary>
+        public static string V_Employee_List {
+            get {
+                return ResourceManager.GetString("V_Employee_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string V_Employee_Name {
+            get {
+                return ResourceManager.GetString("V_Employee_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter.
         /// </summary>
         public static string V_Enter {
@@ -502,11 +610,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Line Manager.
+        /// </summary>
+        public static string V_Line_Manager {
+            get {
+                return ResourceManager.GetString("V_Line_Manager", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Next.
         /// </summary>
         public static string V_Next {
             get {
                 return ResourceManager.GetString("V_Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No employee found in the directory..
+        /// </summary>
+        public static string V_No_User_Found {
+            get {
+                return ResourceManager.GetString("V_No_User_Found", resourceCulture);
             }
         }
         
@@ -525,6 +651,33 @@ namespace totalhr.Resources {
         public static string V_Not_Registered {
             get {
                 return ResourceManager.GetString("V_Not_Registered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string V_Office_Email {
+            get {
+                return ResourceManager.GetString("V_Office_Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Office Phone.
+        /// </summary>
+        public static string V_Office_Phone {
+            get {
+                return ResourceManager.GetString("V_Office_Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Organization Chart.
+        /// </summary>
+        public static string V_Organization_Chart {
+            get {
+                return ResourceManager.GetString("V_Organization_Chart", resourceCulture);
             }
         }
         

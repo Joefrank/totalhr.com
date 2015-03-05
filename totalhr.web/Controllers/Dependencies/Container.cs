@@ -32,6 +32,9 @@ using FormService.Infrastructure;
 using FormService.Implementation;
 using AbsencesService.Infrastructure;
 using Absences.Implementation;
+using ImageGallery;
+using ImageGallery.Implementation;
+using ImageGallery.Infrastructure;
 
 namespace totalhr.web.Controllers.Dependencies
 {
@@ -88,7 +91,8 @@ namespace totalhr.web.Controllers.Dependencies
             ninjectKernel.Bind<IChatManagerService>().To<ChatManagerService>();
             ninjectKernel.Bind<IAbsencesManager>().To<AbsencesManager>();
             ninjectKernel.Bind<IAbsencesRepository>().To<AbsencesRepository>();
-
+            ninjectKernel.Bind<IGalleryRepository>().To<GalleryRepository>();
+            ninjectKernel.Bind<IGalleryService>().To<GalleryService>();
         }
 
     }

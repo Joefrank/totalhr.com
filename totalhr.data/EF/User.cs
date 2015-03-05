@@ -58,6 +58,9 @@ namespace totalhr.data.EF
             this.TimeRecordings = new HashSet<TimeRecording>();
             this.TimeRecordings1 = new HashSet<TimeRecording>();
             this.TimeRecordings2 = new HashSet<TimeRecording>();
+            this.GalleryAlbums = new HashSet<GalleryAlbum>();
+            this.GalleryAlbums1 = new HashSet<GalleryAlbum>();
+            this.GalleryPhotoes = new HashSet<GalleryPhoto>();
         }
     
         public int id { get; set; }
@@ -178,5 +181,11 @@ namespace totalhr.data.EF
         public virtual ICollection<TimeRecording> TimeRecordings1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TimeRecording> TimeRecordings2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GalleryAlbum> GalleryAlbums { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GalleryAlbum> GalleryAlbums1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GalleryPhoto> GalleryPhotoes { get; set; }
     }
 }
