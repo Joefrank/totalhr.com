@@ -1,5 +1,69 @@
-﻿@{
-    ViewBag.Title = "ViewAlbum";
+﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
+@using totalhr.Shared.Models;
+@using totalhr.Shared;
+
+@model totalhr.data.EF.GalleryAlbum
+
+@{
+    ViewBag.Title = Gallery.V_Create_Album;
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Company/", Text = Common.V_Company, Title= Common.V_Company},
+        new BreadCrumbItem{Url = "/Gallery/", Text = Gallery.V_Gallery, Title= Gallery.V_Gallery},
+        new BreadCrumbItem{Url = "", Text = Gallery.V_Album_View, Title= Gallery.V_Album_View}
+    };
+
+    var bShowPhotoList = Model.GalleryPhotoes.Count > 0;
 }
 
-<h2>ViewAlbum</h2>
+@section pagetitle{
+   @Html.Raw(Gallery.V_Album_View + string.Format(": <i>{0}</i>", Model.Name))
+}
+
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+<div class="row-fluid">
+    <div class="span12 sortable">
+        <!-- BEGIN SAMPLE FORMPORTLET-->
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i>@Gallery.V_Gallery_Albums</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                    <a href="javascript:;" class="icon-remove"></a>
+                </span>
+            </div>
+            <div class="widget-body">
+                
+                @if (bShowPhotoList)
+                {
+                    <div class="photolist">
+                        @foreach (var photo in Model.GalleryPhotoes)
+                        {
+                            <img src="/PhotoGallery/Thumbnail/@photo.FileName" alt="@photo.Label" />
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div class="alert alert-error">
+                        @Gallery.V_Error_No_Photo_For_Album
+                   </div>
+                }
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row-fluid">
+    <button type="submit" class="btn btn-warning" @*onclick="$('#dvUpload').show();"*@ onclick="OpenPopup('/Gallery/UploadPhoto/');">
+        <i class="icon-plus icon-white"></i> @Gallery.V_Add_Photo_ToAlbum
+    </button>
+
+</div>

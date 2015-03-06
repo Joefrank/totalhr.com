@@ -140,6 +140,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FormMessages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Gallery.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Gallery.resx</DependentUpon>
+    </Compile>
     <Compile Include="Payroll.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -211,6 +216,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FormMessages.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Gallery.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Gallery.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Payroll.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
