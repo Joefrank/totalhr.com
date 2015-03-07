@@ -9,7 +9,7 @@ using totalhr.services.Infrastructure;
 using totalhr.web.ViewModels;
 using totalhr.web.Controllers;
 
-namespace totalhr.web.Areas.TimeRecording.Controllers
+namespace totalhr.web.Controllers
 {
     public class TimeRecordingController : BaseController
     {

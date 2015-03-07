@@ -14,61 +14,61 @@
 
     @Html.HiddenFor(model => model.UserId)
 
-    <div class="editor-label">
+    <div class="display-label">
         @Html.LabelFor(model => model.Name)
     </div>
-    <div class="editor-field">
+    <div class="display-field">
         @Html.DisplayFor(model => model.Name)
         @Html.ValidationMessageFor(model => model.Name)
     </div>
 
-    <div class="editor-label">
+    <div class="display-label">
         @Html.LabelFor(model => model.Description)
     </div>
-    <div class="editor-field">
+    <div class="display-field">
         @Html.DisplayFor(model => model.Description)
     </div>
 
-    <div class="editor-label">
+    <div class="display-label">
         @Html.LabelFor(model => model.ApprovalNeeded)
     </div>
-    <div class="editor-field">
+    <div class="display-field">
         @Html.DisplayFor(model => model.ApprovalNeeded)
     </div>
 
 
-    <div class="editor-label">
+    <div class="display-label">
         @Html.LabelFor(model => model.ScheduledDateTime)
     </div>
-    <div class="editor-field">
+    <div class="display-field">
         @Html.DisplayFor(model => model.ScheduledDateTime)
     </div>
 
-    <div class="editor-label">
+    <div class="display-label">
         @Html.LabelFor(model => model.AssignedBy)
     </div>
-    <div class="editor-field">
+    <div class="display-field">
         @Html.DisplayFor(x => x.AssignedByUser)
     </div>
 
-    <div class="editor-label">
+    <div class="display-label">
         @Html.LabelFor(model => model.AssignedTo)
     </div>
-    <div class="editor-field">
+    <div class="display-field">
         @Html.DisplayFor(x => x.AssignedToUser)
     </div>
 
-    <div class="editor-label">
+    <div class="display-label">
         @Html.LabelFor(model => model.Department)
     </div>
-    <div class="editor-field">
+    <div class="display-field">
         @Html.DisplayFor(x => x.Department)
     </div>
     @if (Model.TimeRecordings != null && Model.TimeRecordings.Any())
     {
         <fieldset>
             <legend>Time Recordings</legend>
-            <table>
+            <table class="table-advance">
                 <tr>
                     <td>
                         Start Time
@@ -83,7 +83,7 @@
                 </tr>
                 @foreach (var result in Model.TimeRecordings)
                 {
-                    <tr>
+                    <tr class="display-field">
                         <td>
                             @Html.DisplayFor(x => result.StartTime)
                         </td>
