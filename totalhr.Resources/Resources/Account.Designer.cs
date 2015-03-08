@@ -394,6 +394,24 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Permissions&apos; List.
+        /// </summary>
+        public static string V_Profile_List {
+            get {
+                return ResourceManager.GetString("V_Profile_List", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string V_Profile_Name {
+            get {
+                return ResourceManager.GetString("V_Profile_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profile View.
         /// </summary>
         public static string V_Profile_View {

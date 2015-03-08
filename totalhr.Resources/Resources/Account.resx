@@ -282,4 +282,10 @@
   <data name="V_Profile" xml:space="preserve">
     <value>Profile</value>
   </data>
+  <data name="V_Profile_List" xml:space="preserve">
+    <value>Permissions' List</value>
+  </data>
+  <data name="V_Profile_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
 </root>

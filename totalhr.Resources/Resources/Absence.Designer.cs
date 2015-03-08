@@ -124,6 +124,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Absence Year.
+        /// </summary>
+        public static string V_Absence_Year {
+            get {
+                return ResourceManager.GetString("V_Absence_Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Absences.
         /// </summary>
         public static string V_Absences {
@@ -178,6 +187,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Annual Leave Summary.
+        /// </summary>
+        public static string V_Holiday_Summary {
+            get {
+                return ResourceManager.GetString("V_Holiday_Summary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Include Saturday.
         /// </summary>
         public static string V_Include_Saturday {
@@ -201,6 +219,15 @@ namespace totalhr.Resources {
         public static string V_No_Absence_Found {
             get {
                 return ResourceManager.GetString("V_No_Absence_Found", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other Absences.
+        /// </summary>
+        public static string V_Other_Absences {
+            get {
+                return ResourceManager.GetString("V_Other_Absences", resourceCulture);
             }
         }
         

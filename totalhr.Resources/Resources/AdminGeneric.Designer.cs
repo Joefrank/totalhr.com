@@ -682,6 +682,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reporting.
+        /// </summary>
+        public static string V_Reports {
+            get {
+                return ResourceManager.GetString("V_Reports", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to List of Roles.
         /// </summary>
         public static string V_Role_List {
