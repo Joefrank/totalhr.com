@@ -21,7 +21,7 @@
     {
         contractId = Model.Contract.id;
         templateId = Model.Contract.TemplateId;
-        source = System.Web.VirtualPathUtility.ToAbsolute(@"~/Admin/Contract/FillContract/60"); //string.Format(@" src=""~/Admin/Contract/FillContract/{0}"" ", Model.UserDetails.id));
+        source = System.Web.VirtualPathUtility.ToAbsolute(@"~/Admin/Contract/FillContract/" + userId); //string.Format(@" src=""~/Admin/Contract/FillContract/{0}"" ", Model.UserDetails.id));
         selTemplate = templateId.ToString(CultureInfo.InvariantCulture);        
         
         if(Model.TemplateList != null){
@@ -37,7 +37,18 @@
         new BreadCrumbItem{Url = "/Admin/Contract", Text = AdminGeneric.V_Contract_Management, Title= AdminGeneric.V_Contract_Management},
         new BreadCrumbItem{Url = "/Admin/Contract/Manage/", Text = Contract.V_Contract_Management_SelUser, Title= Contract.V_Contract_Management_SelUser},
         new BreadCrumbItem{Url = "", Text = Contract.V_User_Contract, Title= Contract.V_User_Contract}
-    }; 
+    };
+
+    var templatesList = new List<SelectListItem> { new SelectListItem { Value = "", Text = Common.V_None } };
+    
+    try
+    {
+        templatesList = totalhr.web.Areas.Admin.Helpers.GenericHelper.GetListFromNumerable(Model.TemplateList);
+    }
+    catch
+    {
+        
+    }
 }
 
       
@@ -74,62 +85,81 @@
             
                      @Html.ValidationSummary()
 
-                     @Html.HiddenFor(x => x.UserDetails.id)
-       
-                    <div class="formdiv midform">
-                        <div class="wrapper">
+                     @Html.HiddenFor(x => x.UserDetails.id)      
+                   
                                            
-                                <div class="line">
-                                    <b>@Contract.V_User_Name:</b>
-                                    <span>@(Model.UserDetails.firstname + " " + Model.UserDetails.surname)</span>
+                              <div class="control-group">
+                                <label class="control-label">@Contract.V_User_Name:</label>
+                                    
+                                  <div class="controls">
+                                        @(Model.UserDetails.firstname + " " + Model.UserDetails.surname)
+                                  </div>
+                               </div>
+
+                                <div class="control-group">
+                                    <label class="control-label">@Contract.V_Template_Name</label>
+                                     <div class="controls">
+                                        <div class="input-append">
+                                        @if (!string.IsNullOrEmpty(templateName))
+                                        {
+                                            @templateName
+                                        }else{
+                                            @Html.DropDownListFor(x => x.Contract.TemplateId, templatesList, new { @id="ddlTemplate", @name="TemplateId",  @onchange="LoadForm()" })
+                                        }                                       
+
+                                        @*  <input type="button" value="Change" onclick="ModifyTemplate()" />*@
+                                        </div>
+                                       </div>
                                 </div>
 
-                                <div class="line">
-                                    <b>@Contract.V_Template_Name</b>
-                                    <span>
-                                        @templateName  <input type="button" value="Change" onclick="ModifyTemplate()" />
-                                    </span>
-                                    <span class="req">*</span>
-                                </div>
-
-                                @if (Model.Contract != null)
+                                if (Model.Contract != null)
                                 {
-                                    <div class="line">
-                                        <b>@Contract.V_Created_By</b>
-                                        <span>@(Model.Contract.User.firstname + " " + Model.Contract.User.surname)</span>                        
+                                   <div class="control-group">
+                                        <label class="control-label">@Contract.V_Created_By</label>
+                                         <div class="controls">
+                                            <div class="input-append">@(Model.Contract.User.firstname + " " + Model.Contract.User.surname)</div>
+                                          </div>                        
                                     </div>
 
-                                    <div class="line">
-                                        <b>@Contract.V_Created</b>
-                                        <span>@Model.Contract.Created</span>    
+                                    <div class="control-group">
+                                        <label class="control-label">@Contract.V_Created</label>
+                                         <div class="controls">
+                                            <div class="input-append">@Model.Contract.Created</div>
+                                             </div>    
                                     </div>
 
-                                    <div class="line">
-                                        <b>@Contract.V_Last_Updated</b>
-                                        <span>@((Model.Contract.User2 != null)? Model.Contract.Lastupdated.ToString() : "")</span>                        
+                                    <div class="control-group">
+                                        <label class="control-label">@Contract.V_Last_Updated</label>
+                                         <div class="controls">
+                                            <div class="input-append">@((Model.Contract.User2 != null)? Model.Contract.Lastupdated.ToString() : "")</div>
+                                          </div>                        
                                     </div>
-
-                                    <div class="line">
-                                        <b>@Contract.V_Last_Updated_By</b>
-                                        <span>@((Model.Contract.User2 != null)? Model.Contract.User2.firstname + " " + Model.Contract.User2.surname : "")</span>                        
+                                    <div class="control-group">
+                                        <label class="control-label">@Contract.V_Last_Updated_By</label>
+                                         <div class="controls">
+                                            <div class="input-append">@((Model.Contract.User2 != null)? Model.Contract.User2.firstname + " " + Model.Contract.User2.surname : "")</div>
+                                         </div>                        
                                     </div>
                                 }
 
                                 <input type="hidden" value="@contractId" id="ContractId" name="ContractId" />
                                 <input type="hidden" value="@userId" id="UserId" name="UserId" />
                                 <input type="hidden" value="@templateId" id="TemplateId" name="TemplateId" />
-
-                                <div class="line">
-                                    <label>&nbsp;</label>
-                                    @*<span><input type="submit" onclick="return ValidateForm()" value="@Contract.V_Save_Contract" /></span>*@
-                                    @if (contractId > 0)
+                                    
+                                  if (contractId > 0)
                                     {
-                                        <span><input type="button" value="Fill Contract Form" onclick=" OpenContract() " /></span>
-                                    }
-                                </div>
+                                      <div class="form-actions">
+                                        <button type="button" class="btn btn-success" onclick="OpenContract();"><i class="icon-ok icon-white"></i> 
+                                            @Contract.V_Fill_Contract_Form
+                                        </button>
+                                    </div> 
+                                } 
+                               
+                               <button type="button" class="btn btn-success" onclick="$('#frmContract').submit();"><i class="icon-ok icon-white"></i> 
+                                     @Contract.V_Save_Contract
+                               </button>
                            
-                        </div>
-                    </div>
+                      
              }
             </div>
         </div>
@@ -147,6 +177,11 @@
 
         function ModifyTemplate() {
             alert('implement me');
+        }
+
+        function LoadForm(obj) {
+            var templateid = $('#ddlTemplate').val();
+            $("#frmForm").attr("src", "/Admin/FormEditor/Preview/" + templateid);
         }
 
         function OpenContract() {

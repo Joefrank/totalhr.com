@@ -51,8 +51,8 @@ namespace totalhr.web.Controllers
 
         [AllowAnonymous]
         public ActionResult Login()
-        {           
-            return View();
+        {
+            return View(new LoginStruct { ReferringUrl = (Request.UrlReferrer != null)? Request.UrlReferrer.AbsoluteUri : "" });
         }
 
         private void LoadGlossaries()
@@ -140,6 +140,11 @@ namespace totalhr.web.Controllers
                 ViewBag.UserIsAdmin = clientUser.HasRole((int)Variables.Roles.CompanyAdmin);
                 ViewBag.IsUserLoggedIn = true;
                 ViewBag.UserName = clientUser.FullName;
+
+                if (!string.IsNullOrEmpty(userdetails.ReferringUrl))
+                {
+                    Response.Redirect(userdetails.ReferringUrl);
+                }
 
                 return View("Index", clientUser);
             }

@@ -57,6 +57,7 @@
   <div id="login">
     <!-- BEGIN LOGIN FORM -->
     <form id="loginform" class="form-vertical no-padding no-margin" method="post" action="/Account/LoginUser/">
+      <input type="hidden" name="hdnReferingUrl" id="hdnReferingUrl" value="@Model.ReferringUrl" />
       <div class="lock">
           <i class="icon-lock"></i>
       </div>

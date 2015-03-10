@@ -177,4 +177,13 @@
   <data name="V_Status" xml:space="preserve">
     <value>Status</value>
   </data>
+  <data name="V_Absence_Year" xml:space="preserve">
+    <value>Absence Year</value>
+  </data>
+  <data name="V_Holiday_Summary" xml:space="preserve">
+    <value>Annual Leave Summary</value>
+  </data>
+  <data name="V_Other_Absences" xml:space="preserve">
+    <value>Other Absences</value>
+  </data>
 </root>

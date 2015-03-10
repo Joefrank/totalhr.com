@@ -493,6 +493,8 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="AlbumId" Type="int" Nullable="false" />
           <Property Name="FileId" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Label" Type="nvarchar" MaxLength="255" />
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
@@ -4443,6 +4445,8 @@
           <NavigationProperty Name="File" Relationship="TotalHRModel.FK_GalleryPhoto_File" FromRole="GalleryPhoto" ToRole="File" />
           <NavigationProperty Name="GalleryAlbum" Relationship="TotalHRModel.FK_GalleryPhoto_GalleryAlbum" FromRole="GalleryPhoto" ToRole="GalleryAlbum" />
           <NavigationProperty Name="User" Relationship="TotalHRModel.FK_GalleryPhoto_User" FromRole="GalleryPhoto" ToRole="User" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Label" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_GalleryPhoto_File">
           <End Type="TotalHRModel.File" Role="File" Multiplicity="1" />
@@ -5557,6 +5561,8 @@
           <EntitySetMapping Name="GalleryPhotoes">
             <EntityTypeMapping TypeName="TotalHRModel.GalleryPhoto">
               <MappingFragment StoreEntitySet="GalleryPhoto">
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="Created" ColumnName="Created" />
                 <ScalarProperty Name="FileId" ColumnName="FileId" />

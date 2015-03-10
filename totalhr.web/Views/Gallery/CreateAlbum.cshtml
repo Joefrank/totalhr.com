@@ -1,5 +1,77 @@
-﻿@{
-    ViewBag.Title = "CreateAlbum";
+﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
+@using totalhr.Shared.Models;
+@using totalhr.Shared;
+
+@model GalleryAlbumInfo
+
+@{
+    ViewBag.Title = Gallery.V_Create_Album;
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Company/", Text = Common.V_Company, Title= Common.V_Company},
+        new BreadCrumbItem{Url = "/Gallery/", Text = Gallery.V_Gallery, Title= Gallery.V_Gallery},
+        new BreadCrumbItem{Url = "", Text = Gallery.V_Create_Album, Title= Gallery.V_Create_Album}
+    };
+
 }
 
-<h2>CreateAlbum</h2>
+@section pagetitle{
+   @Gallery.V_Create_Album
+}
+
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+
+<div class="row-fluid">
+    <div class="span12 sortable">
+        <!-- BEGIN SAMPLE FORMPORTLET-->
+    <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i>@Gallery.V_Album_Details</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+                <a href="javascript:;" class="icon-remove"></a>
+            </span>
+        </div>
+        <div class="widget-body">
+            <!-- BEGIN FORM-->
+                
+            @using (Html.BeginForm("CreateAlbum", "Gallery", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                <div class="danger"> 
+                @Html.ValidationSummary()
+                </div>
+
+                <div class="control-group">
+                    <label class="control-label">@Gallery.V_Album_Name</label>
+                
+                    <div class="controls">
+                        <div class="input-append">
+                                @Html.TextBoxFor(x => x.Name, new {@class="m-wrap medium", @placeholder=Gallery.V_Album_Name})
+                        </div>
+                    </div>
+                </div>
+                    
+                <div class="control-group">
+                    <label class="control-label">@Gallery.V_Description</label>
+
+                    <div class="controls">
+                        <div class="input-append">
+                            @Html.TextAreaFor(x => x.Description, new {@class="m-wrap medium", @placeholder=Gallery.V_Description})
+                        </div>
+                    </div>
+                </div>
+       
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @Absence.V_Create</button>
+                    <button type="button" class="btn btn-danger" onclick="NavigateTo('/Gallery/');"><i class="icon-remove icon-white"></i> @Common.V_Cancel</button>
+                </div>
+            }
+            <!-- END FORM-->
+        </div>
+    </div>    </div></div>

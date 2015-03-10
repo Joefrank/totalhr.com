@@ -14,8 +14,15 @@ namespace totalhr.data.Repositories.Implementation
     {
         public int AddTemplate(ContractTemplate template)
         {
-            Context.ContractTemplates.Add(template);
-            return Context.SaveChanges();
+            try
+            {
+                Context.ContractTemplates.Add(template);
+                return Context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
         }
 
         public UserContractData SaveContractData(ContractFillViewInfo model)

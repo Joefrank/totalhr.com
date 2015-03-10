@@ -170,6 +170,7 @@
     <Compile Include="Areas\Admin\Controllers\DepartmentController.cs" />
     <Compile Include="Areas\Admin\Controllers\DocumentController.cs" />
     <Compile Include="Areas\Admin\Controllers\FormEditorController.cs" />
+    <Compile Include="Areas\Admin\Controllers\GalleryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\TimeRecordingController.cs" />
     <Compile Include="Areas\Admin\Models\BreadCrumbItem.cs" />
@@ -196,6 +197,7 @@
     <Compile Include="Controllers\ChatApiController.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\CompanyController.cs" />
+    <Compile Include="Controllers\ContractController.cs" />
     <Compile Include="Controllers\Dependencies\Container.cs" />
     <Compile Include="Controllers\DocumentController.cs" />
     <Compile Include="Controllers\EmployeeController.cs" />
@@ -1861,6 +1863,7 @@
     <Content Include="Views\Gallery\CreateAlbum.cshtml" />
     <Content Include="Views\Gallery\EditAlbum.cshtml" />
     <Content Include="Views\Gallery\ViewAlbum.cshtml" />
+    <Content Include="Views\Gallery\UploadPhoto.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

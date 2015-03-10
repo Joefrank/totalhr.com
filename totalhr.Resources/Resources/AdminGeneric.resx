@@ -441,4 +441,7 @@
   <data name="V_Time_Recording_Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="V_Reports" xml:space="preserve">
+    <value>Reporting</value>
+  </data>
 </root>

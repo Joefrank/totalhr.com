@@ -208,9 +208,10 @@ namespace FormService.Implementation
 
             foreach (var item in dynJson)
             {
-                var tempArr = item.ToString().Split(':');
-
-                if (tempArr == null || tempArr.length != 2)
+                string[] tempArr = item.ToString().Split(':');
+               
+               
+                if (tempArr == null || tempArr.Count() != 2)
                 {
                     throw new Exception("Failed to save data. Error occured!");
                 }
