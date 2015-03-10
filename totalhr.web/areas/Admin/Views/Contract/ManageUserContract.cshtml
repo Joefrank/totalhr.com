@@ -25,7 +25,11 @@
         selTemplate = templateId.ToString(CultureInfo.InvariantCulture);        
         
         if(Model.TemplateList != null){
-            templateName = Model.TemplateList.FirstOrDefault(x => x.Id == templateId).Name;    
+            var firstOrDefault = Model.TemplateList.FirstOrDefault(x => x.Id == templateId);
+            if (firstOrDefault != null)
+            {
+                templateName = firstOrDefault.Name;
+            }
         }
     }
 
@@ -80,7 +84,7 @@
         }
        
 
-        @using (Html.BeginForm("SaveUserContract", "Contract", FormMethod.Post, new { id = "frmContract" }))
+        @using (Html.BeginForm("SaveUserContract", "Contract", FormMethod.Post, new { @id = "frmContract", @class = "form-horizontal" }))
              {
             
                      @Html.ValidationSummary()
@@ -92,22 +96,21 @@
                                 <label class="control-label">@Contract.V_User_Name:</label>
                                     
                                   <div class="controls">
-                                        @(Model.UserDetails.firstname + " " + Model.UserDetails.surname)
+                                      <input class="span4 " type="text" placeholder="@(Model.UserDetails.firstname + " " + Model.UserDetails.surname)" disabled />
                                   </div>
                                </div>
 
                                 <div class="control-group">
                                     <label class="control-label">@Contract.V_Template_Name</label>
                                      <div class="controls">
-                                        <div class="input-append">
+                                        <div>
                                         @if (!string.IsNullOrEmpty(templateName))
                                         {
-                                            @templateName
+                                            <input class="span4 " type="text" placeholder="@templateName" disabled />
                                         }else{
-                                            @Html.DropDownListFor(x => x.Contract.TemplateId, templatesList, new { @id="ddlTemplate", @name="TemplateId",  @onchange="LoadForm()" })
-                                        }                                       
-
-                                        @*  <input type="button" value="Change" onclick="ModifyTemplate()" />*@
+                                            @Html.DropDownListFor(x => x.TemplateId, templatesList, new { @id="ddlTemplate", @name="TemplateId",  @onchange="LoadForm()" })
+                                        }
+                                       
                                         </div>
                                        </div>
                                 </div>
@@ -117,27 +120,27 @@
                                    <div class="control-group">
                                         <label class="control-label">@Contract.V_Created_By</label>
                                          <div class="controls">
-                                            <div class="input-append">@(Model.Contract.User.firstname + " " + Model.Contract.User.surname)</div>
+                                            <input class="span4 " type="text" placeholder="@(Model.UserDetails.firstname + " " + Model.UserDetails.surname)" disabled="disabled" />
                                           </div>                        
                                     </div>
 
                                     <div class="control-group">
                                         <label class="control-label">@Contract.V_Created</label>
                                          <div class="controls">
-                                            <div class="input-append">@Model.Contract.Created</div>
-                                             </div>    
+                                             <input class="span4 " type="text" placeholder="@Model.Contract.Created" disabled="disabled" />
+                                         </div>    
                                     </div>
 
                                     <div class="control-group">
                                         <label class="control-label">@Contract.V_Last_Updated</label>
                                          <div class="controls">
-                                            <div class="input-append">@((Model.Contract.User2 != null)? Model.Contract.Lastupdated.ToString() : "")</div>
+                                            <input class="span4 " type="text" placeholder="@((Model.Contract.User2 != null)? Model.Contract.Lastupdated.ToString() : "")" disabled="disabled" />
                                           </div>                        
                                     </div>
                                     <div class="control-group">
                                         <label class="control-label">@Contract.V_Last_Updated_By</label>
                                          <div class="controls">
-                                            <div class="input-append">@((Model.Contract.User2 != null)? Model.Contract.User2.firstname + " " + Model.Contract.User2.surname : "")</div>
+                                            <input class="span4 " type="text" placeholder="@((Model.Contract.User2 != null)? Model.Contract.User2.firstname + " " + Model.Contract.User2.surname : "")" disabled="disabled" />
                                          </div>                        
                                     </div>
                                 }
@@ -145,21 +148,25 @@
                                 <input type="hidden" value="@contractId" id="ContractId" name="ContractId" />
                                 <input type="hidden" value="@userId" id="UserId" name="UserId" />
                                 <input type="hidden" value="@templateId" id="TemplateId" name="TemplateId" />
-                                    
-                                  if (contractId > 0)
-                                    {
-                                      <div class="form-actions">
-                                        <button type="button" class="btn btn-success" onclick="OpenContract();"><i class="icon-ok icon-white"></i> 
-                                            @Contract.V_Fill_Contract_Form
-                                        </button>
-                                    </div> 
-                                } 
-                               
-                               <button type="button" class="btn btn-success" onclick="$('#frmContract').submit();"><i class="icon-ok icon-white"></i> 
-                                     @Contract.V_Save_Contract
-                               </button>
-                           
-                      
+            
+                                <div class="form-actions">
+                                 @if (contractId > 0)
+                                 {
+                     
+                                         <button type="button" class="btn btn-success" onclick=" OpenContract(); "><i class="icon-ok icon-white"></i> 
+                                             @Contract.V_Fill_Contract_Form
+                                         </button>
+                     
+                                 }
+                                 else
+                                 {
+
+                                     <button type="button" class="btn btn-success" onclick=" $('#frmContract').submit(); "><i class="icon-ok icon-white"></i> 
+                                         @Contract.V_Save_Contract
+                                     </button>
+                                 }
+                                </div>
+
              }
             </div>
         </div>

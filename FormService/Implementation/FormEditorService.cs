@@ -217,13 +217,17 @@ namespace FormService.Implementation
                 }
                 else
                 {
+                    
+                    var key = tempArr[0].Replace("\"", string.Empty).Trim();
+                    var value = tempArr[1].Replace("\"", string.Empty).Trim();
+
                     //find related field
-                    var field = lstFormFields.FirstOrDefault(x => x.Name == tempArr[0].Trim());
+                    var field = lstFormFields.FirstOrDefault(x => x.Name == key);
 
                     if (field != null)
                     {
                         //validate input agains field
-                        var result = ValidateInputForField(field, tempArr[1]);
+                        var result = ValidateInputForField(field, value);
 
                         if (result.StateIsValid)
                         {
@@ -232,7 +236,7 @@ namespace FormService.Implementation
                                     Contractid = model.ContractId,
                                     Created = DateTime.Now,
                                     CreatedBy = model.CreatedBy,
-                                    Data = tempArr[1],
+                                    Data = value,
                                     FormId = model.FormId,
                                     FieldId = field.id
                                 });
@@ -248,13 +252,15 @@ namespace FormService.Implementation
                             {
                                 Itemid = -1,
                                 ErrorMessage =
-                                    string.Format("Field '{0}' is null in form {1}", tempArr[0], model.FormId)
+                                    string.Format("Field '{0}' is null in form {1}", key, model.FormId)
                             };
                     }
                 }
             }
 
             //if we get here, then validation has passed
+            //remove existing fields first before putting new ones.
+            _formRepository.DeleteUserContractFieldData(model.ContractId);
             var saveResult = _formRepository.SaveUserContractFieldData(lstFieldData);
 
             return new ResultInfo { Itemid = saveResult, ErrorMessage = (saveResult > 0)? "" : "Failed to save Field data." };

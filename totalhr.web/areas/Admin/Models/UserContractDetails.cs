@@ -14,5 +14,7 @@ namespace totalhr.web.Areas.Admin.Models
         public UserContract Contract { get; set; }
 
         public IEnumerable<ListItemStruct> TemplateList { get; set; }
+
+        public int TemplateId { get; set; }
     }
 }

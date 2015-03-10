@@ -54,11 +54,14 @@ namespace totalhr.web.Areas.Admin.Controllers
 
         private UserContractDetails GetUserContractDetails(int userId)
         {
+            var contract = _contractService.GetUserContract(userId);
+
             return new UserContractDetails
             {
                 UserDetails = _accountService.GetUser(userId),
-                Contract = _contractService.GetUserContract(userId),
-                TemplateList = _contractService.ListContractTemplates()
+                Contract = contract,
+                TemplateList = _contractService.ListContractTemplates(),
+                TemplateId = (contract != null)? contract.TemplateId : 0
             };
         }
 

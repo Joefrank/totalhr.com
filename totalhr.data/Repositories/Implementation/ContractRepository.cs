@@ -28,10 +28,12 @@ namespace totalhr.data.Repositories.Implementation
         public UserContractData SaveContractData(ContractFillViewInfo model)
         {
             UserContractData contractData = null;
+            UserContract contract = null;
 
             if (model.ContractId > 0)
             {
                 contractData = Context.UserContractDatas.FirstOrDefault(x => x.ContractId == model.ContractId && x.UserId == model.UserId);
+                contract = Context.UserContracts.FirstOrDefault(x => x.id == model.ContractId);
             }
 
             //if contract data not found or contract not existent.

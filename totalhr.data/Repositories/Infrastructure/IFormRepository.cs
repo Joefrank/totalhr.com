@@ -19,5 +19,7 @@ namespace totalhr.data.Repositories.Infrastructure
         List<EF.FormFieldJSon> GetFormFields(int formId);
 
         int SaveUserContractFieldData(List<UserContractFieldData> lstFieldData);
+
+        void DeleteUserContractFieldData(int contractId);
     }
 }

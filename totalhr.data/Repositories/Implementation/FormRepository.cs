@@ -68,5 +68,15 @@ namespace totalhr.data.Repositories.Implementation
             Context.UserContractFieldDatas.AddRange(lstFieldData);
             return Context.SaveChanges();
         }
+
+        public void DeleteUserContractFieldData(int contractId)
+        {
+            var range = Context.UserContractDatas.Where(x => x.ContractId == contractId);
+            if (range.Any())
+            {
+                Context.UserContractDatas.RemoveRange(range);
+                Context.SaveChanges();
+            }
+        }
     }
 }
