@@ -25,15 +25,20 @@ namespace totalhr.web.Controllers
         private readonly IGlossaryService _glossaryService;
         private readonly IAccountService _accountService;
         private readonly IMessagingService _messagingService;
+        private readonly IProfileService _profileService;
+        private readonly IContractService _contractService;
         
         private static readonly ILog Log = LogManager.GetLogger(typeof(AccountController));
 
-        public AccountController(IGlossaryService glossaryService, IAccountService accountService, IMessagingService messageService, IOAuthService authService) : base(authService)
+        public AccountController(IGlossaryService glossaryService, IAccountService accountService, IMessagingService messageService, 
+            IProfileService profileService, IOAuthService authService, IContractService contractService) : base(authService)
         {
             _glossaryService = glossaryService;
             _accountService = accountService;
             _messagingService = messageService;
             _messagingService.ReadSMTPSettings(SiteMailSettings);
+            _profileService = profileService;
+            _contractService = contractService;
         }
         
         public ActionResult Index()
@@ -351,6 +356,16 @@ namespace totalhr.web.Controllers
             }
 
             return RedirectToAction("AccessDenied", "Error");
+        }
+
+        public ActionResult Permissions()
+        {
+            return View(_profileService.GetUserProfiles(CurrentUser.UserId));
+        }
+
+        public ActionResult Contract()
+        {
+            return View(_contractService.GetUserContractDetails(CurrentUser.UserId));
         }
     }
 }

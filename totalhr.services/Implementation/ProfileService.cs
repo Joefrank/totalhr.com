@@ -58,5 +58,10 @@ namespace totalhr.services.Implementation
 
             return new ResultInfo { Itemid = profile.id, ErrorMessage = "" };
         }
+
+        public IEnumerable<ListItemStruct> GetUserProfiles(int userId)
+        {
+            return _profileRepos.GetUserPermissions(userId);
+        }
     }
 }

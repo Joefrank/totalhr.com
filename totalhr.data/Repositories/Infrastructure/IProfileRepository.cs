@@ -15,5 +15,7 @@ namespace totalhr.data.Repositories.Infrastructure
         IEnumerable<ListItemStruct> ListProfilesForSimple();
 
         IEnumerable<ListItemStruct> ListProfilesForSimple(int userId);
+
+        IEnumerable<ListItemStruct> GetUserPermissions(int userId);
     }
 }

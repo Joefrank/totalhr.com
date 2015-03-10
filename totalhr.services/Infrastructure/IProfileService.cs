@@ -21,5 +21,7 @@ namespace totalhr.services.Infrastructure
         Profile GetProfile(int id);
 
         ResultInfo CreateProfile(ProfileInfo info);
+
+        IEnumerable<ListItemStruct> GetUserProfiles(int userId);
     }
 }

@@ -1864,6 +1864,7 @@
     <Content Include="Views\Gallery\EditAlbum.cshtml" />
     <Content Include="Views\Gallery\ViewAlbum.cshtml" />
     <Content Include="Views\Gallery\UploadPhoto.cshtml" />
+    <Content Include="Views\Account\Permissions.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
