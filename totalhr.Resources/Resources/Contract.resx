@@ -244,4 +244,13 @@
   <data name="V_Fill_Contract_Form" xml:space="preserve">
     <value>Fill Contract Form</value>
   </data>
+  <data name="V_Contract_Details" xml:space="preserve">
+    <value>Contract Details</value>
+  </data>
+  <data name="V_Make_Enquiry" xml:space="preserve">
+    <value>Make Enquiry</value>
+  </data>
+  <data name="V_My_Contract" xml:space="preserve">
+    <value>My Contract</value>
+  </data>
 </root>

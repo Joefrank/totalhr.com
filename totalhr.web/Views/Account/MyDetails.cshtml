@@ -1,4 +1,5 @@
 ﻿@model totalhr.Shared.Models.UserPersonalInfo
+
 @using totalhr.Resources
 @using totalhr.Shared.Models
 @using  totalhr.data.EF
@@ -66,74 +67,130 @@
             </div>
 
             <div class="span6">
-                                <h4>@(Model.FirstName + " " + Model.Surname)
-                                     <br/><small>Frontend Developer</small>**contract**</h4>
-                                <table class="table table-borderless">
-                                    <tbody>
-                                    <tr>
-                                        <td class="span2">First Name :</td>
-                                        <td>
-                                            @Model.FirstName
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="span2">Last Name :</td>
-                                        <td>
-                                            @Model.Surname
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="span2">Country :</td>
-                                        <td>
-                                            @(countries.FirstOrDefault(x => x.Id == Model.CountryId).Term)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="span2">Birthday :</td>**contract**
-                                        <td>
-                                            13 july 1983
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="span2">Occupation :</td>**contract**
-                                        <td>
-                                            Web Developer
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="span2"> Email :</td>
-                                        <td>
-                                            @Model.Email
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="span2"> Mobile :</td>
-                                        <td>
-                                            @Model.MobilePhone
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <h4>About</h4>
+                    <h4>@(Model.FirstName + " " + Model.Surname)
+                            <br/><small>Software Developer</small></h4>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <td class="span2">Title :</td>
+                                <td>
+                                    @Model.Title
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="span2">First Name :</td>
+                                <td>
+                                    @Model.FirstName
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="span2">Other Name :</td>
+                                <td>
+                                    @Model.MiddleNames
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="span2">Last Name :</td>
+                                <td>
+                                    @Model.Surname
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="span2">Country :</td>
+                                <td>
+                                    @(countries.FirstOrDefault(x => x.Id == Model.CountryId).Term)
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="span2">Birthday :</td>**contract**
+                                <td>
+                                    13 july 1983
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="span2">Occupation :</td>**contract**
+                                <td>
+                                    Web Developer
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="span2"> Mobile :</td>
+                                <td>
+                                    @Model.MobilePhone
+                                </td>
+                            </tr>
 
-                                **add about to employe **<p class="push">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas ultrices, justo vel imperdiet gravida, urna ligula hendrerit nibh, ac cursus nibh sapien in purus. Mauris tincidunt tincidunt turpis in porta. Integer fermentum tincidunt auctor. Vestibulum ullamcorper, odio sed rhoncus imperdiet, enim elit sollicitudin orci, eget dictum leo mi nec lectus. Nam commodo turpis id lectus scelerisque vulputate. Integer sed dolor erat. Fusce erat ipsum, varius vel euismod sed, tristique et lectus? Etiam egestas fringilla enim, id convallis lectus laoreet at. Fusce purus nisi, gravida sed consectetur ut, interdum quis nisi. Quisque egestas nisl id lectus facilisis scelerisque? Proin rhoncus dui at ligula vestibulum ut facilisis ante sodales! Suspendisse potenti. Aliquam tincidunt sollicitudin sem nec ultrices. Sed at mi velit. Ut egestas tempor est, in cursus enim venenatis eget! Nulla quis ligula ipsum. Donec vitae ultrices dolor?</p>
-                               
+                            <tr>
+                                <td class="span2"> Email :</td>
+                                <td>
+                                    @Model.Email
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="span2">Username :</td>
+                                <td>
+                                    @Model.UserName
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="span2">Password :</td>
+                                <td>
+                                    @Model.Password
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td class="span2">Last Login :</td>
+                                <td>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="span2">PreferedLanguage:</td>
+                                <td>
+                                    @Model.PreferedLanguageId
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="span2">Department :</td>
+                                <td>
+                                    
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="span2">Chosen Culture :</td>
+                                <td>
+                                   
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                
+                    <h4>Address</h4>
+                    <div class="well">
+                        <address>
+                            @Model.Address1
+                            <br/>
+                            @Model.Address2
+                            <br/>
+                            @Model.City
+                            <br/>
+                            @Model.PostCode
+                            <br/>
+                            @(countries.FirstOrDefault(x => x.Id == Model.CountryId).Term)
+                            <br/>
+                            @Model.PostCode
+                            <br/>
+                            <abbr title="Phone">P:</abbr> @Model.PersonalPhone
 
-                               
-                                <h4>Address</h4>
-                                <div class="well">
-                                    <address>
-                                        <strong>@Model.Address1</strong><br/>
-                                        @Model.Address2<br/>
-                                        @(countries.FirstOrDefault(x => x.Id == Model.CountryId).Term), @Model.PostCode<br/>
-                                        <abbr title="Phone">P:</abbr> @Model.PersonalPhone
-                                    </address>
-                                    <address>
-                                        <strong>@(Model.FirstName + " " + Model.Surname)</strong><br/>
-                                        <a href="mailto:@Model.Email">@Model.Email</a>
-                                    </address>
-                                </div>
-                            </div>
+                        </address>
+                        <address>
+                            <strong>@(Model.FirstName + " " + Model.Surname)</strong><br/>
+                            <a href="mailto:@Model.Email">@Model.Email</a>
+                        </address>
+                    </div>
+                </div>
 
             <div class="span3">
                 <h4>Experience</h4>

@@ -34,9 +34,11 @@
             $scope.ContractId = @Model.ContractId;
             $scope.UserId = @Model.CTUserId;
             $scope.FormTypeId = @Model.FormTypeId;
+          
                 
             $scope.myForm = {
-                schema: $scope.mySchema
+                schema: $scope.mySchema,
+                data : @Html.Raw(Model.CTData)
             };
 
             $scope.ShowAlert = function() {

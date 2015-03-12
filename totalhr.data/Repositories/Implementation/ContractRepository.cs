@@ -28,14 +28,12 @@ namespace totalhr.data.Repositories.Implementation
         public UserContractData SaveContractData(ContractFillViewInfo model)
         {
             UserContractData contractData = null;
-            UserContract contract = null;
 
             if (model.ContractId > 0)
             {
                 contractData = Context.UserContractDatas.FirstOrDefault(x => x.ContractId == model.ContractId && x.UserId == model.UserId);
-                contract = Context.UserContracts.FirstOrDefault(x => x.id == model.ContractId);
             }
-
+           
             //if contract data not found or contract not existent.
             if (contractData == null)
             {
@@ -71,5 +69,24 @@ namespace totalhr.data.Repositories.Implementation
         {
             return this.Context.GetUserContractDetails(userId, contractId);
         }
+
+        public IEnumerable<EmployeeContractModel.FieldData> GetEmployeeContractDisplay(int employeeId)
+        {
+            var contract = this.Context.UserContracts.FirstOrDefault(x => x.Userid == employeeId);
+            IEnumerable<EmployeeContractModel.FieldData> query = null;
+
+            if (contract != null)
+            {
+                var fieldDatas = this.Context.UserContractFieldDatas;
+                var formFieldJSon = this.Context.FormFieldJSons;
+
+                query = from formField in formFieldJSon
+                            join fieldData in fieldDatas on formField.id equals fieldData.FieldId
+                        select new EmployeeContractModel.FieldData { Label = formField.DisplayName, Content = fieldData.Data };
+            }
+
+
+            return query;
+        } 
     }
 }

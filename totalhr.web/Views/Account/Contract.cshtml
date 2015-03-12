@@ -1,0 +1,75 @@
+﻿@using System.Globalization
+@using totalhr.Resources;
+@using H = totalhr.web.Helpers;
+@using AH = totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
+
+@model totalhr.Shared.Models.EmployeeContractModel
+
+@{
+    ViewBag.Title = Contract.V_My_Contract;    
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Account/", Text = Account.V_Dashboard, Title= Account.V_Dashboard},
+        new BreadCrumbItem{Url = "", Text = Contract.V_My_Contract, Title= Contract.V_My_Contract}
+    };
+}
+
+      
+    @section pagetitle{
+       @Contract.V_My_Contract
+    }
+
+    @section breadcrumb{
+        @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+    }
+
+    <div class="row-fluid">        
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i> @Contract.V_Contract_Details</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                    <a href="javascript:;" class="icon-remove"></a>
+                </span>
+            </div>
+            <div class="widget-body form-horizontal"> 
+                     
+                @foreach (var field in Model.FieldDataList)
+                {
+                    <div class="control-group">
+                        <label class="control-label">@field.Label:</label>
+                                    
+                        <div class="controls">
+                            <input class="span4 " type="text" placeholder="@field.Content" disabled />
+                        </div>
+                    </div>
+                }
+            
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-success" onclick="OpenContactForm()"><i class="icon-ok icon-white"></i> 
+                            @Contract.V_Make_Enquiry
+                        </button>
+                    </div>
+
+      
+            </div>
+        </div>
+    </div>
+
+  
+
+@section scripts{
+    <script type="text/javascript">
+
+        function OpenContactForm() {
+            alert('implement');
+        }
+        
+        $(document).ready(function () {
+           
+        });
+        
+    </script>
+}

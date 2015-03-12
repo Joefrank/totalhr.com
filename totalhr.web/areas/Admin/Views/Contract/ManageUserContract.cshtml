@@ -21,7 +21,7 @@
     {
         contractId = Model.Contract.id;
         templateId = Model.Contract.TemplateId;
-        source = System.Web.VirtualPathUtility.ToAbsolute(@"~/Admin/Contract/FillContract/" + userId); //string.Format(@" src=""~/Admin/Contract/FillContract/{0}"" ", Model.UserDetails.id));
+        source = System.Web.VirtualPathUtility.ToAbsolute(@"~/Admin/Contract/FillContract/" + userId); 
         selTemplate = templateId.ToString(CultureInfo.InvariantCulture);        
         
         if(Model.TemplateList != null){
@@ -182,10 +182,8 @@
 @section scripts{
     <script type="text/javascript">
 
-        function ModifyTemplate() {
-            alert('implement me');
-        }
-
+        var contractSource = '@source';
+        
         function LoadForm(obj) {
             var templateid = $('#ddlTemplate').val();
             $("#frmForm").attr("src", "/Admin/FormEditor/Preview/" + templateid);
@@ -195,42 +193,11 @@
             $("#frmForm").attr("src", "@source");
         }
 
-        //function SubmitForm() {
-        //    var val = $("#templateId option:selected").val();
-        //    if (val > 0) {
-        //        $("#frmForm").attr("src", "/Admin/FormEditor/Preview/" + val);
-        //        $('#formPreview').show();
-        //        $('#TemplateId').val(val);
-        //    } else {
-        //        alert($('#hdnErrorTemplateNotSelected').val());
-        //    }
-        //}
-
-        //function OpenContract() {
-        //    var val = $("#templateId option:selected").val();
-        //    if (val > 0) {
-        //        var url = '/Admin/Contract/FillContract/' + $('#UserId').val();
-        //        NavigateTo(url);
-        //    } else {
-        //        alert($('#hdnErrorTemplateNotSelected').val());
-        //    }
-        //}
+        $(document).ready(function () {
+            if (contractSource != '') {
+                $("#frmForm").attr("src", contractSource);
+            }
+        });
         
-        //function ValidateForm() {
-        //    var valTemplate = $("#templateId option:selected").val();
-        //    var userid = $('#UserId').val();
-            
-        //    if (valTemplate < 1 || valTemplate == "" || valTemplate == null) {
-        //        alert('You must select a template before saving contract!');
-        //        return false;
-        //    }
-            
-        //    if (userid == 0 || userid < 1 || userid == null) {
-        //        alert("No user was specified. Please specify a user!");
-        //        return false;
-        //    }
-
-        //    return true;
-        //}
     </script>
 }

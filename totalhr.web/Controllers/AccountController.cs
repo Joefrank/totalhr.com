@@ -365,7 +365,7 @@ namespace totalhr.web.Controllers
 
         public ActionResult Contract()
         {
-            return View(_contractService.GetUserContractDetails(CurrentUser.UserId));
+            return View(_contractService.GetEmployeeContractDisplay(CurrentUser.UserId));
         }
     }
 }

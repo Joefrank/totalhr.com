@@ -128,6 +128,14 @@ namespace totalhr.services.Implementation
             return _contractRepos.GetUserContractDetails(userId, contractId).FirstOrDefault();
         }
 
+        public EmployeeContractModel GetEmployeeContractDisplay(int employeeId)
+        {
+            return new EmployeeContractModel
+                {
+                    FieldDataList  = _contractRepos.GetEmployeeContractDisplay(employeeId)
+                };
+        }
+
         public FormInfo GetDefaultTemplate(int languageId)
         {
             return new FormInfo

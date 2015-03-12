@@ -71,12 +71,12 @@ namespace totalhr.data.Repositories.Implementation
 
         public void DeleteUserContractFieldData(int contractId)
         {
-            var range = Context.UserContractDatas.Where(x => x.ContractId == contractId);
-            if (range.Any())
-            {
-                Context.UserContractDatas.RemoveRange(range);
-                Context.SaveChanges();
-            }
+            var lstContractDataFields = Context.UserContractFieldDatas.Where(x => x.Contractid == contractId);
+
+            if (!lstContractDataFields.Any()) return;
+
+            Context.UserContractFieldDatas.RemoveRange(lstContractDataFields);
+            Context.SaveChanges();
         }
     }
 }

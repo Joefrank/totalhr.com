@@ -102,6 +102,7 @@
     <Compile Include="HttpCacheHelper.cs" />
     <Compile Include="Infrastructure\ICacheHelper.cs" />
     <Compile Include="Models\Attributes\AlwaysTrueAttribute.cs" />
+    <Compile Include="Models\EmployeeContractModel.cs" />
     <Compile Include="Models\FormInfo.cs" />
     <Compile Include="Models\GalleryAlbumInfo.cs" />
     <Compile Include="Models\GalleryPhotoInfo.cs" />
