@@ -3,39 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using totalhr.data.TimeRecordingSystem.Models;
 
 namespace totalhr.data.TimeRecordingSystem.EF
 {
     public partial class TimeRecording
     {
-        public TimeRecording() { }
-        public TimeRecording(int userId, DateTime startTime, DateTime endTime, Audit audit)
+        public TimeRecording(int userId, DateTime startTime, DateTime endTime, Int16 typeId, Int32? taskRef, Audit audit)
         {
-            this.Build(userId, startTime, endTime, audit);  
+            this.Build(userId, startTime, endTime,typeId,taskRef, audit);  
         }
 
-        public void Build(int userId, DateTime startTime, DateTime endTime, Audit audit)
+        public void Build(int userId, DateTime startTime, DateTime endTime, Int16 typeId, Int32? taskRef, Audit audit)
         {
             UserId = userId;
             StartTime = startTime;
             EndTime = endTime;
-            TypeId = 1;
-            FillAudit(audit);
+            TypeId = typeId;
+            TaskRefId = taskRef;
+            this.Audit = audit;
         }
 
 
-        public void FillAudit(Audit audit)
-        {
-            if (Id == 0)
-            {
-                AddedDate = audit.DateAdded;
-                AddedById = audit.AddedByUserId;
-            }
-            UpdatedDate = audit.DateUpdated;
-            UpdatedById = audit.UpdatedByUserId;
-        
-        }
 
 
     }

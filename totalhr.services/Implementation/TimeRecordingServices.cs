@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using totalhr.data.TimeRecordingSystem.EF;
-using totalhr.data.TimeRecordingSystem.Models;
 using totalhr.data.TimeRecordingSystem.Repositories.Infrastructure;
 using totalhr.services.Infrastructure;
 
@@ -21,7 +20,7 @@ namespace totalhr.services.Implementation
             _accountService = accountService;
         }
 
-        public bool RecordTimeForUser(long id, int userId, DateTime startTime, DateTime endTime, Audit audit)
+        public bool RecordTimeForUser(long id, int userId, DateTime startTime, DateTime endTime, Int16 typeId, Int32? taskRef, Audit audit)
         {
             //find if user exists
             if (_accountService.GetUser(userId) != null)
@@ -29,7 +28,7 @@ namespace totalhr.services.Implementation
                 //record time
                 if (id == 0)
                 {
-                    var timeRecording = new TimeRecording(userId, startTime, endTime, audit);
+                    var timeRecording = new TimeRecording(userId, startTime, endTime,typeId,taskRef, audit);
                     _timeRecordingRepository.Add(timeRecording);
                 }
                 else
@@ -37,7 +36,7 @@ namespace totalhr.services.Implementation
                     var timeRecording = this.GetById(id);
                     if (timeRecording != null)
                     {
-                        timeRecording.Build(userId, startTime, endTime, audit);
+                        timeRecording.Build(userId, startTime, endTime, typeId,taskRef, timeRecording.Audit.UpdateAudit(audit.UpdatedBy, audit.UpdatedDate));
                     }
                 }
                 _timeRecordingRepository.Save();
@@ -46,16 +45,19 @@ namespace totalhr.services.Implementation
             return false;
         }
 
-        public List<TimeRecording> Search(DateTime startDate, DateTime endDate, int skip, int take )
+
+        public List<TimeRecording> Search(DateTime startDate, DateTime endDate, int userId, int skip, int take)
         {
-            return _timeRecordingRepository.Search(startDate, endDate, skip, take).ToList();
-             
+            return _timeRecordingRepository.Search(startDate, endDate,userId, skip, take).ToList();
         }
 
         public TimeRecording GetById(Int64 id)
         {
             var entities= _timeRecordingRepository.FindBy(x => x.Id == id);
-            return entities.FirstOrDefault();
+            var tr= entities.FirstOrDefault();
+            var user = _accountService.GetUser(tr.Audit.AddedBy);
+            tr.Audit.AddedByUserName = user.firstname + " " + user.surname;
+            return tr;
         }
     }
 }

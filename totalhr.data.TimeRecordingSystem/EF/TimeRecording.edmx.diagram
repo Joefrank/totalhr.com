@@ -4,13 +4,13 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="51726a8f4d5e4b3f8349af9a19e33502" Name="Diagram1" ZoomLevel="99">
+      <Diagram DiagramId="51726a8f4d5e4b3f8349af9a19e33502" Name="Diagram1" ZoomLevel="100">
         <EntityTypeShape EntityType="TimeRecordingModel.Company" Width="1.5" PointX="1.5" PointY="20.125" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeRecordingModel.Department" Width="1.5" PointX="0.75" PointY="15.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeRecordingModel.Language" Width="1.5" PointX="5.75" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeRecordingModel.Note" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeRecordingModel.Role" Width="1.5" PointX="7.75" PointY="2.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="TimeRecordingModel.ScheduledNotification" Width="1.5" PointX="7.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="TimeRecordingModel.ScheduledNotification" Width="2" PointX="7.75" PointY="6.625" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeRecordingModel.TaskScheduler" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeRecordingModel.TimeRecording" Width="1.5" PointX="5.25" PointY="6.25" IsExpanded="true" />
         <EntityTypeShape EntityType="TimeRecordingModel.User" Width="1.5" PointX="0.75" PointY="3.5" IsExpanded="true" />
@@ -24,8 +24,6 @@
         <AssociationConnector Association="TimeRecordingModel.FK_TimeRecording_Notes" ManuallyRouted="false" />
         <AssociationConnector Association="TimeRecordingModel.FK_TaskScheduler_User" ManuallyRouted="false" />
         <AssociationConnector Association="TimeRecordingModel.FK_TaskScheduler_User1" ManuallyRouted="false" />
-        <AssociationConnector Association="TimeRecordingModel.FK_TaskScheduler_User2" ManuallyRouted="false" />
-        <AssociationConnector Association="TimeRecordingModel.FK_TaskScheduler_User3" ManuallyRouted="false" />
         <AssociationConnector Association="TimeRecordingModel.FK_TaskScheduler_User4" ManuallyRouted="false" />
         <AssociationConnector Association="TimeRecordingModel.FK_TimeRecording_TaskScheduler" ManuallyRouted="false" />
         <AssociationConnector Association="TimeRecordingModel.FK_TimeRecording_User" ManuallyRouted="false" />

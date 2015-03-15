@@ -100,9 +100,10 @@
     <Compile Include="Implementation\CompanyService.cs" />
     <Compile Include="Implementation\ContractService.cs" />
     <Compile Include="Implementation\GlossaryService.cs" />
+    <Compile Include="Implementation\TaskSchedulerService.cs" />
     <Compile Include="Implementation\TimeRecordingServices.cs" />
     <Compile Include="Infrastructure\IContractService.cs" />
-    <Compile Include="Infrastructure\ITimeRecordingServices.cs" />
+
     <Compile Include="Implementation\ProfileService.cs" />
     <Compile Include="Implementation\RoleService.cs" />
     <Compile Include="Infrastructure\ICompanyService.cs" />
@@ -110,6 +111,8 @@
     <Compile Include="Infrastructure\IGlossaryService.cs" />
     <Compile Include="Infrastructure\IProfileService.cs" />
     <Compile Include="Infrastructure\IRoleService.cs" />
+    <Compile Include="Infrastructure\ITaskSchedulerService.cs" />
+    <Compile Include="Infrastructure\ITimeRecordingServices.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

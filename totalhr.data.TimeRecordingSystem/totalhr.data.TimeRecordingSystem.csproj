@@ -50,6 +50,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EF\Audit.cs">
+      <DependentUpon>TimeRecording.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\Company.cs">
       <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
@@ -62,6 +65,8 @@
     <Compile Include="EF\Note.cs">
       <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\Partials\TaskScheduler.cs" />
+    <Compile Include="EF\Partials\User.cs" />
     <Compile Include="EF\Role.cs">
       <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
@@ -79,6 +84,8 @@
     <Compile Include="EF\TimeRecording.cs">
       <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\Partials\Audit.cs" />
+    <Compile Include="EF\Partials\TimeRecording.cs" />
     <Compile Include="EF\TimeRecording1.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -96,15 +103,15 @@
     <Compile Include="EF\UserRole.cs">
       <DependentUpon>TimeRecording.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Audit.cs" />
-    <Compile Include="EF\Partials\TimeRecording.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EF\TimeRecording.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TimeRecording.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\Implementation\TaskSchedulerRepository.cs" />
     <Compile Include="Repositories\Implementation\TimeRecordingRepository.cs" />
+    <Compile Include="Repositories\Infrastructure\ITaskSchedulerRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ITimeRecordingRepository.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -135,7 +142,9 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\totalhr.data\totalhr.data.csproj">
       <Project>{f5a3d97a-a1b9-463a-850e-23cf6e1fc488}</Project>

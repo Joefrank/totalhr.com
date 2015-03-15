@@ -82,6 +82,8 @@ namespace totalhr.web.Controllers.Dependencies
             ninjectKernel.Bind<IProfileRepository>().To<ProfileRepository>();
             ninjectKernel.Bind<IRoleService>().To<RoleService>();
             ninjectKernel.Bind<IRoleRepository>().To<RoleRepository>();
+            ninjectKernel.Bind<ITaskSchedulerRepository>().To<TaskSchedulerRepository>();
+            ninjectKernel.Bind<ITaskSchedulerService>().To<TaskSchedulerService>();
             ninjectKernel.Bind<IContractRepository>().To<ContractRepository>();
             ninjectKernel.Bind<IContractTemplateRepository>().To<ContractTemplateRepository>();
             ninjectKernel.Bind<IContractService>().To<ContractService>();

@@ -13,8 +13,8 @@ namespace totalhr.data.TimeRecordingSystem.Repositories.Implementation
     public class TimeRecordingRepository : GenericRepository<TimeRecordingEntities, TimeRecording>, ITimeRecordingRepository
     {
         private TimeRecordingEntities _dbContext = new TimeRecordingEntities();
-    //public class TimeRecordingRepository :  ITimeRecordingRepository
-    
+        //public class TimeRecordingRepository :  ITimeRecordingRepository
+
         //public TimeRecording Add (TimeRecording entity)
         //{
         //    using(var context = new TimeRecordingEntities())
@@ -34,15 +34,26 @@ namespace totalhr.data.TimeRecordingSystem.Repositories.Implementation
 
         }
 
-        public IList<TimeRecording> Search(DateTime startDate, DateTime endDate, int skip, int take )
+
+        public IList<TimeRecording> Search(DateTime startDate, DateTime endDate, int userId, int skip, int take)
         {
-            
-                var results = _dbContext.TimeRecordings.Where(x => x.StartTime <= startDate && x.EndTime >= endDate)
-                    .OrderBy(x => x.Id)
-                    .Skip(skip)
-                    .Take(take);
-                return results.Count() > 0 ? results.ToList() : new List<TimeRecording>();
-            
+            var results = _dbContext.TimeRecordings.Where(x => x.StartTime <= startDate && x.EndTime >= endDate);
+            if (userId > 0) results = results.Where(x => x.UserId == userId);
+                   results= results.OrderBy(x => x.Id)
+                   .Skip(skip)
+                   .Take(take);
+                   return results.Count() > 0 ? SetUserAuditAddedByName(results.ToList()) : new List<TimeRecording>();
+        }
+
+        private IList<TimeRecording> SetUserAuditAddedByName(IList<TimeRecording> results)
+        {
+            var addedByUserIds = results.Select(x=> x.Audit.AddedBy).ToList();
+            var users = _dbContext.Users.Where(x => addedByUserIds.Contains(x.id)).ToList();
+            results.ToList().ForEach(result =>
+            {
+                result.Audit.AddedByUserName = users.FirstOrDefault(x => x.id == result.Audit.AddedBy).FullName;
+            });
+            return results;
         }
     }
 }

@@ -144,7 +144,7 @@ ClientBin/
 *~
 *.dbmdl
 *.dacpac
-*FileListAbsolute.txt
+*.FileListAbsolute.txt
 *.dbproj.schemaview
 *.pfx
 *.publishsettings

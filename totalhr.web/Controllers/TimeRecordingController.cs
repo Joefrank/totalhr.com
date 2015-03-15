@@ -1,20 +1,22 @@
-﻿using System;
+﻿using Authentication.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using totalhr.data.TimeRecordingSystem.Models;
+using totalhr.data.TimeRecordingSystem.EF;
 using totalhr.services.Infrastructure;
-using totalhr.web.Areas.TimeRecording.ViewModels;
+using totalhr.web.ViewModels;
+using totalhr.web.Controllers;
 
-namespace totalhr.web.Areas.TimeRecording.Controllers
+namespace totalhr.web.Controllers
 {
-    public class TimeRecordingController : Controller
+    public class TimeRecordingController : BaseController
     {
-        public ITimeRecordingServices _timeRecordingService { get; set; }
-        public IAccountService _accountsService { get; set; }
+        private ITimeRecordingServices _timeRecordingService;
+        private IAccountService _accountsService;
 
-        public TimeRecordingController(ITimeRecordingServices timeRecordingService, IAccountService accountService)
+        public TimeRecordingController(ITimeRecordingServices timeRecordingService, IAccountService accountService, IOAuthService authService):base(authService)
         {
             _timeRecordingService = timeRecordingService;
             _accountsService = accountService;
@@ -28,16 +30,14 @@ namespace totalhr.web.Areas.TimeRecording.Controllers
         }
 
         [HttpGet]
-        public ActionResult RecordTime(long id = 0)
+        public ActionResult RecordTime(long id = 0, Int16 typeId = 1, Int32? taskRef = null)
         {
             var vm = new TimeRecordingVM();
             if (id == 0)
             {
-                //Get User Id & Company Id
-                var user = _accountsService.GetUser(59);
                 vm = new TimeRecordingVM()
                 {
-                    UserId = user.id,
+                    UserId = CurrentUser.UserId,
                     StartTime = DateTime.Now,
                     EndTime = DateTime.Now
                 };
@@ -46,6 +46,8 @@ namespace totalhr.web.Areas.TimeRecording.Controllers
             {
                 vm = new TimeRecordingVM(_timeRecordingService.GetById(id));
             }
+            vm.TaskRef = taskRef;
+            vm.TypeId = typeId;
             return View(vm);
         }
 
@@ -57,17 +59,23 @@ namespace totalhr.web.Areas.TimeRecording.Controllers
                 var isSuccess = false;
                 if (vm.Id == 0)
                 {
-                    isSuccess = _timeRecordingService.RecordTimeForUser(vm.Id,vm.UserId, vm.StartTime, vm.EndTime,
-                       new Audit() { AddedByUserId = vm.UserId, DateAdded = DateTime.Now });
-                if (isSuccess)
-                    return RedirectToAction("Index", "TimeRecording");
+                    isSuccess = _timeRecordingService.RecordTimeForUser(vm.Id,vm.UserId, vm.StartTime, vm.EndTime, vm.TypeId, vm.TaskRef,
+                       new Audit() { AddedBy = vm.UserId, AddedDate = DateTime.Now });
+                    if (isSuccess)
+                    {
+                        if (vm.TaskRef != null) return RedirectToAction("Details", "Task", new {id=vm.TaskRef });
+                        return RedirectToAction("Index", "TimeRecording");
+                    }
                 }
                 else
                 {
-                    isSuccess = _timeRecordingService.RecordTimeForUser(vm.Id,vm.UserId, vm.StartTime, vm.EndTime,
-                       new Audit() { UpdatedByUserId = vm.UserId, DateUpdated = DateTime.Now });
+                    isSuccess = _timeRecordingService.RecordTimeForUser(vm.Id,vm.UserId, vm.StartTime, vm.EndTime, vm.TypeId, vm.TaskRef,
+                       new Audit().UpdateAudit( vm.UserId, DateTime.Now ));
                     if (isSuccess)
+                    {
+                        if (vm.TaskRef != null) return RedirectToAction("Details", "Task", new { id = vm.TaskRef });
                         return RedirectToAction("Details", "TimeRecording", new { id = vm.Id });
+                    }
                 }
             }
             return View(vm);
@@ -78,7 +86,7 @@ namespace totalhr.web.Areas.TimeRecording.Controllers
         {
             var vm = new SearchVM();
             vm.SetUpInitialSearch();
-            var searchResults = _timeRecordingService.Search(vm.StartDate, vm.EndDate, 0, vm.ResultsPerPage);
+            var searchResults = _timeRecordingService.Search(vm.StartDate, vm.EndDate,base.CurrentUser.UserId,0, vm.ResultsPerPage);
             vm.Results = TimeRecordingDetailsVM.Build(searchResults);
             return View(vm);
         }
@@ -86,7 +94,7 @@ namespace totalhr.web.Areas.TimeRecording.Controllers
         [HttpPost]
         public ActionResult Search(SearchVM vm)
         {
-            var searchResults = _timeRecordingService.Search(vm.StartDate, vm.EndDate, vm.PageNumber * vm.ResultsPerPage, vm.ResultsPerPage);
+            var searchResults = _timeRecordingService.Search(vm.StartDate, vm.EndDate,base.CurrentUser.UserId, vm.PageNumber * vm.ResultsPerPage, vm.ResultsPerPage);
             vm.Results = TimeRecordingDetailsVM.Build(searchResults);
             return View(vm);
         }

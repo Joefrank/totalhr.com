@@ -21,3 +21,17 @@
 @section breadcrumb{
     @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
 }
+
+﻿@{
+    ViewBag.Title = "Task Scheduler Home";
+}
+
+<h2>Index</h2>
+
+<div>
+    @Html.ActionLink("Add","Record")
+</div>
+<div>
+    @Html.ActionLink("Search / Edit Recorded Tasks", "Search")
+</div>
+

@@ -1,6 +1,6 @@
 ﻿
 
-create proc GetUserListForAdmin
+create proc [dbo].[GetUserListForAdmin]
 	@showactive bit = null,
 	@viewinglanguageid int 
 as

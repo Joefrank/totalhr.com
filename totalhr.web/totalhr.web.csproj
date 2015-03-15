@@ -173,13 +173,10 @@
     <Compile Include="Areas\Admin\Controllers\GalleryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\TimeRecordingController.cs" />
-    <Compile Include="Areas\Admin\Models\BreadCrumbItem.cs" />
-    <Compile Include="Areas\Admin\Models\UserContractDetails.cs" />
-    <Compile Include="Areas\Admin\Models\UserContractFormDetails.cs" />
-    <Compile Include="Areas\TimeRecording\Controllers\TimeRecordingController.cs" />
-    <Compile Include="Areas\TimeRecording\ViewModels\SearchVM.cs" />
-    <Compile Include="Areas\TimeRecording\ViewModels\TimeRecordingDetailsVM.cs" />
-    <Compile Include="Areas\TimeRecording\ViewModels\TimeRecordingVM.cs" />
+    <Compile Include="Controllers\TimeRecordingController.cs" />
+    <Compile Include="ViewModels\SearchVM.cs" />
+    <Compile Include="ViewModels\TimeRecordingDetailsVM.cs" />
+    <Compile Include="ViewModels\TimeRecordingVM.cs" />
     <Compile Include="Areas\Admin\Controllers\ProfileController.cs" />
     <Compile Include="Areas\Admin\Controllers\RoleController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
@@ -220,6 +217,9 @@
     <Compile Include="Helpers\PaginationHelper.cs" />
     <Compile Include="Models\UserAccountStruct.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\TaskSchedulerSearchVm.cs" />
+    <Compile Include="ViewModels\TaskSchedulerDetailsVM.cs" />
+    <Compile Include="ViewModels\TaskSchedulerVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Admin\Content\assets\bootstrap\css\bootstrap-fileupload.css" />
@@ -1611,6 +1611,10 @@
     <Content Include="Views\Document\ShareComplete.cshtml" />
     <Content Include="Views\Account\ProfilePreview.cshtml" />
     <Content Include="Views\Shared\_DefaultLayout.cshtml" />
+    <Content Include="Views\Task\Record.cshtml" />
+    <Content Include="Views\Task\Search.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
+    <Content Include="Views\Task\Details.cshtml" />
     <Content Include="Scripts\Site\assets\.DS_Store" />
     <Content Include="Scripts\Site\assets\bootstrap-colorpicker\.DS_Store" />
     <Content Include="Scripts\Site\assets\bootstrap-colorpicker\less\colorpicker.less" />
@@ -1852,7 +1856,6 @@
     <Content Include="Views\Structure\Index.cshtml" />
     <Content Include="Views\Payroll\Index.cshtml" />
     <Content Include="Views\Absence\Index.cshtml" />
-    <Content Include="Views\Task\Index.cshtml" />
     <Content Include="Views\Absence\CreateAbsence.cshtml" />
     <Content Include="Views\Company\Index.cshtml" />
     <Content Include="Views\Company\Structure.cshtml" />
@@ -1866,6 +1869,7 @@
     <Content Include="Views\Gallery\UploadPhoto.cshtml" />
     <Content Include="Views\Account\Permissions.cshtml" />
     <Content Include="Views\Account\Contract.cshtml" />
+    <Content Include="Views\Shared\RecordTime.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

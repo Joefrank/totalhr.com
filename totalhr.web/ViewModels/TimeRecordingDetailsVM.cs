@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using TRData = totalhr.data.TimeRecordingSystem.EF;
 
-namespace totalhr.web.Areas.TimeRecording.ViewModels
+namespace totalhr.web.ViewModels
 {
     public class TimeRecordingDetailsVM : TimeRecordingVM
     {
@@ -17,7 +17,7 @@ namespace totalhr.web.Areas.TimeRecording.ViewModels
             get 
             {
                 var timeDiff = EndTime.Subtract(StartTime);
-                return string.Concat(timeDiff.Days, "days ", timeDiff.Hours, "hrs ",timeDiff.Minutes , "mins ",timeDiff.Seconds , "secs ");
+                return string.Concat(timeDiff.Days, " days ", timeDiff.Hours, " hrs ",timeDiff.Minutes , " mins ",timeDiff.Seconds , " secs ");
             } 
         }
 
@@ -27,7 +27,7 @@ namespace totalhr.web.Areas.TimeRecording.ViewModels
         {
             if(entity != null)
             {
-                this.AddedByUser = entity.AddedByUser.firstname + " " + entity.AddedByUser.surname;
+                this.AddedByUser = entity.Audit.AddedByUserName;
                 this.TimeRecordingType = entity.TimeRecordingType.Type;
             }
         }
