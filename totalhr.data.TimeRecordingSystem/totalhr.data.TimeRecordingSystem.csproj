@@ -124,7 +124,6 @@
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
     <None Include="EF\TimeRecording.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>TimeRecording.Context.cs</LastGenOutput>
@@ -138,6 +137,7 @@
       <DependentUpon>TimeRecording.edmx</DependentUpon>
       <LastGenOutput>TimeRecording1.cs</LastGenOutput>
     </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

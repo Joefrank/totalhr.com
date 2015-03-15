@@ -57,5 +57,26 @@ namespace totalhr.data.Repositories.Implementation
             this.Context.FormFieldJSons.RemoveRange(Context.FormFieldJSons.Where(x => x.FormId == formId));
             this.Context.FormFieldValidationRules.RemoveRange(Context.FormFieldValidationRules.Where(x => x.FormId == formId));
         }
+
+        public List<EF.FormFieldJSon> GetFormFields(int formId)
+        {
+            return Context.FormFieldJSons.Where(x => x.FormId == formId).ToList();
+        }
+
+        public int SaveUserContractFieldData(List<UserContractFieldData> lstFieldData)
+        {
+            Context.UserContractFieldDatas.AddRange(lstFieldData);
+            return Context.SaveChanges();
+        }
+
+        public void DeleteUserContractFieldData(int contractId)
+        {
+            var lstContractDataFields = Context.UserContractFieldDatas.Where(x => x.Contractid == contractId);
+
+            if (!lstContractDataFields.Any()) return;
+
+            Context.UserContractFieldDatas.RemoveRange(lstContractDataFields);
+            Context.SaveChanges();
+        }
     }
 }

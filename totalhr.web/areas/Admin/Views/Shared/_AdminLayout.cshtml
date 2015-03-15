@@ -99,7 +99,7 @@
    <!-- END CONTAINER -->
    <!-- BEGIN FOOTER -->
    <div id="footer">
-       2015 &copy; @AdminGeneric.V_TotalHR_Signature .
+       2015 &copy; @AdminGeneric.V_TotalHR_Signature.
       <div class="span pull-right">
          <span class="go-top"><i class="icon-arrow-up"></i></span>
       </div>
@@ -113,7 +113,7 @@
    <!-- ie8 fixes -->
    <!--[if lt IE 9]>
    <script src="/Scripts/Site/js/excanvas.js"></script>
-   <script src="/Scripts//Sitejs/respond.js"></script>
+   <script src="/Scripts/Site/js/respond.js"></script>
    <![endif]-->
    <script type="text/javascript" src="/Scripts/Site/assets/chosen-bootstrap/chosen/chosen.jquery.min.js"></script>
    <script type="text/javascript" src="/Scripts/Site/assets/uniform/jquery.uniform.min.js"></script>
@@ -128,7 +128,7 @@
     @Scripts.Render("~/Scripts/Site/common.js")
     @RenderSection("scripts", required: false)
 
-    <div id="overlay-mask" style="display:none"></div>
+    <div id="overlay-mask" style="display:none;" onclick="ClosePopup('dvPopup');"></div>
 
     <div id="dvPopup" style="display:none;"> 
         <iframe id="ipopup"></iframe>       

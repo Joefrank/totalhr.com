@@ -1,0 +1,51 @@
+﻿@using totalhr.Resources
+@using AH = totalhr.web.Areas.Admin.Helpers
+@using totalhr.web.Areas.Admin.Models
+@using totalhr.web.Helpers;
+
+
+@{
+    ViewBag.Title = Common.V_Company;
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "", Text = Common.V_Company, Title= Common.V_Company}
+    };
+     
+}
+
+@section pagetitle{
+   @Common.V_Company
+}
+
+@section breadcrumb{
+    @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+<div class="row-fluid">
+    <p>
+        @Common.V_Company_Intro
+    </p>
+</div>
+<div class="row-fluid">
+
+     <a class="icon-btn span2" href="/Company/Structure/">
+        <i class="icon-group"></i>
+        <div>@Common.V_Organization_Chart</div>
+    </a>
+
+    <a class="icon-btn span2" href="/Company/EmployeeDirectory/">
+        <i class="icon-group"></i>
+        <div>@Common.V_Employee_Directory</div>
+    </a>
+
+    <a class="icon-btn span2" href="/Company/Departments/">
+        <i class="icon-group"></i>
+        <div>@Common.V_Departments</div>
+    </a>
+
+    <a class="icon-btn span2" href="/Company/Gallery/">
+        <i class="icon-group"></i>
+        <div>@Account.V_Image_Gallery</div>
+    </a>
+   
+</div>

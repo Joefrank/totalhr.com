@@ -43,6 +43,21 @@ namespace totalhr.data.Repositories.Implementation
                      select new ListItemStruct { Id = p.id, Name = p.Name };
                          
         }
+
+        public IEnumerable<ListItemStruct> GetUserPermissions(int userId)
+        {
+
+            return from p in
+                       Context.Profiles.Where(x =>
+                           (
+                           from up in Context.UserProfiles
+                           where up.UserId == userId
+                           select up.ProfileId
+                           ).Contains(x.id)
+                       )
+                   select new ListItemStruct { Id = p.id, Name = p.Name };
+
+        }
     }
 }
  

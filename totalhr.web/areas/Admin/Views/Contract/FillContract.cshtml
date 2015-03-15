@@ -34,9 +34,11 @@
             $scope.ContractId = @Model.ContractId;
             $scope.UserId = @Model.CTUserId;
             $scope.FormTypeId = @Model.FormTypeId;
+          
                 
             $scope.myForm = {
-                schema: $scope.mySchema
+                schema: $scope.mySchema,
+                data : @Html.Raw(Model.CTData)
             };
 
             $scope.ShowAlert = function() {
@@ -55,14 +57,14 @@
                             FormTypeId : $scope.FormTypeId,
                             Data: JSON.stringify(formData.data)
                         },
-                        function(msg) {
-                            var message = msg.Message;
-                            alert(msg.Message);
+                        function(data) {
+                            var message = data.Message;
+                            alert(message);
                             $scope.errorMessage = '';
                         },
                         function(data, response) {
-                            alert(data.Message);
-                            $scope.errorMessage = data.Message;
+                            alert($('#hdnError').val());
+                            $scope.errorMessage = $('#hdnError').val();
                         }
                     );
 

@@ -1,0 +1,70 @@
+﻿@using totalhr.Resources
+@using AH = totalhr.web.Areas.Admin.Helpers
+@using totalhr.web.Areas.Admin.Models
+@using totalhr.web.Helpers;
+
+@model List<totalhr.data.EF.Department>
+
+@{
+    ViewBag.Title = Common.V_Company_Departments;
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Company/", Text = Common.V_Company, Title= Common.V_Company},
+        new BreadCrumbItem{Url = "", Text = Common.V_Company_Departments, Title= Common.V_Company_Departments}
+    };
+     
+}
+
+@section pagetitle{
+   @Common.V_Company_Departments
+}
+
+@section breadcrumb{
+    @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+<div class="row-fluid">
+   <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i>@Common.V_Department_List</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+            </span>
+        </div>
+        <div class="widget-body"> 
+
+           
+            <table class="table table-striped table-bordered" id="sample_1">
+                <thead>
+                    <tr>
+                       <th>@Common.V_Department_Name</th> 
+                        <th>@Common.V_Department_Description</th>
+                        <th>@Common.V_Line_Manager</th>
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var department in Model)
+                    {
+                    <tr class="odd gradeX">                       
+                        <td>
+                            @department.Name
+                        </td>
+                        <td>
+                           @department.Description
+                        </td>
+                        <td>
+                             @(department.User != null ? department.User.firstname   + " " + department.User.surname : "") 
+                        </td>
+                       
+                    </tr> 
+           
+                    }
+                </tbody>
+            </table>
+          
+           
+        </div>
+    </div>
+</div>

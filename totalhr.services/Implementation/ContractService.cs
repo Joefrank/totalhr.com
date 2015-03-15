@@ -13,8 +13,8 @@ namespace totalhr.services.Implementation
 {
     public class ContractService : IContractService
     {
-        private IContractRepository _contractRepos;
-        private IContractTemplateRepository _templateRepos;
+        private readonly IContractRepository _contractRepos;
+        private readonly IContractTemplateRepository _templateRepos;
 
         public ContractService(IContractRepository contractRepos, IContractTemplateRepository templateRepos)
         {
@@ -126,6 +126,14 @@ namespace totalhr.services.Implementation
         public GetUserContractDetails_Result GetUserContractDetails(int userId, int? contractId = null)
         {
             return _contractRepos.GetUserContractDetails(userId, contractId).FirstOrDefault();
+        }
+
+        public EmployeeContractModel GetEmployeeContractDisplay(int employeeId)
+        {
+            return new EmployeeContractModel
+                {
+                    FieldDataList  = _contractRepos.GetEmployeeContractDisplay(employeeId)
+                };
         }
 
         public FormInfo GetDefaultTemplate(int languageId)

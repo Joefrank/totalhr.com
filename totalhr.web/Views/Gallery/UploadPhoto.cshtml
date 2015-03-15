@@ -1,0 +1,54 @@
+﻿@using totalhr.Resources
+
+@{
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+}
+
+@section head2{
+    <h2>@Gallery.V_Photo_Upload</h2>
+}<div id="dvUpload" class="control-group">
+   <br/>
+    <div class="controls">
+        <div class="fileupload fileupload-new" data-provides="fileupload">
+            <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                <img id="imgContainer" src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+            </div>
+            <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+            <div>
+                <span class="btn btn-file"><span class="fileupload-new">Select image</span>
+                    <span class="fileupload-exists">Change</span>
+                    <input id="uploadImage" type="file" name="myPhoto" onchange="PreviewImage();" />
+                </span>
+
+                <button type="submit" class="btn btn-warning" onclick="">
+                    <i class="icon-plus icon-white"></i> Upload
+                </button>
+            </div>
+        </div>
+   
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-8">
+        <label class="control-label">Planets and Satellites</label>
+        <input id="input-24" type="file" multiple=true class="file-loading">
+    </div>
+    <div class="col-sm-4">
+        <div class="alert alert-info small">Set maximum file upload size to 100 KB. Display preview on load with preset files/images and captions with <code>overwriteInitial</code> set to <code>false</code>. So the initial preview is always displayed when additional files are overwritten (useful for multiple upload) scenario.</div>   
+
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function PreviewImage() {
+        var oFReader = new FileReader();
+        oFReader.readAsDataURL(document.getElementById("uploadImage").files[0]);
+
+        oFReader.onload = function (oFREvent) {
+            document.getElementById("imgContainer").src = oFREvent.target.result;
+        };
+    };
+
+</script>

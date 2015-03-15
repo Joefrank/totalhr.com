@@ -93,31 +93,31 @@
       <HintPath>..\packages\AutoMapper.3.2.1\lib\net40\AutoMapper.Net4.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework">
-      <HintPath>..\totalhr.web\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer">
-      <HintPath>..\totalhr.web\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="log4net">
       <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
-      <HintPath>..\totalhr.web\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
-    <Reference Include="Ninject">
-      <HintPath>..\totalhr.web\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
     </Reference>
     <Reference Include="Ninject.Web.Common">
-      <HintPath>..\totalhr.web\packages\Ninject.Web.Common.3.2.2.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
     </Reference>
     <Reference Include="Ninject.Web.Mvc">
-      <HintPath>..\totalhr.web\packages\Ninject.MVC3.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+      <HintPath>..\packages\Ninject.MVC3.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web" />
@@ -127,10 +127,19 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
     <Reference Include="WebActivatorEx">
-      <HintPath>..\totalhr.web\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
+      <HintPath>..\packages\WebActivatorEx.2.0.6\lib\net40\WebActivatorEx.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EF\Absence.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\AbsenceReply.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\AbsenceSettingField.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\Calendar.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
@@ -141,6 +150,15 @@
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\CalEventReminderType.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\ChatMessage.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\ChatRoom.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\ChatRoomUser.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Company.cs">
@@ -230,6 +248,12 @@
     <Compile Include="EF\FormFieldValidationRule.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\GalleryAlbum.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\GalleryPhoto.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\GetCompanyFoldersByUser_Result.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
@@ -252,6 +276,12 @@
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Language.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Note.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\Notification.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\Profile.cs">
@@ -278,13 +308,28 @@
     <Compile Include="EF\SplitCSV_Result.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\TaskScheduler.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TimeRecording.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\TimeRecordingType.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\User.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\UserAbsenceFieldData.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\UserContract.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\UserContractData.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\UserContractFieldData.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\UserProfile.cs">
@@ -304,8 +349,10 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\Implementation\AbsencesRepository.cs" />
     <Compile Include="Repositories\Implementation\CalendarEventRepository.cs" />
     <Compile Include="Repositories\Implementation\CalendarRepository.cs" />
+    <Compile Include="Repositories\Implementation\ChatRepository.cs" />
     <Compile Include="Repositories\Implementation\CompanyDocumentRepository.cs" />
     <Compile Include="Repositories\Implementation\CompanyRepository.cs" />
     <Compile Include="Repositories\Implementation\ContractRepository.cs" />
@@ -313,14 +360,17 @@
     <Compile Include="Repositories\Implementation\EmailTemplateRepository.cs" />
     <Compile Include="Repositories\Implementation\FileRepository.cs" />
     <Compile Include="Repositories\Implementation\FormRepository.cs" />
+    <Compile Include="Repositories\Implementation\GalleryRepository.cs" />
     <Compile Include="Repositories\Implementation\GlossaryRepository.cs" />
     <Compile Include="Repositories\Implementation\GenericRepository.cs" />
     <Compile Include="Repositories\Implementation\LanguageRepository.cs" />
     <Compile Include="Repositories\Implementation\ProfileRepository.cs" />
     <Compile Include="Repositories\Implementation\RoleRepository.cs" />
     <Compile Include="Repositories\Implementation\UserRepository.cs" />
+    <Compile Include="Repositories\Infrastructure\IAbsencesRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICalendarEventRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICalendarRepository.cs" />
+    <Compile Include="Repositories\Infrastructure\IChatRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICompanyDocumentRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ICompanyRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IContractRepository.cs" />
@@ -328,6 +378,7 @@
     <Compile Include="Repositories\Infrastructure\IEmailRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IFileRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IFormRepository.cs" />
+    <Compile Include="Repositories\Infrastructure\IGalleryRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IGlossaryRepository.cs" />
     <Compile Include="Repositories\Infrastructure\IGenericRepository.cs" />
     <Compile Include="Repositories\Infrastructure\ILanguageRepository.cs" />
@@ -420,7 +471,6 @@
       </AppConfigWithTargetPath>
     </ItemGroup>
   </Target>
-  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -428,4 +478,5 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
+  <Import Project="..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.2.1\tools\AutoMapper.targets')" />
 </Project>

@@ -61,6 +61,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Approved.
+        /// </summary>
+        public static string ApprovedAbsence {
+            get {
+                return ResourceManager.GetString("ApprovedAbsence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to By Mail.
         /// </summary>
         public static string ByEmail {
@@ -124,11 +133,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Draft.
+        /// </summary>
+        public static string Draft {
+            get {
+                return ResourceManager.GetString("Draft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Simple Employee.
         /// </summary>
         public static string Employee2 {
             get {
                 return ResourceManager.GetString("Employee2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Fiscal Year.
+        /// </summary>
+        public static string EndFiscalYear {
+            get {
+                return ResourceManager.GetString("EndFiscalYear", resourceCulture);
             }
         }
         
@@ -187,6 +214,24 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum Carry Over.
+        /// </summary>
+        public static string MaxCarryOver {
+            get {
+                return ResourceManager.GetString("MaxCarryOver", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Day Per Request.
+        /// </summary>
+        public static string MaxDayPerRequest {
+            get {
+                return ResourceManager.GetString("MaxDayPerRequest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Monthly (on chosen dates).
         /// </summary>
         public static string MonthlyOnDates {
@@ -201,6 +246,15 @@ namespace totalhr.Resources {
         public static string MyselfOnly {
             get {
                 return ResourceManager.GetString("MyselfOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pending.
+        /// </summary>
+        public static string NewAbsence {
+            get {
+                return ResourceManager.GetString("NewAbsence", resourceCulture);
             }
         }
         
@@ -228,6 +282,15 @@ namespace totalhr.Resources {
         public static string Promoters {
             get {
                 return ResourceManager.GetString("Promoters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Published.
+        /// </summary>
+        public static string Published {
+            get {
+                return ResourceManager.GetString("Published", resourceCulture);
             }
         }
         
@@ -367,11 +430,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rejected.
+        /// </summary>
+        public static string RejectedAbsence {
+            get {
+                return ResourceManager.GetString("RejectedAbsence", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Specific user(s).
         /// </summary>
         public static string SelectedUsers {
             get {
                 return ResourceManager.GetString("SelectedUsers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Fiscal Year.
+        /// </summary>
+        public static string StartFiscalYear {
+            get {
+                return ResourceManager.GetString("StartFiscalYear", resourceCulture);
             }
         }
         
@@ -417,6 +498,15 @@ namespace totalhr.Resources {
         public static string WholeCompany {
             get {
                 return ResourceManager.GetString("WholeCompany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yearly Entitlement.
+        /// </summary>
+        public static string YearlyEntitlement {
+            get {
+                return ResourceManager.GetString("YearlyEntitlement", resourceCulture);
             }
         }
         

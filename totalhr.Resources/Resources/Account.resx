@@ -213,4 +213,79 @@
   <data name="V_User_Login" xml:space="preserve">
     <value>User Login</value>
   </data>
+  <data name="V_Company" xml:space="preserve">
+    <value>Company</value>
+  </data>
+  <data name="V_Create_Document" xml:space="preserve">
+    <value>Create Document</value>
+  </data>
+  <data name="V_Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
+  <data name="V_Departments" xml:space="preserve">
+    <value>Departments</value>
+  </data>
+  <data name="V_Folders" xml:space="preserve">
+    <value>Folders</value>
+  </data>
+  <data name="V_Image_Gallery" xml:space="preserve">
+    <value>Image Gallery</value>
+  </data>
+  <data name="V_Inbox" xml:space="preserve">
+    <value>Inbox</value>
+  </data>
+  <data name="V_My_Absences" xml:space="preserve">
+    <value>My Absences</value>
+  </data>
+  <data name="V_My_Contract" xml:space="preserve">
+    <value>My Contract</value>
+  </data>
+  <data name="V_My_Profile" xml:space="preserve">
+    <value>My Profile</value>
+  </data>
+  <data name="V_My_Profiles" xml:space="preserve">
+    <value>My Permissions</value>
+  </data>
+  <data name="V_Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="V_Payroll" xml:space="preserve">
+    <value>Payroll</value>
+  </data>
+  <data name="V_Record_Time" xml:space="preserve">
+    <value>Record Time</value>
+  </data>
+  <data name="V_Request_Absence" xml:space="preserve">
+    <value>Request Absence</value>
+  </data>
+  <data name="V_Search_For_Recording" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="V_Structure" xml:space="preserve">
+    <value>Structure</value>
+  </data>
+  <data name="V_Tasks" xml:space="preserve">
+    <value>My Tasks</value>
+  </data>
+  <data name="V_Time_Recording" xml:space="preserve">
+    <value>Time Recording</value>
+  </data>
+  <data name="V_Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
+  <data name="V_View_All_Absences" xml:space="preserve">
+    <value>View All</value>
+  </data>
+  <data name="V_Employee_Directory" xml:space="preserve">
+    <value>Employee Directory</value>
+  </data>
+  <data name="V_Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="V_Profile_List" xml:space="preserve">
+    <value>Permissions' List</value>
+  </data>
+  <data name="V_Profile_Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
 </root>

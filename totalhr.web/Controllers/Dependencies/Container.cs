@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Configuration;
+using ChatService.Implementation;
+using ChatService.Infrastructure;
 using Ninject;
 using totalhr.data.EF;
 using totalhr.data.Repositories.Infrastructure;
@@ -28,12 +30,17 @@ using totalhr.data.TimeRecordingSystem.Repositories.Infrastructure;
 using totalhr.data.TimeRecordingSystem.Repositories.Implementation;
 using FormService.Infrastructure;
 using FormService.Implementation;
+using AbsencesService.Infrastructure;
+using Absences.Implementation;
+using ImageGallery;
+using ImageGallery.Implementation;
+using ImageGallery.Infrastructure;
 
 namespace totalhr.web.Controllers.Dependencies
 {
     public class Container : DefaultControllerFactory
     {
-        private IKernel ninjectKernel;
+        private readonly IKernel ninjectKernel;
 
         public Container()
         {
@@ -82,6 +89,12 @@ namespace totalhr.web.Controllers.Dependencies
             ninjectKernel.Bind<IContractService>().To<ContractService>();
             ninjectKernel.Bind<IFormEditorService>().To<FormEditorService>();
             ninjectKernel.Bind<IFormRepository>().To<FormRepository>();
+            ninjectKernel.Bind<IChatRepository>().To<ChatRepository>();
+            ninjectKernel.Bind<IChatManagerService>().To<ChatManagerService>();
+            ninjectKernel.Bind<IAbsencesManager>().To<AbsencesManager>();
+            ninjectKernel.Bind<IAbsencesRepository>().To<AbsencesRepository>();
+            ninjectKernel.Bind<IGalleryRepository>().To<GalleryRepository>();
+            ninjectKernel.Bind<IGalleryService>().To<GalleryService>();
         }
 
     }

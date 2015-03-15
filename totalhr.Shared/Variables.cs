@@ -21,7 +21,8 @@ namespace totalhr.Shared
                 Country,
                 Language,
                 Title,
-                CalendarEventTarget
+                CalendarEventTarget,
+                AbsenceType
             }
 
         public enum NamedGlossaryIds
@@ -230,6 +231,44 @@ namespace totalhr.Shared
             TxtMaxLen = 2,
             Required = 3,
             MatchPattern = 4
+        }
+
+        public enum ChatRoomTarget
+        {
+            Private = 1,
+            Public = 2
+        }
+
+        public enum AbsenceRequestStatus
+        {
+            NewAbsence = 1,
+            ApprovedAbsence = 2,
+            RejectedAbsence = 3
+        }
+
+        public enum AbsenceSettingFieldType
+        {
+            GenericField,
+            CustomField
+        }
+
+        public enum AbsenceSettingInputType
+        {
+            Text,
+            LongText,
+            Integer,
+            Decimal,
+            Boolean,
+            Date
+        }
+
+        public enum AbsenceFieldIdentifier
+        {
+            YearlyEntitlement,
+            MaxDayPerRequest,
+            MaxCarryOver,
+            StartFiscalYear,
+            EndFiscalYear
         }
 
         public static string AdminEmailSignature

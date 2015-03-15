@@ -10,16 +10,20 @@ namespace FormService.Infrastructure
 {
     public interface IFormEditorService
     {
-        int CreateForm(string schema, int formTypeId, int userId);
+        int CreateForm(string schema, string name, int formTypeId, int userId);
+
+        int CreateForm(FormInfo info);
 
         IEnumerable<Form> ListFormsOfType(int formTypeId);
 
         IEnumerable<ListItemStruct> ListFormsOfTypeSimple(int formTypeId);
 
         Form GetForm(int id);
-
-        ResultInfo SaveData(ContractFillViewInfo model);
-
+       
         ResultInfo SaveFormFields(FormInfo info);
+
+        ResultInfo SaveFieldData(ContractFillViewInfo model);
+
+        int UpdateForm(FormInfo info);
     }
 }

@@ -15,5 +15,6 @@ namespace totalhr.Shared.Models
         [Required(ErrorMessageResourceType = typeof(FormMessages), ErrorMessageResourceName = "Error_Password_Rq")]
         public string Password { get; set; }
         public int UserType { get; set; }
+        public string ReferringUrl { get; set; }
     }
 }

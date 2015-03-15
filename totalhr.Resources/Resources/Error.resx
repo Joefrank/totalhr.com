@@ -126,6 +126,12 @@
   <data name="Error_Cant_Remove_All_Roles" xml:space="preserve">
     <value>Sorry but you cannot remove all roles from user. User must have at least one role.</value>
   </data>
+  <data name="Error_ChatRoomName_Rq" xml:space="preserve">
+    <value>Chat room's name is required!</value>
+  </data>
+  <data name="Error_ChatRoomTarget_Rq" xml:space="preserve">
+    <value>Chat room's target is required!</value>
+  </data>
   <data name="Error_Could_Not_CreateUser" xml:space="preserve">
     <value>Sorry but could not create user.</value>
   </data>
@@ -143,6 +149,9 @@
   </data>
   <data name="Error_Missing_Department" xml:space="preserve">
     <value>You must select a department for the new user!</value>
+  </data>
+  <data name="Error_Nickname_Exists" xml:space="preserve">
+    <value>This nickname already exists</value>
   </data>
   <data name="Error_NoAccess_ToUserProfile" xml:space="preserve">
     <value>You do not have the right to edit this user profile.</value>
@@ -164,6 +173,15 @@
   </data>
   <data name="Error_Profile_Picture_Missing" xml:space="preserve">
     <value>You need to add user profile picture.</value>
+  </data>
+  <data name="Error_Validation_Field_X_IsRequired" xml:space="preserve">
+    <value>The field '{0}' is mandatory!</value>
+  </data>
+  <data name="Error_Validation_Field_X_MinReq" xml:space="preserve">
+    <value>A minimum of '{0}' characters is required for the field {1}!</value>
+  </data>
+  <data name="Error_Validation_Pattern_Not_Matched" xml:space="preserve">
+    <value>The input for the field '{0}' is invalid!</value>
   </data>
   <data name="MSG_Error_Could_Not_Save_PRofiles" xml:space="preserve">
     <value>Sorry could not save user profiles!</value>

@@ -1,3 +1,4 @@
+﻿using System;
 ﻿using Authentication.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -21,8 +22,6 @@ namespace totalhr.web.Controllers
             _taskSchedulerService = taskSchedulerService;
             _accountsService = accountsService;
         }
-        //
-        // GET: /Task/
 
         public ActionResult Index()
         {
@@ -37,6 +36,7 @@ namespace totalhr.web.Controllers
             this.SearchTasks(vm);
             return View(vm);
         }
+
         [HttpPost]
         public ActionResult Search(TaskSchedulerSearchVm vm)
         {
@@ -67,7 +67,6 @@ namespace totalhr.web.Controllers
             return View(vm);
 
         }
-
 
         [HttpPost]
         public ActionResult Record(TaskSchedulerDetailsVM vm)
@@ -109,7 +108,6 @@ namespace totalhr.web.Controllers
             var usersVM = GetUserVMList();
             var departmentsVM = GetDepartmentVMList();
             vm.SetupTaskScheduler(this.CurrentUser.UserId, this.CurrentUser.DepartmentId, usersVM, departmentsVM);
-            //return vm;
         }
 
         private List<DepartmentVM> GetDepartmentVMList()
@@ -127,7 +125,6 @@ namespace totalhr.web.Controllers
 
             return usersVM;
         }
-
 
     }
 }

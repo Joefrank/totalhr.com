@@ -64,8 +64,8 @@ namespace totalhr.web.Areas.Admin.Controllers
                     clientUser.DepartmentId = userstruct.UserBasicDetails.departmentid;
 
                     AuthService.PersistClientUser(clientUser);
-
-                    return View("Index", clientUser);
+                    Response.Redirect("~/Admin/");
+                    //return View("Index", clientUser);
                 }
                 
             }

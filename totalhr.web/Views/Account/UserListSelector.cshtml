@@ -1,0 +1,53 @@
+﻿@model IEnumerable<totalhr.Shared.Models.SimpleUser>
+
+@{
+    ViewBag.Title = "UserListSelector";
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+    int index = 0;
+    var tableHtml = new System.Text.StringBuilder();
+}
+
+@section head2{
+    User List
+}
+
+<div class="grid">
+@foreach(var user in Model)
+{
+   <div class="cell4"><input type='checkbox' id='ckuser_@user.Id' value='@user.Id' onclick='PickUser(this);' /> <span id="spName_@user.Id">@user.FullName</span> </div>
+}
+</div>
+
+<div>
+    <input type="button" value="PersistValues" onclick="ReturnSelected();" />
+</div>
+
+<script type="text/javascript">
+    var ckSelectedTargetUsers = new Array();
+
+    function PickUser(objck) {
+        if (objck.checked) {
+            ckSelectedTargetUsers['ckuser_' + objck.value] = objck.value;
+            $('#spName_' + objck.value).css("color", "blue");
+        } else {
+            ckSelectedTargetUsers['ckuser_' + objck.value] = null;
+            $('#spName_' + objck.value).css("color", "grey");
+        }
+    }
+
+    function ReturnSelected() {
+        var allinvitees = '';
+        var allinviteeNames = '';
+
+        for (var key in ckSelectedTargetUsers) {
+            if (ckSelectedTargetUsers[key] != null) {
+                allinvitees += (allinvitees == '') ? ckSelectedTargetUsers[key] : ',' + ckSelectedTargetUsers[key];
+                allinviteeNames += ((allinviteeNames == '') ? '' : ',') + $('#spName_' + ckSelectedTargetUsers[key]).html().replace(/[^-,'A-Za-z0-9]+/g, '');
+            }
+        }
+        if (parent != null) {
+            parent.PickUsers(allinvitees, allinviteeNames);
+            parent.ClosePopup('dvPopup');
+        }
+    }
+</script>

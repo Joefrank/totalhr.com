@@ -18,6 +18,7 @@ namespace totalhr.data.EF
         public Department()
         {
             this.Users = new HashSet<User>();
+            this.TaskSchedulers = new HashSet<TaskScheduler>();
         }
     
         public int id { get; set; }
@@ -34,5 +35,7 @@ namespace totalhr.data.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<User> Users { get; set; }
         public virtual User User { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TaskScheduler> TaskSchedulers { get; set; }
     }
 }

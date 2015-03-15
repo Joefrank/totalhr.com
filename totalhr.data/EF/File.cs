@@ -19,6 +19,7 @@ namespace totalhr.data.EF
         {
             this.CompanyDocuments = new HashSet<CompanyDocument>();
             this.UserProfilePictures = new HashSet<UserProfilePicture>();
+            this.GalleryPhotoes = new HashSet<GalleryPhoto>();
         }
     
         public int id { get; set; }
@@ -35,5 +36,7 @@ namespace totalhr.data.EF
         public virtual ICollection<CompanyDocument> CompanyDocuments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserProfilePicture> UserProfilePictures { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<GalleryPhoto> GalleryPhotoes { get; set; }
     }
 }

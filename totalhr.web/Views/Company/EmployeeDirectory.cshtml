@@ -1,0 +1,71 @@
+﻿@using totalhr.Resources
+@using AH = totalhr.web.Areas.Admin.Helpers
+@using totalhr.web.Areas.Admin.Models
+@using totalhr.web.Helpers;
+
+@model IEnumerable<totalhr.data.EF.User>
+
+@{
+    ViewBag.Title = Common.V_Employee_Directory;
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Company/", Text = Common.V_Company, Title= Common.V_Company},
+        new BreadCrumbItem{Url = "", Text = Common.V_Employee_Directory, Title= Common.V_Employee_Directory}
+    };
+     
+}
+
+@section pagetitle{
+   @Common.V_Employee_Directory
+}
+
+@section breadcrumb{
+    @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+<div class="row-fluid">
+   <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i>@Common.V_Employee_List</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+            </span>
+        </div>
+        <div class="widget-body">
+          
+            <table class="table table-striped table-bordered" id="sample_1">
+                <thead>
+                    <tr>
+                       <th>@Common.V_Employee_Name</th> 
+                        <th>@Common.V_Office_Phone</th>
+                        <th>@Common.V_Office_Email</th>
+                        <th>@Common.V_Department</th> 
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                    <tr class="odd gradeX">                       
+                        <td>
+                            @(user.surname + ", " + user.firstname)
+                        </td>
+                        <td>
+                           @user.Phone
+                        </td>
+                        <td>
+                            @user.email           
+                        </td>
+                        <td>
+                           @user.Department.Name
+                        </td>                      
+                        
+                    </tr> 
+           
+                    }
+                </tbody>
+            </table>          
+           
+        </div>
+    </div>
+</div>

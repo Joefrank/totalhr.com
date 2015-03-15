@@ -1,0 +1,59 @@
+﻿@using totalhr.Resources
+@using AH = totalhr.web.Areas.Admin.Helpers
+@using totalhr.web.Areas.Admin.Models
+@using totalhr.web.Helpers;
+@using EF=totalhr.data.EF;
+
+@model IEnumerable<totalhr.Shared.Models.ListItemStruct>
+
+@{
+    ViewBag.Title = Absence.V_Absences;
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "", Text = Account.V_My_Profiles, Title= Account.V_My_Profiles}
+    };
+   
+}
+
+@section pagetitle{
+   @Account.V_My_Profiles
+}
+
+@section breadcrumb{
+    @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+
+<div class="row-fluid">
+    <div class="span4">
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i>@Account.V_Profile_List</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                </span>
+            </div>
+            <div class="widget-body"> 
+               
+                <table class="table table-striped table-bordered table-advance table-hover" id="sample_1">
+                    <thead>
+                        <tr>
+                            <th>@Account.V_Profile_Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var profile in Model){
+                            <tr>                            
+                                <td>
+                                    @profile.Name
+                                </td>                           
+                            </tr> 
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>

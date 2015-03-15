@@ -25,7 +25,7 @@ namespace totalhr.web.Areas.Admin.Controllers
 
         public AdminBaseController(IOAuthService authService): base(authService)
         {
-                  
+            ViewBag.CurrentUser = CurrentUser;   
         }
 
     }

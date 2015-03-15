@@ -72,7 +72,7 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Mvc, Version=4.0.0.1, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+      <HintPath>..\Libs\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EnumExtensions.cs" />
+    <Compile Include="Models\AbsenceInfo.cs" />
     <Compile Include="Models\AdminProfileStruct.cs" />
     <Compile Include="Models\AdminRoleStruct.cs" />
     <Compile Include="Models\AdminStruct.cs" />
@@ -89,6 +90,9 @@
     <Compile Include="Models\CalendarEventCache.cs" />
     <Compile Include="Models\CalendarEventInfo.cs" />
     <Compile Include="Models\CalendarEventReminder.cs" />
+    <Compile Include="Models\ChatModel.cs" />
+    <Compile Include="Models\ChatRoomInfo.cs" />
+    <Compile Include="Models\CompanyOrganigram.cs" />
     <Compile Include="Models\ContractFillViewInfo.cs" />
     <Compile Include="Models\DocumentInfo.cs" />
     <Compile Include="Models\DocumentSearchInfo.cs" />
@@ -98,7 +102,10 @@
     <Compile Include="HttpCacheHelper.cs" />
     <Compile Include="Infrastructure\ICacheHelper.cs" />
     <Compile Include="Models\Attributes\AlwaysTrueAttribute.cs" />
+    <Compile Include="Models\EmployeeContractModel.cs" />
     <Compile Include="Models\FormInfo.cs" />
+    <Compile Include="Models\GalleryAlbumInfo.cs" />
+    <Compile Include="Models\GalleryPhotoInfo.cs" />
     <Compile Include="Models\ListItemStruct.cs" />
     <Compile Include="Models\LoginStruct.cs" />
     <Compile Include="Models\NewEmployeeInfo.cs" />

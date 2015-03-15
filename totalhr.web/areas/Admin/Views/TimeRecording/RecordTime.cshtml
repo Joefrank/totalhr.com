@@ -1,0 +1,105 @@
+﻿@model totalhr.web.Areas.TimeRecording.ViewModels.TimeRecordingVM
+@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
+
+@{
+    ViewBag.Title = TimeRecording.V_Record_Time;
+
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Admin/TimeRecording/", Text = TimeRecording.V_Time_Recording_Home, Title= TimeRecording.V_Time_Recording_Home},
+        new BreadCrumbItem{Url = "", Text = TimeRecording.V_Record_Time, Title= TimeRecording.V_Record_Time}        
+    }; 
+ }
+
+
+@section pagetitle{
+   @TimeRecording.V_Record_Time
+}
+
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+<div class="row-fluid">
+
+     <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i>@TimeRecording.V_Time_Recording_Details</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+                <a href="javascript:;" class="icon-remove"></a>
+            </span>
+        </div>
+        <div class="widget-body"> 
+
+
+            @using (Html.BeginForm("RecordTime", "TimeRecording", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                if (string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                    @Html.HiddenFor(model => model.Id)
+
+                    <div class="control-group">
+                        <label class="control-label">@TimeRecording.V_UserId</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.UserId)
+                            @Html.ValidationMessageFor(model => model.UserId)
+                            
+                        </div>
+                    </div>                
+                       
+                   <div class="control-group">
+                        <label class="control-label">@TimeRecording.V_Start_Time</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.StartTime, new { @class = "dp" })
+                            @Html.ValidationMessageFor(model => model.StartTime)
+                        </div>
+                    </div>
+                
+                   <div class="control-group">
+                        <label class="control-label">@TimeRecording.V_End_Time</label>
+                        <div class="controls">
+                            @Html.EditorFor(model => model.EndTime)
+                            @Html.ValidationMessageFor(model => model.EndTime)
+                        </div>
+                    </div>
+
+                     <div class="form-actions">
+                        <button type="submit" class="btn btn-success">
+                            <i class="icon-ok icon-white"></i> @Common.V_Save
+                        </button>
+
+                        <button type="button" class="btn btn-danger">
+                            <i class="icon-remove icon-white"></i> @Common.V_Cancel
+                        </button>
+                    </div>
+                    
+
+                    <div>
+                        @Html.ActionLink(TimeRecording.V_Back_To_Recording_Home, "Index")
+                    </div>                  
+                }
+                else
+                {
+                    <div class="error-message">
+                        @Html.DisplayFor(model => model.ErrorMessage)
+                    </div>
+                }
+                
+                if (Model.Id > 0)
+                {
+                    <p>
+                        @Html.ActionLink(TimeRecording.V_Back_To_Details, "Details", new { id = Model.Id })
+                    </p>
+                }
+            }
+     </div>
+
+  </div>
+
+</div>

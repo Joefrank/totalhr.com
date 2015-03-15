@@ -88,6 +88,24 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chat room&apos;s name is required!.
+        /// </summary>
+        public static string Error_ChatRoomName_Rq {
+            get {
+                return ResourceManager.GetString("Error_ChatRoomName_Rq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat room&apos;s target is required!.
+        /// </summary>
+        public static string Error_ChatRoomTarget_Rq {
+            get {
+                return ResourceManager.GetString("Error_ChatRoomTarget_Rq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sorry but could not create user..
         /// </summary>
         public static string Error_Could_Not_CreateUser {
@@ -138,6 +156,15 @@ namespace totalhr.Resources {
         public static string Error_Missing_Department {
             get {
                 return ResourceManager.GetString("Error_Missing_Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This nickname already exists.
+        /// </summary>
+        public static string Error_Nickname_Exists {
+            get {
+                return ResourceManager.GetString("Error_Nickname_Exists", resourceCulture);
             }
         }
         
@@ -201,6 +228,33 @@ namespace totalhr.Resources {
         public static string Error_Profile_Picture_Missing {
             get {
                 return ResourceManager.GetString("Error_Profile_Picture_Missing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The field &apos;{0}&apos; is mandatory!.
+        /// </summary>
+        public static string Error_Validation_Field_X_IsRequired {
+            get {
+                return ResourceManager.GetString("Error_Validation_Field_X_IsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A minimum of &apos;{0}&apos; characters is required for the field {1}!.
+        /// </summary>
+        public static string Error_Validation_Field_X_MinReq {
+            get {
+                return ResourceManager.GetString("Error_Validation_Field_X_MinReq", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The input for the field &apos;{0}&apos; is invalid!.
+        /// </summary>
+        public static string Error_Validation_Pattern_Not_Matched {
+            get {
+                return ResourceManager.GetString("Error_Validation_Pattern_Not_Matched", resourceCulture);
             }
         }
         

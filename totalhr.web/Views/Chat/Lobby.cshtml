@@ -1,0 +1,75 @@
+﻿@using totalhr.Resources
+@using totalhr.web.Areas.Admin.Helpers
+@using totalhr.web.Areas.Admin.Models
+
+@model totalhr.Shared.Models.ChatRoom
+
+@{
+    ViewBag.Title = Common.V_Chat_Registration;
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Chat/", Text = Common.V_Chat_Rooms, Title= Common.V_Chat_Rooms},
+        new BreadCrumbItem{Url = "", Text = Common.V_Chat_Registration, Title= Common.V_Chat_Registration}
+    };
+   
+  
+}
+
+@section pagetitle{
+   @Common.V_Chat_Registration
+}
+
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+
+<div class="row-fluid">
+    <div class="span6">
+        <!-- BEGIN CHAT PORTLET-->
+        <div class="widget" id="">
+            <div class="widget-title">
+                <h4><i class="icon-comments-alt"></i> @Model.Name - <span id="spLastRefresh"></span></h4>
+				<span class="tools">
+				<a href="javascript:;" class="icon-chevron-down"></a>
+				<a href="javascript:;" class="icon-remove"></a>
+				</span>
+            </div>
+            <div class="widget-body">
+                <div id="RefreshArea">
+                   @Html.Partial("ChatHistory")
+                </div>
+                <div class="chat-form">
+                    <div class="input-cont">
+                        <input id="txtMessage" type="text" placeholder="@Common.V_Chat_Type_Message" />
+                    </div>
+                    <div class="btn-cont">
+                        <a href="javascript:SendMessage();" class="btn btn-primary">@Common.V_Chat_Send</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END CHAT PORTLET-->
+    </div>
+</div>
+
+
+@section scripts{
+   
+    <script type="text/javascript">
+
+        var chatRoomId = @Model.DBid;
+        var LOGOUT_MAX = 100;
+        var LogoutCountDown = LOGOUT_MAX;
+        var MSG_LastRefreshAt = '@HttpUtility.HtmlDecode(Common.V_Chat_Refreshed_At)';
+
+    </script>
+    
+    <script type="text/javascript" src="~/Scripts/Site/Chat.js"></script>
+}
+
+
+
+
+ 

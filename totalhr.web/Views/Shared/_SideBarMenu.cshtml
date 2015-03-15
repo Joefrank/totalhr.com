@@ -1,0 +1,111 @@
+﻿ @using totalhr.Resources;
+
+<ul class="sidebar-menu">
+
+    <li>
+        <a class="" href="/Account/">
+            <span class="icon-box"><i class="icon-dashboard"></i></span> @Account.V_Dashboard
+        </a>
+    </li>
+     <li>
+        <a class="" href="/Account/Payroll/">
+            <span class="icon-box"><i class="icon-dashboard"></i></span> @Account.V_Payroll
+        </a>
+    </li> 
+     <li>
+        <a class="" href="/Account/Task/">
+            <span class="icon-box"><i class="icon-dashboard"></i></span> @Account.V_Tasks
+        </a>
+    </li>   
+   
+    <li>
+        <a class="" href="/Account/MyDetails">
+            <span class="icon-box"><i class="icon-dashboard"></i></span> @Account.V_My_Profile
+        </a>
+    </li>  
+     <li>
+        <a class="" href="/Account/Contract/">
+            <span class="icon-box"><i class="icon-dashboard"></i></span> @Account.V_My_Contract
+        </a>
+    </li>  
+    <li>
+        <a class="" href="/Account/Permissions/">
+            <span class="icon-box"><i class="icon-dashboard"></i></span> @Account.V_My_Profiles
+        </a>
+    </li>   
+     <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class="icon-fire"></i></span> @Account.V_My_Absences
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="/Absence/"> @Account.V_View_All_Absences</a></li>
+            <li><a class="" href="/Absence/CreateAbsence/"> @Account.V_Request_Absence</a></li>
+        </ul>
+    </li>
+    
+    <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class="icon-th"></i></span> @Document.V_Documents
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="/Document/Create/"> @Account.V_Create_Document</a></li>            
+            <li><a class="" href="/Document/Folder/"> @Account.V_Folders</a></li>
+            <li><a class="" href="/Document/ViewAsTable/"> @Document.V_View_As_Table</a></li>
+            <li><a class="" href="/Document/SearchForDocument/">@Document.V_Search_For_Document</a></li>
+            
+        </ul>
+    </li>
+         
+     <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class=" icon-qrcode"></i></span> @AdminGeneric.V_Calendar
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="/Calendar/"> @AdminGeneric.V_View_All_Calendars</a></li>
+            <li><a class="" href="/Calendar/Create/"> @AdminGeneric.V_Create_Calendar</a></li>
+        </ul>
+    </li>
+
+     <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class=" icon-qrcode"></i></span> @AdminGeneric.V_Communications
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="/Communication/Inbox/"> @Account.V_Inbox</a></li>
+            <li><a class="" href="/Communication/Notifications/"> @Account.V_Notifications</a></li>
+            <li><a class="" href="/Chat/"> @AdminGeneric.V_Chat</a></li>
+        </ul>
+    </li> 
+      
+   
+     <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class="icon-map-marker"></i></span> @Account.V_Company
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="/Company/EmployeeDirectory/"> @Common.V_Company_Employees</a></li>
+            <li><a class="" href="/Company/Departments/"> @Account.V_Departments</a></li>
+            <li><a class="" href="/Company/Structure/"> @Common.V_Organization_Chart</a></li>
+            <li><a class="" href="/Gallery/"> @Account.V_Image_Gallery</a></li>
+        </ul>
+     </li>    
+  
+
+    <li class="has-sub">
+        <a href="javascript:;" class="">
+            <span class="icon-box"><i class="icon-map-marker"></i></span> @AdminGeneric.V_Time_Recording
+            <span class="arrow"></span>
+        </a>
+        <ul class="sub">
+            <li><a class="" href="/TimeRecording/"> @Account.V_Record_Time</a></li>
+            <li><a class="" href="/TimeRecording/"> @Account.V_Search_For_Recording</a></li>
+        </ul>
+    </li> 
+    
+   
+</ul>

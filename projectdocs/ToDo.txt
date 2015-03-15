@@ -1,0 +1,29 @@
+
+Chat Room:
+ - User selector (when creating room) should remember previous selections
+ - Invite external users for chat.
+ - Create chatroom edit page and remember all selections
+ - We need to persist chat messages and users to DB.
+
+
+- Absences
+	Add facility for admin to edit absence fields and display them for users.
+	Add functionality for managers to approve absences
+	Add notifications for absence requests and approvals.
+
+- Organization chart
+	Get it to read user details and get user images/avatars  
+
+- User Profile 
+	Add functionality to upload profile picture and avatars (chat/ organigram)
+
+- employee directory
+	Add employee search and pagination
+
+- Add employee images view on employee directory and deparment
+
+- Departments
+	- Add lIne managers when deparment is created. or when employee is created.
+
+	- Add line manager for user level
+	- Add number of users and navigation to employees list for each department

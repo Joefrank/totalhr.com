@@ -54,11 +54,14 @@ namespace totalhr.web.Areas.Admin.Controllers
 
         private UserContractDetails GetUserContractDetails(int userId)
         {
+            var contract = _contractService.GetUserContract(userId);
+
             return new UserContractDetails
             {
                 UserDetails = _accountService.GetUser(userId),
-                Contract = _contractService.GetUserContract(userId),
-                TemplateList = _contractService.ListContractTemplates()
+                Contract = contract,
+                TemplateList = _contractService.ListContractTemplates(),
+                TemplateId = (contract != null)? contract.TemplateId : 0
             };
         }
 
@@ -146,17 +149,28 @@ namespace totalhr.web.Areas.Admin.Controllers
             if (IsValid(model))
             {
                 model.CreatedBy = CurrentUser.UserId;
-                var data = _contractService.SaveUserContractData(model);
-                //implement the saving of form data and also of form fields.
-                var result = _formService.SaveData(model);
+                var data = _contractService.SaveUserContractData(model); //persist json data
+                var result = _formService.SaveFieldData(model);//persist field data
 
                 return Json(new { Id = data.ContractId, Message = HttpUtility.HtmlEncode(Contract.V_Contract_Saved) });
             }
-            else
+            else 
             {
                 return Json(new { Id = -1, Message = HttpUtility.HtmlEncode(_sbContractErrors .ToString())});
             }
+        }
 
+        public JsonResult UpdateFormFields(int id)
+        {
+            var form = _formService.GetForm(id);
+            var info = new FormInfo
+                {
+                    Id = form.Id,
+                    FormTypeId = form.FormTypeId,
+                    Schema = form.FormSchema,
+                    UserId = CurrentUser.UserId
+                };
+            return Json(_formService.SaveFormFields(info));
         }
 
         bool IsValid(ContractFillViewInfo model)

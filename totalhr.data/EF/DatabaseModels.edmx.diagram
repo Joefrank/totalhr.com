@@ -88,6 +88,52 @@
         <AssociationConnector Association="TotalHRModel.FK_FormFieldValidationRule_FormFieldJSon" />
         <AssociationConnector Association="TotalHRModel.FK_FormFieldJSon_Form" />
         <AssociationConnector Association="TotalHRModel.FK_Department_User" />
+        <EntityTypeShape EntityType="TotalHRModel.UserContractFieldData" Width="1.5" PointX="14.375" PointY="11.75" />
+        <EntityTypeShape EntityType="TotalHRModel.ChatMessage" Width="1.5" PointX="14.375" PointY="14.75" />
+        <EntityTypeShape EntityType="TotalHRModel.ChatRoom" Width="1.5" PointX="7.5" PointY="48.5" />
+        <EntityTypeShape EntityType="TotalHRModel.ChatRoomUser" Width="1.5" PointX="9.75" PointY="33.875" />
+        <AssociationConnector Association="TotalHRModel.FK_ChatMessage_ChatMessage" />
+        <AssociationConnector Association="TotalHRModel.FK_ChatRoom_ChatRoom" />
+        <AssociationConnector Association="TotalHRModel.FK_ChatRoomUser_ChatRoom" />
+        <AssociationConnector Association="TotalHRModel.FK_ChatRoomUser_User" />
+        <AssociationConnector Association="TotalHRModel.FK_ChatRoomUser_User1" />
+        <EntityTypeShape EntityType="TotalHRModel.Absence" Width="1.5" PointX="7.5" PointY="52.125" />
+        <EntityTypeShape EntityType="TotalHRModel.AbsenceReply" Width="1.5" PointX="9.75" PointY="39.25" />
+        <EntityTypeShape EntityType="TotalHRModel.Note" Width="1.5" PointX="7.5" PointY="56" />
+        <EntityTypeShape EntityType="TotalHRModel.Notification" Width="1.5" PointX="7.5" PointY="59.375" />
+        <EntityTypeShape EntityType="TotalHRModel.TaskScheduler" Width="1.5" PointX="15.5" PointY="28" />
+        <EntityTypeShape EntityType="TotalHRModel.TimeRecording" Width="1.5" PointX="17.75" PointY="36.25" />
+        <EntityTypeShape EntityType="TotalHRModel.TimeRecordingType" Width="1.5" PointX="15.5" PointY="37.375" />
+        <AssociationConnector Association="TotalHRModel.FK_Absence_User" />
+        <AssociationConnector Association="TotalHRModel.FK_Absence_User1" />
+        <AssociationConnector Association="TotalHRModel.FK_AbsenceReply_Notification" />
+        <AssociationConnector Association="TotalHRModel.FK_AbsenceReply_User" />
+        <AssociationConnector Association="TotalHRModel.FK_TaskScheduler_Department" />
+        <AssociationConnector Association="TotalHRModel.FK_Notes_User" />
+        <AssociationConnector Association="TotalHRModel.FK_Notes_User1" />
+        <AssociationConnector Association="TotalHRModel.FK_Notes_User2" />
+        <AssociationConnector Association="TotalHRModel.FK_TimeRecording_Notes" />
+        <AssociationConnector Association="TotalHRModel.FK_Notification_User" />
+        <AssociationConnector Association="TotalHRModel.FK_Notification_User1" />
+        <AssociationConnector Association="TotalHRModel.FK_TaskScheduler_User" />
+        <AssociationConnector Association="TotalHRModel.FK_TaskScheduler_User1" />
+        <AssociationConnector Association="TotalHRModel.FK_TaskScheduler_User2" />
+        <AssociationConnector Association="TotalHRModel.FK_TaskScheduler_User3" />
+        <AssociationConnector Association="TotalHRModel.FK_TaskScheduler_User4" />
+        <AssociationConnector Association="TotalHRModel.FK_TimeRecording_TaskScheduler" />
+        <AssociationConnector Association="TotalHRModel.FK_TimeRecording_TimeRecordingType" />
+        <AssociationConnector Association="TotalHRModel.FK_TimeRecording_User" />
+        <AssociationConnector Association="TotalHRModel.FK_TimeRecording_User1" />
+        <AssociationConnector Association="TotalHRModel.FK_TimeRecording_User2" />
+        <EntityTypeShape EntityType="TotalHRModel.AbsenceSettingField" Width="1.5" PointX="15.375" PointY="0.75" />
+        <EntityTypeShape EntityType="TotalHRModel.UserAbsenceFieldData" Width="1.5" PointX="15.375" PointY="4.75" />
+        <EntityTypeShape EntityType="TotalHRModel.GalleryAlbum" Width="1.5" PointX="11.25" PointY="42.375" />
+        <EntityTypeShape EntityType="TotalHRModel.GalleryPhoto" Width="1.5" PointX="13.5" PointY="17.625" />
+        <AssociationConnector Association="TotalHRModel.FK_GalleryPhoto_File" />
+        <AssociationConnector Association="TotalHRModel.FK_GalleryAlbum_User" />
+        <AssociationConnector Association="TotalHRModel.FK_GalleryAlbum_User1" />
+        <AssociationConnector Association="TotalHRModel.FK_GalleryPhoto_GalleryAlbum" />
+        <AssociationConnector Association="TotalHRModel.FK_GalleryPhoto_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -1,0 +1,27 @@
+﻿@using totalhr.Resources
+@using AH = totalhr.web.Areas.Admin.Helpers
+@using totalhr.web.Areas.Admin.Models
+@using totalhr.web.Helpers;
+
+@model totalhr.Shared.Models.CompanyOrganigram
+
+@{
+    ViewBag.Title = Common.V_Organization_Chart;
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Company/", Text = Common.V_Company, Title= Common.V_Company},
+        new BreadCrumbItem{Url = "", Text = Common.V_Organization_Chart, Title= Common.V_Organization_Chart}
+    };
+     
+}
+
+@section pagetitle{
+   @Common.V_Organization_Chart
+}
+
+@section breadcrumb{
+    @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+<iframe src="/Company/Organigram/" style="width:100%;height:670px;border:none;"></iframe>

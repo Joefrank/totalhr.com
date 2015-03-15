@@ -1,6 +1,8 @@
 ﻿@using totalhr.Resources;
 @using totalhr.web.Helpers;
 @using totalhr.Shared.Models;
+@using GA = totalhr.web.Areas.Admin.Helpers;
+@using  totalhr.web.Areas.Admin.Models;
 
 @model totalhr.Shared.Models.TemplateInfo
 
@@ -16,62 +18,81 @@
     {
         itemList = new List<SelectListItem>{new SelectListItem{Value = "", Text = Common.V_None}};
     }
+
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Admin/Contract/", Text = AdminGeneric.V_Contract_Management, Title= AdminGeneric.V_Contract_Management},
+        new BreadCrumbItem{Url = "/Admin/Contract/Template", Text = AdminGeneric.V_Contract_Template_Management, Title= AdminGeneric.V_Contract_Template_Management},
+         new BreadCrumbItem{Url = "", Text = Contract.V_Template_Create, Title= Contract.V_Template_Create}                
+    };   
+}
+
+@section pagetitle{
+   @Contract.V_Template_Create
+}
+
+@section breadcrumb{
+    @Html.Raw(GA.GenericHelper.MakeBreadCrumb(breadCrumbItems))
 }
 
 
-<div class="container">
-      @section breadcrumb{
-            <a href="/Admin/" title="@AdminGeneric.V_Home">@AdminGeneric.V_Home</a> &gt;
-            <a href="/Admin/Contract/" title="@AdminGeneric.V_Contract_Management">@AdminGeneric.V_Contract_Management</a> &gt;
-          <a href="/Admin/Contract/Template/" title="@AdminGeneric.V_Contract_Template_Management">@AdminGeneric.V_Contract_Template_Management</a> &gt;
-            <span class="last">@Contract.V_Template_Create</span>
-        }
+    <div class="row-fluid">
 
-    <h1>@Contract.V_Template_Create</h1>
-
-    <div class="wide">
+       <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i> @Contract.V_Template_Details</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+                <a href="javascript:;" class="icon-remove"></a>
+            </span>
+        </div>
+        <div class="widget-body">
         <p>
             @Html.Raw(Contract.V_Template_Details_Intro)
         </p>
 
-        @using (Html.BeginForm("CreateTemplate", "Contract", FormMethod.Post))
+        @using (Html.BeginForm("CreateTemplate", "Contract", FormMethod.Post, new { @id = "formTemplate", @class = "form-horizontal" }))
         {
             
              @Html.ValidationSummary()
                        
-            <div class="formdiv midform">
-                <div class="wrapper">
-
-                  <fieldset>
-                   <legend>@Contract.V_Template_Details</legend>
-                
-                    <div class="line">
-                        <label>Name</label>
-                         <span>@Html.TextBoxFor(x => x.Name)</span>
-                        <span class="req">*</span>
+               <div class="control-group">
+                    <label class="control-label">@Contract.V_Template_Name</label>                
+                    <div class="controls">
+                        <div class="input-append">
+                                @Html.TextBoxFor(x => x.Name)
+                        </div>
                     </div>
-
-                    <div class="line">
-                        <label>Description</label>
-                         <span>@Html.TextAreaFor(x => x.Description)</span>                        
-                    </div>
-
-                    <div class="line">
-                        <label>Form</label>
-                         <span>@Html.DropDownListFor(x => x.FormId, itemList)</span>    
-                        <span><input type="button" value="New Form" onclick="OpenPopup('/Admin/FormEditor/CreateForm/1', 900, 600)" /></span>                    
-                    </div>
-
-                    <div class="line">
-                        <label>&nbsp;</label>
-                         <span><input type="submit" value="Save Template" /></span>
-                    </div>
-                  </fieldset>
-
                 </div>
-            </div>
-        }
+               <div class="control-group">
+                    <label class="control-label">@Contract.V_Description</label>                
+                    <div class="controls">
+                        <div class="input-append">
+                                @Html.TextAreaFor(x => x.Description)
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label class="control-label">@Contract.V_Form</label>                
+                    <div class="controls">
+                        <div class="input-append">
+                                @Html.DropDownListFor(x => x.FormId, itemList)
+                            &nbsp;
+                             <button type="button" class="btn btn-info" onclick="OpenPopup('/Admin/FormEditor/CreateForm/1', 900, 600);">
+                                 <i class="icon-ok icon-white"></i> @Contract.V_New_Form
+                             </button>
+                              
+                        </div>
+                    </div>
+                </div>
+            
+                 <div class="form-actions">
+                    <button type="button" class="btn btn-success" onclick="$('#formTemplate').submit();"><i class="icon-ok icon-white"></i> @Contract.V_Save_Template</button>
+                </div>                 
 
+        }
+        </div>
+        </div>
        
     </div>
-</div>
+

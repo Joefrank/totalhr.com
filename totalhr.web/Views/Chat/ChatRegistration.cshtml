@@ -1,0 +1,75 @@
+﻿@using totalhr.Resources
+@using totalhr.web.Areas.Admin.Helpers
+@using totalhr.web.Areas.Admin.Models
+
+@model totalhr.Shared.Models.ChatRoom
+
+@{
+    ViewBag.Title = Common.V_Chat_Registration;
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Chat/", Text = Common.V_Chat_Rooms, Title= Common.V_Chat_Rooms},
+        new BreadCrumbItem{Url = "", Text = Common.V_Chat_Registration, Title= Common.V_Chat_Registration}
+    };
+
+  
+}
+
+@section pagetitle{
+   @Common.V_Chat_Registration
+}
+
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+
+<div class="row-fluid">
+    <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i>@string.Format(Common.V_Chat_Entering_Room, Model.Name)</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+            </span>
+        </div>
+        <div class="widget-body"> 
+
+           <p>
+               @Common.V_Chat_Nickname_Intro
+           </p>
+            
+            <div>
+
+                @if(ViewBag.Error != null){
+                <p class="alert alert-block alert-error fade in">
+                    @ViewBag.Error   
+                </p>
+                }
+
+                <form id="frmReg" action="/Chat/Register/" method="post">
+                    <input type="hidden" name="roomId" value="@Model.DBid" />
+
+                    <div class="control-group">
+                        <label class="control-label">@Common.V_Chat_Nickname</label>
+                        <div class="controls">
+                            <input type="text" name="nickName" placeholder="@Common.V_Chat_Your_Nickname" class="input-large" />
+                            <span class="help-inline">&nbsp;</span>
+                        </div>
+                    </div>
+                                        
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success" onclick="$('#frmReg').submit();"><i class="icon-ok icon-white"></i> @Common.V_Enter</button>                        
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*     @section scripts
+{
+    <script src="/Scripts/Site/Chat.js"></script>
+}*@

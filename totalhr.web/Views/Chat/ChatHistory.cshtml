@@ -1,0 +1,55 @@
+﻿@model totalhr.Shared.Models.ChatRoom
+
+@{
+    ViewBag.Title = "title";
+    int messageIndex = 0;
+    Layout = null;
+}
+
+
+ <ul id="ulMessages" class="chats normal-chat">
+    @foreach (var msg in Model.ChatHistory)
+    {                        
+        <li class="@(messageIndex % 2 == 0 ? "in" : "out")">
+            @if(msg.ByUser != null){<img class="avatar" alt="" src="/Content/img/avatar1.jpg" />}
+                <div class="message ">
+                <span class="arrow"></span>
+                                    
+                <a href="#" class="name">@(msg.ByUser != null ? msg.ByUser.NickName : "")</a>
+                <span class="datetime">at @msg.When</span>
+				<span class="body">
+                    @System.Uri.UnescapeDataString(msg.Message)
+                </span>
+            </div>
+        </li>
+        messageIndex++;
+    }                      
+</ul>
+
+@*<div id="Lobby">
+    <p>
+        <b>@Model.Users.Count online users</b>
+    </p>
+
+    @foreach (var user in Model.Users)
+    {
+        @user.NickName<br />
+    }
+</div>
+<div id="ChatHistory">
+    @foreach (var msg in Model.ChatHistory)
+    {
+        <p>
+            <i>@msg.When</i><br />
+            @if (msg.ByUser != null)
+            {
+                <b>@(msg.ByUser.NickName + ":")</b> @msg.Message
+            }
+            else
+            {
+                <span style="color: Red">@msg.Message</span>
+            }
+        </p>
+    }
+</div>*@
+

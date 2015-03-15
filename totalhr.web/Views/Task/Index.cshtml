@@ -1,3 +1,27 @@
+﻿@using totalhr.Resources
+@using TH = totalhr.web.Helpers;
+@using AH = totalhr.web.Areas.Admin.Helpers;
+@using AM = totalhr.web.Areas.Admin.Models;
+
+@{
+    ViewBag.Title = Task.V_Task_Scheduler;
+
+    var breadCrumbItems = new List<AM.BreadCrumbItem>
+    {
+        new AM.BreadCrumbItem{Url = "", Text = Task.V_Task_Scheduler, Title= Task.V_Task_Scheduler}
+    };
+
+  
+}
+
+@section pagetitle{
+   @Task.V_Task_Scheduler
+}
+
+@section breadcrumb{
+    @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
 ﻿@{
     ViewBag.Title = "Task Scheduler Home";
 }
@@ -10,3 +34,4 @@
 <div>
     @Html.ActionLink("Search / Edit Recorded Tasks", "Search")
 </div>
+

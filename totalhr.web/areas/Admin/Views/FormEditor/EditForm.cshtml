@@ -1,12 +1,17 @@
-﻿@using totalhr.Resources
+﻿@using totalhr.Resources;
 
-@model totalhr.Shared.Models.FormInfo
+@model totalhr.data.EF.Form
 
-<!DOCTYPE html>
-<html ng-app="myApp">
+@{
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+    ViewBag.Title = FormGenerator.V_Form_Edit;
+    var schema = string.IsNullOrEmpty(Model.FormSchema) ? "''" : Model.FormSchema;
+}
 
-    <head>
-        <title>Form Editor</title>
+@section htmlattrib{ng-app="myApp"}
+
+@section headerScripts{
+
         <link data-require="bootstrap-css@3.*" data-semver="3.2.0" rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
         <script data-require="angular.js@1.2.*" data-semver="1.2.25" src="https://code.angularjs.org/1.2.25/angular.js"></script>
         <script data-require="angular-sanitize@1.2.25" data-semver="1.2.25" src="https://code.angularjs.org/1.2.25/angular-sanitize.js"></script>
@@ -14,63 +19,108 @@
         <script data-require="angular-form-gen@0.0.1" data-semver="0.0.1" src="https://cdn.rawgit.com/McNull/angular-form-gen/v0.0.1/dist/angular-form-gen.min.js"></script>
         <script data-require="showdown@0.3.*" data-semver="0.3.1" src="http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>
         <script data-require="angular-markdown-text@0.0.2" data-semver="0.0.2" src="https://cdn.rawgit.com/McNull/angular-markdown-text/v0.0.2/dist/angular-markdown-text.min.js"></script>
-        <link href="/Content/style.css" rel="stylesheet" />
+      
         
-        <div style="display: block">@Html.Raw(Model.Schema)</div>
         <script type="text/javascript">
             var myApp = angular.module('myApp', ['fg', 'ngSanitize', 'markdown']);
 
-            myApp.controller('MyController', function ($scope) {
+            myApp.controller('MyController', function ($scope, schemaService) {
                 
-                $scope.mySchema = @Html.Raw(Model.Schema);               
+                $scope.errorMessage = '';
 
-                $scope.ShowPreview = function () {
-                    window.open("/FormEditor/Preview/");
+                $scope.formId = @Model.Id;
+                
+                $scope.formName = '@Model.Name';
+
+                $scope.FormTypeId = @Model.FormTypeId;
+
+                $scope.mySchema = @Html.Raw(schema);               
+
+                $scope.myForm = {
+                    schema: $scope.mySchema
                 };
 
                 $scope.SaveForm = function () {
-
-                    alert(JSON.stringify($scope.myForm.schema));
+                   var formData = $scope.myForm;
+                    schemaService.addSchema(
+                        {
+                            Id: $scope.formId,
+                            FormTypeId : $scope.FormTypeId,
+                            Schema: JSON.stringify(formData.schema),
+                            FormName: $scope.formName
+                        },
+                        function(data) {
+                            //alert(data.Id + ' ' + data.Message);
+                            if(data.Id === -1){//failure
+                                alert(data.Message);
+                                $scope.errorMessage = data.Message;
+                            }else {//success
+                                $scope.formId = data.Id;
+                                $scope.errorMessage = '';
+                                alert('Form saved successfully!');
+                            }
+                        },
+                        function(data, response) {
+                            alert(data.Message);
+                            $scope.errorMessage = data.Message;
+                        }
+                    );
                 };
 
                 $scope.SubmitFormInput = function () {
                     alert(JSON.stringify($scope.myForm.data));
                 };
 
-                $scope.ChangeSchema = function () {
-                    alert(myApp.value('DBSchema'));
-                    $scope.myForm.schema = myApp.value('DBSchema');
-                    alert(JSON.stringify($scope.myForm.schema));
-                };
             });
+            
+
+            // I act a repository for the remote friend collection.
+            myApp.service(
+                "schemaService",
+                function($http, $q) {
+
+                    // Return public API.
+                    return ({
+                        addSchema: addSchema
+                    });
+
+                    function addSchema(data, success, fail) {
+
+                        $http({
+                            method: 'POST',
+                            url: "/Admin/FormEditor/SaveForm",
+                            data: data,
+                            async: false,
+                            dataType: "json"
+                        })
+                            .success(success)
+                            .error(fail);
+                    }
+                }
+            );
+            
         </script>
        
-         
-    </head>
-
-    <body>
-      
-        <header class="container">
-            <div class="jumbotron text-center">
-                <h1>@FormGenerator.V_Angular_Form_Header</h1>
-                <p>@FormGenerator.V_Used_By_TotalHR</p>
-            </div>
-        </header>
+   }  
+  
+@section head2{
+    <h1>@FormGenerator.V_Form_Edit</h1>
+}      
+     
        
         <div ng-controller="MyController" class="container">
 
-            <h1>
-                @FormGenerator.V_Form_Title
-            </h1>
-            <p>
-                @FormGenerator.V_Form_Intro
+            <div class="alert alert-danger" ng-if="errorMessage != ''" role="alert">
+                <strong>@FormGenerator.Error_Could_Not_Save_Data</strong>
+                <br />
+                <span ng-bind="errorMessage"></span>
+            </div>
+
+             <p>
+                @FormGenerator.V_Form_Name: <input type="text" id="Name" name="Name" ng-model="formName" />
             </p>
 
             <div fg-tabs class="needs-some-more-space">
-                <input type="button" value="Preview" ng-click="ShowPreview()" />
-                <input type="button" value="Save" ng-click="SaveForm()" />
-                <input type="button" value="Change Schema" ng-click="ChangeSchema()" />
-                
 
                 <div fg-tabs-pane="Schema Editor">
                     <form class="form-horizontal" name="myForm.$state">
@@ -80,14 +130,16 @@
                     </form>
                 </div>
 
-                <div fg-tabs-pane="Form Schema">
-                    <div jsonify="myForm.schema"></div>
+                <div fg-tabs-pane="Quick Preview" disabled="myForm.$state.$invalid">
+                    @Html.Partial("_FormQuickPreview")
                 </div>
 
             </div>
 
+             <input type="button" value="Save" ng-click="SaveForm()" />
         </div>
        
-    </body>
-
-</html>
+       @section footer{
+           
+                
+       }

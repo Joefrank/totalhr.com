@@ -262,6 +262,9 @@ namespace totalhr.services.Implementation
         public UserDetailsStruct GetUserDetailsForLogin(string UserName, string Password)
         {
             User user = this.GetActiveUser(UserName, Password);
+            if (user == null)
+                return null;
+
             user.lastvisit = DateTime.Now;
             user.novisits++;
             _userRepos.Save();

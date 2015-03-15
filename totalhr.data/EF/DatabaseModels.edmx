@@ -5,6 +5,48 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="TotalHRModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Absence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="IncludeSaturday" Type="bit" Nullable="false" />
+          <Property Name="IncludeSunday" Type="bit" Nullable="false" />
+          <Property Name="StatusId" Type="int" Nullable="false" />
+          <Property Name="Reason" Type="nvarchar" MaxLength="1500" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AbsenceReply">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AbsenceId" Type="int" Nullable="false" />
+          <Property Name="MangerId" Type="int" Nullable="false" />
+          <Property Name="DateOfReply" Type="datetime" Nullable="false" />
+          <Property Name="Approved" Type="bit" Nullable="false" />
+          <Property Name="MessageId" Type="int" />
+        </EntityType>
+        <EntityType Name="AbsenceSettingField">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FieldName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FieldTypeId" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="InputTypeId" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Mandatory" Type="bit" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="Identifier" Type="varchar" MaxLength="30" Nullable="false" />
+        </EntityType>
         <EntityType Name="Calendar">
           <Key>
             <PropertyRef Name="id" />
@@ -60,6 +102,42 @@
           <Property Name="lastmodified" Type="datetime" />
           <Property Name="lastmodifiedby" Type="int" />
           <Property Name="obsolete" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChatMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ChatUserid" Type="int" Nullable="false" />
+          <Property Name="ChatRoomId" Type="int" Nullable="false" />
+          <Property Name="MessageDate" Type="datetime" Nullable="false" />
+          <Property Name="MessageContent" Type="nvarchar" MaxLength="2000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChatRoom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Private" Type="bit" Nullable="false" />
+          <Property Name="InvitedUsers" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ChatRoomUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ChatRoomId" />
+          </Key>
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="ChatRoomId" Type="int" Nullable="false" />
+          <Property Name="NickName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LoggedOnTime" Type="datetime" Nullable="false" />
+          <Property Name="LastPing" Type="datetime" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
         </EntityType>
         <EntityType Name="Company">
           <Key>
@@ -395,6 +473,31 @@
           <Property Name="SetValue" Type="nvarchar" MaxLength="150" />
           <Property Name="FormId" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="GalleryAlbum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="NoPhotos" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GalleryPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AlbumId" Type="int" Nullable="false" />
+          <Property Name="FileId" Type="int" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Label" Type="nvarchar" MaxLength="255" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Glossary">
           <Key>
             <PropertyRef Name="Id" />
@@ -437,6 +540,37 @@
           <Property Name="LastUpdatedOn" Type="datetime" />
           <Property Name="RelatedGlossaryId" Type="int" Nullable="false" />
           <Property Name="Culture" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Notes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Note" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AddedById" Type="int" Nullable="false" />
+          <Property Name="AddedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedById" Type="int" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="UpdateLog" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="SenderName" Type="nvarchar" MaxLength="150" />
+          <Property Name="SenderEmail" Type="nvarchar" MaxLength="150" />
+          <Property Name="RecipientName" Type="nvarchar" MaxLength="100" />
+          <Property Name="RecipientEmail" Type="nvarchar" MaxLength="100" />
+          <Property Name="Content" Type="nvarchar" MaxLength="3000" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="SenderId" Type="int" Nullable="false" />
+          <Property Name="RecipientId" Type="int" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="statusId" Type="int" Nullable="false" />
+          <Property Name="RelatedItemId" Type="int" />
+          <Property Name="RelatedItemTypeId" Type="int" />
         </EntityType>
         <EntityType Name="Profile">
           <Key>
@@ -507,6 +641,51 @@
           <Property Name="SenderName" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="SenderEmail" Type="nvarchar" MaxLength="150" Nullable="false" />
         </EntityType>
+        <EntityType Name="TaskScheduler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="DepartmentId" Type="int" Nullable="false" />
+          <Property Name="ApprovalNeeded" Type="bit" Nullable="false" />
+          <Property Name="Approved" Type="bit" />
+          <Property Name="AssignedBy" Type="int" Nullable="false" />
+          <Property Name="AssignedTo" Type="int" Nullable="false" />
+          <Property Name="ScheduledDateTime" Type="datetime" />
+          <Property Name="ScheduleLog" Type="nvarchar(max)" />
+          <Property Name="AddedBy" Type="int" Nullable="false" />
+          <Property Name="UpdatedBy" Type="int" />
+          <Property Name="AddedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="ApprovedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="TimeRecording">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="StartTime" Type="datetime" Nullable="false" />
+          <Property Name="EndTime" Type="datetime" />
+          <Property Name="TypeId" Type="smallint" Nullable="false" />
+          <Property Name="AddedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" />
+          <Property Name="TimeStamp" Type="timestamp" StoreGeneratedPattern="Computed" Nullable="false" />
+          <Property Name="NoteId" Type="bigint" />
+          <Property Name="AddedById" Type="int" Nullable="false" />
+          <Property Name="UpdatedById" Type="int" />
+          <Property Name="TaskRefId" Type="int" />
+        </EntityType>
+        <EntityType Name="TimeRecordingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="smallint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="id" />
@@ -546,6 +725,17 @@
           <Property Name="chosenculture" Type="varchar" MaxLength="10" />
           <Property Name="departmentid" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="UserAbsenceFieldData">
+          <Key>
+            <PropertyRef Name="AbsenceFieldId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="AbsenceFieldId" Type="int" Nullable="false" />
+          <Property Name="UserId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="UserContract">
           <Key>
             <PropertyRef Name="id" />
@@ -573,6 +763,18 @@
           <Property Name="CreatedBy" Type="int" Nullable="false" />
           <Property Name="LastUpdated" Type="datetime" />
           <Property Name="LastUpdatedBy" Type="int" />
+        </EntityType>
+        <EntityType Name="UserContractFieldData">
+          <Key>
+            <PropertyRef Name="FieldId" />
+            <PropertyRef Name="Contractid" />
+          </Key>
+          <Property Name="FieldId" Type="int" Nullable="false" />
+          <Property Name="Contractid" Type="int" Nullable="false" />
+          <Property Name="FormId" Type="int" Nullable="false" />
+          <Property Name="Data" Type="nvarchar" MaxLength="1500" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="UserProfile">
           <Key>
@@ -608,6 +810,54 @@
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
+        <Association Name="FK_Absence_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Absence">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Absence_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Absence" Type="Self.Absence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Absence">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AbsenceReply_Notification">
+          <End Role="Notification" Type="Self.Notification" Multiplicity="0..1" />
+          <End Role="AbsenceReply" Type="Self.AbsenceReply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AbsenceReply">
+              <PropertyRef Name="MessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AbsenceReply_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="AbsenceReply" Type="Self.AbsenceReply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AbsenceReply">
+              <PropertyRef Name="MangerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Calendar_Company">
           <End Role="Company" Type="Self.Company" Multiplicity="1" />
           <End Role="Calendar" Type="Self.Calendar" Multiplicity="*" />
@@ -641,6 +891,66 @@
             </Principal>
             <Dependent Role="CalendarEvent">
               <PropertyRef Name="CalendarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatMessage_ChatMessage">
+          <End Role="ChatMessage" Type="Self.ChatMessage" Multiplicity="1" />
+          <End Role="ChatMessage1" Type="Self.ChatMessage" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ChatMessage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatMessage1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoom_ChatRoom">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ChatRoom" Type="Self.ChatRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ChatRoom">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoomUser_ChatRoom">
+          <End Role="ChatRoom" Type="Self.ChatRoom" Multiplicity="1" />
+          <End Role="ChatRoomUser" Type="Self.ChatRoomUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChatRoom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatRoomUser">
+              <PropertyRef Name="ChatRoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoomUser_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="ChatRoomUser" Type="Self.ChatRoomUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ChatRoomUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoomUser_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="ChatRoomUser" Type="Self.ChatRoomUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ChatRoomUser">
+              <PropertyRef Name="LastUpdatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -860,6 +1170,126 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_GalleryAlbum_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="GalleryAlbum" Type="Self.GalleryAlbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryAlbum">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryAlbum_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="GalleryAlbum" Type="Self.GalleryAlbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryAlbum">
+              <PropertyRef Name="LastUpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryPhoto_File">
+          <End Role="File" Type="Self.File" Multiplicity="1" />
+          <End Role="GalleryPhoto" Type="Self.GalleryPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryPhoto">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryPhoto_GalleryAlbum">
+          <End Role="GalleryAlbum" Type="Self.GalleryAlbum" Multiplicity="1" />
+          <End Role="GalleryPhoto" Type="Self.GalleryPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GalleryAlbum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GalleryPhoto">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryPhoto_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="GalleryPhoto" Type="Self.GalleryPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryPhoto">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="AddedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="UpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_User2">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Notes" Type="Self.Notes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notes">
+              <PropertyRef Name="AddedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="SenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_User1">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Notification" Type="Self.Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="RecipientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Profile_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="Profile" Type="Self.Profile" Multiplicity="*" />
@@ -908,6 +1338,78 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_TaskScheduler_Department">
+          <End Role="Department" Type="Self.Department" Multiplicity="1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="AssignedTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="AssignedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User2">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="AddedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User3">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User4">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Template_User">
           <End Role="User" Type="Self.User" Multiplicity="1" />
           <End Role="ContractTemplate" Type="Self.ContractTemplate" Multiplicity="*" />
@@ -917,6 +1419,78 @@
             </Principal>
             <Dependent Role="ContractTemplate">
               <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_Notes">
+          <End Role="Notes" Type="Self.Notes" Multiplicity="0..1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notes">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="NoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_TaskScheduler">
+          <End Role="TaskScheduler" Type="Self.TaskScheduler" Multiplicity="0..1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskScheduler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="TaskRefId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_TimeRecordingType">
+          <End Role="TimeRecordingType" Type="Self.TimeRecordingType" Multiplicity="1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TimeRecordingType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_User1">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="AddedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_User2">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="TimeRecording" Type="Self.TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="UpdatedById" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1178,10 +1752,16 @@
           </ReturnType>
         </Function>
         <EntityContainer Name="TotalHRModelStoreContainer">
+          <EntitySet Name="Absence" EntityType="Self.Absence" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AbsenceReply" EntityType="Self.AbsenceReply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AbsenceSettingField" EntityType="Self.AbsenceSettingField" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Calendar" EntityType="Self.Calendar" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CalendarAssociation" EntityType="Self.CalendarAssociation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CalendarEvent" EntityType="Self.CalendarEvent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CalEventReminderType" EntityType="Self.CalEventReminderType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChatMessage" EntityType="Self.ChatMessage" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChatRoom" EntityType="Self.ChatRoom" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChatRoomUser" EntityType="Self.ChatRoomUser" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyDocument" EntityType="Self.CompanyDocument" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CompanyDocumentDownloads" EntityType="Self.CompanyDocumentDownloads" Schema="dbo" store:Type="Tables" />
@@ -1206,20 +1786,45 @@
           <EntitySet Name="FormField" EntityType="Self.FormField" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormFieldJSon" EntityType="Self.FormFieldJSon" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormFieldValidationRule" EntityType="Self.FormFieldValidationRule" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GalleryAlbum" EntityType="Self.GalleryAlbum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GalleryPhoto" EntityType="Self.GalleryPhoto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Glossary" EntityType="Self.Glossary" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Label" EntityType="Self.Label" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notes" EntityType="Self.Notes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notification" EntityType="Self.Notification" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Profile" EntityType="Self.Profile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Recipient" EntityType="Self.Recipient" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecipientList" EntityType="Self.RecipientList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ScheduledNotifications" EntityType="Self.ScheduledNotifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TaskScheduler" EntityType="Self.TaskScheduler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimeRecording" EntityType="Self.TimeRecording" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TimeRecordingType" EntityType="Self.TimeRecordingType" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserAbsenceFieldData" EntityType="Self.UserAbsenceFieldData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserContract" EntityType="Self.UserContract" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserContractData" EntityType="Self.UserContractData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserContractFieldData" EntityType="Self.UserContractFieldData" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserProfilePicture" EntityType="Self.UserProfilePicture" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Absence_User" Association="Self.FK_Absence_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Absence" EntitySet="Absence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Absence_User1" Association="Self.FK_Absence_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Absence" EntitySet="Absence" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AbsenceReply_Notification" Association="Self.FK_AbsenceReply_Notification">
+            <End Role="Notification" EntitySet="Notification" />
+            <End Role="AbsenceReply" EntitySet="AbsenceReply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AbsenceReply_User" Association="Self.FK_AbsenceReply_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="AbsenceReply" EntitySet="AbsenceReply" />
+          </AssociationSet>
           <AssociationSet Name="FK_Calendar_Company" Association="Self.FK_Calendar_Company">
             <End Role="Company" EntitySet="Company" />
             <End Role="Calendar" EntitySet="Calendar" />
@@ -1231,6 +1836,26 @@
           <AssociationSet Name="FK_CalendarEvent_Calendar" Association="Self.FK_CalendarEvent_Calendar">
             <End Role="Calendar" EntitySet="Calendar" />
             <End Role="CalendarEvent" EntitySet="CalendarEvent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatMessage_ChatMessage" Association="Self.FK_ChatMessage_ChatMessage">
+            <End Role="ChatMessage" EntitySet="ChatMessage" />
+            <End Role="ChatMessage1" EntitySet="ChatMessage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoom_ChatRoom" Association="Self.FK_ChatRoom_ChatRoom">
+            <End Role="User" EntitySet="User" />
+            <End Role="ChatRoom" EntitySet="ChatRoom" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoomUser_ChatRoom" Association="Self.FK_ChatRoomUser_ChatRoom">
+            <End Role="ChatRoom" EntitySet="ChatRoom" />
+            <End Role="ChatRoomUser" EntitySet="ChatRoomUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoomUser_User" Association="Self.FK_ChatRoomUser_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="ChatRoomUser" EntitySet="ChatRoomUser" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoomUser_User1" Association="Self.FK_ChatRoomUser_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="ChatRoomUser" EntitySet="ChatRoomUser" />
           </AssociationSet>
           <AssociationSet Name="FK_CompanyDocument_File" Association="Self.FK_CompanyDocument_File">
             <End Role="File" EntitySet="File" />
@@ -1304,6 +1929,46 @@
             <End Role="User" EntitySet="User" />
             <End Role="FormFieldValidationRule" EntitySet="FormFieldValidationRule" />
           </AssociationSet>
+          <AssociationSet Name="FK_GalleryAlbum_User" Association="Self.FK_GalleryAlbum_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="GalleryAlbum" EntitySet="GalleryAlbum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryAlbum_User1" Association="Self.FK_GalleryAlbum_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="GalleryAlbum" EntitySet="GalleryAlbum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryPhoto_File" Association="Self.FK_GalleryPhoto_File">
+            <End Role="File" EntitySet="File" />
+            <End Role="GalleryPhoto" EntitySet="GalleryPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryPhoto_GalleryAlbum" Association="Self.FK_GalleryPhoto_GalleryAlbum">
+            <End Role="GalleryAlbum" EntitySet="GalleryAlbum" />
+            <End Role="GalleryPhoto" EntitySet="GalleryPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryPhoto_User" Association="Self.FK_GalleryPhoto_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="GalleryPhoto" EntitySet="GalleryPhoto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_User" Association="Self.FK_Notes_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_User1" Association="Self.FK_Notes_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_User2" Association="Self.FK_Notes_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notes" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_User" Association="Self.FK_Notification_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_User1" Association="Self.FK_Notification_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="Notification" EntitySet="Notification" />
+          </AssociationSet>
           <AssociationSet Name="FK_Profile_User" Association="Self.FK_Profile_User">
             <End Role="User" EntitySet="User" />
             <End Role="Profile" EntitySet="Profile" />
@@ -1320,9 +1985,57 @@
             <End Role="User" EntitySet="User" />
             <End Role="Roles" EntitySet="Roles" />
           </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_Department" Association="Self.FK_TaskScheduler_Department">
+            <End Role="Department" EntitySet="Department" />
+            <End Role="TaskScheduler" EntitySet="TaskScheduler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User" Association="Self.FK_TaskScheduler_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TaskScheduler" EntitySet="TaskScheduler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User1" Association="Self.FK_TaskScheduler_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="TaskScheduler" EntitySet="TaskScheduler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User2" Association="Self.FK_TaskScheduler_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="TaskScheduler" EntitySet="TaskScheduler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User3" Association="Self.FK_TaskScheduler_User3">
+            <End Role="User" EntitySet="User" />
+            <End Role="TaskScheduler" EntitySet="TaskScheduler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User4" Association="Self.FK_TaskScheduler_User4">
+            <End Role="User" EntitySet="User" />
+            <End Role="TaskScheduler" EntitySet="TaskScheduler" />
+          </AssociationSet>
           <AssociationSet Name="FK_Template_User" Association="Self.FK_Template_User">
             <End Role="User" EntitySet="User" />
             <End Role="ContractTemplate" EntitySet="ContractTemplate" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_Notes" Association="Self.FK_TimeRecording_Notes">
+            <End Role="Notes" EntitySet="Notes" />
+            <End Role="TimeRecording" EntitySet="TimeRecording" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_TaskScheduler" Association="Self.FK_TimeRecording_TaskScheduler">
+            <End Role="TaskScheduler" EntitySet="TaskScheduler" />
+            <End Role="TimeRecording" EntitySet="TimeRecording" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_TimeRecordingType" Association="Self.FK_TimeRecording_TimeRecordingType">
+            <End Role="TimeRecordingType" EntitySet="TimeRecordingType" />
+            <End Role="TimeRecording" EntitySet="TimeRecording" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_User" Association="Self.FK_TimeRecording_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="TimeRecording" EntitySet="TimeRecording" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_User1" Association="Self.FK_TimeRecording_User1">
+            <End Role="User" EntitySet="User" />
+            <End Role="TimeRecording" EntitySet="TimeRecording" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_User2" Association="Self.FK_TimeRecording_User2">
+            <End Role="User" EntitySet="User" />
+            <End Role="TimeRecording" EntitySet="TimeRecording" />
           </AssociationSet>
           <AssociationSet Name="FK_User_Department" Association="Self.FK_User_Department">
             <End Role="Department" EntitySet="Department" />
@@ -1680,6 +2393,7 @@
           <NavigationProperty Name="Users" Relationship="Self.FK_User_Department" FromRole="Department" ToRole="User" />
           <Property Name="LineManagerId" Type="Int32" />
           <NavigationProperty Name="User" Relationship="TotalHRModel.FK_Department_User" FromRole="Department" ToRole="User" />
+          <NavigationProperty Name="TaskSchedulers" Relationship="TotalHRModel.FK_TaskScheduler_Department" FromRole="Department" ToRole="TaskScheduler" />
         </EntityType>
         <EntityType Name="EmailTemplate">
           <Key>
@@ -1738,6 +2452,7 @@
           <Property Name="lastupdatedby" Type="Int32" />
           <NavigationProperty Name="CompanyDocuments" Relationship="Self.FK_CompanyDocument_File" FromRole="File" ToRole="CompanyDocument" />
           <NavigationProperty Name="UserProfilePictures" Relationship="Self.FK_UserProfilePicture_File" FromRole="File" ToRole="UserProfilePicture" />
+          <NavigationProperty Name="GalleryPhotoes" Relationship="TotalHRModel.FK_GalleryPhoto_File" FromRole="File" ToRole="GalleryPhoto" />
         </EntityType>
         <EntityType Name="Form">
           <Key>
@@ -1963,6 +2678,28 @@
           <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
           <NavigationProperty Name="FormFieldValidationRules" Relationship="TotalHRModel.FK_FormFieldValidationRule_User" FromRole="User" ToRole="FormFieldValidationRule" />
           <NavigationProperty Name="Departments" Relationship="TotalHRModel.FK_Department_User" FromRole="User" ToRole="Department" />
+          <NavigationProperty Name="ChatRooms" Relationship="TotalHRModel.FK_ChatRoom_ChatRoom" FromRole="User" ToRole="ChatRoom" />
+          <NavigationProperty Name="ChatRoomUsers" Relationship="TotalHRModel.FK_ChatRoomUser_User" FromRole="User" ToRole="ChatRoomUser" />
+          <NavigationProperty Name="ChatRoomUsers1" Relationship="TotalHRModel.FK_ChatRoomUser_User1" FromRole="User" ToRole="ChatRoomUser" />
+          <NavigationProperty Name="Absences" Relationship="TotalHRModel.FK_Absence_User" FromRole="User" ToRole="Absence" />
+          <NavigationProperty Name="Absences1" Relationship="TotalHRModel.FK_Absence_User1" FromRole="User" ToRole="Absence" />
+          <NavigationProperty Name="AbsenceReplies" Relationship="TotalHRModel.FK_AbsenceReply_User" FromRole="User" ToRole="AbsenceReply" />
+          <NavigationProperty Name="Notes" Relationship="TotalHRModel.FK_Notes_User" FromRole="User" ToRole="Note" />
+          <NavigationProperty Name="Notes1" Relationship="TotalHRModel.FK_Notes_User1" FromRole="User" ToRole="Note" />
+          <NavigationProperty Name="Notes2" Relationship="TotalHRModel.FK_Notes_User2" FromRole="User" ToRole="Note" />
+          <NavigationProperty Name="Notifications" Relationship="TotalHRModel.FK_Notification_User" FromRole="User" ToRole="Notification" />
+          <NavigationProperty Name="Notifications1" Relationship="TotalHRModel.FK_Notification_User1" FromRole="User" ToRole="Notification" />
+          <NavigationProperty Name="TaskSchedulers" Relationship="TotalHRModel.FK_TaskScheduler_User" FromRole="User" ToRole="TaskScheduler" />
+          <NavigationProperty Name="TaskSchedulers1" Relationship="TotalHRModel.FK_TaskScheduler_User1" FromRole="User" ToRole="TaskScheduler" />
+          <NavigationProperty Name="TaskSchedulers2" Relationship="TotalHRModel.FK_TaskScheduler_User2" FromRole="User" ToRole="TaskScheduler" />
+          <NavigationProperty Name="TaskSchedulers3" Relationship="TotalHRModel.FK_TaskScheduler_User3" FromRole="User" ToRole="TaskScheduler" />
+          <NavigationProperty Name="TaskSchedulers4" Relationship="TotalHRModel.FK_TaskScheduler_User4" FromRole="User" ToRole="TaskScheduler" />
+          <NavigationProperty Name="TimeRecordings" Relationship="TotalHRModel.FK_TimeRecording_User" FromRole="User" ToRole="TimeRecording" />
+          <NavigationProperty Name="TimeRecordings1" Relationship="TotalHRModel.FK_TimeRecording_User1" FromRole="User" ToRole="TimeRecording" />
+          <NavigationProperty Name="TimeRecordings2" Relationship="TotalHRModel.FK_TimeRecording_User2" FromRole="User" ToRole="TimeRecording" />
+          <NavigationProperty Name="GalleryAlbums" Relationship="TotalHRModel.FK_GalleryAlbum_User" FromRole="User" ToRole="GalleryAlbum" />
+          <NavigationProperty Name="GalleryAlbums1" Relationship="TotalHRModel.FK_GalleryAlbum_User1" FromRole="User" ToRole="GalleryAlbum" />
+          <NavigationProperty Name="GalleryPhotoes" Relationship="TotalHRModel.FK_GalleryPhoto_User" FromRole="User" ToRole="GalleryPhoto" />
         </EntityType>
         <EntityType Name="UserContract">
           <Key>
@@ -2763,6 +3500,145 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Department" EntitySet="Departments" />
           </AssociationSet>
+          <EntitySet Name="UserContractFieldDatas" EntityType="TotalHRModel.UserContractFieldData" />
+          <EntitySet Name="ChatMessages" EntityType="TotalHRModel.ChatMessage" />
+          <EntitySet Name="ChatRooms" EntityType="TotalHRModel.ChatRoom" />
+          <EntitySet Name="ChatRoomUsers" EntityType="TotalHRModel.ChatRoomUser" />
+          <AssociationSet Name="FK_ChatMessage_ChatMessage" Association="TotalHRModel.FK_ChatMessage_ChatMessage">
+            <End Role="ChatMessage" EntitySet="ChatMessages" />
+            <End Role="ChatMessage1" EntitySet="ChatMessages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoom_ChatRoom" Association="TotalHRModel.FK_ChatRoom_ChatRoom">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ChatRoom" EntitySet="ChatRooms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoomUser_ChatRoom" Association="TotalHRModel.FK_ChatRoomUser_ChatRoom">
+            <End Role="ChatRoom" EntitySet="ChatRooms" />
+            <End Role="ChatRoomUser" EntitySet="ChatRoomUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoomUser_User" Association="TotalHRModel.FK_ChatRoomUser_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ChatRoomUser" EntitySet="ChatRoomUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ChatRoomUser_User1" Association="TotalHRModel.FK_ChatRoomUser_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ChatRoomUser" EntitySet="ChatRoomUsers" />
+          </AssociationSet>
+          <EntitySet Name="Absences" EntityType="TotalHRModel.Absence" />
+          <EntitySet Name="AbsenceReplies" EntityType="TotalHRModel.AbsenceReply" />
+          <EntitySet Name="Notes" EntityType="TotalHRModel.Note" />
+          <EntitySet Name="Notifications" EntityType="TotalHRModel.Notification" />
+          <EntitySet Name="TaskSchedulers" EntityType="TotalHRModel.TaskScheduler" />
+          <EntitySet Name="TimeRecordings" EntityType="TotalHRModel.TimeRecording" />
+          <EntitySet Name="TimeRecordingTypes" EntityType="TotalHRModel.TimeRecordingType" />
+          <AssociationSet Name="FK_Absence_User" Association="TotalHRModel.FK_Absence_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Absence" EntitySet="Absences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Absence_User1" Association="TotalHRModel.FK_Absence_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Absence" EntitySet="Absences" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AbsenceReply_Notification" Association="TotalHRModel.FK_AbsenceReply_Notification">
+            <End Role="Notification" EntitySet="Notifications" />
+            <End Role="AbsenceReply" EntitySet="AbsenceReplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AbsenceReply_User" Association="TotalHRModel.FK_AbsenceReply_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AbsenceReply" EntitySet="AbsenceReplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_Department" Association="TotalHRModel.FK_TaskScheduler_Department">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="TaskScheduler" EntitySet="TaskSchedulers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_User" Association="TotalHRModel.FK_Notes_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Note" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_User1" Association="TotalHRModel.FK_Notes_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Note" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notes_User2" Association="TotalHRModel.FK_Notes_User2">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Note" EntitySet="Notes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_Notes" Association="TotalHRModel.FK_TimeRecording_Notes">
+            <End Role="Note" EntitySet="Notes" />
+            <End Role="TimeRecording" EntitySet="TimeRecordings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_User" Association="TotalHRModel.FK_Notification_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Notification_User1" Association="TotalHRModel.FK_Notification_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Notification" EntitySet="Notifications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User" Association="TotalHRModel.FK_TaskScheduler_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TaskScheduler" EntitySet="TaskSchedulers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User1" Association="TotalHRModel.FK_TaskScheduler_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TaskScheduler" EntitySet="TaskSchedulers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User2" Association="TotalHRModel.FK_TaskScheduler_User2">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TaskScheduler" EntitySet="TaskSchedulers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User3" Association="TotalHRModel.FK_TaskScheduler_User3">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TaskScheduler" EntitySet="TaskSchedulers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TaskScheduler_User4" Association="TotalHRModel.FK_TaskScheduler_User4">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TaskScheduler" EntitySet="TaskSchedulers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_TaskScheduler" Association="TotalHRModel.FK_TimeRecording_TaskScheduler">
+            <End Role="TaskScheduler" EntitySet="TaskSchedulers" />
+            <End Role="TimeRecording" EntitySet="TimeRecordings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_TimeRecordingType" Association="TotalHRModel.FK_TimeRecording_TimeRecordingType">
+            <End Role="TimeRecordingType" EntitySet="TimeRecordingTypes" />
+            <End Role="TimeRecording" EntitySet="TimeRecordings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_User" Association="TotalHRModel.FK_TimeRecording_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TimeRecording" EntitySet="TimeRecordings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_User1" Association="TotalHRModel.FK_TimeRecording_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TimeRecording" EntitySet="TimeRecordings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TimeRecording_User2" Association="TotalHRModel.FK_TimeRecording_User2">
+            <End Role="User" EntitySet="Users" />
+            <End Role="TimeRecording" EntitySet="TimeRecordings" />
+          </AssociationSet>
+          <EntitySet Name="AbsenceSettingFields" EntityType="TotalHRModel.AbsenceSettingField" />
+          <EntitySet Name="UserAbsenceFieldDatas" EntityType="TotalHRModel.UserAbsenceFieldData" />
+          <EntitySet Name="GalleryAlbums" EntityType="TotalHRModel.GalleryAlbum" />
+          <EntitySet Name="GalleryPhotoes" EntityType="TotalHRModel.GalleryPhoto" />
+          <AssociationSet Name="FK_GalleryPhoto_File" Association="TotalHRModel.FK_GalleryPhoto_File">
+            <End Role="File" EntitySet="Files" />
+            <End Role="GalleryPhoto" EntitySet="GalleryPhotoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryAlbum_User" Association="TotalHRModel.FK_GalleryAlbum_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="GalleryAlbum" EntitySet="GalleryAlbums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryAlbum_User1" Association="TotalHRModel.FK_GalleryAlbum_User1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="GalleryAlbum" EntitySet="GalleryAlbums" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryPhoto_GalleryAlbum" Association="TotalHRModel.FK_GalleryPhoto_GalleryAlbum">
+            <End Role="GalleryAlbum" EntitySet="GalleryAlbums" />
+            <End Role="GalleryPhoto" EntitySet="GalleryPhotoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GalleryPhoto_User" Association="TotalHRModel.FK_GalleryPhoto_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="GalleryPhoto" EntitySet="GalleryPhotoes" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetCompanyFoldersByUser_Result">
           <Property Type="Int32" Name="documentId" Nullable="false" />
@@ -3017,6 +3893,618 @@
             </Principal>
             <Dependent Role="Department">
               <PropertyRef Name="LineManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="UserContractFieldData">
+          <Key>
+            <PropertyRef Name="FieldId" />
+            <PropertyRef Name="Contractid" />
+          </Key>
+          <Property Name="FieldId" Type="Int32" Nullable="false" />
+          <Property Name="Contractid" Type="Int32" Nullable="false" />
+          <Property Name="FormId" Type="Int32" Nullable="false" />
+          <Property Name="Data" Type="String" Nullable="false" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ChatMessage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ChatUserid" Type="Int32" Nullable="false" />
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
+          <Property Name="MessageDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="MessageContent" Type="String" Nullable="false" MaxLength="2000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ChatMessage1" Relationship="TotalHRModel.FK_ChatMessage_ChatMessage" FromRole="ChatMessage" ToRole="ChatMessage1" />
+          <NavigationProperty Name="ChatMessage2" Relationship="TotalHRModel.FK_ChatMessage_ChatMessage" FromRole="ChatMessage1" ToRole="ChatMessage" />
+        </EntityType>
+        <EntityType Name="ChatRoom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Private" Type="Boolean" Nullable="false" />
+          <Property Name="InvitedUsers" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_ChatRoom_ChatRoom" FromRole="ChatRoom" ToRole="User" />
+          <NavigationProperty Name="ChatRoomUsers" Relationship="TotalHRModel.FK_ChatRoomUser_ChatRoom" FromRole="ChatRoom" ToRole="ChatRoomUser" />
+        </EntityType>
+        <EntityType Name="ChatRoomUser">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="ChatRoomId" />
+          </Key>
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="ChatRoomId" Type="Int32" Nullable="false" />
+          <Property Name="NickName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LoggedOnTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastPing" Type="DateTime" Precision="3" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <NavigationProperty Name="ChatRoom" Relationship="TotalHRModel.FK_ChatRoomUser_ChatRoom" FromRole="ChatRoomUser" ToRole="ChatRoom" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_ChatRoomUser_User" FromRole="ChatRoomUser" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_ChatRoomUser_User1" FromRole="ChatRoomUser" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_ChatMessage_ChatMessage">
+          <End Type="TotalHRModel.ChatMessage" Role="ChatMessage" Multiplicity="1" />
+          <End Type="TotalHRModel.ChatMessage" Role="ChatMessage1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ChatMessage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatMessage1">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoom_ChatRoom">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.ChatRoom" Role="ChatRoom" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ChatRoom">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoomUser_ChatRoom">
+          <End Type="TotalHRModel.ChatRoom" Role="ChatRoom" Multiplicity="1" />
+          <End Type="TotalHRModel.ChatRoomUser" Role="ChatRoomUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ChatRoom">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ChatRoomUser">
+              <PropertyRef Name="ChatRoomId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoomUser_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.ChatRoomUser" Role="ChatRoomUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ChatRoomUser">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ChatRoomUser_User1">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.ChatRoomUser" Role="ChatRoomUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ChatRoomUser">
+              <PropertyRef Name="LastUpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Absence">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="IncludeSaturday" Type="Boolean" Nullable="false" />
+          <Property Name="IncludeSunday" Type="Boolean" Nullable="false" />
+          <Property Name="StatusId" Type="Int32" Nullable="false" />
+          <Property Name="Reason" Type="String" MaxLength="1500" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_Absence_User" FromRole="Absence" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_Absence_User1" FromRole="Absence" ToRole="User" />
+        </EntityType>
+        <EntityType Name="AbsenceReply">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AbsenceId" Type="Int32" Nullable="false" />
+          <Property Name="MangerId" Type="Int32" Nullable="false" />
+          <Property Name="DateOfReply" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Approved" Type="Boolean" Nullable="false" />
+          <Property Name="MessageId" Type="Int32" />
+          <NavigationProperty Name="Notification" Relationship="TotalHRModel.FK_AbsenceReply_Notification" FromRole="AbsenceReply" ToRole="Notification" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_AbsenceReply_User" FromRole="AbsenceReply" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Note">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Note1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddedById" Type="Int32" Nullable="false" />
+          <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedById" Type="Int32" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateLog" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_Notes_User" FromRole="Note" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_Notes_User1" FromRole="Note" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="TotalHRModel.FK_Notes_User2" FromRole="Note" ToRole="User" />
+          <NavigationProperty Name="TimeRecordings" Relationship="TotalHRModel.FK_TimeRecording_Notes" FromRole="Note" ToRole="TimeRecording" />
+        </EntityType>
+        <EntityType Name="Notification">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Subject" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SenderName" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="SenderEmail" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="RecipientName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="RecipientEmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Content" Type="String" Nullable="false" MaxLength="3000" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SenderId" Type="Int32" Nullable="false" />
+          <Property Name="RecipientId" Type="Int32" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="statusId" Type="Int32" Nullable="false" />
+          <Property Name="RelatedItemId" Type="Int32" />
+          <Property Name="RelatedItemTypeId" Type="Int32" />
+          <NavigationProperty Name="AbsenceReplies" Relationship="TotalHRModel.FK_AbsenceReply_Notification" FromRole="Notification" ToRole="AbsenceReply" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_Notification_User" FromRole="Notification" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_Notification_User1" FromRole="Notification" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TaskScheduler">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="ApprovalNeeded" Type="Boolean" Nullable="false" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="AssignedBy" Type="Int32" Nullable="false" />
+          <Property Name="AssignedTo" Type="Int32" Nullable="false" />
+          <Property Name="ScheduledDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ScheduleLog" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddedBy" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedBy" Type="Int32" />
+          <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="ApprovedBy" Type="Int32" />
+          <NavigationProperty Name="Department" Relationship="TotalHRModel.FK_TaskScheduler_Department" FromRole="TaskScheduler" ToRole="Department" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_TaskScheduler_User" FromRole="TaskScheduler" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_TaskScheduler_User1" FromRole="TaskScheduler" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="TotalHRModel.FK_TaskScheduler_User2" FromRole="TaskScheduler" ToRole="User" />
+          <NavigationProperty Name="User3" Relationship="TotalHRModel.FK_TaskScheduler_User3" FromRole="TaskScheduler" ToRole="User" />
+          <NavigationProperty Name="User4" Relationship="TotalHRModel.FK_TaskScheduler_User4" FromRole="TaskScheduler" ToRole="User" />
+          <NavigationProperty Name="TimeRecordings" Relationship="TotalHRModel.FK_TimeRecording_TaskScheduler" FromRole="TaskScheduler" ToRole="TimeRecording" />
+        </EntityType>
+        <EntityType Name="TimeRecording">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="StartTime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndTime" Type="DateTime" Precision="3" />
+          <Property Name="TypeId" Type="Int16" Nullable="false" />
+          <Property Name="AddedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="NoteId" Type="Int64" />
+          <Property Name="AddedById" Type="Int32" Nullable="false" />
+          <Property Name="UpdatedById" Type="Int32" />
+          <Property Name="TaskRefId" Type="Int32" />
+          <NavigationProperty Name="Note" Relationship="TotalHRModel.FK_TimeRecording_Notes" FromRole="TimeRecording" ToRole="Note" />
+          <NavigationProperty Name="TaskScheduler" Relationship="TotalHRModel.FK_TimeRecording_TaskScheduler" FromRole="TimeRecording" ToRole="TaskScheduler" />
+          <NavigationProperty Name="TimeRecordingType" Relationship="TotalHRModel.FK_TimeRecording_TimeRecordingType" FromRole="TimeRecording" ToRole="TimeRecordingType" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_TimeRecording_User" FromRole="TimeRecording" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_TimeRecording_User1" FromRole="TimeRecording" ToRole="User" />
+          <NavigationProperty Name="User2" Relationship="TotalHRModel.FK_TimeRecording_User2" FromRole="TimeRecording" ToRole="User" />
+        </EntityType>
+        <EntityType Name="TimeRecordingType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int16" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TimeRecordings" Relationship="TotalHRModel.FK_TimeRecording_TimeRecordingType" FromRole="TimeRecordingType" ToRole="TimeRecording" />
+        </EntityType>
+        <Association Name="FK_Absence_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.Absence" Role="Absence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Absence">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Absence_User1">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.Absence" Role="Absence" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Absence">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AbsenceReply_Notification">
+          <End Type="TotalHRModel.Notification" Role="Notification" Multiplicity="0..1" />
+          <End Type="TotalHRModel.AbsenceReply" Role="AbsenceReply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Notification">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AbsenceReply">
+              <PropertyRef Name="MessageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AbsenceReply_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.AbsenceReply" Role="AbsenceReply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="AbsenceReply">
+              <PropertyRef Name="MangerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_Department">
+          <End Type="TotalHRModel.Department" Role="Department" Multiplicity="1" />
+          <End Type="TotalHRModel.TaskScheduler" Role="TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="DepartmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.Note" Role="Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="AddedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_User1">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.Note" Role="Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="UpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notes_User2">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.Note" Role="Note" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Note">
+              <PropertyRef Name="AddedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_Notes">
+          <End Type="TotalHRModel.Note" Role="Note" Multiplicity="0..1" />
+          <End Type="TotalHRModel.TimeRecording" Role="TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Note">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="NoteId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="SenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Notification_User1">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.Notification" Role="Notification" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Notification">
+              <PropertyRef Name="RecipientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.TaskScheduler" Role="TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="AssignedTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User1">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.TaskScheduler" Role="TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="AssignedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User2">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.TaskScheduler" Role="TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="AddedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User3">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.TaskScheduler" Role="TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="UpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TaskScheduler_User4">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.TaskScheduler" Role="TaskScheduler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TaskScheduler">
+              <PropertyRef Name="ApprovedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_TaskScheduler">
+          <End Type="TotalHRModel.TaskScheduler" Role="TaskScheduler" Multiplicity="0..1" />
+          <End Type="TotalHRModel.TimeRecording" Role="TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaskScheduler">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="TaskRefId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_TimeRecordingType">
+          <End Type="TotalHRModel.TimeRecordingType" Role="TimeRecordingType" Multiplicity="1" />
+          <End Type="TotalHRModel.TimeRecording" Role="TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TimeRecordingType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.TimeRecording" Role="TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_User1">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.TimeRecording" Role="TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="AddedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TimeRecording_User2">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.TimeRecording" Role="TimeRecording" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="TimeRecording">
+              <PropertyRef Name="UpdatedById" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AbsenceSettingField">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FieldName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FieldTypeId" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="InputTypeId" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Mandatory" Type="Boolean" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="Identifier" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserAbsenceFieldData">
+          <Key>
+            <PropertyRef Name="AbsenceFieldId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="AbsenceFieldId" Type="Int32" Nullable="false" />
+          <Property Name="UserId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GalleryAlbum">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="NoPhotos" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_GalleryAlbum_User" FromRole="GalleryAlbum" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="TotalHRModel.FK_GalleryAlbum_User1" FromRole="GalleryAlbum" ToRole="User" />
+          <NavigationProperty Name="GalleryPhotoes" Relationship="TotalHRModel.FK_GalleryPhoto_GalleryAlbum" FromRole="GalleryAlbum" ToRole="GalleryPhoto" />
+        </EntityType>
+        <EntityType Name="GalleryPhoto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AlbumId" Type="Int32" Nullable="false" />
+          <Property Name="FileId" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="File" Relationship="TotalHRModel.FK_GalleryPhoto_File" FromRole="GalleryPhoto" ToRole="File" />
+          <NavigationProperty Name="GalleryAlbum" Relationship="TotalHRModel.FK_GalleryPhoto_GalleryAlbum" FromRole="GalleryPhoto" ToRole="GalleryAlbum" />
+          <NavigationProperty Name="User" Relationship="TotalHRModel.FK_GalleryPhoto_User" FromRole="GalleryPhoto" ToRole="User" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Label" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_GalleryPhoto_File">
+          <End Type="TotalHRModel.File" Role="File" Multiplicity="1" />
+          <End Type="TotalHRModel.GalleryPhoto" Role="GalleryPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="File">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryPhoto">
+              <PropertyRef Name="FileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryAlbum_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.GalleryAlbum" Role="GalleryAlbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryAlbum">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryAlbum_User1">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="TotalHRModel.GalleryAlbum" Role="GalleryAlbum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryAlbum">
+              <PropertyRef Name="LastUpdatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryPhoto_GalleryAlbum">
+          <End Type="TotalHRModel.GalleryAlbum" Role="GalleryAlbum" Multiplicity="1" />
+          <End Type="TotalHRModel.GalleryPhoto" Role="GalleryPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GalleryAlbum">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="GalleryPhoto">
+              <PropertyRef Name="AlbumId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GalleryPhoto_User">
+          <End Type="TotalHRModel.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHRModel.GalleryPhoto" Role="GalleryPhoto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="GalleryPhoto">
+              <PropertyRef Name="CreatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -3866,6 +5354,220 @@
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserContractFieldDatas">
+            <EntityTypeMapping TypeName="TotalHRModel.UserContractFieldData">
+              <MappingFragment StoreEntitySet="UserContractFieldData">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="FormId" ColumnName="FormId" />
+                <ScalarProperty Name="Contractid" ColumnName="Contractid" />
+                <ScalarProperty Name="FieldId" ColumnName="FieldId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatMessages">
+            <EntityTypeMapping TypeName="TotalHRModel.ChatMessage">
+              <MappingFragment StoreEntitySet="ChatMessage">
+                <ScalarProperty Name="MessageContent" ColumnName="MessageContent" />
+                <ScalarProperty Name="MessageDate" ColumnName="MessageDate" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+                <ScalarProperty Name="ChatUserid" ColumnName="ChatUserid" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatRooms">
+            <EntityTypeMapping TypeName="TotalHRModel.ChatRoom">
+              <MappingFragment StoreEntitySet="ChatRoom">
+                <ScalarProperty Name="InvitedUsers" ColumnName="InvitedUsers" />
+                <ScalarProperty Name="Private" ColumnName="Private" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChatRoomUsers">
+            <EntityTypeMapping TypeName="TotalHRModel.ChatRoomUser">
+              <MappingFragment StoreEntitySet="ChatRoomUser">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="LastPing" ColumnName="LastPing" />
+                <ScalarProperty Name="LoggedOnTime" ColumnName="LoggedOnTime" />
+                <ScalarProperty Name="NickName" ColumnName="NickName" />
+                <ScalarProperty Name="ChatRoomId" ColumnName="ChatRoomId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Absences">
+            <EntityTypeMapping TypeName="TotalHRModel.Absence">
+              <MappingFragment StoreEntitySet="Absence">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Reason" ColumnName="Reason" />
+                <ScalarProperty Name="StatusId" ColumnName="StatusId" />
+                <ScalarProperty Name="IncludeSunday" ColumnName="IncludeSunday" />
+                <ScalarProperty Name="IncludeSaturday" ColumnName="IncludeSaturday" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AbsenceReplies">
+            <EntityTypeMapping TypeName="TotalHRModel.AbsenceReply">
+              <MappingFragment StoreEntitySet="AbsenceReply">
+                <ScalarProperty Name="MessageId" ColumnName="MessageId" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="DateOfReply" ColumnName="DateOfReply" />
+                <ScalarProperty Name="MangerId" ColumnName="MangerId" />
+                <ScalarProperty Name="AbsenceId" ColumnName="AbsenceId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notes">
+            <EntityTypeMapping TypeName="TotalHRModel.Note">
+              <MappingFragment StoreEntitySet="Notes">
+                <ScalarProperty Name="UpdateLog" ColumnName="UpdateLog" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="UpdatedById" ColumnName="UpdatedById" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="AddedById" ColumnName="AddedById" />
+                <ScalarProperty Name="Note1" ColumnName="Note" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notifications">
+            <EntityTypeMapping TypeName="TotalHRModel.Notification">
+              <MappingFragment StoreEntitySet="Notification">
+                <ScalarProperty Name="RelatedItemTypeId" ColumnName="RelatedItemTypeId" />
+                <ScalarProperty Name="RelatedItemId" ColumnName="RelatedItemId" />
+                <ScalarProperty Name="statusId" ColumnName="statusId" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="RecipientId" ColumnName="RecipientId" />
+                <ScalarProperty Name="SenderId" ColumnName="SenderId" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="RecipientEmail" ColumnName="RecipientEmail" />
+                <ScalarProperty Name="RecipientName" ColumnName="RecipientName" />
+                <ScalarProperty Name="SenderEmail" ColumnName="SenderEmail" />
+                <ScalarProperty Name="SenderName" ColumnName="SenderName" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TaskSchedulers">
+            <EntityTypeMapping TypeName="TotalHRModel.TaskScheduler">
+              <MappingFragment StoreEntitySet="TaskScheduler">
+                <ScalarProperty Name="ApprovedBy" ColumnName="ApprovedBy" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="ScheduleLog" ColumnName="ScheduleLog" />
+                <ScalarProperty Name="ScheduledDateTime" ColumnName="ScheduledDateTime" />
+                <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+                <ScalarProperty Name="AssignedBy" ColumnName="AssignedBy" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="ApprovalNeeded" ColumnName="ApprovalNeeded" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeRecordings">
+            <EntityTypeMapping TypeName="TotalHRModel.TimeRecording">
+              <MappingFragment StoreEntitySet="TimeRecording">
+                <ScalarProperty Name="TaskRefId" ColumnName="TaskRefId" />
+                <ScalarProperty Name="UpdatedById" ColumnName="UpdatedById" />
+                <ScalarProperty Name="AddedById" ColumnName="AddedById" />
+                <ScalarProperty Name="NoteId" ColumnName="NoteId" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+                <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TimeRecordingTypes">
+            <EntityTypeMapping TypeName="TotalHRModel.TimeRecordingType">
+              <MappingFragment StoreEntitySet="TimeRecordingType">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AbsenceSettingFields">
+            <EntityTypeMapping TypeName="TotalHRModel.AbsenceSettingField">
+              <MappingFragment StoreEntitySet="AbsenceSettingField">
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Mandatory" ColumnName="Mandatory" />
+                <ScalarProperty Name="InputTypeId" ColumnName="InputTypeId" />
+                <ScalarProperty Name="FieldTypeId" ColumnName="FieldTypeId" />
+                <ScalarProperty Name="FieldName" ColumnName="FieldName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserAbsenceFieldDatas">
+            <EntityTypeMapping TypeName="TotalHRModel.UserAbsenceFieldData">
+              <MappingFragment StoreEntitySet="UserAbsenceFieldData">
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="AbsenceFieldId" ColumnName="AbsenceFieldId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GalleryAlbums">
+            <EntityTypeMapping TypeName="TotalHRModel.GalleryAlbum">
+              <MappingFragment StoreEntitySet="GalleryAlbum">
+                <ScalarProperty Name="NoPhotos" ColumnName="NoPhotos" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GalleryPhotoes">
+            <EntityTypeMapping TypeName="TotalHRModel.GalleryPhoto">
+              <MappingFragment StoreEntitySet="GalleryPhoto">
+                <ScalarProperty Name="Label" ColumnName="Label" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

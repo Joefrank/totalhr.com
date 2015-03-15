@@ -36,5 +36,7 @@ namespace totalhr.services.Infrastructure
         UserContractData SaveUserContractData(ContractFillViewInfo model);
 
         GetUserContractDetails_Result GetUserContractDetails(int userId, int? contractId = null);
+
+        EmployeeContractModel GetEmployeeContractDisplay(int employeeId);
     }
 }

@@ -3,8 +3,8 @@
 @model totalhr.Shared.Models.FormInfo
 
 @{
-    Layout = "~/Views/Shared/_PopupLayout.cshtml";    
-    ViewBag.Title = "Form Editor";
+    Layout = "~/Views/Shared/_PopupLayout.cshtml";
+    ViewBag.Title = FormGenerator.V_Form_Editor;
     var schema = string.IsNullOrEmpty(Model.Schema) ? "''" : Model.Schema;
 }
 
@@ -25,6 +25,10 @@
             myApp.controller('MyController', function ($scope, schemaService) {
 
                 $scope.errorMessage = '';
+                
+                $scope.formId = 0;
+
+                $scope.formName = '';
 
                 $scope.FormTypeId = @Model.FormTypeId;
 
@@ -39,32 +43,37 @@
                 };
 
                 $scope.SaveForm = function () {
-                    //alert(JSON.stringify($scope.myForm.schema));
-
+                    
                     var formData = $scope.myForm;
                     schemaService.addSchema(
                         {
-                            Id: formData.id,
+                            Id: $scope.formId,
                             FormTypeId : $scope.FormTypeId,
-                            Schema: JSON.stringify(formData.schema)
+                            Schema: JSON.stringify(formData.schema),
+                            FormName: $scope.formName
                         },
-                        function(msg) {
-                            var message = msg.Message;                            
-                            alert(msg.Message);
-                            $scope.errorMessage = '';
+                        function(data) {
+                            //alert(data.Id + ' ' + data.Message);
+                            if(data.Id === -1){//failure
+                                alert(data.Message);
+                                $scope.errorMessage = data.Message;
+                            }else {//success
+                                $scope.formId = data.Id;
+                                alert('Form saved successfully!');
+                                ClosePopup();
+                                ///NavigateTo('/FormEditor/EditForm/' + data.Id);
+                            }
+                            
                            // window.location.href = '/admin/Contract/Template/';
                         },
                         function(data, response) {
-                            alert('Error' + msg + ' ' + data.Message);
+                            alert(data.Message);
                             $scope.errorMessage = data.Message;
                         }
                     );
 
                 };
 
-                //$scope.SubmitFormInput = function () {
-                //    alert(JSON.stringify($scope.myForm.data));
-                //};
               
             });
 
@@ -82,7 +91,7 @@
 
                         $http({
                             method: 'POST',
-                            url: "/Admin/FormEditor/CreateForm",
+                            url: "/Admin/FormEditor/SaveForm",
                             data: data,
                             async: false,
                             dataType: "json"
@@ -93,10 +102,18 @@
                 }
             );
 
+
+            function ClosePopup(){
+                if(parent != null){
+                    parent.ClosePopup('dvPopup', true);
+                }
+            }
         </script>       
 }
 
-@section head2{"Form Editor - Create form"}      
+@section head2{
+    <h1>@FormGenerator.V_Form_Create_New</h1>
+}      
        
        
         <div ng-controller="MyController" class="container">
@@ -106,10 +123,10 @@
             </p>
 
             <p>
-                Form Name: <input type="text" id="Name" name="Name" />
+                @FormGenerator.V_Form_Name: <input type="text" id="Name" name="Name" ng-model="formName" />
             </p>
             <div class="alert alert-danger" ng-if="errorMessage != ''" role="alert">
-                <strong>Error could not save form!</strong>
+                <strong>@FormGenerator.Error_Could_Not_Save_Data</strong>
                 <br />
                 <span ng-bind="errorMessage"></span>
             </div>
@@ -122,8 +139,7 @@
                              fg-schema="mySchema">
                         </div>
                     </form>
-                    <input type="button" value="Preview" ng-click="ShowPreview()" />
-
+                   
                     <input type="button" value="Save" ng-click="SaveForm()" />
                 </div>
 
@@ -135,4 +151,7 @@
 
         </div>
        
-   
+    @section footer{
+           
+                
+       }

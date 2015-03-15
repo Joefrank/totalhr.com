@@ -3838,3 +3838,53 @@ jQuery UI Datepicker(new in v1.2.2)
     padding: 6px 10px;
 }
 
+#overlay-mask {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 9998;
+    opacity: 0.5;
+    background: rgb(0, 0, 0);
+    width: 100% !important;
+    min-height:800px;
+}
+
+#dvPopup{
+    z-index: 10000;
+    background-color: white;
+    position: absolute;
+    left: 20%;
+    top: 10%;
+    width: 60%;
+    height: 600px;
+    border:1px solid rgba(0, 0, 0, 0.2);
+}
+
+#ipopup {
+    width:100%;height:600px;border:none;
+}
+
+/*----------------------- JQ validation stuff -------------------------*/
+.field-validation-error {
+    color: #f00;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #f00;
+    background-color: #fee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #f00;
+}
+
+.validation-summary-valid {
+    display: none;
+}

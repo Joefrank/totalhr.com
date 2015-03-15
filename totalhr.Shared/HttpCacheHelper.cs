@@ -33,6 +33,21 @@ namespace totalhr.Shared
                 System.Web.Caching.Cache.NoSlidingExpiration);
         }
 
+        //*** consider using lock for update here.
+        public void Update<T>(T o, string key)
+        {
+            /*Clear(key);
+            Add<T>(o, key);*/
+            if (Exists(key))
+            {
+                HttpContext.Current.Cache[key] = o;
+            }
+            else
+            {
+                Add<T>(o, key);
+            }
+        }
+
         /// <summary>
         /// Remove item from cache
         /// </summary>

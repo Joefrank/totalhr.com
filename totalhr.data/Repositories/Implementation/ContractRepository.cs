@@ -14,8 +14,15 @@ namespace totalhr.data.Repositories.Implementation
     {
         public int AddTemplate(ContractTemplate template)
         {
-            Context.ContractTemplates.Add(template);
-            return Context.SaveChanges();
+            try
+            {
+                Context.ContractTemplates.Add(template);
+                return Context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
         }
 
         public UserContractData SaveContractData(ContractFillViewInfo model)
@@ -26,7 +33,7 @@ namespace totalhr.data.Repositories.Implementation
             {
                 contractData = Context.UserContractDatas.FirstOrDefault(x => x.ContractId == model.ContractId && x.UserId == model.UserId);
             }
-
+           
             //if contract data not found or contract not existent.
             if (contractData == null)
             {
@@ -52,9 +59,34 @@ namespace totalhr.data.Repositories.Implementation
             return contractData;
         }
 
+        public void SaveContractFieldData(List<UserContractFieldData> lstFieldData)
+        {
+            Context.UserContractFieldDatas.AddRange(lstFieldData);
+            Context.SaveChanges();
+        }
+
         public IEnumerable<GetUserContractDetails_Result> GetUserContractDetails(int userId, int? contractId = null)
         {
             return this.Context.GetUserContractDetails(userId, contractId);
         }
+
+        public IEnumerable<EmployeeContractModel.FieldData> GetEmployeeContractDisplay(int employeeId)
+        {
+            var contract = this.Context.UserContracts.FirstOrDefault(x => x.Userid == employeeId);
+            IEnumerable<EmployeeContractModel.FieldData> query = null;
+
+            if (contract != null)
+            {
+                var fieldDatas = this.Context.UserContractFieldDatas;
+                var formFieldJSon = this.Context.FormFieldJSons;
+
+                query = from formField in formFieldJSon
+                            join fieldData in fieldDatas on formField.id equals fieldData.FieldId
+                        select new EmployeeContractModel.FieldData { Label = formField.DisplayName, Content = fieldData.Data };
+            }
+
+
+            return query;
+        } 
     }
 }

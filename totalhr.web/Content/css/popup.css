@@ -6,6 +6,18 @@ body {
     padding:0;
 }
 
+#main {
+    height: 100%;
+    overflow: hidden;
+}
+
+#popupfooter {
+    float:left;
+    width:100%;
+    text-align:center;
+    height:10%;
+}
+
 .req {
     color:red;
     position:relative;
@@ -184,15 +196,19 @@ body, html {
 }
 
 div.popuphead {
-    float:left;width:100%;margin-top:-15px;color:white;
-    height: 50px;
+    float:left;
+    width:100%;
+    height: 10%;
     position: relative;
-    background: #161b7a;
-    background: -webkit-linear-gradient(top, #1e249e 0%, #011e62 100%);
+    background: #3f9f61;
+    color:white;
+    text-align:center;
+    padding-top:1%;
+    /*background: -webkit-linear-gradient(top, #1e249e 0%, #011e62 100%);
     background: -moz-linear-gradient(top, #1e249e 0%, #011e62 100%);
     background: -o-linear-gradient(top, #1e249e 0%, #011e62 100%);
     background: -ms-linear-gradient(top, #1e249e 0%, #011e62 100%);
-    background: linear-gradient(to bottom, #1e249e 0%, #011e62 100%);
+    background: linear-gradient(to bottom, #1e249e 0%, #011e62 100%);*/
 }
 
 
@@ -209,6 +225,7 @@ div#toolbox {
     float:left;
     width:98%;
     padding:1%;
+    height:80%;
 }
     div#toolbox .spsave {
         background:transparent url('/content/images/save.png') center center no-repeat;float:right;display:block;width:24px;height:24px;
@@ -293,4 +310,16 @@ html, body {
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -webkit-font-smoothing: antialiased !important;
+}
+
+.grid {
+    float: left;
+}
+
+.grid .cell4 {
+    float: left;
+    width: 23%;
+    margin: 1%;
+    text-align: left;
+    color: grey;
 }
