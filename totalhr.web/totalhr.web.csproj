@@ -173,6 +173,9 @@
     <Compile Include="Areas\Admin\Controllers\GalleryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\TimeRecordingController.cs" />
+    <Compile Include="Areas\Admin\Models\BreadCrumbItem.cs" />
+    <Compile Include="Areas\Admin\Models\UserContractDetails.cs" />
+    <Compile Include="Areas\Admin\Models\UserContractFormDetails.cs" />
     <Compile Include="Controllers\TimeRecordingController.cs" />
     <Compile Include="ViewModels\SearchVM.cs" />
     <Compile Include="ViewModels\TimeRecordingDetailsVM.cs" />
