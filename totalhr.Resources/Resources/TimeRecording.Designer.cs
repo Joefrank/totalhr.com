@@ -187,11 +187,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Time Recording.
+        /// </summary>
+        public static string V_Time_Recording {
+            get {
+                return ResourceManager.GetString("V_Time_Recording", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recording Details.
         /// </summary>
         public static string V_Time_Recording_Details {
             get {
                 return ResourceManager.GetString("V_Time_Recording_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time Recording For &apos;{0}&apos;.
+        /// </summary>
+        public static string V_Time_Recording_For_Task {
+            get {
+                return ResourceManager.GetString("V_Time_Recording_For_Task", resourceCulture);
             }
         }
         

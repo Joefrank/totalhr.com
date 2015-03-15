@@ -189,4 +189,7 @@
   <data name="V_Task_Search_Result" xml:space="preserve">
     <value>Search Result</value>
   </data>
+  <data name="V_Time_Recording" xml:space="preserve">
+    <value>Time Recording</value>
+  </data>
 </root>

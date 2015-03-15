@@ -275,5 +275,14 @@ namespace totalhr.Resources {
                 return ResourceManager.GetString("V_Task_Search_Result", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time Recording.
+        /// </summary>
+        public static string V_Time_Recording {
+            get {
+                return ResourceManager.GetString("V_Time_Recording", resourceCulture);
+            }
+        }
     }
 }

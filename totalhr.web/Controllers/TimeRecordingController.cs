@@ -15,15 +15,17 @@ namespace totalhr.web.Controllers
     {
         private ITimeRecordingServices _timeRecordingService;
         private IAccountService _accountsService;
+        private ITaskSchedulerService _taskService;
 
-        public TimeRecordingController(ITimeRecordingServices timeRecordingService, IAccountService accountService, IOAuthService authService):base(authService)
+        public TimeRecordingController(ITimeRecordingServices timeRecordingService, IAccountService accountService, ITaskSchedulerService taskService,
+            IOAuthService authService):base(authService)
         {
             _timeRecordingService = timeRecordingService;
             _accountsService = accountService;
+            _taskService = taskService;
         }
 
-        // GET: /TimeRecording/TimeRecording/
-
+       
         public ActionResult Index()
         {
             return View();
@@ -33,6 +35,16 @@ namespace totalhr.web.Controllers
         public ActionResult RecordTime(long id = 0, Int16 typeId = 1, Int32? taskRef = null)
         {
             var vm = new TimeRecordingVM();
+
+            if (taskRef != null)
+            {
+                var task = _taskService.GetById(taskRef.Value);
+                if (task != null)
+                {
+                    ViewBag.TaskName = task.Name;
+                }
+            }
+
             if (id == 0)
             {
                 vm = new TimeRecordingVM()

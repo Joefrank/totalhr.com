@@ -174,4 +174,10 @@
   <data name="V_UserId" xml:space="preserve">
     <value>User Id</value>
   </data>
+  <data name="V_Time_Recording" xml:space="preserve">
+    <value>Time Recording</value>
+  </data>
+  <data name="V_Time_Recording_For_Task" xml:space="preserve">
+    <value>Time Recording For '{0}'</value>
+  </data>
 </root>
