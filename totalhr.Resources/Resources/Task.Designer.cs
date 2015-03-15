@@ -61,11 +61,218 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Time.
+        /// </summary>
+        public static string V_Add_Time {
+            get {
+                return ResourceManager.GetString("V_Add_Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assigned By.
+        /// </summary>
+        public static string V_Assigned_By {
+            get {
+                return ResourceManager.GetString("V_Assigned_By", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Assigned To.
+        /// </summary>
+        public static string V_Assigned_To {
+            get {
+                return ResourceManager.GetString("V_Assigned_To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back to search results.
+        /// </summary>
+        public static string V_Back_To_Search {
+            get {
+                return ResourceManager.GetString("V_Back_To_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back to task scheduler home.
+        /// </summary>
+        public static string V_Back_To_Task_Home {
+            get {
+                return ResourceManager.GetString("V_Back_To_Task_Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Task.
+        /// </summary>
+        public static string V_Create_Task {
+            get {
+                return ResourceManager.GetString("V_Create_Task", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Department.
+        /// </summary>
+        public static string V_Department {
+            get {
+                return ResourceManager.GetString("V_Department", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string V_Description {
+            get {
+                return ResourceManager.GetString("V_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration Recorded.
+        /// </summary>
+        public static string V_Duration_Recorded {
+            get {
+                return ResourceManager.GetString("V_Duration_Recorded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Record.
+        /// </summary>
+        public static string V_Edit_Record {
+            get {
+                return ResourceManager.GetString("V_Edit_Record", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End Time.
+        /// </summary>
+        public static string V_End_Time {
+            get {
+                return ResourceManager.GetString("V_End_Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter search criteria.
+        /// </summary>
+        public static string V_Enter_Criteria {
+            get {
+                return ResourceManager.GetString("V_Enter_Criteria", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No of results.
+        /// </summary>
+        public static string V_No_Of_Results {
+            get {
+                return ResourceManager.GetString("V_No_Of_Results", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search / Edit Recorded Tasks.
+        /// </summary>
+        public static string V_Sear_Edit_Record_Task {
+            get {
+                return ResourceManager.GetString("V_Sear_Edit_Record_Task", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string V_Search {
+            get {
+                return ResourceManager.GetString("V_Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task Search Details.
+        /// </summary>
+        public static string V_Search_Details {
+            get {
+                return ResourceManager.GetString("V_Search_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Task.
+        /// </summary>
+        public static string V_Search_Taks {
+            get {
+                return ResourceManager.GetString("V_Search_Taks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Time.
+        /// </summary>
+        public static string V_Start_Time {
+            get {
+                return ResourceManager.GetString("V_Start_Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task Details.
+        /// </summary>
+        public static string V_Task_Details {
+            get {
+                return ResourceManager.GetString("V_Task_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task Id.
+        /// </summary>
+        public static string V_Task_Id {
+            get {
+                return ResourceManager.GetString("V_Task_Id", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Task Name.
+        /// </summary>
+        public static string V_Task_Name {
+            get {
+                return ResourceManager.GetString("V_Task_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Task Scheduler.
         /// </summary>
         public static string V_Task_Scheduler {
             get {
                 return ResourceManager.GetString("V_Task_Scheduler", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Options.
+        /// </summary>
+        public static string V_Task_Scheduler_Options {
+            get {
+                return ResourceManager.GetString("V_Task_Scheduler_Options", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Result.
+        /// </summary>
+        public static string V_Task_Search_Result {
+            get {
+                return ResourceManager.GetString("V_Task_Search_Result", resourceCulture);
             }
         }
     }

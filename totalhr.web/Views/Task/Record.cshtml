@@ -1,90 +1,139 @@
 ﻿@model totalhr.web.ViewModels.TaskSchedulerDetailsVM
 
+@using totalhr.Resources
+@using TH = totalhr.web.Helpers;
+@using AH = totalhr.web.Areas.Admin.Helpers;
+@using AM = totalhr.web.Areas.Admin.Models;
+
 @{
-    ViewBag.Title = "Add Task";
+    ViewBag.Title = Task.V_Task_Scheduler;
+
+    var breadCrumbItems = new List<AM.BreadCrumbItem>
+    {
+        new AM.BreadCrumbItem{Url = "/Task/", Text = Task.V_Task_Scheduler, Title= Task.V_Task_Scheduler},
+        new AM.BreadCrumbItem{Url = "", Text = Task.V_Create_Task, Title= Task.V_Create_Task}
+    };
+
+  
 }
 
-<h2>Add Task</h2>
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+@section pagetitle{
+   @Task.V_Create_Task
+}
 
-    if (string.IsNullOrEmpty(Model.ErrorMessage))
-    {
-        <fieldset>
-            <legend>Task Scheduler</legend>
-            @Html.HiddenFor(model => model.Id)
+@section breadcrumb{
+    @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
 
-
-            @Html.HiddenFor(model => model.UserId)
-
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Name)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.Name)
-                @Html.ValidationMessageFor(model => model.Name)
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(model => model.Description)
-            </div>
-            <div class="editor-field">
-                @Html.TextAreaFor(model => model.Description)
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ApprovalNeeded)
-            </div>
-            <div class="editor-field">
-                @Html.CheckBoxFor(model => model.ApprovalNeeded)
-            </div>
-
-
-            <div class="editor-label">
-                @Html.LabelFor(model => model.ScheduledDateTime)
-            </div>
-            <div class="editor-field">
-                @Html.EditorFor(model => model.ScheduledDateTime)
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(model => model.AssignedBy)
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(x => x.AssignedBy, new SelectList(Model.Users, "Id", "Name", Model.AssignedBy))
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(model => model.AssignedTo)
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(x => x.AssignedTo, new SelectList(Model.Users, "Id", "Name", Model.AssignedTo))
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(model => model.DepartmentId)
-            </div>
-            <div class="editor-field">
-                @Html.DropDownListFor(x => x.DepartmentId, new SelectList(Model.Departments, "Id", "Name", Model.DepartmentId))
-            </div>
-            <p><input type="submit" value="Save" /></p>
-            <p>@Html.ActionLink("Back to Home", "Index")</p>
-
-        </fieldset>
-
-
-
-        @*@section Scripts{
-            @Scripts.Render("~/bundles/jqueryval")
-
-            }*@
-    }
-    else
-    {
-        <div class="error-message">
-            @Html.DisplayFor(model => model.ErrorMessage)
+<div class="row-fluid">
+     <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i> @Task.V_Task_Details</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+            </span>
         </div>
-    }
-}
+        <div class="widget-body">
+
+            @using (Html.BeginForm("Record", "Task", FormMethod.Post, new { @class = "form-horizontal" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true)
+
+                if (string.IsNullOrEmpty(Model.ErrorMessage))
+                {
+                     @Html.HiddenFor(model => model.Id)
+                     @Html.HiddenFor(model => model.UserId)
+
+                    <div class="control-group editor-label">
+                        <label class="control-label">@Html.LabelFor(model => model.Name)</label>
+                        <div class="controls">
+                            <div class="input-append editor-field">
+                                 @Html.EditorFor(model => model.Name)
+                                 @Html.ValidationMessageFor(model => model.Name)
+                            </div>
+                        </div>
+                    </div> 
+
+                    <div class="control-group editor-label">
+                        <label class="control-label">@Html.LabelFor(model => model.Description)</label>
+                        <div class="controls">
+                            <div class="input-append editor-field">
+                                @Html.TextAreaFor(model => model.Description)
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="control-group editor-label">
+                        <label class="control-label">
+                            @Html.LabelFor(model => model.ApprovalNeeded)
+                        </label>
+                        <div class="controls">
+                            <div class="input-append editor-field">
+                                @Html.CheckBoxFor(model => model.ApprovalNeeded)
+                             </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group editor-label">
+                        <label class="control-label">
+                            @Html.LabelFor(model => model.ScheduledDateTime)
+                         </label>
+                        <div class="controls"  id="ui_date_picker_trigger">
+                            <div class="input-append editor-field">
+                                @Html.EditorFor(model => model.ScheduledDateTime, new {@class="m-wrap medium"})
+                                <span class="add-on"><i class="icon-calendar"></i></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group editor-label">
+                        <label class="control-label">
+                            @Html.LabelFor(model => model.AssignedBy)
+                        </label>
+                        <div class="controls">
+                            <div class="input-append editor-field">
+                            @Html.DropDownListFor(x => x.AssignedBy, new SelectList(Model.Users, "Id", "Name", Model.AssignedBy))
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="control-group editor-label">
+                        <label class="control-label">
+                            @Html.LabelFor(model => model.AssignedTo)
+                        </label>
+                        <div class="controls">
+                            <div class="input-append editor-field">
+                            @Html.DropDownListFor(x => x.AssignedTo, new SelectList(Model.Users, "Id", "Name", Model.AssignedTo))
+                         </div>
+                        </div>
+                    </div>
+
+                     <div class="control-group editor-label">
+                        <label class="control-label">
+                            @Html.LabelFor(model => model.DepartmentId)
+                        </label>
+                        <div class="controls">
+                            <div class="input-append editor-field">
+                            @Html.DropDownListFor(x => x.DepartmentId, new SelectList(Model.Departments, "Id", "Name", Model.DepartmentId))
+                         </div>
+                        </div>
+                    </div>
+                
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @Absence.V_Create</button>
+                        <button type="button" class="btn btn-danger" onclick="NavigateTo('/Task/');"><i class="icon-remove icon-white"></i> @Common.V_Cancel</button>
+                    </div>                
+                
+                }
+                else
+                {
+                    <div class="error-message">
+                        @Html.DisplayFor(model => model.ErrorMessage)
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+

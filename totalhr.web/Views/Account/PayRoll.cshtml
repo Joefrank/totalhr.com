@@ -1,0 +1,27 @@
+﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
+
+@{
+    ViewBag.Title = Payroll.V_Payroll;
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Account/", Text = Account.V_Dashboard, Title= Account.V_Dashboard},
+        new BreadCrumbItem{Url = "", Text = Payroll.V_Payroll, Title= Payroll.V_Payroll}
+    };
+
+    var bNoResult = (Model == null || !Model.Any());
+}
+
+@section pagetitle{
+   @Payroll.V_Payroll
+}
+
+@section breadcrumb{
+    @Html.Raw(GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+<div class="row-fluid">
+
+</div>
