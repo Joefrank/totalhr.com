@@ -117,7 +117,79 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="V_Add_Time" xml:space="preserve">
+    <value>Add Time</value>
+  </data>
+  <data name="V_Assigned_By" xml:space="preserve">
+    <value>Assigned By</value>
+  </data>
+  <data name="V_Assigned_To" xml:space="preserve">
+    <value>Assigned To</value>
+  </data>
+  <data name="V_Back_To_Search" xml:space="preserve">
+    <value>Back to search results</value>
+  </data>
+  <data name="V_Back_To_Task_Home" xml:space="preserve">
+    <value>Back to task scheduler home</value>
+  </data>
+  <data name="V_Create_Task" xml:space="preserve">
+    <value>Create Task</value>
+  </data>
+  <data name="V_Department" xml:space="preserve">
+    <value>Department</value>
+  </data>
+  <data name="V_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="V_Duration_Recorded" xml:space="preserve">
+    <value>Duration Recorded</value>
+  </data>
+  <data name="V_Edit_Record" xml:space="preserve">
+    <value>Edit Record</value>
+  </data>
+  <data name="V_End_Time" xml:space="preserve">
+    <value>End Time</value>
+  </data>
+  <data name="V_Enter_Criteria" xml:space="preserve">
+    <value>Please enter search criteria</value>
+  </data>
+  <data name="V_No_Of_Results" xml:space="preserve">
+    <value>No of results</value>
+  </data>
+  <data name="V_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="V_Search_Details" xml:space="preserve">
+    <value>Task Search Details</value>
+  </data>
+  <data name="V_Search_Taks" xml:space="preserve">
+    <value>Search Task</value>
+  </data>
+  <data name="V_Sear_Edit_Record_Task" xml:space="preserve">
+    <value>Search / Edit Recorded Tasks</value>
+  </data>
+  <data name="V_Start_Time" xml:space="preserve">
+    <value>Start Time</value>
+  </data>
+  <data name="V_Task_Details" xml:space="preserve">
+    <value>Task Details</value>
+  </data>
+  <data name="V_Task_Id" xml:space="preserve">
+    <value>Task Id</value>
+  </data>
+  <data name="V_Task_Name" xml:space="preserve">
+    <value>Task Name</value>
+  </data>
   <data name="V_Task_Scheduler" xml:space="preserve">
     <value>Task Scheduler</value>
+  </data>
+  <data name="V_Task_Scheduler_Options" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="V_Task_Search_Result" xml:space="preserve">
+    <value>Search Result</value>
+  </data>
+  <data name="V_Time_Recording" xml:space="preserve">
+    <value>Time Recording</value>
   </data>
 </root>

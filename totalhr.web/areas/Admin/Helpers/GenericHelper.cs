@@ -49,6 +49,8 @@ namespace totalhr.web.Areas.Admin.Helpers
             int index = 0;
             var url = string.Empty;
             var lastClass = string.Empty;
+            var uri = HttpContext.Current.Request.Url.AbsoluteUri.ToLower();
+            var homeUrl = uri.IndexOf("/Admin/", StringComparison.CurrentCultureIgnoreCase) >= 0? "/Admin/" : "/Account/";
 
             foreach(var item in itemList)
             {
@@ -66,10 +68,10 @@ namespace totalhr.web.Areas.Admin.Helpers
             return string.Format(
             @"<ul class=""breadcrumb"">
                 <li>
-                    <a href=""#""><i class=""icon-home""></i></a><span class=""divider"">&nbsp;</span>
+                    <a href=""{1}""><i class=""icon-home""></i></a><span class=""divider"">&nbsp;</span>
                 </li>
                 {0}           
-             </ul>", allHtml.ToString());
+             </ul>", allHtml.ToString(), homeUrl);
         }
     }
 }

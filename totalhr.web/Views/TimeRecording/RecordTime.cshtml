@@ -1,88 +1,131 @@
 ﻿@model totalhr.web.ViewModels.TimeRecordingVM
 
-@{
-    ViewBag.Title = "Record Time";
-}
+@using totalhr.Resources
+@using TH = totalhr.web.Helpers;
+@using AH = totalhr.web.Areas.Admin.Helpers;
+@using AM = totalhr.web.Areas.Admin.Models;
 
-<h2>RecordTime</h2>
 @{
-    //  var culture = System.Globalization.CultureInfo.CurrentUICulture;
-    //var defaultStartDate = (Model.StartTime > DateTime.MinValue) ? Model.StartTime.ToString(culture) : DateTime.Now.ToString(culture);
-}
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
+    ViewBag.Title = Task.V_Time_Recording;
 
-    if (string.IsNullOrEmpty(Model.ErrorMessage))
+    string taskname = (ViewBag.TaskName == null) ? "" : ViewBag.TaskName;
+    
+    var title = !string.IsNullOrEmpty(taskname)? string.Format(TimeRecording.V_Time_Recording_For_Task, taskname) : "";
+        
+    var breadCrumbItems = new List<AM.BreadCrumbItem>
     {
-        <fieldset>
-            <legend>Time Recording</legend>
-            @Html.HiddenFor(model => model.Id)
-            @Html.HiddenFor(model => model.TypeId)
-            @Html.HiddenFor(model => model.TaskRef)
-            @Html.HiddenFor(model => model.UserId)
+        new AM.BreadCrumbItem{Url = "/Task/", Text = Task.V_Task_Scheduler, Title= Task.V_Task_Scheduler},
+        new AM.BreadCrumbItem{Url = "/Task/Search/", Text = Task.V_Search_Taks, Title= Task.V_Search_Taks},
+        new AM.BreadCrumbItem{Url = "/Task/Details/" + Request.QueryString["taskRef"], Text = Task.V_Task_Details, Title = Task.V_Task_Details},
+        new AM.BreadCrumbItem{Url = "", Text = Task.V_Time_Recording, Title = Task.V_Time_Recording}
+    };
 
-            <div class="editor-label">
-                @Html.LabelFor(model => model.StartTime)
+  
+}
+
+@section pagetitle{
+   @Task.V_Time_Recording
+}
+
+@section breadcrumb{
+    @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+
+<div class="row-fluid">
+    <div class="span4">
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i>@title</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                </span>
             </div>
-            <div class="editor-field">
-                @*@Html.EditorFor(model => model.StartTime, new { @class = "dp" })*@
-                @Html.TextBoxFor(x => x.StartTime, "", new { @class = "datetype", onclick = "javascript:NewCal('StartTime','ddmmyyyy',true,24)" })
+            <div class="widget-body"> 
 
-
-                @Html.ValidationMessageFor(model => model.StartTime)
-            </div>
-
-            <div class="editor-label">
-                @Html.LabelFor(model => model.EndTime)
-            </div>
-            <div class="editor-field">
-                @*@Html.EditorFor(model => model.EndTime)*@
-                @Html.TextBoxFor(x => x.EndTime, "", new { @class = "datetype", onclick = "javascript:NewCal('EndTime','ddmmyyyy',true,24)" })
-                @Html.ValidationMessageFor(model => model.EndTime)
-
-            </div>
-
-            <p>
-                <input type="submit" value="Save" />
-            </p>
-        </fieldset>
-
-
-        if (Model.TaskRef != null)
-        {
-            <div>
-                @Html.ActionLink("Back to Task Details", "Details", "Task", new { id = Model.TaskRef }, null)
-            </div>
-        }
-        else
-        {
-            <p>
-                @if (Model.Id > 0)
+                @using (Html.BeginForm("RecordTime", "TimeRecording", FormMethod.Post, new { @class = "form-horizontal" }))
                 {
-                    @Html.ActionLink("Back to Details", "Details", new { id = Model.Id }) 
-                    @Html.Raw("|")
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true)
 
+                    if (string.IsNullOrEmpty(Model.ErrorMessage))
+                    {
+                        
+                            @Html.HiddenFor(model => model.Id)
+                            @Html.HiddenFor(model => model.TypeId)
+                            @Html.HiddenFor(model => model.TaskRef)
+                            @Html.HiddenFor(model => model.UserId)
+
+                              <div class="control-group editor-label">
+                                    <label class="control-label">
+                                        @Html.LabelFor(model => model.StartTime)
+                                    </label>
+                                    <div class="controls">
+                                        <div class="input-append editor-field">                               
+                                            @Html.TextBoxFor(x => x.StartTime, "", new { @class = "datetype", onclick = "javascript:NewCal('StartTime','ddmmyyyy',true,24)" })
+                                            @Html.ValidationMessageFor(model => model.StartTime)
+                                        </div>
+                                    </div>
+                              </div> 
+                            
+                            <div class="control-group editor-label">
+                                    <label class="control-label">
+                                @Html.LabelFor(model => model.EndTime)
+                             </label>
+                                    <div class="controls">
+                                        <div class="input-append editor-field"> 
+                                            @Html.TextBoxFor(x => x.EndTime, "", new { @class = "datetype", onclick = "javascript:NewCal('EndTime','ddmmyyyy',true,24)" })
+                                            @Html.ValidationMessageFor(model => model.EndTime)
+                                      </div>
+                                    </div>
+                            </div>
+
+                            <p>
+                                 <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @TimeRecording.V_Save</button>
+                            </p>
+                       
+
+
+                        if (Model.TaskRef != null)
+                        {
+                            <div>
+                                @Html.ActionLink("Back to Task Details", "Details", "Task", new { id = Model.TaskRef }, null)
+                            </div>
+                        }
+                        else
+                        {
+                            <p>
+                                @if (Model.Id > 0)
+                                {
+                                    @Html.ActionLink("Back to Details", "Details", new { id = Model.Id }) 
+                                    @Html.Raw("|")
+
+                                }
+                                @Html.ActionLink("Back to Time Recording Home", "Index")
+                            </p>
+
+                        }
+
+
+                        @*@section Scripts{
+                            @Scripts.Render("~/bundles/jqueryval")
+
+                            }*@
+                    }
+                    else
+                    {
+                        <div class="error-message">
+                            @Html.DisplayFor(model => model.ErrorMessage)
+                           <p> @Html.ActionLink("Back to Time Recording Home", "Index")</p>
+                        </div>
+                    }
                 }
-                @Html.ActionLink("Back to Time Recording Home", "Index")
-            </p>
 
-        }
-
-
-        @*@section Scripts{
-            @Scripts.Render("~/bundles/jqueryval")
-
-            }*@
-    }
-    else
-    {
-        <div class="error-message">
-            @Html.DisplayFor(model => model.ErrorMessage)
-           <p> @Html.ActionLink("Back to Time Recording Home", "Index")</p>
+            </div>
         </div>
-    }
-}
+    </div>
+</div>
 
-<script type="text/javascript" src="/Scripts/Site/DatePicker.js"></script>
+@section scripts{
+    <script type="text/javascript" src="/Scripts/Site/DatePicker.js"></script>
+}

@@ -1,0 +1,9 @@
+
+- For System.Web.Optimization etc...
+
+Install-Package Microsoft.AspNet.Web.Optimization
+
+
+- To untrack files
+
+git rm --cached file

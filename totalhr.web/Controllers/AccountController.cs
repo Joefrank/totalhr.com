@@ -367,5 +367,10 @@ namespace totalhr.web.Controllers
         {
             return View(_contractService.GetEmployeeContractDisplay(CurrentUser.UserId));
         }
+
+        public ActionResult PayRoll()
+        {
+            return View();
+        }
     }
 }

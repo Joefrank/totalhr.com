@@ -22,16 +22,24 @@
     @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
 }
 
-﻿@{
-    ViewBag.Title = "Task Scheduler Home";
-}
-
-<h2>Index</h2>
-
-<div>
-    @Html.ActionLink("Add","Record")
+<div class="row-fluid">
+     <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i> @Task.V_Task_Scheduler_Options</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>
+            </span>
+        </div>
+        <div class="widget-body">
+            <div>
+                @Html.ActionLink(Task.V_Create_Task,"Record")
+            </div>
+            <br />
+            <div>
+                @Html.ActionLink(Task.V_Sear_Edit_Record_Task, "Search")
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    @Html.ActionLink("Search / Edit Recorded Tasks", "Search")
-</div>
+
 

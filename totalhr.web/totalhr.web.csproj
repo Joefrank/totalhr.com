@@ -1873,6 +1873,7 @@
     <Content Include="Views\Account\Permissions.cshtml" />
     <Content Include="Views\Account\Contract.cshtml" />
     <Content Include="Views\Shared\RecordTime.cshtml" />
+    <Content Include="Views\Account\PayRoll.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
