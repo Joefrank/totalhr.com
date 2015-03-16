@@ -95,6 +95,7 @@ namespace totalhr.web.Controllers.Dependencies
             ninjectKernel.Bind<IAbsencesRepository>().To<AbsencesRepository>();
             ninjectKernel.Bind<IGalleryRepository>().To<GalleryRepository>();
             ninjectKernel.Bind<IGalleryService>().To<GalleryService>();
+            ninjectKernel.Bind<IPayrollService>().To<PayrollService>();
         }
 
     }

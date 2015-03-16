@@ -1,4 +1,6 @@
-﻿@using totalhr.Resources
+﻿@model totalhr.Shared.Models.PayrollStruct
+
+@using totalhr.Resources
 @using TH = totalhr.web.Helpers;
 @using AH = totalhr.web.Areas.Admin.Helpers;
 @using AM = totalhr.web.Areas.Admin.Models;
@@ -11,7 +13,11 @@
         new AM.BreadCrumbItem{Url = "", Text = Payroll.V_Payroll, Title= Payroll.V_Payroll}
     };
 
-  
+    var bonus = (Model.Bonus > 0) ? TH.PayrollHelper.CalculateBonus(Model) : 0;
+    var bonusDisplay = TH.PayrollHelper.BonusDisplay(Model); 
+        
+    var grossPay = Model.BasicSalary + Model.CarAllowance + bonus;
+   
 }
 
 @section pagetitle{
@@ -21,3 +27,63 @@
 @section breadcrumb{
     @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
 }
+
+
+<div class="row-fluid">
+    <div class="span4">
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i>@Payroll.V_Payroll_Details</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                </span>
+            </div>
+            <div class="widget-body"> 
+                <!-- populate from admin -->
+                <p class="alert alert-info"><strong>@Payroll.V_Payroll_Number:</strong> @Model.PayrollNumber</p>
+                <p class="alert alert-info"><strong>@Payroll.V_SS_Number:</strong> @Model.SSNumber</p>
+                <p class="alert alert-info"><strong>@Payroll.V_Tax_Ref:</strong> @Model.TaxReference</p>
+                <p class="alert alert-info"><strong>@Payroll.V_Rate:</strong> @Model.Rate</p>                
+                <p class="alert alert-info"><strong>@Payroll.V_Pay_Type:</strong> @Model.PayType</p>
+            </div>
+        </div>
+    </div>
+    <div class="span4">
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i>@Payroll.V_Salary</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                </span>
+            </div>
+            <div class="widget-body"> 
+                <p class="alert alert-info"><strong>@Payroll.V_Basic_Salary:</strong> @(Model.Currency.ToString() + Model.BasicSalary)</p>
+                <p class="alert alert-info"><strong>@Payroll.V_Car_Allowance:</strong> @(Model.Currency.ToString() + Model.CarAllowance)</p>
+                <p class="alert alert-info"><strong>@Payroll.V_Bonus:</strong> @bonusDisplay</p>
+                <p class="alert alert-info"><strong>@Payroll.V_Bonus_Type:</strong> @Model.BonusType</p>
+                <p class="alert alert-info"><strong>@Payroll.V_Gross_Pay:</strong> @(Model.Currency.ToString() + grossPay)</p>
+            </div>
+        </div>
+    </div>
+    <div class="span4">
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i>@Payroll.V_Bank_Details</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                </span>
+            </div>
+            <div class="widget-body"> 
+                <!-- automatic populate from user records -->
+                <p class="alert alert-success"><strong>@Payroll.V_Bank_Name:</strong> @Model.BankAccountDetails.BankName</p>
+                <p class="alert alert-success"><strong>@Payroll.V_Bank_Address:</strong> @Model.BankAccountDetails.BankAddress</p>
+                <p class="alert alert-success"><strong>@Payroll.V_Account_Name:</strong> @Model.BankAccountDetails.AccountName</p>
+                <p class="alert alert-success"><strong>@Payroll.V_Account_Number:</strong> @Model.BankAccountDetails.AccountNumber</p>
+                <p class="alert alert-success"><strong>@Payroll.V_Sort_Code:</strong> @Model.BankAccountDetails.SortCode</p>
+                <p class="alert alert-success"><strong>@Payroll.V_Bank_Ref:</strong>  @Model.BankAccountDetails.BankRef</p>
+            </div>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-info" onclick="alert('Implement me')"><i class="icon-info-sign icon-white"></i> @Payroll.V_Payroll_Enquire</button>
+</div>

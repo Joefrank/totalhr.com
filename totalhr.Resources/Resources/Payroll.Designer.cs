@@ -61,6 +61,114 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account Name.
+        /// </summary>
+        public static string V_Account_Name {
+            get {
+                return ResourceManager.GetString("V_Account_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account Number.
+        /// </summary>
+        public static string V_Account_Number {
+            get {
+                return ResourceManager.GetString("V_Account_Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Address.
+        /// </summary>
+        public static string V_Bank_Address {
+            get {
+                return ResourceManager.GetString("V_Bank_Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Details.
+        /// </summary>
+        public static string V_Bank_Details {
+            get {
+                return ResourceManager.GetString("V_Bank_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Name.
+        /// </summary>
+        public static string V_Bank_Name {
+            get {
+                return ResourceManager.GetString("V_Bank_Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Ref.
+        /// </summary>
+        public static string V_Bank_Ref {
+            get {
+                return ResourceManager.GetString("V_Bank_Ref", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Basic Salary.
+        /// </summary>
+        public static string V_Basic_Salary {
+            get {
+                return ResourceManager.GetString("V_Basic_Salary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bonus.
+        /// </summary>
+        public static string V_Bonus {
+            get {
+                return ResourceManager.GetString("V_Bonus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bonus Type.
+        /// </summary>
+        public static string V_Bonus_Type {
+            get {
+                return ResourceManager.GetString("V_Bonus_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Car Allowance.
+        /// </summary>
+        public static string V_Car_Allowance {
+            get {
+                return ResourceManager.GetString("V_Car_Allowance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gross Pay.
+        /// </summary>
+        public static string V_Gross_Pay {
+            get {
+                return ResourceManager.GetString("V_Gross_Pay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pay Type.
+        /// </summary>
+        public static string V_Pay_Type {
+            get {
+                return ResourceManager.GetString("V_Pay_Type", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payroll.
         /// </summary>
         public static string V_Payroll {
@@ -70,11 +178,83 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payroll Details.
+        /// </summary>
+        public static string V_Payroll_Details {
+            get {
+                return ResourceManager.GetString("V_Payroll_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Make an Enquiry.
+        /// </summary>
+        public static string V_Payroll_Enquire {
+            get {
+                return ResourceManager.GetString("V_Payroll_Enquire", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extras.
+        /// </summary>
+        public static string V_Payroll_Extras {
+            get {
+                return ResourceManager.GetString("V_Payroll_Extras", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payroll Number.
         /// </summary>
         public static string V_Payroll_Number {
             get {
                 return ResourceManager.GetString("V_Payroll_Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rate.
+        /// </summary>
+        public static string V_Rate {
+            get {
+                return ResourceManager.GetString("V_Rate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Salary Breakdown.
+        /// </summary>
+        public static string V_Salary {
+            get {
+                return ResourceManager.GetString("V_Salary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort Code.
+        /// </summary>
+        public static string V_Sort_Code {
+            get {
+                return ResourceManager.GetString("V_Sort_Code", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NI Number.
+        /// </summary>
+        public static string V_SS_Number {
+            get {
+                return ResourceManager.GetString("V_SS_Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tax Reference.
+        /// </summary>
+        public static string V_Tax_Ref {
+            get {
+                return ResourceManager.GetString("V_Tax_Ref", resourceCulture);
             }
         }
     }

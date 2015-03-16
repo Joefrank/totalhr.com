@@ -177,6 +177,7 @@
     <Compile Include="Areas\Admin\Models\UserContractDetails.cs" />
     <Compile Include="Areas\Admin\Models\UserContractFormDetails.cs" />
     <Compile Include="Controllers\TimeRecordingController.cs" />
+    <Compile Include="Helpers\PayrollHelper.cs" />
     <Compile Include="ViewModels\SearchVM.cs" />
     <Compile Include="ViewModels\TimeRecordingDetailsVM.cs" />
     <Compile Include="ViewModels\TimeRecordingVM.cs" />

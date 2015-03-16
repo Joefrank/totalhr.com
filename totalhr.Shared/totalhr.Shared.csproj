@@ -110,6 +110,7 @@
     <Compile Include="Models\LoginStruct.cs" />
     <Compile Include="Models\NewEmployeeInfo.cs" />
     <Compile Include="Models\NewUserInfo.cs" />
+    <Compile Include="Models\PayrollStruct.cs" />
     <Compile Include="Models\ProfileInfo.cs" />
     <Compile Include="Models\ResultInfo.cs" />
     <Compile Include="Models\SimpleUser.cs" />

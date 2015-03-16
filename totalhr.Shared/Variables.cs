@@ -271,6 +271,20 @@ namespace totalhr.Shared
             EndFiscalYear
         }
 
+        public enum PayType
+        {
+            Hourly,
+            Daily,
+            Weekly,
+            Monthly
+        }
+
+        public enum BonusType
+        {
+            Percentage,
+            Decimal
+        }
+
         public static string AdminEmailSignature
         {
             get
