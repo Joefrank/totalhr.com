@@ -285,6 +285,28 @@ namespace totalhr.Shared
             Decimal
         }
 
+        public enum CustomFieldIdentifier
+        {
+            JOBTITLE,
+            AVATAR
+        }
+
+        public enum CustomFieldType
+        {
+            Contract = 1,
+            Profile = 2, 
+            Payroll=3            
+        }
+
+        public enum CustomFieldDataType
+        {
+            Text = 1,
+            Int = 2,
+            Decimal = 3,
+            Date = 4,
+            Bool = 5
+        }
+
         public static string AdminEmailSignature
         {
             get

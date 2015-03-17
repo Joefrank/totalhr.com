@@ -203,6 +203,9 @@
     <Compile Include="EF\CTSectionFieldLink.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
+    <Compile Include="EF\CustomField.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
     <Compile Include="EF\DatabaseModels.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -222,6 +225,9 @@
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\EmailTemplate.cs">
+      <DependentUpon>DatabaseModels.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\EmployeeCustomField.cs">
       <DependentUpon>DatabaseModels.tt</DependentUpon>
     </Compile>
     <Compile Include="EF\EventToSchedule.cs">

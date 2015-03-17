@@ -330,6 +330,20 @@
           <Property Name="Created" Type="datetime" Nullable="false" />
           <Property Name="CreatedBy" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="CustomFields">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FieldTypeId" Type="int" Nullable="false" />
+          <Property Name="DataTypeId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
+          <Property Name="Identifier" Type="nvarchar" MaxLength="50" />
+        </EntityType>
         <EntityType Name="Department">
           <Key>
             <PropertyRef Name="id" />
@@ -361,6 +375,19 @@
           <Property Name="LastUpdatedBy" Type="int" />
           <Property Name="LastUpdated" Type="datetime" />
           <Property Name="Identifier" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EmployeeCustomField">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="CustomFieldId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="CustomFieldId" Type="int" Nullable="false" />
+          <Property Name="Value" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="Created" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="LastUpdatedBy" Type="int" />
         </EntityType>
         <EntityType Name="EventToSchedule">
           <Key>
@@ -1776,8 +1803,10 @@
           <EntitySet Name="ContractTemplateSection" EntityType="Self.ContractTemplateSection" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CTemplateSectionLink" EntityType="Self.CTemplateSectionLink" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CTSectionFieldLink" EntityType="Self.CTSectionFieldLink" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomFields" EntityType="Self.CustomFields" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Department" EntityType="Self.Department" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailTemplate" EntityType="Self.EmailTemplate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmployeeCustomField" EntityType="Self.EmployeeCustomField" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EventToSchedule" EntityType="Self.EventToSchedule" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Feature" EntityType="Self.Feature" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="File" EntityType="Self.File" Schema="dbo" store:Type="Tables" />
@@ -3639,6 +3668,8 @@
             <End Role="User" EntitySet="Users" />
             <End Role="GalleryPhoto" EntitySet="GalleryPhotoes" />
           </AssociationSet>
+          <EntitySet Name="CustomFields" EntityType="TotalHRModel.CustomField" />
+          <EntitySet Name="EmployeeCustomFields" EntityType="TotalHRModel.EmployeeCustomField" />
         </EntityContainer>
         <ComplexType Name="GetCompanyFoldersByUser_Result">
           <Property Type="Int32" Name="documentId" Nullable="false" />
@@ -4508,6 +4539,33 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CustomField">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FieldTypeId" Type="Int32" Nullable="false" />
+          <Property Name="DataTypeId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+          <Property Name="Identifier" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="EmployeeCustomField">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+            <PropertyRef Name="CustomFieldId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="CustomFieldId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Created" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedBy" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5568,6 +5626,34 @@
                 <ScalarProperty Name="FileId" ColumnName="FileId" />
                 <ScalarProperty Name="AlbumId" ColumnName="AlbumId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomFields">
+            <EntityTypeMapping TypeName="TotalHRModel.CustomField">
+              <MappingFragment StoreEntitySet="CustomFields">
+                <ScalarProperty Name="Identifier" ColumnName="Identifier" />
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="DataTypeId" ColumnName="DataTypeId" />
+                <ScalarProperty Name="FieldTypeId" ColumnName="FieldTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmployeeCustomFields">
+            <EntityTypeMapping TypeName="TotalHRModel.EmployeeCustomField">
+              <MappingFragment StoreEntitySet="EmployeeCustomField">
+                <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="CustomFieldId" ColumnName="CustomFieldId" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

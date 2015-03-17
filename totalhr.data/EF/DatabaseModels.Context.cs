@@ -84,6 +84,8 @@ namespace totalhr.data.EF
         public virtual DbSet<UserAbsenceFieldData> UserAbsenceFieldDatas { get; set; }
         public virtual DbSet<GalleryAlbum> GalleryAlbums { get; set; }
         public virtual DbSet<GalleryPhoto> GalleryPhotoes { get; set; }
+        public virtual DbSet<CustomField> CustomFields { get; set; }
+        public virtual DbSet<EmployeeCustomField> EmployeeCustomFields { get; set; }
     
         [DbFunction("TotalHREntities", "SplitCSV")]
         public virtual IQueryable<SplitCSV_Result> SplitCSV(string @string, string delimiter)

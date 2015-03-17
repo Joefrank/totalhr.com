@@ -48,6 +48,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\Libs\common.dll</HintPath>
     </Reference>
+    <Reference Include="CuteWebUI.AjaxUploader, Version=3.0.0.0, Culture=neutral, PublicKeyToken=bc00d4b0e43ec38d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Libs\CuteWebUI.AjaxUploader.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
@@ -176,6 +180,7 @@
     <Compile Include="Areas\Admin\Models\BreadCrumbItem.cs" />
     <Compile Include="Areas\Admin\Models\UserContractDetails.cs" />
     <Compile Include="Areas\Admin\Models\UserContractFormDetails.cs" />
+    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\TimeRecordingController.cs" />
     <Compile Include="Helpers\PayrollHelper.cs" />
     <Compile Include="ViewModels\SearchVM.cs" />
@@ -641,6 +646,7 @@
     <Content Include="CompanyDocuments\30\7.docx" />
     <Content Include="CompanyDocuments\30\7_bak.docx" />
     <Content Include="CompanyDocuments\30\9.xls" />
+    <Content Include="Handlers\UploadHandler.ashx" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
@@ -1875,6 +1881,7 @@
     <Content Include="Views\Account\Contract.cshtml" />
     <Content Include="Views\Shared\RecordTime.cshtml" />
     <Content Include="Views\Account\PayRoll.cshtml" />
+    <Content Include="Views\File\Index.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

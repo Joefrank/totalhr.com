@@ -134,6 +134,8 @@
         <AssociationConnector Association="TotalHRModel.FK_GalleryAlbum_User1" />
         <AssociationConnector Association="TotalHRModel.FK_GalleryPhoto_GalleryAlbum" />
         <AssociationConnector Association="TotalHRModel.FK_GalleryPhoto_User" />
+        <EntityTypeShape EntityType="TotalHRModel.CustomField" Width="1.5" PointX="15.375" PointY="7.75" />
+        <EntityTypeShape EntityType="TotalHRModel.EmployeeCustomField" Width="1.5" PointX="16.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
