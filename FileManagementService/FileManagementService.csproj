@@ -31,7 +31,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -41,6 +43,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Implementation\FileService.cs" />
+    <Compile Include="Implementation\ProfilePictureFileHandler.cs" />
+    <Compile Include="Infrastructure\IFileHandlerService.cs" />
     <Compile Include="Infrastructure\IFileService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -48,6 +52,10 @@
     <ProjectReference Include="..\totalhr.data\totalhr.data.csproj">
       <Project>{f5a3d97a-a1b9-463a-850e-23cf6e1fc488}</Project>
       <Name>totalhr.data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\totalhr.services\totalhr.services.csproj">
+      <Project>{E80CD858-BBA6-4650-8475-9987337E3EA8}</Project>
+      <Name>totalhr.services</Name>
     </ProjectReference>
     <ProjectReference Include="..\totalhr.Shared\totalhr.Shared.csproj">
       <Project>{1af1abb5-66b8-4e3f-a5aa-12025159514f}</Project>

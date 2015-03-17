@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "UploadFile";
+}
+
+<div class="container-fluid">
+           
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+               <div class="span12">
+                  <div class="widget">
+                        <div class="widget-title">
+                           <h4><i class="icon-globe"></i>Dropzone Layout</h4>
+                           <span class="tools">
+                           <a href="javascript:;" class="icon-chevron-down"></a>
+                           <a href="javascript:;" class="icon-remove"></a>
+                           </span>                    
+                        </div>
+                      <div class="widget-body form">
+                          <form action="/File/UploadFile/" class="dropzone clickable" id="my-awesome-dropzone">
+                              <div class="default message">
+                                  <span>Drop files here to upload</span>
+                              </div>
+                              <input type="hidden" name="FileTypeId" id="FileTypeId"/>
+                          </form>
+                      </div>
+                  </div>
+               </div>
+            </div>
+            <!-- END PAGE CONTENT-->         
+         </div>
+         <!-- END PAGE CONTAINER-->
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/Site/assets/dropzone/dropzone.js"></script>
+}

@@ -141,7 +141,9 @@ namespace totalhr.Shared
         public enum FileType
         {
             CompanyDocument = 1,
-            ProfilePicture = 2
+            ProfilePicture = 2,
+            Avatar = 3,
+            GalleryImage
         }
 
         public enum AllowedFileExtension
