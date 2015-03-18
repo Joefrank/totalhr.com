@@ -7,16 +7,24 @@ using System.Web.Mvc;
 using FileManagementService.Implementation;
 using FileManagementService.Infrastructure;
 using totalhr.Shared;
+using totalhr.services.Infrastructure;
+using Authentication.Infrastructure;
+using ImageGallery.Infrastructure;
 
 namespace totalhr.web.Controllers
 {
-    public class FileController : Controller
+    public class FileController : BaseController
     {
         private IFileService _fileService;
+        private IAccountService _accountService;
+        private IGalleryService _galleryService;
         
-        public FileController(IFileService fileService)
+        public FileController(IFileService fileService, IAccountService accountService, IGalleryService galleryService, IOAuthService authService)
+            : base(authService)
         {
             _fileService = fileService;
+            _accountService = accountService;
+            _galleryService = galleryService;
         }
 
         //create list of files uploaded by this user.
@@ -27,11 +35,23 @@ namespace totalhr.web.Controllers
 
         public ActionResult UploadFile()
         {
-            return View();
+            var dicoHiddenValues = new Dictionary<string, string>();
+            //provide this for photo gallery
+            if (Request.QueryString["albumid"] != null)
+            {
+                dicoHiddenValues.Add("AlbumId", Request.QueryString["albumid"]);
+            }
+            //provide this for all uploads
+            if (Request.QueryString["fileTypeId"] != null)
+            {
+                dicoHiddenValues.Add("FileTypeId", Request.QueryString["fileTypeId"]);
+            }
+
+            return View(dicoHiddenValues);
         }
 
         [HttpPost]
-        public ActionResult UploadFile(int FileTypeId)
+        public ActionResult UploadFile(int FileTypeId, int AlbumId)
         {
             //typegroup (profile image, avatar, companydocument, Gallery Image)
             //determine the type of file and pass it to correct handler to handle file. if there is no type passed then just upload file.
@@ -45,37 +65,17 @@ namespace totalhr.web.Controllers
                 switch (FileTypeId)
                 {
                     case (int)Variables.FileType.ProfilePicture:
-                        fileHandler = new ProfilePictureFileHandler();break;
+                        fileHandler = new ProfilePictureFileHandler(_fileService, _accountService);break;
+                    case (int)Variables.FileType.GalleryImage:
+                        fileHandler = new PhotoGalleryHandler(_fileService, _galleryService, AlbumId);break;
+                    default: fileHandler = new BaseFileHandler(_fileService); break;
                 }
 
                 foreach (string fileName in Request.Files)
                 {
                     var file = Request.Files[fileName];
-
-
-
-                    //Save file content goes here
+                    fileHandler.HandleFileCreation(file, CurrentUser.UserId, FileTypeId);
                     fName = file.FileName;
-
-                    if (file != null && file.ContentLength > 0)
-                    {
-
-                        var originalDirectory = new DirectoryInfo(string.Format("{0}Images\\WallImages", Server.MapPath(@"\")));
-
-                        string pathString = System.IO.Path.Combine(originalDirectory.ToString(), "imagepath");
-
-                        var fileName1 = Path.GetFileName(file.FileName);
-
-                        bool isExists = System.IO.Directory.Exists(pathString);
-
-                        if (!isExists)
-                            System.IO.Directory.CreateDirectory(pathString);
-
-                        var path = string.Format("{0}\\{1}", pathString, file.FileName);
-                        file.SaveAs(path);
-
-                    }
-
                 }
 
             }

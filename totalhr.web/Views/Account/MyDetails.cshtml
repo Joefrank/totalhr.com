@@ -11,7 +11,7 @@
     ViewBag.Title = Account.V_My_Profile;
 
     //var languages = ViewBag.LanguageList as List<ListItemStruct>;
-    var languages = totalhr.web.Helpers.GenericHelper.GetListFromNumerable(ViewBag.LanguageList as IEnumerable<ListItemStruct>);
+    var languages = ViewBag.LanguageList as IEnumerable<ListItemStruct>;
 
     var genders = ViewBag.GenderList as List<Glossary>;
     var countries = ViewBag.CountryList as List<Glossary>;
@@ -53,8 +53,8 @@
                     <img src="/Employee/Profile/Picture/@(Model.ProfilePictureAdded.HasValue? Model.ProfilePicturePath : "profile-pic.jpg")" alt="">
                 </div>
                 <ul class="nav nav-tabs nav-stacked">
-                    <li><a href="javascript:void(0)"><i class="icon-picture"></i> Gallery</a></li>
-                    <li><a href="javascript:void(0)"><i class="icon-paper-clip"></i> Projects</a></li>                    
+                    <li><a href="javascript:void(0)"><i class="icon-picture"></i> Update Picture</a></li>
+                    <li><a href="javascript:void(0)"><i class="icon-paper-clip"></i> Avatar</a></li>                    
                 </ul>
               
             </div>
@@ -67,7 +67,7 @@
                             <tr>
                                 <td class="span2">Title :</td>
                                 <td>
-                                    @Model.Title
+                                    @(titles.FirstOrDefault(x => x.RootId == Model.Title).Term)
                                 </td>
                             </tr>
                             <tr>
@@ -142,7 +142,7 @@
                             <tr>
                                 <td class="span2">PreferedLanguage:</td>
                                 <td>
-                                    @Model.PreferedLanguageId
+                                    @(languages.FirstOrDefault(x =>  x.Id == Model.PreferedLanguageId).Name)
                                 </td>
                             </tr>
                             <tr>

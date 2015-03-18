@@ -1,5 +1,11 @@
-﻿@{
+﻿@using System.Linq;
+
+@model Dictionary<string, string>
+
+
+@{
     ViewBag.Title = "UploadFile";
+    
 }
 
 <div class="container-fluid">
@@ -20,7 +26,13 @@
                               <div class="default message">
                                   <span>Drop files here to upload</span>
                               </div>
-                              <input type="hidden" name="FileTypeId" id="FileTypeId"/>
+                              @if(Model.ContainsKey("AlbumId")){
+                                    <input type="hidden" name="AlbumId" id="AlbumId" value="@Model["AlbumId"]"/>
+                                }
+
+                              @if(Model.ContainsKey("FileTypeId")){
+                                <input type="hidden" name="FileTypeId" id="FileTypeId" value="@Model["FileTypeId"]"/>
+                              }
                           </form>
                       </div>
                   </div>

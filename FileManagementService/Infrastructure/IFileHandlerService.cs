@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FileManagementService.Implementation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,6 @@ namespace FileManagementService.Infrastructure
 {
     public interface IFileHandlerService
     {
-        int HandleFileCreation(HttpPostedFileBase postedFile, int creatorId, int fileTypeId);
+        BaseFileHandler.FileSaveResult HandleFileCreation(HttpPostedFileBase postedFile, int creatorId, int fileTypeId);
     }
 }

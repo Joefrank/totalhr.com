@@ -646,7 +646,6 @@
     <Content Include="CompanyDocuments\30\7.docx" />
     <Content Include="CompanyDocuments\30\7_bak.docx" />
     <Content Include="CompanyDocuments\30\9.xls" />
-    <Content Include="Handlers\UploadHandler.ashx" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
@@ -1901,6 +1900,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="bin\Database\" />
     <Folder Include="Employee\Profile\avatar\" />
+    <Folder Include="GenericUploads\" />
+    <Folder Include="Handlers\" />
     <Folder Include="PhotoGallery\Large\" />
     <Folder Include="PhotoGallery\Original\" />
     <Folder Include="PhotoGallery\Thumbnail\" />

@@ -12,63 +12,58 @@ using totalhr.services.Infrastructure;
 
 namespace FileManagementService.Implementation
 {
-    public class ProfilePictureFileHandler : IFileHandlerService
-    {
-        protected IFileService FileService ;
+    public class ProfilePictureFileHandler : BaseFileHandler, IFileHandlerService
+    {        
         protected IAccountService AccountService;
-
-        public string DirectoryPath
-        {
-            get { return ConfigurationManager.AppSettings["ProfilePicturePath"]; }
-        }
-
+        
         public ProfilePictureFileHandler(IFileService fileService, IAccountService accountService)
+            : base(fileService)
         {
             FileService = fileService;
             AccountService = accountService;
+            UploadPath = ConfigurationManager.AppSettings["ProfilePicturePath"];
+            base.OverridePath(this.DirectoryPath);
         }
 
-        public int HandleFileCreation(HttpPostedFileBase postedFile, int creatorId, int fileTypeId)
+        public override BaseFileHandler.FileSaveResult HandleFileCreation(HttpPostedFileBase postedFile, int creatorId, int fileTypeId)
         {
-            if (postedFile != null && postedFile.ContentLength > 0)
+            var fileResult = base.HandleFileCreation(postedFile, creatorId, fileTypeId);
+
+            if (fileResult.FileId > 0)
             {
-                var pathString = HttpContext.Current.Server.MapPath(DirectoryPath);
-                
-                var fileId = this.FileService.Create(postedFile, pathString, creatorId, fileTypeId);
+                var pictureWidth = 0;
+                var pictureHeight = 0;
 
-                if (fileId > 0)
+                using (var fs = new FileStream(fileResult.FullPath, FileMode.Open, FileAccess.Read))
                 {
-                    var picturePath = Path.Combine(pathString, fileId + Path.GetExtension(postedFile.FileName));
-                    var pictureWidth = 0;
-                    var pictureHeight = 0;
-
-                            using (var fs = new FileStream(picturePath, FileMode.Open, FileAccess.Read))
-                            {
-                                using (var original = System.Drawing.Image.FromStream(fs))
-                                {
-                                    pictureWidth = original.Width;
-                                    pictureHeight = original.Height;
-                                }
-                            }
-
-                      var profilePicture = new UserProfilePicture
-                          {
-                              Created = DateTime.Now,
-                              CreatedBy = creatorId,
-                              FileId = fileId,
-                              UserId = creatorId,
-                              Width = pictureWidth,
-                              Height = pictureHeight
-                          };
-
-                     var result = AccountService.SaveProfilePicture(profilePicture);
-                    if (result)
+                    using (var original = System.Drawing.Image.FromStream(fs))
                     {
-                        return fileId;
+                        pictureWidth = original.Width;
+                        pictureHeight = original.Height;
                     }
                 }
+
+                //apply resizing
+                var profilePicture = new UserProfilePicture
+                    {
+                        Created = DateTime.Now,
+                        CreatedBy = creatorId,
+                        FileId = fileResult.FileId,
+                        UserId = creatorId,
+                        Width = pictureWidth,
+                        Height = pictureHeight
+                    };
+
+                var result = AccountService.SaveProfilePicture(profilePicture);
+
+                if (result)
+                {
+                    return fileResult;
+                }
+                
             }
-            return -1;
+
+            return new BaseFileHandler.FileSaveResult { FileId = -1 };
         }
     }
 }
