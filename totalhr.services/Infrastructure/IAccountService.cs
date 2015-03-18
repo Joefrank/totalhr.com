@@ -84,5 +84,7 @@ namespace totalhr.services.Infrastructure
         IEnumerable<SearchUserWithPaging_Result> SearchUserWithPaging(UserSearchInfo searchInfo);
 
         bool SaveProfilePicture(UserProfilePicture profilePicture);
+
+        UserPersonalInfo GetUserProfileDetails(string email);
     }
 }

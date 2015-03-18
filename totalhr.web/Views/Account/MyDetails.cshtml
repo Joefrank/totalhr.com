@@ -65,37 +65,37 @@
                     <table class="table table-borderless">
                         <tbody>
                             <tr>
-                                <td class="span2">Title :</td>
+                                <td class="span2">@FormMessages.Label_Title :</td>
                                 <td>
                                     @(titles.FirstOrDefault(x => x.RootId == Model.Title).Term)
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">First Name :</td>
+                                <td class="span2">@FormMessages.Label_First_Name :</td>
                                 <td>
                                     @Model.FirstName
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">Other Name :</td>
+                                <td class="span2">@FormMessages.Label_MiddleName :</td>
                                 <td>
                                     @Model.MiddleNames
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">Last Name :</td>
+                                <td class="span2">@FormMessages.Label_Last_Name :</td>
                                 <td>
                                     @Model.Surname
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">Country :</td>
+                                <td class="span2">@FormMessages.Label_Country :</td>
                                 <td>
                                     @(countries.FirstOrDefault(x => x.Id == Model.CountryId).Term)
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">Birthday :</td>**contract**
+                                <td class="span2">@FormMessages.Label_DOB :</td>
                                 <td>
                                     13 july 1983
                                 </td>

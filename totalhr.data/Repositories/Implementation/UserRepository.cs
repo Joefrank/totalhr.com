@@ -143,5 +143,13 @@ namespace totalhr.data.Repositories.Implementation
                          select new {Path = upp.FileId + ff.extension};
             return (result.FirstOrDefault() != null)? result.FirstOrDefault().Path : "";
         }
+
+        public UserPersonalInfo GetProfileDetails(string email)
+        {
+            var personalInfo = new UserPersonalInfo
+                {
+
+                };
+        }
     }
 }

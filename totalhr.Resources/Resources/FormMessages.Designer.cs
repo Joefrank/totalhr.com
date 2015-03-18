@@ -1033,6 +1033,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date of Birth.
+        /// </summary>
+        public static string Label_DOB {
+            get {
+                return ResourceManager.GetString("Label_DOB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DUNS Number.
         /// </summary>
         public static string Label_DUNS_Number {

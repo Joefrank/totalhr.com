@@ -333,8 +333,13 @@ namespace totalhr.services.Implementation
 
         public UserPersonalInfo GetUserInfoByEmail(string email)
         {
-            User user = GetUserByEmail(email);
+            var user = GetUserByEmail(email);
             return GetUserPersonalInfo(user);
+        }
+
+        public UserPersonalInfo GetUserProfileDetails(string email)
+        {
+            return _userRepos.GetProfileDetails(email);
         }
 
         public UserPersonalInfo GetUserInfoByGuid(string guid)

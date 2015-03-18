@@ -654,4 +654,7 @@
   <data name="Label_Department" xml:space="preserve">
     <value>Department</value>
   </data>
+  <data name="Label_DOB" xml:space="preserve">
+    <value>Date of Birth</value>
+  </data>
 </root>
