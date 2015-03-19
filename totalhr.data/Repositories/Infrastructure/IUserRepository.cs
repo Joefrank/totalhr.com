@@ -45,6 +45,6 @@ namespace totalhr.data.Repositories.Infrastructure
 
         string GetProfilePicturePath(int userid);
 
-        UserPersonalInfo GetProfileDetails(string email);
+        UserProfileDetails GetProfileDetails(int userId, string email);
     }
 }

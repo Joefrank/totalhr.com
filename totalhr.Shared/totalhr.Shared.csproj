@@ -119,6 +119,7 @@
     <Compile Include="Models\UserAdminStruct.cs" />
     <Compile Include="Models\UserContractInfo.cs" />
     <Compile Include="Models\UserPersonalInfo.cs" />
+    <Compile Include="Models\UserProfileDetails.cs" />
     <Compile Include="Models\UserRegStruct.cs" />
     <Compile Include="Models\SMTPSettings.cs" />
     <Compile Include="Models\UserSearchInfo.cs" />

@@ -657,4 +657,13 @@
   <data name="Label_DOB" xml:space="preserve">
     <value>Date of Birth</value>
   </data>
+  <data name="Label_Culture" xml:space="preserve">
+    <value>Culture</value>
+  </data>
+  <data name="Label_Last_Visit" xml:space="preserve">
+    <value>Last Visit</value>
+  </data>
+  <data name="Label_Occupation" xml:space="preserve">
+    <value>Occupation</value>
+  </data>
 </root>

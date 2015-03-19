@@ -97,6 +97,7 @@ namespace totalhr.data.EF
         public string activationcode { get; set; }
         public string chosenculture { get; set; }
         public int departmentid { get; set; }
+        public Nullable<int> LineManagerId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompanyDocument> CompanyDocuments { get; set; }

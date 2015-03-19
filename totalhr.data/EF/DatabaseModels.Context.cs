@@ -331,5 +331,18 @@ namespace totalhr.data.EF
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchUserWithPaging_Result>("SearchUserWithPaging", idParameter, nameParameter, usertypeidParameter, departmentidParameter, emailParameter, partialaddressParameter, townParameter, countyParameter, postcodeParameter, phoneParameter, pageSizeParameter, pageNumberParameter, ordercolumnParameter, sortorderParameter, viewinglanguageidParameter);
         }
+    
+        public virtual ObjectResult<GetUserProfileDetails_Result> GetUserProfileDetails(Nullable<int> userId, string email)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserProfileDetails_Result>("GetUserProfileDetails", userIdParameter, emailParameter);
+        }
     }
 }

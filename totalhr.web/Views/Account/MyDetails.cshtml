@@ -1,4 +1,4 @@
-﻿@model totalhr.Shared.Models.UserPersonalInfo
+﻿@model totalhr.Shared.Models.UserProfileDetails
 
 @using totalhr.Resources
 @using totalhr.Shared.Models
@@ -8,23 +8,31 @@
 @using totalhr.web.Areas.Admin.Models
 
 @{
-    ViewBag.Title = Account.V_My_Profile;
+    //ViewBag.Title = Account.V_My_Profile;
 
-    //var languages = ViewBag.LanguageList as List<ListItemStruct>;
-    var languages = ViewBag.LanguageList as IEnumerable<ListItemStruct>;
+    ////var languages = ViewBag.LanguageList as List<ListItemStruct>;
+    //var languages = ViewBag.LanguageList as IEnumerable<ListItemStruct>;
 
-    var genders = ViewBag.GenderList as List<Glossary>;
-    var countries = ViewBag.CountryList as List<Glossary>;
-    var titles = ViewBag.TitleList as List<Glossary>;
+    //var genders = ViewBag.GenderList as List<Glossary>;
+    //var countries = ViewBag.CountryList as List<Glossary>;
+    //var titles = ViewBag.TitleList as List<Glossary>;
 
-    List<SelectListItem> languagesSelect = null;
+    //List<SelectListItem> languagesSelect = null;
 
-    languagesSelect = GenericHelper.GetListFromNumerable(ViewBag.LanguageList as IEnumerable<ListItemStruct>) ?? new List<SelectListItem> { new SelectListItem { Value = "", Text = Common.V_None } };
+    //languagesSelect = GenericHelper.GetListFromNumerable(ViewBag.LanguageList as IEnumerable<ListItemStruct>) ?? new List<SelectListItem> { new SelectListItem { Value = "", Text = Common.V_None } };
 
     var breadCrumbItems = new List<BreadCrumbItem>
     {
         new BreadCrumbItem{Url = "", Text = Account.V_My_Profile, Title= Account.V_My_Profile}
     };
+    
+    var jobtitle = Model.CustomFields.FirstOrDefault(x => x.CustomFieldIdentifier == totalhr.Shared.Variables.CustomFieldIdentifier.JOBTITLE.ToString());
+    var jobtitlevalue = string.Empty;
+    
+    if(jobtitle != null)
+    {
+      jobtitlevalue = jobtitle.CustomFieldValue;   
+    }
     
     }
 
@@ -50,10 +58,10 @@
         <div id="widgetDetails" class="widget-body"> 
              <div class="span3">
                 <div class="text-center profile-pic">
-                    <img src="/Employee/Profile/Picture/@(Model.ProfilePictureAdded.HasValue? Model.ProfilePicturePath : "profile-pic.jpg")" alt="">
+                    <img src="/Employee/Profile/Picture/@(Model.UserProfilePicture != null? Model.UserProfilePicture.FileId + ".ext" : "profile-pic.jpg")" />
                 </div>
                 <ul class="nav nav-tabs nav-stacked">
-                    <li><a href="javascript:void(0)"><i class="icon-picture"></i> Update Picture</a></li>
+                    <li><a href="javascript:void(0)" onclick="OpenPopup('/File/UploadFile/', 600, 600, true)"><i class="icon-picture"></i> Update Picture</a></li>
                     <li><a href="javascript:void(0)"><i class="icon-paper-clip"></i> Avatar</a></li>                    
                 </ul>
               
@@ -67,7 +75,7 @@
                             <tr>
                                 <td class="span2">@FormMessages.Label_Title :</td>
                                 <td>
-                                    @(titles.FirstOrDefault(x => x.RootId == Model.Title).Term)
+                                    @(Model.Title)
                                 </td>
                             </tr>
                             <tr>
@@ -91,7 +99,7 @@
                             <tr>
                                 <td class="span2">@FormMessages.Label_Country :</td>
                                 <td>
-                                    @(countries.FirstOrDefault(x => x.Id == Model.CountryId).Term)
+                                    @Model.Country
                                 </td>
                             </tr>
                             <tr>
@@ -101,60 +109,60 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">Occupation :</td>**contract**
+                                <td class="span2">@FormMessages.Label_Occupation :</td>
                                 <td>
-                                    Web Developer
+                                    @jobtitlevalue
                                 </td>
                             </tr>
                             
                             <tr>
-                                <td class="span2"> Mobile :</td>
+                                <td class="span2"> @FormMessages.Label_Mobile :</td>
                                 <td>
                                     @Model.MobilePhone
                                 </td>
                             </tr>
 
                             <tr>
-                                <td class="span2"> Email :</td>
+                                <td class="span2"> @FormMessages.Label_Email :</td>
                                 <td>
                                     @Model.Email
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">Username :</td>
+                                <td class="span2">@FormMessages.Label_Username :</td>
                                 <td>
                                     @Model.UserName
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">Password :</td>
+                                <td class="span2">@FormMessages.Label_Password :</td>
                                 <td>
                                     @Model.Password
                                 </td>
                             </tr>
                             
                             <tr>
-                                <td class="span2">Last Login :</td>
+                                <td class="span2">@FormMessages.Label_Last_Visit :</td>
                                 <td>
-                                    
+                                    @Model.LastVisit
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">PreferedLanguage:</td>
+                                <td class="span2">@FormMessages.Label_Pref_Language:</td>
                                 <td>
-                                    @(languages.FirstOrDefault(x =>  x.Id == Model.PreferedLanguageId).Name)
+                                    @Model.PreferedLanguage
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">Department :</td>
+                                <td class="span2">@FormMessages.Label_Department :</td>
                                 <td>
-                                    
+                                    @Model.Department
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">Chosen Culture :</td>
+                                <td class="span2">@FormMessages.Label_Culture :</td>
                                 <td>
-                                   
+                                   @Model.ChoosenCulture
                                 </td>
                             </tr>
                         </tbody>
@@ -171,7 +179,7 @@
                             <br/>
                             @Model.PostCode
                             <br/>
-                            @(countries.FirstOrDefault(x => x.Id == Model.CountryId).Term)
+                            @Model.Country
                             <br/>
                             @Model.PostCode
                             <br/>
@@ -217,7 +225,7 @@
 
         <div class="formdiv midform" style="display:none">
 
-        @using (Html.BeginForm("SaveUserDetails", "Account"))
+        @*using (Html.BeginForm("SaveUserDetails", "Account"))
         {
             
         if(Model.DetailsSaveSuccess){
@@ -360,7 +368,7 @@
         
             @Html.HiddenFor(x => x.UserId)
             @Html.HiddenFor(x => x.CompanyId)
-        }
+        }*@
         </div>
 
       </div>

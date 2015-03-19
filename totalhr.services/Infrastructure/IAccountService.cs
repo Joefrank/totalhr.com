@@ -85,6 +85,6 @@ namespace totalhr.services.Infrastructure
 
         bool SaveProfilePicture(UserProfilePicture profilePicture);
 
-        UserPersonalInfo GetUserProfileDetails(string email);
+        UserProfileDetails GetUserProfileDetails(int userId, string email);
     }
 }

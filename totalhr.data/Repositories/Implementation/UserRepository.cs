@@ -144,12 +144,70 @@ namespace totalhr.data.Repositories.Implementation
             return (result.FirstOrDefault() != null)? result.FirstOrDefault().Path : "";
         }
 
-        public UserPersonalInfo GetProfileDetails(string email)
+        public UserProfileDetails GetProfileDetails(int userId, string email)
         {
-            var personalInfo = new UserPersonalInfo
-                {
+            var userprofile = this.Context.GetUserProfileDetails(userId, email).FirstOrDefault();
 
-                };
+            if (userprofile != null)
+            {
+                var customfields = from ecf in this.Context.EmployeeCustomFields
+                                   join cf in this.Context.CustomFields on ecf.CustomFieldId equals cf.Id
+                                   where ecf.EmployeeId == userprofile.UserId
+                                   select new UserProfileDetails.CustomField
+                                   {
+                                       CustomFieldId = ecf.CustomFieldId,
+                                       CustomFieldIdentifier = cf.Identifier,
+                                       CustomFieldValue = ecf.Value
+                                   };
+
+                var profilepicture = from pic in this.Context.UserProfilePictures
+                                     where pic.UserId == userprofile.UserId
+                                     select new UserProfileDetails.ProfilePicture
+                                     {
+                                         FileId = pic.FileId,
+                                         ImageHeight = pic.Height,
+                                         ImageWidth = pic.Width
+                                     };
+
+                
+                var personalInfo = new UserProfileDetails
+                    {
+                        UserId = userprofile.UserId,
+                        Gender = userprofile.Gender,
+                        Title = userprofile.Title,
+                        OtherTitle = userprofile.OtherTitle,
+                        Address1 = userprofile.Address1,
+                        Address2 = userprofile.Address2,
+                        Address3 = userprofile.Address3,
+                        ChoosenCulture = userprofile.ChosenCulture,
+                        City = userprofile.City,
+                        Country = userprofile.Country,
+                        Department = userprofile.Department,
+                        DetailsLastUpdated = (userprofile.DetailsLastUpdated != null)? userprofile.DetailsLastUpdated .Value.ToShortDateString() : "",
+                        DetailsLastUpdatedBy = userprofile.DetailsLastUpdatedBy,
+                        Email = userprofile.Email,
+                        FirstName = userprofile.firstname,
+                        Surname = userprofile.Surname,
+                        JoinDate = userprofile.JoinDate.ToShortDateString(),
+                        LastVisit = (userprofile.LastVisit != null)? userprofile.LastVisit.Value.ToShortDateString() : "",
+                        LineManager = userprofile.LineManager,
+                        MiddleNames = userprofile.MiddleNames,
+                        MobilePhone = userprofile.MobilePhone,
+                        NoOfVisits = userprofile.NoOfVisits,
+                        Password = userprofile.Password,
+                        PersonalPhone = userprofile.PersonalPhone,
+                        PostCode = userprofile.PostCode,
+                        PreferedLanguage = userprofile.PreferedLanguage,
+                        State = userprofile.State,
+                        UserName = userprofile.UserName,
+                        UserProfilePicture = (profilepicture != null)? profilepicture.FirstOrDefault() : null,
+                        CustomFields = (customfields.Any()) ? customfields.ToList() : new List<UserProfileDetails.CustomField>()
+                    };
+
+                return personalInfo;
+            }
+
+            return null;
         }
     }
 }

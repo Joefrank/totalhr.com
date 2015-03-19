@@ -751,6 +751,7 @@
           <Property Name="activationcode" Type="nvarchar" MaxLength="150" />
           <Property Name="chosenculture" Type="varchar" MaxLength="10" />
           <Property Name="departmentid" Type="int" Nullable="false" />
+          <Property Name="LineManagerId" Type="int" />
         </EntityType>
         <EntityType Name="UserAbsenceFieldData">
           <Key>
@@ -1719,6 +1720,10 @@
         <Function Name="GetUserListForAdmin" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="showactive" Type="bit" Mode="In" />
           <Parameter Name="viewinglanguageid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="GetUserProfileDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserId" Type="int" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
         </Function>
         <Function Name="GetUserProfileIds" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="userid" Type="int" Mode="In" />
@@ -2729,6 +2734,7 @@
           <NavigationProperty Name="GalleryAlbums" Relationship="TotalHRModel.FK_GalleryAlbum_User" FromRole="User" ToRole="GalleryAlbum" />
           <NavigationProperty Name="GalleryAlbums1" Relationship="TotalHRModel.FK_GalleryAlbum_User1" FromRole="User" ToRole="GalleryAlbum" />
           <NavigationProperty Name="GalleryPhotoes" Relationship="TotalHRModel.FK_GalleryPhoto_User" FromRole="User" ToRole="GalleryPhoto" />
+          <Property Name="LineManagerId" Type="Int32" />
         </EntityType>
         <EntityType Name="UserContract">
           <Key>
@@ -3670,6 +3676,10 @@
           </AssociationSet>
           <EntitySet Name="CustomFields" EntityType="TotalHRModel.CustomField" />
           <EntitySet Name="EmployeeCustomFields" EntityType="TotalHRModel.EmployeeCustomField" />
+          <FunctionImport Name="GetUserProfileDetails" ReturnType="Collection(TotalHRModel.GetUserProfileDetails_Result)">
+            <Parameter Name="UserId" Mode="In" Type="Int32" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetCompanyFoldersByUser_Result">
           <Property Type="Int32" Name="documentId" Nullable="false" />
@@ -4566,6 +4576,36 @@
           <Property Name="LastUpdated" Type="DateTime" Precision="3" />
           <Property Name="LastUpdatedBy" Type="Int32" />
         </EntityType>
+        <ComplexType Name="GetUserProfileDetails_Result">
+          <Property Type="Int32" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Gender" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="OtherTitle" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="firstname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Surname" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="MiddleNames" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Address1" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address2" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Address3" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PostCode" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PersonalPhone" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="MobilePhone" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="PreferedLanguage" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="NoOfVisits" Nullable="false" />
+          <Property Type="DateTime" Name="LastVisit" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="JoinDate" Nullable="false" Precision="23" />
+          <Property Type="String" Name="Department" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DetailsLastUpdated" Nullable="true" Precision="23" />
+          <Property Type="String" Name="DetailsLastUpdatedBy" Nullable="true" MaxLength="101" />
+          <Property Type="String" Name="ChosenCulture" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="LineManager" Nullable="true" MaxLength="101" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -5071,6 +5111,7 @@
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="TotalHRModel.User">
               <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="LineManagerId" ColumnName="LineManagerId" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="GenderId" ColumnName="GenderId" />
                 <ScalarProperty Name="firstname" ColumnName="firstname" />
@@ -5657,6 +5698,40 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="GetUserProfileDetails" FunctionName="TotalHRModel.Store.GetUserProfileDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="TotalHRModel.GetUserProfileDetails_Result">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="OtherTitle" ColumnName="OtherTitle" />
+                <ScalarProperty Name="firstname" ColumnName="firstname" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="MiddleNames" ColumnName="MiddleNames" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address3" ColumnName="Address3" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="PostCode" ColumnName="PostCode" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="PersonalPhone" ColumnName="PersonalPhone" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PreferedLanguage" ColumnName="PreferedLanguage" />
+                <ScalarProperty Name="NoOfVisits" ColumnName="NoOfVisits" />
+                <ScalarProperty Name="LastVisit" ColumnName="LastVisit" />
+                <ScalarProperty Name="JoinDate" ColumnName="JoinDate" />
+                <ScalarProperty Name="Department" ColumnName="Department" />
+                <ScalarProperty Name="DetailsLastUpdated" ColumnName="DetailsLastUpdated" />
+                <ScalarProperty Name="DetailsLastUpdatedBy" ColumnName="DetailsLastUpdatedBy" />
+                <ScalarProperty Name="ChosenCulture" ColumnName="ChosenCulture" />
+                <ScalarProperty Name="LineManager" ColumnName="LineManager" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

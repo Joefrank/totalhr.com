@@ -337,9 +337,9 @@ namespace totalhr.services.Implementation
             return GetUserPersonalInfo(user);
         }
 
-        public UserPersonalInfo GetUserProfileDetails(string email)
+        public UserProfileDetails GetUserProfileDetails(int userId, string email)
         {
-            return _userRepos.GetProfileDetails(email);
+            return _userRepos.GetProfileDetails(userId, email);
         }
 
         public UserPersonalInfo GetUserInfoByGuid(string guid)
@@ -496,5 +496,7 @@ namespace totalhr.services.Implementation
         {
             return _userRepos.SaveProfilePicture(profilePicture);
         }
+
+       
     }
 }

@@ -48,9 +48,9 @@ namespace totalhr.web.Controllers
         
         public ActionResult MyDetails()
         {
-            var userinfo = _accountService.GetUserInfoByEmail(CurrentUser.UserName.Trim());            
-            userinfo.DetailsSaveSuccess = false;
-            LoadGlossaries();
+            var userinfo = _accountService.GetUserProfileDetails(CurrentUser.UserId, CurrentUser.UserName.Trim());            
+            //userinfo.DetailsSaveSuccess = false;
+            //LoadGlossaries();
             return View(userinfo);
         }
 

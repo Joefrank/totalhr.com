@@ -290,7 +290,8 @@ namespace totalhr.Shared
         public enum CustomFieldIdentifier
         {
             JOBTITLE,
-            AVATAR
+            AVATAR,
+            DOB
         }
 
         public enum CustomFieldType
