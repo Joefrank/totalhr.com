@@ -58,7 +58,7 @@
         <div id="widgetDetails" class="widget-body"> 
              <div class="span3">
                 <div class="text-center profile-pic">
-                    <img src="/Employee/Profile/Picture/@(Model.UserProfilePicture != null? Model.UserProfilePicture.FileId + ".ext" : "profile-pic.jpg")" />
+                    <img src="/Employee/Profile/Picture/@(Model.UserProfilePicture != null? Model.UserProfilePicture.FileName : "profile-pic.jpg")" />
                 </div>
                 <ul class="nav nav-tabs nav-stacked">
                     <li><a href="javascript:void(0)" onclick="OpenPopup('/File/UploadProfilePicture/', 600, 600, true)"><i class="icon-picture"></i> Update Picture</a></li>

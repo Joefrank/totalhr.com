@@ -124,7 +124,16 @@ namespace totalhr.data.Repositories.Implementation
                 info.PageNumber, info.OrderColumn, info.OrderDirection, info.LanguageId);
         }
 
-        public bool SaveProfilePicture(UserProfilePicture profilePicture){
+        public bool SaveProfilePicture(UserProfilePicture profilePicture)
+        {
+            var existingUserPictureProfile =
+                this.Context.UserProfilePictures.FirstOrDefault(x => x.UserId == profilePicture.UserId);
+
+            if (existingUserPictureProfile != null)
+            {
+                this.Context.UserProfilePictures.Remove(existingUserPictureProfile);
+            }
+
             this.Context.UserProfilePictures.Add(profilePicture);
             this.Context.SaveChanges();
             return true;
@@ -162,9 +171,11 @@ namespace totalhr.data.Repositories.Implementation
                                    };
 
                 var profilepicture = from pic in this.Context.UserProfilePictures
+                                     join filex in this.Context.Files on pic.FileId equals  filex.id
                                      where pic.UserId == userprofile.UserId
                                      select new UserProfileDetails.ProfilePicture
                                      {
+                                         FileName = pic.FileId + filex.extension,
                                          FileId = pic.FileId,
                                          ImageHeight = pic.Height,
                                          ImageWidth = pic.Width
