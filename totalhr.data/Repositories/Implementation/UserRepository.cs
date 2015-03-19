@@ -137,11 +137,12 @@ namespace totalhr.data.Repositories.Implementation
 
         public string GetProfilePicturePath(int userid)
         {
-            var result = from upp in Context.UserProfilePictures
+            var result = (from upp in Context.UserProfilePictures
                          join ff in Context.Files on upp.FileId equals ff.id
                          where upp.UserId == userid
-                         select new {Path = upp.FileId + ff.extension};
-            return (result.FirstOrDefault() != null)? result.FirstOrDefault().Path : "";
+                         select new {Path = upp.FileId + ff.extension}).FirstOrDefault();
+
+            return result != null ? result.Path : "";
         }
 
         public UserProfileDetails GetProfileDetails(int userId, string email)
@@ -200,7 +201,7 @@ namespace totalhr.data.Repositories.Implementation
                         PreferedLanguage = userprofile.PreferedLanguage,
                         State = userprofile.State,
                         UserName = userprofile.UserName,
-                        UserProfilePicture = (profilepicture != null)? profilepicture.FirstOrDefault() : null,
+                        UserProfilePicture = (profilepicture.Any())? profilepicture.FirstOrDefault() : null,
                         CustomFields = (customfields.Any()) ? customfields.ToList() : new List<UserProfileDetails.CustomField>()
                     };
 

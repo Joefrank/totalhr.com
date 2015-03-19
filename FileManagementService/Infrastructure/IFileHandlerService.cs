@@ -10,6 +10,6 @@ namespace FileManagementService.Infrastructure
 {
     public interface IFileHandlerService
     {
-        BaseFileHandler.FileSaveResult HandleFileCreation(HttpPostedFileBase postedFile, int creatorId, int fileTypeId);
+        BaseFileHandler.FileSaveResult HandleFileCreation(HttpPostedFileBase postedFile, int creatorId);
     }
 }

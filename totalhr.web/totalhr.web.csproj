@@ -404,6 +404,8 @@
     <Content Include="Content\assets\css\bootstrap.min.css" />
     <Content Include="Content\assets\css\goSamples.css" />
     <Content Include="Content\assets\css\highlight.css" />
+    <Content Include="Content\assets\dropzone\css\basic.css" />
+    <Content Include="Content\assets\dropzone\css\dropzone.css" />
     <Content Include="Content\assets\fancybox\.gitattributes" />
     <Content Include="Content\assets\fancybox\demo\1_b.jpg" />
     <Content Include="Content\assets\fancybox\demo\1_s.jpg" />
@@ -503,7 +505,18 @@
     <Content Include="Content\css\calendar.css" />
     <Content Include="Content\css\companydocument.css" />
     <Content Include="Content\css\default.css" />
+    <Content Include="Content\css\inbox.css" />
     <Content Include="Content\css\popup.css" />
+    <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\style_default.css" />
+    <Content Include="Content\css\style_gray.css" />
+    <Content Include="Content\css\style_navy-blue.css" />
+    <Content Include="Content\css\style_purple.css" />
+    <Content Include="Content\css\style_responsive.css" />
+    <Content Include="Content\font\myriadprobold.svg" />
+    <Content Include="Content\font\myriadproit.svg" />
+    <Content Include="Content\font\myriadprolight.svg" />
+    <Content Include="Content\font\myriadproregular.svg" />
     <Content Include="Content\images\cal.gif" />
     <Content Include="Content\images\design\calendar-icon.png" />
     <Content Include="Content\images\design\device.jpg" />
@@ -646,6 +659,20 @@
     <Content Include="CompanyDocuments\30\7.docx" />
     <Content Include="CompanyDocuments\30\7_bak.docx" />
     <Content Include="CompanyDocuments\30\9.xls" />
+    <Content Include="Content\css\.DS_Store" />
+    <Content Include="Content\font\.DS_Store" />
+    <Content Include="Content\font\myriadprobold.eot" />
+    <Content Include="Content\font\myriadprobold.ttf" />
+    <Content Include="Content\font\myriadprobold.woff" />
+    <Content Include="Content\font\myriadproit.eot" />
+    <Content Include="Content\font\myriadproit.ttf" />
+    <Content Include="Content\font\myriadproit.woff" />
+    <Content Include="Content\font\myriadprolight.eot" />
+    <Content Include="Content\font\myriadprolight.ttf" />
+    <Content Include="Content\font\myriadprolight.woff" />
+    <Content Include="Content\font\myriadproregular.eot" />
+    <Content Include="Content\font\myriadproregular.ttf" />
+    <Content Include="Content\font\myriadproregular.woff" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
@@ -1416,6 +1443,7 @@
     <Content Include="Scripts\Site\js\ui-jqueryui.js" />
     <Content Include="Scripts\Site\js\ui-nestable.js" />
     <Content Include="Scripts\Site\js\ui-tree.js" />
+    <Content Include="Views\File\FileDropZone.html" />
     <Content Include="Views\TimeRecording\Search.cshtml" />
     <Content Include="Views\TimeRecording\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Contract\Index.cshtml" />
@@ -1852,7 +1880,6 @@
     <Content Include="Views\Chat\Index.cshtml" />
     <Content Include="Views\Chat\ChatHistory.cshtml" />
     <Content Include="Views\Chat\Lobby.cshtml" />
-    <Content Include="Views\Shared\Copy of _Layout.cshtml" />
     <Content Include="Views\Shared\_SideBarMenu.cshtml" />
     <Content Include="Views\Shared\_PartialHeader.cshtml" />
     <Content Include="Views\Shared\_MyNotificationPreview.cshtml" />
@@ -1882,6 +1909,10 @@
     <Content Include="Views\Account\PayRoll.cshtml" />
     <Content Include="Views\File\Index.cshtml" />
     <Content Include="Views\File\UploadFile.cshtml" />
+    <Content Include="Views\Shared\_BootstrapPopupLayout.cshtml" />
+    <Content Include="Views\File\DropZone.cshtml" />
+    <Content Include="Views\File\UploadProfilePicture.cshtml" />
+    <Content Include="Views\File\UploadGalleryPhoto.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

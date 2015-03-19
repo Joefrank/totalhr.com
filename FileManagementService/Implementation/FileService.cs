@@ -15,7 +15,7 @@ namespace FileManagementService.Implementation
 {
     public class FileService : IFileService
     {
-        IFileRepository _fileRepos;
+        readonly IFileRepository _fileRepos;
 
         public FileService(IFileRepository fileRepos)
         {
@@ -29,14 +29,16 @@ namespace FileManagementService.Implementation
 
         public int Create(HttpPostedFileBase IOfile, string destinationFolder, int createdBy, int fileTypeId)
         {
-            EF.File file = new EF.File();
-            file.created = DateTime.Now;
-            file.createdby = createdBy;
-            file.extension = System.IO.Path.GetExtension(IOfile.FileName);
-            file.shortname = IOfile.FileName;
-            file.size = IOfile.ContentLength;
-            file.typeid = fileTypeId;
-            int newFileId = _fileRepos.CreateFile(file);
+            var file = new EF.File
+                {
+                    created = DateTime.Now,
+                    createdby = createdBy,
+                    extension = System.IO.Path.GetExtension(IOfile.FileName),
+                    shortname = IOfile.FileName,
+                    size = IOfile.ContentLength,
+                    typeid = fileTypeId
+                };
+            var newFileId = _fileRepos.CreateFile(file);
 
             if (!Directory.Exists(destinationFolder))
             {
@@ -49,7 +51,7 @@ namespace FileManagementService.Implementation
 
         public int UpdateWith(int FileId, HttpPostedFileBase IOfile, string destinationFolder, int updatedBy, int fileTypeId)
         {
-            EF.File oldFile = _fileRepos.FindBy(x => x.id == FileId).FirstOrDefault();
+            var oldFile = _fileRepos.FindBy(x => x.id == FileId).FirstOrDefault();
 
             if (oldFile == null)
             {
@@ -68,7 +70,7 @@ namespace FileManagementService.Implementation
             _fileRepos.Save();
 
             //rename old file
-            FileInfo info = new FileInfo(oldpath);
+            var info = new FileInfo(oldpath);
             if (!File.Exists(backuppath))
             {
                 info.MoveTo(backuppath);

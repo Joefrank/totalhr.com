@@ -9,6 +9,7 @@ using System.Web;
 using FileManagementService.Infrastructure;
 using totalhr.data.EF;
 using totalhr.services.Infrastructure;
+using totalhr.Shared;
 
 namespace FileManagementService.Implementation
 {
@@ -22,12 +23,13 @@ namespace FileManagementService.Implementation
             FileService = fileService;
             AccountService = accountService;
             UploadPath = ConfigurationManager.AppSettings["ProfilePicturePath"];
+            base.FileTypeId = (int)Variables.FileType.ProfilePicture;
             base.OverridePath(this.DirectoryPath);
         }
 
-        public override BaseFileHandler.FileSaveResult HandleFileCreation(HttpPostedFileBase postedFile, int creatorId, int fileTypeId)
+        public override BaseFileHandler.FileSaveResult HandleFileCreation(HttpPostedFileBase postedFile, int creatorId)
         {
-            var fileResult = base.HandleFileCreation(postedFile, creatorId, fileTypeId);
+            var fileResult = base.HandleFileCreation(postedFile, creatorId);
 
             if (fileResult.FileId > 0)
             {
@@ -43,7 +45,7 @@ namespace FileManagementService.Implementation
                     }
                 }
 
-                //apply resizing
+                //***apply resizing
                 var profilePicture = new UserProfilePicture
                     {
                         Created = DateTime.Now,

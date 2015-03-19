@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using totalhr.Shared;
 
 namespace FileManagementService.Implementation
 {
@@ -30,29 +31,20 @@ namespace FileManagementService.Implementation
             this.UploadPath = newPath;
         }
 
-        public virtual FileSaveResult HandleFileCreation(HttpPostedFileBase postedFile, int creatorId, int fileTypeId)
+        public int FileTypeId { get; set; }
+
+        public virtual FileSaveResult HandleFileCreation(HttpPostedFileBase postedFile, int creatorId)
         {
             if (postedFile != null && postedFile.ContentLength > 0)
             {
                 var pathString = HttpContext.Current.Server.MapPath(DirectoryPath);
+                FileTypeId = (FileTypeId > 0) ? FileTypeId : (int) Variables.FileType.CompanyDocument;
 
-                var fileId = this.FileService.Create(postedFile, pathString, creatorId, fileTypeId);
+                var fileId = this.FileService.Create(postedFile, pathString, creatorId, FileTypeId);
 
                 if (fileId > 0)
                 {
                     var picturePath = Path.Combine(pathString, fileId + Path.GetExtension(postedFile.FileName));
-                    var pictureWidth = 0;
-                    var pictureHeight = 0;
-
-                    using (var fs = new FileStream(picturePath, FileMode.Open, FileAccess.Read))
-                    {
-                        using (var original = System.Drawing.Image.FromStream(fs))
-                        {
-                            pictureWidth = original.Width;
-                            pictureHeight = original.Height;
-                        }
-                    }
-
                     return new FileSaveResult { FileId = fileId, FullPath = picturePath };                    
                 }
             }

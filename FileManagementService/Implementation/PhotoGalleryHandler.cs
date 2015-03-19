@@ -7,33 +7,35 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
+using totalhr.Shared;
 
 namespace FileManagementService.Implementation
 {
     public class PhotoGalleryHandler : BaseFileHandler, IFileHandlerService
     {
-        private IGalleryService _galleryService;
-        private int _albumId { get; set; }
+        private readonly IGalleryService _galleryService;
+        private int AlbumId { get; set; }
 
         public PhotoGalleryHandler(IFileService fileService, IGalleryService galleryService, int albumId)
             : base(fileService)
         {           
             _galleryService = galleryService;
             UploadPath = ConfigurationManager.AppSettings["GalleryImagePath"];
+            base.FileTypeId = (int)Variables.FileType.GalleryImage;
             base.OverridePath(this.DirectoryPath);
-            _albumId = albumId;
+            AlbumId = albumId;
         }
 
-        public override BaseFileHandler.FileSaveResult HandleFileCreation(HttpPostedFileBase postedFile, int creatorId, int fileTypeId)
+        public override BaseFileHandler.FileSaveResult HandleFileCreation(HttpPostedFileBase postedFile, int creatorId)
         {
             if (postedFile != null && postedFile.ContentLength > 0)
             {
-                var fileResult = base.HandleFileCreation(postedFile, creatorId, fileTypeId);
+                var fileResult = base.HandleFileCreation(postedFile, creatorId);
 
                 if (fileResult.FileId > 0)
                 {
                     var photoId = _galleryService.AddPhoto(new totalhr.Shared.Models.GalleryPhotoInfo{
-                         AlbumId = this._albumId,
+                         AlbumId = this.AlbumId,
                          FileId = fileResult.FileId,
                          UserId = creatorId
                     });
