@@ -93,6 +93,8 @@ h1.block, h2.block, h3.block, h4.block, h5.block, h6.block {
     font-size: 14px;
 }
 
+h4.page-title{ color: white;font-weight: bold;font-size: 20px;margin: 15px 0 10px 17px;}
+
 /* general tools */
 img.center {
     text-align:center;
@@ -394,6 +396,11 @@ a,a:focus, a:hover, a:active {
     margin-left: 215px;
     min-height: 800px;
     background: #f7f7f7 url("../img/body-bg.png");
+}
+
+#bootstrappopup #main-content {
+    min-height: 300px;
+    margin-left: 10px;
 }
 
 /* page container */
@@ -3073,9 +3080,13 @@ ul.faq-list li a:hover, ul.faq-list li a.active{
 .error-page p {color: #adafb2; font-size: 20px; font-weight: bold;}
 
 /*profile*/
-.profile-pic {
+.profile-pic, .avatar-pic, .small-avatar-pic {
     display: block;
     margin-bottom: 10px;
+}
+
+.avatar {
+    
 }
 .nav-stacked > li > a {
     border-radius: 0!important;

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using totalhr.Shared;
 using totalhr.data.EF;
 using totalhr.data.Repositories.Infrastructure;
 using totalhr.Shared.Models;
@@ -170,18 +171,19 @@ namespace totalhr.data.Repositories.Implementation
                                        CustomFieldValue = ecf.Value
                                    };
 
-                var profilepicture = from pic in this.Context.UserProfilePictures
+                var profilepictures = from pic in this.Context.UserProfilePictures
                                      join filex in this.Context.Files on pic.FileId equals  filex.id
                                      where pic.UserId == userprofile.UserId
                                      select new UserProfileDetails.ProfilePicture
                                      {
                                          FileName = pic.FileId + filex.extension,
+                                         PictureTypeId = (int)Variables.ProfilePictureType.Portrait, //(Variables.ProfilePictureType)Enum.Parse(typeof(Variables.ProfilePictureType), pic.ProfilePictureType, true),
                                          FileId = pic.FileId,
                                          ImageHeight = pic.Height,
                                          ImageWidth = pic.Width
                                      };
 
-                
+                //EnumExtensions.ParseEnum<Variables.ProfilePictureType>(pic.ProfilePictureType)
                 var personalInfo = new UserProfileDetails
                     {
                         UserId = userprofile.UserId,
@@ -212,7 +214,7 @@ namespace totalhr.data.Repositories.Implementation
                         PreferedLanguage = userprofile.PreferedLanguage,
                         State = userprofile.State,
                         UserName = userprofile.UserName,
-                        UserProfilePicture = (profilepicture.Any())? profilepicture.FirstOrDefault() : null,
+                        UserProfilePicture =  profilepictures.ToList(),
                         CustomFields = (customfields.Any()) ? customfields.ToList() : new List<UserProfileDetails.CustomField>()
                     };
 

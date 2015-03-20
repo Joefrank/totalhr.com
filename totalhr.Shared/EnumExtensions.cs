@@ -60,6 +60,10 @@ namespace totalhr.Shared
             var localizedDescription = FileTypeNameResources.GetString(fileType);
             return localizedDescription ?? fileType;
         }
-      
+
+        public static T ParseEnum<T>(string value)
+        {
+            return (T)Enum.Parse(typeof(T), value, true);
+        }
     }
 }

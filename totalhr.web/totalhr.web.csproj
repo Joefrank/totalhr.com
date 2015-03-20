@@ -557,6 +557,24 @@
     <Content Include="Content\themes\jquery-ui.min.css" />
     <Content Include="Content\themes\jquery-ui.structure.min.css" />
     <Content Include="Content\themes\jquery-ui.theme.min.css" />
+    <Content Include="Employee\Profile\avatar-mini\avatar-mini.png" />
+    <Content Include="Employee\Profile\avatar\avatar.png" />
+    <Content Include="Employee\Profile\avatar\HS1.png" />
+    <Content Include="Employee\Profile\avatar\HS10.png" />
+    <Content Include="Employee\Profile\avatar\HS11.png" />
+    <Content Include="Employee\Profile\avatar\HS12.png" />
+    <Content Include="Employee\Profile\avatar\HS13.png" />
+    <Content Include="Employee\Profile\avatar\HS14.png" />
+    <Content Include="Employee\Profile\avatar\HS15.png" />
+    <Content Include="Employee\Profile\avatar\HS16.png" />
+    <Content Include="Employee\Profile\avatar\HS2.png" />
+    <Content Include="Employee\Profile\avatar\HS3.png" />
+    <Content Include="Employee\Profile\avatar\HS4.png" />
+    <Content Include="Employee\Profile\avatar\HS5.png" />
+    <Content Include="Employee\Profile\avatar\HS6.png" />
+    <Content Include="Employee\Profile\avatar\HS7.png" />
+    <Content Include="Employee\Profile\avatar\HS8.png" />
+    <Content Include="Employee\Profile\avatar\HS9.png" />
     <Content Include="Employee\Profile\Picture\13.JPG" />
     <Content Include="Employee\Profile\Picture\14.JPG" />
     <Content Include="Employee\Profile\Picture\15.JPG" />
@@ -1913,6 +1931,7 @@
     <Content Include="Views\File\DropZone.cshtml" />
     <Content Include="Views\File\UploadProfilePicture.cshtml" />
     <Content Include="Views\File\UploadGalleryPhoto.cshtml" />
+    <Content Include="Views\Account\EditMyDetails.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1930,7 +1949,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\Database\" />
-    <Folder Include="Employee\Profile\avatar\" />
     <Folder Include="GenericUploads\" />
     <Folder Include="Handlers\" />
     <Folder Include="PhotoGallery\Large\" />

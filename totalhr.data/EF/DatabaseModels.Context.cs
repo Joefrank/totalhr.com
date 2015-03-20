@@ -27,10 +27,16 @@ namespace totalhr.data.EF
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Absence> Absences { get; set; }
+        public virtual DbSet<AbsenceReply> AbsenceReplies { get; set; }
+        public virtual DbSet<AbsenceSettingField> AbsenceSettingFields { get; set; }
         public virtual DbSet<Calendar> Calendars { get; set; }
         public virtual DbSet<CalendarAssociation> CalendarAssociations { get; set; }
         public virtual DbSet<CalendarEvent> CalendarEvents { get; set; }
         public virtual DbSet<CalEventReminderType> CalEventReminderTypes { get; set; }
+        public virtual DbSet<ChatMessage> ChatMessages { get; set; }
+        public virtual DbSet<ChatRoom> ChatRooms { get; set; }
+        public virtual DbSet<ChatRoomUser> ChatRoomUsers { get; set; }
         public virtual DbSet<Company> Companies { get; set; }
         public virtual DbSet<CompanyDocument> CompanyDocuments { get; set; }
         public virtual DbSet<CompanyDocumentDownload> CompanyDocumentDownloads { get; set; }
@@ -45,49 +51,43 @@ namespace totalhr.data.EF
         public virtual DbSet<ContractTemplateSection> ContractTemplateSections { get; set; }
         public virtual DbSet<CTemplateSectionLink> CTemplateSectionLinks { get; set; }
         public virtual DbSet<CTSectionFieldLink> CTSectionFieldLinks { get; set; }
+        public virtual DbSet<CustomField> CustomFields { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<EmailTemplate> EmailTemplates { get; set; }
+        public virtual DbSet<EmployeeCustomField> EmployeeCustomFields { get; set; }
         public virtual DbSet<EventToSchedule> EventToSchedules { get; set; }
         public virtual DbSet<Feature> Features { get; set; }
         public virtual DbSet<File> Files { get; set; }
         public virtual DbSet<Form> Forms { get; set; }
         public virtual DbSet<FormControl> FormControls { get; set; }
         public virtual DbSet<FormField> FormFields { get; set; }
+        public virtual DbSet<FormFieldJSon> FormFieldJSons { get; set; }
+        public virtual DbSet<FormFieldValidationRule> FormFieldValidationRules { get; set; }
+        public virtual DbSet<GalleryAlbum> GalleryAlbums { get; set; }
+        public virtual DbSet<GalleryPhoto> GalleryPhotoes { get; set; }
         public virtual DbSet<Glossary> Glossaries { get; set; }
         public virtual DbSet<Label> Labels { get; set; }
         public virtual DbSet<Language> Languages { get; set; }
+        public virtual DbSet<Note> Notes { get; set; }
+        public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<Profile> Profiles { get; set; }
         public virtual DbSet<Recipient> Recipients { get; set; }
         public virtual DbSet<RecipientList> RecipientLists { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<ScheduledNotification> ScheduledNotifications { get; set; }
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<UserContract> UserContracts { get; set; }
-        public virtual DbSet<UserContractData> UserContractDatas { get; set; }
-        public virtual DbSet<UserProfile> UserProfiles { get; set; }
-        public virtual DbSet<UserProfilePicture> UserProfilePictures { get; set; }
-        public virtual DbSet<UserRole> UserRoles { get; set; }
-        public virtual DbSet<FormFieldValidationRule> FormFieldValidationRules { get; set; }
-        public virtual DbSet<FormFieldJSon> FormFieldJSons { get; set; }
-        public virtual DbSet<UserContractFieldData> UserContractFieldDatas { get; set; }
-        public virtual DbSet<ChatMessage> ChatMessages { get; set; }
-        public virtual DbSet<ChatRoom> ChatRooms { get; set; }
-        public virtual DbSet<ChatRoomUser> ChatRoomUsers { get; set; }
-        public virtual DbSet<Absence> Absences { get; set; }
-        public virtual DbSet<AbsenceReply> AbsenceReplies { get; set; }
-        public virtual DbSet<Note> Notes { get; set; }
-        public virtual DbSet<Notification> Notifications { get; set; }
         public virtual DbSet<TaskScheduler> TaskSchedulers { get; set; }
         public virtual DbSet<TimeRecording> TimeRecordings { get; set; }
         public virtual DbSet<TimeRecordingType> TimeRecordingTypes { get; set; }
-        public virtual DbSet<AbsenceSettingField> AbsenceSettingFields { get; set; }
+        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserAbsenceFieldData> UserAbsenceFieldDatas { get; set; }
-        public virtual DbSet<GalleryAlbum> GalleryAlbums { get; set; }
-        public virtual DbSet<GalleryPhoto> GalleryPhotoes { get; set; }
-        public virtual DbSet<CustomField> CustomFields { get; set; }
-        public virtual DbSet<EmployeeCustomField> EmployeeCustomFields { get; set; }
+        public virtual DbSet<UserContract> UserContracts { get; set; }
+        public virtual DbSet<UserContractData> UserContractDatas { get; set; }
+        public virtual DbSet<UserContractFieldData> UserContractFieldDatas { get; set; }
+        public virtual DbSet<UserProfile> UserProfiles { get; set; }
+        public virtual DbSet<UserProfilePicture> UserProfilePictures { get; set; }
+        public virtual DbSet<UserRole> UserRoles { get; set; }
     
-        [DbFunction("TotalHREntities", "SplitCSV")]
+        [DbFunction("Entities", "SplitCSV")]
         public virtual IQueryable<SplitCSV_Result> SplitCSV(string @string, string delimiter)
         {
             var stringParameter = @string != null ?
@@ -98,7 +98,7 @@ namespace totalhr.data.EF
                 new ObjectParameter("Delimiter", delimiter) :
                 new ObjectParameter("Delimiter", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<SplitCSV_Result>("[TotalHREntities].[SplitCSV](@String, @Delimiter)", stringParameter, delimiterParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<SplitCSV_Result>("[Entities].[SplitCSV](@String, @Delimiter)", stringParameter, delimiterParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> BuildCalEventReminderRecipientList(Nullable<int> eventid, Nullable<int> companyid, string recipientListName, string description, Nullable<int> createdBy)
@@ -163,6 +163,19 @@ namespace totalhr.data.EF
                 new ObjectParameter("viewinglanguageid", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserListForAdmin_Result>("GetUserListForAdmin", showactiveParameter, viewinglanguageidParameter);
+        }
+    
+        public virtual ObjectResult<GetUserProfileDetails_Result> GetUserProfileDetails(Nullable<int> userId, string email)
+        {
+            var userIdParameter = userId.HasValue ?
+                new ObjectParameter("UserId", userId) :
+                new ObjectParameter("UserId", typeof(int));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserProfileDetails_Result>("GetUserProfileDetails", userIdParameter, emailParameter);
         }
     
         public virtual ObjectResult<Nullable<int>> GetUserProfileIds(Nullable<int> userid)
@@ -330,19 +343,6 @@ namespace totalhr.data.EF
                 new ObjectParameter("viewinglanguageid", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SearchUserWithPaging_Result>("SearchUserWithPaging", idParameter, nameParameter, usertypeidParameter, departmentidParameter, emailParameter, partialaddressParameter, townParameter, countyParameter, postcodeParameter, phoneParameter, pageSizeParameter, pageNumberParameter, ordercolumnParameter, sortorderParameter, viewinglanguageidParameter);
-        }
-    
-        public virtual ObjectResult<GetUserProfileDetails_Result> GetUserProfileDetails(Nullable<int> userId, string email)
-        {
-            var userIdParameter = userId.HasValue ?
-                new ObjectParameter("UserId", userId) :
-                new ObjectParameter("UserId", typeof(int));
-    
-            var emailParameter = email != null ?
-                new ObjectParameter("Email", email) :
-                new ObjectParameter("Email", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetUserProfileDetails_Result>("GetUserProfileDetails", userIdParameter, emailParameter);
         }
     }
 }

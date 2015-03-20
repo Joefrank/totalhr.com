@@ -54,6 +54,11 @@ namespace totalhr.web.Controllers
             return View(userinfo);
         }
 
+        public ActionResult EditMyDetails()
+        {
+            return View();
+        }
+
         [AllowAnonymous]
         public ActionResult Login()
         {

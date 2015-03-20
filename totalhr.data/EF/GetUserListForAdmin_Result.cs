@@ -51,5 +51,6 @@ namespace totalhr.data.EF
         public string activationcode { get; set; }
         public string chosenculture { get; set; }
         public int departmentid { get; set; }
+        public Nullable<int> LineManagerId { get; set; }
     }
 }

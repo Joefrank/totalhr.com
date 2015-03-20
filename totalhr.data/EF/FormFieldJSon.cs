@@ -34,8 +34,8 @@ namespace totalhr.data.EF
         public bool obsolete { get; set; }
         public int FormId { get; set; }
     
+        public virtual Form Form { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FormFieldValidationRule> FormFieldValidationRules { get; set; }
-        public virtual Form Form { get; set; }
     }
 }

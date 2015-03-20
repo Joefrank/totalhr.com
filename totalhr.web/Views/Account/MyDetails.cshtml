@@ -1,6 +1,7 @@
 ﻿@model totalhr.Shared.Models.UserProfileDetails
 
 @using totalhr.Resources
+@using totalhr.Shared
 @using totalhr.Shared.Models
 @using  totalhr.data.EF
 @using totalhr.web.Helpers
@@ -8,19 +9,11 @@
 @using totalhr.web.Areas.Admin.Models
 
 @{
-    //ViewBag.Title = Account.V_My_Profile;
-
-    ////var languages = ViewBag.LanguageList as List<ListItemStruct>;
-    //var languages = ViewBag.LanguageList as IEnumerable<ListItemStruct>;
-
-    //var genders = ViewBag.GenderList as List<Glossary>;
-    //var countries = ViewBag.CountryList as List<Glossary>;
-    //var titles = ViewBag.TitleList as List<Glossary>;
-
-    //List<SelectListItem> languagesSelect = null;
-
-    //languagesSelect = GenericHelper.GetListFromNumerable(ViewBag.LanguageList as IEnumerable<ListItemStruct>) ?? new List<SelectListItem> { new SelectListItem { Value = "", Text = Common.V_None } };
-
+    var avatar = "avatar.png";
+    var smallAvatar = "avatar-mini.png";
+    var portrait = "profile-pic.jpg";
+    var dateOfBirth = "";
+    
     var breadCrumbItems = new List<BreadCrumbItem>
     {
         new BreadCrumbItem{Url = "", Text = Account.V_My_Profile, Title= Account.V_My_Profile}
@@ -33,8 +26,31 @@
     {
       jobtitlevalue = jobtitle.CustomFieldValue;   
     }
+
+    var dateOfBirthField = Model.CustomFields.FirstOrDefault(x => x.CustomFieldIdentifier.Equals(Variables.CustomFieldIdentifier.DOB.ToString()));
     
+    if (dateOfBirthField != null)
+    {
+        dateOfBirth = dateOfBirthField.CustomFieldValue;
     }
+    
+    foreach (var picture in Model.UserProfilePicture)
+    {
+        switch (picture.PictureTypeId)
+        {
+            case (int)Variables.ProfilePictureType.Portrait:
+                portrait = picture.FileName;
+                break;
+            case (int)Variables.ProfilePictureType.Avatar:
+                avatar = picture.FileName;
+                break;
+            case (int)Variables.ProfilePictureType.SmallAvatar:
+                smallAvatar = picture.FileName;
+                break;
+        }
+    }
+
+ }
 
 
 @section pagetitle{
@@ -57,19 +73,35 @@
         </div>
         <div id="widgetDetails" class="widget-body"> 
              <div class="span3">
-                <div class="text-center profile-pic">
-                    <img src="/Employee/Profile/Picture/@(Model.UserProfilePicture != null? Model.UserProfilePicture.FileName : "profile-pic.jpg")" />
-                </div>
-                <ul class="nav nav-tabs nav-stacked">
-                    <li><a href="javascript:void(0)" onclick="OpenPopup('/File/UploadProfilePicture/', 600, 600, true)"><i class="icon-picture"></i> Update Picture</a></li>
-                    <li><a href="javascript:void(0)"><i class="icon-paper-clip"></i> Avatar</a></li>                    
-                </ul>
-              
+                 <div class="text-center profile-pic" onclick="OpenPopup('/File/UploadProfilePicture/', 1000, 500, true)">
+                     <img src="/Employee/Profile/Picture/@portrait" alt="@Account.V_Your_Profile_Picture" />
+                     <br/>
+                     <i class="icon-pencil"> @Account.V_Edit_Profile_Picture</i>
+                     <br/>
+                 </div>
+                 
+                 <div class="text-center avatar-pic" onclick="OpenPopup('/File/UploadAvatar/', 1000, 500, true)">
+                     <img src="/Employee/Profile/avatar/@avatar" alt="@Account.V_Your_Avatar" />
+                      <br/>
+                     <i class="icon-pencil"> @Account.V_Edit_Avatar</i>
+                 </div>
+                 
+                 <div class="text-center small-avatar-pic" onclick="OpenPopup('/File/UploadSmallAvatar/', 1000, 500, true)">
+                     <img src="/Employee/Profile/avatar-mini/@smallAvatar" alt="@Account.V_Your_Small_Avatar" />
+                      <br/>
+                     <i class="icon-pencil"> @Account.V_Edit_Small_Avatar</i>
+                     <br/>
+
+                  
+                 </div>
+                 
             </div>
 
             <div class="span6">
-                    <h4>@(Model.FirstName + " " + Model.Surname)
-                            <br/><small>Software Developer</small></h4>
+                <h4>@(Model.FirstName + " " + Model.Surname)
+                    <br/><small>@jobtitlevalue</small>
+                </h4>
+
                     <table class="table table-borderless">
                         <tbody>
                             <tr>
@@ -105,7 +137,7 @@
                             <tr>
                                 <td class="span2">@FormMessages.Label_DOB :</td>
                                 <td>
-                                    13 july 1983
+                                    @dateOfBirth
                                 </td>
                             </tr>
                             <tr>
@@ -129,42 +161,12 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">@FormMessages.Label_Username :</td>
-                                <td>
-                                    @Model.UserName
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="span2">@FormMessages.Label_Password :</td>
-                                <td>
-                                    @Model.Password
-                                </td>
-                            </tr>
-                            
-                            <tr>
-                                <td class="span2">@FormMessages.Label_Last_Visit :</td>
-                                <td>
-                                    @Model.LastVisit
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="span2">@FormMessages.Label_Pref_Language:</td>
-                                <td>
-                                    @Model.PreferedLanguage
-                                </td>
-                            </tr>
-                            <tr>
                                 <td class="span2">@FormMessages.Label_Department :</td>
                                 <td>
                                     @Model.Department
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="span2">@FormMessages.Label_Culture :</td>
-                                <td>
-                                   @Model.ChoosenCulture
-                                </td>
-                            </tr>
+                           
                         </tbody>
                     </table>
                 
@@ -194,184 +196,34 @@
                 </div>
 
             <div class="span3">
-                <h4>Experience</h4>
+                <h4>@Account.V_Settings</h4>
                 <ul class="icons push">
-                    <li><i class="icon-hand-right"></i> <strong>ABC Company</strong><br/><em>Duration: 4 years</em><br/><em>Description of the company..</em><br><a href="javascript:void(0)">abc-company.com</a></li>
-                    <li><i class="icon-hand-right"></i> <strong>DEF Company</strong><br/><em>Duration: 3 years</em><br/><em>Description of the company..</em><br><a href="javascript:void(0)">def-company.com</a></li>
-                    <li><i class="icon-hand-right"></i> <strong>GHI Company</strong><br/><em>Duration: 1.7 years</em><br/><em>Description of the company..</em><br><a href="javascript:void(0)">ghi-company.com</a></li>
+                    <li><i class="icon-hand-right"></i> <strong>@FormMessages.Label_Last_Visit</strong><br/><em>@Model.LastVisit</em><br/></li>
+                    <li><i class="icon-hand-right"></i> <strong>@FormMessages.Label_Culture</strong><br/><em> @Model.ChoosenCulture</em><br/></li>
+                    <li><i class="icon-hand-right"></i> <strong>@FormMessages.Label_Pref_Language</strong><br/><em>@Model.PreferedLanguage</em><br/></li>
                 </ul>
-                <h4>Current Status</h4>
-                <div class="alert alert-success"><i class="icon-ok-sign"></i> Working in ABC Company</div>
-                <h4>Some Projects</h4>
+                
+                <h4>@Account.V_Logon_Details</h4>
                 <ul class="unstyled">
-                    <li> <strong>Project 1</strong>: <a href="javascript:void(0)">exampleproject1.com</a></li>
-                    <li> <strong>Project 2</strong>: <a href="javascript:void(0)">exampleproject2.com</a></li>
-                    <li> <strong>Project 3</strong>: <a href="javascript:void(0)">exampleproject3.com</a></li>
-                    <li> <strong>Project 4</strong>: <a href="javascript:void(0)">exampleproject4.com</a></li>
-                    <li> <strong>Project 5</strong>: <a href="javascript:void(0)">exampleproject5.com</a></li>
-                    <li> <strong>Project 6</strong>: <a href="javascript:void(0)">exampleproject6.com</a></li>
-                    <li> <strong>Project 7</strong>: <a href="javascript:void(0)">exampleproject7.com</a></li>
-                    <li> <strong>Project 8</strong>: <a href="javascript:void(0)">exampleproject8.com</a></li>
-                    <li> <strong>Project 9</strong>: <a href="javascript:void(0)">exampleproject9.com</a></li>
-                    <li> <strong>Project 10</strong>: <a href="javascript:void(0)">exampleproject10.com</a></li>
+                    <li> <strong>@FormMessages.Label_Username</strong>: @Model.UserName</li>
+                    <li>
+                        <strong>@FormMessages.Label_Password</strong>: 
+                        <span id="pwSecret">***********
+                            <a href="javascript:void(0);">Show</a>
+                        </span> 
+                        <span id="pwd" style="display:none">
+                            @CM.Security.Decrypt(Model.Password)
+                            &nbsp;
+                            <a href="javascript:void(0);">Hide</a>
+                        </span>
+
+                    </li>
                 </ul>
             </div>
 
             <div class="space5"></div>
        
         </div>
-
-        <div id="widgetEditDetails" class="widget-body">
-
-        <div class="formdiv midform" style="display:none">
-
-        @*using (Html.BeginForm("SaveUserDetails", "Account"))
-        {
-            
-        if(Model.DetailsSaveSuccess){
-            <div id="dvSaveSuccess" class="savesuccess">
-                @FormMessages.MSG_Details_Saved
-            </div>
-        }
-            
-        @Html.ValidationSummary()
-
-        
-            <div class="wrapper">
-
-                 <fieldset>
-               <legend>@FormMessages.Title_Personal_Details</legend>
-                
-                <div class="line">
-                    <label>@FormMessages.Label_Gender <b class="req">*</b></label>
-                     <span>@Html.DropDownListFor(x => x.GenderId,  new SelectList(genders, "RootId", "Term"))</span>
-                    
-                </div>
-                 <div class="line">
-                    <label>@FormMessages.Label_Title <b class="req">*</b></label>
-                     <span>@Html.DropDownListFor(x => x.Title, new SelectList(titles, "RootId", "Term"), 
-                        new { onchange = string.Format("CheckOther(this, 'spOther', {0})", (int)totalhr.Shared.Variables.NamedGlossaryIds.OtherTitle) })
-                         &nbsp;
-                        <span id="spOther" style="display:none">@Html.TextBoxFor(x => x.OtherTitle , new { size = "20", maxlength = "30" })</span>
-                     </span>
-                    
-                </div>
-                 <div class="line">
-                    <label>@FormMessages.Label_First_Name <b class="req">*</b></label>
-                    <span>@Html.TextBoxFor(x => x.FirstName , new { size = "45", maxlength = "50" })</span>
-                    
-                </div>
-                 <div class="line">
-                    <label>@FormMessages.Label_MiddleName <b class="req"></b></label>
-                     <span>@Html.TextBoxFor(x => x.MiddleNames, new {size="45", maxlength="50"})</span>
-                    
-                </div>
-                 <div class="line">
-                    <label>@FormMessages.Label_Last_Name <b class="req">*</b></label>
-                    <span>@Html.TextBoxFor(x => x.Surname , new { size = "45", maxlength = "50" })</span>
-                    
-                </div>
-                <div class="line">
-                    <label>@FormMessages.Label_Email <b class="req">*</b></label>
-                    <span>@Html.TextBoxFor(x => x.Email , new { size = "45", maxlength = "150" })</span>
-                    
-                </div>                
-                
-                <div class="line">
-                    <label>@FormMessages.Label_Address <b class="req">*</b></label>
-                    <span>@Html.TextBoxFor(x => x.Address1 , new { size = "45", maxlength = "250" })</span>
-                    
-                </div>
-                 <div class="line">
-                    <label>&nbsp;</label>
-                    <span>@Html.TextBoxFor(x => x.Address2 , new { size = "45", maxlength = "250" })</span>
-                    
-                </div>
-                 <div class="line">
-                    <label>&nbsp;</label>
-                    <span>@Html.TextBoxFor(x => x.Address3 , new { size = "45", maxlength = "250" })</span>
-                   
-                </div>
-                 <div class="line">
-                    <label>@FormMessages.Label_City <b class="req">*</b></label>
-                    <span>@Html.TextBoxFor(x => x.City , new { size = "20", maxlength = "50" })</span>
-                    
-                </div>
-                <div class="line" >
-                    <label>@FormMessages.Label_State</label>
-                    <span>@Html.TextBoxFor(x => x.State , new { size = "20", maxlength = "50" })</span>
-                   
-                </div>
-                <div class="line">
-                    <label>@FormMessages.Label_PostCode</label>
-                    <span>@Html.TextBoxFor(x => x.PostCode , new { size = "10", maxlength = "20" })</span>
-                   
-                </div>
-                <div class="line">
-                    <label>@FormMessages.Label_Country <b class="req">*</b></label>
-                    <span>@Html.DropDownListFor(x => x.CountryId,  new SelectList(countries, "RootId", "Term"))</span>
-                    
-                </div>
-                 <div class="line">
-                    <label>@FormMessages.Label_Phone <b class="req">*</b></label>
-                    <span>@Html.TextBoxFor(x => x.PersonalPhone, new { size = "20", maxlength = "20" })</span>
-                    
-                </div>
-                 <div class="line">
-                    <label>@FormMessages.Label_Mobile</label>
-                    <span>@Html.TextBoxFor(x => x.MobilePhone, new { size = "20", maxlength = "20" })</span>
-                    
-                </div>
-                
-                </fieldset>
-
-                 <fieldset>
-
-                <legend>@FormMessages.Title_Logon_Details</legend>
-
-                 <div class="line">
-                    <label>@FormMessages.Label_Username <b class="req">*</b></label>
-                    <span>
-                        @Html.TextBoxFor(x => x.UserName , new { size = "20", maxlength = "20", autocomplete ="off" })
-                     </span>
-                    
-                </div>
-                <div class="line">
-                    <label>@FormMessages.Label_Password <b class="req">*</b></label>
-                    <span>@Html.PasswordFor(x => x.Password , new { size = "20", maxlength = "15", autocomplete ="off", value=Model.Password })</span>
-                    <span id="spAction" class="actionlink" onclick="RevealPassToSpan('Password', 'spupss', this, 'spAlternate');">@Common.V_Show</span>
-                    <span id="spupss" class="passdisplay" style="display:none"></span>    
-                    <span id="spAlternate" style="display:none">@Common.V_Hide</span>                
-                </div>
-                                
-                 <div class="line">
-                    <label>@FormMessages.Label_Pref_Language</label>
-                    <span>@Html.DropDownListFor(x => x.PreferedLanguageId,  new SelectList(languagesSelect, "Value", "Text"))</span>
-                    
-                </div>
-                
-                </fieldset>
-
-                <div class="line">
-                    &nbsp;
-                </div>
-                <div class="line">
-                    <label>&nbsp;</label>
-                    <span>
-                        <input type="button" value="@FormMessages.btn_Cancel" onclick="" /> &nbsp;
-                        <input type="submit" value="@FormMessages.btn_Value_Save" /></span>
-                    <span class="req"></span>
-                </div>
-                <div class="line">&nbsp;</div>
-            </div>
-
-        
-            @Html.HiddenFor(x => x.UserId)
-            @Html.HiddenFor(x => x.CompanyId)
-        }*@
-        </div>
-
-      </div>
 
     </div>
 </div>

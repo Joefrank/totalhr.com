@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace totalhr.Shared
 {
@@ -308,6 +309,31 @@ namespace totalhr.Shared
             Decimal = 3,
             Date = 4,
             Bool = 5
+        }
+
+        public enum ProfilePictureType
+        {
+            Portrait=1,
+            Avatar=2,
+            SmallAvatar=3
+        }
+
+        /* consider putting this in the web config and read from there */
+        public class ProfilePictureMaxSize
+        {
+            public static Size PortraitSize{
+                get { return new Size {Width  = 500, Height = 500}; }
+            }
+
+            public static Size AvatarSize
+            {
+                get{return new Size{ Width = 45, Height = 45};}
+            }
+
+            public static Size SmallAvatarSize
+            {
+                get{return new Size{Width =29, Height = 29};}
+            }
         }
 
         public static string AdminEmailSignature

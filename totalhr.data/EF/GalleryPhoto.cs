@@ -17,10 +17,10 @@ namespace totalhr.data.EF
         public int Id { get; set; }
         public int AlbumId { get; set; }
         public int FileId { get; set; }
-        public System.DateTime Created { get; set; }
-        public int CreatedBy { get; set; }
         public string FileName { get; set; }
         public string Label { get; set; }
+        public System.DateTime Created { get; set; }
+        public int CreatedBy { get; set; }
     
         public virtual File File { get; set; }
         public virtual GalleryAlbum GalleryAlbum { get; set; }

@@ -17,39 +17,31 @@ namespace totalhr.data.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public User()
         {
+            this.Absences = new HashSet<Absence>();
+            this.Absences1 = new HashSet<Absence>();
+            this.AbsenceReplies = new HashSet<AbsenceReply>();
+            this.ChatRooms = new HashSet<ChatRoom>();
+            this.ChatRoomUsers = new HashSet<ChatRoomUser>();
+            this.ChatRoomUsers1 = new HashSet<ChatRoomUser>();
             this.CompanyDocuments = new HashSet<CompanyDocument>();
             this.CompanyDocumentPermissions = new HashSet<CompanyDocumentPermission>();
             this.CompanyFolders = new HashSet<CompanyFolder>();
             this.ContractTemplates = new HashSet<ContractTemplate>();
             this.CTSectionFieldLinks = new HashSet<CTSectionFieldLink>();
-            this.Profiles = new HashSet<Profile>();
-            this.Profiles1 = new HashSet<Profile>();
-            this.Roles = new HashSet<Role>();
-            this.Roles1 = new HashSet<Role>();
-            this.UserContracts = new HashSet<UserContract>();
-            this.UserContracts1 = new HashSet<UserContract>();
-            this.UserContracts2 = new HashSet<UserContract>();
-            this.UserContractDatas = new HashSet<UserContractData>();
-            this.UserContractDatas1 = new HashSet<UserContractData>();
-            this.UserContractDatas2 = new HashSet<UserContractData>();
-            this.UserProfiles = new HashSet<UserProfile>();
-            this.UserProfilePictures = new HashSet<UserProfilePicture>();
-            this.UserProfilePictures1 = new HashSet<UserProfilePicture>();
-            this.UserProfilePictures2 = new HashSet<UserProfilePicture>();
-            this.UserRoles = new HashSet<UserRole>();
-            this.FormFieldValidationRules = new HashSet<FormFieldValidationRule>();
             this.Departments = new HashSet<Department>();
-            this.ChatRooms = new HashSet<ChatRoom>();
-            this.ChatRoomUsers = new HashSet<ChatRoomUser>();
-            this.ChatRoomUsers1 = new HashSet<ChatRoomUser>();
-            this.Absences = new HashSet<Absence>();
-            this.Absences1 = new HashSet<Absence>();
-            this.AbsenceReplies = new HashSet<AbsenceReply>();
+            this.FormFieldValidationRules = new HashSet<FormFieldValidationRule>();
+            this.GalleryAlbums = new HashSet<GalleryAlbum>();
+            this.GalleryAlbums1 = new HashSet<GalleryAlbum>();
+            this.GalleryPhotoes = new HashSet<GalleryPhoto>();
             this.Notes = new HashSet<Note>();
             this.Notes1 = new HashSet<Note>();
             this.Notes2 = new HashSet<Note>();
             this.Notifications = new HashSet<Notification>();
             this.Notifications1 = new HashSet<Notification>();
+            this.Profiles = new HashSet<Profile>();
+            this.Profiles1 = new HashSet<Profile>();
+            this.Roles = new HashSet<Role>();
+            this.Roles1 = new HashSet<Role>();
             this.TaskSchedulers = new HashSet<TaskScheduler>();
             this.TaskSchedulers1 = new HashSet<TaskScheduler>();
             this.TaskSchedulers2 = new HashSet<TaskScheduler>();
@@ -58,9 +50,14 @@ namespace totalhr.data.EF
             this.TimeRecordings = new HashSet<TimeRecording>();
             this.TimeRecordings1 = new HashSet<TimeRecording>();
             this.TimeRecordings2 = new HashSet<TimeRecording>();
-            this.GalleryAlbums = new HashSet<GalleryAlbum>();
-            this.GalleryAlbums1 = new HashSet<GalleryAlbum>();
-            this.GalleryPhotoes = new HashSet<GalleryPhoto>();
+            this.UserContracts = new HashSet<UserContract>();
+            this.UserContracts1 = new HashSet<UserContract>();
+            this.UserContracts2 = new HashSet<UserContract>();
+            this.UserContractDatas = new HashSet<UserContractData>();
+            this.UserContractDatas1 = new HashSet<UserContractData>();
+            this.UserContractDatas2 = new HashSet<UserContractData>();
+            this.UserProfiles = new HashSet<UserProfile>();
+            this.UserRoles = new HashSet<UserRole>();
         }
     
         public int id { get; set; }
@@ -100,6 +97,18 @@ namespace totalhr.data.EF
         public Nullable<int> LineManagerId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Absence> Absences { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Absence> Absences1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AbsenceReply> AbsenceReplies { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChatRoom> ChatRooms { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChatRoomUser> ChatRoomUsers { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ChatRoomUser> ChatRoomUsers1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompanyDocument> CompanyDocuments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CompanyDocumentPermission> CompanyDocumentPermissions { get; set; }
@@ -109,53 +118,17 @@ namespace totalhr.data.EF
         public virtual ICollection<ContractTemplate> ContractTemplates { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CTSectionFieldLink> CTSectionFieldLinks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Department> Departments { get; set; }
         public virtual Department Department { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Profile> Profiles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Profile> Profiles1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Role> Roles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Role> Roles1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserContract> UserContracts { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserContract> UserContracts1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserContract> UserContracts2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserContractData> UserContractDatas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserContractData> UserContractDatas1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserContractData> UserContractDatas2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserProfile> UserProfiles { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserProfilePicture> UserProfilePictures { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserProfilePicture> UserProfilePictures1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserProfilePicture> UserProfilePictures2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<UserRole> UserRoles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FormFieldValidationRule> FormFieldValidationRules { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Department> Departments { get; set; }
+        public virtual ICollection<GalleryAlbum> GalleryAlbums { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChatRoom> ChatRooms { get; set; }
+        public virtual ICollection<GalleryAlbum> GalleryAlbums1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChatRoomUser> ChatRoomUsers { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ChatRoomUser> ChatRoomUsers1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Absence> Absences { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Absence> Absences1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<AbsenceReply> AbsenceReplies { get; set; }
+        public virtual ICollection<GalleryPhoto> GalleryPhotoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Note> Notes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -166,6 +139,14 @@ namespace totalhr.data.EF
         public virtual ICollection<Notification> Notifications { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Notification> Notifications1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Profile> Profiles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Profile> Profiles1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Role> Roles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Role> Roles1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TaskScheduler> TaskSchedulers { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -183,10 +164,20 @@ namespace totalhr.data.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<TimeRecording> TimeRecordings2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GalleryAlbum> GalleryAlbums { get; set; }
+        public virtual ICollection<UserContract> UserContracts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GalleryAlbum> GalleryAlbums1 { get; set; }
+        public virtual ICollection<UserContract> UserContracts1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GalleryPhoto> GalleryPhotoes { get; set; }
+        public virtual ICollection<UserContract> UserContracts2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserContractData> UserContractDatas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserContractData> UserContractDatas1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserContractData> UserContractDatas2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserProfile> UserProfiles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserRole> UserRoles { get; set; }
     }
 }

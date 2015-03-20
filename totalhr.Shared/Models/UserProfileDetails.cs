@@ -66,8 +66,8 @@ namespace totalhr.Shared.Models
 
         public List<CustomField> CustomFields { get; set; }
 
-        public ProfilePicture UserProfilePicture { get; set; }
-
+        public List<ProfilePicture> UserProfilePicture { get; set; }
+        
         public class CustomField
         {
             public int CustomFieldId { get; set; }
@@ -86,6 +86,8 @@ namespace totalhr.Shared.Models
             public int ImageWidth { get; set; }
 
             public int ImageHeight { get; set; }
+
+            public int PictureTypeId { get; set; }
         }
               
     }

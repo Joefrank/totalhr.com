@@ -38,10 +38,15 @@ namespace totalhr.web.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id">this is the type of profile picture (avatar, portrait or small avatar)</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult UploadProfilePicture(int id)
         {
-            IFileHandlerService fileHandler = new ProfilePictureFileHandler(_fileService, _accountService);
+            IFileHandlerService fileHandler = new ProfilePictureFileHandler(_fileService, _accountService, id);
             var result = UploadTheFile(fileHandler, Request.Files);
             return Json(result.FileId > 0 ? new { Message = result.FullPath } : new { Message = "Error in saving file" });
         }

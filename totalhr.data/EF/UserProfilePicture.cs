@@ -16,16 +16,13 @@ namespace totalhr.data.EF
     {
         public int UserId { get; set; }
         public int FileId { get; set; }
+        public int ProfilePictureTypeId { get; set; }
         public System.DateTime Created { get; set; }
         public int CreatedBy { get; set; }
-        public Nullable<int> LastUpdatedBy { get; set; }
         public Nullable<System.DateTime> LastUpdated { get; set; }
+        public Nullable<int> LastUpdatedBy { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
-    
-        public virtual File File { get; set; }
-        public virtual User User { get; set; }
-        public virtual User User1 { get; set; }
-        public virtual User User2 { get; set; }
+        public string FileName { get; set; }
     }
 }

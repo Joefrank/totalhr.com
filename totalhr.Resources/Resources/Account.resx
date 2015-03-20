@@ -288,4 +288,46 @@
   <data name="V_Profile_Name" xml:space="preserve">
     <value>Name</value>
   </data>
+  <data name="V_Avatar" xml:space="preserve">
+    <value>Avatar</value>
+  </data>
+  <data name="V_Edit_Avatar" xml:space="preserve">
+    <value>Edit avatar</value>
+  </data>
+  <data name="V_Edit_Profile_Picture" xml:space="preserve">
+    <value>Edit profile picture</value>
+  </data>
+  <data name="V_Edit_Small_Avatar" xml:space="preserve">
+    <value>Edit small avatar</value>
+  </data>
+  <data name="V_Logon_Details" xml:space="preserve">
+    <value>Logon Details</value>
+  </data>
+  <data name="V_Profile_Picture" xml:space="preserve">
+    <value>Profile Picture</value>
+  </data>
+  <data name="V_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="V_Small_Avatar" xml:space="preserve">
+    <value>Small Avatar</value>
+  </data>
+  <data name="V_Upload_Avatar" xml:space="preserve">
+    <value>Upload avatar</value>
+  </data>
+  <data name="V_Upload_Profile_Picture" xml:space="preserve">
+    <value>Upload profile picture</value>
+  </data>
+  <data name="V_Upload_Small_Avatar" xml:space="preserve">
+    <value>Upload small avatar</value>
+  </data>
+  <data name="V_Your_Avatar" xml:space="preserve">
+    <value>Your avatar</value>
+  </data>
+  <data name="V_Your_Profile_Picture" xml:space="preserve">
+    <value>Your profile picture</value>
+  </data>
+  <data name="V_Your_Small_Avatar" xml:space="preserve">
+    <value>Your small avatar</value>
+  </data>
 </root>

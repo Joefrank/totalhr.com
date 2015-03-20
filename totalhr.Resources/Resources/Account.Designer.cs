@@ -124,6 +124,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Avatar.
+        /// </summary>
+        public static string V_Avatar {
+            get {
+                return ResourceManager.GetString("V_Avatar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Calendars.
         /// </summary>
         public static string V_Calendars {
@@ -183,6 +192,33 @@ namespace totalhr.Resources {
         public static string V_Documents {
             get {
                 return ResourceManager.GetString("V_Documents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit avatar.
+        /// </summary>
+        public static string V_Edit_Avatar {
+            get {
+                return ResourceManager.GetString("V_Edit_Avatar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit profile picture.
+        /// </summary>
+        public static string V_Edit_Profile_Picture {
+            get {
+                return ResourceManager.GetString("V_Edit_Profile_Picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit small avatar.
+        /// </summary>
+        public static string V_Edit_Small_Avatar {
+            get {
+                return ResourceManager.GetString("V_Edit_Small_Avatar", resourceCulture);
             }
         }
         
@@ -273,6 +309,15 @@ namespace totalhr.Resources {
         public static string V_LastVisit {
             get {
                 return ResourceManager.GetString("V_LastVisit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Logon Details.
+        /// </summary>
+        public static string V_Logon_Details {
+            get {
+                return ResourceManager.GetString("V_Logon_Details", resourceCulture);
             }
         }
         
@@ -412,6 +457,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Profile Picture.
+        /// </summary>
+        public static string V_Profile_Picture {
+            get {
+                return ResourceManager.GetString("V_Profile_Picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profile View.
         /// </summary>
         public static string V_Profile_View {
@@ -453,6 +507,24 @@ namespace totalhr.Resources {
         public static string V_Search_For_Recording {
             get {
                 return ResourceManager.GetString("V_Search_For_Recording", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string V_Settings {
+            get {
+                return ResourceManager.GetString("V_Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Small Avatar.
+        /// </summary>
+        public static string V_Small_Avatar {
+            get {
+                return ResourceManager.GetString("V_Small_Avatar", resourceCulture);
             }
         }
         
@@ -507,6 +579,33 @@ namespace totalhr.Resources {
         public static string V_Title {
             get {
                 return ResourceManager.GetString("V_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload avatar.
+        /// </summary>
+        public static string V_Upload_Avatar {
+            get {
+                return ResourceManager.GetString("V_Upload_Avatar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload profile picture.
+        /// </summary>
+        public static string V_Upload_Profile_Picture {
+            get {
+                return ResourceManager.GetString("V_Upload_Profile_Picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload small avatar.
+        /// </summary>
+        public static string V_Upload_Small_Avatar {
+            get {
+                return ResourceManager.GetString("V_Upload_Small_Avatar", resourceCulture);
             }
         }
         
@@ -570,6 +669,33 @@ namespace totalhr.Resources {
         public static string V_View_All_Absences {
             get {
                 return ResourceManager.GetString("V_View_All_Absences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your avatar.
+        /// </summary>
+        public static string V_Your_Avatar {
+            get {
+                return ResourceManager.GetString("V_Your_Avatar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your profile picture.
+        /// </summary>
+        public static string V_Your_Profile_Picture {
+            get {
+                return ResourceManager.GetString("V_Your_Profile_Picture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your small avatar.
+        /// </summary>
+        public static string V_Your_Small_Avatar {
+            get {
+                return ResourceManager.GetString("V_Your_Small_Avatar", resourceCulture);
             }
         }
     }
