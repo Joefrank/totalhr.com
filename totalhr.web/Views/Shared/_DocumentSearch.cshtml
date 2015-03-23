@@ -16,10 +16,7 @@
     lstFileTypes.Insert(0, new SelectListItem { Value = "", Text = Document.v_Select });
     
 }
-<div id="searchbox">
-     <fieldset>
-       <legend>@Document.V_Document_Search<span class="icon">&nbsp;</span></legend>                  
-               
+   
           
 @using (Html.BeginForm("Search", "Document"))
 {
@@ -30,10 +27,8 @@
      
     @Html.ValidationSummary()
 
-    <div id="dvform" class="formwide">
-
-            <div class="line"> 
-               <table>  
+   
+          <table>  
                <tr>   
                    <td>          
 			         <b>@Document.V_DisplayName</b>
@@ -77,18 +72,18 @@
                     
                    
                 </tr>
-                </table>
-             
-             
-             </div>
+         </table>
 
-            <div class="line">  
-                <input type="submit" value="@Document.V_Search" />&nbsp;
-                <input type="button" value="@Document.V_Reset" onclick="document.location.href='/Document/'" />
-            </div>
-       </div>
+    <div class="form-actions">
+        <button type="submit" class="btn btn-info">
+            <i class="icon-search icon-white"></i> @Document.V_Search
+        </button>
+            
+        <button type="button" class="btn btn-danger" onclick="NavigateTo('/Document/');">
+            <i class="icon-plus icon-white"></i> @Document.V_Reset
+        </button>
+    </div>
         
 }
 
-                </fieldset>
-      </div>
+               

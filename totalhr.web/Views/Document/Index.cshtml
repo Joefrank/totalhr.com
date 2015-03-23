@@ -1,12 +1,19 @@
 ﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Models
 @using totalhr.web.Helpers;
 @using totalhr.data.EF;
 @using System.Text;
 @using totalhr.Shared.Models;
+@using AH = totalhr.web.Areas.Admin.Helpers;
 
 @model DocumentSearchInfo
 
 @{
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "", Text = Document.V_Documents, Title= Document.V_Documents}
+    };
+
     ViewBag.Title = GenericHelper.WebsiteName + " | " + Document.V_Document_title;
     var lstDocuments = (Model.FoundDocuments  != null)? Model.FoundDocuments as List<CompanyDocument> : null;
 
@@ -82,6 +89,15 @@
 
     var searchcriteria = ViewBag.SearchCriteria;
 }
+ @section pagetitle{
+       @Document.V_Documents
+    }
+
+    @section breadcrumb{
+        @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+    }
+
+
 
 @section extrastyles{
     <link rel="stylesheet" type="text/css" href="/Content/css/companydocument.css" />
@@ -91,56 +107,78 @@
      <script type="text/javascript" src="/Scripts/Site/CompanyDocument.js"></script>
 }
 
-<div id="main">
-    <div class="content">
+<div class="row-fluid">        
+    <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i> @Document.V_Document_Search</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>                   
+            </span>
+        </div>
+        <div class="widget-body form-horizontal"> 
+            @Html.Partial("_DocumentSearch")
+        </div>
+    </div>
+</div>
 
-        <h1>@Document.V_Document_title</h1>
 
-      @Html.Partial("_DocumentSearch")
-
-        @if(!string.IsNullOrEmpty(searchcriteria)){
-          <div class="foldergroup">
-              @Html.Raw(searchcriteria)
-          </div>
-        }
-
-      <div class="foldergroup">
-
-        @if(bViewTable){
-            foreach(int key in dicFolders.Keys){
+<div class="row-fluid">        
+    <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i> @Document.V_Folder_Details</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>                   
+            </span>
+        </div>
+        <div class="widget-body form-horizontal"> 
             
-                <fieldset>
-                    <legend>
-                        <span id="spFolder_@key" class="expand" onclick="javascript:ToggleExpandGeneric('spFolder_@key', 
-                        'folder_@key', null, folderExpandButton, folderCollapseButton);">&nbsp;</span> 
-                        
-                        @Html.Raw(folderNames[key])
-
-                    </legend>
-
-                    <div id="folder_@key" class="folder" style="display:none">
-                        @Html.Raw(dicFolders[key])
-                    </div>
-                </fieldset>
-           
+            @if(!string.IsNullOrEmpty(searchcriteria)){
+                <div class="foldergroup">
+                    @Html.Raw(searchcriteria)
+                </div>
             }
+
+            <div class="foldergroup">
+
+                @if(bViewTable){
+                    foreach(int key in dicFolders.Keys){
+            
+                        <fieldset>
+                            <legend>
+                                <span id="spFolder_@key" class="expand" onclick="javascript:ToggleExpandGeneric('spFolder_@key', 
+                                        'folder_@key', null, folderExpandButton, folderCollapseButton);">&nbsp;</span> 
+                        
+                                @Html.Raw(folderNames[key])
+
+                            </legend>
+
+                            <div id="folder_@key" class="folder" style="display:none">
+                                @Html.Raw(dicFolders[key])
+                            </div>
+                        </fieldset>
+           
+                    }
     
-        }else{
-            <p class="error">
-                @Document.Error_No_Folder
-            </p>   
-        }
+                }else{
+                    <p class="error">
+                        @Document.Error_No_Folder
+                    </p>   
+                }
 
-     </div>
-        <br />
-     <div class="wide">
-        <input type="button" onclick="document.location.href='/Document/Create'" value="@Document.V_Create_New" />
-         &nbsp;
-        <input type="button" onclick="document.location.href='/Document/CreateFolder'" value="@Document.V_Create_New_Folder"/>
-
-     </div>
+            </div>
+       
+            <div class="form-actions">
+                <button type="button" class="btn btn-warning" onclick="NavigateTo('/Document/Create');">
+                    <i class="icon-plus icon-white"></i> @Document.V_Create_New
+                </button>
+            
+                <button type="button" class="btn btn-warning" onclick="NavigateTo('/Document/CreateFolder');">
+                    <i class="icon-plus icon-white"></i> @Document.V_Create_New_Folder
+                </button>
+            </div>
 
         </div>
+     </div>
 </div>
 
 <script type="text/javascript">

@@ -23,13 +23,15 @@ namespace CompanyDocumentService.Implementation
 
         #region Folders
 
-        public int CreateFolder(string displayName, bool MakePublic, int createdBy)
+        public int CreateFolder(string displayName, bool makePublic, int createdBy)
         {
-            CompanyFolder folder = new CompanyFolder();
-            folder.DisplayName = displayName;
-            folder.CreatedBy = createdBy;
-            folder.Created = DateTime.Now;
-            folder.OpenedPublic = MakePublic;
+            var folder = new CompanyFolder
+                {
+                    DisplayName = displayName,
+                    CreatedBy = createdBy,
+                    Created = DateTime.Now,
+                    OpenedPublic = makePublic
+                };
 
             return _docRepos.AddFolder(folder);
         }

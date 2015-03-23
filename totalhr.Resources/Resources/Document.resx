@@ -420,4 +420,13 @@
   <data name="V_Document_Permissions" xml:space="preserve">
     <value>Permissions</value>
   </data>
+  <data name="V_Folder_Details" xml:space="preserve">
+    <value>Folder Details</value>
+  </data>
+  <data name="V_View_All" xml:space="preserve">
+    <value>View All</value>
+  </data>
+  <data name="V_View_Folders" xml:space="preserve">
+    <value>View Folders</value>
+  </data>
 </root>

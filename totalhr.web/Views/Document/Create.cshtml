@@ -38,6 +38,7 @@
 
 @section scripts{
     <script type="text/javascript" src="/Scripts/Site/CompanyDocument.js"></script>
+    <script type="text/javascript" src="/Scripts/jquery.unobtrusive-ajax.js"></script>
 }
 
    <div class="row-fluid">        
@@ -70,9 +71,10 @@
                                 <div class="controls">
                                     @Html.DropDownListFor(x => x.FolderId, new SelectList(folders, "Id", "DisplayName"))
                            
-                                     <button type="button" class="btn btn-warning" onclick="OpenPopup('/Document/CreateFolder/', 800,600)">
-                                        <i class="icon-plus icon-white"></i> @Document.V_Add_Folder
-                                    </button>
+                                    <a href="#myModal" role="button" class="btn btn-warning" data-toggle="modal">
+                                        <i class="icon-plus icon-white"></i> 
+                                        @Document.V_Add_Folder
+                                    </a>
                                 </div>
                             </div> 
             
@@ -92,7 +94,7 @@
                   
                             <div class="form-actions">
                                 <button type="submit" class="btn btn-success">
-                                    <i class="icon-ok icon-white"></i> @Document.V_Upload
+                                    <i class="icon-upload-alt icon-white"></i> @Document.V_Upload
                                 </button>
                                 <button type="button" class="btn btn-danger" onclick="NavigateTo('/Document/');">
                                     <i class="icon-remove icon-white"></i> @Document.V_Back_To_List
@@ -118,5 +120,7 @@
 
  @Html.Partial("_CompanyDocItemSelector")
   
-@* @Html.Partial("_FolderCreate")*@
+ @Html.Partial("_FolderCreate")
         
+
+

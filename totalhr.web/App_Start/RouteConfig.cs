@@ -23,7 +23,8 @@ namespace totalhr.web
                    year = DateTime.Now.Year,
                    month = DateTime.Now.Month,
                    day = UrlParameter.Optional
-               });
+               },
+                namespaces: new string[] { "totalhr.web.Controllers" });
 
             routes.MapRoute(
                name: "CalendarEdit",
@@ -35,7 +36,8 @@ namespace totalhr.web
                    year = DateTime.Now.Year,
                    month = DateTime.Now.Month,
                    day = UrlParameter.Optional
-               });
+               },
+                namespaces: new string[] { "totalhr.web.Controllers" });
 
             routes.MapRoute(
               name: "CalendarYear",
@@ -46,7 +48,8 @@ namespace totalhr.web
                   action = "GetCalendarYear",
                   year = DateTime.Now.Year,                  
                   calendarid = UrlParameter.Optional
-              });
+              },
+                namespaces: new string[] { "totalhr.web.Controllers" });
 
             routes.MapRoute(
                name: "CalendarMonth",
@@ -58,7 +61,8 @@ namespace totalhr.web
                    year = DateTime.Now.Year,
                    month = DateTime.Now.Month,
                    calendarid = UrlParameter.Optional
-               });
+               },
+                namespaces: new string[] { "totalhr.web.Controllers" });
 
            
 
@@ -73,7 +77,8 @@ namespace totalhr.web
                    month = DateTime.Now.Month,
                    day = DateTime.Now.Day,
                    calendarid = UrlParameter.Optional
-               });
+               },
+                namespaces: new string[] { "totalhr.web.Controllers" });
             
             routes.MapRoute(
                name: "CalendarDay",
@@ -86,7 +91,8 @@ namespace totalhr.web
                    month = DateTime.Now.Month,
                    day = DateTime.Now.Day,
                    calendarid = UrlParameter.Optional
-               });
+               },
+                namespaces: new string[] { "totalhr.web.Controllers" });
 
             routes.MapRoute(
                name: "CalendarView",
@@ -98,7 +104,9 @@ namespace totalhr.web
                    year = DateTime.Now.Year,
                    month = DateTime.Now.Month,
                    day = UrlParameter.Optional
-               });
+               },
+                namespaces: new string[] { "totalhr.web.Controllers" }
+                );
 
 
             routes.MapRoute(

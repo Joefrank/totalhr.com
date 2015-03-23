@@ -12,7 +12,7 @@ namespace CompanyDocumentService.Infrastructure
     public interface IDocumentManager
     {
         
-        int CreateFolder(string displayName, bool MakePublic, int createdBy);
+        int CreateFolder(string displayName, bool makePublic, int createdBy);
         int UpdateFolder(int folderId, string displayName, int updatedBy);
         void DeleteFolder(int folderId, int deletedBy);
         List<CompanyFolder> ListFolders();

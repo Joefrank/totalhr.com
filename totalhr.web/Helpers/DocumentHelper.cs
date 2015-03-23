@@ -17,8 +17,8 @@ namespace totalhr.web.Helpers
 
             foreach (var num in (Variables.DocumentPermissionType[])Enum.GetValues(typeof(Variables.DocumentPermissionType)))
             {
-                sbTemp.Append(string.Format(@"<span class=""actionlink"" id=""sp_perm_{0}"" onclick=""ShowDocPermissionOption('sp_perm_{0}')"">
-                    <input type=""radio"" name=""PermissionSelection"" value=""{0}"" />&nbsp;{1}</span><br/> ", 
+                sbTemp.Append(string.Format(@"<label class=""radio"" id=""sp_perm_{0}"" onclick=""ShowDocPermissionOption('PermissionSelection{0}')"">
+                    <input type=""radio"" name=""PermissionSelection"" id=""PermissionSelection{0}"" value=""{0}"" />&nbsp;{1}</label><br/> ", 
                                              (int)num, EnumExtensions.Description(num)));
             }
             sbTemp.Append(@"<input type=""hidden"" name=""PermissionSelectionValue"" id=""PermissionSelectionValue"" />");

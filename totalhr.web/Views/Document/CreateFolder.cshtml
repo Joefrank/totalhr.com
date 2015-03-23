@@ -1,47 +1,73 @@
 ﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Models
 @using totalhr.web.Helpers;
+@using AH = totalhr.web.Areas.Admin.Helpers;
 
 @{
     ViewBag.Title = GenericHelper.WebsiteName + " | " + Document.V_Create_New_Folder;
+
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Document/", Text = Document.V_Documents, Title= Document.V_Documents},
+        new BreadCrumbItem{Url = "", Text = Document.V_Create_New_Folder, Title= Document.V_Create_New_Folder}
+    };
 }
+
 @section scripts{
     <script type="text/javascript" src="/Scripts/Site/CompanyDocument.js"></script>
-
 }
 
-<h1>@Document.V_Create_New_Folder</h1>
+   @section pagetitle{
+       @Document.V_Create_New_Folder
+    }
 
-<div id="main">
-    <div class="content">
+    @section breadcrumb{
+        @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+    }
 
-    @using (Html.BeginForm("CreateFolder", "Document", FormMethod.Post)) 
-    {                  
-        <div class="formdiv smallform">
-            <div class="wrapper">
-                <br />
-                <div>
-                    <label>@Document.V_DisplayName </label>
-                        <span><input type="text" name="DisplayName" id="DisplayName" /><b class="req"> *</b></span>                    
-                </div>
-                <div>
-                    <label>@Document.V_Folder_Make_Public</label>
-                        <span>
-                            <input type="checkbox" name="ckMakePublic" id="ckMakePublic" onclick="ToggleCheckedValue(this,'MakePublic');" />
-                            @Html.Hidden("MakePublic", 0)
-                        </span>                    
-                </div>    
-                <div>
-                    <label>&nbsp;</label>
+
+<div class="row-fluid">        
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i> @Document.V_Folder_Details</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>                   
+                </span>
+            </div>
+            <div class="widget-body form-horizontal"> 
+
+                @using (Html.BeginForm("CreateFolder", "Document", FormMethod.Post)) 
+                {                 
+       
+                    <div class="control-group">
+                        <label class="control-label">@Document.V_DisplayName</label>
+                        <div class="controls">
+                           <input type="text" name="DisplayName" id="DisplayName" />
+                        </div>
+                    </div> 
+                      
+                    <div class="control-group">
+                        <label class="control-label">@Document.V_Folder_Make_Public</label>
+                        <div class="controls">
+                           <input type="checkbox" name="ckMakePublic" id="ckMakePublic" onclick="ToggleCheckedValue(this, 'MakePublic');" />
+                           @Html.Hidden("MakePublic", 0)
+                        </div>
+                    </div> 
+                       
+                       
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-success">
+                            <i class="icon-ok icon-white"></i> @Document.V_Create
+                        </button>
+
+                       @* <label>&nbsp;</label>
                         <div style="width:100px;padding:5px;">
                             <input type="submit" onsubmit="alert($('#MakePublic').val());return false;" value="@Document.V_Create" class="btnsmall" />
-                        </div>                    
-                </div>
+                        </div>*@                    
+                    </div>
+    
+                }   
 
             </div>
         </div>
-         
-    
-    }
-
-     </div>
 </div>

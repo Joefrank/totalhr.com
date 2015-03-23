@@ -1,4 +1,5 @@
 ﻿@using totalhr.Resources;
+@using totalhr.web.Areas.Admin.Models
 @using totalhr.web.Helpers;
 @using totalhr.data.EF;
 
@@ -7,96 +8,107 @@
 @{
     ViewBag.Title = GenericHelper.WebsiteName + " | " + Document.V_Document_Details_Title;
     bool bViewable = Model != null;
-   
+
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Document/", Text = Document.V_Documents, Title= Document.V_Documents},
+        new BreadCrumbItem{Url = "", Text = Document.V_Document_Details_Title, Title= Document.V_Document_Details_Title}
+    };
 }
 
+   @section pagetitle{
+       @Document.V_Document_Details_Title
+    }
+
+    @section breadcrumb{
+        @Html.Raw(totalhr.web.Areas.Admin.Helpers.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+    }
 
 
-<div id="main">
-    <div class="content">
+<div class="row-fluid">        
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i> @Document.V_Document_Details_Title</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>                   
+                </span>
+            </div>
+            <div class="widget-body form-horizontal"> 
 
-        <h1>@Document.V_Document_Details_Title</h1>
-
-        @if (bViewable)
-        {          
+                @if (bViewable)
+                {          
          
-                <div class="formdiv midform">
-                    <div class="wrapper">
-                        <div class="line">
-                            <label>@Document.V_Id</label>
-                             <span>@Model.Id</span>                    
-                        </div>
-                         <div class="line">
-                            <label>@Document.V_DisplayName </label>
-                             <span>@Model.DisplayName</span>                    
-                        </div>
-                        <div class="line">
-                            <label>@Document.V_Folder</label>
-                             <span>@Model.FolderDisplayName</span>                    
-                        </div>
-                        <div class="line">
-                            <label>@Document.v_File </label>                            
-                            <span>@Model.OriginalFileName</span>                    
-                        </div>
-                        <div class="line">
-                            <label>@Document.V_Create </label>                            
-                            <span>@Model.Created.ToShortDateString()</span>                    
-                        </div>
-                         <div class="line">
-                            <label>@Document.TH_CreatedBy </label>                            
-                            <span>@Model.CreatedBy</span>                    
-                        </div>
-                         <div class="line">
-                            <label>LastUpdatedBy </label>                            
-                            <span>@Model.LastUpdated</span>                    
-                        </div>
-                         <div class="line">
-                            <label>LastUpdated </label>                            
-                            <span>@Model.LastUpdated</span>                    
-                        </div>
-                         <div class="line">
-                            <label>No Views </label>                            
-                            <span>@Model.NoOfViews</span>                    
-                        </div>
-                         <div class="line">
-                            <label>No of Downloads </label>                            
-                            <span>@Model.NoOfDownloads</span>                    
-                        </div>
-                         <div class="line">
-                            <label>Last downloaded </label>                            
-                            <span>@Model.LastDownloaded</span>                    
-                        </div>
-                         <div class="line">
-                            <label>Last downloaded by </label>                            
-                            <span>@Model.LastDownloadedBy</span>                    
-                        </div>
-                        <div class="line">
-                            <label>Permissions</label>
-                             <span>
-                                 @(ViewBag.PermissonSummary as string)
-                             </span>                    
-                        </div>
-                        <div class="line">
-                            <label>&nbsp;</label>
-                             <span>
-                                <input type="button" value="@Document.V_Back_To_List" onclick="document.location.href='/Document'" /> &nbsp;
+                    
+                           <div class="line">
+                                <label>@Document.V_Id</label>
+                                <span>@Model.Id</span>                    
+                            </div>
+                            <div class="line">
+                                <label>@Document.V_DisplayName </label>
+                                <span>@Model.DisplayName</span>                    
+                            </div>
+                            <div class="line">
+                                <label>@Document.V_Folder</label>
+                                <span>@Model.FolderDisplayName</span>                    
+                            </div>
+                            <div class="line">
+                                <label>@Document.v_File </label>                            
+                                <span>@Model.OriginalFileName</span>                    
+                            </div>
+                            <div class="line">
+                                <label>@Document.V_Create </label>                            
+                                <span>@Model.Created.ToShortDateString()</span>                    
+                            </div>
+                            <div class="line">
+                                <label>@Document.TH_CreatedBy </label>                            
+                                <span>@Model.CreatedBy</span>                    
+                            </div>
+                            <div class="line">
+                                <label>LastUpdatedBy </label>                            
+                                <span>@Model.LastUpdated</span>                    
+                            </div>
+                            <div class="line">
+                                <label>LastUpdated </label>                            
+                                <span>@Model.LastUpdated</span>                    
+                            </div>
+                            <div class="line">
+                                <label>No Views </label>                            
+                                <span>@Model.NoOfViews</span>                    
+                            </div>
+                            <div class="line">
+                                <label>No of Downloads </label>                            
+                                <span>@Model.NoOfDownloads</span>                    
+                            </div>
+                            <div class="line">
+                                <label>Last downloaded </label>                            
+                                <span>@Model.LastDownloaded</span>                    
+                            </div>
+                            <div class="line">
+                                <label>Last downloaded by </label>                            
+                                <span>@Model.LastDownloadedBy</span>                    
+                            </div>
+                            <div class="line">
+                                <label>Permissions</label>
+                                <span>
+                                    @(ViewBag.PermissonSummary as string)
+                                </span>                    
+                            </div>
+                            <div class="line">
+                                <label>&nbsp;</label>
+                                <span>
+                                    <input type="button" value="@Document.V_Back_To_List" onclick="NavigateTo('/Document')" /> &nbsp;
                                   
-                                 <input type="button"  value="@Document.V_Edit" onclick="document.location.href='/Document/Edit/@Model.Id'" />
+                                    <input type="button"  value="@Document.V_Edit" onclick="NavigateTo('/Document/Edit/@Model.Id')" />
                                 
-                                 <input type="button"  value="@Document.V_Download" onclick="alert('please implement')" />
+                                    <input type="button"  value="@Document.V_Download" onclick="alert('please implement')" />
                                 
-                             </span>                    
-                        </div>
+                                </span>                    
+                            </div>
 
-                    </div>
-                </div>
-                 
-
-        }else{
-            <p class="error">@Document.Error_No_Doc_Details</p>   
-        }    
+                }else{
+                    <p class="error">@Document.Error_No_Doc_Details</p>   
+                }    
     
-   
-
+            </div>
        </div>
 </div>

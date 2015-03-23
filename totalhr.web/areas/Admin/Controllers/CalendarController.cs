@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Authentication.Infrastructure;
 
 namespace totalhr.web.Areas.Admin.Controllers
 {
-    public class CalendarController : Controller
+    public class CalendarController : AdminBaseController
     {
-        //
-        // GET: /Admin/Calendar/
+        public CalendarController(IOAuthService authService) :        
+            base(authService)
+        {
+            
+        }
 
         public ActionResult Index()
         {

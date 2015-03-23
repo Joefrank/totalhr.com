@@ -5,26 +5,26 @@ var ckSelectedDepartment = new Array();
 var bUsersAvailable = false;
 var bDeptAvailable = false;
 
-function ShowDocPermissionOption(objid) {    
-    var objInput = $('#' + objid).children("input[type=radio]"); 
-    objInput.attr('checked', true);
-    $('#PermissionSelectionValue').val('');
+function ShowDocPermissionOption(objRadioId) {    
+    var inputVal = $('#' + objRadioId).val();
+    
+    $('#PermissionSelectionValue').val(inputVal);
 
-    if (objInput.val() == WHOLE_COMPANY) {
+    if (inputVal == WHOLE_COMPANY) {
         $('#PermissionSelectionValue').val(CompanyId);
-    } else if (objInput.val() == DEPARTMENT) {//popup
+    } else if (inputVal == DEPARTMENT) {//popup
         OpenSelector('dvSelDepts', 'dvPermissionOption', '/Account/GetCompanyDepartmentsJson/', 2);
         $('#hdnPermMode').val(2);
         $('#dvSelusers').hide();
         $('#dvSelDepts').show();
-    } else if (objInput.val() == SELECTED_USERS) {//popup
+    } else if (inputVal == SELECTED_USERS) {//popup
         OpenSelector('dvSelusers', 'dvPermissionOption', '/Account/GetCompanyUsersJson/', 1);
         $('#hdnPermMode').val(1);
         $('#dvSelDepts').hide();
         $('#dvSelusers').show();
     }
     
-    //alert(objInput.val());
+    alert(inputVal);
 }
 
 function OpenSelectorForFolder(objid) {
@@ -51,7 +51,11 @@ function OpenSelector(divid, dvSelection, url, func) {
         });
     }
 
-    $('#' + dvSelection).slideDown("slow");
+    //$('#' + dvSelection).slideDown("slow");
+    
+    $('#' + dvSelection).modal({
+        keyboard: false
+    });
 }
 
 /** Target user stuff */

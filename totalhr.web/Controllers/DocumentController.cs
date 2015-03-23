@@ -138,15 +138,27 @@ namespace totalhr.web.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateFolder(string DisplayName, int MakePublic)
+        public ActionResult CreateFolder(string displayName, int makePublic)
         {
-            if (string.IsNullOrEmpty(DisplayName))
+            if (string.IsNullOrEmpty(displayName))
             {
                 ModelState.AddModelError("Error_Folder_DisplayName", Document.Error_DisplayName_Rq);
                 return View("CreateFolder");
             }
-            int folderid = _docService.CreateFolder(DisplayName, (MakePublic == 1), CurrentUser.UserId);
+            int folderid = _docService.CreateFolder(displayName, (makePublic == 1), CurrentUser.UserId);
             return View("Index");
+        }
+
+        [HttpPost]
+        public JsonResult CreateFolderAjax(string displayName, int makePublic)
+        {
+            if (string.IsNullOrEmpty(displayName))
+            {
+                ModelState.AddModelError("Error_Folder_DisplayName", Document.Error_DisplayName_Rq);
+                return Json(new { FolderId = -1 });
+            }
+            var folderId = _docService.CreateFolder(displayName, (makePublic == 1), CurrentUser.UserId);
+            return Json(new { FolderId = folderId });
         }
 
         [HttpPost]
