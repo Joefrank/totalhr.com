@@ -253,4 +253,7 @@
   <data name="V_My_Contract" xml:space="preserve">
     <value>My Contract</value>
   </data>
+  <data name="V_No_Contract_Info" xml:space="preserve">
+    <value>Sorry but your contract information is not available yet. Please contact admin.</value>
+  </data>
 </root>

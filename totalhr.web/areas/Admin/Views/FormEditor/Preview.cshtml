@@ -35,7 +35,8 @@
                 $scope.mySchema = @Html.Raw(schema);
                 
                 $scope.myForm = {
-                    schema: $scope.mySchema
+                    schema: $scope.mySchema,
+                    data: {}
                 };
               
 
@@ -114,7 +115,7 @@
 
                 </fieldset>
 
-               @* <div class="form-group">
+               <div class="form-group">
                     <label class="control-label col-sm-3">@FormGenerator.V_Form_Status</label>
 
                     <div class="col-sm-9">
@@ -123,15 +124,15 @@
                             <span ng-if="previewForm.$valid" class="text-success">@FormGenerator.V_Valid <span class="glyphicon glyphicon-thumbs-up"></span></span>
                         </div>
                     </div>
-                </div>*@
+                </div>
 
-             @*   <div class="form-group">
+                <div class="form-group">
                     <label class="control-label col-sm-3">@FormGenerator.V_Form_Data</label>
 
                     <div class="col-sm-9">
                         <div jsonify="myForm.data"></div>
                     </div>
-                </div>*@
+                </div>
                 
               @*  <div class="form-group">
                     <label class="control-label col-sm-3">&nbsp;</label>

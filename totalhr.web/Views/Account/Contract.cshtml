@@ -14,6 +14,8 @@
         new BreadCrumbItem{Url = "/Account/", Text = Account.V_Dashboard, Title= Account.V_Dashboard},
         new BreadCrumbItem{Url = "", Text = Contract.V_My_Contract, Title= Contract.V_My_Contract}
     };
+
+    var bContractAvailable = Model != null && Model.FieldDataList != null && Model.FieldDataList.Any();
 }
 
       
@@ -35,15 +37,21 @@
                 </span>
             </div>
             <div class="widget-body form-horizontal"> 
-                     
-                @foreach (var field in Model.FieldDataList)
-                {
-                    <div class="control-group">
-                        <label class="control-label">@field.Label:</label>
+                  
+                @if(bContractAvailable){   
+                    foreach (var field in Model.FieldDataList)
+                    {
+                        <div class="control-group">
+                            <label class="control-label">@field.Label:</label>
                                     
-                        <div class="controls">
-                            <input class="span4 " type="text" placeholder="@field.Content" disabled />
+                            <div class="controls">
+                                <input class="span4 " type="text" placeholder="@field.Content" disabled />
+                            </div>
                         </div>
+                    }
+                }else{
+                    <div class="alert alert-danger">
+                        @Contract.V_No_Contract_Info
                     </div>
                 }
             

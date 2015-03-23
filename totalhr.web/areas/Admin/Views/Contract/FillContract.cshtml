@@ -5,7 +5,8 @@
 
 @{
     Layout = null;
-    var schema = string.IsNullOrEmpty(Model.FormSchema) ? "''" : Model.FormSchema;
+    var schema = string.IsNullOrEmpty(Model.FormSchema) ? "{}" : Model.FormSchema;
+    var sData = string.IsNullOrEmpty(Model.CTData) ? "" : ", data :" + Model.CTData;
 }
 
 <!DOCTYPE html>
@@ -37,8 +38,8 @@
           
                 
             $scope.myForm = {
-                schema: $scope.mySchema,
-                data : @Html.Raw(Model.CTData)
+                schema: $scope.mySchema
+                @Html.Raw(sData)
             };
 
             $scope.ShowAlert = function() {

@@ -2,6 +2,9 @@
 @using totalhr.web.Helpers;
 @using totalhr.data.EF;
 @using totalhr.Shared;
+@using H = totalhr.web.Helpers;
+@using AH = totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
 
 @model totalhr.Shared.Models.DocumentInfo
 
@@ -15,69 +18,93 @@
         folders.Insert(0, new CompanyFolder { Id = -1, DisplayName = Document.v_Select });
     }
     
-    int CompanyId = Convert.ToInt32(ViewBag.CompanyId);
+    int CompanyId = Convert.ToInt32(ViewBag.CompanyId);  
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Document/", Text = Document.V_Documents, Title= Document.V_Documents},
+        new BreadCrumbItem{Url = "", Text = Document.V_Create_New, Title= Document.V_Create_New}
+    };
 }
 
+    @section pagetitle{
+       @Document.V_Create_New
+    }
+
+    @section breadcrumb{
+        @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+    }
 
 
 @section scripts{
     <script type="text/javascript" src="/Scripts/Site/CompanyDocument.js"></script>
-
 }
 
-<div id="main">
-    <div class="content">
-
-        <h1>@Document.V_Create_New</h1>
-
-        @using (Html.BeginForm("CreateDocument", "Document", FormMethod.Post, new { enctype = "multipart/form-data" }))
-        { 
-         @Html.ValidationSummary();
-            
-            @Html.HiddenFor(x => x.CreatedBy)
-
-            <div class="formdiv midform">
-                <div class="wrapper">
-                    @Html.HiddenFor(x => x.DocId)
-
-                     <div class="line">
-                        <label>@Document.V_DisplayName <b class="req">*</b></label>
-                         <span>@Html.TextBoxFor(x => x.DisplayName, new {size="40", maxlength="250"})</span>                    
-                    </div>
-                    <div class="line">
-                        <label>@Document.V_Folder</label>
-                         <span>@Html.DropDownListFor(x => x.FolderId, new SelectList(folders, "Id", "DisplayName"))
-                            <input type="button" value="@Document.V_Add_Folder" onclick="OpenSelectorForFolder('frmCreateFolder');" />
-                         </span> 
-                                           
-                    </div>
-                    <div class="line">
-                        <label>@Document.v_File <b class="req">*</b></label>
-                         <span>
-                             <input type="file" id="fileToUpload" name="File" />
-                         </span>                    
-                    </div>
-                     <div class="line">
-                        <label>Permissions <b class="req">*</b></label>
-                         <span>
-                             @Html.Raw(DocumentHelper.GetDocumentPermissionType())
-                         </span>                    
-                    </div>
-                    <div class="line">
-                        <label>&nbsp;</label>
-                         <span>
-                             <input type="button" value="@Document.V_Back_To_List" onclick="document.location.href = '/Document'" />
-                                 &nbsp;
-                             <input type="submit" id="btnSubmit" value="@Document.V_Upload" />
-                         </span>                    
-                    </div>
-
-                </div>
+   <div class="row-fluid">        
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i> @Document.V_Document_Details</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>                   
+                </span>
             </div>
+            <div class="widget-body form-horizontal">                   
+
+                @using (Html.BeginForm("CreateDocument", "Document", FormMethod.Post, new { enctype = "multipart/form-data",@class="form-horizontal" }))
+                { 
+                     @Html.ValidationSummary()            
+                     @Html.HiddenFor(x => x.CreatedBy)
+
+           
+                            @Html.HiddenFor(x => x.DocId)
+
+                            <div class="control-group">
+                                <label class="control-label">@Document.V_DisplayName</label>
+                                <div class="controls">
+                                    @Html.TextBoxFor(x => x.DisplayName, new {size="40", maxlength="250"})
+                                </div>
+                            </div>   
+            
+                            <div class="control-group">
+                                <label class="control-label">@Document.V_Folder</label>
+                                <div class="controls">
+                                    @Html.DropDownListFor(x => x.FolderId, new SelectList(folders, "Id", "DisplayName"))
+                           
+                                     <button type="button" class="btn btn-warning" onclick="OpenPopup('/Document/CreateFolder/', 800,600)">
+                                        <i class="icon-plus icon-white"></i> @Document.V_Add_Folder
+                                    </button>
+                                </div>
+                            </div> 
+            
+                            <div class="control-group">
+                                <label class="control-label">@Document.v_File</label>
+                                <div class="controls">
+                                     <input type="file" id="fileToUpload" name="File" />
+                                </div>
+                            </div>             
+                   
+                            <div class="control-group">
+                                <label class="control-label">@Document.V_Document_Permissions</label>
+                                <div class="controls">
+                                     @Html.Raw(DocumentHelper.GetDocumentPermissionType())
+                                </div>
+                            </div>             
+                  
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="icon-ok icon-white"></i> @Document.V_Upload
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="NavigateTo('/Document/');">
+                                    <i class="icon-remove icon-white"></i> @Document.V_Back_To_List
+                                </button>
+                            </div>
+                          
          
-        }
-    </div>
-</div>
+                }
+        </div>
+   </div>
+ </div>
+
 <script type="text/javascript">
     var CompanyId = @CompanyId;
     var WHOLE_COMPANY = @((int)Variables.DocumentPermissionType.WholeCompany);
@@ -91,5 +118,5 @@
 
  @Html.Partial("_CompanyDocItemSelector")
   
- @Html.Partial("_FolderCreate")
+@* @Html.Partial("_FolderCreate")*@
         

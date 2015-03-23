@@ -138,7 +138,7 @@ namespace totalhr.web.Areas.Admin.Controllers
         /// <param name="id">this is template id</param>
         /// <returns></returns>
         public ActionResult FillContract(int id)
-        {
+        {           
             var contractDetails = _contractService.GetUserContractDetails(id);           
             return View(contractDetails);
         }

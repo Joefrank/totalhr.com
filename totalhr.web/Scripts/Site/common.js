@@ -1,5 +1,6 @@
 ﻿var MSG_Error_NO_ITEM_SELECTED = '';
 var MSG_Error_Cant_Save_Without_Profile = '';
+var brefreshparent = false;
 
 function GetO(objId) {
     return document.getElementById(objId);
@@ -79,7 +80,7 @@ function isDate(txtDate)
 function ClosePopup(objid, bRefresh) {   
     document.getElementById(objid).style.display = "none";
     $('#overlay-mask').css("display", "none");
-    if (bRefresh) {
+    if (bRefresh || brefreshparent) {
         window.location.reload(true);
     }
 }
@@ -128,7 +129,7 @@ function OpenEmployeeProfile(empid) {
     OpenPopup('/Account/ProfilePreview/' + empid, 600, 600);
 }
 
-function OpenPopup(url, width, height) {    
+function OpenPopup(url, width, height, brefreshparent) {    
     $('#ipopup').attr("src", url);
     $('#dvPopup').css("display", "");
     $('#dvPopup').css("height", height);

@@ -1,4 +1,4 @@
-﻿@model totalhr.Shared.Models.UserProfileDetails
+﻿@model totalhr.Shared.Models.UserPersonalInfo
 
 @using totalhr.Resources
 @using totalhr.Shared
@@ -8,155 +8,219 @@
 @using AH = totalhr.web.Areas.Admin.Helpers
 @using totalhr.web.Areas.Admin.Models
 
+@{
+    ViewBag.Title = Account.V_Edit_MyDetails;  
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Account/MyDetails/", Text = Account.V_My_Profile, Title= Account.V_My_Profile},
+         new BreadCrumbItem{Url = "", Text = Account.V_Edit_MyDetails, Title= Account.V_Edit_MyDetails}
+    };
 
-<div id="widgetEditDetails" class="widget-body">
+    var languages = ViewBag.LanguageList as IEnumerable<ListItemStruct>;
+    List<Glossary> genders = ViewBag.GenderList as List<Glossary>;
+    List<Glossary> countries = ViewBag.CountryList as List<Glossary>;
+    List<Glossary> titles = ViewBag.TitleList as List<Glossary>;    
+ 
+}
 
-        <div class="formdiv midform" style="display:none">
+@section pagetitle{
+   @Account.V_Edit_MyDetails
+}
 
-        @*using (Html.BeginForm("SaveUserDetails", "Account"))
+@section breadcrumb{
+    @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+ <div class="row-fluid">
+        <div class="span12 sortable">
+            <!-- BEGIN SAMPLE FORMPORTLET-->
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i>@Account.V_My_Details</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>                    
+                </span>
+            </div>
+            <div class="widget-body">
+
+        @using (Html.BeginForm("SaveUserDetails", "Account", FormMethod.Post, new { @class = "form-horizontal" }))
         {
             
-        if(Model.DetailsSaveSuccess){
-            <div id="dvSaveSuccess" class="savesuccess">
-                @FormMessages.MSG_Details_Saved
-            </div>
-        }
+            if(Model.DetailsSaveSuccess){
+                <div id="dvSaveSuccess" class="alert alert-info">
+                    @FormMessages.MSG_Details_Saved
+                </div>
+            }
             
-        @Html.ValidationSummary()
+            @Html.ValidationSummary()
 
-        
-            <div class="wrapper">
-
-                 <fieldset>
-               <legend>@FormMessages.Title_Personal_Details</legend>
+            @Html.HiddenFor(x => x.ProfilePicturePath)
+          
+               <h4 class="info">@FormMessages.Title_Personal_Details</h4>
                 
-                <div class="line">
-                    <label>@FormMessages.Label_Gender <b class="req">*</b></label>
-                     <span>@Html.DropDownListFor(x => x.GenderId,  new SelectList(genders, "RootId", "Term"))</span>
-                    
-                </div>
-                 <div class="line">
-                    <label>@FormMessages.Label_Title <b class="req">*</b></label>
-                     <span>@Html.DropDownListFor(x => x.Title, new SelectList(titles, "RootId", "Term"), 
-                        new { onchange = string.Format("CheckOther(this, 'spOther', {0})", (int)totalhr.Shared.Variables.NamedGlossaryIds.OtherTitle) })
-                         &nbsp;
-                        <span id="spOther" style="display:none">@Html.TextBoxFor(x => x.OtherTitle , new { size = "20", maxlength = "30" })</span>
-                     </span>
-                    
-                </div>
-                 <div class="line">
-                    <label>@FormMessages.Label_First_Name <b class="req">*</b></label>
-                    <span>@Html.TextBoxFor(x => x.FirstName , new { size = "45", maxlength = "50" })</span>
-                    
-                </div>
-                 <div class="line">
-                    <label>@FormMessages.Label_MiddleName <b class="req"></b></label>
-                     <span>@Html.TextBoxFor(x => x.MiddleNames, new {size="45", maxlength="50"})</span>
-                    
-                </div>
-                 <div class="line">
-                    <label>@FormMessages.Label_Last_Name <b class="req">*</b></label>
-                    <span>@Html.TextBoxFor(x => x.Surname , new { size = "45", maxlength = "50" })</span>
-                    
-                </div>
-                <div class="line">
-                    <label>@FormMessages.Label_Email <b class="req">*</b></label>
-                    <span>@Html.TextBoxFor(x => x.Email , new { size = "45", maxlength = "150" })</span>
-                    
-                </div>                
-                
-                <div class="line">
-                    <label>@FormMessages.Label_Address <b class="req">*</b></label>
-                    <span>@Html.TextBoxFor(x => x.Address1 , new { size = "45", maxlength = "250" })</span>
-                    
-                </div>
-                 <div class="line">
-                    <label>&nbsp;</label>
-                    <span>@Html.TextBoxFor(x => x.Address2 , new { size = "45", maxlength = "250" })</span>
-                    
-                </div>
-                 <div class="line">
-                    <label>&nbsp;</label>
-                    <span>@Html.TextBoxFor(x => x.Address3 , new { size = "45", maxlength = "250" })</span>
-                   
-                </div>
-                 <div class="line">
-                    <label>@FormMessages.Label_City <b class="req">*</b></label>
-                    <span>@Html.TextBoxFor(x => x.City , new { size = "20", maxlength = "50" })</span>
-                    
-                </div>
-                <div class="line" >
-                    <label>@FormMessages.Label_State</label>
-                    <span>@Html.TextBoxFor(x => x.State , new { size = "20", maxlength = "50" })</span>
-                   
-                </div>
-                <div class="line">
-                    <label>@FormMessages.Label_PostCode</label>
-                    <span>@Html.TextBoxFor(x => x.PostCode , new { size = "10", maxlength = "20" })</span>
-                   
-                </div>
-                <div class="line">
-                    <label>@FormMessages.Label_Country <b class="req">*</b></label>
-                    <span>@Html.DropDownListFor(x => x.CountryId,  new SelectList(countries, "RootId", "Term"))</span>
-                    
-                </div>
-                 <div class="line">
-                    <label>@FormMessages.Label_Phone <b class="req">*</b></label>
-                    <span>@Html.TextBoxFor(x => x.PersonalPhone, new { size = "20", maxlength = "20" })</span>
-                    
-                </div>
-                 <div class="line">
-                    <label>@FormMessages.Label_Mobile</label>
-                    <span>@Html.TextBoxFor(x => x.MobilePhone, new { size = "20", maxlength = "20" })</span>
-                    
-                </div>
-                
-                </fieldset>
-
-                 <fieldset>
-
-                <legend>@FormMessages.Title_Logon_Details</legend>
-
-                 <div class="line">
-                    <label>@FormMessages.Label_Username <b class="req">*</b></label>
-                    <span>
-                        @Html.TextBoxFor(x => x.UserName , new { size = "20", maxlength = "20", autocomplete ="off" })
-                     </span>
-                    
-                </div>
-                <div class="line">
-                    <label>@FormMessages.Label_Password <b class="req">*</b></label>
-                    <span>@Html.PasswordFor(x => x.Password , new { size = "20", maxlength = "15", autocomplete ="off", value=Model.Password })</span>
-                    <span id="spAction" class="actionlink" onclick="RevealPassToSpan('Password', 'spupss', this, 'spAlternate');">@Common.V_Show</span>
-                    <span id="spupss" class="passdisplay" style="display:none"></span>    
-                    <span id="spAlternate" style="display:none">@Common.V_Hide</span>                
-                </div>
-                                
-                 <div class="line">
-                    <label>@FormMessages.Label_Pref_Language</label>
-                    <span>@Html.DropDownListFor(x => x.PreferedLanguageId,  new SelectList(languagesSelect, "Value", "Text"))</span>
-                    
-                </div>
-                
-                </fieldset>
-
-                <div class="line">
-                    &nbsp;
-                </div>
-                <div class="line">
-                    <label>&nbsp;</label>
-                    <span>
-                        <input type="button" value="@FormMessages.btn_Cancel" onclick="" /> &nbsp;
-                        <input type="submit" value="@FormMessages.btn_Value_Save" /></span>
-                    <span class="req"></span>
-                </div>
-                <div class="line">&nbsp;</div>
+            <div class="control-group">
+                <img src="/Employee/Profile/Picture/@Model.ProfilePicturePath" alt="@Account.V_Your_Profile_Picture" />
             </div>
+            
+                <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_Gender</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(x => x.GenderId,  new SelectList(genders, "RootId", "Term", Model.GenderId))
+                            <span class="help-inline">&nbsp;</span>
+                        </div>
+                    </div>
+            
+                <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_Title</label>
+                        <div class="controls">
+                            @Html.DropDownListFor(x => x.Title, new SelectList(titles, "RootId", "Term"), 
+                        new { onchange = string.Format("CheckOther(this, 'spOther', {0})", (int)totalhr.Shared.Variables.NamedGlossaryIds.OtherTitle) })
+                            <span class="help-inline">&nbsp;</span>
+                            &nbsp;
+                            <span id="spOther" style="display:none">@Html.TextBoxFor(x => x.OtherTitle , new { size = "20", maxlength = "30" })</span>
+                        </div>
+                    </div>
+            
+                <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_First_Name</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(x => x.FirstName , new { size = "45", maxlength = "50" })
+                            <span class="help-inline">&nbsp;</span>
+                        </div>
+                    </div>           
+            
+            
+              <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_MiddleName</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(x => x.MiddleNames, new {size="45", maxlength="50"})
+                            <span class="help-inline">&nbsp;</span>
+                        </div>
+                    </div>
+            
+             <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_Last_Name</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(x => x.Surname , new { size = "45", maxlength = "50" })
+                            <span class="help-inline">&nbsp;</span>
+                        </div>
+                    </div>
+            
+             <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_Email</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(x => x.Email , new { size = "45", maxlength = "150" })
+                            <span class="help-inline">&nbsp;</span>
+                        </div>
+                    </div>
+            
+                 <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_Address</label>
+                        <div class="controls">
+                           @Html.TextBoxFor(x => x.Address1 , new { size = "45", maxlength = "250" })
+                            <br />
+                            @Html.TextBoxFor(x => x.Address2 , new { size = "45", maxlength = "250" })
+                            <br />
+                            @Html.TextBoxFor(x => x.Address3 , new { size = "45", maxlength = "250" })
+                        </div>
+                    </div>    
+                
+             <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_City</label>
+                        <div class="controls">
+                           @Html.TextBoxFor(x => x.City , new { size = "20", maxlength = "50" })
+                            <span class="help-inline">&nbsp;</span>
+                        </div>
+                    </div>  
+            
+             <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_State</label>
+                        <div class="controls">
+                           @Html.TextBoxFor(x => x.State , new { size = "20", maxlength = "50" })
+                            <span class="help-inline">&nbsp;</span>
+                        </div>
+                    </div>  
+            
+             <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_PostCode</label>
+                        <div class="controls">
+                           @Html.TextBoxFor(x => x.PostCode , new { size = "10", maxlength = "20" })
+                            <span class="help-inline">&nbsp;</span>
+                        </div>
+                    </div>           
+               
+                  <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_Country</label>
+                        <div class="controls">
+                           @Html.DropDownListFor(x => x.CountryId,  new SelectList(countries, "RootId", "Term"))
+                            <span class="help-inline">&nbsp;</span>
+                        </div>
+                    </div>   
+               
+               <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_Phone</label>
+                        <div class="controls">
+                           @Html.TextBoxFor(x => x.PersonalPhone, new { size = "20", maxlength = "20" })
+                            <span class="help-inline">&nbsp;</span>
+                        </div>
+                    </div> 
+            
+             <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_Mobile</label>
+                        <div class="controls">
+                           @Html.TextBoxFor(x => x.MobilePhone, new { size = "20", maxlength = "20" })
+                            <span class="help-inline">&nbsp;</span>
+                        </div>
+                    </div>
+              
+                
+            
+            <h4>@FormMessages.Title_Logon_Details</h4>
+
+             <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_Username</label>
+                        <div class="controls">
+                            @Html.TextBoxFor(x => x.UserName , new { size = "20", maxlength = "20", autocomplete ="off" })
+                            <span class="help-inline">&nbsp;</span>
+                        </div>
+                    </div>
+            
+             <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_Password</label>
+                        <div class="controls">
+                           <span>@Html.PasswordFor(x => x.Password , new { size = "20", maxlength = "15", autocomplete ="off", value=Model.Password })</span>
+                            <span id="spAction" class="actionlink" onclick="RevealPassToSpan('Password', 'spupss', this, 'spAlternate');">@Common.V_Show</span>
+                            <span id="spupss" class="passdisplay" style="display:none"></span>    
+                            <span id="spAlternate" style="display:none">@Common.V_Hide</span> 
+                        </div>
+                    </div>
+            
+             <div class="control-group">
+                        <label class="control-label">@FormMessages.Label_Pref_Language</label>
+                        <div class="controls">
+                           @Html.DropDownListFor(x => x.PreferedLanguageId,  new SelectList(languages, "Id", "Name"))
+                            <span class="help-inline">&nbsp;</span>
+                        </div>
+                    </div>
+            
+                 <div class="form-actions">
+                        <button type="submit" class="btn btn-success">
+                            <i class="icon-ok icon-white"></i> @FormMessages.btn_Value_Save
+                        </button>
+
+                        <button type="button" class="btn btn-danger" onclick="javascript:NavigateTo('/Account/MyDetails')">
+                            <i class="icon-remove icon-white" ></i> @FormMessages.btn_Cancel
+                        </button>
+                    </div>          
 
         
             @Html.HiddenFor(x => x.UserId)
             @Html.HiddenFor(x => x.CompanyId)
-        }*@
+        }
         </div>
 
       </div>
+
+   </div>
+ </div>

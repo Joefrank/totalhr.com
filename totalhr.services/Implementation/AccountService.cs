@@ -166,7 +166,7 @@ namespace totalhr.services.Implementation
 
         public User GetUserByEmail(string email)
         {
-            return _userRepos.FindBy(x => x.email.ToLower().Trim().Equals(email.ToLower().Trim())).FirstOrDefault();
+            return _userRepos.FindBy(x => x.email.Trim().Equals(email.Trim(), StringComparison.InvariantCultureIgnoreCase)).FirstOrDefault();
         }
 
         public UserRegStruct IsInfoValidForRegistration(NewEmployeeInfo info)

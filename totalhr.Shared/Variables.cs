@@ -144,7 +144,7 @@ namespace totalhr.Shared
             CompanyDocument = 1,
             ProfilePicture = 2,
             Avatar = 3,
-            GalleryImage
+            GalleryImage=4
         }
 
         public enum AllowedFileExtension

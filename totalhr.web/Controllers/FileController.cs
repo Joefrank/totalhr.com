@@ -10,6 +10,7 @@ using totalhr.Shared;
 using totalhr.services.Infrastructure;
 using Authentication.Infrastructure;
 using ImageGallery.Infrastructure;
+using totalhr.Resources;
 
 namespace totalhr.web.Controllers
 {
@@ -18,7 +19,8 @@ namespace totalhr.web.Controllers
         private IFileService _fileService;
         private IAccountService _accountService;
         private IGalleryService _galleryService;
-        
+        private IFileHandlerService fileHandler;
+
         public FileController(IFileService fileService, IAccountService accountService, IGalleryService galleryService, IOAuthService authService)
             : base(authService)
         {
@@ -46,9 +48,35 @@ namespace totalhr.web.Controllers
         [HttpPost]
         public ActionResult UploadProfilePicture(int id)
         {
-            IFileHandlerService fileHandler = new ProfilePictureFileHandler(_fileService, _accountService, id);
+            fileHandler = new ProfilePictureFileHandler(_fileService, _accountService, id);
             var result = UploadTheFile(fileHandler, Request.Files);
-            return Json(result.FileId > 0 ? new { Message = result.FullPath } : new { Message = "Error in saving file" });
+            return Json(result.FileId > 0 ? new { Message = result.FullPath } : new { Message = Account.Error_Saving_Picture });
+        }
+
+        public ActionResult UploadAvatar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UploadAvatar(int id)
+        {
+            fileHandler = new ProfilePictureFileHandler(_fileService, _accountService, id);
+            var result = UploadTheFile(fileHandler, Request.Files);
+            return Json(result.FileId > 0 ? new { Message = result.FullPath } : new { Message = Account.Error_Saving_Picture });
+        }
+
+        public ActionResult UploadSmallAvatar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult UploadSmallAvatar(int id)
+        {
+            fileHandler = new ProfilePictureFileHandler(_fileService, _accountService, id);
+            var result = UploadTheFile(fileHandler, Request.Files);
+            return Json(result.FileId > 0 ? new { Message = result.FullPath } : new { Message = Account.Error_Saving_Picture });
         }
 
         public ActionResult GalleryPhotoUpload(int id)

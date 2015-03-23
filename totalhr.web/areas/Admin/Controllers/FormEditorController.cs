@@ -49,6 +49,10 @@ namespace totalhr.web.Areas.Admin.Controllers
             _formService.SaveFormFields(info);
         }
 
+        //*** testing only
+        public ActionResult PreviewForm(int id){
+            return View("Preview", _formService.GetForm(id));
+        }
 
         public ActionResult EditForm(int id)
         {

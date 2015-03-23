@@ -68,25 +68,27 @@
         <div class="widget-title">
             <h4><i class="icon-reorder"></i>@Account.V_Profile</h4>
             <span class="tools">
+                <a href="/Account/EditMyDetails/" class="icon-pencil"></a>
                 <a href="javascript:;" class="icon-chevron-down"></a>
+                
             </span>
         </div>
         <div id="widgetDetails" class="widget-body"> 
              <div class="span3">
-                 <div class="text-center profile-pic" onclick="OpenPopup('/File/UploadProfilePicture/', 1000, 500, true)">
+                 <div class="text-center profile-pic" onclick="OpenPopup('/File/UploadProfilePicture/', 1000, 600, true)">
                      <img src="/Employee/Profile/Picture/@portrait" alt="@Account.V_Your_Profile_Picture" />
                      <br/>
                      <i class="icon-pencil"> @Account.V_Edit_Profile_Picture</i>
                      <br/>
                  </div>
                  
-                 <div class="text-center avatar-pic" onclick="OpenPopup('/File/UploadAvatar/', 1000, 500, true)">
+                 <div class="text-center avatar-pic" onclick="OpenPopup('/File/UploadAvatar/', 1000, 600, true)">
                      <img src="/Employee/Profile/avatar/@avatar" alt="@Account.V_Your_Avatar" />
                       <br/>
                      <i class="icon-pencil"> @Account.V_Edit_Avatar</i>
                  </div>
                  
-                 <div class="text-center small-avatar-pic" onclick="OpenPopup('/File/UploadSmallAvatar/', 1000, 500, true)">
+                 <div class="text-center small-avatar-pic" onclick="OpenPopup('/File/UploadSmallAvatar/', 1000, 600, true)">
                      <img src="/Employee/Profile/avatar-mini/@smallAvatar" alt="@Account.V_Your_Small_Avatar" />
                       <br/>
                      <i class="icon-pencil"> @Account.V_Edit_Small_Avatar</i>
@@ -105,68 +107,72 @@
                     <table class="table table-borderless">
                         <tbody>
                             <tr>
-                                <td class="span2">@FormMessages.Label_Title :</td>
+                                <td class="span2"><b>@FormMessages.Label_Title :</b></td>
                                 <td>
                                     @(Model.Title)
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">@FormMessages.Label_First_Name :</td>
+                                <td class="span2"><b>@FormMessages.Label_First_Name :</b></td>
                                 <td>
                                     @Model.FirstName
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">@FormMessages.Label_MiddleName :</td>
+                                <td class="span2"><b>@FormMessages.Label_MiddleName :</b></td>
                                 <td>
                                     @Model.MiddleNames
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">@FormMessages.Label_Last_Name :</td>
+                                <td class="span2"><b>@FormMessages.Label_Last_Name :</b></td>
                                 <td>
                                     @Model.Surname
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">@FormMessages.Label_Country :</td>
+                                <td class="span2"><b>@FormMessages.Label_Country :</b></td>
                                 <td>
                                     @Model.Country
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">@FormMessages.Label_DOB :</td>
+                                <td class="span2"><b>@FormMessages.Label_DOB :</b></td>
                                 <td>
                                     @dateOfBirth
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">@FormMessages.Label_Occupation :</td>
+                                <td class="span2"><b>@FormMessages.Label_Occupation :</b></td>
                                 <td>
                                     @jobtitlevalue
                                 </td>
                             </tr>
                             
                             <tr>
-                                <td class="span2"> @FormMessages.Label_Mobile :</td>
+                                <td class="span2"><b> @FormMessages.Label_Mobile :</b></td>
                                 <td>
                                     @Model.MobilePhone
                                 </td>
                             </tr>
 
                             <tr>
-                                <td class="span2"> @FormMessages.Label_Email :</td>
+                                <td class="span2"><b> @FormMessages.Label_Email :</b></td>
                                 <td>
                                     @Model.Email
                                 </td>
                             </tr>
                             <tr>
-                                <td class="span2">@FormMessages.Label_Department :</td>
+                                <td class="span2"><b>@FormMessages.Label_Department :</b></td>
                                 <td>
                                     @Model.Department
                                 </td>
                             </tr>
-                           
+                           <tr>
+                               <td colspan="2">
+                                  
+                               </td>
+                           </tr>
                         </tbody>
                     </table>
                 
@@ -185,7 +191,7 @@
                             <br/>
                             @Model.PostCode
                             <br/>
-                            <abbr title="Phone">P:</abbr> @Model.PersonalPhone
+                            <abbr title="Phone">Phone:</abbr> @Model.PersonalPhone
 
                         </address>
                         <address>
@@ -193,6 +199,11 @@
                             <a href="mailto:@Model.Email">@Model.Email</a>
                         </address>
                     </div>
+                <div>
+                      <button type="button" class="btn btn-success" onclick="NavigateTo('/Account/EditMyDetails/')">
+                                        <i class="icon-pencil icon-white"></i> @Account.V_Edit_MyDetails
+                                    </button>
+                </div>
                 </div>
 
             <div class="span3">
@@ -208,13 +219,13 @@
                     <li> <strong>@FormMessages.Label_Username</strong>: @Model.UserName</li>
                     <li>
                         <strong>@FormMessages.Label_Password</strong>: 
-                        <span id="pwSecret">***********
-                            <a href="javascript:void(0);">Show</a>
+                        <span id="pwSecret" >***********
+                            <a href="javascript:void(0);"  class="danger" onclick="RevealPwd()">@Account.V_Show_Password</a>
                         </span> 
-                        <span id="pwd" style="display:none">
+                        <span id="pwd"  style="display:none">
                             @CM.Security.Decrypt(Model.Password)
                             &nbsp;
-                            <a href="javascript:void(0);">Hide</a>
+                            <a href="javascript:void(0);" class="danger" onclick="HidePwd()">@Account.V_Hide_Password</a>
                         </span>
 
                     </li>
@@ -230,3 +241,7 @@
 
 </div>
 
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/Site/Account.js" ></script>
+
+}

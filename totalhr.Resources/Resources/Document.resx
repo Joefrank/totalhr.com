@@ -414,4 +414,10 @@
   <data name="V_View_In_Folder" xml:space="preserve">
     <value>View In Folders</value>
   </data>
+  <data name="V_Document_Details" xml:space="preserve">
+    <value>Document Details</value>
+  </data>
+  <data name="V_Document_Permissions" xml:space="preserve">
+    <value>Permissions</value>
+  </data>
 </root>

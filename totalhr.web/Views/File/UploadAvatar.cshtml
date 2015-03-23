@@ -1,5 +1,45 @@
-﻿@{
-    ViewBag.Title = "UploadAvatar";
+﻿@using totalhr.Resources;
+
+@{
+    Layout = "~/Views/Shared/_BootstrapPopupLayout.cshtml";
+    ViewBag.Title = Account.V_Avatar_Upload;
 }
 
-<h2>UploadAvatar</h2>
+@section pagetitle
+{
+    @Account.V_Avatar_Upload
+}
+
+<div class="container-fluid">
+           
+            <!-- BEGIN PAGE CONTENT-->
+            <div class="row-fluid">
+               <div class="span12">
+                  <div class="widget">
+                        <div class="widget-title">
+                           <h4><i class="icon-globe"></i>@Account.V_File_Drop_Zone</h4>
+                           <span class="tools">
+                          
+                           </span>                    
+                        </div>
+                      <div class="widget-body form">
+                           <div style="width: 98%;height: 90%;margin:2%;background:beige;">
+                              <form action="/File/UploadProfilePicture/@((int)totalhr.Shared.Variables.ProfilePictureType.Avatar)" class="dropzone clickable" id="my-awesome-dropzone" style="background-color: beige;height:400px;" >
+                              
+                                  <div class="default message">
+                                      <span>@Account.V_Drop_Files_Or_Click</span>
+                                  </div>
+
+                              </form>
+                            </div>
+                      </div>
+                  </div>
+               </div>
+            </div>
+            <!-- END PAGE CONTENT-->         
+         </div>
+         <!-- END PAGE CONTAINER-->
+@section scripts
+{
+    <script type="text/javascript" src="~/Scripts/Site/assets/dropzone/dropzone.js"></script>
+}

@@ -330,4 +330,34 @@
   <data name="V_Your_Small_Avatar" xml:space="preserve">
     <value>Your small avatar</value>
   </data>
+  <data name="Error_Saving_Picture" xml:space="preserve">
+    <value>Error saving file.</value>
+  </data>
+  <data name="V_Avatar_Upload" xml:space="preserve">
+    <value>Avatar Upload</value>
+  </data>
+  <data name="V_Drop_Files_Or_Click" xml:space="preserve">
+    <value>Drop files here or click to upload</value>
+  </data>
+  <data name="V_Edit_MyDetails" xml:space="preserve">
+    <value>Edit My Details</value>
+  </data>
+  <data name="V_File_Drop_Zone" xml:space="preserve">
+    <value>File Dropzone</value>
+  </data>
+  <data name="V_Hide_Password" xml:space="preserve">
+    <value>Hide</value>
+  </data>
+  <data name="V_My_Details" xml:space="preserve">
+    <value>My Details</value>
+  </data>
+  <data name="V_Profile_Picture_Upload" xml:space="preserve">
+    <value>Profile Picture Upload</value>
+  </data>
+  <data name="V_Show_Password" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="V_Small_Avatar_Upload" xml:space="preserve">
+    <value>Small Avatar Upload</value>
+  </data>
 </root>

@@ -484,11 +484,29 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Document Details.
+        /// </summary>
+        public static string V_Document_Details {
+            get {
+                return ResourceManager.GetString("V_Document_Details", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Document details.
         /// </summary>
         public static string V_Document_Details_Title {
             get {
                 return ResourceManager.GetString("V_Document_Details_Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Permissions.
+        /// </summary>
+        public static string V_Document_Permissions {
+            get {
+                return ResourceManager.GetString("V_Document_Permissions", resourceCulture);
             }
         }
         

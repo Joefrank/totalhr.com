@@ -1,56 +1,12 @@
 ﻿@model totalhr.Shared.Models.LoginStruct
 
 @using totalhr.Resources;
-@using Authentication.Models;
+
 
 @{
     Layout = "~/Views/Shared/_BlankLayout.cshtml";
-    ViewBag.Title = Common.Page_TT_Header_Login;
+    ViewBag.Title = Common.Page_TT_Login;
 }
-
-@*@{Html.RenderPartial("_FormScripts");}*@
-
-
-
-@*<div class="core">
-   
- @using (Html.BeginRouteForm("Default", new { Controller = "Account", action = "LoginUser" }))
-{
-        @Html.ValidationSummary()
-
-    <div class="loginbox">
-        <div class="form">
-            <h1>@Common.Page_TT_Login</h1>
-
-            <div class="line">
-                <label>@FormMessages.Label_Username</label>
-                <span>
-                    @Html.TextBoxFor(x => x.UserName , new { size = "20", maxlength = "100", autocomplete ="off" })
-                </span>
-                <span class="req">*</span>
-            </div>
-            <div class="line">
-                <label>@FormMessages.Label_Password</label>
-                <span>@Html.PasswordFor(x => x.Password , new {  size = "20", maxlength = "15",  autocomplete ="off" })</span>
-                <span class="req">*</span>
-            </div>
-            <div class="line">
-                <label>&nbsp;</label>
-                <span>                       
-                    <input type="submit" class="btn blueb" value="@FormMessages.btn_Login" />
-                 </span>
-            </div>
-        </div>
-        <div class="links">
-            <a href="/Account/ForgotPassword" >@Common.V_Password_Reminder</a>
-            &nbsp;
-            <a href="/Account/Register" >@Common.V_Not_Registered</a>
-        </div>
-    </div>
-  }
-    
-
-</div>*@
 
 
 <!-- BEGIN LOGIN -->

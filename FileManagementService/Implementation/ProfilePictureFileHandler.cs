@@ -27,9 +27,28 @@ namespace FileManagementService.Implementation
             FileService = fileService;
             AccountService = accountService;
             PictureType = pictureType;
-            UploadPath = ConfigurationManager.AppSettings["ProfilePicturePath"];
+            UploadPath = GetUploadPath(pictureType);
             base.FileTypeId = (int)Variables.FileType.ProfilePicture;
             base.OverridePath(this.DirectoryPath);
+        }
+
+        private string GetUploadPath(int picturetype)
+        {
+            var path = string.Empty;
+
+            switch (picturetype)
+            {
+                case (int)Variables.ProfilePictureType.Portrait:
+                    path = "ProfilePicturePath";
+                    break;
+                case (int)Variables.ProfilePictureType.Avatar:
+                    path = "AvatarPicturePath";
+                    break;
+                case (int)Variables.ProfilePictureType.SmallAvatar:
+                    path = "SmallAvatarPicturePath";
+                    break;
+            }
+            return ConfigurationManager.AppSettings[path];
         }
 
         public override BaseFileHandler.FileSaveResult HandleFileCreation(HttpPostedFileBase postedFile, int creatorId)
@@ -51,7 +70,15 @@ namespace FileManagementService.Implementation
                 }
 
                 //resize file to correct dimensions
-                ResizeProfilePicture(fileResult.FullPath, PictureType);
+                var maxSize = GetSizeByPictureType(PictureType);
+                var newsize = maxSize;
+
+                if (maxSize.Width == pictureWidth && maxSize.Height == pictureHeight)
+                {
+                    newsize = new Size(pictureWidth ,pictureHeight);
+                }else{
+                    newsize = ResizeProfilePicture(fileResult.FullPath, maxSize);
+                }                
 
                 var profilePicture = new UserProfilePicture
                     {
@@ -59,9 +86,10 @@ namespace FileManagementService.Implementation
                         CreatedBy = creatorId,
                         FileId = fileResult.FileId,
                         UserId = creatorId,
-                        Width = pictureWidth,
-                        Height = pictureHeight,
-                        ProfilePictureTypeId = PictureType
+                        Width = newsize.Width,
+                        Height = newsize.Height,
+                        ProfilePictureTypeId = PictureType,
+                        FileName = fileResult.FileId + Path.GetExtension(fileResult.FullPath)
                     };
 
                 var result = AccountService.SaveProfilePicture(profilePicture);
@@ -76,24 +104,23 @@ namespace FileManagementService.Implementation
             return new BaseFileHandler.FileSaveResult { FileId = -1 };
         }
 
-        public void ResizeProfilePicture(string picturePath, int profilePictureTypeId)
-        {
-            var photoBytes = System.IO.File.ReadAllBytes(picturePath);
+        public static Size GetSizeByPictureType(int profilePictureType){
 
-            var size = new Size(400,400);
-
-            switch (profilePictureTypeId)
+            switch (profilePictureType)
             {
                 case (int)Variables.ProfilePictureType.Portrait:
-                    size = Variables.ProfilePictureMaxSize.PortraitSize;
-                    break;
+                    return Variables.ProfilePictureMaxSize.PortraitSize;                   
                 case (int)Variables.ProfilePictureType.Avatar:
-                    size = Variables.ProfilePictureMaxSize.AvatarSize;
-                    break;
+                    return Variables.ProfilePictureMaxSize.AvatarSize;                   
                 case (int)Variables.ProfilePictureType.SmallAvatar:
-                    size = Variables.ProfilePictureMaxSize.SmallAvatarSize;
-                    break;
+                    return Variables.ProfilePictureMaxSize.SmallAvatarSize;
             }
+            return new Size { Width = 50, Height = 50 };
+        }
+
+        public Size ResizeProfilePicture(string picturePath, Size size)
+        {
+            var photoBytes = System.IO.File.ReadAllBytes(picturePath);
 
             // process image
             using (var inStream = new MemoryStream(photoBytes))
@@ -105,7 +132,8 @@ namespace FileManagementService.Implementation
                     .Save(picturePath);
                 }
             }
-          
+
+            return size;
         }
 
     }

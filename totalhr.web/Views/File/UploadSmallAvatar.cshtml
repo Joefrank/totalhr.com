@@ -2,12 +2,12 @@
 
 @{
     Layout = "~/Views/Shared/_BootstrapPopupLayout.cshtml";
-    ViewBag.Title = Account.V_Profile_Picture_Upload;
+    ViewBag.Title = Account.V_Upload_Small_Avatar;
 }
 
 @section pagetitle
 {
-    @Account.V_Profile_Picture_Upload
+    @Account.V_Upload_Small_Avatar
 }
 
 <div class="container-fluid">
@@ -24,7 +24,7 @@
                         </div>
                       <div class="widget-body form">
                            <div style="width: 98%;height: 90%;margin:2%;background:beige;">
-                              <form action="/File/UploadProfilePicture/@((int)totalhr.Shared.Variables.ProfilePictureType.Portrait)" class="dropzone clickable" id="my-awesome-dropzone" style="background-color: beige;height:400px;" >
+                              <form action="/File/UploadProfilePicture/@((int)totalhr.Shared.Variables.ProfilePictureType.SmallAvatar)" class="dropzone clickable" id="my-awesome-dropzone" style="background-color: beige;height:400px;" >
                               
                                   <div class="default message">
                                       <span>@Account.V_Drop_Files_Or_Click</span>

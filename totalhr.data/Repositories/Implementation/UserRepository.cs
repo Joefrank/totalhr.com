@@ -128,7 +128,7 @@ namespace totalhr.data.Repositories.Implementation
         public bool SaveProfilePicture(UserProfilePicture profilePicture)
         {
             var existingUserPictureProfile =
-                this.Context.UserProfilePictures.FirstOrDefault(x => x.UserId == profilePicture.UserId);
+                this.Context.UserProfilePictures.FirstOrDefault(x => x.UserId == profilePicture.UserId && x.ProfilePictureTypeId == profilePicture.ProfilePictureTypeId);
 
             if (existingUserPictureProfile != null)
             {
@@ -147,12 +147,11 @@ namespace totalhr.data.Repositories.Implementation
 
         public string GetProfilePicturePath(int userid)
         {
-            var result = (from upp in Context.UserProfilePictures
-                         join ff in Context.Files on upp.FileId equals ff.id
-                         where upp.UserId == userid
-                         select new {Path = upp.FileId + ff.extension}).FirstOrDefault();
+            var result = (from upp in Context.UserProfilePictures                        
+                         where upp.UserId == userid && upp.ProfilePictureTypeId == (int)Variables.ProfilePictureType.Portrait
+                         select upp).FirstOrDefault();
 
-            return result != null ? result.Path : "";
+            return result != null ? result.FileName : "";
         }
 
         public UserProfileDetails GetProfileDetails(int userId, string email)
@@ -177,7 +176,7 @@ namespace totalhr.data.Repositories.Implementation
                                      select new UserProfileDetails.ProfilePicture
                                      {
                                          FileName = pic.FileId + filex.extension,
-                                         PictureTypeId = (int)Variables.ProfilePictureType.Portrait, //(Variables.ProfilePictureType)Enum.Parse(typeof(Variables.ProfilePictureType), pic.ProfilePictureType, true),
+                                         PictureTypeId = pic.ProfilePictureTypeId,
                                          FileId = pic.FileId,
                                          ImageHeight = pic.Height,
                                          ImageWidth = pic.Width

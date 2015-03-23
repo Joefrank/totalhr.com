@@ -707,6 +707,7 @@
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
     <Content Include="Scripts\Site\Absence.js" />
+    <Content Include="Scripts\Site\Account.js" />
     <Content Include="Scripts\Site\angular-form-gen.js" />
     <Content Include="Scripts\Site\assets\bootstrap-colorpicker\css\colorpicker.css" />
     <Content Include="Scripts\Site\assets\bootstrap-colorpicker\img\alpha.png" />
@@ -1932,6 +1933,8 @@
     <Content Include="Views\File\UploadProfilePicture.cshtml" />
     <Content Include="Views\File\UploadGalleryPhoto.cshtml" />
     <Content Include="Views\Account\EditMyDetails.cshtml" />
+    <Content Include="Views\File\UploadAvatar.cshtml" />
+    <Content Include="Views\File\UploadSmallAvatar.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

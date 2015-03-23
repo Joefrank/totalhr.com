@@ -48,15 +48,15 @@ namespace totalhr.web.Controllers
         
         public ActionResult MyDetails()
         {
-            var userinfo = _accountService.GetUserProfileDetails(CurrentUser.UserId, CurrentUser.UserName.Trim());            
-            //userinfo.DetailsSaveSuccess = false;
-            //LoadGlossaries();
+            var userinfo = _accountService.GetUserProfileDetails(CurrentUser.UserId, CurrentUser.UserName.Trim());           
+          
             return View(userinfo);
         }
 
         public ActionResult EditMyDetails()
         {
-            return View();
+            LoadGlossaries();
+            return View(_accountService.GetUserInfoByEmail(CurrentUser.UserName));
         }
 
         [AllowAnonymous]
@@ -182,7 +182,7 @@ namespace totalhr.web.Controllers
                 DepartmentId = 2,
                 CookieDuration = new TimeSpan(0, 5, 0, 0),
                 Culture = "en-GB",
-                UserName = "admin@cyberminds.co.uk",
+                UserName = "joe_bolla@yahoo.com",
                 LanguageId = 1,
                 Profiles = new List<string> { "1", "4" },
                 Roles = new List<string> { "1", "2", "3" },
@@ -224,7 +224,7 @@ namespace totalhr.web.Controllers
         public ActionResult Logout()
         {
             AuthService.LogUserOut();
-            return View("Login");
+            return RedirectToAction("Login");
         }
 
         [AllowAnonymous]
@@ -347,7 +347,7 @@ namespace totalhr.web.Controllers
             }
 
             LoadGlossaries();
-            return View("MyDetails", userinfo);
+            return View("EditMyDetails", userinfo);
 
         }
 
