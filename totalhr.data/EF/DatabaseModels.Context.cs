@@ -14,7 +14,7 @@ namespace totalhr.data.EF
     using System.Data.Entity.Infrastructure;
     using System.Data.Entity.Core.Objects;
     using System.Linq;
-    
+
     public partial class TotalHREntities : DbContext
     {
         public TotalHREntities()

@@ -47,15 +47,15 @@ namespace totalhr.web.Controllers
             _authService = authservice;
         }
 
-        private string MakeClientJSForWeekDays()
+        private string MakeClientJsForWeekDays()
         {
             var sbtemp = new StringBuilder();            
-            string[] weekdays = _calService.GetWeekDaysByName(CultureInfo.CreateSpecificCulture(CurrentUser.Culture));
-            int len = weekdays.Length;
+            var weekdays = _calService.GetWeekDaysByName(CultureInfo.CreateSpecificCulture(CurrentUser.Culture));
+            var len = weekdays.Length;
 
             sbtemp.Append(" var d = new Date();" + Environment.NewLine + " var weekday = new Array(7);" + Environment.NewLine);
 
-            for (int i = 0; i < len; i++)
+            for (var i = 0; i < len; i++)
             {
                 sbtemp.Append(string.Format(@"weekday[{0}]=  ""{1}"";" + Environment.NewLine,
                     i, HttpUtility.JavaScriptStringEncode(weekdays[i])));
@@ -63,6 +63,18 @@ namespace totalhr.web.Controllers
             return sbtemp.ToString();
         }
        
+        public ActionResult CreateCalendar()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateCalendar(CalendarInfo info)
+        {
+            var calendarId = _calMservice.CreateCalendar(info);
+            return RedirectToAction("Index");
+        }
+
         public ActionResult Index()
         {
             var allCalendars = _calMservice.GetCompanyCalendars(CurrentUser.CompanyId);
@@ -84,7 +96,7 @@ namespace totalhr.web.Controllers
         [HttpGet]
         public ActionResult EditEvent(int id)
         {
-            ViewBag.WeekDaysJS = MakeClientJSForWeekDays();
+            ViewBag.WeekDaysJS = MakeClientJsForWeekDays();
             CalendarEventInfo info = _calMservice.GetEventInfo(id);
             info.UserCulture = CurrentUser.Culture; 
             return View("EventEdit", "~/Views/Shared/_PopupLayout.cshtml",info);
@@ -97,7 +109,7 @@ namespace totalhr.web.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ViewBag.WeekDaysJS = MakeClientJSForWeekDays();
+                ViewBag.WeekDaysJS = MakeClientJsForWeekDays();
                 eventinfo.UserCulture = CurrentUser.Culture;
                 return View("EventEdit", "~/Views/Shared/_PopupLayout.cshtml", eventinfo);
             }
@@ -120,7 +132,7 @@ namespace totalhr.web.Controllers
             }
             else
             {
-                ViewBag.WeekDaysJS = MakeClientJSForWeekDays();
+                ViewBag.WeekDaysJS = MakeClientJsForWeekDays();
                 CalendarEventInfo model = new CalendarEventInfo {CalendarId = calendar.id, CalendarName = calendar.Name, UserCulture = CurrentUser.Culture };
                 
                 try

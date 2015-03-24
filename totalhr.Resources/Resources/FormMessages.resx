@@ -666,4 +666,10 @@
   <data name="Label_Occupation" xml:space="preserve">
     <value>Occupation</value>
   </data>
+  <data name="Error_FirstName_Too_long" xml:space="preserve">
+    <value>Firstname is too long.</value>
+  </data>
+  <data name="Error_SurName_Too_long" xml:space="preserve">
+    <value>Surname is too long.</value>
+  </data>
 </root>

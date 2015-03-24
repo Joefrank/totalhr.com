@@ -13,7 +13,7 @@ namespace Calendar.Infrastructure
     {
         TEF.Calendar GetCalendar(int calendarid);
 
-        List<TEF.Calendar> GetCompanyCalendars(int companyid);
+        IEnumerable<TEF.Calendar> GetCompanyCalendars(int companyid);
 
         List<TEF.CalendarEvent> GetCalendarEvents(int calendarid);
 
@@ -34,5 +34,7 @@ namespace Calendar.Infrastructure
         List<CalendarEventCache> GetUserDayCalendarEvents(int userid, DateTime date, int calendarid = 0);
 
         CalendarEvent SaveEvent(totalhr.Shared.Models.CalendarEventInfo info);
+
+        int CreateCalendar(CalendarInfo info);
     }
 }

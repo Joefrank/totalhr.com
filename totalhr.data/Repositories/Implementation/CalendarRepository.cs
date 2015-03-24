@@ -10,15 +10,9 @@ namespace totalhr.data.Repositories.Implementation
 {
     public class CalendarRepository : GenericRepository<TotalHREntities, Calendar>, ICalendarRepository
     {
-        public List<Calendar> GetCompanyCalendar(int companyid)
+        public IEnumerable<Calendar> GetCompanyCalendar(int companyid)
         {
-            var calendar = from ce in this.Context.Calendars
-                           join us in this.Context.Users
-                           on ce.CreatedBy equals us.id
-                           where us.CompanyId == companyid
-                           select ce;
-
-            return calendar.ToList();
+            return this.Context.Calendars.Where(x => x.CompanyId == companyid);
         }
        
         public List<CalendarEvent> GetCalendarEvents(int calendarid)

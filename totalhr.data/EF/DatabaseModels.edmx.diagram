@@ -132,6 +132,7 @@
         <AssociationConnector Association="TotalHREntities.FK_UserProfile_User" ManuallyRouted="false" />
         <AssociationConnector Association="TotalHREntities.FK_UserRole_User" ManuallyRouted="false" />
         <AssociationConnector Association="TotalHREntities.FK_UserContractData_UserContract" ManuallyRouted="false" />
+        <AssociationConnector Association="TotalHREntities.FK_Calendar_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

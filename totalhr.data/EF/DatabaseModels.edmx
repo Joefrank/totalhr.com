@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TotalHREntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TotalHREntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Absence">
           <Key>
             <PropertyRef Name="Id" />
@@ -898,6 +898,18 @@
             </Principal>
             <Dependent Role="Calendar">
               <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Calendar_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Calendar" Type="Self.Calendar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Calendar">
+              <PropertyRef Name="CreatedBy" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1818,6 +1830,10 @@
             <End Role="Company" EntitySet="Company" />
             <End Role="Calendar" EntitySet="Calendar" />
           </AssociationSet>
+          <AssociationSet Name="FK_Calendar_User" Association="Self.FK_Calendar_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Calendar" EntitySet="Calendar" />
+          </AssociationSet>
           <AssociationSet Name="FK_CalendarAssociation_CalendarEvent" Association="Self.FK_CalendarAssociation_CalendarEvent">
             <End Role="CalendarEvent" EntitySet="CalendarEvent" />
             <End Role="CalendarAssociation" EntitySet="CalendarAssociation" />
@@ -2071,8 +2087,7 @@
             <End Role="UserRole" EntitySet="UserRole" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TotalHREntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -2141,6 +2156,7 @@
           <Property Name="CompanyId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Company" Relationship="Self.FK_Calendar_Company" FromRole="Calendar" ToRole="Company" />
           <NavigationProperty Name="CalendarEvents" Relationship="Self.FK_CalendarEvent_Calendar" FromRole="Calendar" ToRole="CalendarEvent" />
+          <NavigationProperty Name="User" Relationship="TotalHREntities.FK_Calendar_User" FromRole="Calendar" ToRole="User" />
         </EntityType>
         <EntityType Name="CalendarAssociation">
           <Key>
@@ -2950,6 +2966,7 @@
           <NavigationProperty Name="UserContractDatas2" Relationship="Self.FK_UserContractData_User2" FromRole="User" ToRole="UserContractData" />
           <NavigationProperty Name="UserProfiles" Relationship="Self.FK_UserProfile_User" FromRole="User" ToRole="UserProfile" />
           <NavigationProperty Name="UserRoles" Relationship="Self.FK_UserRole_User" FromRole="User" ToRole="UserRole" />
+          <NavigationProperty Name="Calendars" Relationship="TotalHREntities.FK_Calendar_User" FromRole="User" ToRole="Calendar" />
         </EntityType>
         <EntityType Name="UserAbsenceFieldData">
           <Key>
@@ -4227,16 +4244,16 @@
             <Parameter Name="Email" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="GetUserProfileIds" ReturnType="Collection(Int32)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserProfiles" ReturnType="Collection(TotalHREntities.GetUserProfiles_Result)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserRoleIds" ReturnType="Collection(Int32)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="GetUserRoles" ReturnType="Collection(TotalHREntities.GetUserRoles_Result)">
-            <Parameter Name="userid" Mode="In" Type="Int32" />
+          <Parameter Name="userid" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="PrepareCalendarEventScheduledReminder">
             <Parameter Name="SenderName" Mode="In" Type="String" />
@@ -4273,6 +4290,10 @@
             <Parameter Name="sortorder" Mode="In" Type="String" />
             <Parameter Name="viewinglanguageid" Mode="In" Type="Int32" />
           </FunctionImport>
+          <AssociationSet Name="FK_Calendar_User" Association="TotalHREntities.FK_Calendar_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Calendar" EntitySet="Calendars" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetCompanyFoldersByUser_Result">
           <Property Type="Int32" Name="documentId" Nullable="false" />
@@ -4480,6 +4501,18 @@
           <Property Type="Int32" Name="departmentid" Nullable="false" />
           <Property Type="Int32" Name="LineManagerId" Nullable="true" />
         </ComplexType>
+        <Association Name="FK_Calendar_User">
+          <End Type="TotalHREntities.User" Role="User" Multiplicity="1" />
+          <End Type="TotalHREntities.Calendar" Role="Calendar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Calendar">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->

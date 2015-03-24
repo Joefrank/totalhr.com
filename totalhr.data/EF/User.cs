@@ -58,6 +58,7 @@ namespace totalhr.data.EF
             this.UserContractDatas2 = new HashSet<UserContractData>();
             this.UserProfiles = new HashSet<UserProfile>();
             this.UserRoles = new HashSet<UserRole>();
+            this.Calendars = new HashSet<Calendar>();
         }
     
         public int id { get; set; }
@@ -179,5 +180,7 @@ namespace totalhr.data.EF
         public virtual ICollection<UserProfile> UserProfiles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserRole> UserRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Calendar> Calendars { get; set; }
     }
 }

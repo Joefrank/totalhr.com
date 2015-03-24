@@ -437,9 +437,9 @@ namespace Calendar.Implementation
             return _calrepos.GetCalendarEvents(calendarid);
         }
 
-        public List<TEF.Calendar> GetCompanyCalendars(int companyid)
+        public IEnumerable<TEF.Calendar> GetCompanyCalendars(int companyid)
         {
-            return _calrepos.GetCompanyCalendar(companyid);
+            return _calrepos.FindBy(x => x.CompanyId == companyid);
         } 
 
         public List<TEF.Calendar> GetUserCalendars(int userid)
@@ -467,6 +467,22 @@ namespace Calendar.Implementation
         public List<TEF.CalendarAssociation> GetCalendarEventReminders(int calendareventid)
         {
             return null;
+        }
+
+        public int CreateCalendar(CalendarInfo info)
+        {
+            var calendar = new TEF.Calendar
+                {
+                     Name = info.Name,
+                     Description =  info.Description,
+                     Created = DateTime.Now,
+                     CreatedBy = info.UserId,
+                     OpenToAll = info.OpenToAll,
+                     TemplateId = info.TemplateId
+                };
+            _calrepos.Add(calendar);
+            _calrepos.Save();
+            return 1;
         }
     }
 }

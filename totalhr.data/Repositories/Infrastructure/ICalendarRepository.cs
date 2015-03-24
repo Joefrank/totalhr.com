@@ -9,7 +9,7 @@ namespace totalhr.data.Repositories.Infrastructure
 {
     public interface ICalendarRepository : IGenericRepository<totalhr.data.EF.Calendar>
     {
-        List<TEF.Calendar> GetCompanyCalendar(int companyid);
+        IEnumerable<TEF.Calendar> GetCompanyCalendar(int companyid);
 
         List<TEF.CalendarEvent> GetCalendarEvents(int calendarid);
     }
