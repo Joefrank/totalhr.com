@@ -49,6 +49,30 @@ namespace FileManagementService.Implementation
             return newFileId;
         }
 
+        public void SaveToPath(string path)
+        {
+            //FileInfo info = new FileInfo(path);
+
+            //DirectoryInfo info = new DirectoryInfo(path);
+            //if (info.Exists)
+            //{
+            //    info
+            //}
+        }
+
+        public void RemovePhotoFiles(string[] filenames,int fileId)
+        {
+            var file = _fileRepos.FindBy(x => x.id == fileId).FirstOrDefault();
+            _fileRepos.Delete(file);
+            _fileRepos.Save();
+
+            //remove physical files
+            foreach (var filename in filenames)
+            {
+                File.Delete(filename);
+            }
+        }
+
         public int UpdateWith(int FileId, HttpPostedFileBase IOfile, string destinationFolder, int updatedBy, int fileTypeId)
         {
             var oldFile = _fileRepos.FindBy(x => x.id == FileId).FirstOrDefault();

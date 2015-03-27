@@ -148,7 +148,7 @@
     <value>Save</value>
   </data>
   <data name="V_Search_Edit_Recording" xml:space="preserve">
-    <value>Search / Edit Recorded Time</value>
+    <value>Search/Edit Recorded Time</value>
   </data>
   <data name="V_Start_Date" xml:space="preserve">
     <value>Start Date</value>
@@ -179,5 +179,32 @@
   </data>
   <data name="V_Time_Recording_For_Task" xml:space="preserve">
     <value>Time Recording For '{0}'</value>
+  </data>
+  <data name="Error_No_Time_Recording" xml:space="preserve">
+    <value>Sorry but no time recording found matching your search criteria. Try revising and searching again.</value>
+  </data>
+  <data name="V_Back_To_Options" xml:space="preserve">
+    <value>Back To Options</value>
+  </data>
+  <data name="V_Back_To_Task_Details" xml:space="preserve">
+    <value>Back to task details</value>
+  </data>
+  <data name="V_No_Results" xml:space="preserve">
+    <value>No of Results to Show</value>
+  </data>
+  <data name="V_Options" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="V_Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="V_Search_Criteria" xml:space="preserve">
+    <value>Search Criteria</value>
+  </data>
+  <data name="V_Search_Result" xml:space="preserve">
+    <value>Search Results</value>
+  </data>
+  <data name="V_Time_Recording_Options" xml:space="preserve">
+    <value>TimeRecording Options</value>
   </data>
 </root>

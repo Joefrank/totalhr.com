@@ -354,4 +354,7 @@
   <data name="V_Organization_Chart" xml:space="preserve">
     <value>Organization Chart</value>
   </data>
+  <data name="V_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
 </root>

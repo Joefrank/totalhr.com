@@ -58,54 +58,60 @@
 
             @if (bViewable)
             {
-                using (Html.BeginForm("UpdateDocument", "Document", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                using (Html.BeginForm("UpdateDocument", "Document", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal" }))
                 { 
                     @Html.ValidationSummary();
          
-                    <div class="formdiv midform">
-                        <div class="wrapper">
-                            <div class="line">
-                                <label>@Document.V_Id</label>
-                                <span>@Model.DocId</span>
-                                @Html.HiddenFor(x => x.DocId)   
-                                @Html.HiddenFor(x => x.OldFileId)                 
-                            </div>
-                            <div class="line">
-                                <label>@Document.V_DisplayName <b class="req">*</b></label>
-                                <span>@Html.TextBoxFor(x => x.DisplayName, new {size="40", maxlength="250"})</span>                    
-                            </div>
-                            <div class="line">
-                                <label>@Document.V_Folder</label>
-                                <span>@Html.DropDownListFor(x => x.FolderId,  new SelectList(folders, "Id", "DisplayName"))
+                   @Html.HiddenFor(x => x.DocId)   
+                                @Html.HiddenFor(x => x.OldFileId) 
+                
+                        <div class="control-group">
+                                <label class="control-label">@Document.V_Id</label>
+                                <div class="controls">
+                                   @Model.DocId
+                                </div>
+                            </div>   
+                         <div class="control-group">
+                                <label class="control-label">@Document.V_DisplayName</label>
+                                <div class="controls">
+                                   @Html.TextBoxFor(x => x.DisplayName, new {size="40", maxlength="250"})
+                                </div>
+                            </div> 
+                           <div class="control-group">
+                                <label class="control-label">@Document.V_Folder</label>
+                                <div class="controls">
+                                   @Html.DropDownListFor(x => x.FolderId,  new SelectList(folders, "Id", "DisplayName"))
                                     <input type="button" value="@Document.V_Add_Folder" onclick="OpenSelectorForFolder('frmCreateFolder');" />
-                                </span>                    
-                            </div>
-                            <div class="line">
-                                <label>@Document.v_File <b class="req">*</b></label>
-                                <span>@Model.ExistingFileName</span>
-                                <span class="actionlink" onclick="$('#spFileUpload').fadeIn()">Modify</span> 
-                                <span id="spFileUpload" style="display:none;">
-                                    <input type="file" id="fileToUpload" name="File" />
-                                </span>                                               
-                            </div>
-                            <div class="line">
-                                <label>@Document.V_Document_Permissions <b class="req">*</b></label><!-- add selection for private by default -->
-                                <span>
+                                </div>
+                            </div> 
+                            <div class="control-group">
+                                <label class="control-label">@Document.v_File</label>
+                                <div class="controls">
+                                   <span>@Model.ExistingFileName</span>
+                                    <span class="actionlink" onclick="$('#spFileUpload').fadeIn()">Modify</span> 
+                                    <span id="spFileUpload" style="display:none;">
+                                        <input type="file" id="fileToUpload" name="File" />
+                                    </span> 
+                                </div>
+                            </div> 
+                              
+                         <div class="control-group">
+                                <label class="control-label">@Document.V_Document_Permissions</label>
+                                <div class="controls">
                                     @Html.Raw(DocumentHelper.GetDocumentPermissionType(docpermissions, Model.PermissionSelection, 
                                                                                        Model.PermissionItemNames, Model.PermissionSelectionValue))
-                                </span>                    
-                            </div>
-                            <div class="line">
-                                <label>&nbsp;</label>
-                                <span>
-                                    <input type="button" value="@Document.V_Back_To_List" onclick="document.location.href = '/Document'" />
-                                    &nbsp;
-                                    <input type="submit" id="btnSubmit" value="@Document.V_Save" />
-                                </span>                    
-                            </div>
+                                </div>
+                            </div> 
+                          
+                           <div class="form-actions">
+                                <button type="submit" class="btn btn-success">
+                                    <i class="icon-ok icon-white"></i> @Document.V_Save
+                                </button>
+                                <button type="button" class="btn btn-danger" onclick="NavigateTo('/Document/');">
+                                    <i class="icon-remove icon-white"></i> @Document.V_Back_To_List
+                                </button>
+                            </div>                          
 
-                        </div>
-                    </div>
          
                 }
 

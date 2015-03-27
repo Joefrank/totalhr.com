@@ -322,6 +322,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gallery Photo Upload.
+        /// </summary>
+        public static string V_Gallery_Picture_Upload {
+            get {
+                return ResourceManager.GetString("V_Gallery_Picture_Upload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gender.
         /// </summary>
         public static string V_Gender {

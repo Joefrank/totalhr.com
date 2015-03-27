@@ -10,26 +10,27 @@ namespace totalhr.web.Helpers
     {
         public static string CurrentYearCalendarLink(string text, int calendarid = 0)
         {
-            return string.Format(@"<a href=""/Calendar/GetCalendarYear/{0}/{1}"">{2}</a>",
+            return string.Format(@"<button class=""btn tooltips"" data-placement=""top"" data-original-title=""tooltips in top"" 
+                onclick=""/Calendar/GetCalendarYear/{0}/{1}"">{2}</button>",
                 DateTime.Now.Year, calendarid, text);
         }
         
         //*** pass current date as links will depend on dates being viewed
         public static string CurrentMonthCalendarLink(string text, int calendarid = 0)
         {
-            return string.Format(@"<a href=""/Calendar/GenerateDefault/{0}"">{1}</a>",
+            return string.Format(@"<a class=""btn tooltips"" href=""/Calendar/GenerateDefault/{0}"">{1}</a>",
                  calendarid, text);
         }
 
         public static string CurrentWeekCalendarLink(string text, int calendarid =0)
         {
-            return string.Format(@"<a href=""/calendar/GetWeekView/{0}/{1}/{2}/{3}"">{4}</a>",
+            return string.Format(@"<a class=""btn tooltips"" href=""/calendar/GetWeekView/{0}/{1}/{2}/{3}"">{4}</a>",
                 DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, calendarid, text);
         }
 
         public static string CurrentDayCalendarLink(string text, int calendarid = 0)
         {
-            return string.Format(@"<a href=""/calendar/GetDayView/{0}/{1}/{2}/{3}"">{4}</a>",
+            return string.Format(@"<a class=""btn tooltips"" href=""/calendar/GetDayView/{0}/{1}/{2}/{3}"">{4}</a>",
                 DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, calendarid, text);
         }
 

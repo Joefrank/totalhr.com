@@ -11,15 +11,25 @@
     string taskname = (ViewBag.TaskName == null) ? "" : ViewBag.TaskName;
     
     var title = !string.IsNullOrEmpty(taskname)? string.Format(TimeRecording.V_Time_Recording_For_Task, taskname) : "";
-        
+    var taskref = 0;
+
+    Int32.TryParse(Request.QueryString["taskRef"], out taskref);
+    
     var breadCrumbItems = new List<AM.BreadCrumbItem>
     {
-        new AM.BreadCrumbItem{Url = "/Task/", Text = Task.V_Task_Scheduler, Title= Task.V_Task_Scheduler},
-        new AM.BreadCrumbItem{Url = "/Task/Search/", Text = Task.V_Search_Taks, Title= Task.V_Search_Taks},
-        new AM.BreadCrumbItem{Url = "/Task/Details/" + Request.QueryString["taskRef"], Text = Task.V_Task_Details, Title = Task.V_Task_Details},
+        new AM.BreadCrumbItem{Url = "/Task/", Text = Task.V_Task_Scheduler, Title= Task.V_Task_Scheduler}, 
         new AM.BreadCrumbItem{Url = "", Text = Task.V_Time_Recording, Title = Task.V_Time_Recording}
     };
 
+    if(taskref > 0){
+        breadCrumbItems.Add(new AM.BreadCrumbItem
+                {
+                    Url = "/Task/Details/" + taskref,
+                    Text = Task.V_Task_Details,
+                    Title = Task.V_Task_Details
+                }
+            );
+    }
   
 }
 
@@ -31,10 +41,8 @@
     @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
 }
 
-
-<div class="row-fluid">
-    <div class="span4">
-        <div class="widget">
+<div class="row-fluid">    
+    <div class="widget">
             <div class="widget-title">
                 <h4><i class="icon-reorder"></i>@title</h4>
                 <span class="tools">
@@ -81,7 +89,13 @@
                             </div>
 
                             <p>
-                                 <button type="submit" class="btn btn-success"><i class="icon-ok icon-white"></i> @TimeRecording.V_Save</button>
+                                 <button type="submit" class="btn btn-success">
+                                     <i class="icon-ok icon-white"></i> @TimeRecording.V_Save
+                                 </button>
+                                &nbsp;
+                                <button type="button" class="btn btn-danger" onclick="NavigateTo('/TimeRecording/');">
+                                    <i class="icon-remove icon-white"></i> @TimeRecording.V_Back_To_Options
+                                </button>
                             </p>
                        
 
@@ -89,7 +103,7 @@
                         if (Model.TaskRef != null)
                         {
                             <div>
-                                @Html.ActionLink("Back to Task Details", "Details", "Task", new { id = Model.TaskRef }, null)
+                                @Html.ActionLink(TimeRecording.V_Back_To_Task_Details, "Details", "Task", new { id = Model.TaskRef }, null)
                             </div>
                         }
                         else
@@ -97,33 +111,27 @@
                             <p>
                                 @if (Model.Id > 0)
                                 {
-                                    @Html.ActionLink("Back to Details", "Details", new { id = Model.Id }) 
+                                    @Html.ActionLink(TimeRecording.V_Back_To_Details, "Details", new { id = Model.Id }) 
                                     @Html.Raw("|")
 
                                 }
-                                @Html.ActionLink("Back to Time Recording Home", "Index")
+                                @*@Html.ActionLink(TimeRecording.V_Back_To_Options, "Index")*@
                             </p>
 
                         }
 
-
-                        @*@section Scripts{
-                            @Scripts.Render("~/bundles/jqueryval")
-
-                            }*@
                     }
                     else
                     {
                         <div class="error-message">
                             @Html.DisplayFor(model => model.ErrorMessage)
-                           <p> @Html.ActionLink("Back to Time Recording Home", "Index")</p>
+                          @* <p> @Html.ActionLink(TimeRecording.V_Back_To_Options, "Index")</p>*@
                         </div>
                     }
                 }
 
             </div>
-        </div>
-    </div>
+        </div>   
 </div>
 
 @section scripts{

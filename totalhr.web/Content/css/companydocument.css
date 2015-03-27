@@ -4,17 +4,40 @@ html {
 }
 
 .foldergroup {
-    float:left;width:90%;
+    /*float:left;*/
+    width:98%;
+    margin:1%;
     font-size:9pt;
 }
 
 .folder {
-     width:100%;
-     float:left;
+     width:96%;
+     /*float:left;*/
 }
 
+.foldergroup .folderblock {
+    margin:5px;
+    width:94%;
+}
+    .foldergroup .folderblock .head {
+        width:98%;
+        text-align:left;
+        margin:5px 1%;
+    }
+
+.folderblock span {
+    margin:5px;
+}
+
+    .foldergroup .foldername {
+        padding-top:5px;
+        cursor:pointer;
+        font-weight:bold;
+        font-size:10pt;
+    }
+
 .document {
-    float:left;
+    /*float:left;*/
     width:100%;
     /*height:55px;*/
     overflow:hidden;
@@ -33,11 +56,10 @@ html {
 
     .document.core {
         height:30px;
-        float:left;
-        width:100%;
+        border-top:1px solid black;
+        width:98%;
     }
-    .document .core .left {
-        float:left;
+    .document .core .left {        
         width:68%;
         text-align:left;
         padding:5px 1% 0;
@@ -47,30 +69,35 @@ html {
             margin:0;
             color:#0f2671;                       
             cursor:pointer;
+            font-size:11pt;
         }
 
-            .document .core .left h4 .expand {
-                padding-left:15px; 
-                background:transparent url('/Content/images/expand.gif') left center no-repeat;
-            }
+           
         .document .core .left .highlight {
             margin-top:3px;
-            font-size:0.85em;
-            padding-left:20px;
+            font-size:0.85em;            
+            width:98%;
+            text-align:left;
         }
 
-            .document .core .left .highlight .actionspan {
+            .document .core .left .highlight .contributor {
                 cursor:pointer;color:#0d5e25;font-weight:bold;
-
             }
              
     .document .core .right {
-        /*float:left;*/
-        width:28%;
+       position:relative;
+        width:98%;
         text-align:right;
-        padding: 5px 1%;
+        padding: 0 1%;
         font-size:8pt;
     }
+
+        .document .core .right .toolbar {
+            float:right;
+            width:200px;
+            right:0;
+            padding-bottom:3px;
+        }
 
         .document .core .right input[type='button'], .moreinfo input[type='button'], #searchbox input[type='submit'],
         #searchbox input[type='button']  {
@@ -84,24 +111,25 @@ html {
 
     .document .moreinfo {
         color:white;
-        /*float:left;*/
-        width:100%;background:rgba(0,0,0,0.3);
-        padding-top:5px;
+        float:left;
+        width:98%;
+        background:rgba(10,10,10,0.3);
+        padding:1%;
     }
 
         .document .moreinfo .left {
-            float:left;width:68%;text-align:left;padding:5px 1% 0;
+            width:68%;text-align:left;padding:2px 1% 0;
         }
             .document .moreinfo .left .details {
                 margin-left:20px;
             }
 
         .document .moreinfo .right {
-             text-align:right;float:left;width:28%;padding:0 1% 5px;
+             text-align:right;width:100%;padding:0 1%;position:relative;right:12px;top:-5px;
         }
 
 #searchbox {
-    /*float:left;*/
+    /**/
     width:800px;
     font: 0.80em/1.13em "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
 }
@@ -114,14 +142,14 @@ html {
         height:10px;font-size:7pt !important;
     }
 
-    #searchbox fieldset legend span.icon {
+    #searchbox span.icon {
         position:relative;
         top:10px;   
         padding:20px 20px 0 0;
         background:transparent url('/Content/images/search.png') center center no-repeat;
     }
 
-.foldergroup fieldset legend span.expand {
+.foldergroup span.expand {
         position:relative;
         top:10px;   
         padding:20px 20px 0 0;
@@ -129,7 +157,13 @@ html {
         cursor:pointer;
 }
 
-.foldergroup fieldset legend span.collapse {
+ .document .core .left h4 .expand {
+                padding-right:10px; 
+                width:10px;
+                background:transparent url('/Content/images/expand.gif') left center no-repeat;
+            }
+
+.foldergroup span.collapse {
     position:relative;
     top:10px;   
     padding:20px 20px 0 0;
@@ -139,14 +173,14 @@ html {
 
 div.wide {
     width:98%;
-    /*float:left;*/
+    /**/
     text-align:left;
     margin:10px 0;
     padding:1%;
 }
 
 span.icon {
-    padding:8px 0 8px 16px;background:transparent url('/Content/images/FileIcons/unknown.png') left center no-repeat;
+    padding:8px 0 8px 20px;background:transparent url('/Content/images/FileIcons/unknown.png') left center no-repeat;
 }
 
 span.doc{background-image:url('/Content/images/FileIcons/doc.png');}

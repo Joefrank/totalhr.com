@@ -478,7 +478,8 @@ namespace Calendar.Implementation
                      Created = DateTime.Now,
                      CreatedBy = info.UserId,
                      OpenToAll = info.OpenToAll,
-                     TemplateId = info.TemplateId
+                     TemplateId = info.TemplateId,
+                     CompanyId = info.CompanyId
                 };
             _calrepos.Add(calendar);
             _calrepos.Save();

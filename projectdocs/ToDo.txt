@@ -27,3 +27,6 @@ Chat Room:
 
 	- Add line manager for user level
 	- Add number of users and navigation to employees list for each department
+
+- Calendar:
+add template to calendar creation

@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using totalhr.Shared;
+using ImageProcessor;
+using System.Drawing;
 
 namespace FileManagementService.Implementation
 {
@@ -49,6 +51,30 @@ namespace FileManagementService.Implementation
                 }
             }
             return new FileSaveResult { FileId = -1 };
+        }
+
+        public Size ResizeProfilePicture(string picturePath, Size size, string destinationpath = null)
+        {
+            var photoBytes = System.IO.File.ReadAllBytes(picturePath);
+            var finalpath = string.IsNullOrEmpty(destinationpath) ? picturePath : destinationpath;
+
+            // process image
+            using (var inStream = new MemoryStream(photoBytes))
+            {
+                using (var imageFactory = new ImageFactory(true))
+                {
+                    imageFactory.Load(inStream)
+                    .Resize(size)
+                    .Save(finalpath);
+                }
+            }
+
+            return size;
+        }
+
+        public void SaveFileToPath(string path)
+        {
+
         }
 
         public class FileSaveResult

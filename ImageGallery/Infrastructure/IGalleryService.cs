@@ -22,7 +22,8 @@ namespace ImageGallery.Infrastructure
         
         IEnumerable<GalleryPhoto> GetPhotos(int albumId);
 
-
         GalleryAlbum GetAlbum(int id);
+
+        bool DeletePhoto(int id);
     }
 }

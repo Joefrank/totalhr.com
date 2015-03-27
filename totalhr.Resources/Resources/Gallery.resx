@@ -165,4 +165,22 @@
   <data name="V_Photo_Upload" xml:space="preserve">
     <value>Photo Upload</value>
   </data>
+  <data name="V_Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="V_Delete" xml:space="preserve">
+    <value>Delete Picture</value>
+  </data>
+  <data name="V_Gallery_Picture_Preview" xml:space="preserve">
+    <value>Gallery Picture Large</value>
+  </data>
+  <data name="V_Info_Are_You_Sure_Delete" xml:space="preserve">
+    <value>Are you sure to delete this picture?</value>
+  </data>
+  <data name="V_Photo_Deleted" xml:space="preserve">
+    <value>Photo deleted successfully!</value>
+  </data>
+  <data name="V_Photo_Not_Deleted" xml:space="preserve">
+    <value>Sorry but the phot could not be deleted.</value>
+  </data>
 </root>

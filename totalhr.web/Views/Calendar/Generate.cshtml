@@ -1,27 +1,35 @@
 ﻿@model Calendar.Models.CalendarHTML
 
+@using R = totalhr.Resources
+@using totalhr.web.Areas.Admin.Models
+@using AH = totalhr.web.Areas.Admin.Helpers;
+
 @{
-    ViewBag.Title = "";
-   
+    ViewBag.Title = R.Calendar.V_Calendar_View;
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "/Calendar/", Text = R.Calendar.V_Company_Calendars, Title= R.Calendar.V_Company_Calendars},
+        new BreadCrumbItem{Url = "", Text = R.Calendar.V_Calendar_Details, Title= R.Calendar.V_Calendar_Details}
+    };
 }
 
-@if (ViewBag.CalendarName != null){
-    <h2>@Html.Raw(string.Format(totalhr.Resources.Calendar.V_Calendar_View_For, ViewBag.CalendarName))</h2>
-}else{
-    <h2>@totalhr.Resources.Calendar.V_Calendar_View</h2>   
-}         
+@section pagetitle{
+    @R.Calendar.V_Calendar_View - <small>(@ViewBag.CalendarName)</small>
+}
+
+@section breadcrumb{
+    @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}      
 
 @{
     Html.RenderPartial("_Calendar");
 }
 
 @section scripts{
-
      @Scripts.Render("~/Scripts/Site/calendar.js")
 
       <script type="text/javascript">
           @Html.Raw(Model.Javascript)
-      </script>
-
-     
+      </script>     
 }

@@ -17,6 +17,9 @@
     };
 
     var bShowPhotoList = Model.GalleryPhotoes.Count > 0;
+
+    var thumbWidth = Variables.GalleryImageMaxSize.Thumbnail.Width;
+    var thumbHeight = Variables.GalleryImageMaxSize.Thumbnail.Height;
 }
 
 @section pagetitle{
@@ -45,7 +48,8 @@
                     <div class="photolist">
                         @foreach (var photo in Model.GalleryPhotoes)
                         {
-                            <img src="/PhotoGallery/Thumbnail/@photo.FileName" alt="@photo.Label" />
+                            <img class="gallerythumb" onclick="DisplayLargePicture($(this));" src="/PhotoGallery/Thumbnail/@photo.FileName" data-large="/PhotoGallery/Large/@photo.FileName"
+                                width="@thumbWidth" height="@thumbHeight" alt="@photo.Label" data-photoid="@photo.Id" />
                         }
                     </div>
                 }
@@ -62,8 +66,14 @@
 </div>
 
 <div class="row-fluid">
-    <button type="submit" class="btn btn-warning" @*onclick="$('#dvUpload').show();"*@ onclick="OpenPopup('/Gallery/UploadPhoto/');">
+    <button type="submit" class="btn btn-warning" onclick="OpenPopup('/File/GalleryPhotoUpload/@Model.Id');">
         <i class="icon-plus icon-white"></i> @Gallery.V_Add_Photo_ToAlbum
     </button>
 
 </div>
+
+@section scripts{
+    <script type="text/javascript" src="~/Scripts/Site/PhotoGallery.js"></script>
+}
+
+@Html.Partial("_GalleryLargePictureModal")

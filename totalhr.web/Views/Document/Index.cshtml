@@ -112,10 +112,10 @@
         <div class="widget-title">
             <h4><i class="icon-reorder"></i> @Document.V_Document_Search</h4>
             <span class="tools">
-                <a href="javascript:;" class="icon-chevron-down"></a>                   
+                <a href="javascript:;" class="icon-chevron-up"></a>                   
             </span>
         </div>
-        <div class="widget-body form-horizontal"> 
+        <div class="widget-body form-horizontal" style="display:none"> 
             @Html.Partial("_DocumentSearch")
         </div>
     </div>
@@ -143,19 +143,18 @@
                 @if(bViewTable){
                     foreach(int key in dicFolders.Keys){
             
-                        <fieldset>
-                            <legend>
+                        <div class="row-fluid folderblock" >
+                            <div class="head">
                                 <span id="spFolder_@key" class="expand" onclick="javascript:ToggleExpandGeneric('spFolder_@key', 
                                         'folder_@key', null, folderExpandButton, folderCollapseButton);">&nbsp;</span> 
                         
-                                @Html.Raw(folderNames[key])
+                                <span class="foldername">@Html.Raw(folderNames[key])</span>
+                            </div>                           
 
-                            </legend>
-
-                            <div id="folder_@key" class="folder" style="display:none">
+                            <div id="folder_@key" class="folder" style="margin-left:3%;display:none">
                                 @Html.Raw(dicFolders[key])
                             </div>
-                        </fieldset>
+                       </div>
            
                     }
     

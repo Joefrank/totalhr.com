@@ -25,5 +25,12 @@ namespace totalhr.data.Repositories.Implementation
             this.Context.GalleryPhotoes.Add(photo);
             return this.Context.SaveChanges();
         }
+
+        public bool DeletePhoto(int id)
+        {
+            this.Context.GalleryPhotoes.Remove(
+                this.Context.GalleryPhotoes.FirstOrDefault(x => x.Id == id));
+            return this.Context.SaveChanges() > 0;
+        }
     }
 }

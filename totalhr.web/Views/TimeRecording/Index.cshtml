@@ -1,13 +1,44 @@
-﻿@{
-    ViewBag.Title = "Time Recording Home Page";
+﻿@using totalhr.Resources
+@using totalhr.web.Areas.Admin.Models
+@using AH = totalhr.web.Areas.Admin.Helpers;
+
+
+@{
+    ViewBag.Title = TimeRecording.V_Time_Recording;
+    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "", Text = TimeRecording.V_Time_Recording, Title= TimeRecording.V_Time_Recording}
+    };
 }
 
-<h2>Time Recording Home Page</h2>
+@section pagetitle{
+    @TimeRecording.V_Time_Recording
+}
+
+@section breadcrumb{
+    @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+}
+
+<div class="row-fluid">        
+    <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i> @TimeRecording.V_Options</h4>
+            <span class="tools">
+                <a href="javascript:;" class="icon-chevron-down"></a>                   
+            </span>
+        </div>
+        <div class="widget-body form-horizontal"> 
+            <p>
+                @Html.ActionLink(TimeRecording.V_Record_Time, "RecordTime")
+            </p>
+            <p>
+                @Html.ActionLink(TimeRecording.V_Search_Edit_Recording, "Search")
+            </p>
+        </div>
+    </div>
+</div>
 
 
-<div>
-    @Html.ActionLink("Record Time", "RecordTime")
-</div>
-<div>
-    @Html.ActionLink("Search / Edit Recorded Time", "Search")
-</div>
+
+

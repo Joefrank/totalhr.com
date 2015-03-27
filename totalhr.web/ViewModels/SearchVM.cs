@@ -7,8 +7,8 @@ namespace totalhr.web.ViewModels
 {
     public class SearchVM
     {
-        
 
+        public bool IsDirty { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int ResultsPerPage { get; set; }

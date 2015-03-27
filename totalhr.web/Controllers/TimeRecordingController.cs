@@ -96,7 +96,7 @@ namespace totalhr.web.Controllers
         [HttpGet]
         public ActionResult Search()
         {
-            var vm = new SearchVM();
+            var vm = new SearchVM { IsDirty = false };
             vm.SetUpInitialSearch();
             var searchResults = _timeRecordingService.Search(vm.StartDate, vm.EndDate,base.CurrentUser.UserId,0, vm.ResultsPerPage);
             vm.Results = TimeRecordingDetailsVM.Build(searchResults);
@@ -108,6 +108,7 @@ namespace totalhr.web.Controllers
         {
             var searchResults = _timeRecordingService.Search(vm.StartDate, vm.EndDate,base.CurrentUser.UserId, vm.PageNumber * vm.ResultsPerPage, vm.ResultsPerPage);
             vm.Results = TimeRecordingDetailsVM.Build(searchResults);
+            vm.IsDirty = true;
             return View(vm);
         }
 

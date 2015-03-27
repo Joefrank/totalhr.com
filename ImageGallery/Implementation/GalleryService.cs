@@ -71,7 +71,8 @@ namespace ImageGallery.Implementation
                  AlbumId = info.AlbumId,
                  Created = DateTime.Now,
                  CreatedBy = info.UserId,
-                 FileId = info.FileId                 
+                 FileId = info.FileId ,
+                 FileName = info.FileName
             };
 
            return _galleryRepos.AddPhoto(photo);
@@ -87,6 +88,9 @@ namespace ImageGallery.Implementation
             return _galleryRepos.GetPhotos(albumId);
         }
 
-        
+        public bool DeletePhoto(int id)
+        {            
+            return _galleryRepos.DeletePhoto(id);
+        }
     }
 }

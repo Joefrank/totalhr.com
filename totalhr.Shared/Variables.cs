@@ -336,6 +336,19 @@ namespace totalhr.Shared
             }
         }
 
+        public class GalleryImageMaxSize
+        {
+            public static Size Large
+            {
+                get { return new Size { Width = 600, Height = 400 }; }
+            }
+
+            public static Size Thumbnail
+            {
+                get { return new Size { Width = 120, Height = 80 }; }
+            }           
+        }
+
         public static string AdminEmailSignature
         {
             get

@@ -1462,6 +1462,7 @@
     <Content Include="Scripts\Site\js\ui-jqueryui.js" />
     <Content Include="Scripts\Site\js\ui-nestable.js" />
     <Content Include="Scripts\Site\js\ui-tree.js" />
+    <Content Include="Scripts\Site\PhotoGallery.js" />
     <Content Include="Views\File\FileDropZone.html" />
     <Content Include="Views\TimeRecording\Search.cshtml" />
     <Content Include="Views\TimeRecording\Details.cshtml" />
@@ -1936,6 +1937,7 @@
     <Content Include="Views\File\UploadAvatar.cshtml" />
     <Content Include="Views\File\UploadSmallAvatar.cshtml" />
     <Content Include="Views\Calendar\CreateCalendar.cshtml" />
+    <Content Include="Views\Shared\_GalleryLargePictureModal.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -12,40 +12,64 @@
 
 <link href="~/Content/css/calendar.css" rel="stylesheet" />
 
-<p>
-   
-    <a href="@Model.PreviousRequest">@totalhr.Resources.Calendar.V_Prev</a>
-    &nbsp;
-    <a href="@Model.NextRequest">@totalhr.Resources.Calendar.V_Next</a>
-    &nbsp;
-    
-     @if (Model.ViewType != Variables.CalendarViewType.YearView)
-    {
-        @Html.Raw(DateHelper.CurrentYearCalendarLink(totalhr.Resources.Calendar.V_Year_View, calendarId))
-        @:&nbsp; 
-    }
+<div class="row-fluid">
+    <div class="span12">
+        <!-- BEGIN CALENDAR PORTLET-->
+        <div class="widget">
+        <div class="widget-title">
+            <h4><i class="icon-reorder"></i>@ViewBag.CalendarName</h4>
+            <span class="tools">
+            <a class="icon-chevron-down" href="javascript:;"></a>
+            </span>
+        </div>
+        <div class="widget-body">   
+           
+            <div class="row-fluid">
 
-    @if (Model.ViewType != Variables.CalendarViewType.MonthView)
-    {
-         @Html.Raw(DateHelper.CurrentMonthCalendarLink(totalhr.Resources.Calendar.V_Month_View, calendarId))
-         @:&nbsp;
-    }
+                <button type="button" class="btn" onclick="NavigateTo('@Model.PreviousRequest');">
+                    <i class="icon-chevron-left"></i> @*@totalhr.Resources.Calendar.V_Prev*@
+                </button>
+                &nbsp; 
+
+                 @if (Model.ViewType != Variables.CalendarViewType.YearView)
+                {
+                    @Html.Raw(DateHelper.CurrentYearCalendarLink(totalhr.Resources.Calendar.V_Year_View, calendarId))
+                    @:&nbsp; 
+                }
+
+                @if (Model.ViewType != Variables.CalendarViewType.MonthView)
+                {
+                     @Html.Raw(DateHelper.CurrentMonthCalendarLink(totalhr.Resources.Calendar.V_Month_View, calendarId))
+                     @:&nbsp;
+                }
     
-    @if (Model.ViewType != Variables.CalendarViewType.WeekView)
-    {
-        @Html.Raw(DateHelper.CurrentWeekCalendarLink(totalhr.Resources.Calendar.V_Week_View, calendarId))
-        @:&nbsp;
-    }
+                @if (Model.ViewType != Variables.CalendarViewType.WeekView)
+                {
+                    @Html.Raw(DateHelper.CurrentWeekCalendarLink(totalhr.Resources.Calendar.V_Week_View, calendarId))
+                    @:&nbsp;
+                }
    
-    @if (Model.ViewType != Variables.CalendarViewType.DayView)
-    {
-        @Html.Raw(DateHelper.CurrentDayCalendarLink(totalhr.Resources.Calendar.V_Day_View, calendarId))
-        @:&nbsp; 
-    }
+                @if (Model.ViewType != Variables.CalendarViewType.DayView)
+                {
+                    @Html.Raw(DateHelper.CurrentDayCalendarLink(totalhr.Resources.Calendar.V_Day_View, calendarId))
+                    @:&nbsp; 
+                }
     
+                 <button type="button" class="btn" onclick="NavigateTo('@Model.NextRequest');">
+                    <i class="icon-chevron-right"></i> @*@totalhr.Resources.Calendar.V_Next*@
+                </button>
+            </div>
+            <br />
+            @Html.Raw(Model.GridHTML)
+
+        </div>
+     </div>
+ </div>
+
+</div>
+       
    
-   
-</p>
-@Html.Raw(Model.GridHTML)
+
+
 
  

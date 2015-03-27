@@ -22,5 +22,7 @@ namespace FileManagementService.Infrastructure
         String BytesToString(long byteCount);
 
         string GetMimeType(string fileName);
+
+        void RemovePhotoFiles(string[] filename, int fileId);
     }
 }

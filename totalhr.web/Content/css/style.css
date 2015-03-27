@@ -3899,3 +3899,9 @@ jQuery UI Datepicker(new in v1.2.2)
 .validation-summary-valid {
     display: none;
 }
+
+.gallerythumb {
+    cursor:pointer;
+    border:10px solid #999;
+    margin:5px;
+}

@@ -1,0 +1,21 @@
+﻿@using totalhr.Resources;
+
+<div class="modal fade" id="basicModal"  style="width:600px;height:600px;" tabindex="-1" role="dialog" aria-labelledby="basicModal" aria-hidden="true">
+    <div class="modal-dialog" style="width:600px;height:600px;">
+        <div class="modal-content">
+            <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+            <h4 class="modal-title" id="myModalLabel">@Gallery.V_Gallery_Picture_Preview</h4>
+            </div>
+            <div class="modal-body">
+                <img id="modalImg" src="" alt="" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="ConfirmDelete()">@Gallery.V_Delete</button>
+                <button type="button" class="btn btn-warning" data-dismiss="modal">@Gallery.V_Close</button>
+        </div>
+    </div>
+  </div>
+</div>
+
+<input type="hidden" id="hdnConfirmDeleteMessage" value="@Gallery.V_Info_Are_You_Sure_Delete" />

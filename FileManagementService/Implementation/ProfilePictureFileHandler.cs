@@ -118,23 +118,7 @@ namespace FileManagementService.Implementation
             return new Size { Width = 50, Height = 50 };
         }
 
-        public Size ResizeProfilePicture(string picturePath, Size size)
-        {
-            var photoBytes = System.IO.File.ReadAllBytes(picturePath);
-
-            // process image
-            using (var inStream = new MemoryStream(photoBytes))
-            {
-                using (var imageFactory = new ImageFactory(true))
-                {
-                    imageFactory.Load(inStream)
-                    .Resize(size)
-                    .Save(picturePath);
-                }
-            }
-
-            return size;
-        }
+       
 
     }
 }

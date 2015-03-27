@@ -301,10 +301,10 @@
     <value>Start</value>
   </data>
   <data name="V_Created_After" xml:space="preserve">
-    <value>Created After</value>
+    <value>Start Date</value>
   </data>
   <data name="V_Created_Before" xml:space="preserve">
-    <value>Created Before</value>
+    <value>End Date</value>
   </data>
   <data name="V_Document_Search" xml:space="preserve">
     <value>Document Search</value>

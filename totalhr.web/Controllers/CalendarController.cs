@@ -65,12 +65,21 @@ namespace totalhr.web.Controllers
        
         public ActionResult CreateCalendar()
         {
-            return View();
+            /** Change template to be db driven in future */
+            return View(new CalendarInfo { TemplateId = 1 });
         }
 
         [HttpPost]
         public ActionResult CreateCalendar(CalendarInfo info)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(info);
+            }
+            
+            info.UserId = CurrentUser.UserId;
+            info.CompanyId = CurrentUser.CompanyId;
+
             var calendarId = _calMservice.CreateCalendar(info);
             return RedirectToAction("Index");
         }

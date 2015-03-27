@@ -3,6 +3,7 @@ using ImageGallery.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace FileManagementService.Implementation
             : base(fileService)
         {           
             _galleryService = galleryService;
-            UploadPath = ConfigurationManager.AppSettings["GalleryImagePath"];
+            UploadPath = ConfigurationManager.AppSettings["GalleryImagePath"] + "Large/";
             base.FileTypeId = (int)Variables.FileType.GalleryImage;
             base.OverridePath(this.DirectoryPath);
             AlbumId = albumId;
@@ -34,9 +35,22 @@ namespace FileManagementService.Implementation
 
                 if (fileResult.FileId > 0)
                 {
+                    var extension = Path.GetExtension(fileResult.FullPath);
+                    var newFileName = this.AlbumId + "_" + fileResult.FileId + extension;
+
+                    //resize for correct large scale
+                    var largePath = fileResult.FullPath.Replace(fileResult.FileId + extension, newFileName);
+                    var largeSize = ResizeProfilePicture(fileResult.FullPath, Variables.GalleryImageMaxSize.Large, largePath);
+                    File.Delete(fileResult.FullPath);
+
+                    //resize for thumbnail
+                    var thumbnailPath = largePath.Replace("\\Large\\", "\\Thumbnail\\");
+                    var thumbnailSize = ResizeProfilePicture(largePath, Variables.GalleryImageMaxSize.Thumbnail, thumbnailPath);
+                    
                     var photoId = _galleryService.AddPhoto(new totalhr.Shared.Models.GalleryPhotoInfo{
                          AlbumId = this.AlbumId,
                          FileId = fileResult.FileId,
+                         FileName = newFileName,
                          UserId = creatorId
                     });
 

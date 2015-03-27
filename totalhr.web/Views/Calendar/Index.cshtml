@@ -36,9 +36,9 @@
                     <thead>
                         <tr>
                             <th>@Calendar.V_Calendar_Name</th>
-                            <td>@Calendar.V_Created</td>
-                            <td>@Calendar.V_CreatedBy</td>
-                            <td>@Calendar.V_View</td>
+                            <th>@Calendar.V_Created</th>
+                            <th>@Calendar.V_CreatedBy</th>
+                            <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -75,6 +75,12 @@
                 </div>
             }
         
+            <div>
+                <br />
+                <button type="button" class="btn btn-warning" onclick="NavigateTo('/Calendar/CreateCalendar/')">
+                    <i class="icon-plus icon-white"></i> @Calendar.V_Create_Calendar
+                </button>                     
+            </div>
         </div>
     </div>
 </div>

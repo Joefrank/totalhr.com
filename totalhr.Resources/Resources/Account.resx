@@ -360,4 +360,7 @@
   <data name="V_Small_Avatar_Upload" xml:space="preserve">
     <value>Small Avatar Upload</value>
   </data>
+  <data name="V_Gallery_Picture_Upload" xml:space="preserve">
+    <value>Gallery Photo Upload</value>
+  </data>
 </root>

@@ -127,8 +127,12 @@ namespace totalhr.web.Helpers
         {           
 
             string personalAction = (currentUserId == doc.CreatedBy) ?
-                    string.Format(@" <input type=""button"" onclick=""DeleteDoc('/Document/Delete/{0}');"" value=""{1}"" /> &nbsp; 
-                            <input type=""button"" onclick=""document.location.href='/Document/Edit/{0}'"" value=""{2}"" />",
+                    string.Format(@" <button type=""button"" class=""btn btn-danger"" onclick=""DeleteDoc('/Document/Delete/{0}');"">
+                                    <i class=""icon-remove icon-white""></i> {1}
+                                </button> &nbsp; 
+                                <button type=""button"" class=""btn btn-success"" onclick=""NavigateTo('/Document/Edit/{0}');"">
+                                    <i class=""icon-edit icon-white""></i> {2}
+                                </button>",
                               doc.Identifier,  Document.V_Archive,  Document.V_Edit) :"";
 
             string sHtml = @"<div id=""doc{0}"" class=""document"">
@@ -138,19 +142,23 @@ namespace totalhr.web.Helpers
                                 <span class=""icon {21}"" onclick=""OpenDoc('{20}');"" title=""{2}"">{2}</span>
                             </h4>
                             <div class=""highlight"">
-                                {5}: <span class=""actionspan"" onclick=""OpenEmployeeProfile('{1}');"">{4}</span>
+                                {5}: <span class=""contributor"" onclick=""OpenEmployeeProfile('{1}');"">{4}</span>
                                 - {6}: {7}
                             </div>
                         </div>
                         <div class=""right"">                       
-                            <div class=""line"">
-                                <input type=""button"" value=""{8}"" onclick=""document.location.href='/Document/Download/{20}'"" /> &nbsp; 
-                                <input type=""button"" value=""{9}"" onclick=""document.location.href='/Document/OpenFile/{20}'"" />   &nbsp; 
-                                <input type=""button"" value=""{10}"" onclick=""OpenEmailEditor('{20}');"" />
+                            <div class=""toolbar"">
+                                <button type=""button"" class=""btn btn-success"" onclick=""NavigateTo('/Document/Download/{20}');"">
+                                    <i class=""icon-download-alt icon-white""></i> {8}
+                                </button> 
+                                &nbsp;                                                  
+                                <button type=""button"" class=""btn btn-info"" onclick=""OpenEmailEditor('{20}');"">
+                                    <i class=""icon-share icon-white""></i> {10}
+                                </button>
                             </div>                    
                         </div>
                    </div>
-                    <div id=""moreinfo{0}"" class=""moreinfo"" style=""display:none;"">
+                    <div id=""moreinfo{0}"" class=""moreinfo"" style=""display:none"">
                         <div class=""left"">
                            <span class=""details"">{11}:{17} | {12}: {18} | {13}: {14} | {15}: {16}</span> &nbsp;
                         </div>

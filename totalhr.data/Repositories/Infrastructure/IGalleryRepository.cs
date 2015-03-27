@@ -14,5 +14,7 @@ namespace totalhr.data.Repositories.Infrastructure
         IEnumerable<GalleryPhoto> GetPhotos(int albumId);
 
         int AddPhoto(GalleryPhoto photo);
+
+        bool DeletePhoto(int id);
     }
 }

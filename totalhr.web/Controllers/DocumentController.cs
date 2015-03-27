@@ -57,7 +57,7 @@ namespace totalhr.web.Controllers
             return View(new DocumentInfo { DocId = 0 });
         }
 
-        [Obsolete("No being used at the moment")]
+        [Obsolete("Not being used at the moment")]
         public ActionResult Details(int id)
         {
             CompanyDocument doc = _docService.GetDocument(id);

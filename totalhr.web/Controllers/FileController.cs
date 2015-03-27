@@ -11,6 +11,7 @@ using totalhr.services.Infrastructure;
 using Authentication.Infrastructure;
 using ImageGallery.Infrastructure;
 using totalhr.Resources;
+using System.Configuration;
 
 namespace totalhr.web.Controllers
 {
@@ -81,6 +82,7 @@ namespace totalhr.web.Controllers
 
         public ActionResult GalleryPhotoUpload(int id)
         {
+            ViewBag.AlbumId = id;
             return View("UploadGalleryPhoto");
         }
 
@@ -90,11 +92,13 @@ namespace totalhr.web.Controllers
         /// <param name="id">this is album id</param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult UploadGalleryPhoto(int id)
+        public ActionResult UploadGalleryPhoto(int? id = null)
         {
-            IFileHandlerService fileHandler = new PhotoGalleryHandler(_fileService, _galleryService, id);
+            var albumId = 0;
+            Int32.TryParse(Request.Form["albumId"], out albumId);
+            IFileHandlerService fileHandler = new PhotoGalleryHandler(_fileService, _galleryService, albumId);
             var result = UploadTheFile(fileHandler, Request.Files);
-            return Json(result.FileId > 0 ? new { Message = result.FullPath } : new { Message = "Error in saving file" });
+            return Json(result.FileId > 0 ? new { Message = result.FullPath } : new { Message = Account.Error_Saving_Picture });
         }
 
         private BaseFileHandler.FileSaveResult UploadTheFile(IFileHandlerService fileHandler, HttpFileCollectionBase files)
@@ -116,53 +120,31 @@ namespace totalhr.web.Controllers
             }
 
         }
-
-       
-
+        
         [HttpPost]
-        public ActionResult UploadFile(int FileTypeId)
+        public JsonResult DeleteGalleryPhoto(int id)
         {
-            //typegroup (profile image, avatar, companydocument, Gallery Image)
-            //determine the type of file and pass it to correct handler to handle file. if there is no type passed then just upload file.
-            
-            //bool isSavedSuccessfully = true;
-            //string fName = "";
-            //try
-            //{
-            //    IFileHandlerService fileHandler;
+            var photo = _galleryService.GetPhoto(id);
+            var result = false;
 
-            //    switch (FileTypeId)
-            //    {
-            //        case (int)Variables.FileType.ProfilePicture:
-            //            fileHandler = new ProfilePictureFileHandler(_fileService, _accountService);break;
-            //        case (int)Variables.FileType.GalleryImage:
-            //            fileHandler = new PhotoGalleryHandler(_fileService, _galleryService, AlbumId);break;
-            //        default: fileHandler = new BaseFileHandler(_fileService); break;
-            //    }
+            if (photo != null)
+            {
+                result = _galleryService.DeletePhoto(photo.Id);
 
-            //    foreach (string fileName in Request.Files)
-            //    {
-            //        var file = Request.Files[fileName];
-            //        fileHandler.HandleFileCreation(file, CurrentUser.UserId, FileTypeId);
-            //        fName = file.FileName;
-            //    }
+                //remove the related files
+                if (result)
+                {
+                    var filesToDelete = new string[]{
+                        ConfigurationManager.AppSettings["GalleryImagePath"] + "\\Large\\" + photo.FileName ,
+                        ConfigurationManager.AppSettings["GalleryImagePath"] + "\\Thumbnail\\" + photo.FileName 
+                    };
 
-            //}
-            //catch (Exception ex)
-            //{
-            //    isSavedSuccessfully = false;
-            //}
+                    _fileService.RemovePhotoFiles(filesToDelete, photo.FileId);
+                }
+            }
 
-
-            //if (isSavedSuccessfully)
-            //{
-            //    return Json(new { Message = fName });
-            //}
-            //else
-            //{
-            //    return Json(new { Message = "Error in saving file" });
-            //}
-            return View("Index");
+            return Json(result ? new { Message = Gallery.V_Photo_Deleted } : new { Message = Gallery.V_Photo_Not_Deleted });
         }
+
     }
 }

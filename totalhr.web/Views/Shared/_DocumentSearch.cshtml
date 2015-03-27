@@ -31,46 +31,47 @@
           <table>  
                <tr>   
                    <td>          
-			         <b>@Document.V_DisplayName</b>
+			         <b>@Document.V_DisplayName </b>
                    </td>
                    <td>
                         @Html.TextBoxFor(x => x.Name)
                    </td>
                    
                     <td>                       
-                        <b>@Document.V_Created_After</b>
+                        <b>@Document.V_Created_After </b>
                     </td>
                     <td> 
                         @Html.TextBox("StartDate", defaultStartDate, new { @class = "datetype", Readonly="true", onclick = "javascript:NewCal('StartDate','ddmmyyyy',false,24)" })
                     </td>
                     <td>
-                        <b>@Document.V_Created_Before</b> 
+                        <b>@Document.V_Created_Before </b> 
                     </td>
                     <td>
                         @Html.TextBox("EndDate", defaultEndDate, new { @class = "datetype", Readonly="true", onclick = "javascript:NewCal('EndDate','ddmmyyyy',false,24)" })
                     </td>
                </tr>
+               <tr>
+                   <td colspan="6">&nbsp;</td>
+               </tr>
                 <tr> 
                    <td>
-                    <b>@Document.V_Folder</b>
+                    <b>@Document.V_Folder </b>
                    </td>
                    <td>
                       @Html.DropDownListFor(x => x.FolderId, Model.Folders, new {onchange = "PutValueIn(this, 'FolderName')" })                  
                    </td>
                    <td>
-                     <b>@Document.V_Contributor</b>
+                     <b>@Document.V_Contributor </b>
                    </td>
                    <td>                      
                        @Html.DropDownListFor(x => x.AuthorId, Model.Contributors, new {onchange = "PutValueIn(this, 'ContributorName')" } )
                    </td>
                     <td>
-                        <b>@Document.V_File_Type</b>
+                        <b>@Document.V_File_Type </b>
                     </td>
                     <td>
                         @Html.DropDownListFor(x => x.FileMimeType, lstFileTypes, new {onchange = "PutValueIn(this, 'FileTypeName')" })
-                    </td>                
-                    
-                   
+                    </td>  
                 </tr>
          </table>
 
