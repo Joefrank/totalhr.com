@@ -99,6 +99,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Absence.resx</DependentUpon>
     </Compile>
+    <Compile Include="Absence.fr-FR.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Absence.fr-FR.resx</DependentUpon>
+    </Compile>
     <Compile Include="Account.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -182,6 +187,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Absence.fr-FR.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Absence.fr-FR.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Absence.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Absence.Designer.cs</LastGenOutput>
