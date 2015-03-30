@@ -261,10 +261,12 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Contract.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Document.fr-FR.resx" />
     <EmbeddedResource Include="Document.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Document.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="EnumDescription.fr-FR.resx" />
     <EmbeddedResource Include="EnumDescription.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>EnumDescription.Designer.cs</LastGenOutput>
