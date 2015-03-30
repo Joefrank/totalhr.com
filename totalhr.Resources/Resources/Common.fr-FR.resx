@@ -1,0 +1,363 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btn_SelectDepartment" xml:space="preserve">
+    <value>Sélectionner</value>
+  </data>
+  <data name="btn_SelectUser" xml:space="preserve">
+    <value>Sélectionner</value>
+  </data>
+  <data name="Error_Account_Activation_Failed" xml:space="preserve">
+    <value>Désolé, mais les détails que vous avez fournis sont introuvables. Veuillez contacter l'administration pour plus de détails.</value>
+  </data>
+  <data name="MSG_Account_Activation_Welcome" xml:space="preserve">
+    <value>Cher {0}, &lt;br/&gt;&lt;br/&gt; Félicitations! Vous venez devenir un membre à part entière de TotalHR. &lt;br/&gt; 
+Vous pouvez maintenant vous connecter à tout moment dans votre compte et sélectionnez les fonctionnalités que vous voulez et 
+de personnaliser votre compte. Pour plus de détails à ce sujet, veuillez voir notre section d'aide.</value>
+  </data>
+  <data name="MSG_Welcome_NewUser" xml:space="preserve">
+    <value>Cher {0}, &lt;br/&gt; Merci pour votre inscription. Vous recevrez d'un moment a l'autre un message à l'adresse email suivante: {1}. 
+&lt;br/&gt; Veuillez suivre les instructions sur votre e-mail pour completer votre inscription. &lt;br/&gt; &lt;br/&gt; Cordialement, &lt;br/&gt;&lt;br/&gt; {2}</value>
+  </data>
+  <data name="Page_TT_Account_Activation" xml:space="preserve">
+    <value>Activation du compte</value>
+  </data>
+  <data name="Page_TT_Account_Activation_Header" xml:space="preserve">
+    <value>TotalHR - Activation du compte</value>
+  </data>
+  <data name="Page_TT_Account_Home" xml:space="preserve">
+    <value>Mon compte</value>
+  </data>
+  <data name="Page_TT_Calendar_Event_Add" xml:space="preserve">
+    <value>Création d'événement</value>
+  </data>
+  <data name="Page_TT_Calendar_Event_Edit" xml:space="preserve">
+    <value>Modification d'événement</value>
+  </data>
+  <data name="Page_TT_ForgotPassword" xml:space="preserve">
+    <value>Rappele du mot de passe</value>
+  </data>
+  <data name="Page_TT_Header_Account_Home" xml:space="preserve">
+    <value>TotalHR - Mon compte</value>
+  </data>
+  <data name="Page_TT_Header_Forgot_Password" xml:space="preserve">
+    <value>TotalHR - Rappel mot de passe</value>
+  </data>
+  <data name="Page_TT_Header_Login" xml:space="preserve">
+    <value>TotalHR - Connexion</value>
+  </data>
+  <data name="Page_TT_Header_Registration" xml:space="preserve">
+    <value>TotalHR - Enregistrement</value>
+  </data>
+  <data name="Page_TT_Header_Welcome" xml:space="preserve">
+    <value>TotalHR - Bienvenue</value>
+  </data>
+  <data name="Page_TT_Login" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="Page_TT_Registration" xml:space="preserve">
+    <value>Enregistrement</value>
+  </data>
+  <data name="Page_TT_Welcome" xml:space="preserve">
+    <value>Bienvenue!</value>
+  </data>
+  <data name="Signature" xml:space="preserve">
+    <value>L'équipe TotalHR</value>
+  </data>
+  <data name="V_Add" xml:space="preserve">
+    <value>Ajouter</value>
+  </data>
+  <data name="V_Before" xml:space="preserve">
+    <value>Avant</value>
+  </data>
+  <data name="V_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="V_ChatRoom_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="V_ChatRoom_Details" xml:space="preserve">
+    <value>Salle de chat Info</value>
+  </data>
+  <data name="V_ChatRoom_Invited_Users" xml:space="preserve">
+    <value>Utilisateurs invités</value>
+  </data>
+  <data name="V_ChatRoom_Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="V_ChatRoom_Private" xml:space="preserve">
+    <value>Privé</value>
+  </data>
+  <data name="V_ChatRoom_Public" xml:space="preserve">
+    <value>Public</value>
+  </data>
+  <data name="V_ChatRoom_Target" xml:space="preserve">
+    <value>Cible</value>
+  </data>
+  <data name="V_Chat_Cant_Add_Message" xml:space="preserve">
+    <value>Désolé mais  vos coordonnées n'ont pas ete trouvés!</value>
+  </data>
+  <data name="V_Chat_Entering_Room" xml:space="preserve">
+    <value>Accession a la salle de chat '{0}'</value>
+  </data>
+  <data name="V_Chat_Nickname" xml:space="preserve">
+    <value>Votre pseudo pour la chat</value>
+  </data>
+  <data name="V_Chat_Nickname_Intro" xml:space="preserve">
+    <value>Saisissez un pseudo ou cliquez simplement 'Accès' dans ce cas votre nom d'utilisateur apparaîtra dans la salle de chat.</value>
+  </data>
+  <data name="V_Chat_NoRooms" xml:space="preserve">
+    <value>Désolé mais il n'y a pas de salle de chat disponible. Vous pouvez en créer une en utilisant le bouton ci-dessous.</value>
+  </data>
+  <data name="V_Chat_Refreshed_At" xml:space="preserve">
+    <value>Dernière mise à jour à {0}</value>
+  </data>
+  <data name="V_Chat_Registration" xml:space="preserve">
+    <value>Inscription chat</value>
+  </data>
+  <data name="V_Chat_Rooms" xml:space="preserve">
+    <value>Salle de chat</value>
+  </data>
+  <data name="V_Chat_Room_Create" xml:space="preserve">
+    <value>Création de salle de chat</value>
+  </data>
+  <data name="V_Chat_Room_List" xml:space="preserve">
+    <value>Liste de salles de chat</value>
+  </data>
+  <data name="V_Chat_Room_New" xml:space="preserve">
+    <value>Création de salle de chat</value>
+  </data>
+  <data name="V_Chat_Send" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="V_Chat_Server_Started_At" xml:space="preserve">
+    <value>Serveur chat commencé a {0}</value>
+  </data>
+  <data name="V_Chat_Type_Message" xml:space="preserve">
+    <value>Tapez un message ici ...</value>
+  </data>
+  <data name="V_Chat_User_X_LoggedOff" xml:space="preserve">
+    <value>Utilisateur '{0}' a quitté la salle.</value>
+  </data>
+  <data name="V_Chat_User_X_LoggedOn" xml:space="preserve">
+    <value>Utilisateur '{0}' a rejoint le chat.</value>
+  </data>
+  <data name="V_Chat_Your_Nickname" xml:space="preserve">
+    <value>Votre pseudo</value>
+  </data>
+  <data name="V_Close" xml:space="preserve">
+    <value>Fermer</value>
+  </data>
+  <data name="V_Company" xml:space="preserve">
+    <value>Société</value>
+  </data>
+  <data name="V_Company_Departments" xml:space="preserve">
+    <value>Départements de la société </value>
+  </data>
+  <data name="V_Company_Employees" xml:space="preserve">
+    <value>Employés</value>
+  </data>
+  <data name="V_Company_Intro" xml:space="preserve">
+    <value>Choisissez une option pour plus de details.</value>
+  </data>
+  <data name="V_Department" xml:space="preserve">
+    <value>Départment</value>
+  </data>
+  <data name="V_Departments" xml:space="preserve">
+    <value>Départements de la société</value>
+  </data>
+  <data name="V_Department_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="V_Department_List" xml:space="preserve">
+    <value>Liste de départements</value>
+  </data>
+  <data name="V_Department_Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="V_Employee_Directory" xml:space="preserve">
+    <value>Annuaire des employés</value>
+  </data>
+  <data name="V_Employee_List" xml:space="preserve">
+    <value>Liste des  employés</value>
+  </data>
+  <data name="V_Employee_Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="V_Enter" xml:space="preserve">
+    <value>Accès</value>
+  </data>
+  <data name="V_Hide" xml:space="preserve">
+    <value>Cacher</value>
+  </data>
+  <data name="V_Line_Manager" xml:space="preserve">
+    <value>Manager</value>
+  </data>
+  <data name="V_Next" xml:space="preserve">
+    <value>Suivant</value>
+  </data>
+  <data name="V_None" xml:space="preserve">
+    <value>Aucun</value>
+  </data>
+  <data name="V_Not_Registered" xml:space="preserve">
+    <value>Pas encore inscrit?</value>
+  </data>
+  <data name="V_No_User_Found" xml:space="preserve">
+    <value>Nombre d'employés dans la liste</value>
+  </data>
+  <data name="V_Office_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="V_Office_Phone" xml:space="preserve">
+    <value>Téléphone au bureau</value>
+  </data>
+  <data name="V_Organization_Chart" xml:space="preserve">
+    <value>Organigramme</value>
+  </data>
+  <data name="V_Password_Reminder" xml:space="preserve">
+    <value>Mot de passe oublié?</value>
+  </data>
+  <data name="V_Prev" xml:space="preserve">
+    <value>Suivant</value>
+  </data>
+  <data name="V_Register" xml:space="preserve">
+    <value>S'inscrire</value>
+  </data>
+  <data name="V_Save" xml:space="preserve">
+    <value>Sauvegarder</value>
+  </data>
+  <data name="V_Set" xml:space="preserve">
+    <value>Fixer</value>
+  </data>
+  <data name="V_Show" xml:space="preserve">
+    <value>Montrer</value>
+  </data>
+  <data name="V_Showing_XtoY_OfZ" xml:space="preserve">
+    <value>Afficher {0} to {1} of {2}</value>
+  </data>
+  <data name="V_Switch_Context" xml:space="preserve">
+    <value>Changer de contexte</value>
+  </data>
+  <data name="V_Switch_Context_Admin_Tooltip" xml:space="preserve">
+    <value>Changer vers le contexte admin.</value>
+  </data>
+  <data name="V_Until" xml:space="preserve">
+    <value>Jusqu'à</value>
+  </data>
+</root>

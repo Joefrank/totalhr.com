@@ -1,0 +1,366 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btn_Loggout" xml:space="preserve">
+    <value>Déconnexion</value>
+  </data>
+  <data name="Error_Saving_Picture" xml:space="preserve">
+    <value>Erreu de sauvegarde.</value>
+  </data>
+  <data name="MSG_User_Created" xml:space="preserve">
+    <value>Vous avez créé l'employé {0}. &lt;br/&gt; Vous aurez aussi besoin d'assigner des profils à cet employé comme aucun utilisateur ne peut accéder au système sans profils. Sélectionnez l'une des options ci-dessous pour continuer.</value>
+  </data>
+  <data name="MSG_Welcome" xml:space="preserve">
+    <value>Cher {0}, &lt;br/&gt; Bienvenue à votre compte. &lt;br/&gt; Veuillez choisire une option pour commencer.</value>
+  </data>
+  <data name="tt_My_Calendars" xml:space="preserve">
+    <value>Mes Calendriers</value>
+  </data>
+  <data name="tt_My_Documents" xml:space="preserve">
+    <value>Documents de la Société</value>
+  </data>
+  <data name="tt_Personal_Details" xml:space="preserve">
+    <value>Détails personnels</value>
+  </data>
+  <data name="V_Admin_Login" xml:space="preserve">
+    <value>Admin Login</value>
+  </data>
+  <data name="V_Avatar" xml:space="preserve">
+    <value>Avatar</value>
+  </data>
+  <data name="V_Avatar_Upload" xml:space="preserve">
+    <value>Téléchargement d'Avatar</value>
+  </data>
+  <data name="V_Calendars" xml:space="preserve">
+    <value>Calendriers</value>
+  </data>
+  <data name="V_Company" xml:space="preserve">
+    <value>Compagnie</value>
+  </data>
+  <data name="V_Create_Document" xml:space="preserve">
+    <value>Créer un document</value>
+  </data>
+  <data name="V_Dashboard" xml:space="preserve">
+    <value>Tableau de bord</value>
+  </data>
+  <data name="V_Department" xml:space="preserve">
+    <value>Département</value>
+  </data>
+  <data name="V_Departments" xml:space="preserve">
+    <value>Département</value>
+  </data>
+  <data name="V_Documents" xml:space="preserve">
+    <value>Documents</value>
+  </data>
+  <data name="V_Drop_Files_Or_Click" xml:space="preserve">
+    <value>Déposer des fichiers ou cliquez ici pour télécharger</value>
+  </data>
+  <data name="V_Edit_Avatar" xml:space="preserve">
+    <value>Modifier avatar</value>
+  </data>
+  <data name="V_Edit_MyDetails" xml:space="preserve">
+    <value>Modifier mon profil</value>
+  </data>
+  <data name="V_Edit_Profile_Picture" xml:space="preserve">
+    <value>Modifier ma photo</value>
+  </data>
+  <data name="V_Edit_Small_Avatar" xml:space="preserve">
+    <value>Modifier mon petit avatar</value>
+  </data>
+  <data name="V_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="V_Email1" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="V_Employee_Directory" xml:space="preserve">
+    <value>Annuaire des employés</value>
+  </data>
+  <data name="V_File_Drop_Zone" xml:space="preserve">
+    <value>Dropzone Fichier</value>
+  </data>
+  <data name="V_Firstname" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="V_Folders" xml:space="preserve">
+    <value>Fichier</value>
+  </data>
+  <data name="V_Forgot_Password" xml:space="preserve">
+    <value>Mot de passe oublié?</value>
+  </data>
+  <data name="V_Gallery_Picture_Upload" xml:space="preserve">
+    <value>Galerie de Photos</value>
+  </data>
+  <data name="V_Gender" xml:space="preserve">
+    <value>Sexe</value>
+  </data>
+  <data name="V_Hide_Password" xml:space="preserve">
+    <value>Cacher</value>
+  </data>
+  <data name="V_Image_Gallery" xml:space="preserve">
+    <value>Galerie de Photo</value>
+  </data>
+  <data name="V_Inbox" xml:space="preserve">
+    <value>Boîte de réception</value>
+  </data>
+  <data name="V_LastVisit" xml:space="preserve">
+    <value>Derniere visite</value>
+  </data>
+  <data name="V_Logon_Details" xml:space="preserve">
+    <value>Donnée Connexion</value>
+  </data>
+  <data name="V_Mobile" xml:space="preserve">
+    <value>Mobile</value>
+  </data>
+  <data name="V_My_Absences" xml:space="preserve">
+    <value>Mes absences</value>
+  </data>
+  <data name="V_My_Contract" xml:space="preserve">
+    <value>Mon contract</value>
+  </data>
+  <data name="V_My_Details" xml:space="preserve">
+    <value>Mon profil</value>
+  </data>
+  <data name="V_My_Profile" xml:space="preserve">
+    <value>Mon profil</value>
+  </data>
+  <data name="V_My_Profiles" xml:space="preserve">
+    <value>Mes permissions</value>
+  </data>
+  <data name="V_Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="V_No_Visits" xml:space="preserve">
+    <value>No de visites</value>
+  </data>
+  <data name="V_Other_Names" xml:space="preserve">
+    <value>Autre nom</value>
+  </data>
+  <data name="V_Password" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="V_PasswordReset_Intro" xml:space="preserve">
+    <value>Saisissez votre adresse e-mail ci-dessous pour réinitialiser votre mot de passe.</value>
+  </data>
+  <data name="V_Payroll" xml:space="preserve">
+    <value>Paie</value>
+  </data>
+  <data name="V_Phone" xml:space="preserve">
+    <value>Téléphone</value>
+  </data>
+  <data name="V_Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="V_Profile_List" xml:space="preserve">
+    <value>Liste des permissions</value>
+  </data>
+  <data name="V_Profile_Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="V_Profile_Picture" xml:space="preserve">
+    <value>Photo du profil</value>
+  </data>
+  <data name="V_Profile_Picture_Upload" xml:space="preserve">
+    <value>Téléchargement de photo du profil</value>
+  </data>
+  <data name="V_Profile_View" xml:space="preserve">
+    <value>Vue du profil</value>
+  </data>
+  <data name="V_Record_Time" xml:space="preserve">
+    <value>Saisire la durée</value>
+  </data>
+  <data name="V_Remember_Me" xml:space="preserve">
+    <value>Garder ma session ouverte</value>
+  </data>
+  <data name="V_Request_Absence" xml:space="preserve">
+    <value>Demander un congé</value>
+  </data>
+  <data name="V_Search_For_Recording" xml:space="preserve">
+    <value>Recherche</value>
+  </data>
+  <data name="V_Settings" xml:space="preserve">
+    <value>Paramètres</value>
+  </data>
+  <data name="V_Show_Password" xml:space="preserve">
+    <value>Montrer</value>
+  </data>
+  <data name="V_Small_Avatar" xml:space="preserve">
+    <value>Petit avatar</value>
+  </data>
+  <data name="V_Small_Avatar_Upload" xml:space="preserve">
+    <value>Téléchargement du petit avatar</value>
+  </data>
+  <data name="V_Structure" xml:space="preserve">
+    <value>Structure de la compagnie</value>
+  </data>
+  <data name="V_Submit" xml:space="preserve">
+    <value>Envoyer</value>
+  </data>
+  <data name="V_Surname" xml:space="preserve">
+    <value>Nom de famille</value>
+  </data>
+  <data name="V_Tasks" xml:space="preserve">
+    <value>Mes taches</value>
+  </data>
+  <data name="V_Time_Recording" xml:space="preserve">
+    <value>Enregistrement de durée</value>
+  </data>
+  <data name="V_Title" xml:space="preserve">
+    <value>Civilité</value>
+  </data>
+  <data name="V_Upload_Avatar" xml:space="preserve">
+    <value>Téléchargement d'avatar</value>
+  </data>
+  <data name="V_Upload_Profile_Picture" xml:space="preserve">
+    <value>Télécharger la photo de profil</value>
+  </data>
+  <data name="V_Upload_Small_Avatar" xml:space="preserve">
+    <value>Télécharger le petit avatar</value>
+  </data>
+  <data name="V_UserId" xml:space="preserve">
+    <value>Id de l'utilisateur</value>
+  </data>
+  <data name="V_UserName" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
+  </data>
+  <data name="V_Users" xml:space="preserve">
+    <value>Utilisateurs</value>
+  </data>
+  <data name="V_User_Created" xml:space="preserve">
+    <value>Utilisateur Créé</value>
+  </data>
+  <data name="V_User_FullName" xml:space="preserve">
+    <value>Nom et prénom</value>
+  </data>
+  <data name="V_User_Login" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="V_View_All_Absences" xml:space="preserve">
+    <value>Voire toute absences</value>
+  </data>
+  <data name="V_Your_Avatar" xml:space="preserve">
+    <value>Votre avatar</value>
+  </data>
+  <data name="V_Your_Profile_Picture" xml:space="preserve">
+    <value>Votre photo de profil</value>
+  </data>
+  <data name="V_Your_Small_Avatar" xml:space="preserve">
+    <value>Votre petit avatar</value>
+  </data>
+</root>

@@ -1,0 +1,447 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Error_No_Item_Selected" xml:space="preserve">
+    <value>Veuillez sélectionner un élément de la liste pour le déplacer.</value>
+  </data>
+  <data name="Error_No_User_Under_Profile" xml:space="preserve">
+    <value>Désolé, mais aucun utilisateur n'a été attribué à cette permission.</value>
+  </data>
+  <data name="V_Absences" xml:space="preserve">
+    <value>Absences</value>
+  </data>
+  <data name="V_Absences_Management" xml:space="preserve">
+    <value>Gestion des absences</value>
+  </data>
+  <data name="V_Absence_Statistics" xml:space="preserve">
+    <value>Statistiques</value>
+  </data>
+  <data name="V_Add_Profile_Picture" xml:space="preserve">
+    <value>Ajouter photo de profil</value>
+  </data>
+  <data name="V_Add_User" xml:space="preserve">
+    <value>Ajouter utilisateur</value>
+  </data>
+  <data name="V_Admin_Dashboard" xml:space="preserve">
+    <value>Tableau de bord Admin</value>
+  </data>
+  <data name="V_Admin_Home_Title" xml:space="preserve">
+    <value>Tableau de bord Admin</value>
+  </data>
+  <data name="V_All_Profiles" xml:space="preserve">
+    <value>Toutes les permissions</value>
+  </data>
+  <data name="V_All_Roles" xml:space="preserve">
+    <value>Tous les roles</value>
+  </data>
+  <data name="V_Assign" xml:space="preserve">
+    <value>Attribuer</value>
+  </data>
+  <data name="V_Assign_All" xml:space="preserve">
+    <value>Tout attribuer</value>
+  </data>
+  <data name="V_Back_To_List" xml:space="preserve">
+    <value>Retour a la liste</value>
+  </data>
+  <data name="V_Calendar" xml:space="preserve">
+    <value>Calendriers</value>
+  </data>
+  <data name="V_Chat" xml:space="preserve">
+    <value>Chat</value>
+  </data>
+  <data name="V_Choose_Option" xml:space="preserve">
+    <value>Choisir une option:</value>
+  </data>
+  <data name="V_Communications" xml:space="preserve">
+    <value>Communications</value>
+  </data>
+  <data name="V_Contracts" xml:space="preserve">
+    <value>Contrats</value>
+  </data>
+  <data name="V_Contract_Management" xml:space="preserve">
+    <value>Gestion des contrats</value>
+  </data>
+  <data name="V_Contract_Template_Management" xml:space="preserve">
+    <value>Gestion des modèles</value>
+  </data>
+  <data name="V_Created_By" xml:space="preserve">
+    <value>Créer par</value>
+  </data>
+  <data name="V_Created_On" xml:space="preserve">
+    <value>Créer le</value>
+  </data>
+  <data name="V_Create_Absences" xml:space="preserve">
+    <value>Demander un congé</value>
+  </data>
+  <data name="V_Create_Calendar" xml:space="preserve">
+    <value>Créer un calendrier</value>
+  </data>
+  <data name="V_Create_Department" xml:space="preserve">
+    <value>Créer a département</value>
+  </data>
+  <data name="V_Create_Form" xml:space="preserve">
+    <value>Créer un formulaire</value>
+  </data>
+  <data name="V_Create_Profile" xml:space="preserve">
+    <value>Créer une permission</value>
+  </data>
+  <data name="V_Dashboard" xml:space="preserve">
+    <value>Tableau de bord</value>
+  </data>
+  <data name="V_Department" xml:space="preserve">
+    <value>Départment</value>
+  </data>
+  <data name="V_Departments" xml:space="preserve">
+    <value>Départments</value>
+  </data>
+  <data name="V_Department_Management" xml:space="preserve">
+    <value>Gestion de départments</value>
+  </data>
+  <data name="V_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="V_Document_Folder_Managment" xml:space="preserve">
+    <value>Gestion de fichier et document</value>
+  </data>
+  <data name="V_Employee" xml:space="preserve">
+    <value>Employés</value>
+  </data>
+  <data name="V_Employee_Add" xml:space="preserve">
+    <value>Ajouter employés</value>
+  </data>
+  <data name="V_Employee_List" xml:space="preserve">
+    <value>Liste des employés</value>
+  </data>
+  <data name="V_Employee_Management" xml:space="preserve">
+    <value>Gestion des employés</value>
+  </data>
+  <data name="V_Employee_Registration" xml:space="preserve">
+    <value>Enregistrement des employés</value>
+  </data>
+  <data name="V_Employee_Search" xml:space="preserve">
+    <value>Recherche d'employé</value>
+  </data>
+  <data name="V_Existing_Profiles" xml:space="preserve">
+    <value>Permission existantes</value>
+  </data>
+  <data name="V_Forms" xml:space="preserve">
+    <value>Formulaire</value>
+  </data>
+  <data name="V_Home" xml:space="preserve">
+    <value>Accueil</value>
+  </data>
+  <data name="V_Last_Modified" xml:space="preserve">
+    <value>Dernière mise à jour</value>
+  </data>
+  <data name="V_Last_Modified_By" xml:space="preserve">
+    <value>Dernière modification par</value>
+  </data>
+  <data name="V_List_Of_Profiles_Intro" xml:space="preserve">
+    <value>Liste des permissions disponibles</value>
+  </data>
+  <data name="V_List_Of_Roles_Intro" xml:space="preserve">
+    <value>Liste des roles disponibles</value>
+  </data>
+  <data name="V_List_Of_Users_Intro" xml:space="preserve">
+    <value>Voir ci-dessous la liste d'employés de votre entreprise. Utilisez le moteur de recherche pour trouver des employés.</value>
+  </data>
+  <data name="V_Loggout" xml:space="preserve">
+    <value>Déconnexion</value>
+  </data>
+  <data name="V_Manage_Contracts" xml:space="preserve">
+    <value>Gestion de contrats</value>
+  </data>
+  <data name="V_Manage_Employees" xml:space="preserve">
+    <value>Gestion d'employés</value>
+  </data>
+  <data name="V_Manage_Forms" xml:space="preserve">
+    <value>Gestion de formulaires</value>
+  </data>
+  <data name="V_Manage_Profiles" xml:space="preserve">
+    <value>Gestion des permissions</value>
+  </data>
+  <data name="V_Manage_Roles" xml:space="preserve">
+    <value>Gestion des roles</value>
+  </data>
+  <data name="V_Manage_Templates" xml:space="preserve">
+    <value>Gestion de modèles</value>
+  </data>
+  <data name="V_Manage_User_Roles" xml:space="preserve">
+    <value>Gestion de roles des employés </value>
+  </data>
+  <data name="V_More_Details" xml:space="preserve">
+    <value>Plus de détails</value>
+  </data>
+  <data name="V_My_Messages" xml:space="preserve">
+    <value>Mes messages</value>
+  </data>
+  <data name="V_Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="V_Notify_User_ByEmail" xml:space="preserve">
+    <value>Informer l'utilisateur par e-mail</value>
+  </data>
+  <data name="V_No_FormFound" xml:space="preserve">
+    <value>Aucun formulaire n'a été trouvé. créer un nouveau formulaire</value>
+  </data>
+  <data name="V_Other_Messages" xml:space="preserve">
+    <value>Tous les messages</value>
+  </data>
+  <data name="V_Profiles" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="V_Profile_List" xml:space="preserve">
+    <value>Liste des permissions</value>
+  </data>
+  <data name="V_Profile_Management" xml:space="preserve">
+    <value>Gestion des permissions</value>
+  </data>
+  <data name="V_Profile_Management_UserList" xml:space="preserve">
+    <value>Liste d'utilisateurs par permission</value>
+  </data>
+  <data name="V_Profile_Picture" xml:space="preserve">
+    <value>Photo de profil</value>
+  </data>
+  <data name="V_Remove" xml:space="preserve">
+    <value>Enlever</value>
+  </data>
+  <data name="V_Remove_All" xml:space="preserve">
+    <value>Tout enlever</value>
+  </data>
+  <data name="V_Reports" xml:space="preserve">
+    <value>Rapports</value>
+  </data>
+  <data name="V_Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="V_Role_List" xml:space="preserve">
+    <value>Liste des permissions</value>
+  </data>
+  <data name="V_Role_Management" xml:space="preserve">
+    <value>Gestion de roles</value>
+  </data>
+  <data name="V_Role_Management_UserList" xml:space="preserve">
+    <value>Liste d'utilisateurs par role</value>
+  </data>
+  <data name="V_Save" xml:space="preserve">
+    <value>Sauvegarder</value>
+  </data>
+  <data name="V_Search_ByName" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="V_Search_Partial_Address" xml:space="preserve">
+    <value>Adresse partielle</value>
+  </data>
+  <data name="V_Select" xml:space="preserve">
+    <value>Sélectionner</value>
+  </data>
+  <data name="V_Select_Form_Intro" xml:space="preserve">
+    <value>Sélectionnez le formulaire que vous souhaitez gérer ci-dessous.</value>
+  </data>
+  <data name="V_Select_User" xml:space="preserve">
+    <value>Sélectionnez l'utilisateur</value>
+  </data>
+  <data name="V_State_or_County" xml:space="preserve">
+    <value>État / District</value>
+  </data>
+  <data name="V_Theme" xml:space="preserve">
+    <value>Thème</value>
+  </data>
+  <data name="V_Time_Recording" xml:space="preserve">
+    <value>Enregistrement de durée</value>
+  </data>
+  <data name="V_Time_Recording_Record" xml:space="preserve">
+    <value>Enregistrer une durée</value>
+  </data>
+  <data name="V_Time_Recording_Search" xml:space="preserve">
+    <value>Recherche</value>
+  </data>
+  <data name="V_TotalHR_Signature" xml:space="preserve">
+    <value>TotalHR Admin</value>
+  </data>
+  <data name="V_Town" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="V_Users" xml:space="preserve">
+    <value>Utilisateurs</value>
+  </data>
+  <data name="V_Users_By_Profile" xml:space="preserve">
+    <value>Utilisateurs ayant cette permission</value>
+  </data>
+  <data name="V_Users_In_Profile_X" xml:space="preserve">
+    <value>Utilisateurs attribués au profil: {0}</value>
+  </data>
+  <data name="V_User_Absences" xml:space="preserve">
+    <value>Absences d'employé</value>
+  </data>
+  <data name="V_User_Create" xml:space="preserve">
+    <value>Créér utilisateur</value>
+  </data>
+  <data name="V_User_Id" xml:space="preserve">
+    <value>Id d'utilisateur</value>
+  </data>
+  <data name="V_User_In_Role_X" xml:space="preserve">
+    <value>Utilisateur ayant le role "{0}"</value>
+  </data>
+  <data name="V_User_List" xml:space="preserve">
+    <value>Liste d'utilisateurs</value>
+  </data>
+  <data name="V_User_Management" xml:space="preserve">
+    <value>Gestion d'utilisateurs</value>
+  </data>
+  <data name="V_User_Management_Details" xml:space="preserve">
+    <value>Details d'utilisateur</value>
+  </data>
+  <data name="V_User_Profiles" xml:space="preserve">
+    <value>Permission attribuées a l'utilisateur</value>
+  </data>
+  <data name="V_User_Profile_Management" xml:space="preserve">
+    <value>Gestion de profile d'utilisateur</value>
+  </data>
+  <data name="V_User_Roles" xml:space="preserve">
+    <value>Roles attribués a l'utilisateur</value>
+  </data>
+  <data name="V_User_Role_Management" xml:space="preserve">
+    <value>Gestion de roles d'utilisateur</value>
+  </data>
+  <data name="V_User_Search" xml:space="preserve">
+    <value>Recherche d'utilisateur</value>
+  </data>
+  <data name="V_User_Search_Result_Intro" xml:space="preserve">
+    <value>Voir résultats de vos critères de recherche ci-dessous.</value>
+  </data>
+  <data name="V_User_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="V_View_All_Calendars" xml:space="preserve">
+    <value>Voir tous les calendriers</value>
+  </data>
+  <data name="V_View_Forms" xml:space="preserve">
+    <value>Voir tous les formulaires</value>
+  </data>
+  <data name="V_View_Users" xml:space="preserve">
+    <value>Voir les utilisateurs</value>
+  </data>
+  <data name="V_You_Viewing_USerProfile_X" xml:space="preserve">
+    <value>Vous regardez permissions liés à l'utilisateur  "{0}".</value>
+  </data>
+  <data name="V_You_Viewing_USerRole_X" xml:space="preserve">
+    <value>Vous regardez roles liés à l'utilisateur  "{0}".</value>
+  </data>
+</root>
