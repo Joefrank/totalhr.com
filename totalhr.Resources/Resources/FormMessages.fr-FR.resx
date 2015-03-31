@@ -1,0 +1,672 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="btn_Cancel" xml:space="preserve">
+    <value>Annuler</value>
+  </data>
+  <data name="btn_CreateTender" xml:space="preserve">
+    <value>Créer une appels d'offres</value>
+  </data>
+  <data name="btn_Login" xml:space="preserve">
+    <value>Connexion</value>
+  </data>
+  <data name="btn_Register" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="btn_Reset" xml:space="preserve">
+    <value>Recommencer</value>
+  </data>
+  <data name="btn_Search" xml:space="preserve">
+    <value>Recherche</value>
+  </data>
+  <data name="btn_value_Continue" xml:space="preserve">
+    <value>Continuer</value>
+  </data>
+  <data name="btn_Value_Save" xml:space="preserve">
+    <value>Sauvegarder</value>
+  </data>
+  <data name="Error_Addres1_Rq" xml:space="preserve">
+    <value>Première ligne d'adresse est requise</value>
+  </data>
+  <data name="Error_Address1_Too_Long" xml:space="preserve">
+    <value>Première ligne d'adress trop longue (max 255 caractères)</value>
+  </data>
+  <data name="Error_Address2_Too_Long" xml:space="preserve">
+    <value>Adress (suite) est trop longue (max 255 caractères)</value>
+  </data>
+  <data name="Error_Address3_Too_Long" xml:space="preserve">
+    <value>Adress (extra) est trop longue (max 255 caractères)</value>
+  </data>
+  <data name="Error_Amount_Rq" xml:space="preserve">
+    <value>Montant est requis</value>
+  </data>
+  <data name="Error_Annual_Revenue_Rq" xml:space="preserve">
+    <value>Revenu annuel est required</value>
+  </data>
+  <data name="Error_City_Rq" xml:space="preserve">
+    <value>La ville est required</value>
+  </data>
+  <data name="Error_City_Too_Long" xml:space="preserve">
+    <value>Nom de la ville est trop long (50 caractères max)</value>
+  </data>
+  <data name="Error_Commodities_Rq" xml:space="preserve">
+    <value>Veuillez sélectionner certains produits</value>
+  </data>
+  <data name="Error_CompanyName_Rq" xml:space="preserve">
+    <value>Le nom de l'entreprise est requis</value>
+  </data>
+  <data name="Error_CompanyNoEmployees_Rq" xml:space="preserve">
+    <value>Le nombre d'employé est  requis</value>
+  </data>
+  <data name="Error_CompanyType_Too_Long" xml:space="preserve">
+    <value>Le type d'entreprise est trop long (50 caractères max)</value>
+  </data>
+  <data name="Error_Company_Name_Rq" xml:space="preserve">
+    <value>Le nom de l'entreprise est requis</value>
+  </data>
+  <data name="Error_Company_Name_Too_long" xml:space="preserve">
+    <value>Le nom de l'entreprise ne doit aller au dela de 100  caractères</value>
+  </data>
+  <data name="Error_Could_Not_Submit_Form" xml:space="preserve">
+    <value>Désolé mais le formulaire n'a pas été soumis.</value>
+  </data>
+  <data name="Error_Country_Required" xml:space="preserve">
+    <value>Veuillez sélectionner un pays</value>
+  </data>
+  <data name="Error_Description_Rq" xml:space="preserve">
+    <value>La description est requise</value>
+  </data>
+  <data name="Error_Description_Too_long" xml:space="preserve">
+    <value>La description ne doit pas dépasser 3000 caractères</value>
+  </data>
+  <data name="Error_Duplicate_Registration" xml:space="preserve">
+    <value>Vous avez déjà soumis vos coordonnées.</value>
+  </data>
+  <data name="Error_Email_Doesnt_Exist" xml:space="preserve">
+    <value>Désolé, votre email ne est pas enregistré.</value>
+  </data>
+  <data name="Error_Email_Needs_To_Be_Provided" xml:space="preserve">
+    <value>Saisissez d'abord l' email avant de l'utiliser comme pseudo</value>
+  </data>
+  <data name="Error_Email_Reminder" xml:space="preserve">
+    <value>l'email est requis.</value>
+  </data>
+  <data name="Error_Email_Too_long" xml:space="preserve">
+    <value>l'addresse email est trés longue (100 caractéres max)</value>
+  </data>
+  <data name="Error_EventEndDate_Rq" xml:space="preserve">
+    <value>Une date de fin est requise pour chaque événement</value>
+  </data>
+  <data name="Error_EventStartDate_Rq" xml:space="preserve">
+    <value>Une date de début est requise pour chaque événement</value>
+  </data>
+  <data name="Error_EventTitle_Rq" xml:space="preserve">
+    <value>Veuillez saisire le titre de votre événement</value>
+  </data>
+  <data name="Error_Event_Target_Not_Set" xml:space="preserve">
+    <value>Vous devez définir un groupe cible pour l'événement</value>
+  </data>
+  <data name="Error_Event_Target_Required" xml:space="preserve">
+    <value>Vous devez sélectionner des participants pour votre événement</value>
+  </data>
+  <data name="Error_Event_UserNotLogged" xml:space="preserve">
+    <value>Vous devez être connecté et un utilisateur valable pour pouvoir créer des d'événements</value>
+  </data>
+  <data name="Error_Firstname_Rq" xml:space="preserve">
+    <value>Prénom est requis</value>
+  </data>
+  <data name="Error_FirstName_Too_long" xml:space="preserve">
+    <value>Prénom est trop long</value>
+  </data>
+  <data name="Error_First_Name_Rq" xml:space="preserve">
+    <value>Prénom est requis</value>
+  </data>
+  <data name="Error_Gender_Rq" xml:space="preserve">
+    <value>Le sexe est requis</value>
+  </data>
+  <data name="Error_Invalid_Date" xml:space="preserve">
+    <value>Date pas valable.</value>
+  </data>
+  <data name="Error_Invalid_Email" xml:space="preserve">
+    <value>Saisissez une addresse email valable</value>
+  </data>
+  <data name="Error_Last_Name_Rq" xml:space="preserve">
+    <value>Le nom de famille est requis</value>
+  </data>
+  <data name="Error_Login_Failed" xml:space="preserve">
+    <value>Les details saisis ne sont pas valable.</value>
+  </data>
+  <data name="Error_Missing_Reminder_Frequency_AndValues" xml:space="preserve">
+    <value>Veuillez saisir la durée et fréquence de rappel.</value>
+  </data>
+  <data name="Error_Missing_Reminder_Type" xml:space="preserve">
+    <value>Sélectionner le type de rappel</value>
+  </data>
+  <data name="Error_MobilePhone_Too_Long" xml:space="preserve">
+    <value>Numero de cellulaire est trop long (30 caractèrs max)</value>
+  </data>
+  <data name="Error_NoProfile_CreateCalendarEvent" xml:space="preserve">
+    <value>Vous n'avez pas de permission pour pouvoire créer un événement de calendrier</value>
+  </data>
+  <data name="Error_OtherName_Too_long" xml:space="preserve">
+    <value>Autre nom trop long (50 caractèrs max)</value>
+  </data>
+  <data name="Error_OtherTitle_Too_long" xml:space="preserve">
+    <value>Civilité trop longue (30 caractèrs max)</value>
+  </data>
+  <data name="Error_PasswordConfirm_NotInRange" xml:space="preserve">
+    <value>La confirmation de mot de passe doit etre entre 6 et 15 caractères.</value>
+  </data>
+  <data name="Error_PasswordConfirm_Too_long" xml:space="preserve">
+    <value>La confirmation de mot de passe est trop longue (15 caractères max)</value>
+  </data>
+  <data name="Error_Password_Conf_Rq" xml:space="preserve">
+    <value>Veuillez confirmer votre mot de passe</value>
+  </data>
+  <data name="Error_Password_NotInRange" xml:space="preserve">
+    <value>Le mot de passe doit avoir entre  6 et 15 caractères.</value>
+  </data>
+  <data name="Error_Password_Not_Matched" xml:space="preserve">
+    <value>Votre confirmation de mot de passe doit correspondre au mot de passe original.</value>
+  </data>
+  <data name="Error_Password_No_Match" xml:space="preserve">
+    <value>La confirmation de mot de passe ne correspond pas à celui l'original.</value>
+  </data>
+  <data name="Error_Password_Rq" xml:space="preserve">
+    <value>Le mot de passe est requis</value>
+  </data>
+  <data name="Error_Password_Too_long" xml:space="preserve">
+    <value>Le mot de passe est trop long (15 caractères max)</value>
+  </data>
+  <data name="Error_PersonalPhone_Too_Long" xml:space="preserve">
+    <value>Telephone personel est trop long (30 caractères max)</value>
+  </data>
+  <data name="Error_Phone1_Rq" xml:space="preserve">
+    <value>Veuillez donner un numero de contact</value>
+  </data>
+  <data name="Error_Phone_Too_Long" xml:space="preserve">
+    <value>Numero de telephone trop long (30 caractères max)</value>
+  </data>
+  <data name="Error_Postcode_Too_Long" xml:space="preserve">
+    <value>Le code postal est trop long (30 caractères max)</value>
+  </data>
+  <data name="Error_Quick_Search_Rq" xml:space="preserve">
+    <value>Veuillez sélectionner un produit et lieux avant de procéder.</value>
+  </data>
+  <data name="Error_Reg_User_Email_Exists" xml:space="preserve">
+    <value>L'e-mail que vous avez entré existe déjà</value>
+  </data>
+  <data name="Error_Sales_Territories_Rq" xml:space="preserve">
+    <value>Sélectionner certains territoires d'essai</value>
+  </data>
+  <data name="Error_Secret_Question_Answer_Rq" xml:space="preserve">
+    <value>Veuillez fournir une réponse à la question secrète</value>
+  </data>
+  <data name="Error_Secret_Question_Rq" xml:space="preserve">
+    <value>Sélectionner une question secrète</value>
+  </data>
+  <data name="Error_Select_Commodity" xml:space="preserve">
+    <value>Vous devez sélectionner une marchandise</value>
+  </data>
+  <data name="Error_Select_Location" xml:space="preserve">
+    <value>Vous devez sélectionner un lieu</value>
+  </data>
+  <data name="Error_Sorry_CouldNot_Save_User" xml:space="preserve">
+    <value>Désolé mais vos coordonnées n'ont pas ete sauvegardés.</value>
+  </data>
+  <data name="Error_StartDate_After_EndDate" xml:space="preserve">
+    <value>Date de début ne peut pas être après la date de fin. Veuillez sélectionner des dates correctes.</value>
+  </data>
+  <data name="Error_StartDate_Before_Repeat" xml:space="preserve">
+    <value>Vous devez spécifier une date de début pour l'événement avant d'ajouter une répétition.</value>
+  </data>
+  <data name="Error_State_Too_Long" xml:space="preserve">
+    <value>État trop long (50 caractères max )</value>
+  </data>
+  <data name="Error_Surname_Rq" xml:space="preserve">
+    <value>Le nom de famille est requis</value>
+  </data>
+  <data name="Error_SurName_Too_long" xml:space="preserve">
+    <value>Le nom de famille est trop long</value>
+  </data>
+  <data name="Error_TaxtID_Too_Long" xml:space="preserve">
+    <value>TAX Id trop long (50 caractères max)</value>
+  </data>
+  <data name="Error_Terms_Not_Accepted_Rq" xml:space="preserve">
+    <value>Veuillez indiquer si vous acceptez nos conditions d'utilisation ou non</value>
+  </data>
+  <data name="Error_Title_Rq" xml:space="preserve">
+    <value>Sélectionnez une civilité ou saisire une autre titre.</value>
+  </data>
+  <data name="Error_Title_Too_Long" xml:space="preserve">
+    <value>Le titre ne doit depasser 150 caractères</value>
+  </data>
+  <data name="Error_Username_Rq" xml:space="preserve">
+    <value>Le nom de l'utilisateur est requis</value>
+  </data>
+  <data name="Error_UserName_Too_long" xml:space="preserve">
+    <value>Le nom de l'utilisateur est trop long (100 caractères max)</value>
+  </data>
+  <data name="Error_UserType_Rq" xml:space="preserve">
+    <value>Veuillez sélectionner le type d'utilisateur</value>
+  </data>
+  <data name="Error_User_Email_Exist" xml:space="preserve">
+    <value>L'e-mail que vous avez saisi est déjà enregistré.</value>
+  </data>
+  <data name="Error_User_Name_Exist" xml:space="preserve">
+    <value>Le pseudo que vous avez saisi a déjà été pris</value>
+  </data>
+  <data name="Error_VATID_Too_Long" xml:space="preserve">
+    <value>TVA trop longue (50 caractères max)</value>
+  </data>
+  <data name="Error_Website_Too_Long" xml:space="preserve">
+    <value>Site internet trop long (500 caractères max)</value>
+  </data>
+  <data name="Info_Months" xml:space="preserve">
+    <value>Mois</value>
+  </data>
+  <data name="Label_AddEdit_Attached_Files" xml:space="preserve">
+    <value>Ajouter/Modifier les fichiers joints</value>
+  </data>
+  <data name="Label_Address" xml:space="preserve">
+    <value>Adresse</value>
+  </data>
+  <data name="Label_Add_Seller_Preferences" xml:space="preserve">
+    <value>Ajouter les préférences du vendeur</value>
+  </data>
+  <data name="Label_Amount" xml:space="preserve">
+    <value>Montant</value>
+  </data>
+  <data name="Label_Annual_Revenue" xml:space="preserve">
+    <value>Revenu annuel</value>
+  </data>
+  <data name="Label_Attached_File" xml:space="preserve">
+    <value>Fichiers join</value>
+  </data>
+  <data name="Label_Award_Date" xml:space="preserve">
+    <value>Date d'attribution</value>
+  </data>
+  <data name="Label_Bid_Required" xml:space="preserve">
+    <value>Appel d'offres obligatoire</value>
+  </data>
+  <data name="Label_Business_Country" xml:space="preserve">
+    <value>Si votre entreprise est situé dans plus d'un pays, veuillez sélectionner le pays où se trouve le siège.</value>
+  </data>
+  <data name="Label_City" xml:space="preserve">
+    <value>Ville</value>
+  </data>
+  <data name="Label_Commodities" xml:space="preserve">
+    <value>Marchandise</value>
+  </data>
+  <data name="Label_CompanyAddress" xml:space="preserve">
+    <value>Adresse de la  société</value>
+  </data>
+  <data name="Label_CompanyEmail" xml:space="preserve">
+    <value>Email de la  société</value>
+  </data>
+  <data name="Label_CompanyNoOfEmployees" xml:space="preserve">
+    <value>Nombre d'employé</value>
+  </data>
+  <data name="Label_CompanyNumber" xml:space="preserve">
+    <value>Numero d'enregistrement</value>
+  </data>
+  <data name="Label_CompanyType" xml:space="preserve">
+    <value>Type de  société</value>
+  </data>
+  <data name="Label_Company_Information" xml:space="preserve">
+    <value>Informations sur la société</value>
+  </data>
+  <data name="Label_Company_Name" xml:space="preserve">
+    <value>Nom de la  société</value>
+  </data>
+  <data name="Label_Contract_Length" xml:space="preserve">
+    <value>Durée du contrat</value>
+  </data>
+  <data name="Label_Country" xml:space="preserve">
+    <value>Pays</value>
+  </data>
+  <data name="Label_Culture" xml:space="preserve">
+    <value>Culture</value>
+  </data>
+  <data name="Label_Department" xml:space="preserve">
+    <value>Départment</value>
+  </data>
+  <data name="Label_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Label_DOB" xml:space="preserve">
+    <value>Date de naissance</value>
+  </data>
+  <data name="Label_DUNS_Number" xml:space="preserve">
+    <value>Numero DUNS</value>
+  </data>
+  <data name="Label_Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Label_End_Date" xml:space="preserve">
+    <value>Date de fin</value>
+  </data>
+  <data name="Label_End_Time" xml:space="preserve">
+    <value>Temps de fin</value>
+  </data>
+  <data name="Label_Enter_Year" xml:space="preserve">
+    <value>Saisissez l'année</value>
+  </data>
+  <data name="Label_First_Name" xml:space="preserve">
+    <value>Prénom</value>
+  </data>
+  <data name="Label_Gender" xml:space="preserve">
+    <value>Sexe</value>
+  </data>
+  <data name="Label_Industries" xml:space="preserve">
+    <value>Industries</value>
+  </data>
+  <data name="Label_In_Location" xml:space="preserve">
+    <value>Aux lieux</value>
+  </data>
+  <data name="Label_Language" xml:space="preserve">
+    <value>Langues</value>
+  </data>
+  <data name="Label_Last_Name" xml:space="preserve">
+    <value>Nom de famille</value>
+  </data>
+  <data name="Label_Last_Visit" xml:space="preserve">
+    <value>Dernière visite</value>
+  </data>
+  <data name="Label_Location" xml:space="preserve">
+    <value>Lieu</value>
+  </data>
+  <data name="Label_Looking_For" xml:space="preserve">
+    <value>À La Recherche De</value>
+  </data>
+  <data name="Label_MiddleName" xml:space="preserve">
+    <value>Deuxième nom</value>
+  </data>
+  <data name="Label_Mobile" xml:space="preserve">
+    <value>Cellulaire</value>
+  </data>
+  <data name="Label_Name" xml:space="preserve">
+    <value>Nom</value>
+  </data>
+  <data name="Label_Occupation" xml:space="preserve">
+    <value>Occupation</value>
+  </data>
+  <data name="Label_Password" xml:space="preserve">
+    <value>Mot de passe</value>
+  </data>
+  <data name="Label_Password_Confirm" xml:space="preserve">
+    <value>Confirmer le mot de passe</value>
+  </data>
+  <data name="Label_Phone" xml:space="preserve">
+    <value>Numero de telephone</value>
+  </data>
+  <data name="Label_Phone1" xml:space="preserve">
+    <value>Premier numéro</value>
+  </data>
+  <data name="Label_Phone2" xml:space="preserve">
+    <value>Deuxième numéro</value>
+  </data>
+  <data name="Label_PostCode" xml:space="preserve">
+    <value>Code Postal</value>
+  </data>
+  <data name="Label_Pref_Language" xml:space="preserve">
+    <value>Langue préférée</value>
+  </data>
+  <data name="Label_Reminders" xml:space="preserve">
+    <value>Rappels</value>
+  </data>
+  <data name="Label_Reminder_Count" xml:space="preserve">
+    <value>{0} ajouté(s)</value>
+  </data>
+  <data name="Label_Repeat" xml:space="preserve">
+    <value>Répéter</value>
+  </data>
+  <data name="Label_Response_Deadline" xml:space="preserve">
+    <value>Date limite de réponse</value>
+  </data>
+  <data name="Label_Sales_Territories" xml:space="preserve">
+    <value>Territoires de vente</value>
+  </data>
+  <data name="Label_Secret_Question" xml:space="preserve">
+    <value>Question secrète</value>
+  </data>
+  <data name="Label_Select_Commodity" xml:space="preserve">
+    <value>Choisissez un ou plusieur produit(s)</value>
+  </data>
+  <data name="Label_Select_Location" xml:space="preserve">
+    <value>Choisissez un lieu</value>
+  </data>
+  <data name="Label_Seller_Preference" xml:space="preserve">
+    <value>Seller Preference</value>
+  </data>
+  <data name="Label_Start_Date" xml:space="preserve">
+    <value>Date de début</value>
+  </data>
+  <data name="Label_Start_Time" xml:space="preserve">
+    <value>Temps du commencement</value>
+  </data>
+  <data name="Label_State" xml:space="preserve">
+    <value>Etat</value>
+  </data>
+  <data name="Label_TargetGroup" xml:space="preserve">
+    <value>Présence (s)</value>
+  </data>
+  <data name="Label_Tax_Id" xml:space="preserve">
+    <value>Tax ID</value>
+  </data>
+  <data name="Label_Title" xml:space="preserve">
+    <value>Titre</value>
+  </data>
+  <data name="Label_Username" xml:space="preserve">
+    <value>Nom d'utilisateur</value>
+  </data>
+  <data name="Label_User_Information" xml:space="preserve">
+    <value>Informations sur le compte de l'utilisateur</value>
+  </data>
+  <data name="Label_VAT_Id" xml:space="preserve">
+    <value>VAT ID</value>
+  </data>
+  <data name="MSG_Add_Commodities" xml:space="preserve">
+    <value>Pick Commodities</value>
+  </data>
+  <data name="MSG_Add_Industries" xml:space="preserve">
+    <value>Sélectionnez vos industries</value>
+  </data>
+  <data name="MSG_Add_Territories" xml:space="preserve">
+    <value>Pick Sales Territories</value>
+  </data>
+  <data name="MSG_AdvancedSearch_Intro" xml:space="preserve">
+    <value>Avec la recherche avancée, vous pouvez voir tous les fournisseurs en fonction de la catégorie ou des produits sélectionnés de votre choix. Se il vous plaît sélectionnez une catégorie ci-dessous pour commencer.</value>
+  </data>
+  <data name="MSG_Category_Search_Intro" xml:space="preserve">
+    <value>Recherche par catégorie</value>
+  </data>
+  <data name="MSG_Departments_Invitee_List" xml:space="preserve">
+    <value>Sélectionnez les départements que vous voulez inviter</value>
+  </data>
+  <data name="MSG_Details_Saved" xml:space="preserve">
+    <value>Vos données ont été sauvegardées avec succès!</value>
+  </data>
+  <data name="MSG_Duplicate_Reminder" xml:space="preserve">
+    <value>Rappel déjà ajouté.</value>
+  </data>
+  <data name="MSG_Email_Reminder" xml:space="preserve">
+    <value>Saisissez  votre email et nous vous enverrons un rappel pour votre mot de passe</value>
+  </data>
+  <data name="MSG_Error_NoAttendee_Chosen" xml:space="preserve">
+    <value>Vous ne pouvez pas inviter les participants sans les avoir sélectionner!</value>
+  </data>
+  <data name="MSG_Terms_Of_Service" xml:space="preserve">
+    <value>Je ai lu et accepté les Conditions d'utilisation et la Charte de confidentialité TotalHR</value>
+  </data>
+  <data name="MSG_Users_Invitee_List" xml:space="preserve">
+    <value>Sélectionnez l'utilisateur que vous voulez inviter</value>
+  </data>
+  <data name="Title_Advanced_Search" xml:space="preserve">
+    <value>Recherche avancée</value>
+  </data>
+  <data name="Title_Company_Details" xml:space="preserve">
+    <value>Détails de la société</value>
+  </data>
+  <data name="Title_Logon_Details" xml:space="preserve">
+    <value>Données de connexion</value>
+  </data>
+  <data name="Title_Personal_Details" xml:space="preserve">
+    <value>Données personelles</value>
+  </data>
+  <data name="Toolt_Add_Reminder" xml:space="preserve">
+    <value>Ajouter un rappel</value>
+  </data>
+  <data name="Toolt_Delete_Reminder" xml:space="preserve">
+    <value>Effacer un rappel</value>
+  </data>
+  <data name="Toolt_Edit_Reminder" xml:space="preserve">
+    <value>Modifer un rappel</value>
+  </data>
+  <data name="V_Added" xml:space="preserve">
+    <value>Ajouté</value>
+  </data>
+  <data name="V_Email_As_Username" xml:space="preserve">
+    <value>Utiliser mon email comme nom d'utilisateur</value>
+  </data>
+  <data name="V_Location" xml:space="preserve">
+    <value>Lieu</value>
+  </data>
+  <data name="V_No" xml:space="preserve">
+    <value>Non</value>
+  </data>
+  <data name="V_None_Added" xml:space="preserve">
+    <value>Aucun ajouté</value>
+  </data>
+  <data name="V_Selected_Commodities" xml:space="preserve">
+    <value>Sélectionner des produits</value>
+  </data>
+  <data name="V_Selected_Locations" xml:space="preserve">
+    <value>Sélectionner les lieux</value>
+  </data>
+  <data name="V_Selected_Suppliers" xml:space="preserve">
+    <value>Sélectionner les fournisseurs</value>
+  </data>
+  <data name="V_User_Email_As_UserName" xml:space="preserve">
+    <value>Utiliser l'email comme nom d'utilisateur</value>
+  </data>
+  <data name="V_Yes" xml:space="preserve">
+    <value>Oui</value>
+  </data>
+</root>

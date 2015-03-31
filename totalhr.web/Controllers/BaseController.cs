@@ -8,6 +8,8 @@ using System.Configuration;
 using Authentication.Infrastructure;
 using Authentication.Models;
 using System.IO;
+using System.Threading;
+using System.Globalization;
 
 namespace totalhr.web.Controllers
 {
@@ -56,8 +58,13 @@ namespace totalhr.web.Controllers
         public BaseController(IOAuthService authService)
         {
             AuthService = authService;
-
             _currentUser = AuthService.GetClientUser();
+
+            //make sure culture cookie gets update when language changed.
+            if (CurrentUser != null && !string.IsNullOrEmpty(CurrentUser.Culture))
+            {
+                Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture(CurrentUser.Culture);
+            }
 
             //keep user logged in if already logged.
             if (_currentUser != null && _currentUser.IsLogged())
@@ -81,8 +88,7 @@ namespace totalhr.web.Controllers
                 SiteRootURL = ConfigurationManager.AppSettings["RootURL"],                
                 SMTPServer = ConfigurationManager.AppSettings["SMTPServerName"],
                 SMTPUser = ConfigurationManager.AppSettings["SMTPUsername"],
-                SMTPPassword = CM.Security.Decrypt(ConfigurationManager.AppSettings["SMTPPass"])
-            
+                SMTPPassword = CM.Security.Decrypt(ConfigurationManager.AppSettings["SMTPPass"])            
             };
 
 

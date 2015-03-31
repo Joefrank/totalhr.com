@@ -9,8 +9,6 @@ using totalhr.Shared.Models;
 using totalhr.services.Infrastructure;
 using totalhr.Shared;
 using AbsencesService.Infrastructure;
-using System.Globalization;
-using System.Threading;
 
 namespace totalhr.web.Controllers
 {
@@ -25,9 +23,7 @@ namespace totalhr.web.Controllers
         {
             _authService = authservice;
             _glossaryService = glossaryService;
-            _absenceService = absenceService;
-
-            Thread.CurrentThread.CurrentUICulture = CultureInfo.CreateSpecificCulture("fr-FR");
+            _absenceService = absenceService;           
 
             ViewBag.AbsenceTypeList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.AbsenceType);
         }
@@ -35,7 +31,6 @@ namespace totalhr.web.Controllers
         public ActionResult Index()
         {
             var absences = _absenceService.ListUserAbsences(CurrentUser.UserId);
-
             return View(absences);
         }
 
