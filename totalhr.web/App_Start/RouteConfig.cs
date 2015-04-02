@@ -12,6 +12,8 @@ namespace totalhr.web
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("*.js|css|.css|swf|.xlxs|.txt|.docx");
+            routes.RouteExistingFiles = true;
 
             routes.MapRoute(
                name: "CalendarCreateEvent",
