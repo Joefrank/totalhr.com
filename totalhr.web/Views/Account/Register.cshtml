@@ -18,11 +18,22 @@
 
 
 
-<div class="container">
+ <div class="row-fluid">
+        <div class="span12 sortable">
+            <!-- BEGIN SAMPLE FORMPORTLET-->
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i>@Common.Page_TT_Registration</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>
+                    <a href="javascript:;" class="icon-remove"></a>
+                </span>
+            </div>
+            <div class="widget-body">
 
-<h1>@Common.Page_TT_Registration</h1>
 
-    @using (Html.BeginRouteForm("Default", new { Controller = "Account", action = "RegisterUser" }))
+
+    @using (Html.BeginRouteForm("Default", new { Controller = "Account", action = "RegisterUser", @class = "form-horizontal" }))
     {
 
          @Html.ValidationSummary()
@@ -267,6 +278,10 @@
             <br /><br />
            
     }
+</div>
+
+        </div>
+        </div>
 </div>
 
 
