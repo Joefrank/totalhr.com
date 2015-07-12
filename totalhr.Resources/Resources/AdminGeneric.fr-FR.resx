@@ -364,7 +364,7 @@
     <value>Thème</value>
   </data>
   <data name="V_Time_Recording" xml:space="preserve">
-    <value>Enregistrement de durée</value>
+    <value>Horaires</value>
   </data>
   <data name="V_Time_Recording_Record" xml:space="preserve">
     <value>Enregistrer une durée</value>

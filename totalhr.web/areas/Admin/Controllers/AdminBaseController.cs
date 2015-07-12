@@ -6,12 +6,13 @@ using System.Web.Mvc;
 using System.Configuration;
 using Authentication.Infrastructure;
 using Authentication.Models;
+using Authentication.Models.Enums;
 using totalhr.Shared;
 using totalhr.web.Controllers;
 
 namespace totalhr.web.Areas.Admin.Controllers
 {
-    [CustomAuth(Variables.Roles.CompanyAdmin)]
+    [CustomAuth(Roles.CompanyAdmin)]
     public class AdminBaseController : BaseController
     {
         public int DefaultPageSize { 

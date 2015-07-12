@@ -5,11 +5,12 @@ using System.Web;
 using System.Web.Mvc;
 using Authentication.Infrastructure;
 using Authentication.Models;
+using Authentication.Models.Enums;
 using totalhr.Shared;
 
 namespace totalhr.web.Controllers.Admin
 {
-    [CustomAuth(Variables.Roles.CompanyAdmin)]
+    [CustomAuth(Roles.CompanyAdmin)]
     public class AdminBaseController : BaseController
     {
        public AdminBaseController(IOAuthService authService) :base(authService)

@@ -14,6 +14,7 @@ namespace totalhr.web
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.IgnoreRoute("*.js|css|.css|swf|.xlxs|.txt|.docx");
             routes.IgnoreRoute("Content/{*.pathInfo}");
+            routes.IgnoreRoute("Scripts/{*.pathInfo}");
             routes.RouteExistingFiles = true;
 
             routes.MapRoute(

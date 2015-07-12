@@ -419,6 +419,7 @@ namespace totalhr.services.Implementation
             return 1;
         }
 
+
         public List<string> GetUserNamesByIds(List<int> ids)
         {
             return _userRepos.GetUserNamesByIds(ids);

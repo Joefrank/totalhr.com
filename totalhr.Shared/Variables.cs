@@ -41,12 +41,12 @@ namespace totalhr.Shared
             CalendarEventNotification
         }
 
-        public enum Roles
-        {            
-            CompanyAdmin = 1,
-            SiteAdmin =2,
-            Employee = 3
-        }
+        //public enum Roles
+        //{            
+        //    CompanyAdmin = 1,
+        //    SiteAdmin =2,
+        //    Employee = 3
+        //}
 
         public enum Profiles
         {

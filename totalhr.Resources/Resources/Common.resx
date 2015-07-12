@@ -357,4 +357,7 @@
   <data name="V_Close" xml:space="preserve">
     <value>Close</value>
   </data>
+  <data name="V_Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
 </root>

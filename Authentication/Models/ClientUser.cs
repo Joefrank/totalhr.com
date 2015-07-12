@@ -37,7 +37,7 @@ namespace Authentication.Models
             return !roles.Except(this.Roles).Any();
         }
 
-        public bool IsInRole(Variables.Roles[] requiredroles)
+        public bool IsInRole(Enums.Roles[] requiredroles)
         {
             return requiredroles.All(rrole => this.Roles.Contains(((int) rrole).ToString(CultureInfo.InvariantCulture)));
         }

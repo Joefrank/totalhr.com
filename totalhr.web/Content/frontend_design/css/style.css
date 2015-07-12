@@ -855,7 +855,7 @@
 			background-color: #292c31;
 			color: #dadde2;
 		}
-		.logo { background-image:url("../images/logo-light.png") !important; }
+		.logo { /*background-image:url("../images/logo-light.png") !important;*/ }
 
 		.menu.xs-toggle {
 			position:relative;
@@ -968,7 +968,7 @@
 	.logo {
 		display:block;
 		height:74px;
-		background-image:url("../images/logo.png");
+		/*background-image:url("../images/logo.png");*/
 		background-position:left center;
 		background-repeat: no-repeat;
 		text-indent:-9999999px;
@@ -978,7 +978,7 @@
 		.logo-center {
 			display:block;
 			height:62px;
-			background-image:url("../images/logo.png");
+			/*background-image:url("../images/logo.png");*/
 			background-position:center center;
 			background-repeat: no-repeat;
 			text-indent:-9999999px;
@@ -999,7 +999,7 @@
 	}
 	.header-dark .menu > li > a { color: #dadde2; }
 	.header-dark .logo,
-	.topbar.dark .logo { background-image:url("../images/logo-light.png"); }
+	.topbar.dark .logo { /*background-image:url("../images/logo-light.png");*/ }
 	.topbar.dark .logo { height:50px; background-position: left center; }
 	
 	@media (min-width:768px) {
@@ -1051,11 +1051,14 @@
 		}
 
 
-		.header-transparent .logo { background-image:url("../images/logo-light.png"); }
+		.header-transparent .logo { /*background-image:url("../images/logo-light.png");*/ }
+
+        .header-transparent h2 {color:#eaecf1;
+        }
 
 		.header-transparent .menu > li > a {
 			color:#eaecf1;
-			opacity:0.9;
+			/*opacity:0.9;*/
 			-webkit-transition: all 0.3s ease-out; transition: all 0.3s ease-out;
 		}
 		.header-transparent .menu > li > a:hover,
@@ -1074,7 +1077,7 @@
 			color: #667; 
 			-webkit-transition: all 0.3s ease-out; transition: all 0.3s ease-out;
 		}
-		.header-transparent .menu-fixed .logo { background-image:url("../images/logo.png"); }
+		.header-transparent .menu-fixed .logo { /*background-image:url("../images/logo.png"); */}
 		.static-menu.header-transparent .main-header {
 			position:absolute;
 			top:76px;
@@ -1247,7 +1250,7 @@
 	.vertical-menu-wrapper .logo,
 	.fullscreen-menu-wrapper .logo {
 		background-position: center bottom;
-		background-image:url("../images/logo-light.png");
+		/*background-image:url("../images/logo-light.png");*/
 	}
 	.vertical-menu { margin-bottom:140px; }
 	.vertical-menu .panel-body {
@@ -1294,7 +1297,7 @@
 		background-color:#f1f1f2;
 		color:#778;
 	}
-	.vertical-menu-wrapper.light .logo { background-image:url("../images/logo.png") !important; }
+	.vertical-menu-wrapper.light .logo { /*background-image:url("../images/logo.png") !important;*/ }
 	.vertical-menu-wrapper.light .vertical-menu .panel-title { color:#667; }
 	.vertical-menu-wrapper.light .copyright { color: #889; }
 	.vertical-menu-wrapper.light .vertical-menu-list  { color:#667; }

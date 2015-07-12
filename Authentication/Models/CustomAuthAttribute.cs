@@ -22,19 +22,19 @@ namespace Authentication.Models
         private static readonly ILog Log = LogManager.GetLogger(typeof(CustomAuthorizeAttribute));
         private ClientUser _user;
         
-        public Variables.Roles[] RequiredRoles { get; set; }
+        public Enums.Roles[] RequiredRoles { get; set; }
         public string AccessDeniedMessage { get; set; }
-        
-        public CustomAuthAttribute(Variables.Roles role)
+
+        public CustomAuthAttribute(Enums.Roles role)
             : base()
         {
             _ninjectKernel = new StandardKernel();
             _ninjectKernel.Bind<IOAuthService>().To<OckAuthService>();
             AuthService = _ninjectKernel.Get<IOAuthService>();
-            RequiredRoles = new Variables.Roles[] { role };
+            RequiredRoles = new Enums.Roles[] { role };
         }
 
-        public CustomAuthAttribute(params Variables.Roles[] roles)
+        public CustomAuthAttribute(params Enums.Roles[] roles)
             : base()
         {
             _ninjectKernel = new StandardKernel();

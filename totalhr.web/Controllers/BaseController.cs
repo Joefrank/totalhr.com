@@ -10,16 +10,18 @@ using Authentication.Models;
 using System.IO;
 using System.Threading;
 using System.Globalization;
+using totalhr.Shared.Models;
+using Authentication.Models.Enums;
 
 namespace totalhr.web.Controllers
 {
-    [CustomAuth(new[] { Variables.Roles.Employee, Variables.Roles.CompanyAdmin })]
+    [CustomAuth(new[] { Roles.Employee, Roles.CompanyAdmin })]
     public class BaseController : Controller
     {
         public int ViewingLanguageId { get; set; }
         public AdminStruct WebsiteKernel {get; set;}
 
-        public bool UserIsAdmin { get { return CurrentUser.HasProfile((int) Variables.Roles.CompanyAdmin); } }
+        public bool UserIsAdmin { get { return CurrentUser.HasProfile((int)Roles.CompanyAdmin); } }
 
         protected IOAuthService AuthService;
 
@@ -71,12 +73,7 @@ namespace totalhr.web.Controllers
             {
                 _currentUser.CookieDuration = new TimeSpan(0, 0, LoginDuration, 0);
                 AuthService.PersistClientUser(_currentUser);
-            }
-            //else
-            //{
-                
-            //    System.Web.HttpContext.Current.Response.Redirect("/Home/Index");
-            //}
+            }           
 
             //this must be after initialization of authservice, find user regional settings and give local language as default
             ViewingLanguageId = (CurrentUser != null) ? CurrentUser.LanguageId : (int)Variables.Languages.English ;
@@ -95,6 +92,25 @@ namespace totalhr.web.Controllers
             ViewBag.UserIsAdmin = (CurrentUser != null) && UserIsAdmin;
             ViewBag.IsUserLoggedIn = (CurrentUser != null);
             ViewBag.UserName = (CurrentUser != null) ? CurrentUser.FullName : "";
+            ViewBag.Currentuser = CurrentUser;
+            
+            
+            if (CurrentUser != null)
+            {
+                
+                ViewBag.DummyLanguageList =  CurrentUser.LanguageId == 2 ? 
+                 new List<ListItemStruct>
+                {
+                    new ListItemStruct{Id = 1, Name = "Anglais"},
+                    new ListItemStruct{Id= 2, Name= "Francais"}
+                }
+                :
+                new List<ListItemStruct>
+                {
+                    new ListItemStruct{Id = 1, Name = "English"},
+                    new ListItemStruct{Id= 2, Name= "French"}
+                };
+            }
         }
 
         //Duration is in minutes

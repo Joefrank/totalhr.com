@@ -99,6 +99,7 @@
     <Compile Include="Models\ClientUser.cs" />
     <Compile Include="Models\CustomAuthAttribute.cs" />
     <Compile Include="Models\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Models\Enums.cs" />
     <Compile Include="Models\ProfileCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

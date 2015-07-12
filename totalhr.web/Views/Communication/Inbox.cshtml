@@ -1,0 +1,34 @@
+﻿@using totalhr.Resources;
+@using AH = totalhr.web.Areas.Admin.Helpers;
+@using totalhr.web.Areas.Admin.Models;
+
+@{    
+    var breadCrumbItems = new List<BreadCrumbItem>
+    {
+        new BreadCrumbItem{Url = "", Text = Communication.V_Inbox, Title= Communication.V_Inbox}
+    };
+}
+
+    @section pagetitle{
+       @Communication.V_Your_Inbox
+    }
+
+    @section breadcrumb{
+        @Html.Raw(AH.GenericHelper.MakeBreadCrumb(breadCrumbItems))
+    }
+
+
+ <div class="row-fluid">        
+        <div class="widget">
+            <div class="widget-title">
+                <h4><i class="icon-reorder"></i> @Communication.V_Inbox_Messages</h4>
+                <span class="tools">
+                    <a href="javascript:;" class="icon-chevron-down"></a>                   
+                </span>
+            </div>
+            <div class="widget-body form-horizontal"> 
+                
+                </div>
+            </div>
+     </div>
+       

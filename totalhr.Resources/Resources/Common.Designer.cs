@@ -619,6 +619,15 @@ namespace totalhr.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string V_Language {
+            get {
+                return ResourceManager.GetString("V_Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Line Manager.
         /// </summary>
         public static string V_Line_Manager {

@@ -360,4 +360,7 @@ de personnaliser votre compte. Pour plus de détails à ce sujet, veuillez voir 
   <data name="V_Until" xml:space="preserve">
     <value>Jusqu'à</value>
   </data>
+  <data name="V_Language" xml:space="preserve">
+    <value>Langue</value>
+  </data>
 </root>

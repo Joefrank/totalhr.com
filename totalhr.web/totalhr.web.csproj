@@ -180,6 +180,7 @@
     <Compile Include="Areas\Admin\Models\BreadCrumbItem.cs" />
     <Compile Include="Areas\Admin\Models\UserContractDetails.cs" />
     <Compile Include="Areas\Admin\Models\UserContractFormDetails.cs" />
+    <Compile Include="Controllers\CommunicationController.cs" />
     <Compile Include="Controllers\FileController.cs" />
     <Compile Include="Controllers\TimeRecordingController.cs" />
     <Compile Include="Helpers\PayrollHelper.cs" />
@@ -2169,6 +2170,9 @@
     <Content Include="Views\Calendar\CreateCalendar.cshtml" />
     <Content Include="Views\Shared\_GalleryLargePictureModal.cshtml" />
     <Content Include="Views\Shared\Copy of _DefaultLayout.cshtml" />
+    <Content Include="Views\Shared\_LanguagesOptions.cshtml" />
+    <Content Include="Views\Communication\Inbox.cshtml" />
+    <Content Include="Views\Communication\Notifications.cshtml" />
     <None Include="Web.AliceLaptop.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

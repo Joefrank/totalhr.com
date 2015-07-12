@@ -17,6 +17,7 @@ using totalhr.data.Models;
 using Authentication.Models;
 using totalhr.data.EF;
 using totalhr.Resources;
+using Authentication.Models.Enums;
 
 namespace totalhr.web.Controllers
 {
@@ -67,7 +68,7 @@ namespace totalhr.web.Controllers
 
         private void LoadGlossaries()
         {
-            ViewBag.LanguageList = _glossaryService.GetLanguageList(this.ViewingLanguageId);
+            ViewBag.LanguageList = _glossaryService.GetLanguageList(this.ViewingLanguageId);           
             ViewBag.CountryList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Country);
             ViewBag.GenderList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Gender);
             ViewBag.TitleList = _glossaryService.GetGlossary(this.ViewingLanguageId, Variables.GlossaryGroups.Title);
@@ -147,7 +148,7 @@ namespace totalhr.web.Controllers
 
                 AuthService.PersistClientUser(clientUser);
 
-                ViewBag.UserIsAdmin = clientUser.HasRole((int)Variables.Roles.CompanyAdmin);
+                ViewBag.UserIsAdmin = clientUser.HasRole((int)Roles.CompanyAdmin);
                 ViewBag.IsUserLoggedIn = true;
                 ViewBag.UserName = clientUser.FullName;
 
@@ -167,6 +168,27 @@ namespace totalhr.web.Controllers
             }
         }
 
+        public void UpdateClientUserCultue(string culture, int languageId)
+        {
+            var clientUser = AuthService.GetClientUser();
+
+            clientUser.Culture = culture;
+            clientUser.LanguageId = languageId;
+
+            AuthService.PersistClientUser(clientUser);
+        }
+
+        public ActionResult ChangeLanguage(int id)
+        {
+                var language = _glossaryService.GetAllLanguages().FirstOrDefault(x => x.Id == id);
+                if (language != null)
+                {
+                    UpdateClientUserCultue(language.Culture, language.Id);
+                }
+           
+
+            return RedirectToAction("Index");
+        }
 
         /// <summary>
         /// this is for testing only do not go live with it.
@@ -338,6 +360,14 @@ namespace totalhr.web.Controllers
                 }
                 else
                 {
+                    //update current language
+                    if(CurrentUser.LanguageId != userinfo.PreferedLanguageId){
+                        var language = _glossaryService.GetAllLanguages().FirstOrDefault(x => x.Id == userinfo.PreferedLanguageId);
+                        if(language != null){
+                            UpdateClientUserCultue(language.Culture, language.Id);
+                        }
+                    }
+                    
                     userinfo.DetailsSaveSuccess = true;
                 }
             }

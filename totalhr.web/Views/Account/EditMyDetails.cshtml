@@ -18,9 +18,14 @@
     };
 
     var languages = ViewBag.LanguageList as IEnumerable<ListItemStruct>;
-    List<Glossary> genders = ViewBag.GenderList as List<Glossary>;
-    List<Glossary> countries = ViewBag.CountryList as List<Glossary>;
-    List<Glossary> titles = ViewBag.TitleList as List<Glossary>;    
+    var languageGlossaries = ViewBag.LanguageGlossaryList as List<Glossary>;
+    var combinedLanguagesList = new List<ListItemStruct>{};
+    
+    
+    
+    var genders = ViewBag.GenderList as List<Glossary>;
+    var countries = ViewBag.CountryList as List<Glossary>;
+    var titles = ViewBag.TitleList as List<Glossary>;       
  
 }
 

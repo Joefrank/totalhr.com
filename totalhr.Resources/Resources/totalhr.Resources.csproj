@@ -144,6 +144,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Common.fr-FR.resx</DependentUpon>
     </Compile>
+    <Compile Include="Communication.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Communication.resx</DependentUpon>
+    </Compile>
     <Compile Include="Contract.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -278,6 +283,7 @@
     <EmbeddedResource Include="Account.fr-FR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Account.fr-FR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Account.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -286,6 +292,7 @@
     <EmbeddedResource Include="AdminGeneric.fr-FR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AdminGeneric.fr-FR.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="AdminGeneric.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -307,6 +314,10 @@
     <EmbeddedResource Include="Common.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Common.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Communication.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Communication.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Contract.fr-FR.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

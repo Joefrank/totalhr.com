@@ -117,94 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Error_No_Time_Recording" xml:space="preserve">
-    <value>Désolé mais aucun horaire ne correspond à vos critères de recherche. Essayez de modifier les critères de recherche à nouveau.</value>
+  <data name="V_Inbox" xml:space="preserve">
+    <value>Inbox</value>
   </data>
-  <data name="V_Back_To_Details" xml:space="preserve">
-    <value>Retour aux détails</value>
+  <data name="V_Inbox_Messages" xml:space="preserve">
+    <value>Your Messages</value>
   </data>
-  <data name="V_Back_To_Options" xml:space="preserve">
-    <value>Retour aux options</value>
+  <data name="V_Notifications" xml:space="preserve">
+    <value>Notifications</value>
   </data>
-  <data name="V_Back_To_Recording_Home" xml:space="preserve">
-    <value>Retour à l'acceuil de l'enregistrement des horaires</value>
+  <data name="V_Your_Inbox" xml:space="preserve">
+    <value>Your Inbox</value>
   </data>
-  <data name="V_Back_To_Task_Details" xml:space="preserve">
-    <value>Retour aux détails de la tâche</value>
-  </data>
-  <data name="V_Details" xml:space="preserve">
-    <value>Détails</value>
-  </data>
-  <data name="V_Duration_Recorded" xml:space="preserve">
-    <value>Durée enregistré</value>
-  </data>
-  <data name="V_End_Date" xml:space="preserve">
-    <value>Date de fin</value>
-  </data>
-  <data name="V_End_Time" xml:space="preserve">
-    <value>Fin du temps</value>
-  </data>
-  <data name="V_No_Results" xml:space="preserve">
-    <value>Nombre de résultats</value>
-  </data>
-  <data name="V_Options" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="V_Recorded_By" xml:space="preserve">
-    <value>Saisi par</value>
-  </data>
-  <data name="V_Record_Time" xml:space="preserve">
-    <value>Saisire les horaires</value>
-  </data>
-  <data name="V_Result_Count" xml:space="preserve">
-    <value>Nombre de résultats</value>
-  </data>
-  <data name="V_Save" xml:space="preserve">
-    <value>Sauvegarder</value>
-  </data>
-  <data name="V_Search" xml:space="preserve">
-    <value>Recherche</value>
-  </data>
-  <data name="V_Search_Criteria" xml:space="preserve">
-    <value>Critères de recherche</value>
-  </data>
-  <data name="V_Search_Edit_Recording" xml:space="preserve">
-    <value>Recherche/Modifier les horaires enregistré</value>
-  </data>
-  <data name="V_Search_Result" xml:space="preserve">
-    <value>Résultats de la recherche</value>
-  </data>
-  <data name="V_Start_Date" xml:space="preserve">
-    <value>Date de commencement</value>
-  </data>
-  <data name="V_Start_Time" xml:space="preserve">
-    <value>Temps du commencement</value>
-  </data>
-  <data name="V_Submit" xml:space="preserve">
-    <value>Soumettre</value>
-  </data>
-  <data name="V_Time_Recording" xml:space="preserve">
-    <value>Saisie des horaires</value>
-  </data>
-  <data name="V_Time_Recording_Details" xml:space="preserve">
-    <value>Détails d'enregistrement</value>
-  </data>
-  <data name="V_Time_Recording_For_Task" xml:space="preserve">
-    <value>Enregistrement du temps de travail pour '{0}'</value>
-  </data>
-  <data name="V_Time_Recording_Home" xml:space="preserve">
-    <value>Temps de travail</value>
-  </data>
-  <data name="V_Time_Recording_Options" xml:space="preserve">
-    <value>Temps de travail - Options</value>
-  </data>
-  <data name="V_Time_Recording_Search" xml:space="preserve">
-    <value>Recherche des horaires de travail</value>
-  </data>
-  <data name="V_Time_Recording_Search_Criteria" xml:space="preserve">
-    <value>Critères de recherche</value>
-  </data>
-  <data name="V_UserId" xml:space="preserve">
-    <value>Id de l'utilisateur</value>
+  <data name="V_Your_Notifications" xml:space="preserve">
+    <value>Your Notifications</value>
   </data>
 </root>

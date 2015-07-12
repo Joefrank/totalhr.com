@@ -9,6 +9,7 @@ using System.Web.Mvc;
 using totalhr.services.Infrastructure;
 using totalhr.Shared;
 using totalhr.Shared.Models;
+using Authentication.Models.Enums;
 
 namespace totalhr.web.Areas.Admin.Controllers
 {
@@ -47,8 +48,8 @@ namespace totalhr.web.Areas.Admin.Controllers
             {
                 var userstruct = _accountService.GetUserDetailsForLogin(userdetails.UserName, userdetails.Password);
 
-                if (userstruct != null && userstruct.IsValid() && 
-                    userstruct.UserRoles.FirstOrDefault(x => x.id == (int)Variables.Roles.CompanyAdmin) != null)
+                if (userstruct != null && userstruct.IsValid() &&
+                    userstruct.UserRoles.FirstOrDefault(x => x.id == (int)Roles.CompanyAdmin) != null)
                 {
                     var clientUser = new ClientUser();
 
