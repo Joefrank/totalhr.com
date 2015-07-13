@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using totalhr.Shared;
+using Authentication.Models.Enums;
 
 namespace Authentication.Models
 {
@@ -37,7 +37,7 @@ namespace Authentication.Models
             return !roles.Except(this.Roles).Any();
         }
 
-        public bool IsInRole(Enums.Roles[] requiredroles)
+        public bool IsInRole(Roles[] requiredroles)
         {
             return requiredroles.All(rrole => this.Roles.Contains(((int) rrole).ToString(CultureInfo.InvariantCulture)));
         }
@@ -52,7 +52,7 @@ namespace Authentication.Models
             return !profiles.Except(this.Profiles).Any();
         }
 
-        public bool IsInProfile(Variables.Profiles[] requiredprofiles)
+        public bool IsInProfile(Profiles[] requiredprofiles)
         {
             return requiredprofiles.All(rprof => this.Profiles.Contains(((int)rprof).ToString(CultureInfo.InvariantCulture)));
         }

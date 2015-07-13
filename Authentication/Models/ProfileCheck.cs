@@ -10,7 +10,7 @@ using Authentication.Implementation;
 using Authentication.Infrastructure;
 using Ninject;
 using log4net;
-using totalhr.Shared;
+using Authentication.Models.Enums;
 
 namespace Authentication.Models
 {
@@ -21,19 +21,19 @@ namespace Authentication.Models
         private static readonly ILog Log = LogManager.GetLogger(typeof(CustomAuthorizeAttribute));
         private ClientUser _user;
 
-        public Variables.Profiles[] RequiredProfiles { get; set; }
+        public Profiles[] RequiredProfiles { get; set; }
         public string AccessDeniedMessage { get; set; }
 
-        public ProfileCheck(Variables.Profiles profile)
+        public ProfileCheck(Profiles profile)
             : base()
         {
             _ninjectKernel = new StandardKernel();
             _ninjectKernel.Bind<IOAuthService>().To<OckAuthService>();
             AuthService = _ninjectKernel.Get<IOAuthService>();
-            RequiredProfiles = new Variables.Profiles[] { profile };
+            RequiredProfiles = new Profiles[] { profile };
         }
 
-        public ProfileCheck(params Variables.Profiles[] profiles)
+        public ProfileCheck(params Profiles[] profiles)
             : base()
         {
             _ninjectKernel = new StandardKernel();

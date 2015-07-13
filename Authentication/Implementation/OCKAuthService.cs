@@ -28,7 +28,7 @@ namespace Authentication.Implementation
 
         private readonly HttpContext _context;
         private readonly ClientUser _user = new ClientUser();
-        private static readonly ILog Log = LogManager.GetLogger(typeof(AuthService));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(OckAuthService));
 
 
         public string UserFullName

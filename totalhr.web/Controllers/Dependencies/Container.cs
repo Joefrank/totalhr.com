@@ -65,7 +65,7 @@ namespace totalhr.web.Controllers.Dependencies
             ninjectKernel.Bind<IEmailRepository>().To<EmailTemplateRepository>();
             ninjectKernel.Bind<IEmailService>().To<EmailService>();
             ninjectKernel.Bind<ICacheHelper>().To<HttpCacheHelper>();
-            ninjectKernel.Bind<IAuthService>().To<AuthService>();
+            
             ninjectKernel.Bind<IOAuthService>().To<OckAuthService>();
             ninjectKernel.Bind<ICalendarDisplayService>().To<CalendarDisplayService>();
             ninjectKernel.Bind<ICalendarManagementService>().To<CalendarManagementService>();

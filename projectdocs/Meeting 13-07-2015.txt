@@ -1,0 +1,55 @@
+Admin
+
+Employees
+
+- Employee Search Not working
+- Pagination needed on employee search
+- Employee Management not able to edit. / Layout
+
+
+Profiles:
+
+- User Profile popup broken layout (Profile -> users in profile -> More details popup)
+- Profile Management for user empty list
+- Missing option to add a new profile
+- Profile list needs pagination
+
+Roles: 
+
+- No Layout done
+- Similar to Profiles requirements above.
+
+Departments:
+
+- Not implemented
+- Can't create department in admin
+
+Documents:
+
+- Links need readjustment as none is working
+- Also review layout
+
+Contract:
+
+- Make it more intuitive and enable users to be able to change template and migrate data
+
+Calendar:
+
+- Implement for Admin
+- Change template.
+
+Communication:
+
+- My messages not implemented
+- Send message needs implementation
+
+Absences:
+
+- Not implemented in admin
+
+Time Recording: 
+
+- Broken in Admin
+
+
+

@@ -27,7 +27,6 @@ namespace Authentication.Models
             _ninjectKernel.Bind<IOAuthService>().To<OckAuthService>();
             AuthService =_ninjectKernel.Get<IOAuthService>();            
         }
-
       
         protected override bool AuthorizeCore(HttpContextBase httpContext)
         {

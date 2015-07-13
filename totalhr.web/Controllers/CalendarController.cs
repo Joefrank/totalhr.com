@@ -18,6 +18,7 @@ using totalhr.Shared;
 using Res = totalhr.Resources;
 using totalhr.services.Infrastructure;
 using System.Text;
+using Authentication.Models.Enums;
 
 namespace totalhr.web.Controllers
 {
@@ -111,7 +112,7 @@ namespace totalhr.web.Controllers
             return View("EventEdit", "~/Views/Shared/_PopupLayout.cshtml",info);
         }
 
-        [ProfileCheck(Variables.Profiles.CalendarCreateEvent)]
+        [ProfileCheck(Profiles.CalendarCreateEvent)]
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult EditEvent(CalendarEventInfo eventinfo)
@@ -129,7 +130,7 @@ namespace totalhr.web.Controllers
             return View("EventEdit", "~/Views/Shared/_PopupLayout.cshtml", eventinfo);
         }
        
-        [ProfileCheck(Variables.Profiles.CalendarCreateEvent)]
+        [ProfileCheck(Profiles.CalendarCreateEvent)]
         [HttpGet]
         public ActionResult CreateEvent(int calendarid, int year, int month, int day)
          {
@@ -155,7 +156,7 @@ namespace totalhr.web.Controllers
          }
 
 
-        [ProfileCheck(Variables.Profiles.CalendarCreateEvent)]
+        [ProfileCheck(Profiles.CalendarCreateEvent)]
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult CreateEvent(CalendarEventInfo eventinfo)
@@ -203,7 +204,7 @@ namespace totalhr.web.Controllers
                 Year = year,
                 RelatedEvents = calEvents,
                 CalendarId = calendarid,
-                UserCanCreateEvent = CurrentUser.HasProfile((int)Variables.Profiles.CalendarCreateEvent),
+                UserCanCreateEvent = CurrentUser.HasProfile((int)Profiles.CalendarCreateEvent),
                 UserId = CurrentUser.UserId,
                 ClientConfig = new ClientScriptConfig
                 {
@@ -242,7 +243,7 @@ namespace totalhr.web.Controllers
                 Month = month,
                 RelatedEvents = calEvents,
                 CalendarId = calendarid,
-                UserCanCreateEvent = CurrentUser.HasProfile((int)Variables.Profiles.CalendarCreateEvent),
+                UserCanCreateEvent = CurrentUser.HasProfile((int)Profiles.CalendarCreateEvent),
                 UserId = CurrentUser.UserId,
                 ClientConfig = new ClientScriptConfig
                     {

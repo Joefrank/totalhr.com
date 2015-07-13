@@ -12,4 +12,13 @@ namespace Authentication.Models.Enums
         SiteAdmin = 2,
         Employee = 3
     }
+
+    public enum Profiles
+    {
+        CalendarEdit = 1,
+        CalendarView = 2,
+        CalendarCreate = 3,
+        CalendarCreateEvent = 4,
+        CalendarEventPropageteToCompany = 5
+    }
 }

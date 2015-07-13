@@ -10,7 +10,7 @@ using Authentication.Implementation;
 using Authentication.Infrastructure;
 using Ninject;
 using log4net;
-using totalhr.Shared;
+
 
 namespace Authentication.Models
 {
