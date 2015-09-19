@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using Authentication.Models;
 using CM;
 using log4net;
+using System.Configuration;
 
 namespace Authentication.Implementation
 {
@@ -26,6 +27,8 @@ namespace Authentication.Implementation
         private const string CkNameRoles = "Roles";
         private const string CkNameDepartmentId = "DepartmentId";
 
+        private readonly string _cookiePrefix = string.Empty;
+        private readonly string _cookieDomain = string.Empty;
         private readonly HttpContext _context;
         private readonly ClientUser _user = new ClientUser();
         private static readonly ILog Log = LogManager.GetLogger(typeof(OckAuthService));
@@ -81,12 +84,20 @@ namespace Authentication.Implementation
             _context = HttpContext.Current;
         }
 
+        public OckAuthService(string cookieDomain, string cookiePrefix)
+        {
+            _context = HttpContext.Current;
+            _cookiePrefix = cookiePrefix;
+            _cookieDomain = cookieDomain;
+        }
+
         public HttpCookie GenerateCookie(string cookieName, string cookieValue, TimeSpan tmDuration)
         {
-            var cookie = new HttpCookie(cookieName)
+            var cookie = new HttpCookie(_cookiePrefix + cookieName)
             {
                 Value = !string.IsNullOrEmpty(cookieValue) ? cookieValue : "",
-                Expires = DateTime.Now + tmDuration
+                Expires = DateTime.Now + tmDuration,
+                Domain = _cookieDomain
             };
 
             return cookie;
@@ -113,10 +124,11 @@ namespace Authentication.Implementation
         /// <returns></returns>
         public HttpCookie GenerateEncryptedCookie(string cookieName, string cookieValue, TimeSpan tmDuration)
         {
-            var cookie = new HttpCookie(cookieName)
+            var cookie = new HttpCookie(_cookiePrefix + cookieName)
                 {
                     Value = !string.IsNullOrEmpty(cookieValue) ? Security.Encrypt(cookieValue) : "",
-                    Expires = DateTime.Now + tmDuration
+                    Expires = DateTime.Now + tmDuration,
+                    Domain = _cookieDomain
                 };
 
             return cookie;
@@ -146,8 +158,9 @@ namespace Authentication.Implementation
               
                 try
                 {
-                    var cookie = HttpContext.Current.Request.Cookies[cookieName];
-                    if (cookie == null)
+                    var cookie = HttpContext.Current.Request.Cookies[_cookiePrefix + 
+                        cookieName];
+                    if (cookie == null || (!string.IsNullOrEmpty(cookie.Domain) && cookie.Domain != _cookieDomain))
                         return default(T);
 
                     var converter = TypeDescriptor.GetConverter(typeof(T));

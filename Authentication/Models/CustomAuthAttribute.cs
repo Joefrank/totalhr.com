@@ -19,7 +19,7 @@ namespace Authentication.Models
         public IOAuthService AuthService;
 
         private readonly IKernel _ninjectKernel;
-        private static readonly ILog Log = LogManager.GetLogger(typeof(CustomAuthorizeAttribute));
+        private static readonly ILog Log = LogManager.GetLogger(typeof(CustomAuthAttribute));
         private ClientUser _user;
         
         public Enums.Roles[] RequiredRoles { get; set; }
