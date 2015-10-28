@@ -922,6 +922,7 @@
     <Content Include="Content\frontend_design\plugins\tweetie\api\tweet.php" />
     <Content Include="Content\frontend_design\plugins\tweetie\api\twitteroauth\OAuth.php" />
     <Content Include="Content\frontend_design\plugins\tweetie\api\twitteroauth\twitteroauth.php" />
+    <None Include="Properties\PublishProfiles\Live.pubxml" />
     <None Include="Scripts\jquery-1.6.4-vsdoc.js" />
     <Content Include="Scripts\jquery-1.6.4.js" />
     <Content Include="Scripts\jquery-1.6.4.min.js" />
